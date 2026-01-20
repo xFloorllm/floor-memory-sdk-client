@@ -1,0 +1,4001 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: contact@ipomo.in
+    name: Ipomo
+    url: https://xfloor.ai/ipomo/blog1551084548304/
+  description: "The set APIs are used to develop Floor pds which can be used as their\
+    \ personal assistants. \n\nThis set of APIs are divided into two parts. \n- Memory\
+    \ and \n- Registration.\n \nThe developer has two ways of using the APIs for the\
+    \ app development. Developer can choose to the  Registration APIs for using the\
+    \ existing xfloor infracture or can implement custom Registration process. In\
+    \ the case of custom registration process, the developer is bound to provide proper\
+    \ authentication mechanisms and then send the user information to xlfoor."
+  license:
+    name: MIT
+    url: https://xfloor.ai/ipomo/blog1551084548304/1642341504453
+  termsOfService: https://xfloor.ai/ipomo/blog1551084548304/1642341504453
+  title: Floor Memory
+  version: 1.0.0
+servers:
+- description: Prod Env
+  url: https://appfloor.in
+tags:
+- name: query
+- name: event
+- name: getRecentEvents
+- name: getFloorInformation
+- name: editFloor
+paths:
+  /agent/memory/query:
+    post:
+      deprecated: false
+      description: |+
+        # **Conversational Query API**
+        This is the **core API** of xfloor.
+
+        It accepts a natural language query and returns a conversational response
+        derived from:
+        - Content ingested into the specified Floor
+        - The user’s prior conversation history (if provided)
+        - Relevant metadata and context
+
+        This API is designed for **multi-turn conversations** and can be used
+        to build:
+        - AI chatbots
+        - Knowledge assistants
+        - Floor-specific copilots
+
+        This API enables **conversational, context-aware querying** over data stored within xfloor.
+
+        It accepts a natural language query (for example, *“What options do I have in your institute?”*) and returns relevant information derived from the specified floors and their associated content.
+
+        The API is designed for **multi-turn conversations**. Follow-up questions from the same user automatically build upon prior context, allowing the system to refine, expand, or clarify results across successive calls.
+
+        ---
+
+        ## **Core Capabilities**
+
+        * Interprets **natural language queries**
+        * Retrieves relevant information from one or more floors
+        * Applies **time-, type-, and tag-based filters**
+        * Supports **Top-K retrieval** for result control
+        * Optionally includes metadata with responses
+        * Can generate **summarized responses** when requested
+        * Maintains **conversation continuity** across multiple queries from the same user
+
+        ---
+
+        ## **Authentication & Identity**
+
+        * A valid `user_id` is **required**
+        * User authentication is assumed to be completed **before** calling this API
+        * `app_id` identifies the calling application context
+        * Conversational continuity is maintained **per `user_id`**
+
+        > **Note:** All queries from the same `user_id` are treated as part of a single conversational context unless explicitly reset by the application.
+
+        ---
+
+        ## **Request Contract**
+
+        ### **HTTP Method**
+
+        `POST`
+
+        ### **Content-Type**
+
+        ```
+        application/json
+        ```
+
+        > **Important:**
+        > This API accepts **JSON requests only**.
+        > `multipart/form-data` is **not supported**.
+
+        ---
+
+        ## **Request Body (JSON)**
+
+        ### **Field Descriptions**
+
+        | Field               | Type                    | Required | Description                                                                                    |
+        | ------------------- | ----------------------- | -------- | ---------------------------------------------------------------------------------------------- |
+        | `user_id`           | string                  | Yes      | Unique xfloor user identifier. Used to maintain conversational continuity and personalization. |
+        | `query`             | string                  | Yes      | Natural language query provided by the user.                                                   |
+        | `floor_ids`         | array of strings        | Yes      | List of floor identifiers that define the search scope. Must be provided as a JSON array.      |
+        | `filters`           | object                  | Optional | Additional constraints to narrow search results.                                               |
+        | `filters.time_from` | string (ISO-8601)       | Optional | Start timestamp for filtering content by creation or update time.                              |
+        | `filters.time_to`   | string (ISO-8601)       | Optional | End timestamp for filtering content by creation or update time.                                |
+        | `filters.types`     | array of strings        | Optional | Content types to include (e.g., `post`, `blog`, `forum`).                                      |
+        | `filters.tags`      | array of strings        | Optional | Tags used to further refine results.                                                           |
+        | `k`                 | integer                 | Optional | Maximum number of results to retrieve (Top-K). Defaults to system-defined behavior if omitted. |
+        | `include_metadata`  | string (`"0"` or `"1"`) | Optional | Whether to include metadata (source, timestamps, tags) in the response. Defaults to `"0"`.     |
+        | `summary_needed`    | string (`"0"` or `"1"`) | Optional | Whether a summarized conversational answer should be generated. Defaults to `"0"`.             |
+        | `app_id`            | string                  | Optional | Identifies the application invoking the API. Useful for multi-app integrations.                |
+
+        ---
+
+        ### **Important Encoding Rules**
+
+        * `floor_ids` **must** be provided as a JSON array
+
+          ```json
+          "floor_ids": ["floor_1", "floor_2"]
+          ```
+        * Boolean-style flags (`include_metadata`, `summary_needed`) are encoded as **string values**: `"0"` or `"1"`
+        * `filters` must be provided as a **JSON object**, not a string
+
+        ---
+
+        ### **Canonical Request Example**
+
+        ```json
+        {
+          "user_id": "xf_user_123",
+          "query": "What options do I have in your institute?",
+          "floor_ids": ["institute_floor"],
+          "filters": {
+            "types": ["post", "blog"],
+            "tags": ["admissions"]
+          },
+          "k": 5,
+          "include_metadata": "1",
+          "summary_needed": "1",
+          "app_id": "student_portal"
+        }
+        ```
+
+        ---
+
+        ## **Behavior**
+
+        1. The query is analyzed using conversational and semantic understanding.
+        2. Relevant content is retrieved from the specified floors.
+        3. Filters (time, type, tags) are applied if provided.
+        4. Results are ranked and limited based on `k`.
+        5. If `summary_needed = "1"`, a synthesized conversational summary is generated.
+        6. If `include_metadata = "1"`, metadata is attached to each result item.
+        7. The response is returned in a conversational format suitable for follow-up questions.
+
+        ---
+
+        ## **Response Contract**
+
+        ### **High-Level Response Structure**
+
+        ```json
+        {
+          "answer": "Assistant-generated conversational response",
+          "items": [
+            {
+              "id": "content_id",
+              "type": "post",
+              "text": "Original content snippet",
+              "metadata": { }
+            }
+          ]
+        }
+        ```
+
+        ---
+
+        ### **Response Field Semantics**
+
+        | Field              | Always Present     | Description                                 | Rendering Guidance     |
+        | ------------------ | ------------------ | ------------------------------------------- | ---------------------- |
+        | `answer`           | Yes                | Assistant-generated conversational response | **Render prominently** |
+        | `items`            | Yes (may be empty) | List of matched content used for grounding  | Render optionally      |
+        | `items[].metadata` | Conditional        | Included only if `include_metadata = "1"`   | Render on demand       |
+
+        > **No-Result Case:**
+        > If no relevant content is found, `items` will be an empty array and `answer` will contain a conversational fallback response.
+
+        ---
+
+        ## **Conversation Continuity**
+
+        * Conversation state is maintained **per `user_id`**
+        * Follow-up queries automatically reference prior context
+        * The API does not require explicit conversation IDs
+        * Applications may reset conversation context by using a new `user_id`
+
+        ---
+
+        ## **Error Handling**
+
+        The API may return errors in the following cases:
+
+        * Missing or invalid `user_id`
+        * Empty or unsupported `query`
+        * Invalid or inaccessible `floor_ids`
+        * Authorization or application context errors
+        * Internal processing failures
+
+        All errors are returned with appropriate HTTP status codes and descriptive messages.
+
+        ---
+
+        ## **Typical Use Case Flow**
+
+        1. User asks an initial question
+           *“What options do I have in your institute?”*
+        2. Application calls `/agent/memory/query`
+        3. Results are displayed to the user
+        4. User asks a follow-up
+           *“Which ones are available on weekends?”*
+        5. Application calls the same API again with the new query
+        6. Conversation continues seamlessly using prior context
+
+        ---
+
+        ## **One-Line Summary**
+
+        > Executes a conversational query over xfloor content, returning context-aware, filtered, and optionally summarized results with support for multi-turn interactions.
+
+      operationId: query
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples: {}
+            schema:
+              $ref: "#/components/schemas/query_request"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryResponse"
+          description: |+
+            Primary response payload containing assistant output and retrieved content.
+
+            This response represents the successful execution of a **conversational query** processed by the agent.
+
+            The API performs:
+
+            1. Interpretation of the user’s query
+            2. Optional retrieval of relevant content (posts/events/blocks)
+            3. Generation of a final **natural-language answer**
+
+            The response contains **two logical parts**:
+
+            * **`answer`** → the assistant’s final conversational response (what should be shown to the user)
+            * **`items`** → the list of retrieved content items that were matched and used (or considered) during answer generation
+
+            ---
+
+            ## Response Structure
+
+            ```json
+            {
+              "answer": "string",
+              "items": [ ... ]
+            }
+            ```
+
+            ---
+
+            ## Top-Level Fields
+
+            | Field    | Type   | Description                                               |
+            | -------- | ------ | --------------------------------------------------------- |
+            | `answer` | String | Final assistant-generated response to the user query      |
+            | `items`  | Array  | List of matched content items retrieved during processing |
+
+            ---
+
+            ## `answer`
+
+            ```json
+            "answer": "non veniam reprehenderit labore"
+            ```
+
+            ### Description
+
+            * This is the **final conversational output** generated by the agent.
+            * It is intended to be **directly rendered** in the chat or UI.
+            * The content may be:
+
+              * A direct answer
+              * A summary
+              * A synthesized response based on retrieved items
+
+            ---
+
+            ## `items[]` – Retrieved Content Items
+
+            Each entry in `items` represents a **content block or event** that matched the query.
+
+            These items are typically used for:
+
+            * Explainability (“why this answer?”)
+            * Debugging or analytics
+            * Showing sources or related content (optional UI)
+
+            ---
+
+            ### Item Object Structure
+
+            ```json
+            {
+              "block_type": 25453249,
+              "block_id": "96",
+              "floor_uid": "87",
+              "event_id": "59",
+              "text": "Deficio cruentus voluptatem...",
+              "score": -80399794.92417637,
+              "block_title": "furthermore separately skeleton...",
+              "block_details": "Duis magna dolore",
+              "from_floor_uid": "73",
+              "user_id": "32",
+              "match_type": "culpa mollit"
+            }
+            ```
+
+            ---
+
+            ### Item Fields
+
+            | Field            | Type   | Description                                                              |
+            | ---------------- | ------ | ------------------------------------------------------------------------ |
+            | `block_type`     | Number | Identifier of the block type (e.g., feed, blog, forum, quiz)             |
+            | `block_id`       | String | Unique identifier of the block containing the content                    |
+            | `block_title`    | String | Title of the block                                                       |
+            | `block_details`  | String | Description or metadata associated with the block                        |
+            | `event_id`       | String | Identifier of the specific event/post within the block                   |
+            | `floor_uid`      | String | Internal floor ID where the content belongs                              |
+            | `from_floor_uid` | String | Source floor ID (used when content is derived, federated, or aggregated) |
+            | `user_id`        | String | Identifier of the user who created the content                           |
+            | `text`           | String | Content text used for matching or retrieval                              |
+            | `score`          | Number | Similarity or relevance score assigned by the retrieval system           |
+            | `match_type`     | String | Type or category of match (e.g., semantic, keyword, hybrid)              |
+
+            ---
+
+            ## Interpretation of `score`
+
+            * Higher relevance is typically indicated by **better score ranking** (interpretation depends on backend logic)
+            * Scores may be positive or negative depending on normalization and similarity model
+            * Clients should **not rely on absolute score values**, only relative ordering
+
+            ---
+
+            ## Typical Usage Patterns
+
+            ### Chat UI
+
+            * Display only `answer`
+            * Ignore `items` unless showing “Sources” or “Related content”
+
+            ### Debug / Analytics
+
+            * Inspect `items` to understand what content influenced the answer
+            * Use `score`, `match_type`, and block metadata
+
+            ### Explainable AI
+
+            * Show selected `items` as citations or expandable references
+
+            ---
+
+            ## Notes for Developers
+
+            * `items` may be an empty array if no relevant content was retrieved
+            * The `answer` is always present on success
+            * The order of `items` is typically sorted by relevance
+            * Field values and score scales are implementation-specific and may evolve
+
+            ---
+
+            ## Minimal Mental Model
+
+            > **Answer** = what the agent says
+            > **Items** = what the agent looked at
+
+        "422":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Floor IDs not present
+              schema:
+                $ref: "#/components/schemas/query_422_response"
+          description: ""
+      security:
+      - bearer: []
+      summary: Query (Primary API)
+      tags:
+      - query
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/memory/events:
+    post:
+      deprecated: false
+      description: |+
+        Posts into the given floor_id. This is asynchronous ingestion. 200 OK means queued, not immediately retrievable.
+        This API allows a user to **post personal content into their POD (Personal Object Database)**.
+        The posted content is stored under a specified **floor**, embedded by the platform, and made available for **semantic querying, conversational retrieval, and memory-based interactions**.
+
+        It is primarily used to:
+
+        * Save reminders, notes, writeups, or personal knowledge
+        * Upload content that the user wants the system to remember
+        * Add information that should later be discoverable via conversational queries
+
+        The content may consist of **text only** or **text combined with one or more media files**.
+
+        ---
+
+        ## **Key Capabilities**
+
+        * Stores user-generated content inside a specific floor
+        * Supports **multi-modal inputs** (text + media)
+        * Automatically embeds content for semantic search
+        * Makes content available to:
+
+          * `/agent/memory/query`
+          * conversational agents
+          * future recall and analytics
+        * Associates content with user, block, and application context
+
+        ---
+
+        ## **Authentication**
+
+        * Requires a valid, authenticated `user_id`
+        * The calling application is responsible for user authentication
+        * `app_id` identifies the application context
+
+        ---
+
+        ## **Request Type**
+
+        **Content-Type:** `multipart/form-data`
+
+        ---
+
+        ## **Request Parameters**
+
+        ### **1. Files (Optional)**
+
+        | Field   | Type   | Required | Description                                                           |
+        | ------- | ------ | -------- | --------------------------------------------------------------------- |
+        | `files` | file[] | Optional | Media files to attach to the content. Multiple files may be uploaded. |
+
+        **Supported formats include (but are not limited to):**
+
+        * Images: `jpg`, `png`
+        * Audio: `mp3`
+        * Documents: `pdf`
+        * Video: `mp4`
+
+        These files are processed and embedded along with the textual content where applicable.
+
+        ---
+
+        ### **2. Input Information (Required)**
+
+        | Field        | Type          | Required | Description                                                       |
+        | ------------ | ------------- | -------- | ----------------------------------------------------------------- |
+        | `input_info` | string (JSON) | Yes      | JSON string containing metadata and textual content for the post. |
+
+        ---
+
+        ## **`input_info` Structure**
+
+        ```json
+        {
+          "floor_id": "my_floor",
+          "BID": "17845683456",
+          "user_id": "145623907625",
+          "title": "My floor",
+          "description": "My floor details",
+          "app_id": "165434879028"
+        }
+        ```
+
+        ---
+
+        ### **Field Descriptions**
+
+        | Field         | Type   | Required | Description                                                                        |
+        | ------------- | ------ | -------- | ---------------------------------------------------------------------------------- |
+        | `floor_id`    | string | Yes      | Identifier of the user’s floor (POD) where the content will be stored.             |
+        | `block_type`  | string | Yes      | Type of block under which the content is categorized (e.g., post, note, reminder). |
+        | `BID`         | string | Yes      | Block identifier associated with this content.                                     |
+        | `user_id`     | string | Yes      | Unique identifier of the user posting the content.                                 |
+        | `title`       | string | Optional | Title or short heading for the content.                                            |
+        | `description` | string | Yes      | Main textual content to be stored and embedded.                                    |
+        | `app_id`      | string | Optional | Identifier of the calling application.                                             |
+
+        ---
+
+        ## **Behavior**
+
+        1. The API validates the user and floor context.
+        2. Textual content (`title` and `description`) is ingested.
+        3. Attached media files are processed and linked to the content.
+        4. Embeddings are generated for:
+
+           * Text
+           * Supported media (where applicable)
+        5. The content becomes part of the user’s **personal memory store**.
+        6. The stored data is immediately available for querying and conversational retrieval.
+
+        ---
+
+        ## **Successful Response**
+
+        On success, the API confirms that:
+
+        * The content has been stored
+        * Embeddings have been generated
+        * The memory item is available for future queries
+
+        A success status and reference identifiers are returned.
+
+        ---
+
+        ## **Error Handling**
+
+        The API may return errors if:
+
+        * Required fields are missing (`floor_id`, `user_id`, `description`)
+        * Unsupported file formats are uploaded
+        * The user does not have access to the specified floor
+        * The request payload is malformed
+        * Internal embedding or storage operations fail
+
+        ---
+
+        ## **Typical Use Cases**
+
+        * Saving personal reminders
+        * Posting notes or observations
+        * Uploading documents for future reference
+        * Creating a personal knowledge base
+        * Feeding data into conversational agents
+
+        ---
+
+        ## **One-Line Summary**
+
+        > Stores user-generated text and media into a personal POD, embeds it for semantic search, and makes it available for conversational querying.
+
+        ⚠️ Content Ingestion is Asynchronous
+
+        The Create Event API queues content for processing.
+        A successful response indicates **acceptance**, not availability.
+
+        Newly ingested content may take time to become searchable
+        via the Query API.
+
+      operationId: event
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding:
+              files:
+                contentType: image/jpeg
+                style: form
+            examples: {}
+            schema:
+              $ref: "#/components/schemas/event_request"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                success: Sent to the queue
+              schema:
+                $ref: "#/components/schemas/EventResponse"
+          description: |-
+            ## **Successful Response (200 OK)**
+
+            This API follows an **asynchronous ingestion model**.
+
+            On success, the API **confirms acceptance of the content**, but **does not guarantee immediate availability** for retrieval or querying.
+
+            ### **What the response means**
+
+            A `200 OK` response indicates that:
+
+            * The request payload is valid
+            * The content has been **accepted and queued** for processing
+            * The content has been published to the internal event pipeline (RabbitMQ)
+            * Embedding and storage will occur asynchronously
+
+            ⚠️ **Important:**
+            The newly posted content **will not appear immediately** in query or feed APIs.
+
+            ---
+
+            ## **Response Body (Example)**
+
+            ```json
+            {
+              "status": "success",
+              "message": "Content accepted for processing"
+            }
+            ```
+
+            > No content data is returned in this response.
+
+            ---
+
+            ## **Availability & Retrieval Model**
+
+            After receiving a successful response:
+
+            1. The content is processed asynchronously
+            2. The content becomes available in the floor feed **after processing completes**
+            3. Developers must retrieve the content using:
+
+            ```
+            GET /api/memory/recent/events
+            ```
+
+            ---
+
+            ## **Polling Requirement**
+
+            Because ingestion is asynchronous:
+
+            * Developers **must poll** `/api/memory/recent/events`
+            * Polling should be done using:
+
+              * `floor_id`
+              * timestamp or last-known event marker
+            * Compare previously retrieved events with new responses to detect newly added content
+
+            This design ensures:
+
+            * High ingestion throughput
+            * Non-blocking uploads
+            * Reliable embedding and storage pipelines
+
+            ---
+
+            ## **Typical Developer Flow**
+
+            ```text
+            POST /api/memory/events
+                    ↓
+            200 OK (content queued)
+                    ↓
+            Poll /api/memory/recent/events
+                    ↓
+            Detect new event
+                    ↓
+            Use content in /agent/memory/query
+            ```
+
+            ---
+
+            ## **Key Design Note (Why This Exists)**
+
+            This API is intentionally asynchronous to:
+
+            * Support large files and multi-modal uploads
+            * Avoid request timeouts during embedding
+            * Enable scalable background processing
+            * Keep write latency low
+
+            ---
+
+            ## **One-Line Summary**
+
+            > Accepts user-generated text and media, queues it for asynchronous processing, and makes it available for retrieval via the recent events API after ingestion completes.
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  code: XF_VALIDATION_ERROR
+                  message: Invalid BID
+                  path: /api/memory/events
+                  timestamp: 2026-01-12T08:11:59.993079561Z
+              schema:
+                $ref: "#/components/schemas/event_400_response"
+          description: ""
+      security:
+      - bearer: []
+      summary: Create Event (Post Content)
+      tags:
+      - event
+      x-content-type: multipart/form-data
+      x-accepts:
+      - application/json
+  /api/memory/recent/events:
+    get:
+      deprecated: false
+      description: |-
+        This API retrieves the **latest posts (events)** from a specified floor.
+
+        The behaviour of the API changes based on whether a **user ID** is provided:
+
+        * **If `user_id` is provided**
+          → The API returns **recent posts relevant to that user**, scoped within the given floor.
+          This includes posts from:
+
+          * Floors the user follows
+          * Floors created by the user
+          * Pod floors associated with the user (if applicable)
+
+        * **If `user_id` is NOT provided**
+          → The API returns the **most recent posts available in the specified floor**, without user-specific filtering.
+
+        This makes the API suitable for:
+
+        * Personalized activity feeds
+        * Floor-level public timelines
+        * Pod-based content aggregation
+        * Developer-built pods and custom clients
+
+        ---
+
+        ## **Key Concepts**
+
+        * A **floor** represents a content space (independent floor, followed floor, or pod floor)
+        * A **pod floor** may aggregate content across multiple related floors
+        * Posts are returned **in reverse chronological order** (latest first)
+        * Each post belongs to a specific **block** within the floor
+
+        ---
+
+        ## **Request Method**
+
+        `GET`
+
+        ---
+
+        ## **Request Parameters (Query Params)**
+
+        | Parameter Name | Type   | Required | Description                                                                                                                |
+        | -------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------- |
+        | `floor_id`     | String | **Yes**  | Floor identifier from which events should be fetched. Can be a pod floor ID, followed floor ID, or an independent floor ID |
+        | `user_id`      | String | No       | If provided, returns posts relevant to the user within the given floor                                                     |
+        | `app_id`       | String | No       | Identifier for external developers or pod-based applications consuming this API                                            |
+
+        ---
+
+        ## **Behavior Summary**
+
+        | Scenario               | Result                                    |
+        | ---------------------- | ----------------------------------------- |
+        | `floor_id` only        | Latest posts from the specified floor     |
+        | `floor_id` + `user_id` | User-relevant posts within that floor     |
+        | Pod floor ID           | Aggregated posts across pod-linked floors |
+        | Independent floor ID   | Posts only from that floor                |
+
+        ---
+
+        ## **Response Format**
+
+        `application/json`
+
+        ---
+
+        ## **Response Structure**
+
+        ### **Top-Level Fields**
+
+        | Field        | Type   | Description                    |
+        | ------------ | ------ | ------------------------------ |
+        | `post_count` | String | Total number of posts returned |
+        | `items`      | Array  | List of recent post objects    |
+
+        ---
+
+        ### **Post Object (`items[]`)**
+
+        | Field           | Type   | Description                                                               |
+        | --------------- | ------ | ------------------------------------------------------------------------- |
+        | `event_id`      | String | Unique identifier of the post/event                                       |
+        | `block_type`    | String | Type of block where the post was created (e.g., blog, forum, audio, etc.) |
+        | `block_id`      | String | Identifier of the block within the floor                                  |
+        | `floor_uid`     | String | Floor identifier where the post belongs                                   |
+        | `title`         | String | Title of the post (may be empty)                                          |
+        | `text`          | String | Text or HTML content of the post                                          |
+        | `media`         | Array  | Media objects (audio, image, etc.), if any                                |
+        | `created_at_ms` | String | Post creation time in milliseconds (epoch)                                |
+
+        ---
+
+        ### **Author Object**
+
+        | Field       | Type   | Description                  |
+        | ----------- | ------ | ---------------------------- |
+        | `name`      | String | Display name of the author   |
+        | `floor_uid` | String | Author’s floor/user handle   |
+        | `avatar`    | Object | Author profile image details |
+
+        ---
+
+        ### **Media Object**
+
+        | Field  | Type   | Description                         |
+        | ------ | ------ | ----------------------------------- |
+        | `type` | String | Media type (e.g., `AUDIO`, `IMAGE`) |
+        | `url`  | String | Public URL of the media file        |
+
+        ---
+
+        ## **Sample Success Response**
+
+        *(structure abbreviated for clarity)*
+
+        ```json
+        {
+          "post_count": "18",
+          "items": [
+            {
+              "event_id": "1766557274836",
+              "block_type": "0",
+              "title": "voice-note-1766557272764.wav",
+              "text": "You",
+              "created_at_ms": "1766557275000",
+              "author": {
+                "name": "MEGHANA G",
+                "floor_uid": "meghanag",
+                "avatar": {
+                  "type": "IMAGE",
+                  "url": "https://..."
+                }
+              },
+              "media": [
+                {
+                  "type": "AUDIO",
+                  "url": "https://..."
+                }
+              ]
+            }
+          ]
+        }
+        ```
+
+        ---
+
+        ## **Notes**
+
+        * Posts may contain **plain text or HTML**
+        * Media is optional and may be absent
+        * Ordering is **latest first**
+        * The API is read-only and does not require authentication by default
+        * Access control (public/private floors) is enforced internally
+
+        ---
+
+        ## **Typical Use Cases**
+
+        * Floor activity feed
+        * Pod-level dashboards
+        * User-personalized timelines
+        * Public floor landing pages
+        * External developer pods using `app_id`
+      operationId: getRecentEvents
+      parameters:
+      - description: ""
+        explode: true
+        in: query
+        name: user_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: ""
+        explode: true
+        in: query
+        name: floor_id
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: ""
+        explode: true
+        in: query
+        name: app_id
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getRecentEvents_200_response"
+          description: ""
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  code: XF_VALIDATION_ERROR
+                  message: Floor ID does not exist
+                  path: /api/recent/events
+                  timestamp: 2026-01-12T08:11:59.993079561Z
+              schema:
+                $ref: "#/components/schemas/getRecentEvents_400_response"
+          description: ""
+      security:
+      - bearer: []
+      summary: Recent Events
+      tags:
+      - getRecentEvents
+      x-accepts:
+      - application/json
+  /api/memory/floor/info/{floor_id}:
+    get:
+      deprecated: false
+      description: |
+        This API returns the **basic profile information of a floor**.
+        It is used to fetch all essential metadata required to **render a floor landing page, header, or navigation context**.
+
+        The response includes:
+
+        * Floor identity and type
+        * Ownership information relative to the requesting user
+        * Floor metadata (title, description, avatar)
+        * List of blocks available in the floor
+        * App association (for pod / developer use cases)
+
+        This API does **not** return posts or content; it only provides **structural and descriptive information** about the floor.
+
+        ---
+
+        ## Typical Use Cases
+
+        * Render floor header (title, logo, description)
+        * Decide UI permissions (owner vs non-owner)
+        * Display available blocks (Feeds, Blog, Quiz, etc.)
+        * Pod discovery or developer-managed floor rendering
+        * Lightweight floor metadata fetch before loading content
+
+        ---
+
+        ## Authorization & Context
+
+        * The API may be called by authenticated or unauthenticated users (depending on floor visibility).
+        * The `is_owner` field is calculated **relative to the requesting user context** (if authenticated).
+
+        ---
+
+        ## Response Format
+
+        `application/json`
+
+        ---
+
+        ## Response Structure
+
+        ### Top-Level Fields
+
+        | Field        | Type                   | Description                                                      |
+        | ------------ | ---------------------- | ---------------------------------------------------------------- |
+        | `floor_id`   | String                 | Public, human-readable identifier of the floor                   |
+        | `floor_uid`  | String                 | Internal unique identifier of the floor                          |
+        | `title`      | String                 | Display title of the floor                                       |
+        | `details`    | String                 | Short description or summary of the floor                        |
+        | `floor_type` | String                 | Type of floor (`PUBLIC`, `PRIVATE`, `POD`)                       |
+        | `is_owner`   | String (`"0"` / `"1"`) | Indicates whether the requesting user is the owner               |
+        | `blocks`     | Array                  | List of blocks available in the floor                            |
+        | `avatar`     | Object                 | Floor logo / avatar metadata                                     |
+        | `app_id`     | String                 | Associated application ID (used mainly for pod/developer floors) |
+
+        ---
+
+        ## Ownership Indicator
+
+        ### `is_owner`
+
+        ```json
+        "is_owner": "0"
+        ```
+
+        | Value | Meaning                                   |
+        | ----- | ----------------------------------------- |
+        | `"1"` | Requesting user is the owner of the floor |
+        | `"0"` | Requesting user is not the owner          |
+
+        This field is typically used by clients to:
+
+        * Enable or disable edit/settings UI
+        * Show owner-only actions
+
+        ---
+
+        ## Blocks Object
+
+        ```json
+        "blocks": [
+          {
+            "BID": "1765960948723",
+            "type": "1",
+            "title": "Feeds"
+          }
+        ]
+        ```
+
+        Each block represents a **content category or service** available inside the floor.
+
+        ### Block Fields
+
+        | Field   | Type   | Description                                           |
+        | ------- | ------ | ----------------------------------------------------- |
+        | `BID`   | String | Unique identifier of the block                        |
+        | `type`  | String | Block type identifier (e.g., feed, blog, forum, quiz) |
+        | `title` | String | Display name of the block                             |
+
+        ---
+
+        ## Avatar Object
+
+        ```json
+        "avatar": {
+          "id": "1767009204367",
+          "url": "https://..."
+        }
+        ```
+
+        | Field | Type   | Description                    |
+        | ----- | ------ | ------------------------------ |
+        | `id`  | String | Media identifier of the avatar |
+        | `url` | String | CDN URL of the floor logo      |
+
+        Used to render the floor’s profile image or banner.
+
+        ---
+
+        ## Floor Type
+
+        ```json
+        "floor_type": "POD"
+        ```
+
+        | Value     | Meaning                               |
+        | --------- | ------------------------------------- |
+        | `PUBLIC`  | Open floor visible to everyone        |
+        | `PRIVATE` | Restricted floor                      |
+        | `POD`     | Aggregated or developer-managed floor |
+
+        `POD` floors are often associated with an `app_id` and may aggregate or serve content programmatically.
+
+        ---
+
+        ## Sample Success Response
+
+        ```json
+        {
+          "is_owner": "0",
+          "blocks": [
+            {
+              "BID": "1765960948723",
+              "type": "1",
+              "title": "Feeds"
+            }
+          ],
+          "floor_uid": "1765960956967",
+          "floor_id": "raghupodfloor1",
+          "details": "raghu",
+          "avatar": {
+            "id": "1767009204367",
+            "url": "https://d2e5822u5ecuq8.cloudfront.net/room/1765960956967/logo/1765960956967.jpg"
+          },
+          "title": "raghu",
+          "floor_type": "POD",
+          "app_id": "1765949734005"
+        }
+        ```
+
+        ---
+
+        ## Notes for Developers
+
+        * This is a **lightweight metadata API** and is safe to call frequently.
+        * Use this API **before** loading posts or analytics.
+        * `blocks` ordering can be used directly for navigation UI.
+        * `floor_type` + `is_owner` together determine which UI actions are allowed.
+
+        ---
+
+        ## Common Error Scenarios
+
+        ### Floor Not Found
+
+        ```json
+        {
+          "status": "ERROR",
+          "message": "Floor not found"
+        }
+        ```
+
+        ### Access Restricted
+
+        ```json
+        {
+          "status": "ERROR",
+          "message": "Access denied for this floor"
+        }
+        ```
+
+        ---
+
+        ### Final Mental Model
+
+        > **This API answers: “What is this floor, who owns it, and what can I do here?”**
+      operationId: getFloorInformation
+      parameters:
+      - description: ""
+        explode: false
+        in: path
+        name: floor_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: User ID  - 13 digit numeric identity
+        example: "1345896753"
+        explode: true
+        in: query
+        name: user_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: App ID - 13 digit numeric identity
+        example: "1387654378"
+        explode: true
+        in: query
+        name: app_id
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getFloorInformation_200_response"
+          description: ""
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  code: XF_VALIDATION_ERROR
+                  message: Invalid data
+                  path: /api/floor/info
+                  timestamp: 2026-01-12T08:11:59.993079561Z
+              schema:
+                $ref: "#/components/schemas/getRecentEvents_400_response"
+          description: ""
+      security:
+      - bearer: []
+      summary: Basic information of a floor
+      tags:
+      - getFloorInformation
+      x-accepts:
+      - application/json
+  /api/memory/edit/floor/{floor_id}:
+    post:
+      deprecated: false
+      description: |+
+        This API updates an existing floor’s profile metadata using **multipart form data**.
+
+        A floor **can be edited only by its owner**.
+        If the authenticated user is **not the owner of the floor**, the request will be rejected, even if the user is a member or follower of the floor.
+
+        The API allows the floor owner to update:
+
+        * Floor **title**
+        * Floor **details/description**
+        * Floor **logo/avatar image**
+
+        After a successful update, the API returns the **latest floor object**, including the updated avatar and the current list of blocks associated with the floor.
+
+        ---
+
+        ## Authorization Rules (Critical)
+
+        * The caller **must be authenticated**
+        * The caller **must be the owner of the floor**
+        * Members, followers, or pod consumers **cannot** edit the floor
+        * Ownership is validated internally using the authenticated user context
+
+        > **Ownership is mandatory. There are no partial permissions for this API.**
+
+        ---
+
+        ## Content-Type
+
+        `multipart/form-data`
+
+        ---
+
+        ## Request Body (Multipart Form Data)
+
+        ### Form Fields
+
+        | Field Name | Type   | Required     | Description                              |
+        | ---------- | ------ | ------------ | ---------------------------------------- |
+        | `fid`      | String | Recommended* | Immutable internal floor ID              |
+        | `floor_id` | String | Optional*    | Public / human-readable floor identifier |
+        | `title`    | String | Optional     | New floor title                          |
+        | `details`  | String | Optional     | New floor description                    |
+        | `logo`     | File   | Optional     | New floor logo image (PNG/JPG/WebP)      |
+
+        * At least **one floor identifier** (`fid` or `floor_id`) must be provided.
+        **Best practice:** Use `fid` as the primary identifier.
+
+        ---
+
+        ## Update Rules
+
+        * At least one of `title`, `details`, or `logo` must be present
+        * Missing update fields result in a validation error
+        * If `logo` is provided, the previous logo is replaced
+
+        ---
+
+        ## Response Format
+
+        `application/json`
+
+        ---
+
+        ## Sample Success Response
+
+        ```json
+        {
+          "floor_id": "my_floor",
+          "title": "daughter ouch upon yummy clamor",
+          "details": "nostrud occaecat incididunt dolor adipisicing",
+          "fid": "86",
+          "blocks": [
+            {
+              "bid": "83",
+              "type": "pariatur",
+              "title": "wherever demobilise acidly refute"
+            }
+          ],
+          "avatar": {
+            "url": "https://legal-availability.name/",
+            "id": "98"
+          }
+        }
+        ```
+
+        ---
+
+        ## Error Responses (Authorization Focus)
+
+        ### Not Floor Owner
+
+        ```json
+        {
+          "status": "ERROR",
+          "message": "Only the floor owner can edit this floor"
+        }
+        ```
+
+        ### Floor Not Found
+
+        ```json
+        {
+          "status": "ERROR",
+          "message": "Floor not found"
+        }
+        ```
+
+        ### No Update Fields
+
+        ```json
+        {
+          "status": "ERROR",
+          "message": "No update fields provided"
+        }
+        ```
+
+        ---
+
+        ## Notes
+
+        * This API is **owner-only by design**
+        * Pods and developer tools must operate using **owner credentials**
+        * Blocks are returned for convenience but are **not editable through this API**
+
+        ---
+
+
+      operationId: editFloor
+      parameters:
+      - description: ""
+        explode: false
+        in: path
+        name: floor_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          multipart/form-data:
+            examples: {}
+            schema:
+              $ref: "#/components/schemas/editFloor_request"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getFloorInformation_200_response"
+          description: ""
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  code: XF_VALIDATION_ERROR
+                  message: Input parameters in the wrong format
+                  path: /api/memory/edit/floor
+                  timestamp: 2026-01-12T08:11:59.993079561Z
+              schema:
+                $ref: "#/components/schemas/editFloor_400_response"
+          description: ""
+      security:
+      - bearer: []
+      summary: Edit floor
+      tags:
+      - editFloor
+      x-content-type: multipart/form-data
+      x-accepts:
+      - application/json
+  /api/memory/make/floor/private:
+    post:
+      deprecated: false
+      description: |
+        This API changes a floor’s visibility to **PRIVATE**.
+
+        It is used when a floor owner wants to **restrict access** to a floor that is currently public. After the update, the floor becomes private and is no longer accessible to non-authorized users (based on your platform’s access rules).
+
+        This endpoint is **state-changing**:
+
+        * If the floor is **PUBLIC**, it will be converted to **PRIVATE**
+        * If the floor is already **PRIVATE**, the API returns success (idempotent) or an “already private” response depending on implementation
+
+        This API is commonly used in:
+
+        * Floor settings → “Privacy” toggle
+        * Developer-managed pod workflows (app_id context)
+        * Admin tools (if applicable)
+
+        ---
+
+        ## Request Method
+
+        `POST`
+
+        ---
+
+        ## Content-Type
+
+        `application/x-www-form-urlencoded` (or `multipart/form-data` if your system uses form-data)
+        *(Document whichever you actually accept; below assumes standard form fields.)*
+
+        ---
+
+        ## Request Parameters (Form Fields)
+
+        | Field      | Type   | Required | Description                                                          |
+        | ---------- | ------ | -------- | -------------------------------------------------------------------- |
+        | `user_id`  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.      |
+        | `floor_id` | String | **Yes**  | Public identifier of the floor to update.                            |
+        | `app_id`   | String | No       | Calling application identifier (used for developer/pod integration). |
+
+        ---
+
+        ## Authorization Rules (Critical)
+
+        * The caller must be authenticated as `user_id`
+        * **Only the floor owner** can change floor visibility
+        * If the user is not the owner, the request must be rejected
+
+        ---
+
+        ## Behavior Rules
+
+        * Converts visibility from **PUBLIC → PRIVATE**
+        * Does not modify floor content or blocks
+        * Access enforcement for private floors is applied immediately after the change
+
+        **Idempotency**
+
+        * Calling this API multiple times should not cause repeated changes
+        * If already private, the API should either:
+
+          * return success with a message like `"already private"`, or
+          * return a specific error/status indicating no-op
+
+        ---
+
+        ## Response Format
+
+        `application/json`
+
+        ---
+
+        ## Sample Success Response
+
+        *(Example — adjust to match your actual response format)*
+
+        ```json
+        {
+          "status": "SUCCESS",
+          "floor_id": "my_floor",
+          "visibility": "PRIVATE",
+          "message": "Floor is now private"
+        }
+        ```
+
+        ---
+
+        ## Sample No-Op Response (Already Private)
+
+        ```json
+        {
+          "status": "SUCCESS",
+          "floor_id": "my_floor",
+          "visibility": "PRIVATE",
+          "message": "Floor is already private"
+        }
+        ```
+
+        ---
+
+        ## Error Responses (Examples)
+
+        ### Not Authorized (Not Owner)
+
+        ```json
+        {
+          "status": "ERROR",
+          "message": "Only the floor owner can change floor visibility"
+        }
+        ```
+
+        ### Floor Not Found
+
+        ```json
+        {
+          "status": "ERROR",
+          "message": "Floor not found"
+        }
+        ```
+
+        ### Invalid Request
+
+        ```json
+        {
+          "status": "ERROR",
+          "message": "user_id and floor_id are required"
+        }
+        ```
+
+        ---
+
+        ## Notes
+
+        * This API is intended to control floor visibility only; membership/invite rules (for private floors) are handled elsewhere.
+        * `app_id` is provided for developer/pod applications and is optional unless enforced by your app model.
+        * If you support floor types like `POD`, document whether pods are allowed to be private or not (some platforms restrict this).
+      operationId: makeFloorPrivate
+      parameters:
+      - description: Floor ID
+        explode: true
+        in: query
+        name: floor_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: User ID
+        explode: true
+        in: query
+        name: user_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: App ID
+        explode: true
+        in: query
+        name: app_id
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getFloorInformation_200_response"
+          description: ""
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  code: XF_VALIDATION_ERROR
+                  message: Invalid floor ID
+                  path: /api/memory/make/floor/private
+                  timestamp: 2026-01-12T08:11:59.993079561Z
+              schema:
+                $ref: "#/components/schemas/editFloor_400_response"
+          description: ""
+      security:
+      - bearer: []
+      summary: Make floor Private
+      tags: []
+      x-accepts:
+      - application/json
+  /api/memory/make/floor/public:
+    post:
+      deprecated: false
+      description: |
+        This API changes a floor’s visibility to **PUBLIC**.
+
+        It is used when a floor owner wants to **make a private floor accessible to everyone**. After the update, the floor becomes public and can be viewed and discovered by any user, subject to platform rules (search, feeds, pods, etc.).
+
+        This endpoint performs a **visibility state transition**:
+
+        * **PRIVATE → PUBLIC**
+        * If the floor is already public, the operation is treated as **idempotent** (no state change).
+
+        This API is typically used from:
+
+        * Floor settings → Privacy / Visibility controls
+        * Owner or admin tools
+        * Developer or pod-based applications using `app_id`
+
+        ---
+
+        ## Request Method
+
+        `POST`
+
+        ---
+
+        ## Content-Type
+
+        `application/x-www-form-urlencoded`
+        (or `multipart/form-data`, depending on your implementation)
+
+        ---
+
+        ## Request Parameters (Form Fields)
+
+        | Field      | Type   | Required | Description                                                                     |
+        | ---------- | ------ | -------- | ------------------------------------------------------------------------------- |
+        | `user_id`  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.                 |
+        | `floor_id` | String | **Yes**  | Public identifier of the floor whose visibility is to be changed.               |
+        | `app_id`   | String | No       | Identifier of the calling application (used mainly for pod/developer contexts). |
+
+        ---
+
+        ## Authorization Rules (Critical)
+
+        * The caller must be authenticated as `user_id`
+        * **Only the floor owner** is allowed to change the floor’s visibility
+        * Requests from non-owners must be rejected
+
+        ---
+
+        ## Behavior Rules
+
+        * Converts floor visibility from **PRIVATE → PUBLIC**
+        * Does not modify floor content, blocks, or ownership
+        * Visibility change takes effect immediately
+
+        ### Idempotency
+
+        * If the floor is already public, the API should:
+
+          * Return success with a message indicating no change, or
+          * Return a specific “already public” status (implementation-dependent)
+
+        ---
+
+        ## Response Format
+
+        `application/json`
+
+        ---
+
+        ## Sample Success Response
+
+        ```json
+        {
+          "status": "SUCCESS",
+          "floor_id": "my_floor",
+          "visibility": "PUBLIC",
+          "message": "Floor is now public"
+        }
+        ```
+
+        ---
+
+        ## Sample No-Op Response (Already Public)
+
+        ```json
+        {
+          "status": "SUCCESS",
+          "floor_id": "my_floor",
+          "visibility": "PUBLIC",
+          "message": "Floor is already public"
+        }
+        ```
+
+        ---
+
+        ## Error Responses (Examples)
+
+        ### Not Authorized (Not Owner)
+
+        ```json
+        {
+          "status": "ERROR",
+          "message": "Only the floor owner can change floor visibility"
+        }
+        ```
+
+        ---
+
+        ### Floor Not Found
+
+        ```json
+        {
+          "status": "ERROR",
+          "message": "Floor not found"
+        }
+        ```
+
+        ---
+
+        ### Invalid Request
+
+        ```json
+        {
+          "status": "ERROR",
+          "message": "user_id and floor_id are required"
+        }
+        ```
+
+        ---
+
+        ## Notes for Developers
+
+        * This API controls **visibility only**. Membership, invitations, and moderation rules are handled by separate APIs.
+        * `app_id` is optional and primarily used for developer-managed or pod floors.
+        * Clients should refresh floor metadata (e.g., via `/api/floor/info`) after a successful visibility change.
+
+        ---
+
+        ### Mental Model (One Line)
+
+        > **This API answers: “Make this floor visible to everyone.”**
+      operationId: makeFloorPublic
+      parameters:
+      - description: Floor ID
+        explode: true
+        in: query
+        name: floor_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: User ID
+        explode: true
+        in: query
+        name: user_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: App ID
+        explode: true
+        in: query
+        name: app_id
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getFloorInformation_200_response"
+          description: ""
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  code: XF_VALIDATION_ERROR
+                  message: Invalid floor ID
+                  path: /api/memory/make/floor/public
+                  timestamp: 2026-01-12T08:11:59.993079561Z
+              schema:
+                $ref: "#/components/schemas/editFloor_400_response"
+          description: ""
+      security:
+      - bearer: []
+      summary: Make floor public
+      tags: []
+      x-accepts:
+      - application/json
+  /api/memory/change/floor/id:
+    post:
+      deprecated: false
+      description: |
+        This API renames a floor by changing knowing the **floor identifier (floor_id)**.
+
+        It allows the **floor owner** to update the public-facing floor ID (slug/handle) from an old value to a new value. This is typically used when the owner wants to rebrand, reorganize, or correct the floor’s identifier.
+
+        ⚠️ **This operation affects how the floor is accessed and referenced externally**, so it must be performed carefully.
+
+        ---
+
+        ## Ownership & Authorization (Critical)
+
+        * The caller **must be authenticated**
+        * **Only the floor owner** is allowed to rename a floor
+        * Members, followers, or non-owners **cannot** perform this operation
+        * Ownership is validated internally using `user_id`
+
+        > If the user is not the owner, the request must be rejected.
+
+        ---
+
+        ## Request Method
+
+        `POST`
+
+        ---
+
+        ## Content-Type
+
+        `application/x-www-form-urlencoded`
+        (or equivalent form-data encoding)
+
+        ---
+
+        ## Request Parameters (Form Fields)
+
+        | Parameter | Type   | Required | Description                                                                     |
+        | --------- | ------ | -------- | ------------------------------------------------------------------------------- |
+        | `user_id` | String | **Yes**  | User requesting the rename. Must be the **owner** of the floor.                 |
+        | `from`    | String | **Yes**  | Existing floor ID (current identifier to be renamed).                           |
+        | `to`      | String | **Yes**  | New floor ID to assign to the floor.                                            |
+        | `app_id`  | String | No       | Identifier of the calling application (used mainly for pod/developer contexts). |
+
+        ---
+
+        ## Rename Rules & Constraints
+
+        * The `from` floor ID **must exist**
+        * The `to` floor ID **must be unique** and not already in use
+        * The rename operation updates **only the floor ID**
+
+          * Floor ownership, blocks, posts, and internal `fid` remain unchanged
+        * Any links or references using the old floor ID may no longer be valid after rename
+
+        ---
+
+        ## Behavior Summary
+
+        | Scenario                     | Result                                            |
+        | ---------------------------- | ------------------------------------------------- |
+        | Valid owner + unique new ID  | Floor ID renamed successfully                     |
+        | Non-owner user               | Request rejected                                  |
+        | `from` floor ID not found    | Error                                             |
+        | `to` floor ID already exists | Error                                             |
+        | `from` == `to`               | No-op or validation error (implementation choice) |
+
+        ---
+
+        ## Response Format
+
+        `application/json`
+
+        ---
+
+        ## Sample Success Response
+
+        ```json
+        {
+          "status": "SUCCESS",
+          "old_floor_id": "oldfloorid",
+          "new_floor_id": "newfloorid",
+          "message": "Floor ID renamed successfully"
+        }
+        ```
+
+        ---
+
+        ## Sample Error Responses
+
+        ### Not Floor Owner
+
+        ```json
+        {
+          "status": "ERROR",
+          "message": "Only the floor owner can rename the floor"
+        }
+        ```
+
+        ---
+
+        ### Floor Not Found
+
+        ```json
+        {
+          "status": "ERROR",
+          "message": "Source floor ID does not exist"
+        }
+        ```
+
+        ---
+
+        ### Floor ID Already Exists
+
+        ```json
+        {
+          "status": "ERROR",
+          "message": "Target floor ID is already in use"
+        }
+        ```
+
+        ---
+
+        ### Invalid Request
+
+        ```json
+        {
+          "status": "ERROR",
+          "message": "user_id, from, and to are required"
+        }
+        ```
+
+        ---
+
+        ## Notes for Developers
+
+        * This API **renames the public identifier only**; the internal immutable floor ID (`fid`) is not affected.
+        * Clients should refresh cached floor metadata after a successful rename.
+        * If your platform supports deep links or bookmarks, consider redirect or alias handling for old floor IDs (if supported).
+
+        ---
+
+        ### One-Line Mental Model
+
+        > **This API answers: “Change the public identity (ID) of a floor, owner-only.”**
+      operationId: renameFloor
+      parameters:
+      - description: User ID
+        explode: true
+        in: query
+        name: user_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: App ID
+        explode: true
+        in: query
+        name: app_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Old floor ID
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: New floor ID
+        explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getFloorInformation_200_response"
+          description: ""
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getRecentEvents_400_response"
+          description: ""
+      security: []
+      summary: Rename floor
+      tags: []
+      x-accepts:
+      - application/json
+  /auth-service/sign/up:
+    post:
+      deprecated: false
+      description: |+
+        Creates a new user account in the Floor POD using **either a mobile number or an email ID**.
+        At least **one of `mobile_number` or `email_id` is required** to register a user. Both may be provided if available.
+
+        The API registers the user under the specified application context and prepares the account for subsequent authentication and usage.
+
+        Upon successful registration, the API returns:
+        - a unique user_id identifying the newly created user, and
+        - a success string indicating the outcome of the sign-up operation.
+        The user account is created under the specified application context and can be used for subsequent interactions with Floor POD APIs.
+
+        ---
+
+        ### **Parameter Clarification (Recommended)**
+
+        * `name` is mandatory for user profile creation
+        * Either `mobile_number` **or** `email_id` must be present
+        * `app_id` is optional and used to associate the user with a specific application
+
+
+      operationId: signUp
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            examples: {}
+            schema:
+              $ref: "#/components/schemas/signUp_request"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/signUp_200_response"
+          description: ""
+        "400":
+          content:
+            application/json:
+              example: |-
+                "error": {
+                    "code": "XF_VALIDATION_ERROR",
+                    "message": "Invalid mobile number",
+                    "path": "/auth-service/sign/up",
+                    "timestamp": "2026-01-12T08:11:59.993079561Z"
+                }
+              schema:
+                $ref: "#/components/schemas/getRecentEvents_400_response"
+          description: ""
+      security:
+      - bearer: []
+      summary: Sign Up
+      tags: []
+      x-content-type: multipart/form-data
+      x-accepts:
+      - application/json
+  /auth-service/validate/activation/code:
+    post:
+      deprecated: false
+      description: |+
+        Validates the activation code submitted by a newly registered user and completes the account activation process.
+
+        This API verifies the provided `activation_code` against the specified `user_id` and activation `mode` (e.g., email or mobile). Upon successful validation, the user account is activated and the API returns the associated **POD information** along with the user’s **profile details**.
+
+        If the activation code is invalid, expired, or does not match the user context, the API returns an appropriate error response and the account remains inactive.
+
+        ---
+
+        ### **Authentication**
+
+        This endpoint requires **Bearer Token authentication**.
+
+        * The token must be included in the `Authorization` header:
+
+          ```
+          Authorization: Bearer <access_token>
+          ```
+
+        ---
+
+        ### **Request Body**
+
+        ```json
+        {
+          "user_id": "string",
+          "activation_code": "string",
+          "app_id": "string",
+          "mode": "string"
+        }
+        ```
+
+        **Field Description**
+
+        * `user_id` – Unique identifier of the newly registered user
+        * `activation_code` – One-time validation code sent to the user
+        * `app_id` – Application identifier (optional or context-specific)
+        * `mode` – Activation channel used (e.g., `email`, `mobile`)
+
+        ---
+        ### **Usage Scenarios (Mode Definition)**
+
+        | Mode | Purpose                       |
+        | ---- | ----------------------------- |
+        | `0`  | Email or mobile number change |
+        | `1`  | Password change               |
+        | `2`  | Delete account                |
+        | `3`  | Clear account                 |
+        | `5`  | Login verification            |
+
+        ### **Successful Response**
+
+        On successful validation:
+
+        * The user account is activated
+        * The API returns:
+
+          * `pod_info` associated with the user
+          * User `profile` information
+
+        The activated account can now be used for login and other Floor POD operations.
+
+        ---
+
+        ### **Error Response**
+
+        The API returns an error response when:
+
+        * The activation code is invalid or expired
+        * The activation code does not match the user or mode
+        * The user is already activated
+        * Authorization fails or the bearer token is missing/invalid
+
+        In all error cases, **account activation is not completed**.
+
+        ---
+
+        ### **One-Line Summary**
+
+        > Validates a user’s activation code, activates the account, and returns POD and profile details on success.
+
+      operationId: validateCode
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples: {}
+            schema:
+              $ref: "#/components/schemas/validateCode_request"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDetails"
+          description: ""
+        "400":
+          content:
+            application/json:
+              example: |-
+                "error": {
+                    "code": "XF_VALIDATION_ERROR",
+                    "message": "The signup failed or wrong user_id",
+                    "path": "/auth-service/validate/activation/code",
+                    "timestamp": "2026-01-12T08:11:59.993079561Z"
+                }
+              schema:
+                $ref: "#/components/schemas/validateCode_400_response"
+          description: ""
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/validateCode_412_response"
+          description: ""
+      security:
+      - bearer: []
+      summary: Validation
+      tags: []
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /auth-service/change/password:
+    post:
+      deprecated: false
+      description: |+
+        Changes the password of an existing user after validating a one-time password change activation code.
+
+        This API validates the provided `activation_code` for the given `user_id`. If the activation code is valid and not expired, the user’s password is updated to the supplied `new_password` and takes effect immediately.
+
+        If the activation code validation fails, the password remains unchanged and an error response is returned.
+
+        ---
+
+        ### **Authentication**
+
+        This endpoint requires **Bearer Token authentication**.
+
+        ```
+        Authorization: Bearer <access_token>
+        ```
+
+        ---
+
+        ### **Request Body (Form Data)**
+
+        | Field        | Type          | Required | Description                                                       |
+        | ------------ | ------------- | -------- | ----------------------------------------------------------------- |
+        | `user_id` | string | Yes      | User ID |
+        | `new_password` | string | Yes      | New Password |
+        | `activation_code` | string | Yes      | Activation code |
+
+
+        **Field Description**
+
+        * `user_id` – Unique identifier of the user requesting the password change
+        * `new_password` – New password to be set for the user
+        * `activation_code` – One-time activation code generated for password change verification
+
+        ---
+
+        ### **Successful Response**
+
+        On successful validation:
+
+        * The activation code is verified
+        * The user password is updated immediately
+        * The API returns a `success` string indicating that the password change was completed
+
+        ---
+
+        ### **Error Response**
+
+        The API returns an error response if:
+
+        * The activation code is invalid or expired
+        * The activation code does not match the specified user
+        * The password does not meet security or policy requirements
+        * Authorization fails or the bearer token is missing or invalid
+
+        In all error cases, the existing password remains unchanged.
+
+        ---
+        ### **Behavior Notes**
+
+        * Requires a prior call to `/auth-service/send/validation/code` with the proper mode.
+        ---
+
+        ### **Security Notes**
+
+        * Activation codes are single-use and time-bound
+        * Passwords are never returned in API responses
+        * Rate limiting may be applied to prevent brute-force attempts
+
+        ---
+
+        ### **One-Line Summary**
+
+        > Updates a user’s password after validating a one-time activation code.
+
+      operationId: changePassword
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            examples: {}
+            schema:
+              $ref: "#/components/schemas/changePassword_request"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/changePassword_200_response"
+          description: ""
+        "400":
+          content:
+            application/json:
+              example: |-
+                "error": {
+                    "code": "XF_VALIDATION_ERROR",
+                    "message": "Invalid Data",
+                    "path": "/auth-service/change/password",
+                    "timestamp": "2026-01-12T08:11:59.993079561Z"
+                }
+              schema:
+                $ref: "#/components/schemas/getRecentEvents_400_response"
+          description: ""
+      security:
+      - bearer: []
+      summary: Change Password
+      tags: []
+      x-content-type: multipart/form-data
+      x-accepts:
+      - application/json
+  /auth-service/sign/in/with/email:
+    post:
+      deprecated: false
+      description: "Authenticates a user using a registered email ID.\nThe authentication\
+        \ mechanism is determined by the specified `mode`.\n\n* When `login_type`\
+        \ is set to **`1`**, the user is authenticated using the provided **password**.\n\
+        * When `login_type` is set to **`2`**, the user is authenticated using a **one-time\
+        \ activation code (OTP)**.\n\nFor OTP-based authentication (`login_type =\
+        \ 2`), the client **must first invoke the Send Validation Code API** with\
+        \ the appropriate login mode to generate and deliver the activation code to\
+        \ the user.\n\n---\n### **Request Body**\n\n| Field        | Type        \
+        \  | Required | Description                                              \
+        \         |\n| ------------ | ------------- | -------- | -----------------------------------------------------------------\
+        \ |\n| `email_id` | string | Yes      | Email ID |\n| `pass_code` | string\
+        \ | Yes      | Password/Validation code depending on the login_type|\n| `login_type`\
+        \ | string | Yes      | login type 1 for password 2 for validation code| \n\
+        \ |`app_id` | string | Yes      | App ID | \n\n\n\n**Field Description**\n\
+        \n* `email_id` – Registered email address of the user\n* `pass_code` – password\
+        \ or activation code  (this is password if it is 1 and 2 it is validation\
+        \ code)\n* `app_id` - App ID which is a 13 digit numeric value\n* `login_type`\
+        \ – Login type\n  * `1` → Password-based login\n  * `2` → Activation code\
+        \ (OTP)–based login\n\n---\n\n### **Behavior Notes**\n\n* When `login_type\
+        \ = 2`, password validation is bypassed.\n* OTP-based login requires a prior\
+        \ call to `\n/auth-service/send/sign/in/validation/code`.\n* If the required\
+        \ credentials for the selected mode are missing or invalid, authentication\
+        \ fails.\n\n---\n\n### **Successful Response**\n\nOn successful authentication,\
+        \ the user is signed in and a success response is returned as per the authentication\
+        \ flow.\n\n---\n\n### **Error Response**\n\nThe API returns an error response\
+        \ if:\n\n* The email ID is not registered\n* The password is incorrect (`login_type\
+        \ = 1 `)\n* The activation code is missing, invalid, or expired (`login_type\
+        \ = 2`)\n* The mode value is invalid or unsupported\n\n---\n\n### **One-Line\
+        \ Summary**\n\n> Signs in a user using an email ID with either password-based\
+        \ or OTP-based authentication, based on the selected mode.\n\n"
+      operationId: signInWithEmail
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            examples: {}
+            schema:
+              $ref: "#/components/schemas/signInWithEmail_request"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example: |-
+                "error": {
+                    "code": "XF_VALIDATION_ERROR",
+                    "message": "Invalid E-Mail",
+                    "path": "/auth-service/sign/in/with/email",
+                    "timestamp": "2026-01-12T08:11:59.993079561Z"
+                }
+                }
+              schema:
+                $ref: "#/components/schemas/signInWithEmail_200_response"
+          description: ""
+        "400":
+          content:
+            application/json:
+              example: |-
+                "error": {
+                    "code": "XF_VALIDATION_ERROR",
+                    "message": "Invalid Data",
+                    "path": "/auth-service/sign/in/with/email",
+                    "timestamp": "2026-01-12T08:11:59.993079561Z"
+                }
+              schema:
+                $ref: "#/components/schemas/getRecentEvents_400_response"
+          description: ""
+      security:
+      - bearer: []
+      summary: Sign In with email ID
+      tags: []
+      x-content-type: multipart/form-data
+      x-accepts:
+      - application/json
+  /auth-service/sign/in/with/mobile/number:
+    post:
+      deprecated: false
+      description: "Authenticates a user using a registered mobile number.\nThe authentication\
+        \ method is determined by the specified `mode`.\n\n* When `login_type` is\
+        \ set to **`1`**, the user is authenticated using the **password** associated\
+        \ with the account.\n* When `login_type` is set to **`2`**, the user is authenticated\
+        \ using a **one-time activation code (OTP)** sent to the registered mobile\
+        \ number.\n\nFor OTP-based authentication (`login_type = 1`), the client **must\
+        \ first call the Send Validation Code API** with the appropriate login mode\
+        \ to generate and deliver the activation code.\n\n---\n\n### **Request Formdata**\n\
+        \n| Field        | Type          | Required | Description                \
+        \                                       |\n| ------------ | -------------\
+        \ | -------- | -----------------------------------------------------------------\
+        \ |\n| `mobile_number` | string | Yes      | Mobile number|\n| `pass_code`\
+        \ | string | Yes      | Password/Validation code depending on the login_type|\n\
+        | `login_type` | string | Yes      | login type 1 for password 2 for validation\
+        \ code| \n |`app_id` | string | Yes      | App ID | \n\n\n**Field Description**\n\
+        \n* `mobile_number` – Registered mobile number of the user\n* `pass_code`\
+        \ – Password / Validation code (password when `login_type= 1`; validation\
+        \ code when `login_type = 2`)\n* `login_type` – Login type\n\n  * `1` → Password-based\
+        \ login\n  * `2` → Activation code (OTP)–based login\n\n---\n\n### **Behavior\
+        \ Notes**\n\n* When `login_type = 2`, password validation is skipped.\n* OTP-based\
+        \ login requires a prior call to `/auth-service/send/sign/in/validation/code`.\n\
+        * Missing or invalid credentials for the selected mode will result in authentication\
+        \ failure.\n\n---\n\n### **Successful Response**\n\nOn successful authentication,\
+        \ the user is signed in and a success response is returned according to the\
+        \ authentication flow.\n\n---\n\n### **Error Response**\n\nThe API returns\
+        \ an error response if:\n\n* The mobile number is not registered\n* The password\
+        \ is incorrect (`login_type = 1`)\n* The activation code is missing, invalid,\
+        \ or expired (`login_type = 2`)\n* An invalid or unsupported mode is provided\n\
+        \n---\n\n### **One-Line Summary**\n\n> Signs in a user using a mobile number\
+        \ with either password-based or OTP-based authentication, based on the selected\
+        \ mode."
+      operationId: signInWithMobileNumber
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples: {}
+            schema:
+              properties: {}
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                error:
+                  code: XF_VALIDATION_ERROR
+                  message: Invalid mobile number
+                  path: /auth-service/sign/in/with/mobile/number
+                  timestamp: 2026-01-12T08:11:59.993079561Z
+              schema:
+                $ref: "#/components/schemas/signInWithEmail_200_response"
+          description: ""
+        "400":
+          content:
+            application/json:
+              example: |-
+                "error": {
+                    "code": "XF_VALIDATION_ERROR",
+                    "message": "Invalid Data",
+                    "path": "/auth-service/sign/in/with/mobile/number",
+                    "timestamp": "2026-01-12T08:11:59.993079561Z"
+                }
+              schema:
+                $ref: "#/components/schemas/getRecentEvents_400_response"
+          description: ""
+      security:
+      - bearer: []
+      summary: Sign In with Mobile number
+      tags: []
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /auth-service/change/email:
+    post:
+      deprecated: false
+      description: |
+        Updates the email ID associated with an existing user account after validating a one-time activation code sent to the **new email address**.
+
+        This operation can only be performed by a **logged-in user**. When a user initiates an email change, an activation code is sent to the newly provided email ID. The email update takes effect only after the activation code is successfully validated.
+
+        If the activation code validation fails, the email ID remains unchanged.
+
+        ---
+
+        ### **Authentication**
+
+        This endpoint requires **Bearer Token authentication**.
+
+        ```
+        Authorization: Bearer <access_token>
+        ```
+
+        ---
+
+        ### **Request Body**
+
+        ```json
+        {
+          "user_id": "string",
+          "new_email_id": "string",
+          "activation_code": "string",
+          "app_id":"string"
+        }
+        ```
+
+        **Field Description**
+
+        * `user_id` – Unique identifier of the logged-in user
+        * `new_email_id` – New email address to be associated with the account
+        * `activation_code` – One-time activation code sent to the new email ID for verification
+
+        ---
+
+        ### **Flow Summary**
+
+        1. User is authenticated and logged in
+        2. User requests to change email ID
+        3. System sends an activation code to the **new email address**
+        4. User submits the activation code via this API
+        5. On successful validation, the email ID is updated
+
+        ---
+
+        ### **Successful Response**
+
+        On successful validation:
+
+        * The activation code is verified
+        * The user’s email ID is updated immediately
+        * A `success` string is returned confirming the email change
+
+        ---
+
+        ### **Error Response**
+
+        The API returns an error response if:
+
+        * The activation code is invalid or expired
+        * The activation code does not match the user or email
+        * The new email ID is already in use
+        * Authorization fails or the bearer token is missing or invalid
+
+        In all error cases, the existing email ID remains unchanged.
+
+        ---
+        ### **Behavior Notes**
+
+        * Requires a prior call to `/auth-service/send/validation/code` with the proper mode.
+
+        ---
+
+        ### **Security Notes (Recommended)**
+
+        * Activation codes are single-use and time-bound
+        * Email changes require prior authentication
+        * Rate limiting may be applied to prevent abuse
+
+        ---
+
+        ### **One-Line Summary**
+
+        > Changes a user’s email ID after validating an activation code sent to the new email address.
+      operationId: changeEmail
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            examples: {}
+            schema:
+              $ref: "#/components/schemas/changeEmail_request"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: ""
+        "400":
+          content:
+            application/json:
+              example: |-
+                "error": {
+                    "code": "XF_VALIDATION_ERROR",
+                    "message": "The user details does not exist",
+                    "path": "/auth-service/change/email",
+                    "timestamp": "2026-01-12T08:11:59.993079561Z"
+                }
+              schema:
+                $ref: "#/components/schemas/getRecentEvents_400_response"
+          description: ""
+      security:
+      - bearer: []
+      summary: Change email ID
+      tags: []
+      x-content-type: multipart/form-data
+      x-accepts:
+      - application/json
+  /auth-service/change/mobile:
+    post:
+      deprecated: false
+      description: |-
+        Updates the mobile number associated with an existing user account after validating a one-time activation code sent to the **new mobile number**.
+
+        This operation can only be performed by a **logged-in user**. When a user initiates a mobile number change, an activation code is sent to the newly provided mobile number. The mobile number update takes effect only after the activation code is successfully validated.
+
+        If the activation code validation fails, the mobile number remains unchanged.
+
+        ---
+
+        ### **Authentication**
+
+        This endpoint requires **Bearer Token authentication**.
+
+        ```
+        Authorization: Bearer <access_token>
+        ```
+
+        ---
+
+        ### **Request Body**
+
+        ```json
+        {
+          "user_id": "string",
+          "new_mobile_number": "string",
+          "activation_code": "string"
+        }
+        ```
+
+        **Field Description**
+
+        * `user_id` – Unique identifier of the logged-in user
+        * `new_mobile_number` – New mobile number to be associated with the account
+        * `activation_code` – One-time activation code sent to the new mobile number for verification
+
+        ---
+
+        ### **Flow Summary**
+
+        1. User is authenticated and logged in
+        2. User requests to change mobile number
+        3. System sends an activation code to the **new mobile number**
+        4. User submits the activation code via this API
+        5. On successful validation, the mobile number is updated
+
+        ---
+
+        ### **Successful Response**
+
+        On successful validation:
+
+        * The activation code is verified
+        * The user’s mobile number is updated immediately
+        * A `success` string is returned confirming the mobile number change
+
+        ---
+
+        ### **Error Response**
+
+        The API returns an error response if:
+
+        * The activation code is invalid or expired
+        * The activation code does not match the user or mobile number
+        * The new mobile number is already in use
+        * Authorization fails or the bearer token is missing or invalid
+
+        In all error cases, the existing mobile number remains unchanged.
+
+        ---
+        ### **Behavior Notes**
+
+        * Requires a prior call to `/auth-service/send/validation/code` with the proper mode.
+        ---
+
+        ### **Security Notes (Recommended)**
+
+        * Activation codes are single-use and time-bound
+        * Mobile number changes require prior authentication
+        * Rate limiting may be applied to prevent abuse
+
+        ---
+
+        ### **One-Line Summary**
+
+        > Changes a user’s mobile number after validating an activation code sent to the new mobile number.
+      operationId: changeMobileNumber
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples: {}
+            schema:
+              properties: {}
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example: |-
+                "error": {
+                    "code": "XF_VALIDATION_ERROR",
+                    "message": "The user details does not exist",
+                    "path": "/auth-service/change/mobile",
+                    "timestamp": "2026-01-12T08:11:59.993079561Z"
+                }
+              schema:
+                properties: {}
+                type: object
+          description: ""
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  code: XF_VALIDATION_ERROR
+                  message: The user details does not exist
+                  path: /auth-service/change/mobile
+                  timestamp: 2026-01-12T08:11:59.993079561Z
+              schema:
+                $ref: "#/components/schemas/getRecentEvents_400_response"
+          description: ""
+      security:
+      - bearer: []
+      summary: Change Mobile number
+      tags: []
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /auth-service/send/validation/code:
+    post:
+      deprecated: false
+      description: |-
+        Generates and sends a one-time validation code to the user for verification of sensitive or critical account operations.
+
+        This API is used across multiple authentication and account-management flows. The validation code is delivered to the user via the appropriate channel (**email or mobile number**), based on the requested operation mode and the input provided.
+
+        The generated code is **time-bound**, **single-use**, and must be validated using the corresponding verification APIs to complete the requested action.
+
+        ---
+
+        ### **Usage Scenarios (Mode Definition)**
+
+        | Mode | Purpose                       |
+        | ---- | ----------------------------- |
+        | `0`  | Email or mobile number change |
+        | `1`  | Password change               |
+        | `2`  | Delete account                |
+        | `3`  | Clear account                 |
+        | `4`  | Signup Verification           |
+
+        **Mode `5` – Signup Verification**
+        For login verification, the validation code is sent to **either the email ID or the mobile number provided in the request**.
+        At least **one of email or mobile number must be supplied** for this mode.
+
+        ---
+
+        ### **Behavior**
+
+        * Generates a secure, one-time validation code
+        * Sends the code to the appropriate channel:
+
+          * Email or mobile number, depending on the operation mode and input
+        * Associates the code with:
+
+          * User identity (or login identifier)
+          * Requested operation (`mode`)
+          * Application context (if applicable)
+        * Validation codes are valid for a limited duration and **cannot be reused**
+
+        ---
+
+        ### **Authentication**
+
+        This endpoint requires **Bearer Token authentication**,
+        **except** where explicitly allowed (for example, login-related flows).
+
+        ```
+        Authorization: Bearer <access_token>
+        ```
+
+        ---
+
+        ### **Successful Response**
+
+        On success, the API confirms that the validation code has been generated and successfully dispatched to the user.
+
+        ---
+
+        ### **Error Response**
+
+        The API returns an error response if:
+
+        * The user does not exist or is not eligible for the requested operation
+        * The requested mode is invalid or unsupported
+        * Required identifiers (email or mobile number for login verification) are missing
+        * Rate limits are exceeded
+        * Authorization fails (where applicable)
+
+        ---
+
+        ### **Security Notes (Recommended)**
+
+        * Validation codes are single-use and time-bound
+        * Rate limiting is enforced to prevent abuse
+        * Repeated failures may trigger temporary blocking or additional verification
+
+        ---
+
+        ### **One-Line Summary**
+
+        > Sends a one-time validation code for secure account and authentication operations, including login via email or mobile number.
+      operationId: sendValidationCode
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            examples: {}
+            schema:
+              $ref: "#/components/schemas/sendValidationCode_request"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example: |-
+                "error": {
+                    "code": "XF_VALIDATION_ERROR",
+                    "message": "Invalid parameter: Invalid mode",
+                    "path": "/auth-service/send/validation/code",
+                    "timestamp": "2026-01-12T08:11:59.993079561Z"
+                }
+              schema:
+                $ref: "#/components/schemas/sendValidationCode_200_response"
+          description: ""
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  code: XF_VALIDATION_ERROR
+                  message: "Invalid parameter: Invalid mode"
+                  path: /auth-service/send/validation/code
+                  timestamp: 2026-01-12T08:11:59.993079561Z
+              schema:
+                $ref: "#/components/schemas/getRecentEvents_400_response"
+          description: ""
+      security:
+      - bearer: []
+      summary: Send Validation code
+      tags: []
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /auth-service/send/sign/in/validation/code:
+    post:
+      deprecated: false
+      description: |+
+        This API initiates the **sign-in validation process** by sending a **one-time validation code (OTP)** to the user.
+
+        The OTP is delivered to **either the mobile number or the email address** provided in the request.
+        This endpoint is typically called **before completing sign-in**, to verify that the user owns the supplied contact identifier.
+
+        The calling application is responsible for:
+
+        * Collecting the OTP from the user
+        * Submitting it to the OTP verification API (handled separately)
+
+        ---
+
+        ## **Use Case**
+
+        * User attempts to sign in
+        * User provides **mobile number or email**
+        * System sends a **validation code (OTP)**
+        * User enters OTP to complete sign-in
+
+        ---
+
+        ## **Request Method**
+
+        `POST`
+
+        ---
+
+        ## **Formdata Parameters**
+
+        | Parameter Name  | Type   | Required  | Description                                 |
+        | --------------- | ------ | --------- | ------------------------------------------- |
+        | `mobile_number` | String | Optional* | Mobile number to which the OTP will be sent |
+        | `email_id`      | String | Optional* | Email address to which the OTP will be sent |
+        | `app_id`        | String | Optional  | Identifier of the calling application       |
+
+        * **Either `mobile_number` or `email_id` must be provided.**
+        Providing both is allowed; the system may choose one based on configuration.
+
+        ---
+
+        ## **Request Rules**
+
+        * At least **one** of `mobile_number` or `email_id` is mandatory
+        * If both are missing, the request will be rejected
+        * OTP delivery channel depends on the provided identifier
+
+        ---
+
+        ## **Response Format**
+
+        `application/json`
+
+        ---
+
+        ## **Sample Success Response**
+
+        ```json
+        {
+          "status": "SUCCESS",
+          "message": "Validation code sent successfully"
+        }
+        ```
+
+        ---
+
+        ## **Sample Error Responses**
+
+        ### Missing Identifier
+
+        ```json
+        {
+          "status": "ERROR",
+          "message": "Either mobile_number or email_id must be provided"
+        }
+        ```
+
+        ### Invalid Identifier
+
+        ```json
+        {
+          "status": "ERROR",
+          "message": "Invalid mobile number or email address"
+        }
+        ```
+
+        ---
+
+        ## **Notes**
+
+        * This API **only sends** the validation code
+        * OTP verification must be performed using the corresponding **verify validation code** API
+        * Rate limiting and retry restrictions may apply to prevent abuse
+
+      operationId: sendSignInValidationCode
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            examples: {}
+            schema:
+              $ref: "#/components/schemas/sendSignInValidationCode_request"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sendSignInValidationCode_200_response"
+          description: ""
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sendSignInValidationCode_400_response"
+          description: ""
+      security:
+      - bearer: []
+      summary: Send Sign-In Validation Code (OTP)
+      tags: []
+      x-content-type: multipart/form-data
+      x-accepts:
+      - application/json
+  /memory/identity/external-user:
+    post:
+      deprecated: false
+      description: |-
+        This API allows a calling application to **pass externally authenticated user identity information to xfloor** after completing authentication within its own system.
+
+        xfloor **does not perform authentication, credential verification, or session management** as part of this API. The calling application is fully responsible for validating the user and ensuring the correctness of the identity data provided.
+
+        Upon invocation, xfloor will:
+
+        * **Create a new user profile** if no matching user exists, or
+        * **Update the existing user profile** if the user is already present.
+
+        xfloor returns a unique `xfloor_user_id`, which serves as the **canonical user identifier** and must be used in all subsequent xfloor APIs, including floors, blocks, conversations, memory interactions, and analytics.
+      operationId: registerExternalUserIdentity
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            examples: {}
+            schema:
+              $ref: "#/components/schemas/registerExternalUserIdentity_request"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                pod_info:
+                  fid: string
+                  floor_id: string
+                  title: string
+                  details: string
+                profile:
+                  floor_id: string
+                  fid: string
+                  name: string
+                  email: string
+                  mobile_number: string
+                  user_id: string
+                  avatar:
+                    url: string
+                    id: string
+              schema:
+                $ref: "#/components/schemas/signInWithEmail_200_response"
+          description: ""
+      security:
+      - bearer: []
+      summary: External User Registration
+      tags: []
+      x-content-type: multipart/form-data
+      x-accepts:
+      - application/json
+components:
+  responses: {}
+  schemas:
+    QueryResponse:
+      example:
+        answer: answer
+        items:
+        - score: 6.027456183070403
+          block_type: 0
+          event_id: event_id
+          block_title: block_title
+          user_id: user_id
+          floor_uid: floor_uid
+          match_type: match_type
+          text: text
+          from_floor_uid: from_floor_uid
+          block_details: block_details
+          block_id: block_id
+        - score: 6.027456183070403
+          block_type: 0
+          event_id: event_id
+          block_title: block_title
+          user_id: user_id
+          floor_uid: floor_uid
+          match_type: match_type
+          text: text
+          from_floor_uid: from_floor_uid
+          block_details: block_details
+          block_id: block_id
+      properties:
+        items:
+          description: List of source content
+          items:
+            $ref: "#/components/schemas/QueryResponse_items_inner"
+          type: array
+        answer:
+          description: Summary of the posts
+          type: string
+      type: object
+    Media:
+      example:
+        type: type
+        url: url
+      properties:
+        url:
+          description: Url where media is stored
+          type: string
+        type:
+          description: ID of the media
+          type: string
+      required:
+      - type
+      - url
+      type: object
+    UserDetails:
+      example:
+        pod_info:
+          fid: fid
+          blocks:
+          - bid: bid
+            type: type
+            title: title
+          - bid: bid
+            type: type
+            title: title
+          floor_id: floor_id
+          details: details
+          avatar:
+            type: type
+            url: url
+          title: title
+        profile:
+          fid: fid
+          user_id: user_id
+          blocks:
+          - bid: bid
+            type: type
+            title: title
+          - bid: bid
+            type: type
+            title: title
+          name: name
+          floor_id: floor_id
+          avatar:
+            id: id
+            url: url
+          mobile_number: mobile_number
+          email: email
+        app_id: app_id
+      properties:
+        pod_info:
+          $ref: "#/components/schemas/FloorInfo"
+        profile:
+          $ref: "#/components/schemas/signInWithEmail_200_response_profile"
+        app_id:
+          description: App ID
+          type: string
+      required:
+      - app_id
+      - pod_info
+      - profile
+      type: object
+    SignUpResponse:
+      properties:
+        user_id:
+          description: User ID
+          type: string
+        success:
+          description: Success string - "Enter Validation code"
+          type: string
+      required:
+      - success
+      - user_id
+      type: object
+    BlockDetails:
+      description: Block Details
+      example:
+        bid: bid
+        type: type
+        title: title
+      properties:
+        bid:
+          description: Block ID
+          type: string
+        type:
+          description: Block Type
+          type: string
+        title:
+          description: Title of the block
+          type: string
+      required:
+      - bid
+      - title
+      - type
+      type: object
+    FloorInfo:
+      description: User's Pod floor Infomation
+      example:
+        fid: fid
+        blocks:
+        - bid: bid
+          type: type
+          title: title
+        - bid: bid
+          type: type
+          title: title
+        floor_id: floor_id
+        details: details
+        avatar:
+          type: type
+          url: url
+        title: title
+      properties:
+        floor_id:
+          description: Pod floor ID
+          type: string
+        title:
+          description: Title
+          type: string
+        details:
+          description: Brief description about the Pod floor
+          type: string
+        fid:
+          description: Unique numeric ID of the pod floor
+          type: string
+        blocks:
+          description: List of blocks
+          items:
+            $ref: "#/components/schemas/BlockDetails"
+          type: array
+        avatar:
+          $ref: "#/components/schemas/Media"
+      required:
+      - fid
+      - floor_id
+      - title
+      type: object
+    EventResponse:
+      example:
+        success: success
+      properties:
+        success:
+          type: string
+      required:
+      - success
+      type: object
+    "400ErrorCode":
+      properties:
+        code:
+          description: Validation Error
+          type: string
+        message:
+          description: Error Message
+          type: string
+        path:
+          description: REST api path
+          type: string
+        timestamp:
+          description: Time stamp
+          type: string
+      required:
+      - code
+      - message
+      - path
+      - timestamp
+      type: object
+    query_request_filters:
+      description: JSON format filters
+      properties:
+        time_from:
+          description: Start timestamp for filtering content by creation or update
+            time.
+          type: string
+        time_to:
+          description: End timestamp for filtering content by creation or update time.
+          type: string
+        filter_types:
+          description: "Content types to include (e.g., post, forum)."
+          type: string
+        filter_tags:
+          description: Tags used to further refine the query results.
+          type: string
+      required:
+      - filter_tags
+      - filter_types
+      - time_from
+      - time_to
+      type: object
+    query_request:
+      properties:
+        user_id:
+          description: User ID
+          type: string
+        query:
+          description: Query text for conversations
+          type: string
+        floor_ids:
+          description: List of floor IDs
+          items:
+            type: string
+          type: array
+        include_metadata:
+          description: Include meta data or not
+          type: string
+        summary_needed:
+          description: Need LLM summary for the lists of posts sent
+          type: string
+        app_id:
+          description: App ID
+          type: string
+        filters:
+          $ref: "#/components/schemas/query_request_filters"
+      required:
+      - floor_ids
+      - query
+      - user_id
+      type: object
+    query_422_response_error:
+      example:
+        message: message
+      properties:
+        message:
+          description: Error Message
+          type: string
+      required:
+      - message
+      type: object
+    query_422_response:
+      example:
+        error:
+          message: message
+      properties:
+        error:
+          $ref: "#/components/schemas/query_422_response_error"
+      required:
+      - error
+      title: ""
+      type: object
+    event_request:
+      properties:
+        files:
+          description: "Attach relevant media here, which includes, jpg, mp3, pdf,\
+            \ mp4 files. More than one media can be selected"
+          example: !!binary |-
+            WyIiXQ==
+          format: binary
+          type: string
+        input_info:
+          description: "Input parameters, bid is optional"
+          example: "{ \"floor_id\": \"my_floor\",   \"bid\": \"17845683456\",    \"\
+            user_id\": \"145623907625\",    \"title\": \"My floor\",    \"description\"\
+            : \"My floor details\", \"app_id\": \"165434879028\"}"
+          type: string
+      required:
+      - input_info
+      type: object
+    event_400_response_error:
+      example:
+        path: path
+        code: code
+        message: message
+        timestamp: timestamp
+      properties:
+        code:
+          type: string
+        message:
+          description: Invalid block type or Invalid Bid type
+          type: string
+        path:
+          type: string
+        timestamp:
+          type: string
+      required:
+      - code
+      - message
+      - path
+      - timestamp
+      type: object
+    event_400_response:
+      example:
+        error:
+          path: path
+          code: code
+          message: message
+          timestamp: timestamp
+      properties:
+        error:
+          $ref: "#/components/schemas/event_400_response_error"
+      required:
+      - error
+      title: ""
+      type: object
+    getRecentEvents_200_response_items_inner_author:
+      description: Author details
+      example:
+        name: name
+        floor_uid: floor_uid
+        floor_id: floor_id
+        avatar:
+          type: type
+          url: url
+      properties:
+        name:
+          description: Name of the author
+          type: string
+        floor_id:
+          description: Profile floor of the auther
+          type: string
+        avatar:
+          $ref: "#/components/schemas/Media"
+        floor_uid:
+          description: Unique 13 digit id of the profile floor
+          type: string
+      type: object
+    getRecentEvents_200_response_items_inner:
+      description: Each post item
+      example:
+        event_id: event_id
+        block_type: block_type
+        author:
+          name: name
+          floor_uid: floor_uid
+          floor_id: floor_id
+          avatar:
+            type: type
+            url: url
+        floor_uid: floor_uid
+        media:
+        - type: type
+          url: url
+        - type: type
+          url: url
+        text: text
+        title: title
+        created_at_ms: created_at_ms
+        block_id: block_id
+      properties:
+        event_id:
+          description: ' Post ID'
+          type: string
+        block_type:
+          description: Block Type
+          type: string
+        author:
+          $ref: "#/components/schemas/getRecentEvents_200_response_items_inner_author"
+        media:
+          description: Any media attached
+          items:
+            $ref: "#/components/schemas/Media"
+          type: array
+        floor_uid:
+          description: 13 digit ID of the floor in which the post is residing
+          type: string
+        title:
+          description: Post title
+          type: string
+        text:
+          description: Post details
+          type: string
+        created_at_ms:
+          description: Created time in milli seconds
+          type: string
+        block_id:
+          description: Numeric ID of the block
+          type: string
+      type: object
+    getRecentEvents_200_response:
+      example:
+        post_count: post_count
+        items:
+        - event_id: event_id
+          block_type: block_type
+          author:
+            name: name
+            floor_uid: floor_uid
+            floor_id: floor_id
+            avatar:
+              type: type
+              url: url
+          floor_uid: floor_uid
+          media:
+          - type: type
+            url: url
+          - type: type
+            url: url
+          text: text
+          title: title
+          created_at_ms: created_at_ms
+          block_id: block_id
+        - event_id: event_id
+          block_type: block_type
+          author:
+            name: name
+            floor_uid: floor_uid
+            floor_id: floor_id
+            avatar:
+              type: type
+              url: url
+          floor_uid: floor_uid
+          media:
+          - type: type
+            url: url
+          - type: type
+            url: url
+          text: text
+          title: title
+          created_at_ms: created_at_ms
+          block_id: block_id
+      properties:
+        post_count:
+          description: Number of posts
+          type: string
+        items:
+          description: List of posts
+          items:
+            $ref: "#/components/schemas/getRecentEvents_200_response_items_inner"
+          type: array
+      required:
+      - items
+      - post_count
+      type: object
+    getRecentEvents_400_response_error:
+      example:
+        path: path
+        code: code
+        message: message
+        timestamp: timestamp
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        path:
+          type: string
+        timestamp:
+          type: string
+      required:
+      - code
+      - message
+      - path
+      - timestamp
+      type: object
+    getRecentEvents_400_response:
+      example:
+        error:
+          path: path
+          code: code
+          message: message
+          timestamp: timestamp
+      properties:
+        error:
+          $ref: "#/components/schemas/getRecentEvents_400_response_error"
+      required:
+      - error
+      title: ""
+      type: object
+    getFloorInformation_200_response:
+      example:
+        fid: fid
+        blocks:
+        - bid: bid
+          type: type
+          title: title
+        - bid: bid
+          type: type
+          title: title
+        floor_id: floor_id
+        details: details
+        avatar:
+          type: type
+          url: url
+        title: title
+      properties:
+        floor_id:
+          description: Pod floor ID
+          type: string
+        title:
+          description: Title
+          type: string
+        details:
+          description: Brief description about the Pod floor
+          type: string
+        fid:
+          description: Unique numeric ID of the pod floor
+          type: string
+        blocks:
+          description: List of blocks
+          items:
+            $ref: "#/components/schemas/BlockDetails"
+          type: array
+        avatar:
+          $ref: "#/components/schemas/Media"
+      required:
+      - fid
+      - floor_id
+      - title
+      type: object
+    editFloor_request:
+      properties:
+        user_id:
+          description: User ID
+          example: ""
+          type: string
+        app_id:
+          description: App ID
+          example: ""
+          type: string
+        logo_file:
+          description: Floor avatar
+          example: !!binary ""
+          format: binary
+          type: string
+        title:
+          description: Floor title
+          example: ""
+          type: string
+        details:
+          description: Floor decription
+          example: ""
+          type: string
+      required:
+      - app_id
+      - user_id
+      type: object
+    editFloor_400_response_error:
+      example:
+        path: path
+        code: code
+        message: message
+        timestamp: timestamp
+      properties:
+        code:
+          description: Error code
+          type: string
+        message:
+          description: Error message
+          type: string
+        path:
+          description: API path
+          type: string
+        timestamp:
+          description: Time stamp
+          type: string
+      required:
+      - code
+      - message
+      - path
+      - timestamp
+      type: object
+    editFloor_400_response:
+      example:
+        error:
+          path: path
+          code: code
+          message: message
+          timestamp: timestamp
+      properties:
+        error:
+          $ref: "#/components/schemas/editFloor_400_response_error"
+      required:
+      - error
+      title: ""
+      type: object
+    signUp_request:
+      properties:
+        name:
+          description: New User Name
+          example: '"Jon Doe"'
+          type: string
+        email_id:
+          description: Email ID of the user
+          example: '"myemail@email.com"'
+          type: string
+        mobile_number:
+          description: Mobile number
+          example: '"9084568934"'
+          type: string
+        password:
+          description: Password
+          example: '"xxxxxxxx"'
+          type: string
+        app_id:
+          description: Registered App ID
+          example: '"1675645678"'
+          type: string
+      required:
+      - name
+      - password
+      type: object
+    signUp_200_response:
+      example:
+        user_id: user_id
+        success: success
+      properties:
+        user_id:
+          description: User ID
+          type: string
+        success:
+          description: Success string - "Enter Validation code"
+          type: string
+      required:
+      - success
+      - user_id
+      type: object
+    validateCode_request:
+      properties:
+        user_id:
+          description: User ID
+          type: string
+        activation_code:
+          description: Validation code
+          type: string
+        app_id:
+          description: App ID which is given while registering as developer
+          type: string
+        mode:
+          description: "4 for sign up, 5 for login"
+          type: string
+      required:
+      - activation_code
+      - app_id
+      - mode
+      - user_id
+      type: object
+    validateCode_400_response_error:
+      example:
+        path: path
+        code: code
+        message: message
+        timestamp: timestamp
+      properties:
+        code:
+          description: error code
+          type: string
+        message:
+          description: The signup failed or wrong user_id
+          type: string
+        path:
+          type: string
+        timestamp:
+          type: string
+      required:
+      - code
+      - message
+      - path
+      - timestamp
+      type: object
+    validateCode_400_response:
+      example:
+        error:
+          path: path
+          code: code
+          message: message
+          timestamp: timestamp
+      properties:
+        error:
+          $ref: "#/components/schemas/validateCode_400_response_error"
+      required:
+      - error
+      title: ""
+      type: object
+    validateCode_412_response:
+      example:
+        error: error
+      properties:
+        error:
+          description: Something went wrong. Try again
+          type: string
+      required:
+      - error
+      title: ""
+      type: object
+    changePassword_request:
+      properties:
+        user_id:
+          description: User ID
+          example: '"187626754904"'
+          type: string
+        new_password:
+          description: New Password
+          example: '"mypassword"'
+          type: string
+        actication_code:
+          description: Validation code
+          example: '"2347"'
+          type: string
+      type: object
+    changePassword_200_response:
+      example:
+        success: success
+      properties:
+        success:
+          description: Validate with OTP
+          type: string
+      required:
+      - success
+      type: object
+    signInWithEmail_request:
+      properties:
+        email_id:
+          description: Email ID
+          example: ""
+          type: string
+        pass_code:
+          description: Validation code or password depends on the login_type
+          example: ""
+          type: string
+        login_type:
+          description: "1 is for password, 2 is for validation code"
+          example: ""
+          type: string
+        app_id:
+          description: App ID
+          example: ""
+          type: string
+      required:
+      - email_id
+      - login_type
+      - pass_code
+      type: object
+    signInWithEmail_200_response_profile_avatar:
+      description: Profile Pick details
+      example:
+        id: id
+        url: url
+      properties:
+        url:
+          description: Image URL
+          type: string
+        id:
+          description: Image ID
+          type: string
+      required:
+      - id
+      - url
+      type: object
+    signInWithEmail_200_response_profile:
+      description: User profile details
+      example:
+        fid: fid
+        user_id: user_id
+        blocks:
+        - bid: bid
+          type: type
+          title: title
+        - bid: bid
+          type: type
+          title: title
+        name: name
+        floor_id: floor_id
+        avatar:
+          id: id
+          url: url
+        mobile_number: mobile_number
+        email: email
+      properties:
+        floor_id:
+          description: Associated floor ID
+          type: string
+        fid:
+          description: Unique ID of floor
+          type: string
+        blocks:
+          description: List of Blocks
+          items:
+            $ref: "#/components/schemas/BlockDetails"
+          type: array
+        name:
+          description: User Name
+          type: string
+        email:
+          description: Email ID
+          type: string
+        mobile_number:
+          description: Mobile number
+          type: string
+        user_id:
+          description: Unique User ID
+          type: string
+        avatar:
+          $ref: "#/components/schemas/signInWithEmail_200_response_profile_avatar"
+      required:
+      - blocks
+      - fid
+      - floor_id
+      - user_id
+      type: object
+    signInWithEmail_200_response:
+      example:
+        pod_info:
+          fid: fid
+          blocks:
+          - bid: bid
+            type: type
+            title: title
+          - bid: bid
+            type: type
+            title: title
+          floor_id: floor_id
+          details: details
+          avatar:
+            type: type
+            url: url
+          title: title
+        profile:
+          fid: fid
+          user_id: user_id
+          blocks:
+          - bid: bid
+            type: type
+            title: title
+          - bid: bid
+            type: type
+            title: title
+          name: name
+          floor_id: floor_id
+          avatar:
+            id: id
+            url: url
+          mobile_number: mobile_number
+          email: email
+        app_id: app_id
+      properties:
+        pod_info:
+          $ref: "#/components/schemas/FloorInfo"
+        profile:
+          $ref: "#/components/schemas/signInWithEmail_200_response_profile"
+        app_id:
+          description: App ID
+          type: string
+      required:
+      - app_id
+      - pod_info
+      - profile
+      type: object
+    changeEmail_request:
+      properties:
+        new_email_id:
+          description: New Email ID
+          example: ""
+          type: string
+        activation_code:
+          description: Validation code
+          example: ""
+          type: string
+      required:
+      - activation_code
+      - new_email_id
+      type: object
+    sendValidationCode_request:
+      properties:
+        user_id:
+          description: user id
+          type: string
+        mode:
+          description: "Mode - 0 for getting activation code, 1 for password change"
+          type: string
+      required:
+      - mode
+      - user_id
+      type: object
+    sendValidationCode_200_response:
+      example:
+        success: success
+      properties:
+        success:
+          description: Validation code sent successfully
+          type: string
+      required:
+      - success
+      type: object
+    sendSignInValidationCode_request:
+      properties:
+        mobile_number:
+          description: Mobile number
+          example: ""
+          type: string
+        email_id:
+          description: Email ID
+          example: ""
+          type: string
+        app_id:
+          description: App ID
+          example: ""
+          type: string
+      required:
+      - app_id
+      type: object
+    sendSignInValidationCode_200_response:
+      example:
+        email_id: email_id
+        success: success
+        mobile_number: mobile_number
+      properties:
+        success:
+          description: Operation successful
+          type: string
+        mobile_number:
+          description: Mobile number if signed in through mobile number
+          type: string
+        email_id:
+          description: Email ID if signed through email
+          type: string
+      required:
+      - email_id
+      - success
+      type: object
+    sendSignInValidationCode_400_response:
+      example:
+        path: path
+        code: code
+        message: message
+        timestamp: timestamp
+      properties:
+        code:
+          description: Validation Error
+          type: string
+        message:
+          description: Error Message
+          type: string
+        path:
+          description: REST api path
+          type: string
+        timestamp:
+          description: Time stamp
+          type: string
+      required:
+      - code
+      - message
+      - path
+      - timestamp
+      title: ""
+      type: object
+    registerExternalUserIdentity_request:
+      properties:
+        mobile_number:
+          example: ""
+          type: string
+        email_id:
+          example: ""
+          type: string
+        name:
+          example: ""
+          type: string
+        app_id:
+          example: ""
+          type: string
+      type: object
+    QueryResponse_items_inner:
+      description: Each item description
+      example:
+        score: 6.027456183070403
+        block_type: 0
+        event_id: event_id
+        block_title: block_title
+        user_id: user_id
+        floor_uid: floor_uid
+        match_type: match_type
+        text: text
+        from_floor_uid: from_floor_uid
+        block_details: block_details
+        block_id: block_id
+      properties:
+        block_type:
+          description: block type ( 0 or 1)
+          type: integer
+        block_id:
+          description: Will be a 13 digit unque number which identifies the block
+          type: string
+        floor_uid:
+          description: Unique ID given to the floor which cannot be modifed
+          type: string
+        event_id:
+          description: Content ID
+          type: string
+        text:
+          description: Related content
+          type: string
+        score:
+          description: Similarity Score
+          type: number
+        block_title:
+          description: Block Title
+          type: string
+        block_details:
+          description: Block Details
+          type: string
+        from_floor_uid:
+          description: Source floor content
+          type: string
+        user_id:
+          description: Author of the content
+          type: string
+        match_type:
+          description: Match type text or image
+          type: string
+      type: object
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      type: http
+

@@ -1,0 +1,22 @@
+# logs
+*.log
+
+# JS/TS
+**/node_modules/
+**/*.tgz
+
+# Python artifacts
+**/__pycache__/
+**/*.pyc
+**/build/
+**/dist/
+**/*.egg-info/
+**/.venv/
+
+# Java artifacts
+**/target/
+**/*.class
+**/*.jar
+
+# OS
+.DS_Store

@@ -1,0 +1,35 @@
+# QueryRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**user_id** | **str** | User ID | 
+**query** | **str** | Query text for conversations | 
+**floor_ids** | **List[str]** | List of floor IDs | 
+**include_metadata** | **str** | Include meta data or not | [optional] 
+**summary_needed** | **str** | Need LLM summary for the lists of posts sent | [optional] 
+**app_id** | **str** | App ID | [optional] 
+**filters** | [**QueryRequestFilters**](QueryRequestFilters.md) |  | [optional] 
+
+## Example
+
+```python
+from xfloor_memory_sdk.models.query_request import QueryRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of QueryRequest from a JSON string
+query_request_instance = QueryRequest.from_json(json)
+# print the JSON string representation of the object
+print(QueryRequest.to_json())
+
+# convert the object into a dict
+query_request_dict = query_request_instance.to_dict()
+# create an instance of QueryRequest from a dict
+query_request_from_dict = QueryRequest.from_dict(query_request_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
