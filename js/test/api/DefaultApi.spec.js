@@ -118,10 +118,10 @@
         done();
       });
     });
-    describe('sendSignInValidationCode', function() {
-      it('should call sendSignInValidationCode successfully', function(done) {
-        //uncomment below and update the code to test sendSignInValidationCode
-        //instance.sendSignInValidationCode(function(error) {
+    describe('resetPassword', function() {
+      it('should call resetPassword successfully', function(done) {
+        //uncomment below and update the code to test resetPassword
+        //instance.resetPassword(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

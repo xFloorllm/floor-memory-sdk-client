@@ -15,10 +15,10 @@
 
 import unittest
 
-from xfloor_memory_sdk.models.send_sign_in_validation_code400_response import SendSignInValidationCode400Response
+from xfloor_memory_sdk.models.reset_password400_response import ResetPassword400Response
 
-class TestSendSignInValidationCode400Response(unittest.TestCase):
-    """SendSignInValidationCode400Response unit test stubs"""
+class TestResetPassword400Response(unittest.TestCase):
+    """ResetPassword400Response unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,23 +26,23 @@ class TestSendSignInValidationCode400Response(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> SendSignInValidationCode400Response:
-        """Test SendSignInValidationCode400Response
+    def make_instance(self, include_optional) -> ResetPassword400Response:
+        """Test ResetPassword400Response
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `SendSignInValidationCode400Response`
+        # uncomment below to create an instance of `ResetPassword400Response`
         """
-        model = SendSignInValidationCode400Response()
+        model = ResetPassword400Response()
         if include_optional:
-            return SendSignInValidationCode400Response(
+            return ResetPassword400Response(
                 code = '',
                 message = '',
                 path = '',
                 timestamp = ''
             )
         else:
-            return SendSignInValidationCode400Response(
+            return ResetPassword400Response(
                 code = '',
                 message = '',
                 path = '',
@@ -50,8 +50,8 @@ class TestSendSignInValidationCode400Response(unittest.TestCase):
         )
         """
 
-    def testSendSignInValidationCode400Response(self):
-        """Test SendSignInValidationCode400Response"""
+    def testResetPassword400Response(self):
+        """Test ResetPassword400Response"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

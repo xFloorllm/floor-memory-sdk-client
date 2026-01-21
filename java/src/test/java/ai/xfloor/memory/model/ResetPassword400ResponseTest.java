@@ -24,41 +24,49 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * Model tests for SendSignInValidationCode200Response
+ * Model tests for ResetPassword400Response
  */
-public class SendSignInValidationCode200ResponseTest {
-    private final SendSignInValidationCode200Response model = new SendSignInValidationCode200Response();
+public class ResetPassword400ResponseTest {
+    private final ResetPassword400Response model = new ResetPassword400Response();
 
     /**
-     * Model tests for SendSignInValidationCode200Response
+     * Model tests for ResetPassword400Response
      */
     @Test
-    public void testSendSignInValidationCode200Response() {
-        // TODO: test SendSignInValidationCode200Response
+    public void testResetPassword400Response() {
+        // TODO: test ResetPassword400Response
     }
 
     /**
-     * Test the property 'success'
+     * Test the property 'code'
      */
     @Test
-    public void successTest() {
-        // TODO: test success
+    public void codeTest() {
+        // TODO: test code
     }
 
     /**
-     * Test the property 'mobileNumber'
+     * Test the property 'message'
      */
     @Test
-    public void mobileNumberTest() {
-        // TODO: test mobileNumber
+    public void messageTest() {
+        // TODO: test message
     }
 
     /**
-     * Test the property 'emailId'
+     * Test the property 'path'
      */
     @Test
-    public void emailIdTest() {
-        // TODO: test emailId
+    public void pathTest() {
+        // TODO: test path
+    }
+
+    /**
+     * Test the property 'timestamp'
+     */
+    @Test
+    public void timestampTest() {
+        // TODO: test timestamp
     }
 
 }

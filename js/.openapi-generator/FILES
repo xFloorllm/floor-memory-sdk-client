@@ -31,8 +31,8 @@ docs/QueryRequest.md
 docs/QueryRequestFilters.md
 docs/QueryResponse.md
 docs/QueryResponseItemsInner.md
-docs/SendSignInValidationCode200Response.md
-docs/SendSignInValidationCode400Response.md
+docs/ResetPassword200Response.md
+docs/ResetPassword400Response.md
 docs/SendValidationCode200Response.md
 docs/SendValidationCodeRequest.md
 docs/SignInWithEmail200Response.md
@@ -78,8 +78,8 @@ src/model/QueryRequest.js
 src/model/QueryRequestFilters.js
 src/model/QueryResponse.js
 src/model/QueryResponseItemsInner.js
-src/model/SendSignInValidationCode200Response.js
-src/model/SendSignInValidationCode400Response.js
+src/model/ResetPassword200Response.js
+src/model/ResetPassword400Response.js
 src/model/SendValidationCode200Response.js
 src/model/SendValidationCodeRequest.js
 src/model/SignInWithEmail200Response.js
@@ -120,8 +120,8 @@ test/model/QueryRequest.spec.js
 test/model/QueryRequestFilters.spec.js
 test/model/QueryResponse.spec.js
 test/model/QueryResponseItemsInner.spec.js
-test/model/SendSignInValidationCode200Response.spec.js
-test/model/SendSignInValidationCode400Response.spec.js
+test/model/ResetPassword200Response.spec.js
+test/model/ResetPassword400Response.spec.js
 test/model/SendValidationCode200Response.spec.js
 test/model/SendValidationCodeRequest.spec.js
 test/model/SignInWithEmail200Response.spec.js

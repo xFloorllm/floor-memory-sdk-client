@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new XfloorFloorMemorySdkJs.SendSignInValidationCode400Response();
+    instance = new XfloorFloorMemorySdkJs.ResetPassword200Response();
   });
 
   var getProperty = function(object, getter, property) {
@@ -47,34 +47,16 @@
       object[property] = value;
   }
 
-  describe('SendSignInValidationCode400Response', function() {
-    it('should create an instance of SendSignInValidationCode400Response', function() {
-      // uncomment below and update the code to test SendSignInValidationCode400Response
-      //var instance = new XfloorFloorMemorySdkJs.SendSignInValidationCode400Response();
-      //expect(instance).to.be.a(XfloorFloorMemorySdkJs.SendSignInValidationCode400Response);
+  describe('ResetPassword200Response', function() {
+    it('should create an instance of ResetPassword200Response', function() {
+      // uncomment below and update the code to test ResetPassword200Response
+      //var instance = new XfloorFloorMemorySdkJs.ResetPassword200Response();
+      //expect(instance).to.be.a(XfloorFloorMemorySdkJs.ResetPassword200Response);
     });
 
-    it('should have the property code (base name: "code")', function() {
-      // uncomment below and update the code to test the property code
-      //var instance = new XfloorFloorMemorySdkJs.SendSignInValidationCode400Response();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property message (base name: "message")', function() {
-      // uncomment below and update the code to test the property message
-      //var instance = new XfloorFloorMemorySdkJs.SendSignInValidationCode400Response();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property path (base name: "path")', function() {
-      // uncomment below and update the code to test the property path
-      //var instance = new XfloorFloorMemorySdkJs.SendSignInValidationCode400Response();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property timestamp (base name: "timestamp")', function() {
-      // uncomment below and update the code to test the property timestamp
-      //var instance = new XfloorFloorMemorySdkJs.SendSignInValidationCode400Response();
+    it('should have the property success (base name: "success")', function() {
+      // uncomment below and update the code to test the property success
+      //var instance = new XfloorFloorMemorySdkJs.ResetPassword200Response();
       //expect(instance).to.be();
     });
 

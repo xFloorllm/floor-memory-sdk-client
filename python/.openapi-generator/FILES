@@ -32,8 +32,8 @@ docs/QueryRequest.md
 docs/QueryRequestFilters.md
 docs/QueryResponse.md
 docs/QueryResponseItemsInner.md
-docs/SendSignInValidationCode200Response.md
-docs/SendSignInValidationCode400Response.md
+docs/ResetPassword200Response.md
+docs/ResetPassword400Response.md
 docs/SendValidationCode200Response.md
 docs/SendValidationCodeRequest.md
 docs/SignInWithEmail200Response.md
@@ -81,8 +81,8 @@ test/test_query_request.py
 test/test_query_request_filters.py
 test/test_query_response.py
 test/test_query_response_items_inner.py
-test/test_send_sign_in_validation_code200_response.py
-test/test_send_sign_in_validation_code400_response.py
+test/test_reset_password200_response.py
+test/test_reset_password400_response.py
 test/test_send_validation_code200_response.py
 test/test_send_validation_code_request.py
 test/test_sign_in_with_email200_response.py
@@ -131,8 +131,8 @@ xfloor_memory_sdk/models/query_request.py
 xfloor_memory_sdk/models/query_request_filters.py
 xfloor_memory_sdk/models/query_response.py
 xfloor_memory_sdk/models/query_response_items_inner.py
-xfloor_memory_sdk/models/send_sign_in_validation_code200_response.py
-xfloor_memory_sdk/models/send_sign_in_validation_code400_response.py
+xfloor_memory_sdk/models/reset_password200_response.py
+xfloor_memory_sdk/models/reset_password400_response.py
 xfloor_memory_sdk/models/send_validation_code200_response.py
 xfloor_memory_sdk/models/send_validation_code_request.py
 xfloor_memory_sdk/models/sign_in_with_email200_response.py

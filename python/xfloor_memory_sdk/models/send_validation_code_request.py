@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,9 +27,11 @@ class SendValidationCodeRequest(BaseModel):
     """
     SendValidationCodeRequest
     """ # noqa: E501
-    user_id: StrictStr = Field(description="user id")
-    mode: StrictStr = Field(description="Mode - 0 for getting activation code, 1 for password change")
-    __properties: ClassVar[List[str]] = ["user_id", "mode"]
+    user_id: Optional[StrictStr] = Field(default=None, description="user id")
+    mode: StrictStr = Field(description="Mode - 0 for getting activation code to change email or mobile number, 1 for password change")
+    mobiles_number: Optional[StrictStr] = None
+    email_id: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["user_id", "mode", "mobiles_number", "email_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,7 +85,9 @@ class SendValidationCodeRequest(BaseModel):
 
         _obj = cls.model_validate({
             "user_id": obj.get("user_id"),
-            "mode": obj.get("mode")
+            "mode": obj.get("mode"),
+            "mobiles_number": obj.get("mobiles_number"),
+            "email_id": obj.get("email_id")
         })
         return _obj
 

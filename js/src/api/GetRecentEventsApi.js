@@ -19,7 +19,7 @@ import GetRecentEvents400Response from '../model/GetRecentEvents400Response';
 /**
 * GetRecentEvents service.
 * @module api/GetRecentEventsApi
-* @version 1.0.0
+* @version 1.0.2
 */
 export default class GetRecentEventsApi {
 

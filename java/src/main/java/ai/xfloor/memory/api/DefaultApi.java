@@ -31,8 +31,8 @@ import ai.xfloor.memory.model.ChangePassword200Response;
 import ai.xfloor.memory.model.EditFloor400Response;
 import ai.xfloor.memory.model.GetFloorInformation200Response;
 import ai.xfloor.memory.model.GetRecentEvents400Response;
-import ai.xfloor.memory.model.SendSignInValidationCode200Response;
-import ai.xfloor.memory.model.SendSignInValidationCode400Response;
+import ai.xfloor.memory.model.ResetPassword200Response;
+import ai.xfloor.memory.model.ResetPassword400Response;
 import ai.xfloor.memory.model.SendValidationCode200Response;
 import ai.xfloor.memory.model.SendValidationCodeRequest;
 import ai.xfloor.memory.model.SignInWithEmail200Response;
@@ -366,9 +366,9 @@ public class DefaultApi {
     }
     /**
      * Build call for changePassword
+     * @param newPassword New Password (required)
+     * @param activationCode Validation code (required)
      * @param userId User ID (optional)
-     * @param newPassword New Password (optional)
-     * @param acticationCode Validation code (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -380,7 +380,7 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call changePasswordCall(@javax.annotation.Nullable String userId, @javax.annotation.Nullable String newPassword, @javax.annotation.Nullable String acticationCode, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call changePasswordCall(@javax.annotation.Nonnull String newPassword, @javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String userId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -397,7 +397,7 @@ public class DefaultApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/auth-service/change/password";
+        String localVarPath = "/auth-service/password/change";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -413,8 +413,8 @@ public class DefaultApi {
             localVarFormParams.put("new_password", newPassword);
         }
 
-        if (acticationCode != null) {
-            localVarFormParams.put("actication_code", acticationCode);
+        if (activationCode != null) {
+            localVarFormParams.put("activation_code", activationCode);
         }
 
         final String[] localVarAccepts = {
@@ -438,17 +438,27 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call changePasswordValidateBeforeCall(@javax.annotation.Nullable String userId, @javax.annotation.Nullable String newPassword, @javax.annotation.Nullable String acticationCode, final ApiCallback _callback) throws ApiException {
-        return changePasswordCall(userId, newPassword, acticationCode, _callback);
+    private okhttp3.Call changePasswordValidateBeforeCall(@javax.annotation.Nonnull String newPassword, @javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String userId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'newPassword' is set
+        if (newPassword == null) {
+            throw new ApiException("Missing the required parameter 'newPassword' when calling changePassword(Async)");
+        }
+
+        // verify the required parameter 'activationCode' is set
+        if (activationCode == null) {
+            throw new ApiException("Missing the required parameter 'activationCode' when calling changePassword(Async)");
+        }
+
+        return changePasswordCall(newPassword, activationCode, userId, _callback);
 
     }
 
     /**
      * Change Password
-     * Changes the password of an existing user after validating a one-time password change activation code.  This API validates the provided &#x60;activation_code&#x60; for the given &#x60;user_id&#x60;. If the activation code is valid and not expired, the user’s password is updated to the supplied &#x60;new_password&#x60; and takes effect immediately.  If the activation code validation fails, the password remains unchanged and an error response is returned.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ### **Request Body (Form Data)**  | Field        | Type          | Required | Description                                                       | | ------------ | ------------- | -------- | ----------------------------------------------------------------- | | &#x60;user_id&#x60; | string | Yes      | User ID | | &#x60;new_password&#x60; | string | Yes      | New Password | | &#x60;activation_code&#x60; | string | Yes      | Activation code |   **Field Description**  * &#x60;user_id&#x60; – Unique identifier of the user requesting the password change * &#x60;new_password&#x60; – New password to be set for the user * &#x60;activation_code&#x60; – One-time activation code generated for password change verification  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user password is updated immediately * The API returns a &#x60;success&#x60; string indicating that the password change was completed  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the specified user * The password does not meet security or policy requirements * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing password remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to &#x60;/auth-service/send/validation/code&#x60; with the proper mode. ---  ### **Security Notes**  * Activation codes are single-use and time-bound * Passwords are never returned in API responses * Rate limiting may be applied to prevent brute-force attempts  ---  ### **One-Line Summary**  &gt; Updates a user’s password after validating a one-time activation code.  
+     * ## 1) &#x60;POST /password/change&#x60; — Change Password (Logged-in User)  Changes the password of an **authenticated user** who is currently logged in.  This endpoint is used when a user is already signed in and wants to update their password as a security or preference action. The system validates a **one-time password-change verification code** (&#x60;activation_code&#x60;) issued specifically for the change-password flow. If the code is valid and not expired, the user’s password is updated to &#x60;new_password&#x60; and takes effect immediately.  If verification fails, the password remains unchanged and an error response is returned.  ### Authentication  ✅ **Required**: Bearer token for the logged-in session  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ### Request Body (Form Data)  * &#x60;user_id&#x60; (optional if derived from token) * &#x60;activation_code&#x60; (required) * &#x60;new_password&#x60; (required)  ### Behavior Notes  * Typically requires a prior call to **send a verification code** for password change (mode &#x3D; password change). * &#x60;user_id&#x60; can be taken from the access token; include it only if your system requires it explicitly.  ### One-Line Summary  &gt; Changes the password for a logged-in user after validating a one-time password-change code. 
+     * @param newPassword New Password (required)
+     * @param activationCode Validation code (required)
      * @param userId User ID (optional)
-     * @param newPassword New Password (optional)
-     * @param acticationCode Validation code (optional)
      * @return ChangePassword200Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -459,17 +469,17 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ChangePassword200Response changePassword(@javax.annotation.Nullable String userId, @javax.annotation.Nullable String newPassword, @javax.annotation.Nullable String acticationCode) throws ApiException {
-        ApiResponse<ChangePassword200Response> localVarResp = changePasswordWithHttpInfo(userId, newPassword, acticationCode);
+    public ChangePassword200Response changePassword(@javax.annotation.Nonnull String newPassword, @javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String userId) throws ApiException {
+        ApiResponse<ChangePassword200Response> localVarResp = changePasswordWithHttpInfo(newPassword, activationCode, userId);
         return localVarResp.getData();
     }
 
     /**
      * Change Password
-     * Changes the password of an existing user after validating a one-time password change activation code.  This API validates the provided &#x60;activation_code&#x60; for the given &#x60;user_id&#x60;. If the activation code is valid and not expired, the user’s password is updated to the supplied &#x60;new_password&#x60; and takes effect immediately.  If the activation code validation fails, the password remains unchanged and an error response is returned.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ### **Request Body (Form Data)**  | Field        | Type          | Required | Description                                                       | | ------------ | ------------- | -------- | ----------------------------------------------------------------- | | &#x60;user_id&#x60; | string | Yes      | User ID | | &#x60;new_password&#x60; | string | Yes      | New Password | | &#x60;activation_code&#x60; | string | Yes      | Activation code |   **Field Description**  * &#x60;user_id&#x60; – Unique identifier of the user requesting the password change * &#x60;new_password&#x60; – New password to be set for the user * &#x60;activation_code&#x60; – One-time activation code generated for password change verification  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user password is updated immediately * The API returns a &#x60;success&#x60; string indicating that the password change was completed  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the specified user * The password does not meet security or policy requirements * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing password remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to &#x60;/auth-service/send/validation/code&#x60; with the proper mode. ---  ### **Security Notes**  * Activation codes are single-use and time-bound * Passwords are never returned in API responses * Rate limiting may be applied to prevent brute-force attempts  ---  ### **One-Line Summary**  &gt; Updates a user’s password after validating a one-time activation code.  
+     * ## 1) &#x60;POST /password/change&#x60; — Change Password (Logged-in User)  Changes the password of an **authenticated user** who is currently logged in.  This endpoint is used when a user is already signed in and wants to update their password as a security or preference action. The system validates a **one-time password-change verification code** (&#x60;activation_code&#x60;) issued specifically for the change-password flow. If the code is valid and not expired, the user’s password is updated to &#x60;new_password&#x60; and takes effect immediately.  If verification fails, the password remains unchanged and an error response is returned.  ### Authentication  ✅ **Required**: Bearer token for the logged-in session  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ### Request Body (Form Data)  * &#x60;user_id&#x60; (optional if derived from token) * &#x60;activation_code&#x60; (required) * &#x60;new_password&#x60; (required)  ### Behavior Notes  * Typically requires a prior call to **send a verification code** for password change (mode &#x3D; password change). * &#x60;user_id&#x60; can be taken from the access token; include it only if your system requires it explicitly.  ### One-Line Summary  &gt; Changes the password for a logged-in user after validating a one-time password-change code. 
+     * @param newPassword New Password (required)
+     * @param activationCode Validation code (required)
      * @param userId User ID (optional)
-     * @param newPassword New Password (optional)
-     * @param acticationCode Validation code (optional)
      * @return ApiResponse&lt;ChangePassword200Response&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -480,18 +490,18 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ChangePassword200Response> changePasswordWithHttpInfo(@javax.annotation.Nullable String userId, @javax.annotation.Nullable String newPassword, @javax.annotation.Nullable String acticationCode) throws ApiException {
-        okhttp3.Call localVarCall = changePasswordValidateBeforeCall(userId, newPassword, acticationCode, null);
+    public ApiResponse<ChangePassword200Response> changePasswordWithHttpInfo(@javax.annotation.Nonnull String newPassword, @javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String userId) throws ApiException {
+        okhttp3.Call localVarCall = changePasswordValidateBeforeCall(newPassword, activationCode, userId, null);
         Type localVarReturnType = new TypeToken<ChangePassword200Response>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Change Password (asynchronously)
-     * Changes the password of an existing user after validating a one-time password change activation code.  This API validates the provided &#x60;activation_code&#x60; for the given &#x60;user_id&#x60;. If the activation code is valid and not expired, the user’s password is updated to the supplied &#x60;new_password&#x60; and takes effect immediately.  If the activation code validation fails, the password remains unchanged and an error response is returned.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ### **Request Body (Form Data)**  | Field        | Type          | Required | Description                                                       | | ------------ | ------------- | -------- | ----------------------------------------------------------------- | | &#x60;user_id&#x60; | string | Yes      | User ID | | &#x60;new_password&#x60; | string | Yes      | New Password | | &#x60;activation_code&#x60; | string | Yes      | Activation code |   **Field Description**  * &#x60;user_id&#x60; – Unique identifier of the user requesting the password change * &#x60;new_password&#x60; – New password to be set for the user * &#x60;activation_code&#x60; – One-time activation code generated for password change verification  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user password is updated immediately * The API returns a &#x60;success&#x60; string indicating that the password change was completed  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the specified user * The password does not meet security or policy requirements * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing password remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to &#x60;/auth-service/send/validation/code&#x60; with the proper mode. ---  ### **Security Notes**  * Activation codes are single-use and time-bound * Passwords are never returned in API responses * Rate limiting may be applied to prevent brute-force attempts  ---  ### **One-Line Summary**  &gt; Updates a user’s password after validating a one-time activation code.  
+     * ## 1) &#x60;POST /password/change&#x60; — Change Password (Logged-in User)  Changes the password of an **authenticated user** who is currently logged in.  This endpoint is used when a user is already signed in and wants to update their password as a security or preference action. The system validates a **one-time password-change verification code** (&#x60;activation_code&#x60;) issued specifically for the change-password flow. If the code is valid and not expired, the user’s password is updated to &#x60;new_password&#x60; and takes effect immediately.  If verification fails, the password remains unchanged and an error response is returned.  ### Authentication  ✅ **Required**: Bearer token for the logged-in session  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ### Request Body (Form Data)  * &#x60;user_id&#x60; (optional if derived from token) * &#x60;activation_code&#x60; (required) * &#x60;new_password&#x60; (required)  ### Behavior Notes  * Typically requires a prior call to **send a verification code** for password change (mode &#x3D; password change). * &#x60;user_id&#x60; can be taken from the access token; include it only if your system requires it explicitly.  ### One-Line Summary  &gt; Changes the password for a logged-in user after validating a one-time password-change code. 
+     * @param newPassword New Password (required)
+     * @param activationCode Validation code (required)
      * @param userId User ID (optional)
-     * @param newPassword New Password (optional)
-     * @param acticationCode Validation code (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -503,9 +513,9 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call changePasswordAsync(@javax.annotation.Nullable String userId, @javax.annotation.Nullable String newPassword, @javax.annotation.Nullable String acticationCode, final ApiCallback<ChangePassword200Response> _callback) throws ApiException {
+    public okhttp3.Call changePasswordAsync(@javax.annotation.Nonnull String newPassword, @javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String userId, final ApiCallback<ChangePassword200Response> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = changePasswordValidateBeforeCall(userId, newPassword, acticationCode, _callback);
+        okhttp3.Call localVarCall = changePasswordValidateBeforeCall(newPassword, activationCode, userId, _callback);
         Type localVarReturnType = new TypeToken<ChangePassword200Response>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1104,10 +1114,11 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
-     * Build call for sendSignInValidationCode
-     * @param appId App ID (required)
-     * @param mobileNumber Mobile number (optional)
+     * Build call for resetPassword
+     * @param activationCode Activation Code (required)
      * @param emailId Email ID (optional)
+     * @param mobileNumber Mobile number (optional)
+     * @param appId App ID (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1119,7 +1130,7 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call sendSignInValidationCodeCall(@javax.annotation.Nonnull String appId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call resetPasswordCall(@javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String appId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1136,7 +1147,7 @@ public class DefaultApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/auth-service/send/sign/in/validation/code";
+        String localVarPath = "/auth-service/password/reset";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -1144,16 +1155,20 @@ public class DefaultApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        if (mobileNumber != null) {
-            localVarFormParams.put("mobile_number", mobileNumber);
+        if (emailId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("email_id", emailId));
         }
 
-        if (emailId != null) {
-            localVarFormParams.put("email_id", emailId);
+        if (mobileNumber != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("mobile_number", mobileNumber));
+        }
+
+        if (activationCode != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("activation_code", activationCode));
         }
 
         if (appId != null) {
-            localVarFormParams.put("app_id", appId);
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("app_id", appId));
         }
 
         final String[] localVarAccepts = {
@@ -1165,35 +1180,35 @@ public class DefaultApi {
         }
 
         final String[] localVarContentTypes = {
-            "multipart/form-data"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] { "bearer" };
+        String[] localVarAuthNames = new String[] {  };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call sendSignInValidationCodeValidateBeforeCall(@javax.annotation.Nonnull String appId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'appId' is set
-        if (appId == null) {
-            throw new ApiException("Missing the required parameter 'appId' when calling sendSignInValidationCode(Async)");
+    private okhttp3.Call resetPasswordValidateBeforeCall(@javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String appId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'activationCode' is set
+        if (activationCode == null) {
+            throw new ApiException("Missing the required parameter 'activationCode' when calling resetPassword(Async)");
         }
 
-        return sendSignInValidationCodeCall(appId, mobileNumber, emailId, _callback);
+        return resetPasswordCall(activationCode, emailId, mobileNumber, appId, _callback);
 
     }
 
     /**
-     * Send Sign-In Validation Code (OTP)
-     * This API initiates the **sign-in validation process** by sending a **one-time validation code (OTP)** to the user.  The OTP is delivered to **either the mobile number or the email address** provided in the request. This endpoint is typically called **before completing sign-in**, to verify that the user owns the supplied contact identifier.  The calling application is responsible for:  * Collecting the OTP from the user * Submitting it to the OTP verification API (handled separately)  ---  ## **Use Case**  * User attempts to sign in * User provides **mobile number or email** * System sends a **validation code (OTP)** * User enters OTP to complete sign-in  ---  ## **Request Method**  &#x60;POST&#x60;  ---  ## **Formdata Parameters**  | Parameter Name  | Type   | Required  | Description                                 | | --------------- | ------ | --------- | ------------------------------------------- | | &#x60;mobile_number&#x60; | String | Optional* | Mobile number to which the OTP will be sent | | &#x60;email_id&#x60;      | String | Optional* | Email address to which the OTP will be sent | | &#x60;app_id&#x60;        | String | Optional  | Identifier of the calling application       |  * **Either &#x60;mobile_number&#x60; or &#x60;email_id&#x60; must be provided.** Providing both is allowed; the system may choose one based on configuration.  ---  ## **Request Rules**  * At least **one** of &#x60;mobile_number&#x60; or &#x60;email_id&#x60; is mandatory * If both are missing, the request will be rejected * OTP delivery channel depends on the provided identifier  ---  ## **Response Format**  &#x60;application/json&#x60;  ---  ## **Sample Success Response**  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;message\&quot;: \&quot;Validation code sent successfully\&quot; } &#x60;&#x60;&#x60;  ---  ## **Sample Error Responses**  ### Missing Identifier  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Either mobile_number or email_id must be provided\&quot; } &#x60;&#x60;&#x60;  ### Invalid Identifier  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Invalid mobile number or email address\&quot; } &#x60;&#x60;&#x60;  ---  ## **Notes**  * This API **only sends** the validation code * OTP verification must be performed using the corresponding **verify validation code** API * Rate limiting and retry restrictions may apply to prevent abuse  
-     * @param appId App ID (required)
-     * @param mobileNumber Mobile number (optional)
+     * Reset Password
+     * ---  ## Reset Password (Forgot Password, Not Logged In)  Resets the password of a user who **cannot log in** and is using a **forgot-password** flow.  This endpoint is used when the user is not authenticated and requests a password reset using a verified identity channel such as **email** or **mobile number**. The system validates a **one-time reset verification code** (&#x60;activation_code&#x60;) issued for the reset-password flow. If valid and not expired, the password is updated to &#x60;new_password&#x60; and takes effect immediately.  If verification fails, the password remains unchanged and an error response is returned.  ### Authentication  ✅ **Recommended** (better security): a short-lived **reset token** issued after initiating reset  &#x60;&#x60;&#x60; Authorization: Bearer &lt;reset_token&gt; &#x60;&#x60;&#x60;  &gt; If you don’t use a reset token, you must enforce strong rate limiting + OTP attempt throttling on this endpoint.  ### Request Body (Form Data)  * &#x60;email_id&#x60; or &#x60;mobile_number&#x60; (required to identify user) * &#x60;activation_code&#x60; (required) * &#x60;new_password&#x60; (required) * &#x60;user_id&#x60; (optional, if your reset flow already resolved it)  ### Behavior Notes  * Requires a prior call to **initiate reset** and send OTP/code (mode &#x3D; forgot password). * Must enforce code attempt limits and expiration strictly.  ### One-Line Summary  &gt; Resets a user’s password (forgot-password flow) after validating a one-time reset code sent to email or mobile.   
+     * @param activationCode Activation Code (required)
      * @param emailId Email ID (optional)
-     * @return SendSignInValidationCode200Response
+     * @param mobileNumber Mobile number (optional)
+     * @param appId App ID (optional)
+     * @return ResetPassword200Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -1203,18 +1218,19 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public SendSignInValidationCode200Response sendSignInValidationCode(@javax.annotation.Nonnull String appId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId) throws ApiException {
-        ApiResponse<SendSignInValidationCode200Response> localVarResp = sendSignInValidationCodeWithHttpInfo(appId, mobileNumber, emailId);
+    public ResetPassword200Response resetPassword(@javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String appId) throws ApiException {
+        ApiResponse<ResetPassword200Response> localVarResp = resetPasswordWithHttpInfo(activationCode, emailId, mobileNumber, appId);
         return localVarResp.getData();
     }
 
     /**
-     * Send Sign-In Validation Code (OTP)
-     * This API initiates the **sign-in validation process** by sending a **one-time validation code (OTP)** to the user.  The OTP is delivered to **either the mobile number or the email address** provided in the request. This endpoint is typically called **before completing sign-in**, to verify that the user owns the supplied contact identifier.  The calling application is responsible for:  * Collecting the OTP from the user * Submitting it to the OTP verification API (handled separately)  ---  ## **Use Case**  * User attempts to sign in * User provides **mobile number or email** * System sends a **validation code (OTP)** * User enters OTP to complete sign-in  ---  ## **Request Method**  &#x60;POST&#x60;  ---  ## **Formdata Parameters**  | Parameter Name  | Type   | Required  | Description                                 | | --------------- | ------ | --------- | ------------------------------------------- | | &#x60;mobile_number&#x60; | String | Optional* | Mobile number to which the OTP will be sent | | &#x60;email_id&#x60;      | String | Optional* | Email address to which the OTP will be sent | | &#x60;app_id&#x60;        | String | Optional  | Identifier of the calling application       |  * **Either &#x60;mobile_number&#x60; or &#x60;email_id&#x60; must be provided.** Providing both is allowed; the system may choose one based on configuration.  ---  ## **Request Rules**  * At least **one** of &#x60;mobile_number&#x60; or &#x60;email_id&#x60; is mandatory * If both are missing, the request will be rejected * OTP delivery channel depends on the provided identifier  ---  ## **Response Format**  &#x60;application/json&#x60;  ---  ## **Sample Success Response**  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;message\&quot;: \&quot;Validation code sent successfully\&quot; } &#x60;&#x60;&#x60;  ---  ## **Sample Error Responses**  ### Missing Identifier  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Either mobile_number or email_id must be provided\&quot; } &#x60;&#x60;&#x60;  ### Invalid Identifier  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Invalid mobile number or email address\&quot; } &#x60;&#x60;&#x60;  ---  ## **Notes**  * This API **only sends** the validation code * OTP verification must be performed using the corresponding **verify validation code** API * Rate limiting and retry restrictions may apply to prevent abuse  
-     * @param appId App ID (required)
-     * @param mobileNumber Mobile number (optional)
+     * Reset Password
+     * ---  ## Reset Password (Forgot Password, Not Logged In)  Resets the password of a user who **cannot log in** and is using a **forgot-password** flow.  This endpoint is used when the user is not authenticated and requests a password reset using a verified identity channel such as **email** or **mobile number**. The system validates a **one-time reset verification code** (&#x60;activation_code&#x60;) issued for the reset-password flow. If valid and not expired, the password is updated to &#x60;new_password&#x60; and takes effect immediately.  If verification fails, the password remains unchanged and an error response is returned.  ### Authentication  ✅ **Recommended** (better security): a short-lived **reset token** issued after initiating reset  &#x60;&#x60;&#x60; Authorization: Bearer &lt;reset_token&gt; &#x60;&#x60;&#x60;  &gt; If you don’t use a reset token, you must enforce strong rate limiting + OTP attempt throttling on this endpoint.  ### Request Body (Form Data)  * &#x60;email_id&#x60; or &#x60;mobile_number&#x60; (required to identify user) * &#x60;activation_code&#x60; (required) * &#x60;new_password&#x60; (required) * &#x60;user_id&#x60; (optional, if your reset flow already resolved it)  ### Behavior Notes  * Requires a prior call to **initiate reset** and send OTP/code (mode &#x3D; forgot password). * Must enforce code attempt limits and expiration strictly.  ### One-Line Summary  &gt; Resets a user’s password (forgot-password flow) after validating a one-time reset code sent to email or mobile.   
+     * @param activationCode Activation Code (required)
      * @param emailId Email ID (optional)
-     * @return ApiResponse&lt;SendSignInValidationCode200Response&gt;
+     * @param mobileNumber Mobile number (optional)
+     * @param appId App ID (optional)
+     * @return ApiResponse&lt;ResetPassword200Response&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -1224,18 +1240,19 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<SendSignInValidationCode200Response> sendSignInValidationCodeWithHttpInfo(@javax.annotation.Nonnull String appId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId) throws ApiException {
-        okhttp3.Call localVarCall = sendSignInValidationCodeValidateBeforeCall(appId, mobileNumber, emailId, null);
-        Type localVarReturnType = new TypeToken<SendSignInValidationCode200Response>(){}.getType();
+    public ApiResponse<ResetPassword200Response> resetPasswordWithHttpInfo(@javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String appId) throws ApiException {
+        okhttp3.Call localVarCall = resetPasswordValidateBeforeCall(activationCode, emailId, mobileNumber, appId, null);
+        Type localVarReturnType = new TypeToken<ResetPassword200Response>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Send Sign-In Validation Code (OTP) (asynchronously)
-     * This API initiates the **sign-in validation process** by sending a **one-time validation code (OTP)** to the user.  The OTP is delivered to **either the mobile number or the email address** provided in the request. This endpoint is typically called **before completing sign-in**, to verify that the user owns the supplied contact identifier.  The calling application is responsible for:  * Collecting the OTP from the user * Submitting it to the OTP verification API (handled separately)  ---  ## **Use Case**  * User attempts to sign in * User provides **mobile number or email** * System sends a **validation code (OTP)** * User enters OTP to complete sign-in  ---  ## **Request Method**  &#x60;POST&#x60;  ---  ## **Formdata Parameters**  | Parameter Name  | Type   | Required  | Description                                 | | --------------- | ------ | --------- | ------------------------------------------- | | &#x60;mobile_number&#x60; | String | Optional* | Mobile number to which the OTP will be sent | | &#x60;email_id&#x60;      | String | Optional* | Email address to which the OTP will be sent | | &#x60;app_id&#x60;        | String | Optional  | Identifier of the calling application       |  * **Either &#x60;mobile_number&#x60; or &#x60;email_id&#x60; must be provided.** Providing both is allowed; the system may choose one based on configuration.  ---  ## **Request Rules**  * At least **one** of &#x60;mobile_number&#x60; or &#x60;email_id&#x60; is mandatory * If both are missing, the request will be rejected * OTP delivery channel depends on the provided identifier  ---  ## **Response Format**  &#x60;application/json&#x60;  ---  ## **Sample Success Response**  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;message\&quot;: \&quot;Validation code sent successfully\&quot; } &#x60;&#x60;&#x60;  ---  ## **Sample Error Responses**  ### Missing Identifier  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Either mobile_number or email_id must be provided\&quot; } &#x60;&#x60;&#x60;  ### Invalid Identifier  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Invalid mobile number or email address\&quot; } &#x60;&#x60;&#x60;  ---  ## **Notes**  * This API **only sends** the validation code * OTP verification must be performed using the corresponding **verify validation code** API * Rate limiting and retry restrictions may apply to prevent abuse  
-     * @param appId App ID (required)
-     * @param mobileNumber Mobile number (optional)
+     * Reset Password (asynchronously)
+     * ---  ## Reset Password (Forgot Password, Not Logged In)  Resets the password of a user who **cannot log in** and is using a **forgot-password** flow.  This endpoint is used when the user is not authenticated and requests a password reset using a verified identity channel such as **email** or **mobile number**. The system validates a **one-time reset verification code** (&#x60;activation_code&#x60;) issued for the reset-password flow. If valid and not expired, the password is updated to &#x60;new_password&#x60; and takes effect immediately.  If verification fails, the password remains unchanged and an error response is returned.  ### Authentication  ✅ **Recommended** (better security): a short-lived **reset token** issued after initiating reset  &#x60;&#x60;&#x60; Authorization: Bearer &lt;reset_token&gt; &#x60;&#x60;&#x60;  &gt; If you don’t use a reset token, you must enforce strong rate limiting + OTP attempt throttling on this endpoint.  ### Request Body (Form Data)  * &#x60;email_id&#x60; or &#x60;mobile_number&#x60; (required to identify user) * &#x60;activation_code&#x60; (required) * &#x60;new_password&#x60; (required) * &#x60;user_id&#x60; (optional, if your reset flow already resolved it)  ### Behavior Notes  * Requires a prior call to **initiate reset** and send OTP/code (mode &#x3D; forgot password). * Must enforce code attempt limits and expiration strictly.  ### One-Line Summary  &gt; Resets a user’s password (forgot-password flow) after validating a one-time reset code sent to email or mobile.   
+     * @param activationCode Activation Code (required)
      * @param emailId Email ID (optional)
+     * @param mobileNumber Mobile number (optional)
+     * @param appId App ID (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1247,10 +1264,10 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call sendSignInValidationCodeAsync(@javax.annotation.Nonnull String appId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId, final ApiCallback<SendSignInValidationCode200Response> _callback) throws ApiException {
+    public okhttp3.Call resetPasswordAsync(@javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String appId, final ApiCallback<ResetPassword200Response> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = sendSignInValidationCodeValidateBeforeCall(appId, mobileNumber, emailId, _callback);
-        Type localVarReturnType = new TypeToken<SendSignInValidationCode200Response>(){}.getType();
+        okhttp3.Call localVarCall = resetPasswordValidateBeforeCall(activationCode, emailId, mobileNumber, appId, _callback);
+        Type localVarReturnType = new TypeToken<ResetPassword200Response>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -1930,7 +1947,7 @@ public class DefaultApi {
 
     /**
      * Validation
-     * Validates the activation code submitted by a newly registered user and completes the account activation process.  This API verifies the provided &#x60;activation_code&#x60; against the specified &#x60;user_id&#x60; and activation &#x60;mode&#x60; (e.g., email or mobile). Upon successful validation, the user account is activated and the API returns the associated **POD information** along with the user’s **profile details**.  If the activation code is invalid, expired, or does not match the user context, the API returns an appropriate error response and the account remains inactive.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  * The token must be included in the &#x60;Authorization&#x60; header:    &#x60;&#x60;&#x60;   Authorization: Bearer &lt;access_token&gt;   &#x60;&#x60;&#x60;  ---  ### **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot;,   \&quot;app_id\&quot;: \&quot;string\&quot;,   \&quot;mode\&quot;: \&quot;string\&quot; } &#x60;&#x60;&#x60;  **Field Description**  * &#x60;user_id&#x60; – Unique identifier of the newly registered user * &#x60;activation_code&#x60; – One-time validation code sent to the user * &#x60;app_id&#x60; – Application identifier (optional or context-specific) * &#x60;mode&#x60; – Activation channel used (e.g., &#x60;email&#x60;, &#x60;mobile&#x60;)  --- ### **Usage Scenarios (Mode Definition)**  | Mode | Purpose                       | | ---- | ----------------------------- | | &#x60;0&#x60;  | Email or mobile number change | | &#x60;1&#x60;  | Password change               | | &#x60;2&#x60;  | Delete account                | | &#x60;3&#x60;  | Clear account                 | | &#x60;5&#x60;  | Login verification            |  ### **Successful Response**  On successful validation:  * The user account is activated * The API returns:    * &#x60;pod_info&#x60; associated with the user   * User &#x60;profile&#x60; information  The activated account can now be used for login and other Floor POD operations.  ---  ### **Error Response**  The API returns an error response when:  * The activation code is invalid or expired * The activation code does not match the user or mode * The user is already activated * Authorization fails or the bearer token is missing/invalid  In all error cases, **account activation is not completed**.  ---  ### **One-Line Summary**  &gt; Validates a user’s activation code, activates the account, and returns POD and profile details on success.  
+     * ## **Validate Activation / Verification Code**  This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**.  Depending on the mode, the API may:  * Activate a newly registered account * Confirm a login attempt * Verify a password change or reset * Validate email or mobile updates * Confirm account deletion or clearing requests  The API verifies the provided &#x60;activation_code&#x60; against the given &#x60;user_id&#x60;, &#x60;mode&#x60;, and application context. If validation succeeds, the requested operation is completed and the API returns the relevant **POD information** and **user profile details** (where applicable).  If validation fails, the operation is **not performed** and an appropriate error response is returned.  ---  ## **Authentication**  This endpoint requires **Bearer Token authentication**.  **Header**  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ## **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot;,   \&quot;app_id\&quot;: \&quot;string\&quot;,   \&quot;mode\&quot;: \&quot;string\&quot; } &#x60;&#x60;&#x60;  ### **Field Descriptions**  * **user_id** – Unique identifier of the user initiating the operation * **activation_code** – One-time verification code sent to the user * **app_id** – Application identifier (optional or context-specific) * **mode** – Operation context for which the verification is being performed  ---  ## **Usage Scenarios (Mode Definitions)**  | Mode | Purpose                                  | | ---- | ---------------------------------------- | | 0    | Email or mobile number change            | | 1    | Password change                          | | 2    | Delete account                           | | 3    | Clear account                            | | 4    | Signup verification (account activation) | | 5    | Login verification                       | | 6    | Forgot password verification             |  ---  ## **Successful Response**  On successful validation:  * The requested operation (based on &#x60;mode&#x60;) is completed * The API returns:    * **POD information** associated with the user (if applicable)   * **User profile details** (if applicable)  Examples:  * For **signup verification**, the user account is activated * For **login**, access is confirmed * For **password reset**, the user may proceed to set a new password * For **account deletion**, the request is confirmed  ---  ## **Error Response**  The API returns an error response when:  * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated) * Authorization fails or the bearer token is missing or invalid  ⚠️ In all error cases, **no account state change occurs**.  ---  ## **One-Line Summary**  &gt; Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
      * @param validateCodeRequest  (required)
      * @return UserDetails
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1950,7 +1967,7 @@ public class DefaultApi {
 
     /**
      * Validation
-     * Validates the activation code submitted by a newly registered user and completes the account activation process.  This API verifies the provided &#x60;activation_code&#x60; against the specified &#x60;user_id&#x60; and activation &#x60;mode&#x60; (e.g., email or mobile). Upon successful validation, the user account is activated and the API returns the associated **POD information** along with the user’s **profile details**.  If the activation code is invalid, expired, or does not match the user context, the API returns an appropriate error response and the account remains inactive.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  * The token must be included in the &#x60;Authorization&#x60; header:    &#x60;&#x60;&#x60;   Authorization: Bearer &lt;access_token&gt;   &#x60;&#x60;&#x60;  ---  ### **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot;,   \&quot;app_id\&quot;: \&quot;string\&quot;,   \&quot;mode\&quot;: \&quot;string\&quot; } &#x60;&#x60;&#x60;  **Field Description**  * &#x60;user_id&#x60; – Unique identifier of the newly registered user * &#x60;activation_code&#x60; – One-time validation code sent to the user * &#x60;app_id&#x60; – Application identifier (optional or context-specific) * &#x60;mode&#x60; – Activation channel used (e.g., &#x60;email&#x60;, &#x60;mobile&#x60;)  --- ### **Usage Scenarios (Mode Definition)**  | Mode | Purpose                       | | ---- | ----------------------------- | | &#x60;0&#x60;  | Email or mobile number change | | &#x60;1&#x60;  | Password change               | | &#x60;2&#x60;  | Delete account                | | &#x60;3&#x60;  | Clear account                 | | &#x60;5&#x60;  | Login verification            |  ### **Successful Response**  On successful validation:  * The user account is activated * The API returns:    * &#x60;pod_info&#x60; associated with the user   * User &#x60;profile&#x60; information  The activated account can now be used for login and other Floor POD operations.  ---  ### **Error Response**  The API returns an error response when:  * The activation code is invalid or expired * The activation code does not match the user or mode * The user is already activated * Authorization fails or the bearer token is missing/invalid  In all error cases, **account activation is not completed**.  ---  ### **One-Line Summary**  &gt; Validates a user’s activation code, activates the account, and returns POD and profile details on success.  
+     * ## **Validate Activation / Verification Code**  This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**.  Depending on the mode, the API may:  * Activate a newly registered account * Confirm a login attempt * Verify a password change or reset * Validate email or mobile updates * Confirm account deletion or clearing requests  The API verifies the provided &#x60;activation_code&#x60; against the given &#x60;user_id&#x60;, &#x60;mode&#x60;, and application context. If validation succeeds, the requested operation is completed and the API returns the relevant **POD information** and **user profile details** (where applicable).  If validation fails, the operation is **not performed** and an appropriate error response is returned.  ---  ## **Authentication**  This endpoint requires **Bearer Token authentication**.  **Header**  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ## **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot;,   \&quot;app_id\&quot;: \&quot;string\&quot;,   \&quot;mode\&quot;: \&quot;string\&quot; } &#x60;&#x60;&#x60;  ### **Field Descriptions**  * **user_id** – Unique identifier of the user initiating the operation * **activation_code** – One-time verification code sent to the user * **app_id** – Application identifier (optional or context-specific) * **mode** – Operation context for which the verification is being performed  ---  ## **Usage Scenarios (Mode Definitions)**  | Mode | Purpose                                  | | ---- | ---------------------------------------- | | 0    | Email or mobile number change            | | 1    | Password change                          | | 2    | Delete account                           | | 3    | Clear account                            | | 4    | Signup verification (account activation) | | 5    | Login verification                       | | 6    | Forgot password verification             |  ---  ## **Successful Response**  On successful validation:  * The requested operation (based on &#x60;mode&#x60;) is completed * The API returns:    * **POD information** associated with the user (if applicable)   * **User profile details** (if applicable)  Examples:  * For **signup verification**, the user account is activated * For **login**, access is confirmed * For **password reset**, the user may proceed to set a new password * For **account deletion**, the request is confirmed  ---  ## **Error Response**  The API returns an error response when:  * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated) * Authorization fails or the bearer token is missing or invalid  ⚠️ In all error cases, **no account state change occurs**.  ---  ## **One-Line Summary**  &gt; Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
      * @param validateCodeRequest  (required)
      * @return ApiResponse&lt;UserDetails&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1971,7 +1988,7 @@ public class DefaultApi {
 
     /**
      * Validation (asynchronously)
-     * Validates the activation code submitted by a newly registered user and completes the account activation process.  This API verifies the provided &#x60;activation_code&#x60; against the specified &#x60;user_id&#x60; and activation &#x60;mode&#x60; (e.g., email or mobile). Upon successful validation, the user account is activated and the API returns the associated **POD information** along with the user’s **profile details**.  If the activation code is invalid, expired, or does not match the user context, the API returns an appropriate error response and the account remains inactive.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  * The token must be included in the &#x60;Authorization&#x60; header:    &#x60;&#x60;&#x60;   Authorization: Bearer &lt;access_token&gt;   &#x60;&#x60;&#x60;  ---  ### **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot;,   \&quot;app_id\&quot;: \&quot;string\&quot;,   \&quot;mode\&quot;: \&quot;string\&quot; } &#x60;&#x60;&#x60;  **Field Description**  * &#x60;user_id&#x60; – Unique identifier of the newly registered user * &#x60;activation_code&#x60; – One-time validation code sent to the user * &#x60;app_id&#x60; – Application identifier (optional or context-specific) * &#x60;mode&#x60; – Activation channel used (e.g., &#x60;email&#x60;, &#x60;mobile&#x60;)  --- ### **Usage Scenarios (Mode Definition)**  | Mode | Purpose                       | | ---- | ----------------------------- | | &#x60;0&#x60;  | Email or mobile number change | | &#x60;1&#x60;  | Password change               | | &#x60;2&#x60;  | Delete account                | | &#x60;3&#x60;  | Clear account                 | | &#x60;5&#x60;  | Login verification            |  ### **Successful Response**  On successful validation:  * The user account is activated * The API returns:    * &#x60;pod_info&#x60; associated with the user   * User &#x60;profile&#x60; information  The activated account can now be used for login and other Floor POD operations.  ---  ### **Error Response**  The API returns an error response when:  * The activation code is invalid or expired * The activation code does not match the user or mode * The user is already activated * Authorization fails or the bearer token is missing/invalid  In all error cases, **account activation is not completed**.  ---  ### **One-Line Summary**  &gt; Validates a user’s activation code, activates the account, and returns POD and profile details on success.  
+     * ## **Validate Activation / Verification Code**  This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**.  Depending on the mode, the API may:  * Activate a newly registered account * Confirm a login attempt * Verify a password change or reset * Validate email or mobile updates * Confirm account deletion or clearing requests  The API verifies the provided &#x60;activation_code&#x60; against the given &#x60;user_id&#x60;, &#x60;mode&#x60;, and application context. If validation succeeds, the requested operation is completed and the API returns the relevant **POD information** and **user profile details** (where applicable).  If validation fails, the operation is **not performed** and an appropriate error response is returned.  ---  ## **Authentication**  This endpoint requires **Bearer Token authentication**.  **Header**  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ## **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot;,   \&quot;app_id\&quot;: \&quot;string\&quot;,   \&quot;mode\&quot;: \&quot;string\&quot; } &#x60;&#x60;&#x60;  ### **Field Descriptions**  * **user_id** – Unique identifier of the user initiating the operation * **activation_code** – One-time verification code sent to the user * **app_id** – Application identifier (optional or context-specific) * **mode** – Operation context for which the verification is being performed  ---  ## **Usage Scenarios (Mode Definitions)**  | Mode | Purpose                                  | | ---- | ---------------------------------------- | | 0    | Email or mobile number change            | | 1    | Password change                          | | 2    | Delete account                           | | 3    | Clear account                            | | 4    | Signup verification (account activation) | | 5    | Login verification                       | | 6    | Forgot password verification             |  ---  ## **Successful Response**  On successful validation:  * The requested operation (based on &#x60;mode&#x60;) is completed * The API returns:    * **POD information** associated with the user (if applicable)   * **User profile details** (if applicable)  Examples:  * For **signup verification**, the user account is activated * For **login**, access is confirmed * For **password reset**, the user may proceed to set a new password * For **account deletion**, the request is confirmed  ---  ## **Error Response**  The API returns an error response when:  * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated) * Authorization fails or the bearer token is missing or invalid  ⚠️ In all error cases, **no account state change occurs**.  ---  ## **One-Line Summary**  &gt; Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
      * @param validateCodeRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call

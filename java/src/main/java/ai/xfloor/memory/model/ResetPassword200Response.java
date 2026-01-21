@@ -46,35 +46,25 @@ import java.util.Set;
 import ai.xfloor.memory.client.JSON;
 
 /**
- * SendSignInValidationCode200Response
+ * ResetPassword200Response
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.18.0")
-public class SendSignInValidationCode200Response {
+public class ResetPassword200Response {
   public static final String SERIALIZED_NAME_SUCCESS = "success";
   @SerializedName(SERIALIZED_NAME_SUCCESS)
   @javax.annotation.Nonnull
   private String success;
 
-  public static final String SERIALIZED_NAME_MOBILE_NUMBER = "mobile_number";
-  @SerializedName(SERIALIZED_NAME_MOBILE_NUMBER)
-  @javax.annotation.Nullable
-  private String mobileNumber;
-
-  public static final String SERIALIZED_NAME_EMAIL_ID = "email_id";
-  @SerializedName(SERIALIZED_NAME_EMAIL_ID)
-  @javax.annotation.Nonnull
-  private String emailId;
-
-  public SendSignInValidationCode200Response() {
+  public ResetPassword200Response() {
   }
 
-  public SendSignInValidationCode200Response success(@javax.annotation.Nonnull String success) {
+  public ResetPassword200Response success(@javax.annotation.Nonnull String success) {
     this.success = success;
     return this;
   }
 
   /**
-   * Operation successful
+   * Password Reset
    * @return success
    */
   @javax.annotation.Nonnull
@@ -87,44 +77,6 @@ public class SendSignInValidationCode200Response {
   }
 
 
-  public SendSignInValidationCode200Response mobileNumber(@javax.annotation.Nullable String mobileNumber) {
-    this.mobileNumber = mobileNumber;
-    return this;
-  }
-
-  /**
-   * Mobile number if signed in through mobile number
-   * @return mobileNumber
-   */
-  @javax.annotation.Nullable
-  public String getMobileNumber() {
-    return mobileNumber;
-  }
-
-  public void setMobileNumber(@javax.annotation.Nullable String mobileNumber) {
-    this.mobileNumber = mobileNumber;
-  }
-
-
-  public SendSignInValidationCode200Response emailId(@javax.annotation.Nonnull String emailId) {
-    this.emailId = emailId;
-    return this;
-  }
-
-  /**
-   * Email ID if signed through email
-   * @return emailId
-   */
-  @javax.annotation.Nonnull
-  public String getEmailId() {
-    return emailId;
-  }
-
-  public void setEmailId(@javax.annotation.Nonnull String emailId) {
-    this.emailId = emailId;
-  }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -134,24 +86,20 @@ public class SendSignInValidationCode200Response {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SendSignInValidationCode200Response sendSignInValidationCode200Response = (SendSignInValidationCode200Response) o;
-    return Objects.equals(this.success, sendSignInValidationCode200Response.success) &&
-        Objects.equals(this.mobileNumber, sendSignInValidationCode200Response.mobileNumber) &&
-        Objects.equals(this.emailId, sendSignInValidationCode200Response.emailId);
+    ResetPassword200Response resetPassword200Response = (ResetPassword200Response) o;
+    return Objects.equals(this.success, resetPassword200Response.success);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(success, mobileNumber, emailId);
+    return Objects.hash(success);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SendSignInValidationCode200Response {\n");
+    sb.append("class ResetPassword200Response {\n");
     sb.append("    success: ").append(toIndentedString(success)).append("\n");
-    sb.append("    mobileNumber: ").append(toIndentedString(mobileNumber)).append("\n");
-    sb.append("    emailId: ").append(toIndentedString(emailId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -173,35 +121,35 @@ public class SendSignInValidationCode200Response {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("success", "mobile_number", "email_id"));
+    openapiFields = new HashSet<String>(Arrays.asList("success"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("success", "email_id"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("success"));
   }
 
   /**
    * Validates the JSON Element and throws an exception if issues found
    *
    * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to SendSignInValidationCode200Response
+   * @throws IOException if the JSON Element is invalid with respect to ResetPassword200Response
    */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!SendSignInValidationCode200Response.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in SendSignInValidationCode200Response is not found in the empty JSON string", SendSignInValidationCode200Response.openapiRequiredFields.toString()));
+        if (!ResetPassword200Response.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in ResetPassword200Response is not found in the empty JSON string", ResetPassword200Response.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!SendSignInValidationCode200Response.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `SendSignInValidationCode200Response` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!ResetPassword200Response.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `ResetPassword200Response` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : SendSignInValidationCode200Response.openapiRequiredFields) {
+      for (String requiredField : ResetPassword200Response.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
           throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
@@ -210,34 +158,28 @@ public class SendSignInValidationCode200Response {
       if (!jsonObj.get("success").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `success` to be a primitive type in the JSON string but got `%s`", jsonObj.get("success").toString()));
       }
-      if ((jsonObj.get("mobile_number") != null && !jsonObj.get("mobile_number").isJsonNull()) && !jsonObj.get("mobile_number").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `mobile_number` to be a primitive type in the JSON string but got `%s`", jsonObj.get("mobile_number").toString()));
-      }
-      if (!jsonObj.get("email_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `email_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("email_id").toString()));
-      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!SendSignInValidationCode200Response.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'SendSignInValidationCode200Response' and its subtypes
+       if (!ResetPassword200Response.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'ResetPassword200Response' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<SendSignInValidationCode200Response> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(SendSignInValidationCode200Response.class));
+       final TypeAdapter<ResetPassword200Response> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(ResetPassword200Response.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<SendSignInValidationCode200Response>() {
+       return (TypeAdapter<T>) new TypeAdapter<ResetPassword200Response>() {
            @Override
-           public void write(JsonWriter out, SendSignInValidationCode200Response value) throws IOException {
+           public void write(JsonWriter out, ResetPassword200Response value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public SendSignInValidationCode200Response read(JsonReader in) throws IOException {
+           public ResetPassword200Response read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -248,18 +190,18 @@ public class SendSignInValidationCode200Response {
   }
 
   /**
-   * Create an instance of SendSignInValidationCode200Response given an JSON string
+   * Create an instance of ResetPassword200Response given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of SendSignInValidationCode200Response
-   * @throws IOException if the JSON string is invalid with respect to SendSignInValidationCode200Response
+   * @return An instance of ResetPassword200Response
+   * @throws IOException if the JSON string is invalid with respect to ResetPassword200Response
    */
-  public static SendSignInValidationCode200Response fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, SendSignInValidationCode200Response.class);
+  public static ResetPassword200Response fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, ResetPassword200Response.class);
   }
 
   /**
-   * Convert an instance of SendSignInValidationCode200Response to an JSON string
+   * Convert an instance of ResetPassword200Response to an JSON string
    *
    * @return JSON string
    */

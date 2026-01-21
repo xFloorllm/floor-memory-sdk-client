@@ -52,7 +52,7 @@ import ai.xfloor.memory.client.JSON;
 public class SendValidationCodeRequest {
   public static final String SERIALIZED_NAME_USER_ID = "user_id";
   @SerializedName(SERIALIZED_NAME_USER_ID)
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private String userId;
 
   public static final String SERIALIZED_NAME_MODE = "mode";
@@ -60,10 +60,20 @@ public class SendValidationCodeRequest {
   @javax.annotation.Nonnull
   private String mode;
 
+  public static final String SERIALIZED_NAME_MOBILES_NUMBER = "mobiles_number";
+  @SerializedName(SERIALIZED_NAME_MOBILES_NUMBER)
+  @javax.annotation.Nullable
+  private String mobilesNumber;
+
+  public static final String SERIALIZED_NAME_EMAIL_ID = "email_id";
+  @SerializedName(SERIALIZED_NAME_EMAIL_ID)
+  @javax.annotation.Nullable
+  private String emailId;
+
   public SendValidationCodeRequest() {
   }
 
-  public SendValidationCodeRequest userId(@javax.annotation.Nonnull String userId) {
+  public SendValidationCodeRequest userId(@javax.annotation.Nullable String userId) {
     this.userId = userId;
     return this;
   }
@@ -72,12 +82,12 @@ public class SendValidationCodeRequest {
    * user id
    * @return userId
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getUserId() {
     return userId;
   }
 
-  public void setUserId(@javax.annotation.Nonnull String userId) {
+  public void setUserId(@javax.annotation.Nullable String userId) {
     this.userId = userId;
   }
 
@@ -88,7 +98,7 @@ public class SendValidationCodeRequest {
   }
 
   /**
-   * Mode - 0 for getting activation code, 1 for password change
+   * Mode - 0 for getting activation code to change email or mobile number, 1 for password change
    * @return mode
    */
   @javax.annotation.Nonnull
@@ -98,6 +108,44 @@ public class SendValidationCodeRequest {
 
   public void setMode(@javax.annotation.Nonnull String mode) {
     this.mode = mode;
+  }
+
+
+  public SendValidationCodeRequest mobilesNumber(@javax.annotation.Nullable String mobilesNumber) {
+    this.mobilesNumber = mobilesNumber;
+    return this;
+  }
+
+  /**
+   * Get mobilesNumber
+   * @return mobilesNumber
+   */
+  @javax.annotation.Nullable
+  public String getMobilesNumber() {
+    return mobilesNumber;
+  }
+
+  public void setMobilesNumber(@javax.annotation.Nullable String mobilesNumber) {
+    this.mobilesNumber = mobilesNumber;
+  }
+
+
+  public SendValidationCodeRequest emailId(@javax.annotation.Nullable String emailId) {
+    this.emailId = emailId;
+    return this;
+  }
+
+  /**
+   * Get emailId
+   * @return emailId
+   */
+  @javax.annotation.Nullable
+  public String getEmailId() {
+    return emailId;
+  }
+
+  public void setEmailId(@javax.annotation.Nullable String emailId) {
+    this.emailId = emailId;
   }
 
 
@@ -112,12 +160,14 @@ public class SendValidationCodeRequest {
     }
     SendValidationCodeRequest sendValidationCodeRequest = (SendValidationCodeRequest) o;
     return Objects.equals(this.userId, sendValidationCodeRequest.userId) &&
-        Objects.equals(this.mode, sendValidationCodeRequest.mode);
+        Objects.equals(this.mode, sendValidationCodeRequest.mode) &&
+        Objects.equals(this.mobilesNumber, sendValidationCodeRequest.mobilesNumber) &&
+        Objects.equals(this.emailId, sendValidationCodeRequest.emailId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, mode);
+    return Objects.hash(userId, mode, mobilesNumber, emailId);
   }
 
   @Override
@@ -126,6 +176,8 @@ public class SendValidationCodeRequest {
     sb.append("class SendValidationCodeRequest {\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    mode: ").append(toIndentedString(mode)).append("\n");
+    sb.append("    mobilesNumber: ").append(toIndentedString(mobilesNumber)).append("\n");
+    sb.append("    emailId: ").append(toIndentedString(emailId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -147,10 +199,10 @@ public class SendValidationCodeRequest {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("user_id", "mode"));
+    openapiFields = new HashSet<String>(Arrays.asList("user_id", "mode", "mobiles_number", "email_id"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("user_id", "mode"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("mode"));
   }
 
   /**
@@ -181,11 +233,17 @@ public class SendValidationCodeRequest {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("user_id").isJsonPrimitive()) {
+      if ((jsonObj.get("user_id") != null && !jsonObj.get("user_id").isJsonNull()) && !jsonObj.get("user_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `user_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("user_id").toString()));
       }
       if (!jsonObj.get("mode").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `mode` to be a primitive type in the JSON string but got `%s`", jsonObj.get("mode").toString()));
+      }
+      if ((jsonObj.get("mobiles_number") != null && !jsonObj.get("mobiles_number").isJsonNull()) && !jsonObj.get("mobiles_number").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `mobiles_number` to be a primitive type in the JSON string but got `%s`", jsonObj.get("mobiles_number").toString()));
+      }
+      if ((jsonObj.get("email_id") != null && !jsonObj.get("email_id").isJsonNull()) && !jsonObj.get("email_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `email_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("email_id").toString()));
       }
   }
 

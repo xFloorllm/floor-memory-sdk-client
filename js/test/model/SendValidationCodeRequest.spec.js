@@ -66,6 +66,18 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property mobilesNumber (base name: "mobiles_number")', function() {
+      // uncomment below and update the code to test the property mobilesNumber
+      //var instance = new XfloorFloorMemorySdkJs.SendValidationCodeRequest();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property emailId (base name: "email_id")', function() {
+      // uncomment below and update the code to test the property emailId
+      //var instance = new XfloorFloorMemorySdkJs.SendValidationCodeRequest();
+      //expect(instance).to.be();
+    });
+
   });
 
 }));

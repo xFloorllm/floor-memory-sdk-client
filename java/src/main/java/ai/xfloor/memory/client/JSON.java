@@ -118,8 +118,8 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.QueryRequestFilters.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.QueryResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.QueryResponseItemsInner.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.SendSignInValidationCode200Response.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.SendSignInValidationCode400Response.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.ResetPassword200Response.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.ResetPassword400Response.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.SendValidationCode200Response.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.SendValidationCodeRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.SignInWithEmail200Response.CustomTypeAdapterFactory());

@@ -35,8 +35,8 @@ import QueryRequest from './model/QueryRequest';
 import QueryRequestFilters from './model/QueryRequestFilters';
 import QueryResponse from './model/QueryResponse';
 import QueryResponseItemsInner from './model/QueryResponseItemsInner';
-import SendSignInValidationCode200Response from './model/SendSignInValidationCode200Response';
-import SendSignInValidationCode400Response from './model/SendSignInValidationCode400Response';
+import ResetPassword200Response from './model/ResetPassword200Response';
+import ResetPassword400Response from './model/ResetPassword400Response';
 import SendValidationCode200Response from './model/SendValidationCode200Response';
 import SendValidationCodeRequest from './model/SendValidationCodeRequest';
 import SignInWithEmail200Response from './model/SignInWithEmail200Response';
@@ -86,7 +86,7 @@ import QueryApi from './api/QueryApi';
 * </pre>
 * </p>
 * @module index
-* @version 1.0.0
+* @version 1.0.2
 */
 export {
     /**
@@ -228,16 +228,16 @@ export {
     QueryResponseItemsInner,
 
     /**
-     * The SendSignInValidationCode200Response model constructor.
-     * @property {module:model/SendSignInValidationCode200Response}
+     * The ResetPassword200Response model constructor.
+     * @property {module:model/ResetPassword200Response}
      */
-    SendSignInValidationCode200Response,
+    ResetPassword200Response,
 
     /**
-     * The SendSignInValidationCode400Response model constructor.
-     * @property {module:model/SendSignInValidationCode400Response}
+     * The ResetPassword400Response model constructor.
+     * @property {module:model/ResetPassword400Response}
      */
-    SendSignInValidationCode400Response,
+    ResetPassword400Response,
 
     /**
      * The SendValidationCode200Response model constructor.

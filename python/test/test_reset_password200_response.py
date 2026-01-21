@@ -15,10 +15,10 @@
 
 import unittest
 
-from xfloor_memory_sdk.models.send_sign_in_validation_code200_response import SendSignInValidationCode200Response
+from xfloor_memory_sdk.models.reset_password200_response import ResetPassword200Response
 
-class TestSendSignInValidationCode200Response(unittest.TestCase):
-    """SendSignInValidationCode200Response unit test stubs"""
+class TestResetPassword200Response(unittest.TestCase):
+    """ResetPassword200Response unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,29 +26,26 @@ class TestSendSignInValidationCode200Response(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> SendSignInValidationCode200Response:
-        """Test SendSignInValidationCode200Response
+    def make_instance(self, include_optional) -> ResetPassword200Response:
+        """Test ResetPassword200Response
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `SendSignInValidationCode200Response`
+        # uncomment below to create an instance of `ResetPassword200Response`
         """
-        model = SendSignInValidationCode200Response()
+        model = ResetPassword200Response()
         if include_optional:
-            return SendSignInValidationCode200Response(
-                success = '',
-                mobile_number = '',
-                email_id = ''
+            return ResetPassword200Response(
+                success = ''
             )
         else:
-            return SendSignInValidationCode200Response(
+            return ResetPassword200Response(
                 success = '',
-                email_id = '',
         )
         """
 
-    def testSendSignInValidationCode200Response(self):
-        """Test SendSignInValidationCode200Response"""
+    def testResetPassword200Response(self):
+        """Test ResetPassword200Response"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

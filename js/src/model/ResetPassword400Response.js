@@ -14,14 +14,14 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The SendSignInValidationCode400Response model module.
- * @module model/SendSignInValidationCode400Response
- * @version 1.0.0
+ * The ResetPassword400Response model module.
+ * @module model/ResetPassword400Response
+ * @version 1.0.2
  */
-class SendSignInValidationCode400Response {
+class ResetPassword400Response {
     /**
-     * Constructs a new <code>SendSignInValidationCode400Response</code>.
-     * @alias module:model/SendSignInValidationCode400Response
+     * Constructs a new <code>ResetPassword400Response</code>.
+     * @alias module:model/ResetPassword400Response
      * @param code {String} Validation Error
      * @param message {String} Error Message
      * @param path {String} REST api path
@@ -29,7 +29,7 @@ class SendSignInValidationCode400Response {
      */
     constructor(code, message, path, timestamp) { 
         
-        SendSignInValidationCode400Response.initialize(this, code, message, path, timestamp);
+        ResetPassword400Response.initialize(this, code, message, path, timestamp);
     }
 
     /**
@@ -45,15 +45,15 @@ class SendSignInValidationCode400Response {
     }
 
     /**
-     * Constructs a <code>SendSignInValidationCode400Response</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>ResetPassword400Response</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/SendSignInValidationCode400Response} obj Optional instance to populate.
-     * @return {module:model/SendSignInValidationCode400Response} The populated <code>SendSignInValidationCode400Response</code> instance.
+     * @param {module:model/ResetPassword400Response} obj Optional instance to populate.
+     * @return {module:model/ResetPassword400Response} The populated <code>ResetPassword400Response</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new SendSignInValidationCode400Response();
+            obj = obj || new ResetPassword400Response();
 
             if (data.hasOwnProperty('code')) {
                 obj['code'] = ApiClient.convertToType(data['code'], 'String');
@@ -72,13 +72,13 @@ class SendSignInValidationCode400Response {
     }
 
     /**
-     * Validates the JSON data with respect to <code>SendSignInValidationCode400Response</code>.
+     * Validates the JSON data with respect to <code>ResetPassword400Response</code>.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>SendSignInValidationCode400Response</code>.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>ResetPassword400Response</code>.
      */
     static validateJSON(data) {
         // check to make sure all required properties are present in the JSON string
-        for (const property of SendSignInValidationCode400Response.RequiredProperties) {
+        for (const property of ResetPassword400Response.RequiredProperties) {
             if (!data.hasOwnProperty(property)) {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
@@ -106,36 +106,36 @@ class SendSignInValidationCode400Response {
 
 }
 
-SendSignInValidationCode400Response.RequiredProperties = ["code", "message", "path", "timestamp"];
+ResetPassword400Response.RequiredProperties = ["code", "message", "path", "timestamp"];
 
 /**
  * Validation Error
  * @member {String} code
  */
-SendSignInValidationCode400Response.prototype['code'] = undefined;
+ResetPassword400Response.prototype['code'] = undefined;
 
 /**
  * Error Message
  * @member {String} message
  */
-SendSignInValidationCode400Response.prototype['message'] = undefined;
+ResetPassword400Response.prototype['message'] = undefined;
 
 /**
  * REST api path
  * @member {String} path
  */
-SendSignInValidationCode400Response.prototype['path'] = undefined;
+ResetPassword400Response.prototype['path'] = undefined;
 
 /**
  * Time stamp
  * @member {String} timestamp
  */
-SendSignInValidationCode400Response.prototype['timestamp'] = undefined;
+ResetPassword400Response.prototype['timestamp'] = undefined;
 
 
 
 
 
 
-export default SendSignInValidationCode400Response;
+export default ResetPassword400Response;
 

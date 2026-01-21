@@ -1,4 +1,4 @@
-# XfloorFloorMemorySdkJs.SendSignInValidationCode400Response
+# XfloorFloorMemorySdkJs.ResetPassword400Response
 
 ## Properties
 

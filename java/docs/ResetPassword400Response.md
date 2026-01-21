@@ -1,6 +1,6 @@
 
 
-# SendSignInValidationCode400Response
+# ResetPassword400Response
 
 
 ## Properties

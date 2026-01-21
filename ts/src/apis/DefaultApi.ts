@@ -19,8 +19,8 @@ import type {
   EditFloor400Response,
   GetFloorInformation200Response,
   GetRecentEvents400Response,
-  SendSignInValidationCode200Response,
-  SendSignInValidationCode400Response,
+  ResetPassword200Response,
+  ResetPassword400Response,
   SendValidationCode200Response,
   SendValidationCodeRequest,
   SignInWithEmail200Response,
@@ -39,10 +39,10 @@ import {
     GetFloorInformation200ResponseToJSON,
     GetRecentEvents400ResponseFromJSON,
     GetRecentEvents400ResponseToJSON,
-    SendSignInValidationCode200ResponseFromJSON,
-    SendSignInValidationCode200ResponseToJSON,
-    SendSignInValidationCode400ResponseFromJSON,
-    SendSignInValidationCode400ResponseToJSON,
+    ResetPassword200ResponseFromJSON,
+    ResetPassword200ResponseToJSON,
+    ResetPassword400ResponseFromJSON,
+    ResetPassword400ResponseToJSON,
     SendValidationCode200ResponseFromJSON,
     SendValidationCode200ResponseToJSON,
     SendValidationCodeRequestFromJSON,
@@ -71,9 +71,9 @@ export interface ChangeMobileNumberRequest {
 }
 
 export interface ChangePasswordRequest {
+    newPassword: string;
+    activationCode: string;
     userId?: string;
-    newPassword?: string;
-    acticationCode?: string;
 }
 
 export interface MakeFloorPrivateRequest {
@@ -102,10 +102,11 @@ export interface RenameFloorRequest {
     to?: string;
 }
 
-export interface SendSignInValidationCodeRequest {
-    appId: string;
-    mobileNumber?: string;
+export interface ResetPasswordRequest {
+    activationCode: string;
     emailId?: string;
+    mobileNumber?: string;
+    appId?: string;
 }
 
 export interface SendValidationCodeOperationRequest {
@@ -266,10 +267,24 @@ export class DefaultApi extends runtime.BaseAPI {
     }
 
     /**
-     * Changes the password of an existing user after validating a one-time password change activation code.  This API validates the provided `activation_code` for the given `user_id`. If the activation code is valid and not expired, the user’s password is updated to the supplied `new_password` and takes effect immediately.  If the activation code validation fails, the password remains unchanged and an error response is returned.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  ``` Authorization: Bearer <access_token> ```  ---  ### **Request Body (Form Data)**  | Field        | Type          | Required | Description                                                       | | ------------ | ------------- | -------- | ----------------------------------------------------------------- | | `user_id` | string | Yes      | User ID | | `new_password` | string | Yes      | New Password | | `activation_code` | string | Yes      | Activation code |   **Field Description**  * `user_id` – Unique identifier of the user requesting the password change * `new_password` – New password to be set for the user * `activation_code` – One-time activation code generated for password change verification  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user password is updated immediately * The API returns a `success` string indicating that the password change was completed  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the specified user * The password does not meet security or policy requirements * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing password remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to `/auth-service/send/validation/code` with the proper mode. ---  ### **Security Notes**  * Activation codes are single-use and time-bound * Passwords are never returned in API responses * Rate limiting may be applied to prevent brute-force attempts  ---  ### **One-Line Summary**  > Updates a user’s password after validating a one-time activation code.  
+     * ## 1) `POST /password/change` — Change Password (Logged-in User)  Changes the password of an **authenticated user** who is currently logged in.  This endpoint is used when a user is already signed in and wants to update their password as a security or preference action. The system validates a **one-time password-change verification code** (`activation_code`) issued specifically for the change-password flow. If the code is valid and not expired, the user’s password is updated to `new_password` and takes effect immediately.  If verification fails, the password remains unchanged and an error response is returned.  ### Authentication  ✅ **Required**: Bearer token for the logged-in session  ``` Authorization: Bearer <access_token> ```  ### Request Body (Form Data)  * `user_id` (optional if derived from token) * `activation_code` (required) * `new_password` (required)  ### Behavior Notes  * Typically requires a prior call to **send a verification code** for password change (mode = password change). * `user_id` can be taken from the access token; include it only if your system requires it explicitly.  ### One-Line Summary  > Changes the password for a logged-in user after validating a one-time password-change code. 
      * Change Password
      */
     async changePasswordRaw(requestParameters: ChangePasswordRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ChangePassword200Response>> {
+        if (requestParameters['newPassword'] == null) {
+            throw new runtime.RequiredError(
+                'newPassword',
+                'Required parameter "newPassword" was null or undefined when calling changePassword().'
+            );
+        }
+
+        if (requestParameters['activationCode'] == null) {
+            throw new runtime.RequiredError(
+                'activationCode',
+                'Required parameter "activationCode" was null or undefined when calling changePassword().'
+            );
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -304,12 +319,12 @@ export class DefaultApi extends runtime.BaseAPI {
             formParams.append('new_password', requestParameters['newPassword'] as any);
         }
 
-        if (requestParameters['acticationCode'] != null) {
-            formParams.append('actication_code', requestParameters['acticationCode'] as any);
+        if (requestParameters['activationCode'] != null) {
+            formParams.append('activation_code', requestParameters['activationCode'] as any);
         }
 
 
-        let urlPath = `/auth-service/change/password`;
+        let urlPath = `/auth-service/password/change`;
 
         const response = await this.request({
             path: urlPath,
@@ -323,10 +338,10 @@ export class DefaultApi extends runtime.BaseAPI {
     }
 
     /**
-     * Changes the password of an existing user after validating a one-time password change activation code.  This API validates the provided `activation_code` for the given `user_id`. If the activation code is valid and not expired, the user’s password is updated to the supplied `new_password` and takes effect immediately.  If the activation code validation fails, the password remains unchanged and an error response is returned.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  ``` Authorization: Bearer <access_token> ```  ---  ### **Request Body (Form Data)**  | Field        | Type          | Required | Description                                                       | | ------------ | ------------- | -------- | ----------------------------------------------------------------- | | `user_id` | string | Yes      | User ID | | `new_password` | string | Yes      | New Password | | `activation_code` | string | Yes      | Activation code |   **Field Description**  * `user_id` – Unique identifier of the user requesting the password change * `new_password` – New password to be set for the user * `activation_code` – One-time activation code generated for password change verification  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user password is updated immediately * The API returns a `success` string indicating that the password change was completed  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the specified user * The password does not meet security or policy requirements * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing password remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to `/auth-service/send/validation/code` with the proper mode. ---  ### **Security Notes**  * Activation codes are single-use and time-bound * Passwords are never returned in API responses * Rate limiting may be applied to prevent brute-force attempts  ---  ### **One-Line Summary**  > Updates a user’s password after validating a one-time activation code.  
+     * ## 1) `POST /password/change` — Change Password (Logged-in User)  Changes the password of an **authenticated user** who is currently logged in.  This endpoint is used when a user is already signed in and wants to update their password as a security or preference action. The system validates a **one-time password-change verification code** (`activation_code`) issued specifically for the change-password flow. If the code is valid and not expired, the user’s password is updated to `new_password` and takes effect immediately.  If verification fails, the password remains unchanged and an error response is returned.  ### Authentication  ✅ **Required**: Bearer token for the logged-in session  ``` Authorization: Bearer <access_token> ```  ### Request Body (Form Data)  * `user_id` (optional if derived from token) * `activation_code` (required) * `new_password` (required)  ### Behavior Notes  * Typically requires a prior call to **send a verification code** for password change (mode = password change). * `user_id` can be taken from the access token; include it only if your system requires it explicitly.  ### One-Line Summary  > Changes the password for a logged-in user after validating a one-time password-change code. 
      * Change Password
      */
-    async changePassword(requestParameters: ChangePasswordRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ChangePassword200Response> {
+    async changePassword(requestParameters: ChangePasswordRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ChangePassword200Response> {
         const response = await this.changePasswordRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -551,75 +566,56 @@ export class DefaultApi extends runtime.BaseAPI {
     }
 
     /**
-     * This API initiates the **sign-in validation process** by sending a **one-time validation code (OTP)** to the user.  The OTP is delivered to **either the mobile number or the email address** provided in the request. This endpoint is typically called **before completing sign-in**, to verify that the user owns the supplied contact identifier.  The calling application is responsible for:  * Collecting the OTP from the user * Submitting it to the OTP verification API (handled separately)  ---  ## **Use Case**  * User attempts to sign in * User provides **mobile number or email** * System sends a **validation code (OTP)** * User enters OTP to complete sign-in  ---  ## **Request Method**  `POST`  ---  ## **Formdata Parameters**  | Parameter Name  | Type   | Required  | Description                                 | | --------------- | ------ | --------- | ------------------------------------------- | | `mobile_number` | String | Optional* | Mobile number to which the OTP will be sent | | `email_id`      | String | Optional* | Email address to which the OTP will be sent | | `app_id`        | String | Optional  | Identifier of the calling application       |  * **Either `mobile_number` or `email_id` must be provided.** Providing both is allowed; the system may choose one based on configuration.  ---  ## **Request Rules**  * At least **one** of `mobile_number` or `email_id` is mandatory * If both are missing, the request will be rejected * OTP delivery channel depends on the provided identifier  ---  ## **Response Format**  `application/json`  ---  ## **Sample Success Response**  ```json {   \"status\": \"SUCCESS\",   \"message\": \"Validation code sent successfully\" } ```  ---  ## **Sample Error Responses**  ### Missing Identifier  ```json {   \"status\": \"ERROR\",   \"message\": \"Either mobile_number or email_id must be provided\" } ```  ### Invalid Identifier  ```json {   \"status\": \"ERROR\",   \"message\": \"Invalid mobile number or email address\" } ```  ---  ## **Notes**  * This API **only sends** the validation code * OTP verification must be performed using the corresponding **verify validation code** API * Rate limiting and retry restrictions may apply to prevent abuse  
-     * Send Sign-In Validation Code (OTP)
+     * ---  ## Reset Password (Forgot Password, Not Logged In)  Resets the password of a user who **cannot log in** and is using a **forgot-password** flow.  This endpoint is used when the user is not authenticated and requests a password reset using a verified identity channel such as **email** or **mobile number**. The system validates a **one-time reset verification code** (`activation_code`) issued for the reset-password flow. If valid and not expired, the password is updated to `new_password` and takes effect immediately.  If verification fails, the password remains unchanged and an error response is returned.  ### Authentication  ✅ **Recommended** (better security): a short-lived **reset token** issued after initiating reset  ``` Authorization: Bearer <reset_token> ```  > If you don’t use a reset token, you must enforce strong rate limiting + OTP attempt throttling on this endpoint.  ### Request Body (Form Data)  * `email_id` or `mobile_number` (required to identify user) * `activation_code` (required) * `new_password` (required) * `user_id` (optional, if your reset flow already resolved it)  ### Behavior Notes  * Requires a prior call to **initiate reset** and send OTP/code (mode = forgot password). * Must enforce code attempt limits and expiration strictly.  ### One-Line Summary  > Resets a user’s password (forgot-password flow) after validating a one-time reset code sent to email or mobile.   
+     * Reset Password
      */
-    async sendSignInValidationCodeRaw(requestParameters: SendSignInValidationCodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SendSignInValidationCode200Response>> {
-        if (requestParameters['appId'] == null) {
+    async resetPasswordRaw(requestParameters: ResetPasswordRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ResetPassword200Response>> {
+        if (requestParameters['activationCode'] == null) {
             throw new runtime.RequiredError(
-                'appId',
-                'Required parameter "appId" was null or undefined when calling sendSignInValidationCode().'
+                'activationCode',
+                'Required parameter "activationCode" was null or undefined when calling resetPassword().'
             );
         }
 
         const queryParameters: any = {};
 
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("bearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-        const consumes: runtime.Consume[] = [
-            { contentType: 'multipart/form-data' },
-        ];
-        // @ts-ignore: canConsumeForm may be unused
-        const canConsumeForm = runtime.canConsumeForm(consumes);
-
-        let formParams: { append(param: string, value: any): any };
-        let useForm = false;
-        if (useForm) {
-            formParams = new FormData();
-        } else {
-            formParams = new URLSearchParams();
+        if (requestParameters['emailId'] != null) {
+            queryParameters['email_id'] = requestParameters['emailId'];
         }
 
         if (requestParameters['mobileNumber'] != null) {
-            formParams.append('mobile_number', requestParameters['mobileNumber'] as any);
+            queryParameters['mobile_number'] = requestParameters['mobileNumber'];
         }
 
-        if (requestParameters['emailId'] != null) {
-            formParams.append('email_id', requestParameters['emailId'] as any);
+        if (requestParameters['activationCode'] != null) {
+            queryParameters['activation_code'] = requestParameters['activationCode'];
         }
 
         if (requestParameters['appId'] != null) {
-            formParams.append('app_id', requestParameters['appId'] as any);
+            queryParameters['app_id'] = requestParameters['appId'];
         }
 
+        const headerParameters: runtime.HTTPHeaders = {};
 
-        let urlPath = `/auth-service/send/sign/in/validation/code`;
+
+        let urlPath = `/auth-service/password/reset`;
 
         const response = await this.request({
             path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: formParams,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => SendSignInValidationCode200ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ResetPassword200ResponseFromJSON(jsonValue));
     }
 
     /**
-     * This API initiates the **sign-in validation process** by sending a **one-time validation code (OTP)** to the user.  The OTP is delivered to **either the mobile number or the email address** provided in the request. This endpoint is typically called **before completing sign-in**, to verify that the user owns the supplied contact identifier.  The calling application is responsible for:  * Collecting the OTP from the user * Submitting it to the OTP verification API (handled separately)  ---  ## **Use Case**  * User attempts to sign in * User provides **mobile number or email** * System sends a **validation code (OTP)** * User enters OTP to complete sign-in  ---  ## **Request Method**  `POST`  ---  ## **Formdata Parameters**  | Parameter Name  | Type   | Required  | Description                                 | | --------------- | ------ | --------- | ------------------------------------------- | | `mobile_number` | String | Optional* | Mobile number to which the OTP will be sent | | `email_id`      | String | Optional* | Email address to which the OTP will be sent | | `app_id`        | String | Optional  | Identifier of the calling application       |  * **Either `mobile_number` or `email_id` must be provided.** Providing both is allowed; the system may choose one based on configuration.  ---  ## **Request Rules**  * At least **one** of `mobile_number` or `email_id` is mandatory * If both are missing, the request will be rejected * OTP delivery channel depends on the provided identifier  ---  ## **Response Format**  `application/json`  ---  ## **Sample Success Response**  ```json {   \"status\": \"SUCCESS\",   \"message\": \"Validation code sent successfully\" } ```  ---  ## **Sample Error Responses**  ### Missing Identifier  ```json {   \"status\": \"ERROR\",   \"message\": \"Either mobile_number or email_id must be provided\" } ```  ### Invalid Identifier  ```json {   \"status\": \"ERROR\",   \"message\": \"Invalid mobile number or email address\" } ```  ---  ## **Notes**  * This API **only sends** the validation code * OTP verification must be performed using the corresponding **verify validation code** API * Rate limiting and retry restrictions may apply to prevent abuse  
-     * Send Sign-In Validation Code (OTP)
+     * ---  ## Reset Password (Forgot Password, Not Logged In)  Resets the password of a user who **cannot log in** and is using a **forgot-password** flow.  This endpoint is used when the user is not authenticated and requests a password reset using a verified identity channel such as **email** or **mobile number**. The system validates a **one-time reset verification code** (`activation_code`) issued for the reset-password flow. If valid and not expired, the password is updated to `new_password` and takes effect immediately.  If verification fails, the password remains unchanged and an error response is returned.  ### Authentication  ✅ **Recommended** (better security): a short-lived **reset token** issued after initiating reset  ``` Authorization: Bearer <reset_token> ```  > If you don’t use a reset token, you must enforce strong rate limiting + OTP attempt throttling on this endpoint.  ### Request Body (Form Data)  * `email_id` or `mobile_number` (required to identify user) * `activation_code` (required) * `new_password` (required) * `user_id` (optional, if your reset flow already resolved it)  ### Behavior Notes  * Requires a prior call to **initiate reset** and send OTP/code (mode = forgot password). * Must enforce code attempt limits and expiration strictly.  ### One-Line Summary  > Resets a user’s password (forgot-password flow) after validating a one-time reset code sent to email or mobile.   
+     * Reset Password
      */
-    async sendSignInValidationCode(requestParameters: SendSignInValidationCodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SendSignInValidationCode200Response> {
-        const response = await this.sendSignInValidationCodeRaw(requestParameters, initOverrides);
+    async resetPassword(requestParameters: ResetPasswordRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ResetPassword200Response> {
+        const response = await this.resetPasswordRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -901,7 +897,7 @@ export class DefaultApi extends runtime.BaseAPI {
     }
 
     /**
-     * Validates the activation code submitted by a newly registered user and completes the account activation process.  This API verifies the provided `activation_code` against the specified `user_id` and activation `mode` (e.g., email or mobile). Upon successful validation, the user account is activated and the API returns the associated **POD information** along with the user’s **profile details**.  If the activation code is invalid, expired, or does not match the user context, the API returns an appropriate error response and the account remains inactive.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  * The token must be included in the `Authorization` header:    ```   Authorization: Bearer <access_token>   ```  ---  ### **Request Body**  ```json {   \"user_id\": \"string\",   \"activation_code\": \"string\",   \"app_id\": \"string\",   \"mode\": \"string\" } ```  **Field Description**  * `user_id` – Unique identifier of the newly registered user * `activation_code` – One-time validation code sent to the user * `app_id` – Application identifier (optional or context-specific) * `mode` – Activation channel used (e.g., `email`, `mobile`)  --- ### **Usage Scenarios (Mode Definition)**  | Mode | Purpose                       | | ---- | ----------------------------- | | `0`  | Email or mobile number change | | `1`  | Password change               | | `2`  | Delete account                | | `3`  | Clear account                 | | `5`  | Login verification            |  ### **Successful Response**  On successful validation:  * The user account is activated * The API returns:    * `pod_info` associated with the user   * User `profile` information  The activated account can now be used for login and other Floor POD operations.  ---  ### **Error Response**  The API returns an error response when:  * The activation code is invalid or expired * The activation code does not match the user or mode * The user is already activated * Authorization fails or the bearer token is missing/invalid  In all error cases, **account activation is not completed**.  ---  ### **One-Line Summary**  > Validates a user’s activation code, activates the account, and returns POD and profile details on success.  
+     * ## **Validate Activation / Verification Code**  This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**.  Depending on the mode, the API may:  * Activate a newly registered account * Confirm a login attempt * Verify a password change or reset * Validate email or mobile updates * Confirm account deletion or clearing requests  The API verifies the provided `activation_code` against the given `user_id`, `mode`, and application context. If validation succeeds, the requested operation is completed and the API returns the relevant **POD information** and **user profile details** (where applicable).  If validation fails, the operation is **not performed** and an appropriate error response is returned.  ---  ## **Authentication**  This endpoint requires **Bearer Token authentication**.  **Header**  ``` Authorization: Bearer <access_token> ```  ---  ## **Request Body**  ```json {   \"user_id\": \"string\",   \"activation_code\": \"string\",   \"app_id\": \"string\",   \"mode\": \"string\" } ```  ### **Field Descriptions**  * **user_id** – Unique identifier of the user initiating the operation * **activation_code** – One-time verification code sent to the user * **app_id** – Application identifier (optional or context-specific) * **mode** – Operation context for which the verification is being performed  ---  ## **Usage Scenarios (Mode Definitions)**  | Mode | Purpose                                  | | ---- | ---------------------------------------- | | 0    | Email or mobile number change            | | 1    | Password change                          | | 2    | Delete account                           | | 3    | Clear account                            | | 4    | Signup verification (account activation) | | 5    | Login verification                       | | 6    | Forgot password verification             |  ---  ## **Successful Response**  On successful validation:  * The requested operation (based on `mode`) is completed * The API returns:    * **POD information** associated with the user (if applicable)   * **User profile details** (if applicable)  Examples:  * For **signup verification**, the user account is activated * For **login**, access is confirmed * For **password reset**, the user may proceed to set a new password * For **account deletion**, the request is confirmed  ---  ## **Error Response**  The API returns an error response when:  * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated) * Authorization fails or the bearer token is missing or invalid  ⚠️ In all error cases, **no account state change occurs**.  ---  ## **One-Line Summary**  > Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
      * Validation
      */
     async validateCodeRaw(requestParameters: ValidateCodeOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserDetails>> {
@@ -941,7 +937,7 @@ export class DefaultApi extends runtime.BaseAPI {
     }
 
     /**
-     * Validates the activation code submitted by a newly registered user and completes the account activation process.  This API verifies the provided `activation_code` against the specified `user_id` and activation `mode` (e.g., email or mobile). Upon successful validation, the user account is activated and the API returns the associated **POD information** along with the user’s **profile details**.  If the activation code is invalid, expired, or does not match the user context, the API returns an appropriate error response and the account remains inactive.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  * The token must be included in the `Authorization` header:    ```   Authorization: Bearer <access_token>   ```  ---  ### **Request Body**  ```json {   \"user_id\": \"string\",   \"activation_code\": \"string\",   \"app_id\": \"string\",   \"mode\": \"string\" } ```  **Field Description**  * `user_id` – Unique identifier of the newly registered user * `activation_code` – One-time validation code sent to the user * `app_id` – Application identifier (optional or context-specific) * `mode` – Activation channel used (e.g., `email`, `mobile`)  --- ### **Usage Scenarios (Mode Definition)**  | Mode | Purpose                       | | ---- | ----------------------------- | | `0`  | Email or mobile number change | | `1`  | Password change               | | `2`  | Delete account                | | `3`  | Clear account                 | | `5`  | Login verification            |  ### **Successful Response**  On successful validation:  * The user account is activated * The API returns:    * `pod_info` associated with the user   * User `profile` information  The activated account can now be used for login and other Floor POD operations.  ---  ### **Error Response**  The API returns an error response when:  * The activation code is invalid or expired * The activation code does not match the user or mode * The user is already activated * Authorization fails or the bearer token is missing/invalid  In all error cases, **account activation is not completed**.  ---  ### **One-Line Summary**  > Validates a user’s activation code, activates the account, and returns POD and profile details on success.  
+     * ## **Validate Activation / Verification Code**  This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**.  Depending on the mode, the API may:  * Activate a newly registered account * Confirm a login attempt * Verify a password change or reset * Validate email or mobile updates * Confirm account deletion or clearing requests  The API verifies the provided `activation_code` against the given `user_id`, `mode`, and application context. If validation succeeds, the requested operation is completed and the API returns the relevant **POD information** and **user profile details** (where applicable).  If validation fails, the operation is **not performed** and an appropriate error response is returned.  ---  ## **Authentication**  This endpoint requires **Bearer Token authentication**.  **Header**  ``` Authorization: Bearer <access_token> ```  ---  ## **Request Body**  ```json {   \"user_id\": \"string\",   \"activation_code\": \"string\",   \"app_id\": \"string\",   \"mode\": \"string\" } ```  ### **Field Descriptions**  * **user_id** – Unique identifier of the user initiating the operation * **activation_code** – One-time verification code sent to the user * **app_id** – Application identifier (optional or context-specific) * **mode** – Operation context for which the verification is being performed  ---  ## **Usage Scenarios (Mode Definitions)**  | Mode | Purpose                                  | | ---- | ---------------------------------------- | | 0    | Email or mobile number change            | | 1    | Password change                          | | 2    | Delete account                           | | 3    | Clear account                            | | 4    | Signup verification (account activation) | | 5    | Login verification                       | | 6    | Forgot password verification             |  ---  ## **Successful Response**  On successful validation:  * The requested operation (based on `mode`) is completed * The API returns:    * **POD information** associated with the user (if applicable)   * **User profile details** (if applicable)  Examples:  * For **signup verification**, the user account is activated * For **login**, access is confirmed * For **password reset**, the user may proceed to set a new password * For **account deletion**, the request is confirmed  ---  ## **Error Response**  The API returns an error response when:  * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated) * Authorization fails or the bearer token is missing or invalid  ⚠️ In all error cases, **no account state change occurs**.  ---  ## **One-Line Summary**  > Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
      * Validation
      */
     async validateCode(requestParameters: ValidateCodeOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserDetails> {

@@ -24,20 +24,31 @@ export interface SendValidationCodeRequest {
      * @type {string}
      * @memberof SendValidationCodeRequest
      */
-    userId: string;
+    userId?: string;
     /**
-     * Mode - 0 for getting activation code, 1 for password change
+     * Mode - 0 for getting activation code to change email or mobile number, 1 for password change
      * @type {string}
      * @memberof SendValidationCodeRequest
      */
     mode: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SendValidationCodeRequest
+     */
+    mobilesNumber?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SendValidationCodeRequest
+     */
+    emailId?: string;
 }
 
 /**
  * Check if a given object implements the SendValidationCodeRequest interface.
  */
 export function instanceOfSendValidationCodeRequest(value: object): value is SendValidationCodeRequest {
-    if (!('userId' in value) || value['userId'] === undefined) return false;
     if (!('mode' in value) || value['mode'] === undefined) return false;
     return true;
 }
@@ -52,8 +63,10 @@ export function SendValidationCodeRequestFromJSONTyped(json: any, ignoreDiscrimi
     }
     return {
         
-        'userId': json['user_id'],
+        'userId': json['user_id'] == null ? undefined : json['user_id'],
         'mode': json['mode'],
+        'mobilesNumber': json['mobiles_number'] == null ? undefined : json['mobiles_number'],
+        'emailId': json['email_id'] == null ? undefined : json['email_id'],
     };
 }
 
@@ -70,6 +83,8 @@ export function SendValidationCodeRequestToJSONTyped(value?: SendValidationCodeR
         
         'user_id': value['userId'],
         'mode': value['mode'],
+        'mobiles_number': value['mobilesNumber'],
+        'email_id': value['emailId'],
     };
 }
 

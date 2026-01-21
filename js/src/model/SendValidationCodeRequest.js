@@ -16,18 +16,17 @@ import ApiClient from '../ApiClient';
 /**
  * The SendValidationCodeRequest model module.
  * @module model/SendValidationCodeRequest
- * @version 1.0.0
+ * @version 1.0.2
  */
 class SendValidationCodeRequest {
     /**
      * Constructs a new <code>SendValidationCodeRequest</code>.
      * @alias module:model/SendValidationCodeRequest
-     * @param userId {String} user id
-     * @param mode {String} Mode - 0 for getting activation code, 1 for password change
+     * @param mode {String} Mode - 0 for getting activation code to change email or mobile number, 1 for password change
      */
-    constructor(userId, mode) { 
+    constructor(mode) { 
         
-        SendValidationCodeRequest.initialize(this, userId, mode);
+        SendValidationCodeRequest.initialize(this, mode);
     }
 
     /**
@@ -35,8 +34,7 @@ class SendValidationCodeRequest {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, userId, mode) { 
-        obj['user_id'] = userId;
+    static initialize(obj, mode) { 
         obj['mode'] = mode;
     }
 
@@ -56,6 +54,12 @@ class SendValidationCodeRequest {
             }
             if (data.hasOwnProperty('mode')) {
                 obj['mode'] = ApiClient.convertToType(data['mode'], 'String');
+            }
+            if (data.hasOwnProperty('mobiles_number')) {
+                obj['mobiles_number'] = ApiClient.convertToType(data['mobiles_number'], 'String');
+            }
+            if (data.hasOwnProperty('email_id')) {
+                obj['email_id'] = ApiClient.convertToType(data['email_id'], 'String');
             }
         }
         return obj;
@@ -81,6 +85,14 @@ class SendValidationCodeRequest {
         if (data['mode'] && !(typeof data['mode'] === 'string' || data['mode'] instanceof String)) {
             throw new Error("Expected the field `mode` to be a primitive type in the JSON string but got " + data['mode']);
         }
+        // ensure the json data is a string
+        if (data['mobiles_number'] && !(typeof data['mobiles_number'] === 'string' || data['mobiles_number'] instanceof String)) {
+            throw new Error("Expected the field `mobiles_number` to be a primitive type in the JSON string but got " + data['mobiles_number']);
+        }
+        // ensure the json data is a string
+        if (data['email_id'] && !(typeof data['email_id'] === 'string' || data['email_id'] instanceof String)) {
+            throw new Error("Expected the field `email_id` to be a primitive type in the JSON string but got " + data['email_id']);
+        }
 
         return true;
     }
@@ -88,7 +100,7 @@ class SendValidationCodeRequest {
 
 }
 
-SendValidationCodeRequest.RequiredProperties = ["user_id", "mode"];
+SendValidationCodeRequest.RequiredProperties = ["mode"];
 
 /**
  * user id
@@ -97,10 +109,20 @@ SendValidationCodeRequest.RequiredProperties = ["user_id", "mode"];
 SendValidationCodeRequest.prototype['user_id'] = undefined;
 
 /**
- * Mode - 0 for getting activation code, 1 for password change
+ * Mode - 0 for getting activation code to change email or mobile number, 1 for password change
  * @member {String} mode
  */
 SendValidationCodeRequest.prototype['mode'] = undefined;
+
+/**
+ * @member {String} mobiles_number
+ */
+SendValidationCodeRequest.prototype['mobiles_number'] = undefined;
+
+/**
+ * @member {String} email_id
+ */
+SendValidationCodeRequest.prototype['email_id'] = undefined;
 
 
 

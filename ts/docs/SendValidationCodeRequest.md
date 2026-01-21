@@ -8,6 +8,8 @@ Name | Type
 ------------ | -------------
 `userId` | string
 `mode` | string
+`mobilesNumber` | string
+`emailId` | string
 
 ## Example
 
@@ -18,6 +20,8 @@ import type { SendValidationCodeRequest } from '@xfloor/floor-memory-sdk-ts'
 const example = {
   "userId": null,
   "mode": null,
+  "mobilesNumber": null,
+  "emailId": null,
 } satisfies SendValidationCodeRequest
 
 console.log(example)

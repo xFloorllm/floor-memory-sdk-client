@@ -37,11 +37,12 @@ class TestSendValidationCodeRequest(unittest.TestCase):
         if include_optional:
             return SendValidationCodeRequest(
                 user_id = '',
-                mode = ''
+                mode = '',
+                mobiles_number = '',
+                email_id = ''
             )
         else:
             return SendValidationCodeRequest(
-                user_id = '',
                 mode = '',
         )
         """

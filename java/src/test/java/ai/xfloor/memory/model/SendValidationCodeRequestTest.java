@@ -53,4 +53,20 @@ public class SendValidationCodeRequestTest {
         // TODO: test mode
     }
 
+    /**
+     * Test the property 'mobilesNumber'
+     */
+    @Test
+    public void mobilesNumberTest() {
+        // TODO: test mobilesNumber
+    }
+
+    /**
+     * Test the property 'emailId'
+     */
+    @Test
+    public void emailIdTest() {
+        // TODO: test emailId
+    }
+
 }

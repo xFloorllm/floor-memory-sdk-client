@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.0"
+__version__ = "1.0.2"
 
 # Define package exports
 __all__ = [
@@ -56,8 +56,8 @@ __all__ = [
     "QueryRequestFilters",
     "QueryResponse",
     "QueryResponseItemsInner",
-    "SendSignInValidationCode200Response",
-    "SendSignInValidationCode400Response",
+    "ResetPassword200Response",
+    "ResetPassword400Response",
     "SendValidationCode200Response",
     "SendValidationCodeRequest",
     "SignInWithEmail200Response",
@@ -114,8 +114,8 @@ from xfloor_memory_sdk.models.query_request import QueryRequest as QueryRequest
 from xfloor_memory_sdk.models.query_request_filters import QueryRequestFilters as QueryRequestFilters
 from xfloor_memory_sdk.models.query_response import QueryResponse as QueryResponse
 from xfloor_memory_sdk.models.query_response_items_inner import QueryResponseItemsInner as QueryResponseItemsInner
-from xfloor_memory_sdk.models.send_sign_in_validation_code200_response import SendSignInValidationCode200Response as SendSignInValidationCode200Response
-from xfloor_memory_sdk.models.send_sign_in_validation_code400_response import SendSignInValidationCode400Response as SendSignInValidationCode400Response
+from xfloor_memory_sdk.models.reset_password200_response import ResetPassword200Response as ResetPassword200Response
+from xfloor_memory_sdk.models.reset_password400_response import ResetPassword400Response as ResetPassword400Response
 from xfloor_memory_sdk.models.send_validation_code200_response import SendValidationCode200Response as SendValidationCode200Response
 from xfloor_memory_sdk.models.send_validation_code_request import SendValidationCodeRequest as SendValidationCodeRequest
 from xfloor_memory_sdk.models.sign_in_with_email200_response import SignInWithEmail200Response as SignInWithEmail200Response

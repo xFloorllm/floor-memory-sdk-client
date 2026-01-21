@@ -76,10 +76,10 @@ class TestDefaultApi(unittest.TestCase):
         """
         pass
 
-    def test_send_sign_in_validation_code(self) -> None:
-        """Test case for send_sign_in_validation_code
+    def test_reset_password(self) -> None:
+        """Test case for reset_password
 
-        Send Sign-In Validation Code (OTP)
+        Reset Password
         """
         pass
 

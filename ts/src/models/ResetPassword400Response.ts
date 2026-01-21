@@ -16,39 +16,39 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface SendSignInValidationCode400Response
+ * @interface ResetPassword400Response
  */
-export interface SendSignInValidationCode400Response {
+export interface ResetPassword400Response {
     /**
      * Validation Error
      * @type {string}
-     * @memberof SendSignInValidationCode400Response
+     * @memberof ResetPassword400Response
      */
     code: string;
     /**
      * Error Message
      * @type {string}
-     * @memberof SendSignInValidationCode400Response
+     * @memberof ResetPassword400Response
      */
     message: string;
     /**
      * REST api path
      * @type {string}
-     * @memberof SendSignInValidationCode400Response
+     * @memberof ResetPassword400Response
      */
     path: string;
     /**
      * Time stamp
      * @type {string}
-     * @memberof SendSignInValidationCode400Response
+     * @memberof ResetPassword400Response
      */
     timestamp: string;
 }
 
 /**
- * Check if a given object implements the SendSignInValidationCode400Response interface.
+ * Check if a given object implements the ResetPassword400Response interface.
  */
-export function instanceOfSendSignInValidationCode400Response(value: object): value is SendSignInValidationCode400Response {
+export function instanceOfResetPassword400Response(value: object): value is ResetPassword400Response {
     if (!('code' in value) || value['code'] === undefined) return false;
     if (!('message' in value) || value['message'] === undefined) return false;
     if (!('path' in value) || value['path'] === undefined) return false;
@@ -56,11 +56,11 @@ export function instanceOfSendSignInValidationCode400Response(value: object): va
     return true;
 }
 
-export function SendSignInValidationCode400ResponseFromJSON(json: any): SendSignInValidationCode400Response {
-    return SendSignInValidationCode400ResponseFromJSONTyped(json, false);
+export function ResetPassword400ResponseFromJSON(json: any): ResetPassword400Response {
+    return ResetPassword400ResponseFromJSONTyped(json, false);
 }
 
-export function SendSignInValidationCode400ResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): SendSignInValidationCode400Response {
+export function ResetPassword400ResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): ResetPassword400Response {
     if (json == null) {
         return json;
     }
@@ -73,11 +73,11 @@ export function SendSignInValidationCode400ResponseFromJSONTyped(json: any, igno
     };
 }
 
-export function SendSignInValidationCode400ResponseToJSON(json: any): SendSignInValidationCode400Response {
-    return SendSignInValidationCode400ResponseToJSONTyped(json, false);
+export function ResetPassword400ResponseToJSON(json: any): ResetPassword400Response {
+    return ResetPassword400ResponseToJSONTyped(json, false);
 }
 
-export function SendSignInValidationCode400ResponseToJSONTyped(value?: SendSignInValidationCode400Response | null, ignoreDiscriminator: boolean = false): any {
+export function ResetPassword400ResponseToJSONTyped(value?: ResetPassword400Response | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

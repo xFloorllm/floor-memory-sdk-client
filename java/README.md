@@ -47,7 +47,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>ai.xfloor.sdk</groupId>
   <artifactId>floor-memory-sdk-client</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.2</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -63,7 +63,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "ai.xfloor.sdk:floor-memory-sdk-client:1.0.0"
+     implementation "ai.xfloor.sdk:floor-memory-sdk-client:1.0.2"
   }
 ```
 
@@ -77,7 +77,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/floor-memory-sdk-client-1.0.0.jar`
+* `target/floor-memory-sdk-client-1.0.2.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -129,12 +129,12 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DefaultApi* | [**changeEmail**](docs/DefaultApi.md#changeEmail) | **POST** /auth-service/change/email | Change email ID
 *DefaultApi* | [**changeMobileNumber**](docs/DefaultApi.md#changeMobileNumber) | **POST** /auth-service/change/mobile | Change Mobile number
-*DefaultApi* | [**changePassword**](docs/DefaultApi.md#changePassword) | **POST** /auth-service/change/password | Change Password
+*DefaultApi* | [**changePassword**](docs/DefaultApi.md#changePassword) | **POST** /auth-service/password/change | Change Password
 *DefaultApi* | [**makeFloorPrivate**](docs/DefaultApi.md#makeFloorPrivate) | **POST** /api/memory/make/floor/private | Make floor Private
 *DefaultApi* | [**makeFloorPublic**](docs/DefaultApi.md#makeFloorPublic) | **POST** /api/memory/make/floor/public | Make floor public
 *DefaultApi* | [**registerExternalUserIdentity**](docs/DefaultApi.md#registerExternalUserIdentity) | **POST** /memory/identity/external-user | External User Registration
 *DefaultApi* | [**renameFloor**](docs/DefaultApi.md#renameFloor) | **POST** /api/memory/change/floor/id | Rename floor
-*DefaultApi* | [**sendSignInValidationCode**](docs/DefaultApi.md#sendSignInValidationCode) | **POST** /auth-service/send/sign/in/validation/code | Send Sign-In Validation Code (OTP)
+*DefaultApi* | [**resetPassword**](docs/DefaultApi.md#resetPassword) | **POST** /auth-service/password/reset | Reset Password
 *DefaultApi* | [**sendValidationCode**](docs/DefaultApi.md#sendValidationCode) | **POST** /auth-service/send/validation/code | Send Validation code
 *DefaultApi* | [**signInWithEmail**](docs/DefaultApi.md#signInWithEmail) | **POST** /auth-service/sign/in/with/email | Sign In with email ID
 *DefaultApi* | [**signInWithMobileNumber**](docs/DefaultApi.md#signInWithMobileNumber) | **POST** /auth-service/sign/in/with/mobile/number | Sign In with Mobile number
@@ -171,8 +171,8 @@ Class | Method | HTTP request | Description
  - [QueryRequestFilters](docs/QueryRequestFilters.md)
  - [QueryResponse](docs/QueryResponse.md)
  - [QueryResponseItemsInner](docs/QueryResponseItemsInner.md)
- - [SendSignInValidationCode200Response](docs/SendSignInValidationCode200Response.md)
- - [SendSignInValidationCode400Response](docs/SendSignInValidationCode400Response.md)
+ - [ResetPassword200Response](docs/ResetPassword200Response.md)
+ - [ResetPassword400Response](docs/ResetPassword400Response.md)
  - [SendValidationCode200Response](docs/SendValidationCode200Response.md)
  - [SendValidationCodeRequest](docs/SendValidationCodeRequest.md)
  - [SignInWithEmail200Response](docs/SignInWithEmail200Response.md)

@@ -23,15 +23,12 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-class SendSignInValidationCode400Response(BaseModel):
+class ResetPassword200Response(BaseModel):
     """
-    SendSignInValidationCode400Response
+    ResetPassword200Response
     """ # noqa: E501
-    code: StrictStr = Field(description="Validation Error")
-    message: StrictStr = Field(description="Error Message")
-    path: StrictStr = Field(description="REST api path")
-    timestamp: StrictStr = Field(description="Time stamp")
-    __properties: ClassVar[List[str]] = ["code", "message", "path", "timestamp"]
+    success: StrictStr = Field(description="Password Reset")
+    __properties: ClassVar[List[str]] = ["success"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -51,7 +48,7 @@ class SendSignInValidationCode400Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of SendSignInValidationCode400Response from a JSON string"""
+        """Create an instance of ResetPassword200Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -76,7 +73,7 @@ class SendSignInValidationCode400Response(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of SendSignInValidationCode400Response from a dict"""
+        """Create an instance of ResetPassword200Response from a dict"""
         if obj is None:
             return None
 
@@ -84,10 +81,7 @@ class SendSignInValidationCode400Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
-            "message": obj.get("message"),
-            "path": obj.get("path"),
-            "timestamp": obj.get("timestamp")
+            "success": obj.get("success")
         })
         return _obj
 

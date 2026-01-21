@@ -46,10 +46,10 @@ import java.util.Set;
 import ai.xfloor.memory.client.JSON;
 
 /**
- * SendSignInValidationCode400Response
+ * ResetPassword400Response
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.18.0")
-public class SendSignInValidationCode400Response {
+public class ResetPassword400Response {
   public static final String SERIALIZED_NAME_CODE = "code";
   @SerializedName(SERIALIZED_NAME_CODE)
   @javax.annotation.Nonnull
@@ -70,10 +70,10 @@ public class SendSignInValidationCode400Response {
   @javax.annotation.Nonnull
   private String timestamp;
 
-  public SendSignInValidationCode400Response() {
+  public ResetPassword400Response() {
   }
 
-  public SendSignInValidationCode400Response code(@javax.annotation.Nonnull String code) {
+  public ResetPassword400Response code(@javax.annotation.Nonnull String code) {
     this.code = code;
     return this;
   }
@@ -92,7 +92,7 @@ public class SendSignInValidationCode400Response {
   }
 
 
-  public SendSignInValidationCode400Response message(@javax.annotation.Nonnull String message) {
+  public ResetPassword400Response message(@javax.annotation.Nonnull String message) {
     this.message = message;
     return this;
   }
@@ -111,7 +111,7 @@ public class SendSignInValidationCode400Response {
   }
 
 
-  public SendSignInValidationCode400Response path(@javax.annotation.Nonnull String path) {
+  public ResetPassword400Response path(@javax.annotation.Nonnull String path) {
     this.path = path;
     return this;
   }
@@ -130,7 +130,7 @@ public class SendSignInValidationCode400Response {
   }
 
 
-  public SendSignInValidationCode400Response timestamp(@javax.annotation.Nonnull String timestamp) {
+  public ResetPassword400Response timestamp(@javax.annotation.Nonnull String timestamp) {
     this.timestamp = timestamp;
     return this;
   }
@@ -158,11 +158,11 @@ public class SendSignInValidationCode400Response {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SendSignInValidationCode400Response sendSignInValidationCode400Response = (SendSignInValidationCode400Response) o;
-    return Objects.equals(this.code, sendSignInValidationCode400Response.code) &&
-        Objects.equals(this.message, sendSignInValidationCode400Response.message) &&
-        Objects.equals(this.path, sendSignInValidationCode400Response.path) &&
-        Objects.equals(this.timestamp, sendSignInValidationCode400Response.timestamp);
+    ResetPassword400Response resetPassword400Response = (ResetPassword400Response) o;
+    return Objects.equals(this.code, resetPassword400Response.code) &&
+        Objects.equals(this.message, resetPassword400Response.message) &&
+        Objects.equals(this.path, resetPassword400Response.path) &&
+        Objects.equals(this.timestamp, resetPassword400Response.timestamp);
   }
 
   @Override
@@ -173,7 +173,7 @@ public class SendSignInValidationCode400Response {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SendSignInValidationCode400Response {\n");
+    sb.append("class ResetPassword400Response {\n");
     sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("    path: ").append(toIndentedString(path)).append("\n");
@@ -209,25 +209,25 @@ public class SendSignInValidationCode400Response {
    * Validates the JSON Element and throws an exception if issues found
    *
    * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to SendSignInValidationCode400Response
+   * @throws IOException if the JSON Element is invalid with respect to ResetPassword400Response
    */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!SendSignInValidationCode400Response.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in SendSignInValidationCode400Response is not found in the empty JSON string", SendSignInValidationCode400Response.openapiRequiredFields.toString()));
+        if (!ResetPassword400Response.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in ResetPassword400Response is not found in the empty JSON string", ResetPassword400Response.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!SendSignInValidationCode400Response.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `SendSignInValidationCode400Response` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!ResetPassword400Response.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `ResetPassword400Response` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : SendSignInValidationCode400Response.openapiRequiredFields) {
+      for (String requiredField : ResetPassword400Response.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
           throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
@@ -251,22 +251,22 @@ public class SendSignInValidationCode400Response {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!SendSignInValidationCode400Response.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'SendSignInValidationCode400Response' and its subtypes
+       if (!ResetPassword400Response.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'ResetPassword400Response' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<SendSignInValidationCode400Response> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(SendSignInValidationCode400Response.class));
+       final TypeAdapter<ResetPassword400Response> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(ResetPassword400Response.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<SendSignInValidationCode400Response>() {
+       return (TypeAdapter<T>) new TypeAdapter<ResetPassword400Response>() {
            @Override
-           public void write(JsonWriter out, SendSignInValidationCode400Response value) throws IOException {
+           public void write(JsonWriter out, ResetPassword400Response value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public SendSignInValidationCode400Response read(JsonReader in) throws IOException {
+           public ResetPassword400Response read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -277,18 +277,18 @@ public class SendSignInValidationCode400Response {
   }
 
   /**
-   * Create an instance of SendSignInValidationCode400Response given an JSON string
+   * Create an instance of ResetPassword400Response given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of SendSignInValidationCode400Response
-   * @throws IOException if the JSON string is invalid with respect to SendSignInValidationCode400Response
+   * @return An instance of ResetPassword400Response
+   * @throws IOException if the JSON string is invalid with respect to ResetPassword400Response
    */
-  public static SendSignInValidationCode400Response fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, SendSignInValidationCode400Response.class);
+  public static ResetPassword400Response fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, ResetPassword400Response.class);
   }
 
   /**
-   * Convert an instance of SendSignInValidationCode400Response to an JSON string
+   * Convert an instance of ResetPassword400Response to an JSON string
    *
    * @return JSON string
    */

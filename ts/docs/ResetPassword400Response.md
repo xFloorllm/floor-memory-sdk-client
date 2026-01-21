@@ -1,26 +1,28 @@
 
-# SendSignInValidationCode200Response
+# ResetPassword400Response
 
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`success` | string
-`mobileNumber` | string
-`emailId` | string
+`code` | string
+`message` | string
+`path` | string
+`timestamp` | string
 
 ## Example
 
 ```typescript
-import type { SendSignInValidationCode200Response } from '@xfloor/floor-memory-sdk-ts'
+import type { ResetPassword400Response } from '@xfloor/floor-memory-sdk-ts'
 
 // TODO: Update the object below with actual values
 const example = {
-  "success": null,
-  "mobileNumber": null,
-  "emailId": null,
-} satisfies SendSignInValidationCode200Response
+  "code": null,
+  "message": null,
+  "path": null,
+  "timestamp": null,
+} satisfies ResetPassword400Response
 
 console.log(example)
 
@@ -29,7 +31,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as SendSignInValidationCode200Response
+const exampleParsed = JSON.parse(exampleJSON) as ResetPassword400Response
 console.log(exampleParsed)
 ```
 

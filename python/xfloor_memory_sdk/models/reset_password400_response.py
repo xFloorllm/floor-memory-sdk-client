@@ -19,18 +19,19 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-class SendSignInValidationCode200Response(BaseModel):
+class ResetPassword400Response(BaseModel):
     """
-    SendSignInValidationCode200Response
+    ResetPassword400Response
     """ # noqa: E501
-    success: StrictStr = Field(description="Operation successful")
-    mobile_number: Optional[StrictStr] = Field(default=None, description="Mobile number if signed in through mobile number")
-    email_id: StrictStr = Field(description="Email ID if signed through email")
-    __properties: ClassVar[List[str]] = ["success", "mobile_number", "email_id"]
+    code: StrictStr = Field(description="Validation Error")
+    message: StrictStr = Field(description="Error Message")
+    path: StrictStr = Field(description="REST api path")
+    timestamp: StrictStr = Field(description="Time stamp")
+    __properties: ClassVar[List[str]] = ["code", "message", "path", "timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +51,7 @@ class SendSignInValidationCode200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of SendSignInValidationCode200Response from a JSON string"""
+        """Create an instance of ResetPassword400Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,7 +76,7 @@ class SendSignInValidationCode200Response(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of SendSignInValidationCode200Response from a dict"""
+        """Create an instance of ResetPassword400Response from a dict"""
         if obj is None:
             return None
 
@@ -83,9 +84,10 @@ class SendSignInValidationCode200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "success": obj.get("success"),
-            "mobile_number": obj.get("mobile_number"),
-            "email_id": obj.get("email_id")
+            "code": obj.get("code"),
+            "message": obj.get("message"),
+            "path": obj.get("path"),
+            "timestamp": obj.get("timestamp")
         })
         return _obj
 
