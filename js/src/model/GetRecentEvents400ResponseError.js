@@ -16,7 +16,7 @@ import ApiClient from '../ApiClient';
 /**
  * The GetRecentEvents400ResponseError model module.
  * @module model/GetRecentEvents400ResponseError
- * @version 1.0.2
+ * @version 1.0.3
  */
 class GetRecentEvents400ResponseError {
     /**

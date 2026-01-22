@@ -1,6 +1,6 @@
 {
   "name": "@xfloor/floor-memory-sdk-ts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "TypeScript SDK for xFloor Memory APIs (Memory + Registration).",
   "author": "xFloor",
   "repository": {

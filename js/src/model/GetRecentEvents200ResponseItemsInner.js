@@ -18,7 +18,7 @@ import Media from './Media';
 /**
  * The GetRecentEvents200ResponseItemsInner model module.
  * @module model/GetRecentEvents200ResponseItemsInner
- * @version 1.0.2
+ * @version 1.0.3
  */
 class GetRecentEvents200ResponseItemsInner {
     /**

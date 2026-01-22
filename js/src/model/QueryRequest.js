@@ -17,7 +17,7 @@ import QueryRequestFilters from './QueryRequestFilters';
 /**
  * The QueryRequest model module.
  * @module model/QueryRequest
- * @version 1.0.2
+ * @version 1.0.3
  */
 class QueryRequest {
     /**
