@@ -105,8 +105,10 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **newEmailId** | **String**| New Email ID | |
-| **activationCode** | **String**| Validation code | |
+| **newEmailId** | **String**| New Email ID |
+|
+| **activationCode** | **String**| Validation code |
+|
 
 ### Return type
 
@@ -210,7 +212,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **body** | **Object**|  | |
+| **body** | **Object**|
+| |
 
 ### Return type
 
@@ -294,8 +297,10 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **newPassword** | **String**| New Password | |
-| **activationCode** | **String**| Validation code | |
+| **newPassword** | **String**| New Password |
+|
+| **activationCode** | **String**| Validation code |
+|
 | **userId** | **String**| User ID | [optional] |
 
 ### Return type
@@ -910,7 +915,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **activationCode** | **String**| Activation Code | |
+| **activationCode** | **String**| Activation Code |
+|
 | **emailId** | **String**| Email ID | [optional] |
 | **mobileNumber** | **String**| Mobile number | [optional] |
 | **appId** | **String**| App ID | [optional] |
@@ -1026,7 +1032,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **sendValidationCodeRequest** | [**SendValidationCodeRequest**](SendValidationCodeRequest.md)|  | |
+| **sendValidationCodeRequest** | [**SendValidationCodeRequest**](SendValidationCodeRequest.md)|
+| |
 
 ### Return type
 
@@ -1124,9 +1131,12 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **emailId** | **String**| Email ID | |
-| **passCode** | **String**| Validation code or password depends on the login_type | |
-| **loginType** | **String**| 1 is for password, 2 is for validation code | |
+| **emailId** | **String**| Email ID |
+|
+| **passCode** | **String**| Validation code or password depends on the login_type |
+|
+| **loginType** | **String**| 1 is for password, 2 is for validation code |
+|
 | **appId** | **String**| App ID | [optional] |
 
 ### Return type
@@ -1226,7 +1236,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **body** | **Object**|  | |
+| **body** | **Object**|
+| |
 
 ### Return type
 
@@ -1303,8 +1314,10 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **name** | **String**| New User Name | |
-| **password** | **String**| Password | |
+| **name** | **String**| New User Name |
+|
+| **password** | **String**| Password |
+|
 | **emailId** | **String**| Email ID of the user | [optional] |
 | **mobileNumber** | **String**| Mobile number | [optional] |
 | **appId** | **String**| Registered App ID | [optional] |
@@ -1420,7 +1433,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **validateCodeRequest** | [**ValidateCodeRequest**](ValidateCodeRequest.md)|  | |
+| **validateCodeRequest** | [**ValidateCodeRequest**](ValidateCodeRequest.md)|
+| |
 
 ### Return type
 

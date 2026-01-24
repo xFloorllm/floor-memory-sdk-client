@@ -132,7 +132,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **inputInfo** | **String**| Input parameters, bid is optional | |
+| **inputInfo** | **String**| Input parameters, bid is optional |
+|
 | **files** | **File**| Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected | [optional] |
 
 ### Return type

@@ -145,7 +145,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **floorId** | **String**|  | |
+| **floorId** | **String**|
+| |
 | **userId** | **String**|  | [optional] |
 | **appId** | **String**|  | [optional] |
 

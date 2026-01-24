@@ -148,7 +148,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **queryRequest** | [**QueryRequest**](QueryRequest.md)|  | |
+| **queryRequest** | [**QueryRequest**](QueryRequest.md)|
+| |
 
 ### Return type
 

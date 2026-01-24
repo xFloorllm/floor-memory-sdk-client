@@ -122,9 +122,12 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **floorId** | **String**|  | |
-| **userId** | **String**| User ID | |
-| **appId** | **String**| App ID | |
+| **floorId** | **String**|
+| |
+| **userId** | **String**| User ID |
+|
+| **appId** | **String**| App ID |
+|
 | **logoFile** | **File**| Floor avatar | [optional] |
 | **title** | **String**| Floor title | [optional] |
 | **details** | **String**| Floor decription | [optional] |

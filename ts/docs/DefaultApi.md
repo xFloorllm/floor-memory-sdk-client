@@ -216,7 +216,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **body** | `object` |  | |
+| **body** | `object` |
+| |
 
 ### Return type
 
@@ -1077,7 +1078,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **sendValidationCodeRequest** | [SendValidationCodeRequest](SendValidationCodeRequest.md) |  | |
+| **sendValidationCodeRequest** | [SendValidationCodeRequest](SendValidationCodeRequest.md) |
+| |
 
 ### Return type
 
@@ -1288,7 +1290,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **body** | `object` |  | |
+| **body** | `object` |
+| |
 
 ### Return type
 
@@ -1494,7 +1497,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **validateCodeRequest** | [ValidateCodeRequest](ValidateCodeRequest.md) |  | |
+| **validateCodeRequest** | [ValidateCodeRequest](ValidateCodeRequest.md) |
+| |
 
 ### Return type
 

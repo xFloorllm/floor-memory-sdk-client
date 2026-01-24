@@ -157,7 +157,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **floorId** | **String**|  | |
+| **floorId** | **String**|
+| |
 | **userId** | **String**| User ID  - 13 digit numeric identity | [optional] |
 | **appId** | **String**| App ID - 13 digit numeric identity | [optional] |
 

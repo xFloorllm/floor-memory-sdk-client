@@ -149,7 +149,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **queryRequest** | [QueryRequest](QueryRequest.md) |  | |
+| **queryRequest** | [QueryRequest](QueryRequest.md) |
+| |
 
 ### Return type
 
