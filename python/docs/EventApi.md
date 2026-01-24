@@ -243,29 +243,35 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | ## **Successful Response (200 OK)** This API follows an **asynchronous ingestion model**. On success, the API **confirms acceptance of the content**, but **does not guarantee immediate availability** for retrieval or querying.
 
-### **What the response means** A &#x60;200 OK&#x60; response indicates that:
+### **What the response means** A `200 OK` response indicates that:
 * The request payload is valid * The content has been **accepted and queued** for processing * The content has been published to the internal event pipeline (RabbitMQ) * Embedding and storage will occur asynchronously ⚠️ **Important:** The newly posted content **will not appear immediately** in query or feed APIs.
 
 ---
 
-## **Response Body (Example)** &#x60;&#x60;&#x60;json { \&quot;status\&quot;: \&quot;success\&quot;, \&quot;message\&quot;: \&quot;Content accepted for processing\&quot; } &#x60;&#x60;&#x60; &gt; No content data is returned in this response.
+## **Response Body (Example)**
+
+```json { \"status\": \"success\", \"message\": \"Content accepted for processing\" } ``` > No content data is returned in this response.
 
 ---
 
-## **Availability &amp; Retrieval Model** After receiving a successful response:
-1. The content is processed asynchronously 2. The content becomes available in the floor feed **after processing completes** 3. Developers must retrieve the content using: &#x60;&#x60;&#x60; GET /api/memory/recent/events &#x60;&#x60;&#x60;
+## **Availability & Retrieval Model** After receiving a successful response:
+1. The content is processed asynchronously 2. The content becomes available in the floor feed **after processing completes** 3. Developers must retrieve the content using:
+
+``` GET /api/memory/recent/events ```
 
 ---
 
 ## **Polling Requirement** Because ingestion is asynchronous:
-* Developers **must poll** &#x60;/api/memory/recent/events&#x60; * Polling should be done using:
-* &#x60;floor_id&#x60;
+* Developers **must poll** `/api/memory/recent/events` * Polling should be done using:
+* `floor_id`
 * timestamp or last-known event marker * Compare previously retrieved events with new responses to detect newly added content This design ensures:
 * High ingestion throughput * Non-blocking uploads * Reliable embedding and storage pipelines
 
 ---
 
-## **Typical Developer Flow** &#x60;&#x60;&#x60;text POST /api/memory/events ↓ 200 OK (content queued) ↓ Poll /api/memory/recent/events ↓ Detect new event ↓ Use content in /agent/memory/query &#x60;&#x60;&#x60;
+## **Typical Developer Flow**
+
+```text POST /api/memory/events ↓ 200 OK (content queued) ↓ Poll /api/memory/recent/events ↓ Detect new event ↓ Use content in /agent/memory/query ```
 
 ---
 
@@ -274,7 +280,7 @@ Name | Type | Description  | Notes
 
 ---
 
-## **One-Line Summary** &gt; Accepts user-generated text and media, queues it for asynchronous processing, and makes it available for retrieval via the recent events API after ingestion completes. |
+## **One-Line Summary** > Accepts user-generated text and media, queues it for asynchronous processing, and makes it available for retrieval via the recent events API after ingestion completes. |
 - |
 **400** |  |  -  |
 

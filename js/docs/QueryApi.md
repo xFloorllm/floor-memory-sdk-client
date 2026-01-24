@@ -23,16 +23,18 @@ Query (Primary API)
 
 ---
 
-## **Authentication &amp; Identity**
-* A valid &#x60;user_id&#x60; is **required** * User authentication is assumed to be completed **before** calling this API * &#x60;app_id&#x60; identifies the calling application context * Conversational continuity is maintained **per &#x60;user_id&#x60;** &gt; **Note:** All queries from the same &#x60;user_id&#x60; are treated as part of a single conversational context unless explicitly reset by the application.
+## **Authentication & Identity**
+* A valid `user_id` is **required** * User authentication is assumed to be completed **before** calling this API * `app_id` identifies the calling application context * Conversational continuity is maintained **per `user_id`** > **Note:** All queries from the same `user_id` are treated as part of a single conversational context unless explicitly reset by the application.
 
 ---
 
 ## **Request Contract**
 
-### **HTTP Method** &#x60;POST&#x60;
+### **HTTP Method** `POST`
 
-### **Content-Type** &#x60;&#x60;&#x60; application/json &#x60;&#x60;&#x60; &gt; **Important:** &gt; This API accepts **JSON requests only**. &gt; &#x60;multipart/form-data&#x60; is **not supported**.
+### **Content-Type**
+
+``` application/json ``` > **Important:** > This API accepts **JSON requests only**. > `multipart/form-data` is **not supported**.
 
 ---
 
@@ -40,65 +42,73 @@ Query (Primary API)
 
 ### **Field Descriptions** | Field | Type | Required | Description |
 | ------------------- | ----------------------- | -------- | ---------------------------------------------------------------------------------------------- |
-| &#x60;user_id&#x60; | string | Yes | Unique xfloor user identifier. Used to maintain conversational continuity and personalization. |
-| &#x60;query&#x60; | string | Yes | Natural language query provided by the user. |
-| &#x60;floor_ids&#x60; | array of strings | Yes | List of floor identifiers that define the search scope. Must be provided as a JSON array. |
-| &#x60;filters&#x60; | object | Optional | Additional constraints to narrow search results. |
-| &#x60;filters.time_from&#x60; | string (ISO-8601) | Optional | Start timestamp for filtering content by creation or update time. |
-| &#x60;filters.time_to&#x60; | string (ISO-8601) | Optional | End timestamp for filtering content by creation or update time. |
-| &#x60;filters.types&#x60; | array of strings | Optional | Content types to include (e.g., &#x60;post&#x60;, &#x60;blog&#x60;, &#x60;forum&#x60;). |
-| &#x60;filters.tags&#x60; | array of strings | Optional | Tags used to further refine results. |
-| &#x60;k&#x60; | integer | Optional | Maximum number of results to retrieve (Top-K). Defaults to system-defined behavior if omitted. |
-| &#x60;include_metadata&#x60; | string (&#x60;\&quot;0\&quot;&#x60; or &#x60;\&quot;1\&quot;&#x60;) | Optional | Whether to include metadata (source, timestamps, tags) in the response. Defaults to &#x60;\&quot;0\&quot;&#x60;. |
-| &#x60;summary_needed&#x60; | string (&#x60;\&quot;0\&quot;&#x60; or &#x60;\&quot;1\&quot;&#x60;) | Optional | Whether a summarized conversational answer should be generated. Defaults to &#x60;\&quot;0\&quot;&#x60;. |
-| &#x60;app_id&#x60; | string | Optional | Identifies the application invoking the API. Useful for multi-app integrations. |
+| `user_id` | string | Yes | Unique xfloor user identifier. Used to maintain conversational continuity and personalization. |
+| `query` | string | Yes | Natural language query provided by the user. |
+| `floor_ids` | array of strings | Yes | List of floor identifiers that define the search scope. Must be provided as a JSON array. |
+| `filters` | object | Optional | Additional constraints to narrow search results. |
+| `filters.time_from` | string (ISO-8601) | Optional | Start timestamp for filtering content by creation or update time. |
+| `filters.time_to` | string (ISO-8601) | Optional | End timestamp for filtering content by creation or update time. |
+| `filters.types` | array of strings | Optional | Content types to include (e.g., `post`, `blog`, `forum`). |
+| `filters.tags` | array of strings | Optional | Tags used to further refine results. |
+| `k` | integer | Optional | Maximum number of results to retrieve (Top-K). Defaults to system-defined behavior if omitted. |
+| `include_metadata` | string (`\"0\"` or `\"1\"`) | Optional | Whether to include metadata (source, timestamps, tags) in the response. Defaults to `\"0\"`. |
+| `summary_needed` | string (`\"0\"` or `\"1\"`) | Optional | Whether a summarized conversational answer should be generated. Defaults to `\"0\"`. |
+| `app_id` | string | Optional | Identifies the application invoking the API. Useful for multi-app integrations. |
 
 ---
 
 ### **Important Encoding Rules**
-* &#x60;floor_ids&#x60; **must** be provided as a JSON array &#x60;&#x60;&#x60;json \&quot;floor_ids\&quot;: [\&quot;floor_1\&quot;, \&quot;floor_2\&quot;] &#x60;&#x60;&#x60; * Boolean-style flags (&#x60;include_metadata&#x60;, &#x60;summary_needed&#x60;) are encoded as **string values**: &#x60;\&quot;0\&quot;&#x60; or &#x60;\&quot;1\&quot;&#x60; * &#x60;filters&#x60; must be provided as a **JSON object**, not a string
+* `floor_ids` **must** be provided as a JSON array
+
+```json \"floor_ids\": [\"floor_1\", \"floor_2\"]
+
+``` * Boolean-style flags (`include_metadata`, `summary_needed`) are encoded as **string values**: `\"0\"` or `\"1\"` * `filters` must be provided as a **JSON object**, not a string
 
 ---
 
-### **Canonical Request Example** &#x60;&#x60;&#x60;json { \&quot;user_id\&quot;: \&quot;xf_user_123\&quot;, \&quot;query\&quot;: \&quot;What options do I have in your institute?\&quot;, \&quot;floor_ids\&quot;: [\&quot;institute_floor\&quot;], \&quot;filters\&quot;: { \&quot;types\&quot;: [\&quot;post\&quot;, \&quot;blog\&quot;], \&quot;tags\&quot;: [\&quot;admissions\&quot;] }, \&quot;k\&quot;: 5, \&quot;include_metadata\&quot;: \&quot;1\&quot;, \&quot;summary_needed\&quot;: \&quot;1\&quot;, \&quot;app_id\&quot;: \&quot;student_portal\&quot; } &#x60;&#x60;&#x60;
+### **Canonical Request Example**
+
+```json { \"user_id\": \"xf_user_123\", \"query\": \"What options do I have in your institute?\", \"floor_ids\": [\"institute_floor\"], \"filters\": { \"types\": [\"post\", \"blog\"], \"tags\": [\"admissions\"] }, \"k\": 5, \"include_metadata\": \"1\", \"summary_needed\": \"1\", \"app_id\": \"student_portal\" } ```
 
 ---
 
 ## **Behavior**
-1. The query is analyzed using conversational and semantic understanding. 2. Relevant content is retrieved from the specified floors. 3. Filters (time, type, tags) are applied if provided. 4. Results are ranked and limited based on &#x60;k&#x60;. 5. If &#x60;summary_needed &#x3D; \&quot;1\&quot;&#x60;, a synthesized conversational summary is generated. 6. If &#x60;include_metadata &#x3D; \&quot;1\&quot;&#x60;, metadata is attached to each result item. 7. The response is returned in a conversational format suitable for follow-up questions.
+1. The query is analyzed using conversational and semantic understanding. 2. Relevant content is retrieved from the specified floors. 3. Filters (time, type, tags) are applied if provided. 4. Results are ranked and limited based on `k`. 5. If `summary_needed = \"1\"`, a synthesized conversational summary is generated. 6. If `include_metadata = \"1\"`, metadata is attached to each result item. 7. The response is returned in a conversational format suitable for follow-up questions.
 
 ---
 
 ## **Response Contract**
 
-### **High-Level Response Structure** &#x60;&#x60;&#x60;json { \&quot;answer\&quot;: \&quot;Assistant-generated conversational response\&quot;, \&quot;items\&quot;: [ { \&quot;id\&quot;: \&quot;content_id\&quot;, \&quot;type\&quot;: \&quot;post\&quot;, \&quot;text\&quot;: \&quot;Original content snippet\&quot;, \&quot;metadata\&quot;: { } } ] } &#x60;&#x60;&#x60;
+### **High-Level Response Structure**
+
+```json { \"answer\": \"Assistant-generated conversational response\", \"items\": [ { \"id\": \"content_id\", \"type\": \"post\", \"text\": \"Original content snippet\", \"metadata\": { } } ] } ```
 
 ---
 
 ### **Response Field Semantics** | Field | Always Present | Description | Rendering Guidance |
 | ------------------ | ------------------ | ------------------------------------------- | ---------------------- |
-| &#x60;answer&#x60; | Yes | Assistant-generated conversational response | **Render prominently** |
-| &#x60;items&#x60; | Yes (may be empty) | List of matched content used for grounding | Render optionally |
-| &#x60;items[].metadata&#x60; | Conditional | Included only if &#x60;include_metadata &#x3D; \&quot;1\&quot;&#x60; | Render on demand | &gt; **No-Result Case:** &gt; If no relevant content is found, &#x60;items&#x60; will be an empty array and &#x60;answer&#x60; will contain a conversational fallback response.
+| `answer` | Yes | Assistant-generated conversational response | **Render prominently** |
+| `items` | Yes (may be empty) | List of matched content used for grounding | Render optionally |
+| `items[].metadata` | Conditional | Included only if `include_metadata = \"1\"` | Render on demand | > **No-Result Case:** > If no relevant content is found, `items` will be an empty array and `answer` will contain a conversational fallback response.
 
 ---
 
 ## **Conversation Continuity**
-* Conversation state is maintained **per &#x60;user_id&#x60;** * Follow-up queries automatically reference prior context * The API does not require explicit conversation IDs * Applications may reset conversation context by using a new &#x60;user_id&#x60;
+* Conversation state is maintained **per `user_id`** * Follow-up queries automatically reference prior context * The API does not require explicit conversation IDs * Applications may reset conversation context by using a new `user_id`
 
 ---
 
 ## **Error Handling** The API may return errors in the following cases:
-* Missing or invalid &#x60;user_id&#x60; * Empty or unsupported &#x60;query&#x60; * Invalid or inaccessible &#x60;floor_ids&#x60; * Authorization or application context errors * Internal processing failures All errors are returned with appropriate HTTP status codes and descriptive messages.
+* Missing or invalid `user_id` * Empty or unsupported `query` * Invalid or inaccessible `floor_ids` * Authorization or application context errors * Internal processing failures All errors are returned with appropriate HTTP status codes and descriptive messages.
 
 ---
 
 ## **Typical Use Case Flow**
-1. User asks an initial question *“What options do I have in your institute?”* 2. Application calls &#x60;/agent/memory/query&#x60; 3. Results are displayed to the user 4. User asks a follow-up *“Which ones are available on weekends?”* 5. Application calls the same API again with the new query 6. Conversation continues seamlessly using prior context
+1. User asks an initial question *“What options do I have in your institute?”* 2. Application calls `/agent/memory/query` 3. Results are displayed to the user 4. User asks a follow-up *“Which ones are available on weekends?”* 5. Application calls the same API again with the new query 6. Conversation continues seamlessly using prior context
 
 ---
 
-## **One-Line Summary** &gt; Executes a conversational query over xfloor content, returning context-aware, filtered, and optionally summarized results with support for multi-turn interactions.
+## **One-Line Summary** > Executes a conversational query over xfloor content, returning context-aware, filtered, and optionally summarized results with support for multi-turn interactions.
 
 ### Example
 
