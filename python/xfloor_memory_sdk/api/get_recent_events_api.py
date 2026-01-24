@@ -3,7 +3,9 @@
 """
     Floor Memory
 
-    The set APIs are used to develop Floor pds which can be used as their personal assistants.   This set of APIs are divided into two parts.  - Memory and  - Registration.   The developer has two ways of using the APIs for the app development. Developer can choose to the  Registration APIs for using the existing xfloor infracture or can implement custom Registration process. In the case of custom registration process, the developer is bound to provide proper authentication mechanisms and then send the user information to xlfoor.
+    The set APIs are used to develop Floor pds which can be used as their personal assistants. This set of APIs are divided into two parts.
+    - Memory and
+    - Registration. The developer has two ways of using the APIs for the app development. Developer can choose to the Registration APIs for using the existing xfloor infracture or can implement custom Registration process. In the case of custom registration process, the developer is bound to provide proper authentication mechanisms and then send the user information to xlfoor.
 
     The version of the OpenAPI document: 1.0.0
     Contact: contact@ipomo.in
@@ -60,7 +62,96 @@ class GetRecentEventsApi:
     ) -> GetRecentEvents200Response:
         """Recent Events
 
-        This API retrieves the **latest posts (events)** from a specified floor.  The behaviour of the API changes based on whether a **user ID** is provided:  * **If `user_id` is provided**   → The API returns **recent posts relevant to that user**, scoped within the given floor.   This includes posts from:    * Floors the user follows   * Floors created by the user   * Pod floors associated with the user (if applicable)  * **If `user_id` is NOT provided**   → The API returns the **most recent posts available in the specified floor**, without user-specific filtering.  This makes the API suitable for:  * Personalized activity feeds * Floor-level public timelines * Pod-based content aggregation * Developer-built pods and custom clients  ---  ## **Key Concepts**  * A **floor** represents a content space (independent floor, followed floor, or pod floor) * A **pod floor** may aggregate content across multiple related floors * Posts are returned **in reverse chronological order** (latest first) * Each post belongs to a specific **block** within the floor  ---  ## **Request Method**  `GET`  ---  ## **Request Parameters (Query Params)**  | Parameter Name | Type   | Required | Description                                                                                                                | | -------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------- | | `floor_id`     | String | **Yes**  | Floor identifier from which events should be fetched. Can be a pod floor ID, followed floor ID, or an independent floor ID | | `user_id`      | String | No       | If provided, returns posts relevant to the user within the given floor                                                     | | `app_id`       | String | No       | Identifier for external developers or pod-based applications consuming this API                                            |  ---  ## **Behavior Summary**  | Scenario               | Result                                    | | ---------------------- | ----------------------------------------- | | `floor_id` only        | Latest posts from the specified floor     | | `floor_id` + `user_id` | User-relevant posts within that floor     | | Pod floor ID           | Aggregated posts across pod-linked floors | | Independent floor ID   | Posts only from that floor                |  ---  ## **Response Format**  `application/json`  ---  ## **Response Structure**  ### **Top-Level Fields**  | Field        | Type   | Description                    | | ------------ | ------ | ------------------------------ | | `post_count` | String | Total number of posts returned | | `items`      | Array  | List of recent post objects    |  ---  ### **Post Object (`items[]`)**  | Field           | Type   | Description                                                               | | --------------- | ------ | ------------------------------------------------------------------------- | | `event_id`      | String | Unique identifier of the post/event                                       | | `block_type`    | String | Type of block where the post was created (e.g., blog, forum, audio, etc.) | | `block_id`      | String | Identifier of the block within the floor                                  | | `floor_uid`     | String | Floor identifier where the post belongs                                   | | `title`         | String | Title of the post (may be empty)                                          | | `text`          | String | Text or HTML content of the post                                          | | `media`         | Array  | Media objects (audio, image, etc.), if any                                | | `created_at_ms` | String | Post creation time in milliseconds (epoch)                                |  ---  ### **Author Object**  | Field       | Type   | Description                  | | ----------- | ------ | ---------------------------- | | `name`      | String | Display name of the author   | | `floor_uid` | String | Author’s floor/user handle   | | `avatar`    | Object | Author profile image details |  ---  ### **Media Object**  | Field  | Type   | Description                         | | ------ | ------ | ----------------------------------- | | `type` | String | Media type (e.g., `AUDIO`, `IMAGE`) | | `url`  | String | Public URL of the media file        |  ---  ## **Sample Success Response**  *(structure abbreviated for clarity)*  ```json {   \"post_count\": \"18\",   \"items\": [     {       \"event_id\": \"1766557274836\",       \"block_type\": \"0\",       \"title\": \"voice-note-1766557272764.wav\",       \"text\": \"You\",       \"created_at_ms\": \"1766557275000\",       \"author\": {         \"name\": \"MEGHANA G\",         \"floor_uid\": \"meghanag\",         \"avatar\": {           \"type\": \"IMAGE\",           \"url\": \"https://...\"         }       },       \"media\": [         {           \"type\": \"AUDIO\",           \"url\": \"https://...\"         }       ]     }   ] } ```  ---  ## **Notes**  * Posts may contain **plain text or HTML** * Media is optional and may be absent * Ordering is **latest first** * The API is read-only and does not require authentication by default * Access control (public/private floors) is enforced internally  ---  ## **Typical Use Cases**  * Floor activity feed * Pod-level dashboards * User-personalized timelines * Public floor landing pages * External developer pods using `app_id`
+        This API retrieves the **latest posts (events)** from a specified floor. The behaviour of the API changes based on whether a **user ID** is provided:
+        * **If `user_id` is provided** → The API returns **recent posts relevant to that user**, scoped within the given floor. This includes posts from:
+        * Floors the user follows
+        * Floors created by the user
+        * Pod floors associated with the user (if applicable)
+        * **If `user_id` is NOT provided** → The API returns the **most recent posts available in the specified floor**, without user-specific filtering. This makes the API suitable for:
+        * Personalized activity feeds * Floor-level public timelines * Pod-based content aggregation * Developer-built pods and custom clients
+        
+        ---
+        
+        ## **Key Concepts**
+        * A **floor** represents a content space (independent floor, followed floor, or pod floor) * A **pod floor** may aggregate content across multiple related floors * Posts are returned **in reverse chronological order** (latest first) * Each post belongs to a specific **block** within the floor
+        
+        ---
+        
+        ## **Request Method** `GET`
+        
+        ---
+        
+        ## **Request Parameters (Query Params)** | Parameter Name | Type | Required | Description |
+        | -------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------- |
+        | `floor_id` | String | **Yes** | Floor identifier from which events should be fetched. Can be a pod floor ID, followed floor ID, or an independent floor ID |
+        | `user_id` | String | No | If provided, returns posts relevant to the user within the given floor |
+        | `app_id` | String | No | Identifier for external developers or pod-based applications consuming this API |
+        
+        ---
+        
+        ## **Behavior Summary** | Scenario | Result |
+        | ---------------------- | ----------------------------------------- |
+        | `floor_id` only | Latest posts from the specified floor |
+        | `floor_id` + `user_id` | User-relevant posts within that floor |
+        | Pod floor ID | Aggregated posts across pod-linked floors |
+        | Independent floor ID | Posts only from that floor |
+        
+        ---
+        
+        ## **Response Format** `application/json`
+        
+        ---
+        
+        ## **Response Structure**
+        
+        ### **Top-Level Fields** | Field | Type | Description |
+        | ------------ | ------ | ------------------------------ |
+        | `post_count` | String | Total number of posts returned |
+        | `items` | Array | List of recent post objects |
+        
+        ---
+        
+        ### **Post Object (`items[]`)** | Field | Type | Description |
+        | --------------- | ------ | ------------------------------------------------------------------------- |
+        | `event_id` | String | Unique identifier of the post/event |
+        | `block_type` | String | Type of block where the post was created (e.g., blog, forum, audio, etc.) |
+        | `block_id` | String | Identifier of the block within the floor |
+        | `floor_uid` | String | Floor identifier where the post belongs |
+        | `title` | String | Title of the post (may be empty) |
+        | `text` | String | Text or HTML content of the post |
+        | `media` | Array | Media objects (audio, image, etc.), if any |
+        | `created_at_ms` | String | Post creation time in milliseconds (epoch) |
+        
+        ---
+        
+        ### **Author Object** | Field | Type | Description |
+        | ----------- | ------ | ---------------------------- |
+        | `name` | String | Display name of the author |
+        | `floor_uid` | String | Author’s floor/user handle |
+        | `avatar` | Object | Author profile image details |
+        
+        ---
+        
+        ### **Media Object** | Field | Type | Description |
+        | ------ | ------ | ----------------------------------- |
+        | `type` | String | Media type (e.g., `AUDIO`, `IMAGE`) |
+        | `url` | String | Public URL of the media file |
+        
+        ---
+        
+        ## **Sample Success Response** *(structure abbreviated for clarity)*
+        
+        ```json { \"post_count\": \"18\", \"items\": [ { \"event_id\": \"1766557274836\", \"block_type\": \"0\", \"title\": \"voice-note-1766557272764.wav\", \"text\": \"You\", \"created_at_ms\": \"1766557275000\", \"author\": { \"name\": \"MEGHANA G\", \"floor_uid\": \"meghanag\", \"avatar\": { \"type\": \"IMAGE\", \"url\": \"https://...\" } }, \"media\": [ { \"type\": \"AUDIO\", \"url\": \"https://...\" } ] } ] } ```
+        
+        ---
+        
+        ## **Notes**
+        * Posts may contain **plain text or HTML** * Media is optional and may be absent * Ordering is **latest first** * The API is read-only and does not require authentication by default * Access control (public/private floors) is enforced internally
+        
+        ---
+        
+        ## **Typical Use Cases**
+        * Floor activity feed * Pod-level dashboards * User-personalized timelines * Public floor landing pages * External developer pods using `app_id`
 
         :param floor_id:  (required)
         :type floor_id: str
@@ -136,7 +227,96 @@ class GetRecentEventsApi:
     ) -> ApiResponse[GetRecentEvents200Response]:
         """Recent Events
 
-        This API retrieves the **latest posts (events)** from a specified floor.  The behaviour of the API changes based on whether a **user ID** is provided:  * **If `user_id` is provided**   → The API returns **recent posts relevant to that user**, scoped within the given floor.   This includes posts from:    * Floors the user follows   * Floors created by the user   * Pod floors associated with the user (if applicable)  * **If `user_id` is NOT provided**   → The API returns the **most recent posts available in the specified floor**, without user-specific filtering.  This makes the API suitable for:  * Personalized activity feeds * Floor-level public timelines * Pod-based content aggregation * Developer-built pods and custom clients  ---  ## **Key Concepts**  * A **floor** represents a content space (independent floor, followed floor, or pod floor) * A **pod floor** may aggregate content across multiple related floors * Posts are returned **in reverse chronological order** (latest first) * Each post belongs to a specific **block** within the floor  ---  ## **Request Method**  `GET`  ---  ## **Request Parameters (Query Params)**  | Parameter Name | Type   | Required | Description                                                                                                                | | -------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------- | | `floor_id`     | String | **Yes**  | Floor identifier from which events should be fetched. Can be a pod floor ID, followed floor ID, or an independent floor ID | | `user_id`      | String | No       | If provided, returns posts relevant to the user within the given floor                                                     | | `app_id`       | String | No       | Identifier for external developers or pod-based applications consuming this API                                            |  ---  ## **Behavior Summary**  | Scenario               | Result                                    | | ---------------------- | ----------------------------------------- | | `floor_id` only        | Latest posts from the specified floor     | | `floor_id` + `user_id` | User-relevant posts within that floor     | | Pod floor ID           | Aggregated posts across pod-linked floors | | Independent floor ID   | Posts only from that floor                |  ---  ## **Response Format**  `application/json`  ---  ## **Response Structure**  ### **Top-Level Fields**  | Field        | Type   | Description                    | | ------------ | ------ | ------------------------------ | | `post_count` | String | Total number of posts returned | | `items`      | Array  | List of recent post objects    |  ---  ### **Post Object (`items[]`)**  | Field           | Type   | Description                                                               | | --------------- | ------ | ------------------------------------------------------------------------- | | `event_id`      | String | Unique identifier of the post/event                                       | | `block_type`    | String | Type of block where the post was created (e.g., blog, forum, audio, etc.) | | `block_id`      | String | Identifier of the block within the floor                                  | | `floor_uid`     | String | Floor identifier where the post belongs                                   | | `title`         | String | Title of the post (may be empty)                                          | | `text`          | String | Text or HTML content of the post                                          | | `media`         | Array  | Media objects (audio, image, etc.), if any                                | | `created_at_ms` | String | Post creation time in milliseconds (epoch)                                |  ---  ### **Author Object**  | Field       | Type   | Description                  | | ----------- | ------ | ---------------------------- | | `name`      | String | Display name of the author   | | `floor_uid` | String | Author’s floor/user handle   | | `avatar`    | Object | Author profile image details |  ---  ### **Media Object**  | Field  | Type   | Description                         | | ------ | ------ | ----------------------------------- | | `type` | String | Media type (e.g., `AUDIO`, `IMAGE`) | | `url`  | String | Public URL of the media file        |  ---  ## **Sample Success Response**  *(structure abbreviated for clarity)*  ```json {   \"post_count\": \"18\",   \"items\": [     {       \"event_id\": \"1766557274836\",       \"block_type\": \"0\",       \"title\": \"voice-note-1766557272764.wav\",       \"text\": \"You\",       \"created_at_ms\": \"1766557275000\",       \"author\": {         \"name\": \"MEGHANA G\",         \"floor_uid\": \"meghanag\",         \"avatar\": {           \"type\": \"IMAGE\",           \"url\": \"https://...\"         }       },       \"media\": [         {           \"type\": \"AUDIO\",           \"url\": \"https://...\"         }       ]     }   ] } ```  ---  ## **Notes**  * Posts may contain **plain text or HTML** * Media is optional and may be absent * Ordering is **latest first** * The API is read-only and does not require authentication by default * Access control (public/private floors) is enforced internally  ---  ## **Typical Use Cases**  * Floor activity feed * Pod-level dashboards * User-personalized timelines * Public floor landing pages * External developer pods using `app_id`
+        This API retrieves the **latest posts (events)** from a specified floor. The behaviour of the API changes based on whether a **user ID** is provided:
+        * **If `user_id` is provided** → The API returns **recent posts relevant to that user**, scoped within the given floor. This includes posts from:
+        * Floors the user follows
+        * Floors created by the user
+        * Pod floors associated with the user (if applicable)
+        * **If `user_id` is NOT provided** → The API returns the **most recent posts available in the specified floor**, without user-specific filtering. This makes the API suitable for:
+        * Personalized activity feeds * Floor-level public timelines * Pod-based content aggregation * Developer-built pods and custom clients
+        
+        ---
+        
+        ## **Key Concepts**
+        * A **floor** represents a content space (independent floor, followed floor, or pod floor) * A **pod floor** may aggregate content across multiple related floors * Posts are returned **in reverse chronological order** (latest first) * Each post belongs to a specific **block** within the floor
+        
+        ---
+        
+        ## **Request Method** `GET`
+        
+        ---
+        
+        ## **Request Parameters (Query Params)** | Parameter Name | Type | Required | Description |
+        | -------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------- |
+        | `floor_id` | String | **Yes** | Floor identifier from which events should be fetched. Can be a pod floor ID, followed floor ID, or an independent floor ID |
+        | `user_id` | String | No | If provided, returns posts relevant to the user within the given floor |
+        | `app_id` | String | No | Identifier for external developers or pod-based applications consuming this API |
+        
+        ---
+        
+        ## **Behavior Summary** | Scenario | Result |
+        | ---------------------- | ----------------------------------------- |
+        | `floor_id` only | Latest posts from the specified floor |
+        | `floor_id` + `user_id` | User-relevant posts within that floor |
+        | Pod floor ID | Aggregated posts across pod-linked floors |
+        | Independent floor ID | Posts only from that floor |
+        
+        ---
+        
+        ## **Response Format** `application/json`
+        
+        ---
+        
+        ## **Response Structure**
+        
+        ### **Top-Level Fields** | Field | Type | Description |
+        | ------------ | ------ | ------------------------------ |
+        | `post_count` | String | Total number of posts returned |
+        | `items` | Array | List of recent post objects |
+        
+        ---
+        
+        ### **Post Object (`items[]`)** | Field | Type | Description |
+        | --------------- | ------ | ------------------------------------------------------------------------- |
+        | `event_id` | String | Unique identifier of the post/event |
+        | `block_type` | String | Type of block where the post was created (e.g., blog, forum, audio, etc.) |
+        | `block_id` | String | Identifier of the block within the floor |
+        | `floor_uid` | String | Floor identifier where the post belongs |
+        | `title` | String | Title of the post (may be empty) |
+        | `text` | String | Text or HTML content of the post |
+        | `media` | Array | Media objects (audio, image, etc.), if any |
+        | `created_at_ms` | String | Post creation time in milliseconds (epoch) |
+        
+        ---
+        
+        ### **Author Object** | Field | Type | Description |
+        | ----------- | ------ | ---------------------------- |
+        | `name` | String | Display name of the author |
+        | `floor_uid` | String | Author’s floor/user handle |
+        | `avatar` | Object | Author profile image details |
+        
+        ---
+        
+        ### **Media Object** | Field | Type | Description |
+        | ------ | ------ | ----------------------------------- |
+        | `type` | String | Media type (e.g., `AUDIO`, `IMAGE`) |
+        | `url` | String | Public URL of the media file |
+        
+        ---
+        
+        ## **Sample Success Response** *(structure abbreviated for clarity)*
+        
+        ```json { \"post_count\": \"18\", \"items\": [ { \"event_id\": \"1766557274836\", \"block_type\": \"0\", \"title\": \"voice-note-1766557272764.wav\", \"text\": \"You\", \"created_at_ms\": \"1766557275000\", \"author\": { \"name\": \"MEGHANA G\", \"floor_uid\": \"meghanag\", \"avatar\": { \"type\": \"IMAGE\", \"url\": \"https://...\" } }, \"media\": [ { \"type\": \"AUDIO\", \"url\": \"https://...\" } ] } ] } ```
+        
+        ---
+        
+        ## **Notes**
+        * Posts may contain **plain text or HTML** * Media is optional and may be absent * Ordering is **latest first** * The API is read-only and does not require authentication by default * Access control (public/private floors) is enforced internally
+        
+        ---
+        
+        ## **Typical Use Cases**
+        * Floor activity feed * Pod-level dashboards * User-personalized timelines * Public floor landing pages * External developer pods using `app_id`
 
         :param floor_id:  (required)
         :type floor_id: str
@@ -212,7 +392,96 @@ class GetRecentEventsApi:
     ) -> RESTResponseType:
         """Recent Events
 
-        This API retrieves the **latest posts (events)** from a specified floor.  The behaviour of the API changes based on whether a **user ID** is provided:  * **If `user_id` is provided**   → The API returns **recent posts relevant to that user**, scoped within the given floor.   This includes posts from:    * Floors the user follows   * Floors created by the user   * Pod floors associated with the user (if applicable)  * **If `user_id` is NOT provided**   → The API returns the **most recent posts available in the specified floor**, without user-specific filtering.  This makes the API suitable for:  * Personalized activity feeds * Floor-level public timelines * Pod-based content aggregation * Developer-built pods and custom clients  ---  ## **Key Concepts**  * A **floor** represents a content space (independent floor, followed floor, or pod floor) * A **pod floor** may aggregate content across multiple related floors * Posts are returned **in reverse chronological order** (latest first) * Each post belongs to a specific **block** within the floor  ---  ## **Request Method**  `GET`  ---  ## **Request Parameters (Query Params)**  | Parameter Name | Type   | Required | Description                                                                                                                | | -------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------- | | `floor_id`     | String | **Yes**  | Floor identifier from which events should be fetched. Can be a pod floor ID, followed floor ID, or an independent floor ID | | `user_id`      | String | No       | If provided, returns posts relevant to the user within the given floor                                                     | | `app_id`       | String | No       | Identifier for external developers or pod-based applications consuming this API                                            |  ---  ## **Behavior Summary**  | Scenario               | Result                                    | | ---------------------- | ----------------------------------------- | | `floor_id` only        | Latest posts from the specified floor     | | `floor_id` + `user_id` | User-relevant posts within that floor     | | Pod floor ID           | Aggregated posts across pod-linked floors | | Independent floor ID   | Posts only from that floor                |  ---  ## **Response Format**  `application/json`  ---  ## **Response Structure**  ### **Top-Level Fields**  | Field        | Type   | Description                    | | ------------ | ------ | ------------------------------ | | `post_count` | String | Total number of posts returned | | `items`      | Array  | List of recent post objects    |  ---  ### **Post Object (`items[]`)**  | Field           | Type   | Description                                                               | | --------------- | ------ | ------------------------------------------------------------------------- | | `event_id`      | String | Unique identifier of the post/event                                       | | `block_type`    | String | Type of block where the post was created (e.g., blog, forum, audio, etc.) | | `block_id`      | String | Identifier of the block within the floor                                  | | `floor_uid`     | String | Floor identifier where the post belongs                                   | | `title`         | String | Title of the post (may be empty)                                          | | `text`          | String | Text or HTML content of the post                                          | | `media`         | Array  | Media objects (audio, image, etc.), if any                                | | `created_at_ms` | String | Post creation time in milliseconds (epoch)                                |  ---  ### **Author Object**  | Field       | Type   | Description                  | | ----------- | ------ | ---------------------------- | | `name`      | String | Display name of the author   | | `floor_uid` | String | Author’s floor/user handle   | | `avatar`    | Object | Author profile image details |  ---  ### **Media Object**  | Field  | Type   | Description                         | | ------ | ------ | ----------------------------------- | | `type` | String | Media type (e.g., `AUDIO`, `IMAGE`) | | `url`  | String | Public URL of the media file        |  ---  ## **Sample Success Response**  *(structure abbreviated for clarity)*  ```json {   \"post_count\": \"18\",   \"items\": [     {       \"event_id\": \"1766557274836\",       \"block_type\": \"0\",       \"title\": \"voice-note-1766557272764.wav\",       \"text\": \"You\",       \"created_at_ms\": \"1766557275000\",       \"author\": {         \"name\": \"MEGHANA G\",         \"floor_uid\": \"meghanag\",         \"avatar\": {           \"type\": \"IMAGE\",           \"url\": \"https://...\"         }       },       \"media\": [         {           \"type\": \"AUDIO\",           \"url\": \"https://...\"         }       ]     }   ] } ```  ---  ## **Notes**  * Posts may contain **plain text or HTML** * Media is optional and may be absent * Ordering is **latest first** * The API is read-only and does not require authentication by default * Access control (public/private floors) is enforced internally  ---  ## **Typical Use Cases**  * Floor activity feed * Pod-level dashboards * User-personalized timelines * Public floor landing pages * External developer pods using `app_id`
+        This API retrieves the **latest posts (events)** from a specified floor. The behaviour of the API changes based on whether a **user ID** is provided:
+        * **If `user_id` is provided** → The API returns **recent posts relevant to that user**, scoped within the given floor. This includes posts from:
+        * Floors the user follows
+        * Floors created by the user
+        * Pod floors associated with the user (if applicable)
+        * **If `user_id` is NOT provided** → The API returns the **most recent posts available in the specified floor**, without user-specific filtering. This makes the API suitable for:
+        * Personalized activity feeds * Floor-level public timelines * Pod-based content aggregation * Developer-built pods and custom clients
+        
+        ---
+        
+        ## **Key Concepts**
+        * A **floor** represents a content space (independent floor, followed floor, or pod floor) * A **pod floor** may aggregate content across multiple related floors * Posts are returned **in reverse chronological order** (latest first) * Each post belongs to a specific **block** within the floor
+        
+        ---
+        
+        ## **Request Method** `GET`
+        
+        ---
+        
+        ## **Request Parameters (Query Params)** | Parameter Name | Type | Required | Description |
+        | -------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------- |
+        | `floor_id` | String | **Yes** | Floor identifier from which events should be fetched. Can be a pod floor ID, followed floor ID, or an independent floor ID |
+        | `user_id` | String | No | If provided, returns posts relevant to the user within the given floor |
+        | `app_id` | String | No | Identifier for external developers or pod-based applications consuming this API |
+        
+        ---
+        
+        ## **Behavior Summary** | Scenario | Result |
+        | ---------------------- | ----------------------------------------- |
+        | `floor_id` only | Latest posts from the specified floor |
+        | `floor_id` + `user_id` | User-relevant posts within that floor |
+        | Pod floor ID | Aggregated posts across pod-linked floors |
+        | Independent floor ID | Posts only from that floor |
+        
+        ---
+        
+        ## **Response Format** `application/json`
+        
+        ---
+        
+        ## **Response Structure**
+        
+        ### **Top-Level Fields** | Field | Type | Description |
+        | ------------ | ------ | ------------------------------ |
+        | `post_count` | String | Total number of posts returned |
+        | `items` | Array | List of recent post objects |
+        
+        ---
+        
+        ### **Post Object (`items[]`)** | Field | Type | Description |
+        | --------------- | ------ | ------------------------------------------------------------------------- |
+        | `event_id` | String | Unique identifier of the post/event |
+        | `block_type` | String | Type of block where the post was created (e.g., blog, forum, audio, etc.) |
+        | `block_id` | String | Identifier of the block within the floor |
+        | `floor_uid` | String | Floor identifier where the post belongs |
+        | `title` | String | Title of the post (may be empty) |
+        | `text` | String | Text or HTML content of the post |
+        | `media` | Array | Media objects (audio, image, etc.), if any |
+        | `created_at_ms` | String | Post creation time in milliseconds (epoch) |
+        
+        ---
+        
+        ### **Author Object** | Field | Type | Description |
+        | ----------- | ------ | ---------------------------- |
+        | `name` | String | Display name of the author |
+        | `floor_uid` | String | Author’s floor/user handle |
+        | `avatar` | Object | Author profile image details |
+        
+        ---
+        
+        ### **Media Object** | Field | Type | Description |
+        | ------ | ------ | ----------------------------------- |
+        | `type` | String | Media type (e.g., `AUDIO`, `IMAGE`) |
+        | `url` | String | Public URL of the media file |
+        
+        ---
+        
+        ## **Sample Success Response** *(structure abbreviated for clarity)*
+        
+        ```json { \"post_count\": \"18\", \"items\": [ { \"event_id\": \"1766557274836\", \"block_type\": \"0\", \"title\": \"voice-note-1766557272764.wav\", \"text\": \"You\", \"created_at_ms\": \"1766557275000\", \"author\": { \"name\": \"MEGHANA G\", \"floor_uid\": \"meghanag\", \"avatar\": { \"type\": \"IMAGE\", \"url\": \"https://...\" } }, \"media\": [ { \"type\": \"AUDIO\", \"url\": \"https://...\" } ] } ] } ```
+        
+        ---
+        
+        ## **Notes**
+        * Posts may contain **plain text or HTML** * Media is optional and may be absent * Ordering is **latest first** * The API is read-only and does not require authentication by default * Access control (public/private floors) is enforced internally
+        
+        ---
+        
+        ## **Typical Use Cases**
+        * Floor activity feed * Pod-level dashboards * User-personalized timelines * Public floor landing pages * External developer pods using `app_id`
 
         :param floor_id:  (required)
         :type floor_id: str

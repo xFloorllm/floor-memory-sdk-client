@@ -5,7 +5,9 @@
 """
     Floor Memory
 
-    The set APIs are used to develop Floor pds which can be used as their personal assistants.   This set of APIs are divided into two parts.  - Memory and  - Registration.   The developer has two ways of using the APIs for the app development. Developer can choose to the  Registration APIs for using the existing xfloor infracture or can implement custom Registration process. In the case of custom registration process, the developer is bound to provide proper authentication mechanisms and then send the user information to xlfoor.
+    The set APIs are used to develop Floor pds which can be used as their personal assistants. This set of APIs are divided into two parts.
+    - Memory and
+    - Registration. The developer has two ways of using the APIs for the app development. Developer can choose to the Registration APIs for using the existing xfloor infracture or can implement custom Registration process. In the case of custom registration process, the developer is bound to provide proper authentication mechanisms and then send the user information to xlfoor.
 
     The version of the OpenAPI document: 1.0.0
     Contact: contact@ipomo.in

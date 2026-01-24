@@ -10,7 +10,7 @@ This set of APIs are divided into two parts.
 - Memory and 
 - Registration.
  
-The developer has two ways of using the APIs for the app development. Developer can choose to the  Registration APIs for using the existing xfloor infracture or can implement custom Registration process. In the case of custom registration process, the developer is bound to provide proper authentication mechanisms and then send the user information to xlfoor.
+The developer has two ways of using the APIs for the app development. Developer can choose to the Registration APIs for using the existing xfloor infracture or can implement custom Registration process. In the case of custom registration process, the developer is bound to provide proper authentication mechanisms and then send the user information to xlfoor.
 
   For more information, please visit [https://xfloor.ai/ipomo/blog1551084548304/](https://xfloor.ai/ipomo/blog1551084548304/)
 
