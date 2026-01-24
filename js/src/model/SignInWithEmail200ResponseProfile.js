@@ -18,7 +18,7 @@ import SignInWithEmail200ResponseProfileAvatar from './SignInWithEmail200Respons
 /**
  * The SignInWithEmail200ResponseProfile model module.
  * @module model/SignInWithEmail200ResponseProfile
- * @version 1.0.3
+ * @version 1.0.4
  */
 class SignInWithEmail200ResponseProfile {
     /**
@@ -27,12 +27,11 @@ class SignInWithEmail200ResponseProfile {
      * @alias module:model/SignInWithEmail200ResponseProfile
      * @param floorId {String} Associated floor ID
      * @param fid {String} Unique ID of floor
-     * @param blocks {Array.<module:model/BlockDetails>} List of Blocks
      * @param userId {String} Unique User ID
      */
-    constructor(floorId, fid, blocks, userId) { 
+    constructor(floorId, fid, userId) { 
         
-        SignInWithEmail200ResponseProfile.initialize(this, floorId, fid, blocks, userId);
+        SignInWithEmail200ResponseProfile.initialize(this, floorId, fid, userId);
     }
 
     /**
@@ -40,10 +39,9 @@ class SignInWithEmail200ResponseProfile {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, floorId, fid, blocks, userId) { 
+    static initialize(obj, floorId, fid, userId) { 
         obj['floor_id'] = floorId;
         obj['fid'] = fid;
-        obj['blocks'] = blocks;
         obj['user_id'] = userId;
     }
 
@@ -143,7 +141,7 @@ class SignInWithEmail200ResponseProfile {
 
 }
 
-SignInWithEmail200ResponseProfile.RequiredProperties = ["floor_id", "fid", "blocks", "user_id"];
+SignInWithEmail200ResponseProfile.RequiredProperties = ["floor_id", "fid", "user_id"];
 
 /**
  * Associated floor ID

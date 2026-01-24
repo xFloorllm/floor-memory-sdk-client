@@ -13,13 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
-import type { FloorInfo } from './FloorInfo';
+import type { SignInWithEmail200ResponsePodInfo } from './SignInWithEmail200ResponsePodInfo';
 import {
-    FloorInfoFromJSON,
-    FloorInfoFromJSONTyped,
-    FloorInfoToJSON,
-    FloorInfoToJSONTyped,
-} from './FloorInfo';
+    SignInWithEmail200ResponsePodInfoFromJSON,
+    SignInWithEmail200ResponsePodInfoFromJSONTyped,
+    SignInWithEmail200ResponsePodInfoToJSON,
+    SignInWithEmail200ResponsePodInfoToJSONTyped,
+} from './SignInWithEmail200ResponsePodInfo';
 import type { SignInWithEmail200ResponseProfile } from './SignInWithEmail200ResponseProfile';
 import {
     SignInWithEmail200ResponseProfileFromJSON,
@@ -36,31 +36,30 @@ import {
 export interface SignInWithEmail200Response {
     /**
      * 
-     * @type {FloorInfo}
-     * @memberof SignInWithEmail200Response
-     */
-    podInfo: FloorInfo;
-    /**
-     * 
      * @type {SignInWithEmail200ResponseProfile}
      * @memberof SignInWithEmail200Response
      */
     profile: SignInWithEmail200ResponseProfile;
     /**
+     * 
+     * @type {SignInWithEmail200ResponsePodInfo}
+     * @memberof SignInWithEmail200Response
+     */
+    podInfo: SignInWithEmail200ResponsePodInfo;
+    /**
      * App ID
      * @type {string}
      * @memberof SignInWithEmail200Response
      */
-    appId: string;
+    appId?: string;
 }
 
 /**
  * Check if a given object implements the SignInWithEmail200Response interface.
  */
 export function instanceOfSignInWithEmail200Response(value: object): value is SignInWithEmail200Response {
-    if (!('podInfo' in value) || value['podInfo'] === undefined) return false;
     if (!('profile' in value) || value['profile'] === undefined) return false;
-    if (!('appId' in value) || value['appId'] === undefined) return false;
+    if (!('podInfo' in value) || value['podInfo'] === undefined) return false;
     return true;
 }
 
@@ -74,9 +73,9 @@ export function SignInWithEmail200ResponseFromJSONTyped(json: any, ignoreDiscrim
     }
     return {
         
-        'podInfo': FloorInfoFromJSON(json['pod_info']),
         'profile': SignInWithEmail200ResponseProfileFromJSON(json['profile']),
-        'appId': json['app_id'],
+        'podInfo': SignInWithEmail200ResponsePodInfoFromJSON(json['pod_info']),
+        'appId': json['app_id'] == null ? undefined : json['app_id'],
     };
 }
 
@@ -91,8 +90,8 @@ export function SignInWithEmail200ResponseToJSONTyped(value?: SignInWithEmail200
 
     return {
         
-        'pod_info': FloorInfoToJSON(value['podInfo']),
         'profile': SignInWithEmail200ResponseProfileToJSON(value['profile']),
+        'pod_info': SignInWithEmail200ResponsePodInfoToJSON(value['podInfo']),
         'app_id': value['appId'],
     };
 }

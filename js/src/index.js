@@ -40,6 +40,7 @@ import ResetPassword400Response from './model/ResetPassword400Response';
 import SendValidationCode200Response from './model/SendValidationCode200Response';
 import SendValidationCodeRequest from './model/SendValidationCodeRequest';
 import SignInWithEmail200Response from './model/SignInWithEmail200Response';
+import SignInWithEmail200ResponsePodInfo from './model/SignInWithEmail200ResponsePodInfo';
 import SignInWithEmail200ResponseProfile from './model/SignInWithEmail200ResponseProfile';
 import SignInWithEmail200ResponseProfileAvatar from './model/SignInWithEmail200ResponseProfileAvatar';
 import SignUp200Response from './model/SignUp200Response';
@@ -86,7 +87,7 @@ import QueryApi from './api/QueryApi';
 * </pre>
 * </p>
 * @module index
-* @version 1.0.3
+* @version 1.0.4
 */
 export {
     /**
@@ -256,6 +257,12 @@ export {
      * @property {module:model/SignInWithEmail200Response}
      */
     SignInWithEmail200Response,
+
+    /**
+     * The SignInWithEmail200ResponsePodInfo model constructor.
+     * @property {module:model/SignInWithEmail200ResponsePodInfo}
+     */
+    SignInWithEmail200ResponsePodInfo,
 
     /**
      * The SignInWithEmail200ResponseProfile model constructor.

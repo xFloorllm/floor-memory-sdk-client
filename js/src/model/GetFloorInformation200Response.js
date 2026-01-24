@@ -18,7 +18,7 @@ import Media from './Media';
 /**
  * The GetFloorInformation200Response model module.
  * @module model/GetFloorInformation200Response
- * @version 1.0.3
+ * @version 1.0.4
  */
 class GetFloorInformation200Response {
     /**

@@ -66,7 +66,7 @@ public class SignInWithEmail200ResponseProfile {
 
   public static final String SERIALIZED_NAME_BLOCKS = "blocks";
   @SerializedName(SERIALIZED_NAME_BLOCKS)
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private List<BlockDetails> blocks = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_NAME = "name";
@@ -135,7 +135,7 @@ public class SignInWithEmail200ResponseProfile {
   }
 
 
-  public SignInWithEmail200ResponseProfile blocks(@javax.annotation.Nonnull List<BlockDetails> blocks) {
+  public SignInWithEmail200ResponseProfile blocks(@javax.annotation.Nullable List<BlockDetails> blocks) {
     this.blocks = blocks;
     return this;
   }
@@ -152,12 +152,12 @@ public class SignInWithEmail200ResponseProfile {
    * List of Blocks
    * @return blocks
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public List<BlockDetails> getBlocks() {
     return blocks;
   }
 
-  public void setBlocks(@javax.annotation.Nonnull List<BlockDetails> blocks) {
+  public void setBlocks(@javax.annotation.Nullable List<BlockDetails> blocks) {
     this.blocks = blocks;
   }
 
@@ -318,7 +318,7 @@ public class SignInWithEmail200ResponseProfile {
     openapiFields = new HashSet<String>(Arrays.asList("floor_id", "fid", "blocks", "name", "email", "mobile_number", "user_id", "avatar"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("floor_id", "fid", "blocks", "user_id"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("floor_id", "fid", "user_id"));
   }
 
   /**
@@ -355,16 +355,20 @@ public class SignInWithEmail200ResponseProfile {
       if (!jsonObj.get("fid").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `fid` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fid").toString()));
       }
-      // ensure the json data is an array
-      if (!jsonObj.get("blocks").isJsonArray()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `blocks` to be an array in the JSON string but got `%s`", jsonObj.get("blocks").toString()));
-      }
+      if (jsonObj.get("blocks") != null && !jsonObj.get("blocks").isJsonNull()) {
+        JsonArray jsonArrayblocks = jsonObj.getAsJsonArray("blocks");
+        if (jsonArrayblocks != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("blocks").isJsonArray()) {
+            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `blocks` to be an array in the JSON string but got `%s`", jsonObj.get("blocks").toString()));
+          }
 
-      JsonArray jsonArrayblocks = jsonObj.getAsJsonArray("blocks");
-      // validate the required field `blocks` (array)
-      for (int i = 0; i < jsonArrayblocks.size(); i++) {
-        BlockDetails.validateJsonElement(jsonArrayblocks.get(i));
-      };
+          // validate the optional field `blocks` (array)
+          for (int i = 0; i < jsonArrayblocks.size(); i++) {
+            BlockDetails.validateJsonElement(jsonArrayblocks.get(i));
+          };
+        }
+      }
       if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
       }

@@ -12,25 +12,24 @@
  */
 
 import ApiClient from '../ApiClient';
-import FloorInfo from './FloorInfo';
+import SignInWithEmail200ResponsePodInfo from './SignInWithEmail200ResponsePodInfo';
 import SignInWithEmail200ResponseProfile from './SignInWithEmail200ResponseProfile';
 
 /**
  * The UserDetails model module.
  * @module model/UserDetails
- * @version 1.0.3
+ * @version 1.0.4
  */
 class UserDetails {
     /**
      * Constructs a new <code>UserDetails</code>.
      * @alias module:model/UserDetails
-     * @param podInfo {module:model/FloorInfo} 
      * @param profile {module:model/SignInWithEmail200ResponseProfile} 
-     * @param appId {String} App ID
+     * @param podInfo {module:model/SignInWithEmail200ResponsePodInfo} 
      */
-    constructor(podInfo, profile, appId) { 
+    constructor(profile, podInfo) { 
         
-        UserDetails.initialize(this, podInfo, profile, appId);
+        UserDetails.initialize(this, profile, podInfo);
     }
 
     /**
@@ -38,10 +37,9 @@ class UserDetails {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, podInfo, profile, appId) { 
-        obj['pod_info'] = podInfo;
+    static initialize(obj, profile, podInfo) { 
         obj['profile'] = profile;
-        obj['app_id'] = appId;
+        obj['pod_info'] = podInfo;
     }
 
     /**
@@ -55,11 +53,11 @@ class UserDetails {
         if (data) {
             obj = obj || new UserDetails();
 
-            if (data.hasOwnProperty('pod_info')) {
-                obj['pod_info'] = FloorInfo.constructFromObject(data['pod_info']);
-            }
             if (data.hasOwnProperty('profile')) {
                 obj['profile'] = SignInWithEmail200ResponseProfile.constructFromObject(data['profile']);
+            }
+            if (data.hasOwnProperty('pod_info')) {
+                obj['pod_info'] = SignInWithEmail200ResponsePodInfo.constructFromObject(data['pod_info']);
             }
             if (data.hasOwnProperty('app_id')) {
                 obj['app_id'] = ApiClient.convertToType(data['app_id'], 'String');
@@ -80,13 +78,13 @@ class UserDetails {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
         }
-        // validate the optional field `pod_info`
-        if (data['pod_info']) { // data not null
-          FloorInfo.validateJSON(data['pod_info']);
-        }
         // validate the optional field `profile`
         if (data['profile']) { // data not null
           SignInWithEmail200ResponseProfile.validateJSON(data['profile']);
+        }
+        // validate the optional field `pod_info`
+        if (data['pod_info']) { // data not null
+          SignInWithEmail200ResponsePodInfo.validateJSON(data['pod_info']);
         }
         // ensure the json data is a string
         if (data['app_id'] && !(typeof data['app_id'] === 'string' || data['app_id'] instanceof String)) {
@@ -99,17 +97,17 @@ class UserDetails {
 
 }
 
-UserDetails.RequiredProperties = ["pod_info", "profile", "app_id"];
-
-/**
- * @member {module:model/FloorInfo} pod_info
- */
-UserDetails.prototype['pod_info'] = undefined;
+UserDetails.RequiredProperties = ["profile", "pod_info"];
 
 /**
  * @member {module:model/SignInWithEmail200ResponseProfile} profile
  */
 UserDetails.prototype['profile'] = undefined;
+
+/**
+ * @member {module:model/SignInWithEmail200ResponsePodInfo} pod_info
+ */
+UserDetails.prototype['pod_info'] = undefined;
 
 /**
  * App ID

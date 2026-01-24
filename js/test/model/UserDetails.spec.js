@@ -54,14 +54,14 @@
       //expect(instance).to.be.a(XfloorFloorMemorySdkJs.UserDetails);
     });
 
-    it('should have the property podInfo (base name: "pod_info")', function() {
-      // uncomment below and update the code to test the property podInfo
+    it('should have the property profile (base name: "profile")', function() {
+      // uncomment below and update the code to test the property profile
       //var instance = new XfloorFloorMemorySdkJs.UserDetails();
       //expect(instance).to.be();
     });
 
-    it('should have the property profile (base name: "profile")', function() {
-      // uncomment below and update the code to test the property profile
+    it('should have the property podInfo (base name: "pod_info")', function() {
+      // uncomment below and update the code to test the property podInfo
       //var instance = new XfloorFloorMemorySdkJs.UserDetails();
       //expect(instance).to.be();
     });

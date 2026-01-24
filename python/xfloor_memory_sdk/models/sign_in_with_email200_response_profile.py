@@ -31,7 +31,7 @@ class SignInWithEmail200ResponseProfile(BaseModel):
     """ # noqa: E501
     floor_id: StrictStr = Field(description="Associated floor ID")
     fid: StrictStr = Field(description="Unique ID of floor")
-    blocks: List[BlockDetails] = Field(description="List of Blocks")
+    blocks: Optional[List[BlockDetails]] = Field(default=None, description="List of Blocks")
     name: Optional[StrictStr] = Field(default=None, description="User Name")
     email: Optional[StrictStr] = Field(default=None, description="Email ID")
     mobile_number: Optional[StrictStr] = Field(default=None, description="Mobile number")

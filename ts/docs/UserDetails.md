@@ -6,8 +6,8 @@
 
 Name | Type
 ------------ | -------------
-`podInfo` | [FloorInfo](FloorInfo.md)
 `profile` | [SignInWithEmail200ResponseProfile](SignInWithEmail200ResponseProfile.md)
+`podInfo` | [SignInWithEmail200ResponsePodInfo](SignInWithEmail200ResponsePodInfo.md)
 `appId` | string
 
 ## Example
@@ -17,8 +17,8 @@ import type { UserDetails } from '@xfloor/floor-memory-sdk-ts'
 
 // TODO: Update the object below with actual values
 const example = {
-  "podInfo": null,
   "profile": null,
+  "podInfo": null,
   "appId": null,
 } satisfies UserDetails
 

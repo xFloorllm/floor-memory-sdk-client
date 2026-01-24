@@ -39,6 +39,7 @@ docs/ResetPassword400Response.md
 docs/SendValidationCode200Response.md
 docs/SendValidationCodeRequest.md
 docs/SignInWithEmail200Response.md
+docs/SignInWithEmail200ResponsePodInfo.md
 docs/SignInWithEmail200ResponseProfile.md
 docs/SignInWithEmail200ResponseProfileAvatar.md
 docs/SignUp200Response.md
@@ -108,6 +109,7 @@ src/main/java/ai/xfloor/memory/model/ResetPassword400Response.java
 src/main/java/ai/xfloor/memory/model/SendValidationCode200Response.java
 src/main/java/ai/xfloor/memory/model/SendValidationCodeRequest.java
 src/main/java/ai/xfloor/memory/model/SignInWithEmail200Response.java
+src/main/java/ai/xfloor/memory/model/SignInWithEmail200ResponsePodInfo.java
 src/main/java/ai/xfloor/memory/model/SignInWithEmail200ResponseProfile.java
 src/main/java/ai/xfloor/memory/model/SignInWithEmail200ResponseProfileAvatar.java
 src/main/java/ai/xfloor/memory/model/SignUp200Response.java
@@ -149,6 +151,7 @@ src/test/java/ai/xfloor/memory/model/ResetPassword200ResponseTest.java
 src/test/java/ai/xfloor/memory/model/ResetPassword400ResponseTest.java
 src/test/java/ai/xfloor/memory/model/SendValidationCode200ResponseTest.java
 src/test/java/ai/xfloor/memory/model/SendValidationCodeRequestTest.java
+src/test/java/ai/xfloor/memory/model/SignInWithEmail200ResponsePodInfoTest.java
 src/test/java/ai/xfloor/memory/model/SignInWithEmail200ResponseProfileAvatarTest.java
 src/test/java/ai/xfloor/memory/model/SignInWithEmail200ResponseProfileTest.java
 src/test/java/ai/xfloor/memory/model/SignInWithEmail200ResponseTest.java

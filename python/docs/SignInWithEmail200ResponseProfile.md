@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **floor_id** | **str** | Associated floor ID | 
 **fid** | **str** | Unique ID of floor | 
-**blocks** | [**List[BlockDetails]**](BlockDetails.md) | List of Blocks | 
+**blocks** | [**List[BlockDetails]**](BlockDetails.md) | List of Blocks | [optional] 
 **name** | **str** | User Name | [optional] 
 **email** | **str** | Email ID | [optional] 
 **mobile_number** | **str** | Mobile number | [optional] 

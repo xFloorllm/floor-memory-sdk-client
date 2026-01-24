@@ -1344,8 +1344,10 @@ The generated code is **time-bound**, **single-use**, and must be validated usin
 | `2`  | Delete account                |
 | `3`  | Clear account                 |
 | `4`  | Signup Verification           |
+| `5`  | Using OTP for Login           |
+| `6`  | OTP for forgot password       |
 
-**Mode `5` – Signup Verification**
+**Mode `4` – Signup Verification**
 For login verification, the validation code is sent to **either the email ID or the mobile number provided in the request**.
 At least **one of email or mobile number must be supplied** for this mode.
 

@@ -56,12 +56,6 @@ class TestSignInWithEmail200ResponseProfile(unittest.TestCase):
             return SignInWithEmail200ResponseProfile(
                 floor_id = '',
                 fid = '',
-                blocks = [
-                    xfloor_memory_sdk.models.block_details.BlockDetails(
-                        bid = '', 
-                        type = '', 
-                        title = '', )
-                    ],
                 user_id = '',
         )
         """

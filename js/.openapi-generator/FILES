@@ -36,6 +36,7 @@ docs/ResetPassword400Response.md
 docs/SendValidationCode200Response.md
 docs/SendValidationCodeRequest.md
 docs/SignInWithEmail200Response.md
+docs/SignInWithEmail200ResponsePodInfo.md
 docs/SignInWithEmail200ResponseProfile.md
 docs/SignInWithEmail200ResponseProfileAvatar.md
 docs/SignUp200Response.md
@@ -83,6 +84,7 @@ src/model/ResetPassword400Response.js
 src/model/SendValidationCode200Response.js
 src/model/SendValidationCodeRequest.js
 src/model/SignInWithEmail200Response.js
+src/model/SignInWithEmail200ResponsePodInfo.js
 src/model/SignInWithEmail200ResponseProfile.js
 src/model/SignInWithEmail200ResponseProfileAvatar.js
 src/model/SignUp200Response.js
@@ -125,6 +127,7 @@ test/model/ResetPassword400Response.spec.js
 test/model/SendValidationCode200Response.spec.js
 test/model/SendValidationCodeRequest.spec.js
 test/model/SignInWithEmail200Response.spec.js
+test/model/SignInWithEmail200ResponsePodInfo.spec.js
 test/model/SignInWithEmail200ResponseProfile.spec.js
 test/model/SignInWithEmail200ResponseProfileAvatar.spec.js
 test/model/SignUp200Response.spec.js

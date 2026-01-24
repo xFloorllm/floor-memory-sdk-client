@@ -27,6 +27,7 @@ export * from './ResetPassword400Response';
 export * from './SendValidationCode200Response';
 export * from './SendValidationCodeRequest';
 export * from './SignInWithEmail200Response';
+export * from './SignInWithEmail200ResponsePodInfo';
 export * from './SignInWithEmail200ResponseProfile';
 export * from './SignInWithEmail200ResponseProfileAvatar';
 export * from './SignUp200Response';

@@ -37,6 +37,7 @@ docs/ResetPassword400Response.md
 docs/SendValidationCode200Response.md
 docs/SendValidationCodeRequest.md
 docs/SignInWithEmail200Response.md
+docs/SignInWithEmail200ResponsePodInfo.md
 docs/SignInWithEmail200ResponseProfile.md
 docs/SignInWithEmail200ResponseProfileAvatar.md
 docs/SignUp200Response.md
@@ -86,6 +87,7 @@ test/test_reset_password400_response.py
 test/test_send_validation_code200_response.py
 test/test_send_validation_code_request.py
 test/test_sign_in_with_email200_response.py
+test/test_sign_in_with_email200_response_pod_info.py
 test/test_sign_in_with_email200_response_profile.py
 test/test_sign_in_with_email200_response_profile_avatar.py
 test/test_sign_up200_response.py
@@ -136,6 +138,7 @@ xfloor_memory_sdk/models/reset_password400_response.py
 xfloor_memory_sdk/models/send_validation_code200_response.py
 xfloor_memory_sdk/models/send_validation_code_request.py
 xfloor_memory_sdk/models/sign_in_with_email200_response.py
+xfloor_memory_sdk/models/sign_in_with_email200_response_pod_info.py
 xfloor_memory_sdk/models/sign_in_with_email200_response_profile.py
 xfloor_memory_sdk/models/sign_in_with_email200_response_profile_avatar.py
 xfloor_memory_sdk/models/sign_up200_response.py

@@ -47,7 +47,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>ai.xfloor.sdk</groupId>
   <artifactId>floor-memory-sdk-client</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -63,7 +63,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "ai.xfloor.sdk:floor-memory-sdk-client:1.0.3"
+     implementation "ai.xfloor.sdk:floor-memory-sdk-client:1.0.4"
   }
 ```
 
@@ -77,7 +77,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/floor-memory-sdk-client-1.0.3.jar`
+* `target/floor-memory-sdk-client-1.0.4.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -176,6 +176,7 @@ Class | Method | HTTP request | Description
  - [SendValidationCode200Response](docs/SendValidationCode200Response.md)
  - [SendValidationCodeRequest](docs/SendValidationCodeRequest.md)
  - [SignInWithEmail200Response](docs/SignInWithEmail200Response.md)
+ - [SignInWithEmail200ResponsePodInfo](docs/SignInWithEmail200ResponsePodInfo.md)
  - [SignInWithEmail200ResponseProfile](docs/SignInWithEmail200ResponseProfile.md)
  - [SignInWithEmail200ResponseProfileAvatar](docs/SignInWithEmail200ResponseProfileAvatar.md)
  - [SignUp200Response](docs/SignUp200Response.md)

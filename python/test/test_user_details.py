@@ -36,20 +36,6 @@ class TestUserDetails(unittest.TestCase):
         model = UserDetails()
         if include_optional:
             return UserDetails(
-                pod_info = xfloor_memory_sdk.models.floor_info.FloorInfo(
-                    floor_id = '', 
-                    title = '', 
-                    details = '', 
-                    fid = '', 
-                    blocks = [
-                        xfloor_memory_sdk.models.block_details.BlockDetails(
-                            bid = '', 
-                            type = '', 
-                            title = '', )
-                        ], 
-                    avatar = xfloor_memory_sdk.models.media.Media(
-                        url = '', 
-                        type = '', ), ),
                 profile = xfloor_memory_sdk.models.sign_in_with_email_200_response_profile.signInWithEmail_200_response_profile(
                     floor_id = '', 
                     fid = '', 
@@ -66,24 +52,24 @@ class TestUserDetails(unittest.TestCase):
                     avatar = xfloor_memory_sdk.models.sign_in_with_email_200_response_profile_avatar.signInWithEmail_200_response_profile_avatar(
                         url = '', 
                         id = '', ), ),
+                pod_info = xfloor_memory_sdk.models.sign_in_with_email_200_response_pod_info.signInWithEmail_200_response_pod_info(
+                    floor_id = '', 
+                    title = '', 
+                    details = '', 
+                    fid = '', 
+                    blocks = [
+                        xfloor_memory_sdk.models.block_details.BlockDetails(
+                            bid = '', 
+                            type = '', 
+                            title = '', )
+                        ], 
+                    avatar = xfloor_memory_sdk.models.media.Media(
+                        url = '', 
+                        type = '', ), ),
                 app_id = ''
             )
         else:
             return UserDetails(
-                pod_info = xfloor_memory_sdk.models.floor_info.FloorInfo(
-                    floor_id = '', 
-                    title = '', 
-                    details = '', 
-                    fid = '', 
-                    blocks = [
-                        xfloor_memory_sdk.models.block_details.BlockDetails(
-                            bid = '', 
-                            type = '', 
-                            title = '', )
-                        ], 
-                    avatar = xfloor_memory_sdk.models.media.Media(
-                        url = '', 
-                        type = '', ), ),
                 profile = xfloor_memory_sdk.models.sign_in_with_email_200_response_profile.signInWithEmail_200_response_profile(
                     floor_id = '', 
                     fid = '', 
@@ -100,7 +86,20 @@ class TestUserDetails(unittest.TestCase):
                     avatar = xfloor_memory_sdk.models.sign_in_with_email_200_response_profile_avatar.signInWithEmail_200_response_profile_avatar(
                         url = '', 
                         id = '', ), ),
-                app_id = '',
+                pod_info = xfloor_memory_sdk.models.sign_in_with_email_200_response_pod_info.signInWithEmail_200_response_pod_info(
+                    floor_id = '', 
+                    title = '', 
+                    details = '', 
+                    fid = '', 
+                    blocks = [
+                        xfloor_memory_sdk.models.block_details.BlockDetails(
+                            bid = '', 
+                            type = '', 
+                            title = '', )
+                        ], 
+                    avatar = xfloor_memory_sdk.models.media.Media(
+                        url = '', 
+                        type = '', ), ),
         )
         """
 

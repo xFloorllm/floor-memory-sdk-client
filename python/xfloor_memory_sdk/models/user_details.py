@@ -19,8 +19,8 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
-from xfloor_memory_sdk.models.floor_info import FloorInfo
+from typing import Any, ClassVar, Dict, List, Optional
+from xfloor_memory_sdk.models.sign_in_with_email200_response_pod_info import SignInWithEmail200ResponsePodInfo
 from xfloor_memory_sdk.models.sign_in_with_email200_response_profile import SignInWithEmail200ResponseProfile
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,10 +29,10 @@ class UserDetails(BaseModel):
     """
     UserDetails
     """ # noqa: E501
-    pod_info: FloorInfo
     profile: SignInWithEmail200ResponseProfile
-    app_id: StrictStr = Field(description="App ID")
-    __properties: ClassVar[List[str]] = ["pod_info", "profile", "app_id"]
+    pod_info: SignInWithEmail200ResponsePodInfo
+    app_id: Optional[StrictStr] = Field(default=None, description="App ID")
+    __properties: ClassVar[List[str]] = ["profile", "pod_info", "app_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,12 +73,12 @@ class UserDetails(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of pod_info
-        if self.pod_info:
-            _dict['pod_info'] = self.pod_info.to_dict()
         # override the default output from pydantic by calling `to_dict()` of profile
         if self.profile:
             _dict['profile'] = self.profile.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of pod_info
+        if self.pod_info:
+            _dict['pod_info'] = self.pod_info.to_dict()
         return _dict
 
     @classmethod
@@ -91,8 +91,8 @@ class UserDetails(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "pod_info": FloorInfo.from_dict(obj["pod_info"]) if obj.get("pod_info") is not None else None,
             "profile": SignInWithEmail200ResponseProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None,
+            "pod_info": SignInWithEmail200ResponsePodInfo.from_dict(obj["pod_info"]) if obj.get("pod_info") is not None else None,
             "app_id": obj.get("app_id")
         })
         return _obj

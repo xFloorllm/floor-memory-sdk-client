@@ -2347,6 +2347,12 @@ paths:
         "200":
           content:
             application/json:
+              example:
+                error:
+                  code: XF_VALIDATION_ERROR
+                  message: The signup failed or wrong user_id
+                  path: /auth-service/validate/activation/code
+                  timestamp: 2026-01-12T08:11:59.993079561Z
               schema:
                 $ref: "#/components/schemas/changePassword_200_response"
           description: ""
@@ -2749,8 +2755,10 @@ paths:
         | `2`  | Delete account                |
         | `3`  | Clear account                 |
         | `4`  | Signup Verification           |
+        | `5`  | Using OTP for Login           |
+        | `6`  | OTP for forgot password       |
 
-        **Mode `5` – Signup Verification**
+        **Mode `4` – Signup Verification**
         For login verification, the validation code is sent to **either the email ID or the mobile number provided in the request**.
         At least **one of email or mobile number must be supplied** for this mode.
 
@@ -2907,7 +2915,6 @@ paths:
       x-accepts:
       - application/json
 components:
-  responses: {}
   schemas:
     QueryResponse:
       example:
@@ -2996,15 +3003,14 @@ components:
           email: email
         app_id: app_id
       properties:
-        pod_info:
-          $ref: "#/components/schemas/FloorInfo"
         profile:
           $ref: "#/components/schemas/signInWithEmail_200_response_profile"
+        pod_info:
+          $ref: "#/components/schemas/signInWithEmail_200_response_pod_info"
         app_id:
           description: App ID
           type: string
       required:
-      - app_id
       - pod_info
       - profile
       type: object
@@ -3043,21 +3049,6 @@ components:
       type: object
     FloorInfo:
       description: User's Pod floor Infomation
-      example:
-        fid: fid
-        blocks:
-        - bid: bid
-          type: type
-          title: title
-        - bid: bid
-          type: type
-          title: title
-        floor_id: floor_id
-        details: details
-        avatar:
-          type: type
-          url: url
-        title: title
       properties:
         floor_id:
           description: Pod floor ID
@@ -3635,10 +3626,46 @@ components:
         avatar:
           $ref: "#/components/schemas/signInWithEmail_200_response_profile_avatar"
       required:
-      - blocks
       - fid
       - floor_id
       - user_id
+      type: object
+    signInWithEmail_200_response_pod_info:
+      example:
+        fid: fid
+        blocks:
+        - bid: bid
+          type: type
+          title: title
+        - bid: bid
+          type: type
+          title: title
+        floor_id: floor_id
+        details: details
+        avatar:
+          type: type
+          url: url
+        title: title
+      properties:
+        floor_id:
+          type: string
+        title:
+          type: string
+        details:
+          type: string
+        fid:
+          type: string
+        blocks:
+          items:
+            $ref: "#/components/schemas/BlockDetails"
+          type: array
+        avatar:
+          $ref: "#/components/schemas/Media"
+      required:
+      - blocks
+      - fid
+      - floor_id
+      - title
       type: object
     signInWithEmail_200_response:
       example:
@@ -3676,15 +3703,14 @@ components:
           email: email
         app_id: app_id
       properties:
-        pod_info:
-          $ref: "#/components/schemas/FloorInfo"
         profile:
           $ref: "#/components/schemas/signInWithEmail_200_response_profile"
+        pod_info:
+          $ref: "#/components/schemas/signInWithEmail_200_response_pod_info"
         app_id:
           description: App ID
           type: string
       required:
-      - app_id
       - pod_info
       - profile
       type: object

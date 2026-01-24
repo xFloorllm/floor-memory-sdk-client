@@ -10,7 +10,7 @@ User profile details
 |------------ | ------------- | ------------- | -------------|
 |**floorId** | **String** | Associated floor ID |  |
 |**fid** | **String** | Unique ID of floor |  |
-|**blocks** | [**List&lt;BlockDetails&gt;**](BlockDetails.md) | List of Blocks |  |
+|**blocks** | [**List&lt;BlockDetails&gt;**](BlockDetails.md) | List of Blocks |  [optional] |
 |**name** | **String** | User Name |  [optional] |
 |**email** | **String** | Email ID |  [optional] |
 |**mobileNumber** | **String** | Mobile number |  [optional] |

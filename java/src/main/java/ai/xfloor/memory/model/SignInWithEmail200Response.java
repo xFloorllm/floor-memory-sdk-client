@@ -14,7 +14,7 @@
 package ai.xfloor.memory.model;
 
 import java.util.Objects;
-import ai.xfloor.memory.model.FloorInfo;
+import ai.xfloor.memory.model.SignInWithEmail200ResponsePodInfo;
 import ai.xfloor.memory.model.SignInWithEmail200ResponseProfile;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
@@ -52,42 +52,23 @@ import ai.xfloor.memory.client.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.18.0")
 public class SignInWithEmail200Response {
-  public static final String SERIALIZED_NAME_POD_INFO = "pod_info";
-  @SerializedName(SERIALIZED_NAME_POD_INFO)
-  @javax.annotation.Nonnull
-  private FloorInfo podInfo;
-
   public static final String SERIALIZED_NAME_PROFILE = "profile";
   @SerializedName(SERIALIZED_NAME_PROFILE)
   @javax.annotation.Nonnull
   private SignInWithEmail200ResponseProfile profile;
 
+  public static final String SERIALIZED_NAME_POD_INFO = "pod_info";
+  @SerializedName(SERIALIZED_NAME_POD_INFO)
+  @javax.annotation.Nonnull
+  private SignInWithEmail200ResponsePodInfo podInfo;
+
   public static final String SERIALIZED_NAME_APP_ID = "app_id";
   @SerializedName(SERIALIZED_NAME_APP_ID)
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private String appId;
 
   public SignInWithEmail200Response() {
   }
-
-  public SignInWithEmail200Response podInfo(@javax.annotation.Nonnull FloorInfo podInfo) {
-    this.podInfo = podInfo;
-    return this;
-  }
-
-  /**
-   * Get podInfo
-   * @return podInfo
-   */
-  @javax.annotation.Nonnull
-  public FloorInfo getPodInfo() {
-    return podInfo;
-  }
-
-  public void setPodInfo(@javax.annotation.Nonnull FloorInfo podInfo) {
-    this.podInfo = podInfo;
-  }
-
 
   public SignInWithEmail200Response profile(@javax.annotation.Nonnull SignInWithEmail200ResponseProfile profile) {
     this.profile = profile;
@@ -108,7 +89,26 @@ public class SignInWithEmail200Response {
   }
 
 
-  public SignInWithEmail200Response appId(@javax.annotation.Nonnull String appId) {
+  public SignInWithEmail200Response podInfo(@javax.annotation.Nonnull SignInWithEmail200ResponsePodInfo podInfo) {
+    this.podInfo = podInfo;
+    return this;
+  }
+
+  /**
+   * Get podInfo
+   * @return podInfo
+   */
+  @javax.annotation.Nonnull
+  public SignInWithEmail200ResponsePodInfo getPodInfo() {
+    return podInfo;
+  }
+
+  public void setPodInfo(@javax.annotation.Nonnull SignInWithEmail200ResponsePodInfo podInfo) {
+    this.podInfo = podInfo;
+  }
+
+
+  public SignInWithEmail200Response appId(@javax.annotation.Nullable String appId) {
     this.appId = appId;
     return this;
   }
@@ -117,12 +117,12 @@ public class SignInWithEmail200Response {
    * App ID
    * @return appId
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getAppId() {
     return appId;
   }
 
-  public void setAppId(@javax.annotation.Nonnull String appId) {
+  public void setAppId(@javax.annotation.Nullable String appId) {
     this.appId = appId;
   }
 
@@ -137,22 +137,22 @@ public class SignInWithEmail200Response {
       return false;
     }
     SignInWithEmail200Response signInWithEmail200Response = (SignInWithEmail200Response) o;
-    return Objects.equals(this.podInfo, signInWithEmail200Response.podInfo) &&
-        Objects.equals(this.profile, signInWithEmail200Response.profile) &&
+    return Objects.equals(this.profile, signInWithEmail200Response.profile) &&
+        Objects.equals(this.podInfo, signInWithEmail200Response.podInfo) &&
         Objects.equals(this.appId, signInWithEmail200Response.appId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(podInfo, profile, appId);
+    return Objects.hash(profile, podInfo, appId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SignInWithEmail200Response {\n");
-    sb.append("    podInfo: ").append(toIndentedString(podInfo)).append("\n");
     sb.append("    profile: ").append(toIndentedString(profile)).append("\n");
+    sb.append("    podInfo: ").append(toIndentedString(podInfo)).append("\n");
     sb.append("    appId: ").append(toIndentedString(appId)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -175,10 +175,10 @@ public class SignInWithEmail200Response {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("pod_info", "profile", "app_id"));
+    openapiFields = new HashSet<String>(Arrays.asList("profile", "pod_info", "app_id"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("pod_info", "profile", "app_id"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("profile", "pod_info"));
   }
 
   /**
@@ -209,11 +209,11 @@ public class SignInWithEmail200Response {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the required field `pod_info`
-      FloorInfo.validateJsonElement(jsonObj.get("pod_info"));
       // validate the required field `profile`
       SignInWithEmail200ResponseProfile.validateJsonElement(jsonObj.get("profile"));
-      if (!jsonObj.get("app_id").isJsonPrimitive()) {
+      // validate the required field `pod_info`
+      SignInWithEmail200ResponsePodInfo.validateJsonElement(jsonObj.get("pod_info"));
+      if ((jsonObj.get("app_id") != null && !jsonObj.get("app_id").isJsonNull()) && !jsonObj.get("app_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `app_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("app_id").toString()));
       }
   }

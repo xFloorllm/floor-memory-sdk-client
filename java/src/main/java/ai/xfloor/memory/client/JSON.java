@@ -123,6 +123,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.SendValidationCode200Response.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.SendValidationCodeRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.SignInWithEmail200Response.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.SignInWithEmail200ResponsePodInfo.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.SignInWithEmail200ResponseProfile.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.SignInWithEmail200ResponseProfileAvatar.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.SignUp200Response.CustomTypeAdapterFactory());

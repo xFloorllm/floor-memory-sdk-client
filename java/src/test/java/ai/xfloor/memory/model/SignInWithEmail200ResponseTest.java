@@ -13,7 +13,7 @@
 
 package ai.xfloor.memory.model;
 
-import ai.xfloor.memory.model.FloorInfo;
+import ai.xfloor.memory.model.SignInWithEmail200ResponsePodInfo;
 import ai.xfloor.memory.model.SignInWithEmail200ResponseProfile;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
@@ -40,19 +40,19 @@ public class SignInWithEmail200ResponseTest {
     }
 
     /**
-     * Test the property 'podInfo'
-     */
-    @Test
-    public void podInfoTest() {
-        // TODO: test podInfo
-    }
-
-    /**
      * Test the property 'profile'
      */
     @Test
     public void profileTest() {
         // TODO: test profile
+    }
+
+    /**
+     * Test the property 'podInfo'
+     */
+    @Test
+    public void podInfoTest() {
+        // TODO: test podInfo
     }
 
     /**

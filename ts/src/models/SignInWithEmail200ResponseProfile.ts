@@ -51,7 +51,7 @@ export interface SignInWithEmail200ResponseProfile {
      * @type {Array<BlockDetails>}
      * @memberof SignInWithEmail200ResponseProfile
      */
-    blocks: Array<BlockDetails>;
+    blocks?: Array<BlockDetails>;
     /**
      * User Name
      * @type {string}
@@ -90,7 +90,6 @@ export interface SignInWithEmail200ResponseProfile {
 export function instanceOfSignInWithEmail200ResponseProfile(value: object): value is SignInWithEmail200ResponseProfile {
     if (!('floorId' in value) || value['floorId'] === undefined) return false;
     if (!('fid' in value) || value['fid'] === undefined) return false;
-    if (!('blocks' in value) || value['blocks'] === undefined) return false;
     if (!('userId' in value) || value['userId'] === undefined) return false;
     return true;
 }
@@ -107,7 +106,7 @@ export function SignInWithEmail200ResponseProfileFromJSONTyped(json: any, ignore
         
         'floorId': json['floor_id'],
         'fid': json['fid'],
-        'blocks': ((json['blocks'] as Array<any>).map(BlockDetailsFromJSON)),
+        'blocks': json['blocks'] == null ? undefined : ((json['blocks'] as Array<any>).map(BlockDetailsFromJSON)),
         'name': json['name'] == null ? undefined : json['name'],
         'email': json['email'] == null ? undefined : json['email'],
         'mobileNumber': json['mobile_number'] == null ? undefined : json['mobile_number'],
@@ -129,7 +128,7 @@ export function SignInWithEmail200ResponseProfileToJSONTyped(value?: SignInWithE
         
         'floor_id': value['floorId'],
         'fid': value['fid'],
-        'blocks': ((value['blocks'] as Array<any>).map(BlockDetailsToJSON)),
+        'blocks': value['blocks'] == null ? undefined : ((value['blocks'] as Array<any>).map(BlockDetailsToJSON)),
         'name': value['name'],
         'email': value['email'],
         'mobile_number': value['mobileNumber'],
