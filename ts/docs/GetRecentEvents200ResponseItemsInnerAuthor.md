@@ -3,7 +3,7 @@
 
 Author details
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
@@ -12,7 +12,7 @@ Name | Type
 `avatar` | [Media](Media.md)
 `floorUid` | string
 
-## Example
+### Example
 
 ```typescript
 import type { GetRecentEvents200ResponseItemsInnerAuthor } from '@xfloor/floor-memory-sdk-ts'

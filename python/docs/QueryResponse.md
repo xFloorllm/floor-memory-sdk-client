@@ -1,14 +1,14 @@
 # QueryResponse
 
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **items** | [**List[QueryResponseItemsInner]**](QueryResponseItemsInner.md) | List of source content | [optional] 
 **answer** | **str** | Summary of the posts | [optional] 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.query_response import QueryResponse

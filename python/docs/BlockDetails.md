@@ -2,7 +2,7 @@
 
 Block Details
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **type** | **str** | Block Type | 
 **title** | **str** | Title of the block | 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.block_details import BlockDetails

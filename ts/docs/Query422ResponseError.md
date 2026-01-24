@@ -2,13 +2,13 @@
 # Query422ResponseError
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
 `message` | string
 
-## Example
+### Example
 
 ```typescript
 import type { Query422ResponseError } from '@xfloor/floor-memory-sdk-ts'

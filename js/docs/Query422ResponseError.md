@@ -1,6 +1,6 @@
 # XfloorFloorMemorySdkJs.Query422ResponseError
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

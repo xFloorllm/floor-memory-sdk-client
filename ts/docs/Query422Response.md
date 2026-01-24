@@ -2,13 +2,13 @@
 # Query422Response
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
 `error` | [Query422ResponseError](Query422ResponseError.md)
 
-## Example
+### Example
 
 ```typescript
 import type { Query422Response } from '@xfloor/floor-memory-sdk-ts'

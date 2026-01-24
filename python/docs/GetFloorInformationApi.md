@@ -27,7 +27,7 @@ This API does **not** return posts or content; it only provides **structural and
 
 ---
 
-## Typical Use Cases
+### Typical Use Cases
 
 * Render floor header (title, logo, description)
 * Decide UI permissions (owner vs non-owner)
@@ -37,20 +37,20 @@ This API does **not** return posts or content; it only provides **structural and
 
 ---
 
-## Authorization & Context
+### Authorization & Context
 
 * The API may be called by authenticated or unauthenticated users (depending on floor visibility).
 * The `is_owner` field is calculated **relative to the requesting user context** (if authenticated).
 
 ---
 
-## Response Format
+### Response Format
 
 `application/json`
 
 ---
 
-## Response Structure
+### Response Structure
 
 ### Top-Level Fields
 
@@ -68,7 +68,7 @@ This API does **not** return posts or content; it only provides **structural and
 
 ---
 
-## Ownership Indicator
+### Ownership Indicator
 
 ### `is_owner`
 
@@ -88,7 +88,7 @@ This field is typically used by clients to:
 
 ---
 
-## Blocks Object
+### Blocks Object
 
 ```json
 "blocks": [
@@ -112,7 +112,7 @@ Each block represents a **content category or service** available inside the flo
 
 ---
 
-## Avatar Object
+### Avatar Object
 
 ```json
 "avatar": {
@@ -130,7 +130,7 @@ Used to render the floor’s profile image or banner.
 
 ---
 
-## Floor Type
+### Floor Type
 
 ```json
 "floor_type": "POD"
@@ -146,7 +146,7 @@ Used to render the floor’s profile image or banner.
 
 ---
 
-## Sample Success Response
+### Sample Success Response
 
 ```json
 {
@@ -173,7 +173,7 @@ Used to render the floor’s profile image or banner.
 
 ---
 
-## Notes for Developers
+### Notes for Developers
 
 * This is a **lightweight metadata API** and is safe to call frequently.
 * Use this API **before** loading posts or analytics.
@@ -182,7 +182,7 @@ Used to render the floor’s profile image or banner.
 
 ---
 
-## Common Error Scenarios
+### Common Error Scenarios
 
 ### Floor Not Found
 

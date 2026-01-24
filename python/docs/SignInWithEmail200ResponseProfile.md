@@ -2,7 +2,7 @@
 
 User profile details
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **user_id** | **str** | Unique User ID | 
 **avatar** | [**SignInWithEmail200ResponseProfileAvatar**](SignInWithEmail200ResponseProfileAvatar.md) |  | [optional] 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.sign_in_with_email200_response_profile import SignInWithEmail200ResponseProfile

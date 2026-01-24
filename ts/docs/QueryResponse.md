@@ -2,14 +2,14 @@
 # QueryResponse
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
 `items` | [Array&lt;QueryResponseItemsInner&gt;](QueryResponseItemsInner.md)
 `answer` | string
 
-## Example
+### Example
 
 ```typescript
 import type { QueryResponse } from '@xfloor/floor-memory-sdk-ts'

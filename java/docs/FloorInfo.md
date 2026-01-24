@@ -4,7 +4,7 @@
 
 User's Pod floor Infomation
 
-## Properties
+### Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|

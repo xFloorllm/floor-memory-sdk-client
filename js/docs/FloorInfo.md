@@ -1,6 +1,6 @@
 # XfloorFloorMemorySdkJs.FloorInfo
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -2,7 +2,7 @@
 # SendValidationCodeRequest
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
@@ -11,7 +11,7 @@ Name | Type
 `mobilesNumber` | string
 `emailId` | string
 
-## Example
+### Example
 
 ```typescript
 import type { SendValidationCodeRequest } from '@xfloor/floor-memory-sdk-ts'

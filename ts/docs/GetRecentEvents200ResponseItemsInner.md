@@ -3,7 +3,7 @@
 
 Each post item
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
@@ -17,7 +17,7 @@ Name | Type
 `createdAtMs` | string
 `blockId` | string
 
-## Example
+### Example
 
 ```typescript
 import type { GetRecentEvents200ResponseItemsInner } from '@xfloor/floor-memory-sdk-ts'

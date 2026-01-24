@@ -1,13 +1,13 @@
 # GetRecentEvents400Response
 
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **error** | [**GetRecentEvents400ResponseError**](GetRecentEvents400ResponseError.md) |  | 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.get_recent_events400_response import GetRecentEvents400Response

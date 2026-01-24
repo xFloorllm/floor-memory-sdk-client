@@ -2,14 +2,14 @@
 # SignUpResponse
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
 `userId` | string
 `success` | string
 
-## Example
+### Example
 
 ```typescript
 import type { SignUpResponse } from '@xfloor/floor-memory-sdk-ts'

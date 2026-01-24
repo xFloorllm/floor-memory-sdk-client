@@ -2,7 +2,7 @@
 
 Author details
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **avatar** | [**Media**](Media.md) |  | [optional] 
 **floor_uid** | **str** | Unique 13 digit id of the profile floor | [optional] 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.get_recent_events200_response_items_inner_author import GetRecentEvents200ResponseItemsInnerAuthor

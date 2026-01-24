@@ -2,7 +2,7 @@
 
 Each item description
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **user_id** | **str** | Author of the content | [optional] 
 **match_type** | **str** | Match type text or image | [optional] 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.query_response_items_inner import QueryResponseItemsInner

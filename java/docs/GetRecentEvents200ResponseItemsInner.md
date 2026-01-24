@@ -4,7 +4,7 @@
 
 Each post item
 
-## Properties
+### Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|

@@ -1,6 +1,6 @@
 # XfloorFloorMemorySdkJs.SendValidationCodeRequest
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

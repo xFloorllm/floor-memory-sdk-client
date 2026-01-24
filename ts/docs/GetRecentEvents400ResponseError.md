@@ -2,7 +2,7 @@
 # GetRecentEvents400ResponseError
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
@@ -11,7 +11,7 @@ Name | Type
 `path` | string
 `timestamp` | string
 
-## Example
+### Example
 
 ```typescript
 import type { GetRecentEvents400ResponseError } from '@xfloor/floor-memory-sdk-ts'

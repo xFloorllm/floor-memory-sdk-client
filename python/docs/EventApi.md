@@ -26,7 +26,7 @@ The content may consist of **text only** or **text combined with one or more med
 
 ---
 
-## **Key Capabilities**
+### **Key Capabilities**
 
 * Stores user-generated content inside a specific floor
 * Supports **multi-modal inputs** (text + media)
@@ -40,7 +40,7 @@ The content may consist of **text only** or **text combined with one or more med
 
 ---
 
-## **Authentication**
+### **Authentication**
 
 * Requires a valid, authenticated `user_id`
 * The calling application is responsible for user authentication
@@ -48,13 +48,13 @@ The content may consist of **text only** or **text combined with one or more med
 
 ---
 
-## **Request Type**
+### **Request Type**
 
 **Content-Type:** `multipart/form-data`
 
 ---
 
-## **Request Parameters**
+### **Request Parameters**
 
 ### **1. Files (Optional)**
 
@@ -81,7 +81,7 @@ These files are processed and embedded along with the textual content where appl
 
 ---
 
-## **`input_info` Structure**
+### **`input_info` Structure**
 
 ```json
 {
@@ -110,7 +110,7 @@ These files are processed and embedded along with the textual content where appl
 
 ---
 
-## **Behavior**
+### **Behavior**
 
 1. The API validates the user and floor context.
 2. Textual content (`title` and `description`) is ingested.
@@ -124,7 +124,7 @@ These files are processed and embedded along with the textual content where appl
 
 ---
 
-## **Successful Response**
+### **Successful Response**
 
 On success, the API confirms that:
 
@@ -136,7 +136,7 @@ A success status and reference identifiers are returned.
 
 ---
 
-## **Error Handling**
+### **Error Handling**
 
 The API may return errors if:
 
@@ -148,7 +148,7 @@ The API may return errors if:
 
 ---
 
-## **Typical Use Cases**
+### **Typical Use Cases**
 
 * Saving personal reminders
 * Posting notes or observations
@@ -158,7 +158,7 @@ The API may return errors if:
 
 ---
 
-## **One-Line Summary**
+### **One-Line Summary**
 
 > Stores user-generated text and media into a personal POD, embeds it for semantic search, and makes it available for conversational querying.
 
@@ -248,20 +248,20 @@ Name | Type | Description  | Notes
 
 ---
 
-## **Response Body (Example)**
+### **Response Body (Example)**
 
 ```json { \"status\": \"success\", \"message\": \"Content accepted for processing\" } ``` > No content data is returned in this response.
 
 ---
 
-## **Availability & Retrieval Model** After receiving a successful response:
+### **Availability & Retrieval Model** After receiving a successful response:
 1. The content is processed asynchronously 2. The content becomes available in the floor feed **after processing completes** 3. Developers must retrieve the content using:
 
 ``` GET /api/memory/recent/events ```
 
 ---
 
-## **Polling Requirement** Because ingestion is asynchronous:
+### **Polling Requirement** Because ingestion is asynchronous:
 * Developers **must poll** `/api/memory/recent/events` * Polling should be done using:
 * `floor_id`
 * timestamp or last-known event marker * Compare previously retrieved events with new responses to detect newly added content This design ensures:
@@ -269,18 +269,18 @@ Name | Type | Description  | Notes
 
 ---
 
-## **Typical Developer Flow**
+### **Typical Developer Flow**
 
 ```text POST /api/memory/events ↓ 200 OK (content queued) ↓ Poll /api/memory/recent/events ↓ Detect new event ↓ Use content in /agent/memory/query ```
 
 ---
 
-## **Key Design Note (Why This Exists)** This API is intentionally asynchronous to:
+### **Key Design Note (Why This Exists)** This API is intentionally asynchronous to:
 * Support large files and multi-modal uploads * Avoid request timeouts during embedding * Enable scalable background processing * Keep write latency low
 
 ---
 
-## **One-Line Summary** > Accepts user-generated text and media, queues it for asynchronous processing, and makes it available for retrieval via the recent events API after ingestion completes. |
+### **One-Line Summary** > Accepts user-generated text and media, queues it for asynchronous processing, and makes it available for retrieval via the recent events API after ingestion completes. |
 - |
 **400** |  |  -  |
 

@@ -4,7 +4,7 @@
 
 User profile details
 
-## Properties
+### Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|

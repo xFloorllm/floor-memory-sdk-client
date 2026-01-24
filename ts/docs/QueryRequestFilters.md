@@ -3,7 +3,7 @@
 
 JSON format filters
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
@@ -12,7 +12,7 @@ Name | Type
 `filterTypes` | string
 `filterTags` | string
 
-## Example
+### Example
 
 ```typescript
 import type { QueryRequestFilters } from '@xfloor/floor-memory-sdk-ts'

@@ -2,7 +2,7 @@
 # ValidateCodeRequest
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
@@ -11,7 +11,7 @@ Name | Type
 `appId` | string
 `mode` | string
 
-## Example
+### Example
 
 ```typescript
 import type { ValidateCodeRequest } from '@xfloor/floor-memory-sdk-ts'

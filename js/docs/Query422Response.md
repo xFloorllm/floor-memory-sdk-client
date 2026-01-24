@@ -1,6 +1,6 @@
 # XfloorFloorMemorySdkJs.Query422Response
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

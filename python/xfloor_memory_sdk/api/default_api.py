@@ -1217,15 +1217,21 @@ class DefaultApi:
         
         ---
         
-        ## Request Method `POST`
+        **Request Method**
+        
+         `POST`
         
         ---
         
-        ## Content-Type `application/x-www-form-urlencoded` (or `multipart/form-data` if your system uses form-data) *(Document whichever you actually accept; below assumes standard form fields.)*
+        **Content-Type**
+        
+         `application/x-www-form-urlencoded` (or `multipart/form-data` if your system uses form-data) *(Document whichever you actually accept; below assumes standard form fields.)*
         
         ---
         
-        ## Request Parameters (Form Fields) | Field | Type | Required | Description |
+        **Request Parameters (Form Fields)**
+        
+        | Field | Type | Required | Description |
         | ---------- | ------ | -------- | -------------------------------------------------------------------- |
         | `user_id` | String | **Yes** | User requesting the change. Must be the **owner** of the floor. |
         | `floor_id` | String | **Yes** | Public identifier of the floor to update. |
@@ -1233,12 +1239,12 @@ class DefaultApi:
         
         ---
         
-        ## Authorization Rules (Critical)
+        ### Authorization Rules (Critical)
         * The caller must be authenticated as `user_id` * **Only the floor owner** can change floor visibility * If the user is not the owner, the request must be rejected
         
         ---
         
-        ## Behavior Rules
+        ### Behavior Rules
         * Converts visibility from **PUBLIC → PRIVATE** * Does not modify floor content or blocks * Access enforcement for private floors is applied immediately after the change **Idempotency**
         * Calling this API multiple times should not cause repeated changes * If already private, the API should either:
         * return success with a message like `\"already private\"`, or
@@ -1246,23 +1252,23 @@ class DefaultApi:
         
         ---
         
-        ## Response Format `application/json`
+        ### Response Format `application/json`
         
         ---
         
-        ## Sample Success Response *(Example — adjust to match your actual response format)*
+        ### Sample Success Response *(Example — adjust to match your actual response format)*
         
         ```json { \"status\": \"SUCCESS\", \"floor_id\": \"my_floor\", \"visibility\": \"PRIVATE\", \"message\": \"Floor is now private\" } ```
         
         ---
         
-        ## Sample No-Op Response (Already Private)
+        ### Sample No-Op Response (Already Private)
         
         ```json { \"status\": \"SUCCESS\", \"floor_id\": \"my_floor\", \"visibility\": \"PRIVATE\", \"message\": \"Floor is already private\" } ```
         
         ---
         
-        ## Error Responses (Examples)
+        ### Error Responses (Examples)
         
         ### Not Authorized (Not Owner)
         
@@ -1278,7 +1284,7 @@ class DefaultApi:
         
         ---
         
-        ## Notes
+        ### Notes
         * This API is intended to control floor visibility only; membership/invite rules (for private floors) are handled elsewhere. * `app_id` is provided for developer/pod applications and is optional unless enforced by your app model. * If you support floor types like `POD`, document whether pods are allowed to be private or not (some platforms restrict this).
 
         :param floor_id: Floor ID
@@ -1361,15 +1367,21 @@ class DefaultApi:
         
         ---
         
-        ## Request Method `POST`
+        **Request Method**
+        
+         `POST`
         
         ---
         
-        ## Content-Type `application/x-www-form-urlencoded` (or `multipart/form-data` if your system uses form-data) *(Document whichever you actually accept; below assumes standard form fields.)*
+        **Content-Type**
+        
+         `application/x-www-form-urlencoded` (or `multipart/form-data` if your system uses form-data) *(Document whichever you actually accept; below assumes standard form fields.)*
         
         ---
         
-        ## Request Parameters (Form Fields) | Field | Type | Required | Description |
+        **Request Parameters (Form Fields)**
+        
+        | Field | Type | Required | Description |
         | ---------- | ------ | -------- | -------------------------------------------------------------------- |
         | `user_id` | String | **Yes** | User requesting the change. Must be the **owner** of the floor. |
         | `floor_id` | String | **Yes** | Public identifier of the floor to update. |
@@ -1377,12 +1389,12 @@ class DefaultApi:
         
         ---
         
-        ## Authorization Rules (Critical)
+        ### Authorization Rules (Critical)
         * The caller must be authenticated as `user_id` * **Only the floor owner** can change floor visibility * If the user is not the owner, the request must be rejected
         
         ---
         
-        ## Behavior Rules
+        ### Behavior Rules
         * Converts visibility from **PUBLIC → PRIVATE** * Does not modify floor content or blocks * Access enforcement for private floors is applied immediately after the change **Idempotency**
         * Calling this API multiple times should not cause repeated changes * If already private, the API should either:
         * return success with a message like `\"already private\"`, or
@@ -1390,23 +1402,23 @@ class DefaultApi:
         
         ---
         
-        ## Response Format `application/json`
+        ### Response Format `application/json`
         
         ---
         
-        ## Sample Success Response *(Example — adjust to match your actual response format)*
+        ### Sample Success Response *(Example — adjust to match your actual response format)*
         
         ```json { \"status\": \"SUCCESS\", \"floor_id\": \"my_floor\", \"visibility\": \"PRIVATE\", \"message\": \"Floor is now private\" } ```
         
         ---
         
-        ## Sample No-Op Response (Already Private)
+        ### Sample No-Op Response (Already Private)
         
         ```json { \"status\": \"SUCCESS\", \"floor_id\": \"my_floor\", \"visibility\": \"PRIVATE\", \"message\": \"Floor is already private\" } ```
         
         ---
         
-        ## Error Responses (Examples)
+        ### Error Responses (Examples)
         
         ### Not Authorized (Not Owner)
         
@@ -1422,7 +1434,7 @@ class DefaultApi:
         
         ---
         
-        ## Notes
+        ### Notes
         * This API is intended to control floor visibility only; membership/invite rules (for private floors) are handled elsewhere. * `app_id` is provided for developer/pod applications and is optional unless enforced by your app model. * If you support floor types like `POD`, document whether pods are allowed to be private or not (some platforms restrict this).
 
         :param floor_id: Floor ID
@@ -1505,15 +1517,21 @@ class DefaultApi:
         
         ---
         
-        ## Request Method `POST`
+        **Request Method**
+        
+         `POST`
         
         ---
         
-        ## Content-Type `application/x-www-form-urlencoded` (or `multipart/form-data` if your system uses form-data) *(Document whichever you actually accept; below assumes standard form fields.)*
+        **Content-Type**
+        
+         `application/x-www-form-urlencoded` (or `multipart/form-data` if your system uses form-data) *(Document whichever you actually accept; below assumes standard form fields.)*
         
         ---
         
-        ## Request Parameters (Form Fields) | Field | Type | Required | Description |
+        **Request Parameters (Form Fields)**
+        
+        | Field | Type | Required | Description |
         | ---------- | ------ | -------- | -------------------------------------------------------------------- |
         | `user_id` | String | **Yes** | User requesting the change. Must be the **owner** of the floor. |
         | `floor_id` | String | **Yes** | Public identifier of the floor to update. |
@@ -1521,12 +1539,12 @@ class DefaultApi:
         
         ---
         
-        ## Authorization Rules (Critical)
+        ### Authorization Rules (Critical)
         * The caller must be authenticated as `user_id` * **Only the floor owner** can change floor visibility * If the user is not the owner, the request must be rejected
         
         ---
         
-        ## Behavior Rules
+        ### Behavior Rules
         * Converts visibility from **PUBLIC → PRIVATE** * Does not modify floor content or blocks * Access enforcement for private floors is applied immediately after the change **Idempotency**
         * Calling this API multiple times should not cause repeated changes * If already private, the API should either:
         * return success with a message like `\"already private\"`, or
@@ -1534,23 +1552,23 @@ class DefaultApi:
         
         ---
         
-        ## Response Format `application/json`
+        ### Response Format `application/json`
         
         ---
         
-        ## Sample Success Response *(Example — adjust to match your actual response format)*
+        ### Sample Success Response *(Example — adjust to match your actual response format)*
         
         ```json { \"status\": \"SUCCESS\", \"floor_id\": \"my_floor\", \"visibility\": \"PRIVATE\", \"message\": \"Floor is now private\" } ```
         
         ---
         
-        ## Sample No-Op Response (Already Private)
+        ### Sample No-Op Response (Already Private)
         
         ```json { \"status\": \"SUCCESS\", \"floor_id\": \"my_floor\", \"visibility\": \"PRIVATE\", \"message\": \"Floor is already private\" } ```
         
         ---
         
-        ## Error Responses (Examples)
+        ### Error Responses (Examples)
         
         ### Not Authorized (Not Owner)
         
@@ -1566,7 +1584,7 @@ class DefaultApi:
         
         ---
         
-        ## Notes
+        ### Notes
         * This API is intended to control floor visibility only; membership/invite rules (for private floors) are handled elsewhere. * `app_id` is provided for developer/pod applications and is optional unless enforced by your app model. * If you support floor types like `POD`, document whether pods are allowed to be private or not (some platforms restrict this).
 
         :param floor_id: Floor ID
@@ -1721,15 +1739,21 @@ class DefaultApi:
         
         ---
         
-        ## Request Method `POST`
+        **Request Method**
+        
+         `POST`
         
         ---
         
-        ## Content-Type `application/x-www-form-urlencoded` (or `multipart/form-data`, depending on your implementation)
+        **Content-Type**
+        
+         `application/x-www-form-urlencoded` (or `multipart/form-data`, depending on your implementation)
         
         ---
         
-        ## Request Parameters (Form Fields) | Field | Type | Required | Description |
+        **Request Parameters (Form Fields)**
+        
+        | Field | Type | Required | Description |
         | ---------- | ------ | -------- | ------------------------------------------------------------------------------- |
         | `user_id` | String | **Yes** | User requesting the change. Must be the **owner** of the floor. |
         | `floor_id` | String | **Yes** | Public identifier of the floor whose visibility is to be changed. |
@@ -1737,12 +1761,12 @@ class DefaultApi:
         
         ---
         
-        ## Authorization Rules (Critical)
+        ### Authorization Rules (Critical)
         * The caller must be authenticated as `user_id` * **Only the floor owner** is allowed to change the floor’s visibility * Requests from non-owners must be rejected
         
         ---
         
-        ## Behavior Rules
+        ### Behavior Rules
         * Converts floor visibility from **PRIVATE → PUBLIC** * Does not modify floor content, blocks, or ownership * Visibility change takes effect immediately
         
         ### Idempotency
@@ -1752,23 +1776,23 @@ class DefaultApi:
         
         ---
         
-        ## Response Format `application/json`
+        ### Response Format `application/json`
         
         ---
         
-        ## Sample Success Response
+        ### Sample Success Response
         
         ```json { \"status\": \"SUCCESS\", \"floor_id\": \"my_floor\", \"visibility\": \"PUBLIC\", \"message\": \"Floor is now public\" } ```
         
         ---
         
-        ## Sample No-Op Response (Already Public)
+        ### Sample No-Op Response (Already Public)
         
         ```json { \"status\": \"SUCCESS\", \"floor_id\": \"my_floor\", \"visibility\": \"PUBLIC\", \"message\": \"Floor is already public\" } ```
         
         ---
         
-        ## Error Responses (Examples)
+        ### Error Responses (Examples)
         
         ### Not Authorized (Not Owner)
         
@@ -1788,7 +1812,7 @@ class DefaultApi:
         
         ---
         
-        ## Notes for Developers
+        ### Notes for Developers
         * This API controls **visibility only**. Membership, invitations, and moderation rules are handled by separate APIs. * `app_id` is optional and primarily used for developer-managed or pod floors. * Clients should refresh floor metadata (e.g., via `/api/floor/info`) after a successful visibility change.
         
         ---
@@ -1875,15 +1899,21 @@ class DefaultApi:
         
         ---
         
-        ## Request Method `POST`
+        **Request Method**
+        
+         `POST`
         
         ---
         
-        ## Content-Type `application/x-www-form-urlencoded` (or `multipart/form-data`, depending on your implementation)
+        **Content-Type**
+        
+         `application/x-www-form-urlencoded` (or `multipart/form-data`, depending on your implementation)
         
         ---
         
-        ## Request Parameters (Form Fields) | Field | Type | Required | Description |
+        **Request Parameters (Form Fields)**
+        
+        | Field | Type | Required | Description |
         | ---------- | ------ | -------- | ------------------------------------------------------------------------------- |
         | `user_id` | String | **Yes** | User requesting the change. Must be the **owner** of the floor. |
         | `floor_id` | String | **Yes** | Public identifier of the floor whose visibility is to be changed. |
@@ -1891,12 +1921,12 @@ class DefaultApi:
         
         ---
         
-        ## Authorization Rules (Critical)
+        ### Authorization Rules (Critical)
         * The caller must be authenticated as `user_id` * **Only the floor owner** is allowed to change the floor’s visibility * Requests from non-owners must be rejected
         
         ---
         
-        ## Behavior Rules
+        ### Behavior Rules
         * Converts floor visibility from **PRIVATE → PUBLIC** * Does not modify floor content, blocks, or ownership * Visibility change takes effect immediately
         
         ### Idempotency
@@ -1906,23 +1936,23 @@ class DefaultApi:
         
         ---
         
-        ## Response Format `application/json`
+        ### Response Format `application/json`
         
         ---
         
-        ## Sample Success Response
+        ### Sample Success Response
         
         ```json { \"status\": \"SUCCESS\", \"floor_id\": \"my_floor\", \"visibility\": \"PUBLIC\", \"message\": \"Floor is now public\" } ```
         
         ---
         
-        ## Sample No-Op Response (Already Public)
+        ### Sample No-Op Response (Already Public)
         
         ```json { \"status\": \"SUCCESS\", \"floor_id\": \"my_floor\", \"visibility\": \"PUBLIC\", \"message\": \"Floor is already public\" } ```
         
         ---
         
-        ## Error Responses (Examples)
+        ### Error Responses (Examples)
         
         ### Not Authorized (Not Owner)
         
@@ -1942,7 +1972,7 @@ class DefaultApi:
         
         ---
         
-        ## Notes for Developers
+        ### Notes for Developers
         * This API controls **visibility only**. Membership, invitations, and moderation rules are handled by separate APIs. * `app_id` is optional and primarily used for developer-managed or pod floors. * Clients should refresh floor metadata (e.g., via `/api/floor/info`) after a successful visibility change.
         
         ---
@@ -2029,15 +2059,21 @@ class DefaultApi:
         
         ---
         
-        ## Request Method `POST`
+        **Request Method**
+        
+         `POST`
         
         ---
         
-        ## Content-Type `application/x-www-form-urlencoded` (or `multipart/form-data`, depending on your implementation)
+        **Content-Type**
+        
+         `application/x-www-form-urlencoded` (or `multipart/form-data`, depending on your implementation)
         
         ---
         
-        ## Request Parameters (Form Fields) | Field | Type | Required | Description |
+        **Request Parameters (Form Fields)**
+        
+        | Field | Type | Required | Description |
         | ---------- | ------ | -------- | ------------------------------------------------------------------------------- |
         | `user_id` | String | **Yes** | User requesting the change. Must be the **owner** of the floor. |
         | `floor_id` | String | **Yes** | Public identifier of the floor whose visibility is to be changed. |
@@ -2045,12 +2081,12 @@ class DefaultApi:
         
         ---
         
-        ## Authorization Rules (Critical)
+        ### Authorization Rules (Critical)
         * The caller must be authenticated as `user_id` * **Only the floor owner** is allowed to change the floor’s visibility * Requests from non-owners must be rejected
         
         ---
         
-        ## Behavior Rules
+        ### Behavior Rules
         * Converts floor visibility from **PRIVATE → PUBLIC** * Does not modify floor content, blocks, or ownership * Visibility change takes effect immediately
         
         ### Idempotency
@@ -2060,23 +2096,23 @@ class DefaultApi:
         
         ---
         
-        ## Response Format `application/json`
+        ### Response Format `application/json`
         
         ---
         
-        ## Sample Success Response
+        ### Sample Success Response
         
         ```json { \"status\": \"SUCCESS\", \"floor_id\": \"my_floor\", \"visibility\": \"PUBLIC\", \"message\": \"Floor is now public\" } ```
         
         ---
         
-        ## Sample No-Op Response (Already Public)
+        ### Sample No-Op Response (Already Public)
         
         ```json { \"status\": \"SUCCESS\", \"floor_id\": \"my_floor\", \"visibility\": \"PUBLIC\", \"message\": \"Floor is already public\" } ```
         
         ---
         
-        ## Error Responses (Examples)
+        ### Error Responses (Examples)
         
         ### Not Authorized (Not Owner)
         
@@ -2096,7 +2132,7 @@ class DefaultApi:
         
         ---
         
-        ## Notes for Developers
+        ### Notes for Developers
         * This API controls **visibility only**. Membership, invitations, and moderation rules are handled by separate APIs. * `app_id` is optional and primarily used for developer-managed or pod floors. * Clients should refresh floor metadata (e.g., via `/api/floor/info`) after a successful visibility change.
         
         ---
@@ -2576,20 +2612,26 @@ class DefaultApi:
         
         ---
         
-        ## Ownership & Authorization (Critical)
+        ### Ownership & Authorization (Critical)
         * The caller **must be authenticated** * **Only the floor owner** is allowed to rename a floor * Members, followers, or non-owners **cannot** perform this operation * Ownership is validated internally using `user_id` > If the user is not the owner, the request must be rejected.
         
         ---
         
-        ## Request Method `POST`
+        **Request Method**
+        
+         `POST`
         
         ---
         
-        ## Content-Type `application/x-www-form-urlencoded` (or equivalent form-data encoding)
+        **Content-Type**
+        
+         `application/x-www-form-urlencoded` (or equivalent form-data encoding)
         
         ---
         
-        ## Request Parameters (Form Fields) | Parameter | Type | Required | Description |
+        **Request Parameters (Form Fields)**
+        
+        | Parameter | Type | Required | Description |
         | --------- | ------ | -------- | ------------------------------------------------------------------------------- |
         | `user_id` | String | **Yes** | User requesting the rename. Must be the **owner** of the floor. |
         | `from` | String | **Yes** | Existing floor ID (current identifier to be renamed). |
@@ -2598,13 +2640,13 @@ class DefaultApi:
         
         ---
         
-        ## Rename Rules & Constraints
+        ### Rename Rules & Constraints
         * The `from` floor ID **must exist** * The `to` floor ID **must be unique** and not already in use * The rename operation updates **only the floor ID**
         * Floor ownership, blocks, posts, and internal `fid` remain unchanged * Any links or references using the old floor ID may no longer be valid after rename
         
         ---
         
-        ## Behavior Summary | Scenario | Result |
+        ### Behavior Summary | Scenario | Result |
         | ---------------------------- | ------------------------------------------------- |
         | Valid owner + unique new ID | Floor ID renamed successfully |
         | Non-owner user | Request rejected |
@@ -2614,17 +2656,17 @@ class DefaultApi:
         
         ---
         
-        ## Response Format `application/json`
+        ### Response Format `application/json`
         
         ---
         
-        ## Sample Success Response
+        ### Sample Success Response
         
         ```json { \"status\": \"SUCCESS\", \"old_floor_id\": \"oldfloorid\", \"new_floor_id\": \"newfloorid\", \"message\": \"Floor ID renamed successfully\" } ```
         
         ---
         
-        ## Sample Error Responses
+        ### Sample Error Responses
         
         ### Not Floor Owner
         
@@ -2650,7 +2692,7 @@ class DefaultApi:
         
         ---
         
-        ## Notes for Developers
+        ### Notes for Developers
         * This API **renames the public identifier only**; the internal immutable floor ID (`fid`) is not affected. * Clients should refresh cached floor metadata after a successful rename. * If your platform supports deep links or bookmarks, consider redirect or alias handling for old floor IDs (if supported).
         
         ---
@@ -2739,20 +2781,26 @@ class DefaultApi:
         
         ---
         
-        ## Ownership & Authorization (Critical)
+        ### Ownership & Authorization (Critical)
         * The caller **must be authenticated** * **Only the floor owner** is allowed to rename a floor * Members, followers, or non-owners **cannot** perform this operation * Ownership is validated internally using `user_id` > If the user is not the owner, the request must be rejected.
         
         ---
         
-        ## Request Method `POST`
+        **Request Method**
+        
+         `POST`
         
         ---
         
-        ## Content-Type `application/x-www-form-urlencoded` (or equivalent form-data encoding)
+        **Content-Type**
+        
+         `application/x-www-form-urlencoded` (or equivalent form-data encoding)
         
         ---
         
-        ## Request Parameters (Form Fields) | Parameter | Type | Required | Description |
+        **Request Parameters (Form Fields)**
+        
+        | Parameter | Type | Required | Description |
         | --------- | ------ | -------- | ------------------------------------------------------------------------------- |
         | `user_id` | String | **Yes** | User requesting the rename. Must be the **owner** of the floor. |
         | `from` | String | **Yes** | Existing floor ID (current identifier to be renamed). |
@@ -2761,13 +2809,13 @@ class DefaultApi:
         
         ---
         
-        ## Rename Rules & Constraints
+        ### Rename Rules & Constraints
         * The `from` floor ID **must exist** * The `to` floor ID **must be unique** and not already in use * The rename operation updates **only the floor ID**
         * Floor ownership, blocks, posts, and internal `fid` remain unchanged * Any links or references using the old floor ID may no longer be valid after rename
         
         ---
         
-        ## Behavior Summary | Scenario | Result |
+        ### Behavior Summary | Scenario | Result |
         | ---------------------------- | ------------------------------------------------- |
         | Valid owner + unique new ID | Floor ID renamed successfully |
         | Non-owner user | Request rejected |
@@ -2777,17 +2825,17 @@ class DefaultApi:
         
         ---
         
-        ## Response Format `application/json`
+        ### Response Format `application/json`
         
         ---
         
-        ## Sample Success Response
+        ### Sample Success Response
         
         ```json { \"status\": \"SUCCESS\", \"old_floor_id\": \"oldfloorid\", \"new_floor_id\": \"newfloorid\", \"message\": \"Floor ID renamed successfully\" } ```
         
         ---
         
-        ## Sample Error Responses
+        ### Sample Error Responses
         
         ### Not Floor Owner
         
@@ -2813,7 +2861,7 @@ class DefaultApi:
         
         ---
         
-        ## Notes for Developers
+        ### Notes for Developers
         * This API **renames the public identifier only**; the internal immutable floor ID (`fid`) is not affected. * Clients should refresh cached floor metadata after a successful rename. * If your platform supports deep links or bookmarks, consider redirect or alias handling for old floor IDs (if supported).
         
         ---
@@ -2902,20 +2950,26 @@ class DefaultApi:
         
         ---
         
-        ## Ownership & Authorization (Critical)
+        ### Ownership & Authorization (Critical)
         * The caller **must be authenticated** * **Only the floor owner** is allowed to rename a floor * Members, followers, or non-owners **cannot** perform this operation * Ownership is validated internally using `user_id` > If the user is not the owner, the request must be rejected.
         
         ---
         
-        ## Request Method `POST`
+        **Request Method**
+        
+         `POST`
         
         ---
         
-        ## Content-Type `application/x-www-form-urlencoded` (or equivalent form-data encoding)
+        **Content-Type**
+        
+         `application/x-www-form-urlencoded` (or equivalent form-data encoding)
         
         ---
         
-        ## Request Parameters (Form Fields) | Parameter | Type | Required | Description |
+        **Request Parameters (Form Fields)**
+        
+        | Parameter | Type | Required | Description |
         | --------- | ------ | -------- | ------------------------------------------------------------------------------- |
         | `user_id` | String | **Yes** | User requesting the rename. Must be the **owner** of the floor. |
         | `from` | String | **Yes** | Existing floor ID (current identifier to be renamed). |
@@ -2924,13 +2978,13 @@ class DefaultApi:
         
         ---
         
-        ## Rename Rules & Constraints
+        ### Rename Rules & Constraints
         * The `from` floor ID **must exist** * The `to` floor ID **must be unique** and not already in use * The rename operation updates **only the floor ID**
         * Floor ownership, blocks, posts, and internal `fid` remain unchanged * Any links or references using the old floor ID may no longer be valid after rename
         
         ---
         
-        ## Behavior Summary | Scenario | Result |
+        ### Behavior Summary | Scenario | Result |
         | ---------------------------- | ------------------------------------------------- |
         | Valid owner + unique new ID | Floor ID renamed successfully |
         | Non-owner user | Request rejected |
@@ -2940,17 +2994,17 @@ class DefaultApi:
         
         ---
         
-        ## Response Format `application/json`
+        ### Response Format `application/json`
         
         ---
         
-        ## Sample Success Response
+        ### Sample Success Response
         
         ```json { \"status\": \"SUCCESS\", \"old_floor_id\": \"oldfloorid\", \"new_floor_id\": \"newfloorid\", \"message\": \"Floor ID renamed successfully\" } ```
         
         ---
         
-        ## Sample Error Responses
+        ### Sample Error Responses
         
         ### Not Floor Owner
         
@@ -2976,7 +3030,7 @@ class DefaultApi:
         
         ---
         
-        ## Notes for Developers
+        ### Notes for Developers
         * This API **renames the public identifier only**; the internal immutable floor ID (`fid`) is not affected. * Clients should refresh cached floor metadata after a successful rename. * If your platform supports deep links or bookmarks, consider redirect or alias handling for old floor IDs (if supported).
         
         ---
@@ -3139,7 +3193,7 @@ class DefaultApi:
 
         ---
         
-        ## Reset Password (Forgot Password, Not Logged In) Resets the password of a user who **cannot log in** and is using a **forgot-password** flow. This endpoint is used when the user is not authenticated and requests a password reset using a verified identity channel such as **email** or **mobile number**. The system validates a **one-time reset verification code** (`activation_code`) issued for the reset-password flow. If valid and not expired, the password is updated to `new_password` and takes effect immediately. If verification fails, the password remains unchanged and an error response is returned.
+        ### Reset Password (Forgot Password, Not Logged In) Resets the password of a user who **cannot log in** and is using a **forgot-password** flow. This endpoint is used when the user is not authenticated and requests a password reset using a verified identity channel such as **email** or **mobile number**. The system validates a **one-time reset verification code** (`activation_code`) issued for the reset-password flow. If valid and not expired, the password is updated to `new_password` and takes effect immediately. If verification fails, the password remains unchanged and an error response is returned.
         
         ### Authentication ✅ **Recommended** (better security): a short-lived **reset token** issued after initiating reset
         
@@ -3233,7 +3287,7 @@ class DefaultApi:
 
         ---
         
-        ## Reset Password (Forgot Password, Not Logged In) Resets the password of a user who **cannot log in** and is using a **forgot-password** flow. This endpoint is used when the user is not authenticated and requests a password reset using a verified identity channel such as **email** or **mobile number**. The system validates a **one-time reset verification code** (`activation_code`) issued for the reset-password flow. If valid and not expired, the password is updated to `new_password` and takes effect immediately. If verification fails, the password remains unchanged and an error response is returned.
+        ### Reset Password (Forgot Password, Not Logged In) Resets the password of a user who **cannot log in** and is using a **forgot-password** flow. This endpoint is used when the user is not authenticated and requests a password reset using a verified identity channel such as **email** or **mobile number**. The system validates a **one-time reset verification code** (`activation_code`) issued for the reset-password flow. If valid and not expired, the password is updated to `new_password` and takes effect immediately. If verification fails, the password remains unchanged and an error response is returned.
         
         ### Authentication ✅ **Recommended** (better security): a short-lived **reset token** issued after initiating reset
         
@@ -3327,7 +3381,7 @@ class DefaultApi:
 
         ---
         
-        ## Reset Password (Forgot Password, Not Logged In) Resets the password of a user who **cannot log in** and is using a **forgot-password** flow. This endpoint is used when the user is not authenticated and requests a password reset using a verified identity channel such as **email** or **mobile number**. The system validates a **one-time reset verification code** (`activation_code`) issued for the reset-password flow. If valid and not expired, the password is updated to `new_password` and takes effect immediately. If verification fails, the password remains unchanged and an error response is returned.
+        ### Reset Password (Forgot Password, Not Logged In) Resets the password of a user who **cannot log in** and is using a **forgot-password** flow. This endpoint is used when the user is not authenticated and requests a password reset using a verified identity channel such as **email** or **mobile number**. The system validates a **one-time reset verification code** (`activation_code`) issued for the reset-password flow. If valid and not expired, the password is updated to `new_password` and takes effect immediately. If verification fails, the password remains unchanged and an error response is returned.
         
         ### Authentication ✅ **Recommended** (better security): a short-lived **reset token** issued after initiating reset
         
@@ -5029,18 +5083,18 @@ class DefaultApi:
     ) -> UserDetails:
         """Validation
 
-        ## **Validate Activation / Verification Code** This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**. Depending on the mode, the API may:
+        ### **Validate Activation / Verification Code** This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**. Depending on the mode, the API may:
         * Activate a newly registered account * Confirm a login attempt * Verify a password change or reset * Validate email or mobile updates * Confirm account deletion or clearing requests The API verifies the provided `activation_code` against the given `user_id`, `mode`, and application context. If validation succeeds, the requested operation is completed and the API returns the relevant **POD information** and **user profile details** (where applicable). If validation fails, the operation is **not performed** and an appropriate error response is returned.
         
         ---
         
-        ## **Authentication** This endpoint requires **Bearer Token authentication**. **Header**
+        ### **Authentication** This endpoint requires **Bearer Token authentication**. **Header**
         
         ``` Authorization: Bearer <access_token> ```
         
         ---
         
-        ## **Request Body**
+        ### **Request Body**
         
         ```json { \"user_id\": \"string\", \"activation_code\": \"string\", \"app_id\": \"string\", \"mode\": \"string\" } ```
         
@@ -5049,7 +5103,7 @@ class DefaultApi:
         
         ---
         
-        ## **Usage Scenarios (Mode Definitions)** | Mode | Purpose |
+        ### **Usage Scenarios (Mode Definitions)** | Mode | Purpose |
         | ---- | ---------------------------------------- |
         | 0 | Email or mobile number change |
         | 1 | Password change |
@@ -5061,7 +5115,7 @@ class DefaultApi:
         
         ---
         
-        ## **Successful Response** On successful validation:
+        ### **Successful Response** On successful validation:
         * The requested operation (based on `mode`) is completed * The API returns:
         * **POD information** associated with the user (if applicable)
         * **User profile details** (if applicable) Examples:
@@ -5069,12 +5123,12 @@ class DefaultApi:
         
         ---
         
-        ## **Error Response** The API returns an error response when:
+        ### **Error Response** The API returns an error response when:
         * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated) * Authorization fails or the bearer token is missing or invalid ⚠️ In all error cases, **no account state change occurs**.
         
         ---
         
-        ## **One-Line Summary** > Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
+        ### **One-Line Summary** > Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
 
         :param validate_code_request: (required)
         :type validate_code_request: ValidateCodeRequest
@@ -5143,18 +5197,18 @@ class DefaultApi:
     ) -> ApiResponse[UserDetails]:
         """Validation
 
-        ## **Validate Activation / Verification Code** This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**. Depending on the mode, the API may:
+        ### **Validate Activation / Verification Code** This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**. Depending on the mode, the API may:
         * Activate a newly registered account * Confirm a login attempt * Verify a password change or reset * Validate email or mobile updates * Confirm account deletion or clearing requests The API verifies the provided `activation_code` against the given `user_id`, `mode`, and application context. If validation succeeds, the requested operation is completed and the API returns the relevant **POD information** and **user profile details** (where applicable). If validation fails, the operation is **not performed** and an appropriate error response is returned.
         
         ---
         
-        ## **Authentication** This endpoint requires **Bearer Token authentication**. **Header**
+        ### **Authentication** This endpoint requires **Bearer Token authentication**. **Header**
         
         ``` Authorization: Bearer <access_token> ```
         
         ---
         
-        ## **Request Body**
+        ### **Request Body**
         
         ```json { \"user_id\": \"string\", \"activation_code\": \"string\", \"app_id\": \"string\", \"mode\": \"string\" } ```
         
@@ -5163,7 +5217,7 @@ class DefaultApi:
         
         ---
         
-        ## **Usage Scenarios (Mode Definitions)** | Mode | Purpose |
+        ### **Usage Scenarios (Mode Definitions)** | Mode | Purpose |
         | ---- | ---------------------------------------- |
         | 0 | Email or mobile number change |
         | 1 | Password change |
@@ -5175,7 +5229,7 @@ class DefaultApi:
         
         ---
         
-        ## **Successful Response** On successful validation:
+        ### **Successful Response** On successful validation:
         * The requested operation (based on `mode`) is completed * The API returns:
         * **POD information** associated with the user (if applicable)
         * **User profile details** (if applicable) Examples:
@@ -5183,12 +5237,12 @@ class DefaultApi:
         
         ---
         
-        ## **Error Response** The API returns an error response when:
+        ### **Error Response** The API returns an error response when:
         * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated) * Authorization fails or the bearer token is missing or invalid ⚠️ In all error cases, **no account state change occurs**.
         
         ---
         
-        ## **One-Line Summary** > Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
+        ### **One-Line Summary** > Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
 
         :param validate_code_request: (required)
         :type validate_code_request: ValidateCodeRequest
@@ -5257,18 +5311,18 @@ class DefaultApi:
     ) -> RESTResponseType:
         """Validation
 
-        ## **Validate Activation / Verification Code** This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**. Depending on the mode, the API may:
+        ### **Validate Activation / Verification Code** This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**. Depending on the mode, the API may:
         * Activate a newly registered account * Confirm a login attempt * Verify a password change or reset * Validate email or mobile updates * Confirm account deletion or clearing requests The API verifies the provided `activation_code` against the given `user_id`, `mode`, and application context. If validation succeeds, the requested operation is completed and the API returns the relevant **POD information** and **user profile details** (where applicable). If validation fails, the operation is **not performed** and an appropriate error response is returned.
         
         ---
         
-        ## **Authentication** This endpoint requires **Bearer Token authentication**. **Header**
+        ### **Authentication** This endpoint requires **Bearer Token authentication**. **Header**
         
         ``` Authorization: Bearer <access_token> ```
         
         ---
         
-        ## **Request Body**
+        ### **Request Body**
         
         ```json { \"user_id\": \"string\", \"activation_code\": \"string\", \"app_id\": \"string\", \"mode\": \"string\" } ```
         
@@ -5277,7 +5331,7 @@ class DefaultApi:
         
         ---
         
-        ## **Usage Scenarios (Mode Definitions)** | Mode | Purpose |
+        ### **Usage Scenarios (Mode Definitions)** | Mode | Purpose |
         | ---- | ---------------------------------------- |
         | 0 | Email or mobile number change |
         | 1 | Password change |
@@ -5289,7 +5343,7 @@ class DefaultApi:
         
         ---
         
-        ## **Successful Response** On successful validation:
+        ### **Successful Response** On successful validation:
         * The requested operation (based on `mode`) is completed * The API returns:
         * **POD information** associated with the user (if applicable)
         * **User profile details** (if applicable) Examples:
@@ -5297,12 +5351,12 @@ class DefaultApi:
         
         ---
         
-        ## **Error Response** The API returns an error response when:
+        ### **Error Response** The API returns an error response when:
         * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated) * Authorization fails or the bearer token is missing or invalid ⚠️ In all error cases, **no account state change occurs**.
         
         ---
         
-        ## **One-Line Summary** > Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
+        ### **One-Line Summary** > Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
 
         :param validate_code_request: (required)
         :type validate_code_request: ValidateCodeRequest

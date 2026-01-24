@@ -1,7 +1,7 @@
 # EditFloor400ResponseError
 
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **path** | **str** | API path | 
 **timestamp** | **str** | Time stamp | 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.edit_floor400_response_error import EditFloor400ResponseError

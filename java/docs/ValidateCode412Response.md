@@ -3,7 +3,7 @@
 # ValidateCode412Response
 
 
-## Properties
+### Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|

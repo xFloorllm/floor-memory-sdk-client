@@ -1,6 +1,6 @@
 # XfloorFloorMemorySdkJs.GetRecentEvents400Response
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

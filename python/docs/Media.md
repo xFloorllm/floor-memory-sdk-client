@@ -1,14 +1,14 @@
 # Media
 
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **url** | **str** | Url where media is stored | 
 **type** | **str** | ID of the media | 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.media import Media

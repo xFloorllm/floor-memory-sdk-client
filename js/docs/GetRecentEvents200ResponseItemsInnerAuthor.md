@@ -1,6 +1,6 @@
 # XfloorFloorMemorySdkJs.GetRecentEvents200ResponseItemsInnerAuthor
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

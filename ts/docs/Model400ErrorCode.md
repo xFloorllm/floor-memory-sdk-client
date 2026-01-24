@@ -2,7 +2,7 @@
 # Model400ErrorCode
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
@@ -11,7 +11,7 @@ Name | Type
 `path` | string
 `timestamp` | string
 
-## Example
+### Example
 
 ```typescript
 import type { Model400ErrorCode } from '@xfloor/floor-memory-sdk-ts'

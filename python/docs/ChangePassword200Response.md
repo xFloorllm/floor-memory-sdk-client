@@ -1,13 +1,13 @@
 # ChangePassword200Response
 
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **str** | Validate with OTP | 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.change_password200_response import ChangePassword200Response

@@ -4,7 +4,7 @@
 
 Block Details
 
-## Properties
+### Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|

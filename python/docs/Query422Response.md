@@ -1,13 +1,13 @@
 # Query422Response
 
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **error** | [**Query422ResponseError**](Query422ResponseError.md) |  | 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.query422_response import Query422Response

@@ -27,7 +27,7 @@ After a successful update, the API returns the **latest floor object**, includin
 
 ---
 
-## Authorization Rules (Critical)
+### Authorization Rules (Critical)
 
 * The caller **must be authenticated**
 * The caller **must be the owner of the floor**
@@ -38,13 +38,15 @@ After a successful update, the API returns the **latest floor object**, includin
 
 ---
 
-## Content-Type
+**Content-Type**
+
+
 
 `multipart/form-data`
 
 ---
 
-## Request Body (Multipart Form Data)
+### Request Body (Multipart Form Data)
 
 ### Form Fields
 
@@ -61,7 +63,7 @@ After a successful update, the API returns the **latest floor object**, includin
 
 ---
 
-## Update Rules
+### Update Rules
 
 * At least one of `title`, `details`, or `logo` must be present
 * Missing update fields result in a validation error
@@ -69,13 +71,13 @@ After a successful update, the API returns the **latest floor object**, includin
 
 ---
 
-## Response Format
+### Response Format
 
 `application/json`
 
 ---
 
-## Sample Success Response
+### Sample Success Response
 
 ```json
 {
@@ -99,7 +101,7 @@ After a successful update, the API returns the **latest floor object**, includin
 
 ---
 
-## Error Responses (Authorization Focus)
+### Error Responses (Authorization Focus)
 
 ### Not Floor Owner
 
@@ -130,7 +132,7 @@ After a successful update, the API returns the **latest floor object**, includin
 
 ---
 
-## Notes
+### Notes
 
 * This API is **owner-only by design**
 * Pods and developer tools must operate using **owner credentials**

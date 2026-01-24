@@ -1,14 +1,14 @@
 # GetRecentEvents200Response
 
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **post_count** | **str** | Number of posts | 
 **items** | [**List[GetRecentEvents200ResponseItemsInner]**](GetRecentEvents200ResponseItemsInner.md) | List of posts | 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.get_recent_events200_response import GetRecentEvents200Response

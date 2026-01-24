@@ -8,7 +8,7 @@ All URIs are relative to *https://appfloor.in*
 
 
 
-## editFloor
+### editFloor
 
 > GetFloorInformation200Response editFloor(floorId, userId, appId, logoFile, title, details)
 
@@ -19,16 +19,18 @@ This API updates an existing floor’s profile metadata using **multipart form d
 
 ---
 
-## Authorization Rules (Critical)
+### Authorization Rules (Critical)
 * The caller **must be authenticated** * The caller **must be the owner of the floor** * Members, followers, or pod consumers **cannot** edit the floor * Ownership is validated internally using the authenticated user context > **Ownership is mandatory. There are no partial permissions for this API.**
 
 ---
 
-## Content-Type `multipart/form-data`
+**Content-Type**
+
+ `multipart/form-data`
 
 ---
 
-## Request Body (Multipart Form Data)
+### Request Body (Multipart Form Data)
 
 ### Form Fields | Field Name | Type | Required | Description |
 | ---------- | ------ | ------------ | ---------------------------------------- |
@@ -41,22 +43,22 @@ This API updates an existing floor’s profile metadata using **multipart form d
 
 ---
 
-## Update Rules
+### Update Rules
 * At least one of `title`, `details`, or `logo` must be present * Missing update fields result in a validation error * If `logo` is provided, the previous logo is replaced
 
 ---
 
-## Response Format `application/json`
+### Response Format `application/json`
 
 ---
 
-## Sample Success Response
+### Sample Success Response
 
 ```json { \"floor_id\": \"my_floor\", \"title\": \"daughter ouch upon yummy clamor\", \"details\": \"nostrud occaecat incididunt dolor adipisicing\", \"fid\": \"86\", \"blocks\": [ { \"bid\": \"83\", \"type\": \"pariatur\", \"title\": \"wherever demobilise acidly refute\" } ], \"avatar\": { \"url\": \"https://legal-availability.name/\", \"id\": \"98\" } } ```
 
 ---
 
-## Error Responses (Authorization Focus)
+### Error Responses (Authorization Focus)
 
 ### Not Floor Owner
 
@@ -72,7 +74,7 @@ This API updates an existing floor’s profile metadata using **multipart form d
 
 ---
 
-## Notes
+### Notes
 * This API is **owner-only by design** * Pods and developer tools must operate using **owner credentials** * Blocks are returned for convenience but are **not editable through this API**
 
 ---

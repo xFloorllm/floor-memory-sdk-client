@@ -2,13 +2,13 @@
 # ValidateCode400Response
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
 `error` | [ValidateCode400ResponseError](ValidateCode400ResponseError.md)
 
-## Example
+### Example
 
 ```typescript
 import type { ValidateCode400Response } from '@xfloor/floor-memory-sdk-ts'

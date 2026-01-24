@@ -35,7 +35,7 @@ The API is designed for **multi-turn conversations**. Follow-up questions from t
 
 ---
 
-## **Core Capabilities**
+### **Core Capabilities**
 
 * Interprets **natural language queries**
 * Retrieves relevant information from one or more floors
@@ -47,7 +47,7 @@ The API is designed for **multi-turn conversations**. Follow-up questions from t
 
 ---
 
-## **Authentication & Identity**
+### **Authentication & Identity**
 
 * A valid `user_id` is **required**
 * User authentication is assumed to be completed **before** calling this API
@@ -58,7 +58,7 @@ The API is designed for **multi-turn conversations**. Follow-up questions from t
 
 ---
 
-## **Request Contract**
+### **Request Contract**
 
 ### **HTTP Method**
 
@@ -76,7 +76,7 @@ application/json
 
 ---
 
-## **Request Body (JSON)**
+### **Request Body (JSON)**
 
 ### **Field Descriptions**
 
@@ -129,7 +129,7 @@ application/json
 
 ---
 
-## **Behavior**
+### **Behavior**
 
 1. The query is analyzed using conversational and semantic understanding.
 2. Relevant content is retrieved from the specified floors.
@@ -141,7 +141,7 @@ application/json
 
 ---
 
-## **Response Contract**
+### **Response Contract**
 
 ### **High-Level Response Structure**
 
@@ -174,7 +174,7 @@ application/json
 
 ---
 
-## **Conversation Continuity**
+### **Conversation Continuity**
 
 * Conversation state is maintained **per `user_id`**
 * Follow-up queries automatically reference prior context
@@ -183,7 +183,7 @@ application/json
 
 ---
 
-## **Error Handling**
+### **Error Handling**
 
 The API may return errors in the following cases:
 
@@ -197,7 +197,7 @@ All errors are returned with appropriate HTTP status codes and descriptive messa
 
 ---
 
-## **Typical Use Case Flow**
+### **Typical Use Case Flow**
 
 1. User asks an initial question
    *“What options do I have in your institute?”*
@@ -210,7 +210,7 @@ All errors are returned with appropriate HTTP status codes and descriptive messa
 
 ---
 
-## **One-Line Summary**
+### **One-Line Summary**
 
 > Executes a conversational query over xfloor content, returning context-aware, filtered, and optionally summarized results with support for multi-turn interactions.
 
@@ -290,20 +290,20 @@ Name | Type | Description  | Notes
 
 ---
 
-## Response Structure
+### Response Structure
 
 ```json { \"answer\": \"string\", \"items\": [ ... ] } ```
 
 ---
 
-## Top-Level Fields | Field | Type | Description |
+### Top-Level Fields | Field | Type | Description |
 | -------- | ------ | --------------------------------------------------------- |
 | `answer` | String | Final assistant-generated response to the user query |
 | `items` | Array | List of matched content items retrieved during processing |
 
 ---
 
-## `answer`
+### `answer`
 
 ```json \"answer\": \"non veniam reprehenderit labore\" ```
 
@@ -315,7 +315,7 @@ Name | Type | Description  | Notes
 
 ---
 
-## `items[]` – Retrieved Content Items Each entry in `items` represents a **content block or event** that matched the query. These items are typically used for:
+### `items[]` – Retrieved Content Items Each entry in `items` represents a **content block or event** that matched the query. These items are typically used for:
 * Explainability (“why this answer?”) * Debugging or analytics * Showing sources or related content (optional UI)
 
 ---
@@ -342,12 +342,12 @@ Name | Type | Description  | Notes
 
 ---
 
-## Interpretation of `score`
+### Interpretation of `score`
 * Higher relevance is typically indicated by **better score ranking** (interpretation depends on backend logic) * Scores may be positive or negative depending on normalization and similarity model * Clients should **not rely on absolute score values**, only relative ordering
 
 ---
 
-## Typical Usage Patterns
+### Typical Usage Patterns
 
 ### Chat UI
 * Display only `answer` * Ignore `items` unless showing “Sources” or “Related content”
@@ -360,12 +360,12 @@ Name | Type | Description  | Notes
 
 ---
 
-## Notes for Developers
+### Notes for Developers
 * `items` may be an empty array if no relevant content was retrieved * The `answer` is always present on success * The order of `items` is typically sorted by relevance * Field values and score scales are implementation-specific and may evolve
 
 ---
 
-## Minimal Mental Model > **Answer** = what the agent says > **Items** = what the agent looked at |
+### Minimal Mental Model > **Answer** = what the agent says > **Items** = what the agent looked at |
 - |
 **422** |  |  -  |
 

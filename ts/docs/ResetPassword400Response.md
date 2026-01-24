@@ -2,7 +2,7 @@
 # ResetPassword400Response
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
@@ -11,7 +11,7 @@ Name | Type
 `path` | string
 `timestamp` | string
 
-## Example
+### Example
 
 ```typescript
 import type { ResetPassword400Response } from '@xfloor/floor-memory-sdk-ts'

@@ -1,7 +1,7 @@
 # QueryRequest
 
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **app_id** | **str** | App ID | [optional] 
 **filters** | [**QueryRequestFilters**](QueryRequestFilters.md) |  | [optional] 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.query_request import QueryRequest

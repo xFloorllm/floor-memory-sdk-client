@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 
-## event
+### event
 
 > EventResponse event(inputInfo, opts)
 
@@ -19,7 +19,7 @@ Posts into the given floor_id. This is asynchronous ingestion. 200 OK means queu
 
 ---
 
-## **Key Capabilities**
+### **Key Capabilities**
 * Stores user-generated content inside a specific floor * Supports **multi-modal inputs** (text + media) * Automatically embeds content for semantic search * Makes content available to:
 * `/agent/memory/query`
 * conversational agents
@@ -27,16 +27,16 @@ Posts into the given floor_id. This is asynchronous ingestion. 200 OK means queu
 
 ---
 
-## **Authentication**
+### **Authentication**
 * Requires a valid, authenticated `user_id` * The calling application is responsible for user authentication * `app_id` identifies the application context
 
 ---
 
-## **Request Type** **Content-Type:** `multipart/form-data`
+### **Request Type** **Content-Type:** `multipart/form-data`
 
 ---
 
-## **Request Parameters**
+### **Request Parameters**
 
 ### **1. Files (Optional)** | Field | Type | Required | Description |
 | ------- | ------ | -------- | --------------------------------------------------------------------- |
@@ -51,7 +51,7 @@ Posts into the given floor_id. This is asynchronous ingestion. 200 OK means queu
 
 ---
 
-## **`input_info` Structure**
+### **`input_info` Structure**
 
 ```json { \"floor_id\": \"my_floor\", \"BID\": \"17845683456\", \"user_id\": \"145623907625\", \"title\": \"My floor\", \"description\": \"My floor details\", \"app_id\": \"165434879028\" } ```
 
@@ -69,29 +69,29 @@ Posts into the given floor_id. This is asynchronous ingestion. 200 OK means queu
 
 ---
 
-## **Behavior**
+### **Behavior**
 1. The API validates the user and floor context. 2. Textual content (`title` and `description`) is ingested. 3. Attached media files are processed and linked to the content. 4. Embeddings are generated for:
 * Text
 * Supported media (where applicable) 5. The content becomes part of the user’s **personal memory store**. 6. The stored data is immediately available for querying and conversational retrieval.
 
 ---
 
-## **Successful Response** On success, the API confirms that:
+### **Successful Response** On success, the API confirms that:
 * The content has been stored * Embeddings have been generated * The memory item is available for future queries A success status and reference identifiers are returned.
 
 ---
 
-## **Error Handling** The API may return errors if:
+### **Error Handling** The API may return errors if:
 * Required fields are missing (`floor_id`, `user_id`, `description`) * Unsupported file formats are uploaded * The user does not have access to the specified floor * The request payload is malformed * Internal embedding or storage operations fail
 
 ---
 
-## **Typical Use Cases**
+### **Typical Use Cases**
 * Saving personal reminders * Posting notes or observations * Uploading documents for future reference * Creating a personal knowledge base * Feeding data into conversational agents
 
 ---
 
-## **One-Line Summary** > Stores user-generated text and media into a personal POD, embeds it for semantic search, and makes it available for conversational querying. ⚠️ Content Ingestion is Asynchronous The Create Event API queues content for processing. A successful response indicates **acceptance**, not availability. Newly ingested content may take time to become searchable via the Query API.
+### **One-Line Summary** > Stores user-generated text and media into a personal POD, embeds it for semantic search, and makes it available for conversational querying. ⚠️ Content Ingestion is Asynchronous The Create Event API queues content for processing. A successful response indicates **acceptance**, not availability. Newly ingested content may take time to become searchable via the Query API.
 
 ### Example
 

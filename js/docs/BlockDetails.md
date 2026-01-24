@@ -1,6 +1,6 @@
 # XfloorFloorMemorySdkJs.BlockDetails
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

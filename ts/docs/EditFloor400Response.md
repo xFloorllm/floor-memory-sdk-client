@@ -2,13 +2,13 @@
 # EditFloor400Response
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
 `error` | [EditFloor400ResponseError](EditFloor400ResponseError.md)
 
-## Example
+### Example
 
 ```typescript
 import type { EditFloor400Response } from '@xfloor/floor-memory-sdk-ts'

@@ -3,7 +3,7 @@
 
 User\'s Pod floor Infomation
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
@@ -14,7 +14,7 @@ Name | Type
 `blocks` | [Array&lt;BlockDetails&gt;](BlockDetails.md)
 `avatar` | [Media](Media.md)
 
-## Example
+### Example
 
 ```typescript
 import type { FloorInfo } from '@xfloor/floor-memory-sdk-ts'

@@ -2,13 +2,13 @@
 # SendValidationCode200Response
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
 `success` | string
 
-## Example
+### Example
 
 ```typescript
 import type { SendValidationCode200Response } from '@xfloor/floor-memory-sdk-ts'

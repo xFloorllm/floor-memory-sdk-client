@@ -1,7 +1,7 @@
 # SignInWithEmail200ResponsePodInfo
 
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **blocks** | [**List[BlockDetails]**](BlockDetails.md) |  | 
 **avatar** | [**Media**](Media.md) |  | [optional] 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.sign_in_with_email200_response_pod_info import SignInWithEmail200ResponsePodInfo

@@ -1,7 +1,7 @@
 # ResetPassword400Response
 
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **path** | **str** | REST api path | 
 **timestamp** | **str** | Time stamp | 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.reset_password400_response import ResetPassword400Response

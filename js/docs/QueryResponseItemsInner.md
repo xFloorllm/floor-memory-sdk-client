@@ -1,6 +1,6 @@
 # XfloorFloorMemorySdkJs.QueryResponseItemsInner
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

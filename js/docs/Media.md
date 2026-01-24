@@ -1,6 +1,6 @@
 # XfloorFloorMemorySdkJs.Media
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

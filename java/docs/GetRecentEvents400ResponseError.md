@@ -3,7 +3,7 @@
 # GetRecentEvents400ResponseError
 
 
-## Properties
+### Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|

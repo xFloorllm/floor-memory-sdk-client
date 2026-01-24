@@ -1,13 +1,13 @@
 # ValidateCode412Response
 
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **error** | **str** | Something went wrong. Try again | 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.validate_code412_response import ValidateCode412Response

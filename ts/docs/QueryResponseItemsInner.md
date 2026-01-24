@@ -3,7 +3,7 @@
 
 Each item description
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
@@ -19,7 +19,7 @@ Name | Type
 `userId` | string
 `matchType` | string
 
-## Example
+### Example
 
 ```typescript
 import type { QueryResponseItemsInner } from '@xfloor/floor-memory-sdk-ts'

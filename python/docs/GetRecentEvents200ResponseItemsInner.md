@@ -2,7 +2,7 @@
 
 Each post item
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **created_at_ms** | **str** | Created time in milli seconds | [optional] 
 **block_id** | **str** | Numeric ID of the block | [optional] 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.get_recent_events200_response_items_inner import GetRecentEvents200ResponseItemsInner

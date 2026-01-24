@@ -3,7 +3,7 @@
 
 User profile details
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
@@ -16,7 +16,7 @@ Name | Type
 `userId` | string
 `avatar` | [SignInWithEmail200ResponseProfileAvatar](SignInWithEmail200ResponseProfileAvatar.md)
 
-## Example
+### Example
 
 ```typescript
 import type { SignInWithEmail200ResponseProfile } from '@xfloor/floor-memory-sdk-ts'

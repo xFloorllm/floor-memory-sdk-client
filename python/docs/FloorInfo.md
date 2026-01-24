@@ -2,7 +2,7 @@
 
 User's Pod floor Infomation
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **blocks** | [**List[BlockDetails]**](BlockDetails.md) | List of blocks | [optional] 
 **avatar** | [**Media**](Media.md) |  | [optional] 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.floor_info import FloorInfo

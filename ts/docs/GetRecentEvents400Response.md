@@ -2,13 +2,13 @@
 # GetRecentEvents400Response
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
 `error` | [GetRecentEvents400ResponseError](GetRecentEvents400ResponseError.md)
 
-## Example
+### Example
 
 ```typescript
 import type { GetRecentEvents400Response } from '@xfloor/floor-memory-sdk-ts'

@@ -1,14 +1,14 @@
 # SignUpResponse
 
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **user_id** | **str** | User ID | 
 **success** | **str** | Success string - \&quot;Enter Validation code\&quot; | 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.sign_up_response import SignUpResponse

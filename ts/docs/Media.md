@@ -2,14 +2,14 @@
 # Media
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
 `url` | string
 `type` | string
 
-## Example
+### Example
 
 ```typescript
 import type { Media } from '@xfloor/floor-memory-sdk-ts'

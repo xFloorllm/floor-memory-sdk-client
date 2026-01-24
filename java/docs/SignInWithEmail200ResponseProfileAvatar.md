@@ -4,7 +4,7 @@
 
 Profile Pick details
 
-## Properties
+### Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|

@@ -351,7 +351,7 @@ Name | Type | Description  | Notes
 
 Change Password
 
-## 1) `POST /password/change` — Change Password (Logged-in User)
+### 1) `POST /password/change` — Change Password (Logged-in User)
 
 Changes the password of an **authenticated user** who is currently logged in.
 
@@ -481,20 +481,24 @@ This API is commonly used in:
 
 ---
 
-## Request Method
+**Request Method**
+
+
 
 `POST`
 
 ---
 
-## Content-Type
+**Content-Type**
+
+
 
 `application/x-www-form-urlencoded` (or `multipart/form-data` if your system uses form-data)
 *(Document whichever you actually accept; below assumes standard form fields.)*
 
 ---
 
-## Request Parameters (Form Fields)
+**Request Parameters (Form Fields)**
 
 | Field      | Type   | Required | Description                                                          |
 | ---------- | ------ | -------- | -------------------------------------------------------------------- |
@@ -504,7 +508,7 @@ This API is commonly used in:
 
 ---
 
-## Authorization Rules (Critical)
+### Authorization Rules (Critical)
 
 * The caller must be authenticated as `user_id`
 * **Only the floor owner** can change floor visibility
@@ -512,7 +516,7 @@ This API is commonly used in:
 
 ---
 
-## Behavior Rules
+### Behavior Rules
 
 * Converts visibility from **PUBLIC → PRIVATE**
 * Does not modify floor content or blocks
@@ -528,13 +532,13 @@ This API is commonly used in:
 
 ---
 
-## Response Format
+### Response Format
 
 `application/json`
 
 ---
 
-## Sample Success Response
+### Sample Success Response
 
 *(Example — adjust to match your actual response format)*
 
@@ -549,7 +553,7 @@ This API is commonly used in:
 
 ---
 
-## Sample No-Op Response (Already Private)
+### Sample No-Op Response (Already Private)
 
 ```json
 {
@@ -562,7 +566,7 @@ This API is commonly used in:
 
 ---
 
-## Error Responses (Examples)
+### Error Responses (Examples)
 
 ### Not Authorized (Not Owner)
 
@@ -593,7 +597,7 @@ This API is commonly used in:
 
 ---
 
-## Notes
+### Notes
 
 * This API is intended to control floor visibility only; membership/invite rules (for private floors) are handled elsewhere.
 * `app_id` is provided for developer/pod applications and is optional unless enforced by your app model.
@@ -698,20 +702,24 @@ This API is typically used from:
 
 ---
 
-## Request Method
+**Request Method**
+
+
 
 `POST`
 
 ---
 
-## Content-Type
+**Content-Type**
+
+
 
 `application/x-www-form-urlencoded`
 (or `multipart/form-data`, depending on your implementation)
 
 ---
 
-## Request Parameters (Form Fields)
+**Request Parameters (Form Fields)**
 
 | Field      | Type   | Required | Description                                                                     |
 | ---------- | ------ | -------- | ------------------------------------------------------------------------------- |
@@ -721,7 +729,7 @@ This API is typically used from:
 
 ---
 
-## Authorization Rules (Critical)
+### Authorization Rules (Critical)
 
 * The caller must be authenticated as `user_id`
 * **Only the floor owner** is allowed to change the floor’s visibility
@@ -729,7 +737,7 @@ This API is typically used from:
 
 ---
 
-## Behavior Rules
+### Behavior Rules
 
 * Converts floor visibility from **PRIVATE → PUBLIC**
 * Does not modify floor content, blocks, or ownership
@@ -744,13 +752,13 @@ This API is typically used from:
 
 ---
 
-## Response Format
+### Response Format
 
 `application/json`
 
 ---
 
-## Sample Success Response
+### Sample Success Response
 
 ```json
 {
@@ -763,7 +771,7 @@ This API is typically used from:
 
 ---
 
-## Sample No-Op Response (Already Public)
+### Sample No-Op Response (Already Public)
 
 ```json
 {
@@ -776,7 +784,7 @@ This API is typically used from:
 
 ---
 
-## Error Responses (Examples)
+### Error Responses (Examples)
 
 ### Not Authorized (Not Owner)
 
@@ -811,7 +819,7 @@ This API is typically used from:
 
 ---
 
-## Notes for Developers
+### Notes for Developers
 
 * This API controls **visibility only**. Membership, invitations, and moderation rules are handled by separate APIs.
 * `app_id` is optional and primarily used for developer-managed or pod floors.
@@ -1006,7 +1014,7 @@ It allows the **floor owner** to update the public-facing floor ID (slug/handle)
 
 ---
 
-## Ownership & Authorization (Critical)
+### Ownership & Authorization (Critical)
 
 * The caller **must be authenticated**
 * **Only the floor owner** is allowed to rename a floor
@@ -1017,20 +1025,24 @@ It allows the **floor owner** to update the public-facing floor ID (slug/handle)
 
 ---
 
-## Request Method
+**Request Method**
+
+
 
 `POST`
 
 ---
 
-## Content-Type
+**Content-Type**
+
+
 
 `application/x-www-form-urlencoded`
 (or equivalent form-data encoding)
 
 ---
 
-## Request Parameters (Form Fields)
+**Request Parameters (Form Fields)**
 
 | Parameter | Type   | Required | Description                                                                     |
 | --------- | ------ | -------- | ------------------------------------------------------------------------------- |
@@ -1041,7 +1053,7 @@ It allows the **floor owner** to update the public-facing floor ID (slug/handle)
 
 ---
 
-## Rename Rules & Constraints
+### Rename Rules & Constraints
 
 * The `from` floor ID **must exist**
 * The `to` floor ID **must be unique** and not already in use
@@ -1052,7 +1064,7 @@ It allows the **floor owner** to update the public-facing floor ID (slug/handle)
 
 ---
 
-## Behavior Summary
+### Behavior Summary
 
 | Scenario                     | Result                                            |
 | ---------------------------- | ------------------------------------------------- |
@@ -1064,13 +1076,13 @@ It allows the **floor owner** to update the public-facing floor ID (slug/handle)
 
 ---
 
-## Response Format
+### Response Format
 
 `application/json`
 
 ---
 
-## Sample Success Response
+### Sample Success Response
 
 ```json
 {
@@ -1083,7 +1095,7 @@ It allows the **floor owner** to update the public-facing floor ID (slug/handle)
 
 ---
 
-## Sample Error Responses
+### Sample Error Responses
 
 ### Not Floor Owner
 
@@ -1129,7 +1141,7 @@ It allows the **floor owner** to update the public-facing floor ID (slug/handle)
 
 ---
 
-## Notes for Developers
+### Notes for Developers
 
 * This API **renames the public identifier only**; the internal immutable floor ID (`fid`) is not affected.
 * Clients should refresh cached floor metadata after a successful rename.
@@ -1217,7 +1229,7 @@ Reset Password
 
 ---
 
-## Reset Password (Forgot Password, Not Logged In)
+### Reset Password (Forgot Password, Not Logged In)
 
 Resets the password of a user who **cannot log in** and is using a **forgot-password** flow.
 
@@ -1876,7 +1888,7 @@ Name | Type | Description  | Notes
 
 Validation
 
-## **Validate Activation / Verification Code**
+### **Validate Activation / Verification Code**
 
 This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**.
 
@@ -1895,7 +1907,7 @@ If validation fails, the operation is **not performed** and an appropriate error
 
 ---
 
-## **Authentication**
+### **Authentication**
 
 This endpoint requires **Bearer Token authentication**.
 
@@ -1907,7 +1919,7 @@ Authorization: Bearer <access_token>
 
 ---
 
-## **Request Body**
+### **Request Body**
 
 ```json
 {
@@ -1927,7 +1939,7 @@ Authorization: Bearer <access_token>
 
 ---
 
-## **Usage Scenarios (Mode Definitions)**
+### **Usage Scenarios (Mode Definitions)**
 
 | Mode | Purpose                                  |
 | ---- | ---------------------------------------- |
@@ -1941,7 +1953,7 @@ Authorization: Bearer <access_token>
 
 ---
 
-## **Successful Response**
+### **Successful Response**
 
 On successful validation:
 
@@ -1960,7 +1972,7 @@ Examples:
 
 ---
 
-## **Error Response**
+### **Error Response**
 
 The API returns an error response when:
 
@@ -1973,7 +1985,7 @@ The API returns an error response when:
 
 ---
 
-## **One-Line Summary**
+### **One-Line Summary**
 
 > Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
 

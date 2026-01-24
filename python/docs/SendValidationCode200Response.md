@@ -1,13 +1,13 @@
 # SendValidationCode200Response
 
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **str** | Validation code sent successfully | 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.send_validation_code200_response import SendValidationCode200Response

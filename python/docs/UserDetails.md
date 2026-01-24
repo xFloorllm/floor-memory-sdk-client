@@ -1,7 +1,7 @@
 # UserDetails
 
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **pod_info** | [**SignInWithEmail200ResponsePodInfo**](SignInWithEmail200ResponsePodInfo.md) |  | 
 **app_id** | **str** | App ID | [optional] 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.user_details import UserDetails

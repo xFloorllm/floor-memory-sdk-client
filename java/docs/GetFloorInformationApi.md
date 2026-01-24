@@ -18,21 +18,21 @@ This API returns the **basic profile information of a floor**. It is used to fet
 
 ---
 
-## Typical Use Cases
+### Typical Use Cases
 * Render floor header (title, logo, description) * Decide UI permissions (owner vs non-owner) * Display available blocks (Feeds, Blog, Quiz, etc.) * Pod discovery or developer-managed floor rendering * Lightweight floor metadata fetch before loading content
 
 ---
 
-## Authorization & Context
+### Authorization & Context
 * The API may be called by authenticated or unauthenticated users (depending on floor visibility). * The `is_owner` field is calculated **relative to the requesting user context** (if authenticated).
 
 ---
 
-## Response Format `application/json`
+### Response Format `application/json`
 
 ---
 
-## Response Structure
+### Response Structure
 
 ### Top-Level Fields | Field | Type | Description |
 | ------------ | ---------------------- | ---------------------------------------------------------------- |
@@ -48,7 +48,7 @@ This API returns the **basic profile information of a floor**. It is used to fet
 
 ---
 
-## Ownership Indicator
+### Ownership Indicator
 
 ### `is_owner`
 
@@ -60,7 +60,7 @@ This API returns the **basic profile information of a floor**. It is used to fet
 
 ---
 
-## Blocks Object
+### Blocks Object
 
 ```json \"blocks\": [ { \"BID\": \"1765960948723\", \"type\": \"1\", \"title\": \"Feeds\" } ] ``` Each block represents a **content category or service** available inside the floor.
 
@@ -72,7 +72,7 @@ This API returns the **basic profile information of a floor**. It is used to fet
 
 ---
 
-## Avatar Object
+### Avatar Object
 
 ```json \"avatar\": { \"id\": \"1767009204367\", \"url\": \"https://...\" } ``` | Field | Type | Description |
 | ----- | ------ | ------------------------------ |
@@ -81,7 +81,7 @@ This API returns the **basic profile information of a floor**. It is used to fet
 
 ---
 
-## Floor Type
+### Floor Type
 
 ```json \"floor_type\": \"POD\" ``` | Value | Meaning |
 | --------- | ------------------------------------- |
@@ -91,18 +91,18 @@ This API returns the **basic profile information of a floor**. It is used to fet
 
 ---
 
-## Sample Success Response
+### Sample Success Response
 
 ```json { \"is_owner\": \"0\", \"blocks\": [ { \"BID\": \"1765960948723\", \"type\": \"1\", \"title\": \"Feeds\" } ], \"floor_uid\": \"1765960956967\", \"floor_id\": \"raghupodfloor1\", \"details\": \"raghu\", \"avatar\": { \"id\": \"1767009204367\", \"url\": \"https://d2e5822u5ecuq8.cloudfront.net/room/1765960956967/logo/1765960956967.jpg\" }, \"title\": \"raghu\", \"floor_type\": \"POD\", \"app_id\": \"1765949734005\" } ```
 
 ---
 
-## Notes for Developers
+### Notes for Developers
 * This is a **lightweight metadata API** and is safe to call frequently. * Use this API **before** loading posts or analytics. * `blocks` ordering can be used directly for navigation UI. * `floor_type` + `is_owner` together determine which UI actions are allowed.
 
 ---
 
-## Common Error Scenarios
+### Common Error Scenarios
 
 ### Floor Not Found
 

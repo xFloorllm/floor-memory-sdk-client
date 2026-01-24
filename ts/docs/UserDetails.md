@@ -2,7 +2,7 @@
 # UserDetails
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
@@ -10,7 +10,7 @@ Name | Type
 `podInfo` | [SignInWithEmail200ResponsePodInfo](SignInWithEmail200ResponsePodInfo.md)
 `appId` | string
 
-## Example
+### Example
 
 ```typescript
 import type { UserDetails } from '@xfloor/floor-memory-sdk-ts'

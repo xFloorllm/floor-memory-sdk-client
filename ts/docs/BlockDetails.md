@@ -3,7 +3,7 @@
 
 Block Details
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
@@ -11,7 +11,7 @@ Name | Type
 `type` | string
 `title` | string
 
-## Example
+### Example
 
 ```typescript
 import type { BlockDetails } from '@xfloor/floor-memory-sdk-ts'

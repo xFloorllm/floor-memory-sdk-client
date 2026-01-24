@@ -36,7 +36,7 @@ This makes the API suitable for:
 
 ---
 
-## **Key Concepts**
+### **Key Concepts**
 
 * A **floor** represents a content space (independent floor, followed floor, or pod floor)
 * A **pod floor** may aggregate content across multiple related floors
@@ -45,13 +45,13 @@ This makes the API suitable for:
 
 ---
 
-## **Request Method**
+### **Request Method**
 
 `GET`
 
 ---
 
-## **Request Parameters (Query Params)**
+### **Request Parameters (Query Params)**
 
 | Parameter Name | Type   | Required | Description                                                                                                                |
 | -------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -61,7 +61,7 @@ This makes the API suitable for:
 
 ---
 
-## **Behavior Summary**
+### **Behavior Summary**
 
 | Scenario               | Result                                    |
 | ---------------------- | ----------------------------------------- |
@@ -72,13 +72,13 @@ This makes the API suitable for:
 
 ---
 
-## **Response Format**
+### **Response Format**
 
 `application/json`
 
 ---
 
-## **Response Structure**
+### **Response Structure**
 
 ### **Top-Level Fields**
 
@@ -123,7 +123,7 @@ This makes the API suitable for:
 
 ---
 
-## **Sample Success Response**
+### **Sample Success Response**
 
 *(structure abbreviated for clarity)*
 
@@ -158,7 +158,7 @@ This makes the API suitable for:
 
 ---
 
-## **Notes**
+### **Notes**
 
 * Posts may contain **plain text or HTML**
 * Media is optional and may be absent
@@ -168,7 +168,7 @@ This makes the API suitable for:
 
 ---
 
-## **Typical Use Cases**
+### **Typical Use Cases**
 
 * Floor activity feed
 * Pod-level dashboards

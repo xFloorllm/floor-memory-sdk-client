@@ -2,7 +2,7 @@
 
 JSON format filters
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **filter_types** | **str** | Content types to include (e.g., post, forum). | 
 **filter_tags** | **str** | Tags used to further refine the query results. | 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.query_request_filters import QueryRequestFilters

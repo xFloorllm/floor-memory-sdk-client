@@ -1,7 +1,7 @@
 # ValidateCode400ResponseError
 
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **path** | **str** |  | 
 **timestamp** | **str** |  | 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.validate_code400_response_error import ValidateCode400ResponseError

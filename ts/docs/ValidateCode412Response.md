@@ -2,13 +2,13 @@
 # ValidateCode412Response
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
 `error` | string
 
-## Example
+### Example
 
 ```typescript
 import type { ValidateCode412Response } from '@xfloor/floor-memory-sdk-ts'

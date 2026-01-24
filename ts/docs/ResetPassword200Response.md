@@ -2,13 +2,13 @@
 # ResetPassword200Response
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
 `success` | string
 
-## Example
+### Example
 
 ```typescript
 import type { ResetPassword200Response } from '@xfloor/floor-memory-sdk-ts'

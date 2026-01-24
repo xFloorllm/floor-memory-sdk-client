@@ -3,14 +3,14 @@
 
 Profile Pick details
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
 `url` | string
 `id` | string
 
-## Example
+### Example
 
 ```typescript
 import type { SignInWithEmail200ResponseProfileAvatar } from '@xfloor/floor-memory-sdk-ts'

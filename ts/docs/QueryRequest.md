@@ -2,7 +2,7 @@
 # QueryRequest
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
@@ -14,7 +14,7 @@ Name | Type
 `appId` | string
 `filters` | [QueryRequestFilters](QueryRequestFilters.md)
 
-## Example
+### Example
 
 ```typescript
 import type { QueryRequest } from '@xfloor/floor-memory-sdk-ts'

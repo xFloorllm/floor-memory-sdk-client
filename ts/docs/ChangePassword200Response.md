@@ -2,13 +2,13 @@
 # ChangePassword200Response
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
 `success` | string
 
-## Example
+### Example
 
 ```typescript
 import type { ChangePassword200Response } from '@xfloor/floor-memory-sdk-ts'

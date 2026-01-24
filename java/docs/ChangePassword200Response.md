@@ -3,7 +3,7 @@
 # ChangePassword200Response
 
 
-## Properties
+### Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|

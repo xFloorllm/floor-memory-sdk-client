@@ -17,17 +17,17 @@ Query (Primary API)
 
 ---
 
-## **Core Capabilities**
+### **Core Capabilities**
 * Interprets **natural language queries** * Retrieves relevant information from one or more floors * Applies **time-, type-, and tag-based filters** * Supports **Top-K retrieval** for result control * Optionally includes metadata with responses * Can generate **summarized responses** when requested * Maintains **conversation continuity** across multiple queries from the same user
 
 ---
 
-## **Authentication & Identity**
+### **Authentication & Identity**
 * A valid `user_id` is **required** * User authentication is assumed to be completed **before** calling this API * `app_id` identifies the calling application context * Conversational continuity is maintained **per `user_id`** > **Note:** All queries from the same `user_id` are treated as part of a single conversational context unless explicitly reset by the application.
 
 ---
 
-## **Request Contract**
+### **Request Contract**
 
 ### **HTTP Method** `POST`
 
@@ -37,7 +37,7 @@ Query (Primary API)
 
 ---
 
-## **Request Body (JSON)**
+### **Request Body (JSON)**
 
 ### **Field Descriptions** | Field | Type | Required | Description |
 | ------------------- | ----------------------- | -------- | ---------------------------------------------------------------------------------------------- |
@@ -71,12 +71,12 @@ Query (Primary API)
 
 ---
 
-## **Behavior**
+### **Behavior**
 1. The query is analyzed using conversational and semantic understanding. 2. Relevant content is retrieved from the specified floors. 3. Filters (time, type, tags) are applied if provided. 4. Results are ranked and limited based on `k`. 5. If `summary_needed = \"1\"`, a synthesized conversational summary is generated. 6. If `include_metadata = \"1\"`, metadata is attached to each result item. 7. The response is returned in a conversational format suitable for follow-up questions.
 
 ---
 
-## **Response Contract**
+### **Response Contract**
 
 ### **High-Level Response Structure**
 
@@ -92,22 +92,22 @@ Query (Primary API)
 
 ---
 
-## **Conversation Continuity**
+### **Conversation Continuity**
 * Conversation state is maintained **per `user_id`** * Follow-up queries automatically reference prior context * The API does not require explicit conversation IDs * Applications may reset conversation context by using a new `user_id`
 
 ---
 
-## **Error Handling** The API may return errors in the following cases:
+### **Error Handling** The API may return errors in the following cases:
 * Missing or invalid `user_id` * Empty or unsupported `query` * Invalid or inaccessible `floor_ids` * Authorization or application context errors * Internal processing failures All errors are returned with appropriate HTTP status codes and descriptive messages.
 
 ---
 
-## **Typical Use Case Flow**
+### **Typical Use Case Flow**
 1. User asks an initial question *“What options do I have in your institute?”* 2. Application calls `/agent/memory/query` 3. Results are displayed to the user 4. User asks a follow-up *“Which ones are available on weekends?”* 5. Application calls the same API again with the new query 6. Conversation continues seamlessly using prior context
 
 ---
 
-## **One-Line Summary** > Executes a conversational query over xfloor content, returning context-aware, filtered, and optionally summarized results with support for multi-turn interactions.
+### **One-Line Summary** > Executes a conversational query over xfloor content, returning context-aware, filtered, and optionally summarized results with support for multi-turn interactions.
 
 ### Example
 ```java
@@ -172,20 +172,20 @@ public class Example {
 
 ---
 
-## Response Structure
+### Response Structure
 
 ```json { \"answer\": \"string\", \"items\": [ ... ] } ```
 
 ---
 
-## Top-Level Fields | Field | Type | Description |
+### Top-Level Fields | Field | Type | Description |
 | -------- | ------ | --------------------------------------------------------- |
 | `answer` | String | Final assistant-generated response to the user query |
 | `items` | Array | List of matched content items retrieved during processing |
 
 ---
 
-## `answer`
+### `answer`
 
 ```json \"answer\": \"non veniam reprehenderit labore\" ```
 
@@ -197,7 +197,7 @@ public class Example {
 
 ---
 
-## `items[]` – Retrieved Content Items Each entry in `items` represents a **content block or event** that matched the query. These items are typically used for:
+### `items[]` – Retrieved Content Items Each entry in `items` represents a **content block or event** that matched the query. These items are typically used for:
 * Explainability (“why this answer?”) * Debugging or analytics * Showing sources or related content (optional UI)
 
 ---
@@ -224,12 +224,12 @@ public class Example {
 
 ---
 
-## Interpretation of `score`
+### Interpretation of `score`
 * Higher relevance is typically indicated by **better score ranking** (interpretation depends on backend logic) * Scores may be positive or negative depending on normalization and similarity model * Clients should **not rely on absolute score values**, only relative ordering
 
 ---
 
-## Typical Usage Patterns
+### Typical Usage Patterns
 
 ### Chat UI
 * Display only `answer` * Ignore `items` unless showing “Sources” or “Related content”
@@ -242,12 +242,12 @@ public class Example {
 
 ---
 
-## Notes for Developers
+### Notes for Developers
 * `items` may be an empty array if no relevant content was retrieved * The `answer` is always present on success * The order of `items` is typically sorted by relevance * Field values and score scales are implementation-specific and may evolve
 
 ---
 
-## Minimal Mental Model > **Answer** = what the agent says > **Items** = what the agent looked at |
+### Minimal Mental Model > **Answer** = what the agent says > **Items** = what the agent looked at |
 - |
 | **422** |  |  -  |
 

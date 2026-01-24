@@ -2,14 +2,14 @@
 # GetRecentEvents200Response
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
 `postCount` | string
 `items` | [Array&lt;GetRecentEvents200ResponseItemsInner&gt;](GetRecentEvents200ResponseItemsInner.md)
 
-## Example
+### Example
 
 ```typescript
 import type { GetRecentEvents200Response } from '@xfloor/floor-memory-sdk-ts'

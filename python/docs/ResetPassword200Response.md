@@ -1,13 +1,13 @@
 # ResetPassword200Response
 
 
-## Properties
+### Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **str** | Password Reset | 
 
-## Example
+### Example
 
 ```python
 from xfloor_memory_sdk.models.reset_password200_response import ResetPassword200Response

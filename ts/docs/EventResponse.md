@@ -2,13 +2,13 @@
 # EventResponse
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
 `success` | string
 
-## Example
+### Example
 
 ```typescript
 import type { EventResponse } from '@xfloor/floor-memory-sdk-ts'

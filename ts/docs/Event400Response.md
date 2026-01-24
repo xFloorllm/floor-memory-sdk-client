@@ -2,13 +2,13 @@
 # Event400Response
 
 
-## Properties
+### Properties
 
 Name | Type
 ------------ | -------------
 `error` | [Event400ResponseError](Event400ResponseError.md)
 
-## Example
+### Example
 
 ```typescript
 import type { Event400Response } from '@xfloor/floor-memory-sdk-ts'
