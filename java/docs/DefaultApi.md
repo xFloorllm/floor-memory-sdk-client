@@ -237,7 +237,9 @@ public class Example {
 
 Change Password
 
-## 1) `POST /password/change` — Change Password (Logged-in User) Changes the password of an **authenticated user** who is currently logged in. This endpoint is used when a user is already signed in and wants to update their password as a security or preference action. The system validates a **one-time password-change verification code** (`activation_code`) issued specifically for the change-password flow. If the code is valid and not expired, the user’s password is updated to `new_password` and takes effect immediately. If verification fails, the password remains unchanged and an error response is returned.
+1) `POST /password/change` — Change Password (Logged-in User)
+
+Changes the password of an **authenticated user** who is currently logged in. This endpoint is used when a user is already signed in and wants to update their password as a security or preference action. The system validates a **one-time password-change verification code** (`activation_code`) issued specifically for the change-password flow. If the code is valid and not expired, the user’s password is updated to `new_password` and takes effect immediately. If verification fails, the password remains unchanged and an error response is returned.
 
 ### Authentication ✅ **Required**: Bearer token for the logged-in session
 
