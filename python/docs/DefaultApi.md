@@ -93,13 +93,17 @@ The API returns an error response if:
 In all error cases, the existing email ID remains unchanged.
 
 ---
-### **Behavior Notes**
+### **Behavior
+
+Notes**
 
 * Requires a prior call to `/auth-service/send/validation/code` with the proper mode.
 
 ---
 
-### **Security Notes (Recommended)**
+### **Security
+
+Notes (Recommended)**
 
 * Activation codes are single-use and time-bound
 * Email changes require prior authentication
@@ -158,10 +162,22 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **new_email_id** | **str**| New Email ID | 
- **activation_code** | **str**| Validation code | 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **new_email_id**
+
+| **str**| New Email ID |
+ **activation_code**
+
+| **str**| Validation code |
 
 ### Return type
 
@@ -180,8 +196,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** |  |  -  |
-**400** |  |  -  |
+**200** |
+|
+- |
+**400** |
+|
+- |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -258,12 +278,16 @@ The API returns an error response if:
 In all error cases, the existing mobile number remains unchanged.
 
 ---
-### **Behavior Notes**
+### **Behavior
+
+Notes**
 
 * Requires a prior call to `/auth-service/send/validation/code` with the proper mode.
 ---
 
-### **Security Notes (Recommended)**
+### **Security
+
+Notes (Recommended)**
 
 * Activation codes are single-use and time-bound
 * Mobile number changes require prior authentication
@@ -320,9 +344,20 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | **object**|  | 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **body**
+
+| **object**|
+|
 
 ### Return type
 
@@ -341,8 +376,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** |  |  -  |
-**400** |  |  -  |
+**200** |
+|
+- |
+**400** |
+|
+- |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -369,13 +408,17 @@ If verification fails, the password remains unchanged and an error response is r
 Authorization: Bearer <access_token>
 ```
 
-### Request Body (Form Data)
+**Request Body**
+
+(Form Data)
 
 * `user_id` (optional if derived from token)
 * `activation_code` (required)
 * `new_password` (required)
 
-### Behavior Notes
+### Behavior
+
+Notes
 
 * Typically requires a prior call to **send a verification code** for password change (mode = password change).
 * `user_id` can be taken from the access token; include it only if your system requires it explicitly.
@@ -433,11 +476,27 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **new_password** | **str**| New Password | 
- **activation_code** | **str**| Validation code | 
- **user_id** | **str**| User ID | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **new_password**
+
+| **str**| New Password |
+ **activation_code**
+
+| **str**| Validation code |
+ **user_id**
+
+| **str**| User ID |
+
+[optional]
 
 ### Return type
 
@@ -456,8 +515,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** |  |  -  |
-**400** |  |  -  |
+**200** |
+|
+- |
+**400** |
+|
+- |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -500,15 +563,13 @@ This API is commonly used in:
 
 ---
 
-**Request Parameters (Form
+**Request Parameters (Form Fields)**
 
-Fields)**
-
-| Field      | Type   | Required | Description                                                          |
+| Field | Type | Required | Description |
 | ---------- | ------ | -------- | -------------------------------------------------------------------- |
-| `user_id`  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.      |
-| `floor_id` | String | **Yes**  | Public identifier of the floor to update.                            |
-| `app_id`   | String | No       | Calling application identifier (used for developer/pod integration). |
+| `user_id` | String | **Yes** | User requesting the change. Must be the **owner** of the floor. |
+| `floor_id` | String | **Yes** | Public identifier of the floor to update. |
+| `app_id` | String | No | Calling application identifier (used for developer/pod integration). |
 
 ---
 
@@ -542,7 +603,9 @@ Fields)**
 
 ---
 
-### Sample Success Response
+### Sample
+
+Success Response
 
 *(Example — adjust to match your actual response format)*
 
@@ -557,9 +620,7 @@ Fields)**
 
 ---
 
-### Sample No-Op Response (Already
-
-Private)
+### Sample No-Op Response (Already Private)
 
 ```json
 {
@@ -658,11 +719,31 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **floor_id** | **str**| Floor ID | [optional] 
- **user_id** | **str**| User ID | [optional] 
- **app_id** | **str**| App ID | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **floor_id**
+
+| **str**| Floor ID |
+
+[optional]
+ **user_id**
+
+| **str**| User ID |
+
+[optional]
+ **app_id**
+
+| **str**| App ID |
+
+[optional]
 
 ### Return type
 
@@ -681,8 +762,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** |  |  -  |
-**400** |  |  -  |
+**200** |
+|
+- |
+**400** |
+|
+- |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -725,15 +810,13 @@ This API is typically used from:
 
 ---
 
-**Request Parameters (Form
+**Request Parameters (Form Fields)**
 
-Fields)**
-
-| Field      | Type   | Required | Description                                                                     |
+| Field | Type | Required | Description |
 | ---------- | ------ | -------- | ------------------------------------------------------------------------------- |
-| `user_id`  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.                 |
-| `floor_id` | String | **Yes**  | Public identifier of the floor whose visibility is to be changed.               |
-| `app_id`   | String | No       | Identifier of the calling application (used mainly for pod/developer contexts). |
+| `user_id` | String | **Yes** | User requesting the change. Must be the **owner** of the floor. |
+| `floor_id` | String | **Yes** | Public identifier of the floor whose visibility is to be changed. |
+| `app_id` | String | No | Identifier of the calling application (used mainly for pod/developer contexts). |
 
 ---
 
@@ -766,7 +849,9 @@ Fields)**
 
 ---
 
-### Sample Success Response
+### Sample
+
+Success Response
 
 ```json
 {
@@ -779,9 +864,7 @@ Fields)**
 
 ---
 
-### Sample No-Op Response (Already
-
-Public)
+### Sample No-Op Response (Already Public)
 
 ```json
 {
@@ -890,11 +973,31 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **floor_id** | **str**| Floor ID | [optional] 
- **user_id** | **str**| User ID | [optional] 
- **app_id** | **str**| App ID | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **floor_id**
+
+| **str**| Floor ID |
+
+[optional]
+ **user_id**
+
+| **str**| User ID |
+
+[optional]
+ **app_id**
+
+| **str**| App ID |
+
+[optional]
 
 ### Return type
 
@@ -913,8 +1016,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** |  |  -  |
-**400** |  |  -  |
+**200** |
+|
+- |
+**400** |
+|
+- |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -983,12 +1090,40 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **mobile_number** | **str**|  | [optional] 
- **email_id** | **str**|  | [optional] 
- **name** | **str**|  | [optional] 
- **app_id** | **str**|  | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **mobile_number**
+
+| **str**|
+|
+
+[optional]
+ **email_id**
+
+| **str**|
+|
+
+[optional]
+ **name**
+
+| **str**|
+|
+
+[optional]
+ **app_id**
+
+| **str**|
+|
+
+[optional]
 
 ### Return type
 
@@ -1007,7 +1142,9 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** |  |  -  |
+**200** |
+|
+- |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1052,16 +1189,14 @@ It allows the **floor owner** to update the public-facing floor ID (slug/handle)
 
 ---
 
-**Request Parameters (Form
+**Request Parameters (Form Fields)**
 
-Fields)**
-
-| Parameter | Type   | Required | Description                                                                     |
+| Parameter | Type | Required | Description |
 | --------- | ------ | -------- | ------------------------------------------------------------------------------- |
-| `user_id` | String | **Yes**  | User requesting the rename. Must be the **owner** of the floor.                 |
-| `from`    | String | **Yes**  | Existing floor ID (current identifier to be renamed).                           |
-| `to`      | String | **Yes**  | New floor ID to assign to the floor.                                            |
-| `app_id`  | String | No       | Identifier of the calling application (used mainly for pod/developer contexts). |
+| `user_id` | String | **Yes** | User requesting the rename. Must be the **owner** of the floor. |
+| `from` | String | **Yes** | Existing floor ID (current identifier to be renamed). |
+| `to` | String | **Yes** | New floor ID to assign to the floor. |
+| `app_id` | String | No | Identifier of the calling application (used mainly for pod/developer contexts). |
 
 ---
 
@@ -1078,13 +1213,13 @@ Fields)**
 
 ### Behavior Summary
 
-| Scenario                     | Result                                            |
+| Scenario | Result |
 | ---------------------------- | ------------------------------------------------- |
-| Valid owner + unique new ID  | Floor ID renamed successfully                     |
-| Non-owner user               | Request rejected                                  |
-| `from` floor ID not found    | Error                                             |
-| `to` floor ID already exists | Error                                             |
-| `from` == `to`               | No-op or validation error (implementation choice) |
+| Valid owner + unique new ID | Floor ID renamed successfully |
+| Non-owner user | Request rejected |
+| `from` floor ID not found | Error |
+| `to` floor ID already exists | Error |
+| `from` == `to` | No-op or validation error (implementation choice) |
 
 ---
 
@@ -1094,7 +1229,9 @@ Fields)**
 
 ---
 
-### Sample Success Response
+### Sample
+
+Success Response
 
 ```json
 {
@@ -1107,7 +1244,9 @@ Fields)**
 
 ---
 
-### Sample Error Responses
+### Sample
+
+Error Responses
 
 ### Not Floor Owner
 
@@ -1205,12 +1344,36 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **user_id** | **str**| User ID | [optional] 
- **app_id** | **str**| App ID | [optional] 
- **var_from** | **str**| Old floor ID | [optional] 
- **to** | **str**| New floor ID | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **user_id**
+
+| **str**| User ID |
+
+[optional]
+ **app_id**
+
+| **str**| App ID |
+
+[optional]
+ **var_from**
+
+| **str**| Old floor ID |
+
+[optional]
+ **to**
+
+| **str**| New floor ID |
+
+[optional]
 
 ### Return type
 
@@ -1229,8 +1392,12 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** |  |  -  |
-**400** |  |  -  |
+**200** |
+|
+- |
+**400** |
+|
+- |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1241,9 +1408,7 @@ Reset Password
 
 ---
 
-### Reset Password (Forgot Password,
-
-Not Logged In)
+### Reset Password (Forgot Password, Not Logged In)
 
 Resets the password of a user who **cannot log in** and is using a **forgot-password** flow.
 
@@ -1261,14 +1426,18 @@ Authorization: Bearer <reset_token>
 
 > If you don’t use a reset token, you must enforce strong rate limiting + OTP attempt throttling on this endpoint.
 
-### Request Body (Form Data)
+**Request Body**
+
+(Form Data)
 
 * `email_id` or `mobile_number` (required to identify user)
 * `activation_code` (required)
 * `new_password` (required)
 * `user_id` (optional, if your reset flow already resolved it)
 
-### Behavior Notes
+### Behavior
+
+Notes
 
 * Requires a prior call to **initiate reset** and send OTP/code (mode = forgot password).
 * Must enforce code attempt limits and expiration strictly.
@@ -1319,12 +1488,34 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **activation_code** | **str**| Activation Code | 
- **email_id** | **str**| Email ID | [optional] 
- **mobile_number** | **str**| Mobile number | [optional] 
- **app_id** | **str**| App ID | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **activation_code**
+
+| **str**| Activation Code |
+ **email_id**
+
+| **str**| Email ID |
+
+[optional]
+ **mobile_number**
+
+| **str**| Mobile number |
+
+[optional]
+ **app_id**
+
+| **str**| App ID |
+
+[optional]
 
 ### Return type
 
@@ -1343,8 +1534,12 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** |  |  -  |
-**400** |  |  -  |
+**200** |
+|
+- |
+**400** |
+|
+- |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1363,15 +1558,15 @@ The generated code is **time-bound**, **single-use**, and must be validated usin
 
 ### **Usage Scenarios (Mode Definition)**
 
-| Mode | Purpose                       |
+| Mode | Purpose |
 | ---- | ----------------------------- |
-| `0`  | Email or mobile number change |
-| `1`  | Password change               |
-| `2`  | Delete account                |
-| `3`  | Clear account                 |
-| `4`  | Signup Verification           |
-| `5`  | Using OTP for Login           |
-| `6`  | OTP for forgot password       |
+| `0` | Email or mobile number change |
+| `1` | Password change |
+| `2` | Delete account |
+| `3` | Clear account |
+| `4` | Signup Verification |
+| `5` | Using OTP for Login |
+| `6` | OTP for forgot password |
 
 **Mode `4` – Signup Verification**
 For login verification, the validation code is sent to **either the email ID or the mobile number provided in the request**.
@@ -1423,7 +1618,9 @@ The API returns an error response if:
 
 ---
 
-### **Security Notes (Recommended)**
+### **Security
+
+Notes (Recommended)**
 
 * Validation codes are single-use and time-bound
 * Rate limiting is enforced to prevent abuse
@@ -1482,9 +1679,20 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **send_validation_code_request** | [**SendValidationCodeRequest**](SendValidationCodeRequest.md)|  | 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **send_validation_code_request**
+
+| [**SendValidationCodeRequest**](SendValidationCodeRequest.md)|
+|
 
 ### Return type
 
@@ -1503,8 +1711,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** |  |  -  |
-**400** |  |  -  |
+**200** |
+|
+- |
+**400** |
+|
+- |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1524,12 +1736,14 @@ For OTP-based authentication (`login_type = 2`), the client **must first invoke 
 ---
 ### **Request Body**
 
-| Field        | Type          | Required | Description                                                       |
+| Field | Type | Required | Description |
 | ------------ | ------------- | -------- | ----------------------------------------------------------------- |
-| `email_id` | string | Yes      | Email ID |
-| `pass_code` | string | Yes      | Password/Validation code depending on the login_type|
-| `login_type` | string | Yes      | login type 1 for password 2 for validation code| 
- |`app_id` | string | Yes      | App ID | 
+| `email_id` | string | Yes | Email ID |
+| `pass_code` | string | Yes | Password/Validation code depending on the login_type|
+| `login_type` | string | Yes | login type 1 for password 2 for validation code|
+
+
+|`app_id` | string | Yes | App ID |
 
 
 
@@ -1544,7 +1758,9 @@ For OTP-based authentication (`login_type = 2`), the client **must first invoke 
 
 ---
 
-### **Behavior Notes**
+### **Behavior
+
+Notes**
 
 * When `login_type = 2`, password validation is bypassed.
 * OTP-based login requires a prior call to `
@@ -1625,12 +1841,30 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **email_id** | **str**| Email ID | 
- **pass_code** | **str**| Validation code or password depends on the login_type | 
- **login_type** | **str**| 1 is for password, 2 is for validation code | 
- **app_id** | **str**| App ID | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **email_id**
+
+| **str**| Email ID |
+ **pass_code**
+
+| **str**| Validation code or password depends on the login_type |
+ **login_type**
+
+| **str**| 1 is for password, 2 is for validation code |
+ **app_id**
+
+| **str**| App ID |
+
+[optional]
 
 ### Return type
 
@@ -1649,8 +1883,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** |  |  -  |
-**400** |  |  -  |
+**200** |
+|
+- |
+**400** |
+|
+- |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1671,12 +1909,14 @@ For OTP-based authentication (`login_type = 1`), the client **must first call th
 
 ### **Request Formdata**
 
-| Field        | Type          | Required | Description                                                       |
+| Field | Type | Required | Description |
 | ------------ | ------------- | -------- | ----------------------------------------------------------------- |
-| `mobile_number` | string | Yes      | Mobile number|
-| `pass_code` | string | Yes      | Password/Validation code depending on the login_type|
-| `login_type` | string | Yes      | login type 1 for password 2 for validation code| 
- |`app_id` | string | Yes      | App ID | 
+| `mobile_number` | string | Yes | Mobile number|
+| `pass_code` | string | Yes | Password/Validation code depending on the login_type|
+| `login_type` | string | Yes | login type 1 for password 2 for validation code|
+
+
+|`app_id` | string | Yes | App ID |
 
 
 **Field Description**
@@ -1690,7 +1930,9 @@ For OTP-based authentication (`login_type = 1`), the client **must first call th
 
 ---
 
-### **Behavior Notes**
+### **Behavior
+
+Notes**
 
 * When `login_type = 2`, password validation is skipped.
 * OTP-based login requires a prior call to `/auth-service/send/sign/in/validation/code`.
@@ -1765,9 +2007,20 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | **object**|  | 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **body**
+
+| **object**|
+|
 
 ### Return type
 
@@ -1786,8 +2039,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** |  |  -  |
-**400** |  |  -  |
+**200** |
+|
+- |
+**400** |
+|
+- |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1867,13 +2124,37 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**| New User Name | 
- **password** | **str**| Password | 
- **email_id** | **str**| Email ID of the user | [optional] 
- **mobile_number** | **str**| Mobile number | [optional] 
- **app_id** | **str**| Registered App ID | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **name**
+
+| **str**| New User Name |
+ **password**
+
+| **str**| Password |
+ **email_id**
+
+| **str**| Email ID of the user |
+
+[optional]
+ **mobile_number**
+
+| **str**| Mobile number |
+
+[optional]
+ **app_id**
+
+| **str**| Registered App ID |
+
+[optional]
 
 ### Return type
 
@@ -1892,8 +2173,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** |  |  -  |
-**400** |  |  -  |
+**200** |
+|
+- |
+**400** |
+|
+- |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1902,9 +2187,7 @@ Name | Type | Description  | Notes
 
 Validation
 
-### **Validate Activation / Verification
-
-Code**
+### **Validate Activation / Verification Code**
 
 This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**.
 
@@ -1957,15 +2240,15 @@ Authorization: Bearer <access_token>
 
 ### **Usage Scenarios (Mode Definitions)**
 
-| Mode | Purpose                                  |
+| Mode | Purpose |
 | ---- | ---------------------------------------- |
-| 0    | Email or mobile number change            |
-| 1    | Password change                          |
-| 2    | Delete account                           |
-| 3    | Clear account                            |
-| 4    | Signup verification (account activation) |
-| 5    | Login verification                       |
-| 6    | Forgot password verification             |
+| 0 | Email or mobile number change |
+| 1 | Password change |
+| 2 | Delete account |
+| 3 | Clear account |
+| 4 | Signup verification (account activation) |
+| 5 | Login verification |
+| 6 | Forgot password verification |
 
 ---
 
@@ -1976,8 +2259,10 @@ On successful validation:
 * The requested operation (based on `mode`) is completed
 * The API returns:
 
-  * **POD information** associated with the user (if applicable)
-  * **User profile details** (if applicable)
+
+* **POD information** associated with the user (if applicable)
+
+* **User profile details** (if applicable)
 
 Examples:
 
@@ -2052,9 +2337,20 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **validate_code_request** | [**ValidateCodeRequest**](ValidateCodeRequest.md)|  | 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **validate_code_request**
+
+| [**ValidateCodeRequest**](ValidateCodeRequest.md)|
+|
 
 ### Return type
 
@@ -2073,9 +2369,15 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** |  |  -  |
-**400** |  |  -  |
-**412** |  |  -  |
+**200** |
+|
+- |
+**400** |
+|
+- |
+**412** |
+|
+- |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

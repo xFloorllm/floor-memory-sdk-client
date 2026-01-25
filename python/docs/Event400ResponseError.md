@@ -3,12 +3,31 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**code** | **str** |  | 
-**message** | **str** | Invalid block type or Invalid Bid type | 
-**path** | **str** |  | 
-**timestamp** | **str** |  | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**code**
+
+| **str** |
+|
+**message**
+
+| **str** | Invalid block type or Invalid Bid type |
+**path**
+
+| **str** |
+|
+**timestamp**
+
+| **str** |
+|
 
 ### Example
 

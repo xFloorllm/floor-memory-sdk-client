@@ -3,9 +3,19 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**success** | **str** | Validate with OTP | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**success**
+
+| **str** | Validate with OTP |
 
 ### Example
 

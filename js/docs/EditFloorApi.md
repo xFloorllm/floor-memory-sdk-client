@@ -15,12 +15,17 @@ Method | HTTP request | Description
 Edit floor
 
 This API updates an existing floor’s profile metadata using **multipart form data**. A floor **can be edited only by its owner**. If the authenticated user is **not the owner of the floor**, the request will be rejected, even if the user is a member or follower of the floor. The API allows the floor owner to update:
-* Floor **title** * Floor **details/description** * Floor **logo/avatar image** After a successful update, the API returns the **latest floor object**, including the updated avatar and the current list of blocks associated with the floor.
+* Floor **title**
+* Floor **details/description**
+* Floor **logo/avatar image** After a successful update, the API returns the **latest floor object**, including the updated avatar and the current list of blocks associated with the floor.
 
 ---
 
 ### Authorization Rules (Critical)
-* The caller **must be authenticated** * The caller **must be the owner of the floor** * Members, followers, or pod consumers **cannot** edit the floor * Ownership is validated internally using the authenticated user context > **Ownership is mandatory. There are no partial permissions for this API.**
+* The caller **must be authenticated**
+* The caller **must be the owner of the floor**
+* Members, followers, or pod consumers **cannot** edit the floor
+* Ownership is validated internally using the authenticated user context > **Ownership is mandatory. There are no partial permissions for this API.**
 
 ---
 
@@ -30,9 +35,13 @@ This API updates an existing floor’s profile metadata using **multipart form d
 
 ---
 
-### Request Body (Multipart Form Data)
+**Request Body**
 
-### Form Fields | Field Name | Type | Required | Description |
+(Multipart Form Data)
+
+### Form Fields
+
+| Field Name | Type | Required | Description |
 | ---------- | ------ | ------------ | ---------------------------------------- |
 | `fid` | String | Recommended* | Immutable internal floor ID |
 | `floor_id` | String | Optional* | Public / human-readable floor identifier |
@@ -44,7 +53,9 @@ This API updates an existing floor’s profile metadata using **multipart form d
 ---
 
 ### Update Rules
-* At least one of `title`, `details`, or `logo` must be present * Missing update fields result in a validation error * If `logo` is provided, the previous logo is replaced
+* At least one of `title`, `details`, or `logo` must be present
+* Missing update fields result in a validation error
+* If `logo` is provided, the previous logo is replaced
 
 ---
 
@@ -52,9 +63,15 @@ This API updates an existing floor’s profile metadata using **multipart form d
 
 ---
 
-### Sample Success Response
+### Sample
 
-```json { \"floor_id\": \"my_floor\", \"title\": \"daughter ouch upon yummy clamor\", \"details\": \"nostrud occaecat incididunt dolor adipisicing\", \"fid\": \"86\", \"blocks\": [ { \"bid\": \"83\", \"type\": \"pariatur\", \"title\": \"wherever demobilise acidly refute\" } ], \"avatar\": { \"url\": \"https://legal-availability.name/\", \"id\": \"98\" } } ```
+Success Response
+
+```json { \"floor_id\":
+
+\"my_floor\", \"title\": \"daughter ouch upon yummy clamor\", \"details\": \"nostrud occaecat incididunt dolor adipisicing\", \"fid\": \"86\", \"blocks\": [ { \"bid\": \"83\", \"type\": \"pariatur\", \"title\": \"wherever demobilise acidly refute\" } ], \"avatar\": { \"url\": \"https://legal-availability.name/\", \"id\": \"98\" } }
+
+```
 
 ---
 
@@ -62,20 +79,30 @@ This API updates an existing floor’s profile metadata using **multipart form d
 
 ### Not Floor Owner
 
-```json { \"status\": \"ERROR\", \"message\": \"Only the floor owner can edit this floor\" } ```
+```json { \"status\":
+
+\"ERROR\", \"message\": \"Only the floor owner can edit this floor\" }
+
+```
 
 ### Floor Not Found
 
-```json { \"status\": \"ERROR\", \"message\": \"Floor not found\" } ```
+```json { \"status\": \"ERROR\", \"message\": \"Floor not found\" }
+
+```
 
 ### No Update Fields
 
-```json { \"status\": \"ERROR\", \"message\": \"No update fields provided\" } ```
+```json { \"status\": \"ERROR\", \"message\": \"No update fields provided\" }
+
+```
 
 ---
 
 ### Notes
-* This API is **owner-only by design** * Pods and developer tools must operate using **owner credentials** * Blocks are returned for convenience but are **not editable through this API**
+* This API is **owner-only by design**
+* Pods and developer tools must operate using **owner credentials**
+* Blocks are returned for convenience but are **not editable through this API**
 
 ---
 
@@ -109,14 +136,41 @@ apiInstance.editFloor(floorId, userId, appId, opts, (error, data, response) => {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **floorId** | **String**|  | 
- **userId** | **String**| User ID | 
- **appId** | **String**| App ID | 
- **logoFile** | **File**| Floor avatar | [optional] 
- **title** | **String**| Floor title | [optional] 
- **details** | **String**| Floor decription | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **floorId**
+
+| **String**|
+|
+ **userId**
+
+| **String**| User ID |
+ **appId**
+
+| **String**| App ID |
+ **logoFile**
+
+| **File**| Floor avatar |
+
+[optional]
+ **title**
+
+| **String**| Floor title |
+
+[optional]
+ **details**
+
+| **String**| Floor decription |
+
+[optional]
 
 ### Return type
 

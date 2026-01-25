@@ -3,9 +3,20 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**error** | [**GetRecentEvents400ResponseError**](GetRecentEvents400ResponseError.md) |  | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**error**
+
+| [**GetRecentEvents400ResponseError**](GetRecentEvents400ResponseError.md) |
+|
 
 ### Example
 

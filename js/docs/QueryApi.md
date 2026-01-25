@@ -19,12 +19,18 @@ Query (Primary API)
 ---
 
 ### **Core Capabilities**
-* Interprets **natural language queries** * Retrieves relevant information from one or more floors * Applies **time-, type-, and tag-based filters** * Supports **Top-K retrieval** for result control * Optionally includes metadata with responses * Can generate **summarized responses** when requested * Maintains **conversation continuity** across multiple queries from the same user
+* Interprets **natural language queries**
+* Retrieves relevant information from one or more floors * Applies **time-, type-, and tag-based filters**
+* Supports **Top-K retrieval** for result control
+* Optionally includes metadata with responses * Can generate **summarized responses** when requested * Maintains **conversation continuity** across multiple queries from the same user
 
 ---
 
 ### **Authentication & Identity**
-* A valid `user_id` is **required** * User authentication is assumed to be completed **before** calling this API * `app_id` identifies the calling application context * Conversational continuity is maintained **per `user_id`** > **Note:** All queries from the same `user_id` are treated as part of a single conversational context unless explicitly reset by the application.
+* A valid `user_id` is **required**
+* User authentication is assumed to be completed **before** calling this API * `app_id` identifies the calling application context * Conversational continuity is maintained **per `user_id`**
+
+> **Note:** All queries from the same `user_id` are treated as part of a single conversational context unless explicitly reset by the application.
 
 ---
 
@@ -34,13 +40,19 @@ Query (Primary API)
 
 ### **Content-Type**
 
-``` application/json ``` > **Important:** > This API accepts **JSON requests only**. > `multipart/form-data` is **not supported**.
+``` application/json
+
+``` > **Important:**
+
+> This API accepts **JSON requests only**. > `multipart/form-data` is **not supported**.
 
 ---
 
 ### **Request Body (JSON)**
 
-### **Field Descriptions** | Field | Type | Required | Description |
+### **Field Descriptions**
+
+| Field | Type | Required | Description |
 | ------------------- | ----------------------- | -------- | ---------------------------------------------------------------------------------------------- |
 | `user_id` | string | Yes | Unique xfloor user identifier. Used to maintain conversational continuity and personalization. |
 | `query` | string | Yes | Natural language query provided by the user. |
@@ -68,12 +80,15 @@ Query (Primary API)
 
 ### **Canonical Request Example**
 
-```json { \"user_id\": \"xf_user_123\", \"query\": \"What options do I have in your institute?\", \"floor_ids\": [\"institute_floor\"], \"filters\": { \"types\": [\"post\", \"blog\"], \"tags\": [\"admissions\"] }, \"k\": 5, \"include_metadata\": \"1\", \"summary_needed\": \"1\", \"app_id\": \"student_portal\" } ```
+```json { \"user_id\": \"xf_user_123\", \"query\": \"What options do I have in your institute?\", \"floor_ids\": [\"institute_floor\"], \"filters\": { \"types\": [\"post\", \"blog\"], \"tags\": [\"admissions\"] }, \"k\": 5, \"include_metadata\": \"1\", \"summary_needed\": \"1\", \"app_id\": \"student_portal\" }
+
+```
 
 ---
 
 ### **Behavior**
-1. The query is analyzed using conversational and semantic understanding. 2. Relevant content is retrieved from the specified floors. 3. Filters (time, type, tags) are applied if provided. 4. Results are ranked and limited based on `k`. 5. If `summary_needed = \"1\"`, a synthesized conversational summary is generated. 6. If `include_metadata = \"1\"`, metadata is attached to each result item. 7. The response is returned in a conversational format suitable for follow-up questions.
+1. The query is analyzed using conversational and semantic understanding.
+2. Relevant content is retrieved from the specified floors. 3. Filters (time, type, tags) are applied if provided. 4. Results are ranked and limited based on `k`. 5. If `summary_needed = \"1\"`, a synthesized conversational summary is generated. 6. If `include_metadata = \"1\"`, metadata is attached to each result item. 7. The response is returned in a conversational format suitable for follow-up questions.
 
 ---
 
@@ -81,34 +96,49 @@ Query (Primary API)
 
 ### **High-Level Response Structure**
 
-```json { \"answer\": \"Assistant-generated conversational response\", \"items\": [ { \"id\": \"content_id\", \"type\": \"post\", \"text\": \"Original content snippet\", \"metadata\": { } } ] } ```
+```json { \"answer\": \"Assistant-generated conversational response\", \"items\": [ { \"id\": \"content_id\", \"type\": \"post\", \"text\": \"Original content snippet\", \"metadata\": { } } ] }
+
+```
 
 ---
 
-### **Response Field Semantics** | Field | Always Present | Description | Rendering Guidance |
+### **Response Field Semantics**
+
+| Field | Always Present | Description | Rendering Guidance |
 | ------------------ | ------------------ | ------------------------------------------- | ---------------------- |
 | `answer` | Yes | Assistant-generated conversational response | **Render prominently** |
 | `items` | Yes (may be empty) | List of matched content used for grounding | Render optionally |
-| `items[].metadata` | Conditional | Included only if `include_metadata = \"1\"` | Render on demand | > **No-Result Case:** > If no relevant content is found, `items` will be an empty array and `answer` will contain a conversational fallback response.
+| `items[].metadata` | Conditional | Included only if `include_metadata = \"1\"` | Render on demand |
+
+> **No-Result Case:**
+
+> If no relevant content is found, `items` will be an empty array and `answer` will contain a conversational fallback response.
 
 ---
 
 ### **Conversation Continuity**
-* Conversation state is maintained **per `user_id`** * Follow-up queries automatically reference prior context * The API does not require explicit conversation IDs * Applications may reset conversation context by using a new `user_id`
+* Conversation state is maintained **per `user_id`**
+* Follow-up queries automatically reference prior context * The API does not require explicit conversation IDs * Applications may reset conversation context by using a new `user_id`
 
 ---
 
-### **Error Handling** The API may return errors in the following cases:
-* Missing or invalid `user_id` * Empty or unsupported `query` * Invalid or inaccessible `floor_ids` * Authorization or application context errors * Internal processing failures All errors are returned with appropriate HTTP status codes and descriptive messages.
+### **Error Handling**
+
+ The API may return errors in the following cases:
+* Missing or invalid `user_id`
+* Empty or unsupported `query` * Invalid or inaccessible `floor_ids` * Authorization or application context errors * Internal processing failures All errors are returned with appropriate HTTP status codes and descriptive messages.
 
 ---
 
 ### **Typical Use Case Flow**
-1. User asks an initial question *“What options do I have in your institute?”* 2. Application calls `/agent/memory/query` 3. Results are displayed to the user 4. User asks a follow-up *“Which ones are available on weekends?”* 5. Application calls the same API again with the new query 6. Conversation continues seamlessly using prior context
+1. User asks an initial question *“What options do I have in your institute?”*
+2. Application calls `/agent/memory/query` 3. Results are displayed to the user 4. User asks a follow-up *“Which ones are available on weekends?”* 5. Application calls the same API again with the new query 6. Conversation continues seamlessly using prior context
 
 ---
 
-### **One-Line Summary** > Executes a conversational query over xfloor content, returning context-aware, filtered, and optionally summarized results with support for multi-turn interactions.
+### **One-Line Summary**
+
+> Executes a conversational query over xfloor content, returning context-aware, filtered, and optionally summarized results with support for multi-turn interactions.
 
 ### Example
 
@@ -133,9 +163,20 @@ apiInstance.query(queryRequest, (error, data, response) => {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **queryRequest** | [**QueryRequest**](QueryRequest.md)|  | 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **queryRequest**
+
+| [**QueryRequest**](QueryRequest.md)|
+|
 
 ### Return type
 

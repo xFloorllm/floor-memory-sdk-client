@@ -7,7 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**error** | [**EditFloor400ResponseError**](EditFloor400ResponseError.md) |  |  |
+|**error** | [**EditFloor400ResponseError**](EditFloor400ResponseError.md) |
+| |
 
 
 

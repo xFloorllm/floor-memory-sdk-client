@@ -54,17 +54,17 @@ This API does **not** return posts or content; it only provides **structural and
 
 ### Top-Level Fields
 
-| Field        | Type                   | Description                                                      |
+| Field | Type | Description |
 | ------------ | ---------------------- | ---------------------------------------------------------------- |
-| `floor_id`   | String                 | Public, human-readable identifier of the floor                   |
-| `floor_uid`  | String                 | Internal unique identifier of the floor                          |
-| `title`      | String                 | Display title of the floor                                       |
-| `details`    | String                 | Short description or summary of the floor                        |
-| `floor_type` | String                 | Type of floor (`PUBLIC`, `PRIVATE`, `POD`)                       |
-| `is_owner`   | String (`"0"` / `"1"`) | Indicates whether the requesting user is the owner               |
-| `blocks`     | Array                  | List of blocks available in the floor                            |
-| `avatar`     | Object                 | Floor logo / avatar metadata                                     |
-| `app_id`     | String                 | Associated application ID (used mainly for pod/developer floors) |
+| `floor_id` | String | Public, human-readable identifier of the floor |
+| `floor_uid` | String | Internal unique identifier of the floor |
+| `title` | String | Display title of the floor |
+| `details` | String | Short description or summary of the floor |
+| `floor_type` | String | Type of floor (`PUBLIC`, `PRIVATE`, `POD`) |
+| `is_owner` | String (`"0"` / `"1"`) | Indicates whether the requesting user is the owner |
+| `blocks` | Array | List of blocks available in the floor |
+| `avatar` | Object | Floor logo / avatar metadata |
+| `app_id` | String | Associated application ID (used mainly for pod/developer floors) |
 
 ---
 
@@ -76,10 +76,10 @@ This API does **not** return posts or content; it only provides **structural and
 "is_owner": "0"
 ```
 
-| Value | Meaning                                   |
+| Value | Meaning |
 | ----- | ----------------------------------------- |
 | `"1"` | Requesting user is the owner of the floor |
-| `"0"` | Requesting user is not the owner          |
+| `"0"` | Requesting user is not the owner |
 
 This field is typically used by clients to:
 
@@ -104,11 +104,11 @@ Each block represents a **content category or service** available inside the flo
 
 ### Block Fields
 
-| Field   | Type   | Description                                           |
+| Field | Type | Description |
 | ------- | ------ | ----------------------------------------------------- |
-| `BID`   | String | Unique identifier of the block                        |
-| `type`  | String | Block type identifier (e.g., feed, blog, forum, quiz) |
-| `title` | String | Display name of the block                             |
+| `BID` | String | Unique identifier of the block |
+| `type` | String | Block type identifier (e.g., feed, blog, forum, quiz) |
+| `title` | String | Display name of the block |
 
 ---
 
@@ -121,10 +121,10 @@ Each block represents a **content category or service** available inside the flo
 }
 ```
 
-| Field | Type   | Description                    |
+| Field | Type | Description |
 | ----- | ------ | ------------------------------ |
-| `id`  | String | Media identifier of the avatar |
-| `url` | String | CDN URL of the floor logo      |
+| `id` | String | Media identifier of the avatar |
+| `url` | String | CDN URL of the floor logo |
 
 Used to render the floor’s profile image or banner.
 
@@ -136,17 +136,19 @@ Used to render the floor’s profile image or banner.
 "floor_type": "POD"
 ```
 
-| Value     | Meaning                               |
+| Value | Meaning |
 | --------- | ------------------------------------- |
-| `PUBLIC`  | Open floor visible to everyone        |
-| `PRIVATE` | Restricted floor                      |
-| `POD`     | Aggregated or developer-managed floor |
+| `PUBLIC` | Open floor visible to everyone |
+| `PRIVATE` | Restricted floor |
+| `POD` | Aggregated or developer-managed floor |
 
 `POD` floors are often associated with an `app_id` and may aggregate or serve content programmatically.
 
 ---
 
-### Sample Success Response
+### Sample
+
+Success Response
 
 ```json
 {
@@ -182,7 +184,9 @@ Used to render the floor’s profile image or banner.
 
 ---
 
-### Common Error Scenarios
+### Common
+
+Error Scenarios
 
 ### Floor Not Found
 
@@ -257,11 +261,31 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **floor_id** | **str**|  | 
- **user_id** | **str**| User ID  - 13 digit numeric identity | [optional] 
- **app_id** | **str**| App ID - 13 digit numeric identity | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **floor_id**
+
+| **str**|
+|
+ **user_id**
+
+| **str**| User ID
+- 13 digit numeric identity |
+
+[optional]
+ **app_id**
+
+| **str**| App ID - 13 digit numeric identity |
+
+[optional]
 
 ### Return type
 
@@ -280,8 +304,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** |  |  -  |
-**400** |  |  -  |
+**200** |
+|
+- |
+**400** |
+|
+- |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

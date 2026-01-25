@@ -4,12 +4,28 @@ JSON format filters
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**time_from** | **str** | Start timestamp for filtering content by creation or update time. | 
-**time_to** | **str** | End timestamp for filtering content by creation or update time. | 
-**filter_types** | **str** | Content types to include (e.g., post, forum). | 
-**filter_tags** | **str** | Tags used to further refine the query results. | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**time_from**
+
+| **str** | Start timestamp for filtering content by creation or update time. |
+**time_to**
+
+| **str** | End timestamp for filtering content by creation or update time. |
+**filter_types**
+
+| **str** | Content types to include (e.g., post, forum). |
+**filter_tags**
+
+| **str** | Tags used to further refine the query results. |
 
 ### Example
 

@@ -3,9 +3,20 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**success** | **str** |  | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**success**
+
+| **str** |
+|
 
 ### Example
 

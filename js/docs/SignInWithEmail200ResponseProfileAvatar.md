@@ -2,9 +2,21 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**url** | **String** | Image URL | 
-**id** | **String** | Image ID | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**url**
+
+| **String** | Image URL |
+**id**
+
+| **String** | Image ID |
 
 

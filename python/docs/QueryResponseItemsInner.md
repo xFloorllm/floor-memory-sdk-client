@@ -4,19 +4,71 @@ Each item description
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**block_type** | **int** | block type ( 0 or 1) | [optional] 
-**block_id** | **str** | Will be a 13 digit unque number which identifies the block | [optional] 
-**floor_uid** | **str** | Unique ID given to the floor which cannot be modifed | [optional] 
-**event_id** | **str** | Content ID | [optional] 
-**text** | **str** | Related content | [optional] 
-**score** | **float** | Similarity Score | [optional] 
-**block_title** | **str** | Block Title | [optional] 
-**block_details** | **str** | Block Details | [optional] 
-**from_floor_uid** | **str** | Source floor content | [optional] 
-**user_id** | **str** | Author of the content | [optional] 
-**match_type** | **str** | Match type text or image | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**block_type**
+
+| **int** | block type ( 0 or 1) |
+
+[optional]
+**block_id**
+
+| **str** | Will be a 13 digit unque number which identifies the block |
+
+[optional]
+**floor_uid**
+
+| **str** | Unique ID given to the floor which cannot be modifed |
+
+[optional]
+**event_id**
+
+| **str** | Content ID |
+
+[optional]
+**text**
+
+| **str** | Related content |
+
+[optional]
+**score**
+
+| **float** | Similarity Score |
+
+[optional]
+**block_title**
+
+| **str** | Block Title |
+
+[optional]
+**block_details**
+
+| **str** | Block Details |
+
+[optional]
+**from_floor_uid**
+
+| **str** | Source floor content |
+
+[optional]
+**user_id**
+
+| **str** | Author of the content |
+
+[optional]
+**match_type**
+
+| **str** | Match type text or image |
+
+[optional]
 
 ### Example
 

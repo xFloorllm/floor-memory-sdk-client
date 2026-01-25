@@ -2,8 +2,19 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**error** | [**Query422ResponseError**](Query422ResponseError.md) |  | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**error**
+
+| [**Query422ResponseError**](Query422ResponseError.md) |
+|
 
 

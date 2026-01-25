@@ -3,12 +3,28 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**user_id** | **str** | User ID | 
-**activation_code** | **str** | Validation code | 
-**app_id** | **str** | App ID which is given while registering as developer | 
-**mode** | **str** | 4 for sign up, 5 for login | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**user_id**
+
+| **str** | User ID |
+**activation_code**
+
+| **str** | Validation code |
+**app_id**
+
+| **str** | App ID which is given while registering as developer |
+**mode**
+
+| **str** | 4 for sign up, 5 for login |
 
 ### Example
 

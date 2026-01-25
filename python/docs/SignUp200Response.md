@@ -3,10 +3,22 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**user_id** | **str** | User ID | 
-**success** | **str** | Success string - \&quot;Enter Validation code\&quot; | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**user_id**
+
+| **str** | User ID |
+**success**
+
+| **str** | Success string - \"Enter Validation code\" |
 
 ### Example
 

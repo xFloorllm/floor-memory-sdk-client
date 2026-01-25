@@ -3,10 +3,26 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**items** | [**List[QueryResponseItemsInner]**](QueryResponseItemsInner.md) | List of source content | [optional] 
-**answer** | **str** | Summary of the posts | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**items**
+
+| [**List[QueryResponseItemsInner]**](QueryResponseItemsInner.md) | List of source content |
+
+[optional]
+**answer**
+
+| **str** | Summary of the posts |
+
+[optional]
 
 ### Example
 

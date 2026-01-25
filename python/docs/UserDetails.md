@@ -3,11 +3,29 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**profile** | [**SignInWithEmail200ResponseProfile**](SignInWithEmail200ResponseProfile.md) |  | 
-**pod_info** | [**SignInWithEmail200ResponsePodInfo**](SignInWithEmail200ResponsePodInfo.md) |  | 
-**app_id** | **str** | App ID | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**profile**
+
+| [**SignInWithEmail200ResponseProfile**](SignInWithEmail200ResponseProfile.md) |
+|
+**pod_info**
+
+| [**SignInWithEmail200ResponsePodInfo**](SignInWithEmail200ResponsePodInfo.md) |
+|
+**app_id**
+
+| **str** | App ID |
+
+[optional]
 
 ### Example
 

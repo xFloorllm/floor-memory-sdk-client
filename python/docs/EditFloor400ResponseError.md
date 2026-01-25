@@ -3,12 +3,28 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**code** | **str** | Error code | 
-**message** | **str** | Error message | 
-**path** | **str** | API path | 
-**timestamp** | **str** | Time stamp | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**code**
+
+| **str** | Error code |
+**message**
+
+| **str** | Error message |
+**path**
+
+| **str** | API path |
+**timestamp**
+
+| **str** | Time stamp |
 
 ### Example
 

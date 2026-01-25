@@ -4,11 +4,25 @@ Block Details
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**bid** | **str** | Block ID | 
-**type** | **str** | Block Type | 
-**title** | **str** | Title of the block | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**bid**
+
+| **str** | Block ID |
+**type**
+
+| **str** | Block Type |
+**title**
+
+| **str** | Title of the block |
 
 ### Example
 

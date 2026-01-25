@@ -2,8 +2,18 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**success** | **String** | Password Reset | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**success**
+
+| **String** | Password Reset |
 
 

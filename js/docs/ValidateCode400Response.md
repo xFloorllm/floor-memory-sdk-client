@@ -2,8 +2,19 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**error** | [**ValidateCode400ResponseError**](ValidateCode400ResponseError.md) |  | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**error**
+
+| [**ValidateCode400ResponseError**](ValidateCode400ResponseError.md) |
+|
 
 

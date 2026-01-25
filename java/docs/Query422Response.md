@@ -7,7 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**error** | [**Query422ResponseError**](Query422ResponseError.md) |  |  |
+|**error** | [**Query422ResponseError**](Query422ResponseError.md) |
+| |
 
 
 

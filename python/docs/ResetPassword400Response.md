@@ -3,12 +3,28 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**code** | **str** | Validation Error | 
-**message** | **str** | Error Message | 
-**path** | **str** | REST api path | 
-**timestamp** | **str** | Time stamp | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**code**
+
+| **str** | Validation Error |
+**message**
+
+| **str** | Error Message |
+**path**
+
+| **str** | REST api path |
+**timestamp**
+
+| **str** | Time stamp |
 
 ### Example
 

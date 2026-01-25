@@ -3,12 +3,30 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**code** | **str** | error code | 
-**message** | **str** | The signup failed or wrong user_id | 
-**path** | **str** |  | 
-**timestamp** | **str** |  | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**code**
+
+| **str** | error code |
+**message**
+
+| **str** | The signup failed or wrong user_id |
+**path**
+
+| **str** |
+|
+**timestamp**
+
+| **str** |
+|
 
 ### Example
 

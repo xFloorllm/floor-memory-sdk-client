@@ -4,12 +4,37 @@ Author details
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**name** | **str** | Name of the author | [optional] 
-**floor_id** | **str** | Profile floor of the auther | [optional] 
-**avatar** | [**Media**](Media.md) |  | [optional] 
-**floor_uid** | **str** | Unique 13 digit id of the profile floor | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**name**
+
+| **str** | Name of the author |
+
+[optional]
+**floor_id**
+
+| **str** | Profile floor of the auther |
+
+[optional]
+**avatar**
+
+| [**Media**](Media.md) |
+|
+
+[optional]
+**floor_uid**
+
+| **str** | Unique 13 digit id of the profile floor |
+
+[optional]
 
 ### Example
 

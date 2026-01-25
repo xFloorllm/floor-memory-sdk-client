@@ -3,10 +3,22 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**url** | **str** | Url where media is stored | 
-**type** | **str** | ID of the media | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**url**
+
+| **str** | Url where media is stored |
+**type**
+
+| **str** | ID of the media |
 
 ### Example
 

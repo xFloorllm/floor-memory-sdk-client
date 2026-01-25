@@ -3,10 +3,22 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**post_count** | **str** | Number of posts | 
-**items** | [**List[GetRecentEvents200ResponseItemsInner]**](GetRecentEvents200ResponseItemsInner.md) | List of posts | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**post_count**
+
+| **str** | Number of posts |
+**items**
+
+| [**List[GetRecentEvents200ResponseItemsInner]**](GetRecentEvents200ResponseItemsInner.md) | List of posts |
 
 ### Example
 

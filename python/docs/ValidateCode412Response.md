@@ -3,9 +3,19 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**error** | **str** | Something went wrong. Try again | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**error**
+
+| **str** | Something went wrong. Try again |
 
 ### Example
 

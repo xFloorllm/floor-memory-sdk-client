@@ -8,8 +8,10 @@ Profile Pick details
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**url** | **String** | Image URL |  |
-|**id** | **String** | Image ID |  |
+|**url** | **String** | Image URL |
+|
+|**id** | **String** | Image ID |
+|
 
 
 

@@ -51,26 +51,24 @@ This makes the API suitable for:
 
 ---
 
-### **Request Parameters (Query
+### **Request Parameters (Query Params)**
 
-Params)**
-
-| Parameter Name | Type   | Required | Description                                                                                                                |
+| Parameter Name | Type | Required | Description |
 | -------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `floor_id`     | String | **Yes**  | Floor identifier from which events should be fetched. Can be a pod floor ID, followed floor ID, or an independent floor ID |
-| `user_id`      | String | No       | If provided, returns posts relevant to the user within the given floor                                                     |
-| `app_id`       | String | No       | Identifier for external developers or pod-based applications consuming this API                                            |
+| `floor_id` | String | **Yes** | Floor identifier from which events should be fetched. Can be a pod floor ID, followed floor ID, or an independent floor ID |
+| `user_id` | String | No | If provided, returns posts relevant to the user within the given floor |
+| `app_id` | String | No | Identifier for external developers or pod-based applications consuming this API |
 
 ---
 
 ### **Behavior Summary**
 
-| Scenario               | Result                                    |
+| Scenario | Result |
 | ---------------------- | ----------------------------------------- |
-| `floor_id` only        | Latest posts from the specified floor     |
-| `floor_id` + `user_id` | User-relevant posts within that floor     |
-| Pod floor ID           | Aggregated posts across pod-linked floors |
-| Independent floor ID   | Posts only from that floor                |
+| `floor_id` only | Latest posts from the specified floor |
+| `floor_id` + `user_id` | User-relevant posts within that floor |
+| Pod floor ID | Aggregated posts across pod-linked floors |
+| Independent floor ID | Posts only from that floor |
 
 ---
 
@@ -84,48 +82,50 @@ Params)**
 
 ### **Top-Level Fields**
 
-| Field        | Type   | Description                    |
+| Field | Type | Description |
 | ------------ | ------ | ------------------------------ |
 | `post_count` | String | Total number of posts returned |
-| `items`      | Array  | List of recent post objects    |
+| `items` | Array | List of recent post objects |
 
 ---
 
 ### **Post Object (`items[]`)**
 
-| Field           | Type   | Description                                                               |
+| Field | Type | Description |
 | --------------- | ------ | ------------------------------------------------------------------------- |
-| `event_id`      | String | Unique identifier of the post/event                                       |
-| `block_type`    | String | Type of block where the post was created (e.g., blog, forum, audio, etc.) |
-| `block_id`      | String | Identifier of the block within the floor                                  |
-| `floor_uid`     | String | Floor identifier where the post belongs                                   |
-| `title`         | String | Title of the post (may be empty)                                          |
-| `text`          | String | Text or HTML content of the post                                          |
-| `media`         | Array  | Media objects (audio, image, etc.), if any                                |
-| `created_at_ms` | String | Post creation time in milliseconds (epoch)                                |
+| `event_id` | String | Unique identifier of the post/event |
+| `block_type` | String | Type of block where the post was created (e.g., blog, forum, audio, etc.) |
+| `block_id` | String | Identifier of the block within the floor |
+| `floor_uid` | String | Floor identifier where the post belongs |
+| `title` | String | Title of the post (may be empty) |
+| `text` | String | Text or HTML content of the post |
+| `media` | Array | Media objects (audio, image, etc.), if any |
+| `created_at_ms` | String | Post creation time in milliseconds (epoch) |
 
 ---
 
 ### **Author Object**
 
-| Field       | Type   | Description                  |
+| Field | Type | Description |
 | ----------- | ------ | ---------------------------- |
-| `name`      | String | Display name of the author   |
-| `floor_uid` | String | Author’s floor/user handle   |
-| `avatar`    | Object | Author profile image details |
+| `name` | String | Display name of the author |
+| `floor_uid` | String | Author’s floor/user handle |
+| `avatar` | Object | Author profile image details |
 
 ---
 
 ### **Media Object**
 
-| Field  | Type   | Description                         |
+| Field | Type | Description |
 | ------ | ------ | ----------------------------------- |
 | `type` | String | Media type (e.g., `AUDIO`, `IMAGE`) |
-| `url`  | String | Public URL of the media file        |
+| `url` | String | Public URL of the media file |
 
 ---
 
-### **Sample Success Response**
+### **Sample
+
+Success Response**
 
 *(structure abbreviated for clarity)*
 
@@ -226,11 +226,32 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **floor_id** | **str**|  | 
- **user_id** | **str**|  | [optional] 
- **app_id** | **str**|  | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **floor_id**
+
+| **str**|
+|
+ **user_id**
+
+| **str**|
+|
+
+[optional]
+ **app_id**
+
+| **str**|
+|
+
+[optional]
 
 ### Return type
 
@@ -249,8 +270,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** |  |  -  |
-**400** |  |  -  |
+**200** |
+|
+- |
+**400** |
+|
+- |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

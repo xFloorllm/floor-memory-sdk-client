@@ -3,12 +3,36 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**user_id** | **str** | user id | [optional] 
-**mode** | **str** | Mode - 0 for getting activation code to change email or mobile number, 1 for password change | 
-**mobiles_number** | **str** |  | [optional] 
-**email_id** | **str** |  | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**user_id**
+
+| **str** | user id |
+
+[optional]
+**mode**
+
+| **str** | Mode - 0 for getting activation code to change email or mobile number, 1 for password change |
+**mobiles_number**
+
+| **str** |
+|
+
+[optional]
+**email_id**
+
+| **str** |
+|
+
+[optional]
 
 ### Example
 

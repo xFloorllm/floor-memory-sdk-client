@@ -3,14 +3,44 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**floor_id** | **str** |  | 
-**title** | **str** |  | 
-**details** | **str** |  | [optional] 
-**fid** | **str** |  | 
-**blocks** | [**List[BlockDetails]**](BlockDetails.md) |  | 
-**avatar** | [**Media**](Media.md) |  | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**floor_id**
+
+| **str** |
+|
+**title**
+
+| **str** |
+|
+**details**
+
+| **str** |
+|
+
+[optional]
+**fid**
+
+| **str** |
+|
+**blocks**
+
+| [**List[BlockDetails]**](BlockDetails.md) |
+|
+**avatar**
+
+| [**Media**](Media.md) |
+|
+
+[optional]
 
 ### Example
 

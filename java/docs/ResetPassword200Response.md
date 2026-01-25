@@ -7,7 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**success** | **String** | Password Reset |  |
+|**success** | **String** | Password Reset |
+|
 
 
 

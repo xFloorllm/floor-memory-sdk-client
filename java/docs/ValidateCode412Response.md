@@ -7,7 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**error** | **String** | Something went wrong. Try again |  |
+|**error** | **String** | Something went wrong. Try again |
+|
 
 
 

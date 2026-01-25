@@ -3,12 +3,32 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**code** | **str** |  | 
-**message** | **str** |  | 
-**path** | **str** |  | 
-**timestamp** | **str** |  | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**code**
+
+| **str** |
+|
+**message**
+
+| **str** |
+|
+**path**
+
+| **str** |
+|
+**timestamp**
+
+| **str** |
+|
 
 ### Example
 

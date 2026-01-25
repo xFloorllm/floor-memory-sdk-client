@@ -7,7 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**error** | [**ValidateCode400ResponseError**](ValidateCode400ResponseError.md) |  |  |
+|**error** | [**ValidateCode400ResponseError**](ValidateCode400ResponseError.md) |
+| |
 
 
 

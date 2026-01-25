@@ -2,8 +2,18 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**message** | **String** | Error Message | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**message**
+
+| **String** | Error Message |
 
 

@@ -4,17 +4,62 @@ Each post item
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**event_id** | **str** |  Post ID | [optional] 
-**block_type** | **str** | Block Type | [optional] 
-**author** | [**GetRecentEvents200ResponseItemsInnerAuthor**](GetRecentEvents200ResponseItemsInnerAuthor.md) |  | [optional] 
-**media** | [**List[Media]**](Media.md) | Any media attached | [optional] 
-**floor_uid** | **str** | 13 digit ID of the floor in which the post is residing | [optional] 
-**title** | **str** | Post title | [optional] 
-**text** | **str** | Post details | [optional] 
-**created_at_ms** | **str** | Created time in milli seconds | [optional] 
-**block_id** | **str** | Numeric ID of the block | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**event_id**
+
+| **str** | Post ID |
+
+[optional]
+**block_type**
+
+| **str** | Block Type |
+
+[optional]
+**author**
+
+| [**GetRecentEvents200ResponseItemsInnerAuthor**](GetRecentEvents200ResponseItemsInnerAuthor.md) |
+|
+
+[optional]
+**media**
+
+| [**List[Media]**](Media.md) | Any media attached |
+
+[optional]
+**floor_uid**
+
+| **str** | 13 digit ID of the floor in which the post is residing |
+
+[optional]
+**title**
+
+| **str** | Post title |
+
+[optional]
+**text**
+
+| **str** | Post details |
+
+[optional]
+**created_at_ms**
+
+| **str** | Created time in milli seconds |
+
+[optional]
+**block_id**
+
+| **str** | Numeric ID of the block |
+
+[optional]
 
 ### Example
 

@@ -7,7 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**error** | [**Event400ResponseError**](Event400ResponseError.md) |  |  |
+|**error** | [**Event400ResponseError**](Event400ResponseError.md) |
+| |
 
 
 

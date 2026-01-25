@@ -24,15 +24,20 @@ This API retrieves the **latest posts (events)** from a specified floor. The beh
 ---
 
 ### **Key Concepts**
-* A **floor** represents a content space (independent floor, followed floor, or pod floor) * A **pod floor** may aggregate content across multiple related floors * Posts are returned **in reverse chronological order** (latest first) * Each post belongs to a specific **block** within the floor
+* A **floor** represents a content space (independent floor, followed floor, or pod floor)
+* A **pod floor** may aggregate content across multiple related floors * Posts are returned **in reverse chronological order** (latest first) * Each post belongs to a specific **block** within the floor
 
 ---
 
-### **Request Method** `GET`
+### **Request Method**
+
+ `GET`
 
 ---
 
-### **Request Parameters (Query Params)** | Parameter Name | Type | Required | Description |
+### **Request Parameters (Query Params)**
+
+| Parameter Name | Type | Required | Description |
 | -------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `floor_id` | String | **Yes** | Floor identifier from which events should be fetched. Can be a pod floor ID, followed floor ID, or an independent floor ID |
 | `user_id` | String | No | If provided, returns posts relevant to the user within the given floor |
@@ -40,7 +45,9 @@ This API retrieves the **latest posts (events)** from a specified floor. The beh
 
 ---
 
-### **Behavior Summary** | Scenario | Result |
+### **Behavior Summary**
+
+| Scenario | Result |
 | ---------------------- | ----------------------------------------- |
 | `floor_id` only | Latest posts from the specified floor |
 | `floor_id` + `user_id` | User-relevant posts within that floor |
@@ -49,20 +56,26 @@ This API retrieves the **latest posts (events)** from a specified floor. The beh
 
 ---
 
-### **Response Format** `application/json`
+### **Response Format**
+
+ `application/json`
 
 ---
 
 ### **Response Structure**
 
-### **Top-Level Fields** | Field | Type | Description |
+### **Top-Level Fields**
+
+| Field | Type | Description |
 | ------------ | ------ | ------------------------------ |
 | `post_count` | String | Total number of posts returned |
 | `items` | Array | List of recent post objects |
 
 ---
 
-### **Post Object (`items[]`)** | Field | Type | Description |
+### **Post Object (`items[]`)**
+
+| Field | Type | Description |
 | --------------- | ------ | ------------------------------------------------------------------------- |
 | `event_id` | String | Unique identifier of the post/event |
 | `block_type` | String | Type of block where the post was created (e.g., blog, forum, audio, etc.) |
@@ -75,7 +88,9 @@ This API retrieves the **latest posts (events)** from a specified floor. The beh
 
 ---
 
-### **Author Object** | Field | Type | Description |
+### **Author Object**
+
+| Field | Type | Description |
 | ----------- | ------ | ---------------------------- |
 | `name` | String | Display name of the author |
 | `floor_uid` | String | Author’s floor/user handle |
@@ -83,26 +98,38 @@ This API retrieves the **latest posts (events)** from a specified floor. The beh
 
 ---
 
-### **Media Object** | Field | Type | Description |
+### **Media Object**
+
+| Field | Type | Description |
 | ------ | ------ | ----------------------------------- |
 | `type` | String | Media type (e.g., `AUDIO`, `IMAGE`) |
 | `url` | String | Public URL of the media file |
 
 ---
 
-### **Sample Success Response** *(structure abbreviated for clarity)*
+### **Sample
 
-```json { \"post_count\": \"18\", \"items\": [ { \"event_id\": \"1766557274836\", \"block_type\": \"0\", \"title\": \"voice-note-1766557272764.wav\", \"text\": \"You\", \"created_at_ms\": \"1766557275000\", \"author\": { \"name\": \"MEGHANA G\", \"floor_uid\": \"meghanag\", \"avatar\": { \"type\": \"IMAGE\", \"url\": \"https://...\" } }, \"media\": [ { \"type\": \"AUDIO\", \"url\": \"https://...\" } ] } ] } ```
+Success Response**
+
+ *(structure abbreviated for clarity)*
+
+```json { \"post_count\": \"18\", \"items\": [ { \"event_id\": \"1766557274836\", \"block_type\": \"0\", \"title\": \"voice-note-1766557272764.wav\", \"text\": \"You\", \"created_at_ms\": \"1766557275000\", \"author\": { \"name\": \"MEGHANA G\", \"floor_uid\": \"meghanag\", \"avatar\": { \"type\": \"IMAGE\", \"url\": \"https://...\" } }, \"media\": [ { \"type\": \"AUDIO\", \"url\": \"https://...\" } ] } ] }
+
+```
 
 ---
 
 ### **Notes**
-* Posts may contain **plain text or HTML** * Media is optional and may be absent * Ordering is **latest first** * The API is read-only and does not require authentication by default * Access control (public/private floors) is enforced internally
+* Posts may contain **plain text or HTML**
+* Media is optional and may be absent * Ordering is **latest first**
+* The API is read-only and does not require authentication by default
+* Access control (public/private floors) is enforced internally
 
 ---
 
 ### **Typical Use Cases**
-* Floor activity feed * Pod-level dashboards * User-personalized timelines * Public floor landing pages * External developer pods using `app_id`
+* Floor activity feed
+* Pod-level dashboards * User-personalized timelines * Public floor landing pages * External developer pods using `app_id`
 
 ### Example
 ```java
@@ -143,12 +170,14 @@ public class Example {
 
 ### Parameters
 
-| Name | Type | Description  | Notes |
+| Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **floorId** | **String**|
 | |
-| **userId** | **String**|  | [optional] |
-| **appId** | **String**|  | [optional] |
+| **userId** | **String**|
+| [optional] |
+| **appId** | **String**|
+| [optional] |
 
 ### Return type
 
@@ -166,6 +195,10 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** |  |  -  |
-| **400** |  |  -  |
+| **200** |
+|
+- |
+| **400** |
+|
+- |
 

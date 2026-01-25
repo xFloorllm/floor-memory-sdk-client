@@ -4,16 +4,51 @@ User profile details
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**floor_id** | **str** | Associated floor ID | 
-**fid** | **str** | Unique ID of floor | 
-**blocks** | [**List[BlockDetails]**](BlockDetails.md) | List of Blocks | [optional] 
-**name** | **str** | User Name | [optional] 
-**email** | **str** | Email ID | [optional] 
-**mobile_number** | **str** | Mobile number | [optional] 
-**user_id** | **str** | Unique User ID | 
-**avatar** | [**SignInWithEmail200ResponseProfileAvatar**](SignInWithEmail200ResponseProfileAvatar.md) |  | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**floor_id**
+
+| **str** | Associated floor ID |
+**fid**
+
+| **str** | Unique ID of floor |
+**blocks**
+
+| [**List[BlockDetails]**](BlockDetails.md) | List of Blocks |
+
+[optional]
+**name**
+
+| **str** | User Name |
+
+[optional]
+**email**
+
+| **str** | Email ID |
+
+[optional]
+**mobile_number**
+
+| **str** | Mobile number |
+
+[optional]
+**user_id**
+
+| **str** | Unique User ID |
+**avatar**
+
+| [**SignInWithEmail200ResponseProfileAvatar**](SignInWithEmail200ResponseProfileAvatar.md) |
+|
+
+[optional]
 
 ### Example
 

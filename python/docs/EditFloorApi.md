@@ -46,19 +46,19 @@ After a successful update, the API returns the **latest floor object**, includin
 
 ---
 
-### Request Body (Multipart Form
+**Request Body**
 
-Data)
+(Multipart Form Data)
 
 ### Form Fields
 
-| Field Name | Type   | Required     | Description                              |
+| Field Name | Type | Required | Description |
 | ---------- | ------ | ------------ | ---------------------------------------- |
-| `fid`      | String | Recommended* | Immutable internal floor ID              |
-| `floor_id` | String | Optional*    | Public / human-readable floor identifier |
-| `title`    | String | Optional     | New floor title                          |
-| `details`  | String | Optional     | New floor description                    |
-| `logo`     | File   | Optional     | New floor logo image (PNG/JPG/WebP)      |
+| `fid` | String | Recommended* | Immutable internal floor ID |
+| `floor_id` | String | Optional* | Public / human-readable floor identifier |
+| `title` | String | Optional | New floor title |
+| `details` | String | Optional | New floor description |
+| `logo` | File | Optional | New floor logo image (PNG/JPG/WebP) |
 
 * At least **one floor identifier** (`fid` or `floor_id`) must be provided.
 **Best practice:** Use `fid` as the primary identifier.
@@ -79,7 +79,9 @@ Data)
 
 ---
 
-### Sample Success Response
+### Sample
+
+Success Response
 
 ```json
 {
@@ -103,9 +105,7 @@ Data)
 
 ---
 
-### Error Responses (Authorization
-
-Focus)
+### Error Responses (Authorization Focus)
 
 ### Not Floor Owner
 
@@ -198,14 +198,41 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **floor_id** | **str**|  | 
- **user_id** | **str**| User ID | 
- **app_id** | **str**| App ID | 
- **logo_file** | **bytearray**| Floor avatar | [optional] 
- **title** | **str**| Floor title | [optional] 
- **details** | **str**| Floor decription | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **floor_id**
+
+| **str**|
+|
+ **user_id**
+
+| **str**| User ID |
+ **app_id**
+
+| **str**| App ID |
+ **logo_file**
+
+| **bytearray**| Floor avatar |
+
+[optional]
+ **title**
+
+| **str**| Floor title |
+
+[optional]
+ **details**
+
+| **str**| Floor decription |
+
+[optional]
 
 ### Return type
 
@@ -224,8 +251,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** |  |  -  |
-**400** |  |  -  |
+**200** |
+|
+- |
+**400** |
+|
+- |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

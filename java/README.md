@@ -125,26 +125,106 @@ public class Example {
 
 All URIs are relative to *https://appfloor.in*
 
-Class | Method | HTTP request | Description
------------- | ------------- | ------------- | -------------
-*DefaultApi* | [**changeEmail**](docs/DefaultApi.md#changeEmail) | **POST** /auth-service/change/email | Change email ID
-*DefaultApi* | [**changeMobileNumber**](docs/DefaultApi.md#changeMobileNumber) | **POST** /auth-service/change/mobile | Change Mobile number
-*DefaultApi* | [**changePassword**](docs/DefaultApi.md#changePassword) | **POST** /auth-service/password/change | Change Password
-*DefaultApi* | [**makeFloorPrivate**](docs/DefaultApi.md#makeFloorPrivate) | **POST** /api/memory/make/floor/private | Make floor Private
-*DefaultApi* | [**makeFloorPublic**](docs/DefaultApi.md#makeFloorPublic) | **POST** /api/memory/make/floor/public | Make floor public
-*DefaultApi* | [**registerExternalUserIdentity**](docs/DefaultApi.md#registerExternalUserIdentity) | **POST** /memory/identity/external-user | External User Registration
-*DefaultApi* | [**renameFloor**](docs/DefaultApi.md#renameFloor) | **POST** /api/memory/change/floor/id | Rename floor
-*DefaultApi* | [**resetPassword**](docs/DefaultApi.md#resetPassword) | **POST** /auth-service/password/reset | Reset Password
-*DefaultApi* | [**sendValidationCode**](docs/DefaultApi.md#sendValidationCode) | **POST** /auth-service/send/validation/code | Send Validation code
-*DefaultApi* | [**signInWithEmail**](docs/DefaultApi.md#signInWithEmail) | **POST** /auth-service/sign/in/with/email | Sign In with email ID
-*DefaultApi* | [**signInWithMobileNumber**](docs/DefaultApi.md#signInWithMobileNumber) | **POST** /auth-service/sign/in/with/mobile/number | Sign In with Mobile number
-*DefaultApi* | [**signUp**](docs/DefaultApi.md#signUp) | **POST** /auth-service/sign/up | Sign Up
-*DefaultApi* | [**validateCode**](docs/DefaultApi.md#validateCode) | **POST** /auth-service/validate/activation/code | Validation
-*EditFloorApi* | [**editFloor**](docs/EditFloorApi.md#editFloor) | **POST** /api/memory/edit/floor/{floor_id} | Edit floor
-*EventApi* | [**event**](docs/EventApi.md#event) | **POST** /api/memory/events | Create Event (Post Content)
-*GetFloorInformationApi* | [**getFloorInformation**](docs/GetFloorInformationApi.md#getFloorInformation) | **GET** /api/memory/floor/info/{floor_id} | Basic information of a floor
-*GetRecentEventsApi* | [**getRecentEvents**](docs/GetRecentEventsApi.md#getRecentEvents) | **GET** /api/memory/recent/events | Recent Events
-*QueryApi* | [**query**](docs/QueryApi.md#query) | **POST** /agent/memory/query | Query (Primary API)
+Class
+
+| Method | HTTP request |
+
+Description
+------------
+
+| ------------- | ------------- |
+
+-------------
+*DefaultApi*
+
+| [**changeEmail**](docs/DefaultApi.md#changeEmail) | **POST** /auth-service/change/email |
+
+Change email ID
+*DefaultApi*
+
+| [**changeMobileNumber**](docs/DefaultApi.md#changeMobileNumber) | **POST** /auth-service/change/mobile |
+
+Change Mobile number
+*DefaultApi*
+
+| [**changePassword**](docs/DefaultApi.md#changePassword) | **POST** /auth-service/password/change |
+
+Change Password
+*DefaultApi*
+
+| [**makeFloorPrivate**](docs/DefaultApi.md#makeFloorPrivate) | **POST** /api/memory/make/floor/private |
+
+Make floor Private
+*DefaultApi*
+
+| [**makeFloorPublic**](docs/DefaultApi.md#makeFloorPublic) | **POST** /api/memory/make/floor/public |
+
+Make floor public
+*DefaultApi*
+
+| [**registerExternalUserIdentity**](docs/DefaultApi.md#registerExternalUserIdentity) | **POST** /memory/identity/external-user |
+
+External User Registration
+*DefaultApi*
+
+| [**renameFloor**](docs/DefaultApi.md#renameFloor) | **POST** /api/memory/change/floor/id |
+
+Rename floor
+*DefaultApi*
+
+| [**resetPassword**](docs/DefaultApi.md#resetPassword) | **POST** /auth-service/password/reset |
+
+Reset Password
+*DefaultApi*
+
+| [**sendValidationCode**](docs/DefaultApi.md#sendValidationCode) | **POST** /auth-service/send/validation/code |
+
+Send Validation code
+*DefaultApi*
+
+| [**signInWithEmail**](docs/DefaultApi.md#signInWithEmail) | **POST** /auth-service/sign/in/with/email |
+
+Sign In with email ID
+*DefaultApi*
+
+| [**signInWithMobileNumber**](docs/DefaultApi.md#signInWithMobileNumber) | **POST** /auth-service/sign/in/with/mobile/number |
+
+Sign In with Mobile number
+*DefaultApi*
+
+| [**signUp**](docs/DefaultApi.md#signUp) | **POST** /auth-service/sign/up |
+
+Sign Up
+*DefaultApi*
+
+| [**validateCode**](docs/DefaultApi.md#validateCode) | **POST** /auth-service/validate/activation/code |
+
+Validation
+*EditFloorApi*
+
+| [**editFloor**](docs/EditFloorApi.md#editFloor) | **POST** /api/memory/edit/floor/{floor_id} |
+
+Edit floor
+*EventApi*
+
+| [**event**](docs/EventApi.md#event) | **POST** /api/memory/events |
+
+Create Event (Post Content)
+*GetFloorInformationApi*
+
+| [**getFloorInformation**](docs/GetFloorInformationApi.md#getFloorInformation) | **GET** /api/memory/floor/info/{floor_id} |
+
+Basic information of a floor
+*GetRecentEventsApi*
+
+| [**getRecentEvents**](docs/GetRecentEventsApi.md#getRecentEvents) | **GET** /api/memory/recent/events |
+
+Recent Events
+*QueryApi*
+
+| [**query**](docs/QueryApi.md#query) | **POST** /agent/memory/query |
+
+Query (Primary API)
 
 
 ### Documentation for Models

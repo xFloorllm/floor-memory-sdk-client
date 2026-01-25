@@ -7,10 +7,14 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**code** | **String** |  |  |
-|**message** | **String** |  |  |
-|**path** | **String** |  |  |
-|**timestamp** | **String** |  |  |
+|**code** | **String** |
+| |
+|**message** | **String** |
+| |
+|**path** | **String** |
+| |
+|**timestamp** | **String** |
+| |
 
 
 

@@ -3,14 +3,41 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**floor_id** | **str** | Pod floor ID | 
-**title** | **str** | Title | 
-**details** | **str** | Brief description about the Pod floor | [optional] 
-**fid** | **str** | Unique numeric ID of the pod floor | 
-**blocks** | [**List[BlockDetails]**](BlockDetails.md) | List of blocks | [optional] 
-**avatar** | [**Media**](Media.md) |  | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**floor_id**
+
+| **str** | Pod floor ID |
+**title**
+
+| **str** | Title |
+**details**
+
+| **str** | Brief description about the Pod floor |
+
+[optional]
+**fid**
+
+| **str** | Unique numeric ID of the pod floor |
+**blocks**
+
+| [**List[BlockDetails]**](BlockDetails.md) | List of blocks |
+
+[optional]
+**avatar**
+
+| [**Media**](Media.md) |
+|
+
+[optional]
 
 ### Example
 

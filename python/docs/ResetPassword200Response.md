@@ -3,9 +3,19 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**success** | **str** | Password Reset | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**success**
+
+| **str** | Password Reset |
 
 ### Example
 

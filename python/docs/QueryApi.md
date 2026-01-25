@@ -80,20 +80,20 @@ application/json
 
 ### **Field Descriptions**
 
-| Field               | Type                    | Required | Description                                                                                    |
+| Field | Type | Required | Description |
 | ------------------- | ----------------------- | -------- | ---------------------------------------------------------------------------------------------- |
-| `user_id`           | string                  | Yes      | Unique xfloor user identifier. Used to maintain conversational continuity and personalization. |
-| `query`             | string                  | Yes      | Natural language query provided by the user.                                                   |
-| `floor_ids`         | array of strings        | Yes      | List of floor identifiers that define the search scope. Must be provided as a JSON array.      |
-| `filters`           | object                  | Optional | Additional constraints to narrow search results.                                               |
-| `filters.time_from` | string (ISO-8601)       | Optional | Start timestamp for filtering content by creation or update time.                              |
-| `filters.time_to`   | string (ISO-8601)       | Optional | End timestamp for filtering content by creation or update time.                                |
-| `filters.types`     | array of strings        | Optional | Content types to include (e.g., `post`, `blog`, `forum`).                                      |
-| `filters.tags`      | array of strings        | Optional | Tags used to further refine results.                                                           |
-| `k`                 | integer                 | Optional | Maximum number of results to retrieve (Top-K). Defaults to system-defined behavior if omitted. |
-| `include_metadata`  | string (`"0"` or `"1"`) | Optional | Whether to include metadata (source, timestamps, tags) in the response. Defaults to `"0"`.     |
-| `summary_needed`    | string (`"0"` or `"1"`) | Optional | Whether a summarized conversational answer should be generated. Defaults to `"0"`.             |
-| `app_id`            | string                  | Optional | Identifies the application invoking the API. Useful for multi-app integrations.                |
+| `user_id` | string | Yes | Unique xfloor user identifier. Used to maintain conversational continuity and personalization. |
+| `query` | string | Yes | Natural language query provided by the user. |
+| `floor_ids` | array of strings | Yes | List of floor identifiers that define the search scope. Must be provided as a JSON array. |
+| `filters` | object | Optional | Additional constraints to narrow search results. |
+| `filters.time_from` | string (ISO-8601) | Optional | Start timestamp for filtering content by creation or update time. |
+| `filters.time_to` | string (ISO-8601) | Optional | End timestamp for filtering content by creation or update time. |
+| `filters.types` | array of strings | Optional | Content types to include (e.g., `post`, `blog`, `forum`). |
+| `filters.tags` | array of strings | Optional | Tags used to further refine results. |
+| `k` | integer | Optional | Maximum number of results to retrieve (Top-K). Defaults to system-defined behavior if omitted. |
+| `include_metadata` | string (`"0"` or `"1"`) | Optional | Whether to include metadata (source, timestamps, tags) in the response. Defaults to `"0"`. |
+| `summary_needed` | string (`"0"` or `"1"`) | Optional | Whether a summarized conversational answer should be generated. Defaults to `"0"`. |
+| `app_id` | string | Optional | Identifies the application invoking the API. Useful for multi-app integrations. |
 
 ---
 
@@ -163,11 +163,11 @@ application/json
 
 ### **Response Field Semantics**
 
-| Field              | Always Present     | Description                                 | Rendering Guidance     |
+| Field | Always Present | Description | Rendering Guidance |
 | ------------------ | ------------------ | ------------------------------------------- | ---------------------- |
-| `answer`           | Yes                | Assistant-generated conversational response | **Render prominently** |
-| `items`            | Yes (may be empty) | List of matched content used for grounding  | Render optionally      |
-| `items[].metadata` | Conditional        | Included only if `include_metadata = "1"`   | Render on demand       |
+| `answer` | Yes | Assistant-generated conversational response | **Render prominently** |
+| `items` | Yes (may be empty) | List of matched content used for grounding | Render optionally |
+| `items[].metadata` | Conditional | Included only if `include_metadata = "1"` | Render on demand |
 
 > **No-Result Case:**
 > If no relevant content is found, `items` will be an empty array and `answer` will contain a conversational fallback response.
@@ -263,9 +263,20 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **query_request** | [**QueryRequest**](QueryRequest.md)|  | 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **query_request**
+
+| [**QueryRequest**](QueryRequest.md)|
+|
 
 ### Return type
 
@@ -285,18 +296,26 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Primary response payload containing assistant output and retrieved content. This response represents the successful execution of a **conversational query** processed by the agent. The API performs:
-1. Interpretation of the user’s query 2. Optional retrieval of relevant content (posts/events/blocks) 3. Generation of a final **natural-language answer** The response contains **two logical parts**:
-* **`answer`** → the assistant’s final conversational response (what should be shown to the user) * **`items`** → the list of retrieved content items that were matched and used (or considered) during answer generation
+1. Interpretation of the user’s query
+2. Optional retrieval of relevant content (posts/events/blocks) 3. Generation of a final **natural-language answer** The response contains **two logical parts**:
+* **`answer`** → the assistant’s final conversational response (what should be shown to the user)
+* **`items`** → the list of retrieved content items that were matched and used (or considered) during answer generation
 
 ---
 
 ### Response Structure
 
-```json { \"answer\": \"string\", \"items\": [ ... ] } ```
+```json { \"answer\":
+
+\"string\", \"items\": [ ... ] }
+
+```
 
 ---
 
-### Top-Level Fields | Field | Type | Description |
+### Top-Level Fields
+
+| Field | Type | Description |
 | -------- | ------ | --------------------------------------------------------- |
 | `answer` | String | Final assistant-generated response to the user query |
 | `items` | Array | List of matched content items retrieved during processing |
@@ -305,28 +324,42 @@ Name | Type | Description  | Notes
 
 ### `answer`
 
-```json \"answer\": \"non veniam reprehenderit labore\" ```
+```json \"answer\":
+
+\"non veniam reprehenderit labore\"
+
+```
 
 ### Description
-* This is the **final conversational output** generated by the agent. * It is intended to be **directly rendered** in the chat or UI. * The content may be:
+* This is the **final conversational output** generated by the agent.
+* It is intended to be **directly rendered** in the chat or UI. * The content may be:
 * A direct answer
 * A summary
 * A synthesized response based on retrieved items
 
 ---
 
-### `items[]` – Retrieved Content Items Each entry in `items` represents a **content block or event** that matched the query. These items are typically used for:
-* Explainability (“why this answer?”) * Debugging or analytics * Showing sources or related content (optional UI)
+### `items[]` – Retrieved Content Items Each entry in `items` represents a **content block or event** that matched the query.
+
+These items are typically used for:
+* Explainability (“why this answer?”)
+* Debugging or analytics * Showing sources or related content (optional UI)
 
 ---
 
 ### Item Object Structure
 
-```json { \"block_type\": 25453249, \"block_id\": \"96\", \"floor_uid\": \"87\", \"event_id\": \"59\", \"text\": \"Deficio cruentus voluptatem...\", \"score\": -80399794.92417637, \"block_title\": \"furthermore separately skeleton...\", \"block_details\": \"Duis magna dolore\", \"from_floor_uid\": \"73\", \"user_id\": \"32\", \"match_type\": \"culpa mollit\" } ```
+```json { \"block_type\":
+
+25453249, \"block_id\": \"96\", \"floor_uid\": \"87\", \"event_id\": \"59\", \"text\": \"Deficio cruentus voluptatem...\", \"score\": -80399794.92417637, \"block_title\": \"furthermore separately skeleton...\", \"block_details\": \"Duis magna dolore\", \"from_floor_uid\": \"73\", \"user_id\": \"32\", \"match_type\": \"culpa mollit\" }
+
+```
 
 ---
 
-### Item Fields | Field | Type | Description |
+### Item Fields
+
+| Field | Type | Description |
 | ---------------- | ------ | ------------------------------------------------------------------------ |
 | `block_type` | Number | Identifier of the block type (e.g., feed, blog, forum, quiz) |
 | `block_id` | String | Unique identifier of the block containing the content |
@@ -343,17 +376,20 @@ Name | Type | Description  | Notes
 ---
 
 ### Interpretation of `score`
-* Higher relevance is typically indicated by **better score ranking** (interpretation depends on backend logic) * Scores may be positive or negative depending on normalization and similarity model * Clients should **not rely on absolute score values**, only relative ordering
+* Higher relevance is typically indicated by **better score ranking** (interpretation depends on backend logic)
+* Scores may be positive or negative depending on normalization and similarity model * Clients should **not rely on absolute score values**, only relative ordering
 
 ---
 
 ### Typical Usage Patterns
 
 ### Chat UI
-* Display only `answer` * Ignore `items` unless showing “Sources” or “Related content”
+* Display only `answer`
+* Ignore `items` unless showing “Sources” or “Related content”
 
 ### Debug / Analytics
-* Inspect `items` to understand what content influenced the answer * Use `score`, `match_type`, and block metadata
+* Inspect `items` to understand what content influenced the answer
+* Use `score`, `match_type`, and block metadata
 
 ### Explainable AI
 * Show selected `items` as citations or expandable references
@@ -361,13 +397,20 @@ Name | Type | Description  | Notes
 ---
 
 ### Notes for Developers
-* `items` may be an empty array if no relevant content was retrieved * The `answer` is always present on success * The order of `items` is typically sorted by relevance * Field values and score scales are implementation-specific and may evolve
+* `items` may be an empty array if no relevant content was retrieved
+* The `answer` is always present on success * The order of `items` is typically sorted by relevance
+* Field values and score scales are implementation-specific and may evolve
 
 ---
 
-### Minimal Mental Model > **Answer** = what the agent says > **Items** = what the agent looked at |
+### Minimal Mental Model > **Answer** = what the agent says
+
+> **Items** = what the agent looked at
+
+| - |
+**422** |
+|
 - |
-**422** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

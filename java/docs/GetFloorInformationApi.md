@@ -14,17 +14,22 @@ All URIs are relative to *https://appfloor.in*
 Basic information of a floor
 
 This API returns the **basic profile information of a floor**. It is used to fetch all essential metadata required to **render a floor landing page, header, or navigation context**. The response includes:
-* Floor identity and type * Ownership information relative to the requesting user * Floor metadata (title, description, avatar) * List of blocks available in the floor * App association (for pod / developer use cases) This API does **not** return posts or content; it only provides **structural and descriptive information** about the floor.
+* Floor identity and type
+* Ownership information relative to the requesting user * Floor metadata (title, description, avatar) * List of blocks available in the floor * App association (for pod / developer use cases) This API does **not** return posts or content; it only provides **structural and descriptive information** about the floor.
 
 ---
 
 ### Typical Use Cases
-* Render floor header (title, logo, description) * Decide UI permissions (owner vs non-owner) * Display available blocks (Feeds, Blog, Quiz, etc.) * Pod discovery or developer-managed floor rendering * Lightweight floor metadata fetch before loading content
+* Render floor header (title, logo, description)
+* Decide UI permissions (owner vs non-owner) * Display available blocks (Feeds, Blog, Quiz, etc.)
+* Pod discovery or developer-managed floor rendering
+* Lightweight floor metadata fetch before loading content
 
 ---
 
 ### Authorization & Context
-* The API may be called by authenticated or unauthenticated users (depending on floor visibility). * The `is_owner` field is calculated **relative to the requesting user context** (if authenticated).
+* The API may be called by authenticated or unauthenticated users (depending on floor visibility).
+* The `is_owner` field is calculated **relative to the requesting user context** (if authenticated).
 
 ---
 
@@ -34,7 +39,9 @@ This API returns the **basic profile information of a floor**. It is used to fet
 
 ### Response Structure
 
-### Top-Level Fields | Field | Type | Description |
+### Top-Level Fields
+
+| Field | Type | Description |
 | ------------ | ---------------------- | ---------------------------------------------------------------- |
 | `floor_id` | String | Public, human-readable identifier of the floor |
 | `floor_uid` | String | Internal unique identifier of the floor |
@@ -52,19 +59,34 @@ This API returns the **basic profile information of a floor**. It is used to fet
 
 ### `is_owner`
 
-```json \"is_owner\": \"0\" ``` | Value | Meaning |
+```json \"is_owner\":
+
+\"0\"
+
+```
+
+| Value | Meaning |
 | ----- | ----------------------------------------- |
 | `\"1\"` | Requesting user is the owner of the floor |
-| `\"0\"` | Requesting user is not the owner | This field is typically used by clients to:
-* Enable or disable edit/settings UI * Show owner-only actions
+| `\"0\"` | Requesting user is not the owner |
+
+This field is typically used by clients to:
+* Enable or disable edit/settings UI
+* Show owner-only actions
 
 ---
 
 ### Blocks Object
 
-```json \"blocks\": [ { \"BID\": \"1765960948723\", \"type\": \"1\", \"title\": \"Feeds\" } ] ``` Each block represents a **content category or service** available inside the floor.
+```json \"blocks\":
 
-### Block Fields | Field | Type | Description |
+[ { \"BID\": \"1765960948723\", \"type\": \"1\", \"title\": \"Feeds\" } ]
+
+``` Each block represents a **content category or service** available inside the floor.
+
+### Block Fields
+
+| Field | Type | Description |
 | ------- | ------ | ----------------------------------------------------- |
 | `BID` | String | Unique identifier of the block |
 | `type` | String | Block type identifier (e.g., feed, blog, forum, quiz) |
@@ -74,47 +96,82 @@ This API returns the **basic profile information of a floor**. It is used to fet
 
 ### Avatar Object
 
-```json \"avatar\": { \"id\": \"1767009204367\", \"url\": \"https://...\" } ``` | Field | Type | Description |
+```json \"avatar\":
+
+{ \"id\": \"1767009204367\", \"url\": \"https://...\" }
+
+```
+
+| Field | Type | Description |
 | ----- | ------ | ------------------------------ |
 | `id` | String | Media identifier of the avatar |
-| `url` | String | CDN URL of the floor logo | Used to render the floor’s profile image or banner.
+| `url` | String | CDN URL of the floor logo |
+
+Used to render the floor’s profile image or banner.
 
 ---
 
 ### Floor Type
 
-```json \"floor_type\": \"POD\" ``` | Value | Meaning |
+```json \"floor_type\":
+
+\"POD\"
+
+```
+
+| Value | Meaning |
 | --------- | ------------------------------------- |
 | `PUBLIC` | Open floor visible to everyone |
 | `PRIVATE` | Restricted floor |
-| `POD` | Aggregated or developer-managed floor | `POD` floors are often associated with an `app_id` and may aggregate or serve content programmatically.
+| `POD` | Aggregated or developer-managed floor |
+
+`POD` floors are often associated with an `app_id` and may aggregate or serve content programmatically.
 
 ---
 
-### Sample Success Response
+### Sample
 
-```json { \"is_owner\": \"0\", \"blocks\": [ { \"BID\": \"1765960948723\", \"type\": \"1\", \"title\": \"Feeds\" } ], \"floor_uid\": \"1765960956967\", \"floor_id\": \"raghupodfloor1\", \"details\": \"raghu\", \"avatar\": { \"id\": \"1767009204367\", \"url\": \"https://d2e5822u5ecuq8.cloudfront.net/room/1765960956967/logo/1765960956967.jpg\" }, \"title\": \"raghu\", \"floor_type\": \"POD\", \"app_id\": \"1765949734005\" } ```
+Success Response
+
+```json { \"is_owner\":
+
+\"0\", \"blocks\": [ { \"BID\": \"1765960948723\", \"type\": \"1\", \"title\": \"Feeds\" } ], \"floor_uid\": \"1765960956967\", \"floor_id\": \"raghupodfloor1\", \"details\": \"raghu\", \"avatar\": { \"id\": \"1767009204367\", \"url\": \"https://d2e5822u5ecuq8.cloudfront.net/room/1765960956967/logo/1765960956967.jpg\" }, \"title\": \"raghu\", \"floor_type\": \"POD\", \"app_id\": \"1765949734005\" }
+
+```
 
 ---
 
 ### Notes for Developers
-* This is a **lightweight metadata API** and is safe to call frequently. * Use this API **before** loading posts or analytics. * `blocks` ordering can be used directly for navigation UI. * `floor_type` + `is_owner` together determine which UI actions are allowed.
+* This is a **lightweight metadata API** and is safe to call frequently.
+* Use this API **before** loading posts or analytics. * `blocks` ordering can be used directly for navigation UI. * `floor_type` + `is_owner` together determine which UI actions are allowed.
 
 ---
 
-### Common Error Scenarios
+### Common
+
+Error Scenarios
 
 ### Floor Not Found
 
-```json { \"status\": \"ERROR\", \"message\": \"Floor not found\" } ```
+```json { \"status\":
+
+\"ERROR\", \"message\": \"Floor not found\" }
+
+```
 
 ### Access Restricted
 
-```json { \"status\": \"ERROR\", \"message\": \"Access denied for this floor\" } ```
+```json { \"status\": \"ERROR\", \"message\": \"Access denied for this floor\" }
+
+```
 
 ---
 
-### Final Mental Model > **This API answers: “What is this floor, who owns it, and what can I do here?”**
+### Final Mental Model 
+
+> **This API answers:
+
+“What is this floor, who owns it, and what can I do here?”**
 
 ### Example
 ```java
@@ -155,11 +212,12 @@ public class Example {
 
 ### Parameters
 
-| Name | Type | Description  | Notes |
+| Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **floorId** | **String**|
 | |
-| **userId** | **String**| User ID  - 13 digit numeric identity | [optional] |
+| **userId** | **String**| User ID
+- 13 digit numeric identity | [optional] |
 | **appId** | **String**| App ID - 13 digit numeric identity | [optional] |
 
 ### Return type
@@ -178,6 +236,10 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** |  |  -  |
-| **400** |  |  -  |
+| **200** |
+|
+- |
+| **400** |
+|
+- |
 

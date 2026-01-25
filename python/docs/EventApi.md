@@ -58,7 +58,7 @@ The content may consist of **text only** or **text combined with one or more med
 
 ### **1. Files (Optional)**
 
-| Field   | Type   | Required | Description                                                           |
+| Field | Type | Required | Description |
 | ------- | ------ | -------- | --------------------------------------------------------------------- |
 | `files` | file[] | Optional | Media files to attach to the content. Multiple files may be uploaded. |
 
@@ -75,9 +75,9 @@ These files are processed and embedded along with the textual content where appl
 
 ### **2. Input Information (Required)**
 
-| Field        | Type          | Required | Description                                                       |
+| Field | Type | Required | Description |
 | ------------ | ------------- | -------- | ----------------------------------------------------------------- |
-| `input_info` | string (JSON) | Yes      | JSON string containing metadata and textual content for the post. |
+| `input_info` | string (JSON) | Yes | JSON string containing metadata and textual content for the post. |
 
 ---
 
@@ -98,15 +98,15 @@ These files are processed and embedded along with the textual content where appl
 
 ### **Field Descriptions**
 
-| Field         | Type   | Required | Description                                                                        |
+| Field | Type | Required | Description |
 | ------------- | ------ | -------- | ---------------------------------------------------------------------------------- |
-| `floor_id`    | string | Yes      | Identifier of the user’s floor (POD) where the content will be stored.             |
-| `block_type`  | string | Yes      | Type of block under which the content is categorized (e.g., post, note, reminder). |
-| `BID`         | string | Yes      | Block identifier associated with this content.                                     |
-| `user_id`     | string | Yes      | Unique identifier of the user posting the content.                                 |
-| `title`       | string | Optional | Title or short heading for the content.                                            |
-| `description` | string | Yes      | Main textual content to be stored and embedded.                                    |
-| `app_id`      | string | Optional | Identifier of the calling application.                                             |
+| `floor_id` | string | Yes | Identifier of the user’s floor (POD) where the content will be stored. |
+| `block_type` | string | Yes | Type of block under which the content is categorized (e.g., post, note, reminder). |
+| `BID` | string | Yes | Block identifier associated with this content. |
+| `user_id` | string | Yes | Unique identifier of the user posting the content. |
+| `title` | string | Optional | Title or short heading for the content. |
+| `description` | string | Yes | Main textual content to be stored and embedded. |
+| `app_id` | string | Optional | Identifier of the calling application. |
 
 ---
 
@@ -219,10 +219,24 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **input_info** | **str**| Input parameters, bid is optional | 
- **files** | **bytearray**| Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected | [optional] 
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **input_info**
+
+| **str**| Input parameters, bid is optional |
+ **files**
+
+| **bytearray**| Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected |
+
+[optional]
 
 ### Return type
 
@@ -244,45 +258,70 @@ Name | Type | Description  | Notes
 **200** | ## **Successful Response (200 OK)** This API follows an **asynchronous ingestion model**. On success, the API **confirms acceptance of the content**, but **does not guarantee immediate availability** for retrieval or querying.
 
 ### **What the response means** A `200 OK` response indicates that:
-* The request payload is valid * The content has been **accepted and queued** for processing * The content has been published to the internal event pipeline (RabbitMQ) * Embedding and storage will occur asynchronously ⚠️ **Important:** The newly posted content **will not appear immediately** in query or feed APIs.
+* The request payload is valid
+* The content has been **accepted and queued** for processing * The content has been published to the internal event pipeline (RabbitMQ) * Embedding and storage will occur asynchronously ⚠️ **Important:** The newly posted content **will not appear immediately** in query or feed APIs.
 
 ---
 
 ### **Response Body (Example)**
 
-```json { \"status\": \"success\", \"message\": \"Content accepted for processing\" } ``` > No content data is returned in this response.
+```json { \"status\": \"success\", \"message\": \"Content accepted for processing\" }
+
+``` > No content data is returned in this response.
 
 ---
 
-### **Availability & Retrieval Model** After receiving a successful response:
-1. The content is processed asynchronously 2. The content becomes available in the floor feed **after processing completes** 3. Developers must retrieve the content using:
+### **Availability & Retrieval Model**
 
-``` GET /api/memory/recent/events ```
+ After receiving a successful response:
+1. The content is processed asynchronously
+2. The content becomes available in the floor feed **after processing completes**
+3. Developers must retrieve the content using:
+
+``` GET /api/memory/recent/events
+
+```
 
 ---
 
-### **Polling Requirement** Because ingestion is asynchronous:
-* Developers **must poll** `/api/memory/recent/events` * Polling should be done using:
+### **Polling Requirement**
+
+ Because ingestion is asynchronous:
+* Developers **must poll** `/api/memory/recent/events`
+* Polling should be done using:
 * `floor_id`
 * timestamp or last-known event marker * Compare previously retrieved events with new responses to detect newly added content This design ensures:
-* High ingestion throughput * Non-blocking uploads * Reliable embedding and storage pipelines
+* High ingestion throughput
+* Non-blocking uploads * Reliable embedding and storage pipelines
 
 ---
 
 ### **Typical Developer Flow**
 
-```text POST /api/memory/events ↓ 200 OK (content queued) ↓ Poll /api/memory/recent/events ↓ Detect new event ↓ Use content in /agent/memory/query ```
+```text POST /api/memory/events ↓ 200 OK (content queued) ↓ Poll /api/memory/recent/events ↓ Detect new event ↓ Use content in /agent/memory/query
+
+```
 
 ---
 
-### **Key Design Note (Why This Exists)** This API is intentionally asynchronous to:
-* Support large files and multi-modal uploads * Avoid request timeouts during embedding * Enable scalable background processing * Keep write latency low
+### **Key Design
+
+Note (Why This Exists)**
+
+ This API is intentionally asynchronous to:
+* Support large files and multi-modal uploads
+* Avoid request timeouts during embedding * Enable scalable background processing * Keep write latency low
 
 ---
 
-### **One-Line Summary** > Accepts user-generated text and media, queues it for asynchronous processing, and makes it available for retrieval via the recent events API after ingestion completes. |
+### **One-Line Summary**
+
+> Accepts user-generated text and media, queues it for asynchronous processing, and makes it available for retrieval via the recent events API after ingestion completes.
+
+| - |
+**400** |
+|
 - |
-**400** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

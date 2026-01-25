@@ -7,7 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**success** | **String** | Validation code sent successfully |  |
+|**success** | **String** | Validation code sent successfully |
+|
 
 
 

@@ -7,7 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**message** | **String** | Error Message |  |
+|**message** | **String** | Error Message |
+|
 
 
 

@@ -7,7 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**success** | **String** | Validate with OTP |  |
+|**success** | **String** | Validate with OTP |
+|
 
 
 

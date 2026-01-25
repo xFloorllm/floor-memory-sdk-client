@@ -4,10 +4,22 @@ Profile Pick details
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**url** | **str** | Image URL | 
-**id** | **str** | Image ID | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**url**
+
+| **str** | Image URL |
+**id**
+
+| **str** | Image ID |
 
 ### Example
 

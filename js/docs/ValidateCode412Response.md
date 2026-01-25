@@ -2,8 +2,18 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**error** | **String** | Something went wrong. Try again | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**error**
+
+| **String** | Something went wrong. Try again |
 
 

@@ -3,9 +3,19 @@
 
 ### Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**message** | **str** | Error Message | 
+Name
+
+| Type | Description |
+
+Notes
+------------
+
+| ------------- | ------------- |
+
+-------------
+**message**
+
+| **str** | Error Message |
 
 ### Example
 
