@@ -200,9 +200,9 @@ Name | Type | Description  | Notes
 
 Change Password
 
-1) `POST /password/change` — Change Password (Logged-in User)
+1) `POST /password/change` —
 
-Changes the password of an **authenticated user** who is currently logged in. This endpoint is used when a user is already signed in and wants to update their password as a security or preference action. The system validates a **one-time password-change verification code** (`activation_code`) issued specifically for the change-password flow. If the code is valid and not expired, the user’s password is updated to `new_password` and takes effect immediately. If verification fails, the password remains unchanged and an error response is returned.
+Change Password (Logged-in User) Changes the password of an **authenticated user** who is currently logged in. This endpoint is used when a user is already signed in and wants to update their password as a security or preference action. The system validates a **one-time password-change verification code** (`activation_code`) issued specifically for the change-password flow. If the code is valid and not expired, the user’s password is updated to `new_password` and takes effect immediately. If verification fails, the password remains unchanged and an error response is returned.
 
 ### Authentication ✅
 
@@ -218,7 +218,9 @@ Bearer token for the logged-in session
 ### Behavior Notes
 * Typically requires a prior call to **send a verification code** for password change (mode = password change). * `user_id` can be taken from the access token; include it only if your system requires it explicitly.
 
-### One-Line Summary 
+###
+
+One-Line Summary 
 
 > Changes the password for a logged-in user after validating a one-time password-change code.
 
@@ -1132,7 +1134,9 @@ Name | Type | Description  | Notes
 
 Validation
 
-### **Validate Activation / Verification Code** This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**. Depending on the mode, the API may:
+### **Validate Activation / Verification
+
+Code** This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**. Depending on the mode, the API may:
 * Activate a newly registered account * Confirm a login attempt * Verify a password change or reset * Validate email or mobile updates * Confirm account deletion or clearing requests The API verifies the provided `activation_code` against the given `user_id`, `mode`, and application context. If validation succeeds, the requested operation is completed and the API returns the relevant **POD information** and **user profile details** (where applicable). If validation fails, the operation is **not performed** and an appropriate error response is returned.
 
 ---

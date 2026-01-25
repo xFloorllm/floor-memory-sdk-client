@@ -46,7 +46,9 @@ After a successful update, the API returns the **latest floor object**, includin
 
 ---
 
-### Request Body (Multipart Form Data)
+### Request Body (Multipart Form
+
+Data)
 
 ### Form Fields
 
@@ -101,7 +103,9 @@ After a successful update, the API returns the **latest floor object**, includin
 
 ---
 
-### Error Responses (Authorization Focus)
+### Error Responses (Authorization
+
+Focus)
 
 ### Not Floor Owner
 

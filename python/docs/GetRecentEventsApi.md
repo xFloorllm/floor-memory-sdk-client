@@ -51,7 +51,9 @@ This makes the API suitable for:
 
 ---
 
-### **Request Parameters (Query Params)**
+### **Request Parameters (Query
+
+Params)**
 
 | Parameter Name | Type   | Required | Description                                                                                                                |
 | -------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------- |

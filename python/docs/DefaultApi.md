@@ -500,7 +500,9 @@ This API is commonly used in:
 
 ---
 
-**Request Parameters (Form Fields)**
+**Request Parameters (Form
+
+Fields)**
 
 | Field      | Type   | Required | Description                                                          |
 | ---------- | ------ | -------- | -------------------------------------------------------------------- |
@@ -555,7 +557,9 @@ This API is commonly used in:
 
 ---
 
-### Sample No-Op Response (Already Private)
+### Sample No-Op Response (Already
+
+Private)
 
 ```json
 {
@@ -721,7 +725,9 @@ This API is typically used from:
 
 ---
 
-**Request Parameters (Form Fields)**
+**Request Parameters (Form
+
+Fields)**
 
 | Field      | Type   | Required | Description                                                                     |
 | ---------- | ------ | -------- | ------------------------------------------------------------------------------- |
@@ -773,7 +779,9 @@ This API is typically used from:
 
 ---
 
-### Sample No-Op Response (Already Public)
+### Sample No-Op Response (Already
+
+Public)
 
 ```json
 {
@@ -1044,7 +1052,9 @@ It allows the **floor owner** to update the public-facing floor ID (slug/handle)
 
 ---
 
-**Request Parameters (Form Fields)**
+**Request Parameters (Form
+
+Fields)**
 
 | Parameter | Type   | Required | Description                                                                     |
 | --------- | ------ | -------- | ------------------------------------------------------------------------------- |
@@ -1231,7 +1241,9 @@ Reset Password
 
 ---
 
-### Reset Password (Forgot Password, Not Logged In)
+### Reset Password (Forgot Password,
+
+Not Logged In)
 
 Resets the password of a user who **cannot log in** and is using a **forgot-password** flow.
 
@@ -1890,7 +1902,9 @@ Name | Type | Description  | Notes
 
 Validation
 
-### **Validate Activation / Verification Code**
+### **Validate Activation / Verification
+
+Code**
 
 This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**.
 
