@@ -866,7 +866,11 @@ class DefaultApi:
         
         Changes the password of an **authenticated user** who is currently logged in. This endpoint is used when a user is already signed in and wants to update their password as a security or preference action. The system validates a **one-time password-change verification code** (`activation_code`) issued specifically for the change-password flow. If the code is valid and not expired, the user’s password is updated to `new_password` and takes effect immediately. If verification fails, the password remains unchanged and an error response is returned.
         
-        ### Authentication ✅ **Required**: Bearer token for the logged-in session
+        ### Authentication ✅
+        
+        **Required**:
+        
+        Bearer token for the logged-in session
         
         ``` Authorization: Bearer <access_token> ```
         
@@ -876,7 +880,9 @@ class DefaultApi:
         ### Behavior Notes
         * Typically requires a prior call to **send a verification code** for password change (mode = password change). * `user_id` can be taken from the access token; include it only if your system requires it explicitly.
         
-        ### One-Line Summary > Changes the password for a logged-in user after validating a one-time password-change code.
+        ### One-Line Summary 
+        
+        > Changes the password for a logged-in user after validating a one-time password-change code.
 
         :param new_password: New Password (required)
         :type new_password: str
@@ -956,7 +962,11 @@ class DefaultApi:
         
         Changes the password of an **authenticated user** who is currently logged in. This endpoint is used when a user is already signed in and wants to update their password as a security or preference action. The system validates a **one-time password-change verification code** (`activation_code`) issued specifically for the change-password flow. If the code is valid and not expired, the user’s password is updated to `new_password` and takes effect immediately. If verification fails, the password remains unchanged and an error response is returned.
         
-        ### Authentication ✅ **Required**: Bearer token for the logged-in session
+        ### Authentication ✅
+        
+        **Required**:
+        
+        Bearer token for the logged-in session
         
         ``` Authorization: Bearer <access_token> ```
         
@@ -966,7 +976,9 @@ class DefaultApi:
         ### Behavior Notes
         * Typically requires a prior call to **send a verification code** for password change (mode = password change). * `user_id` can be taken from the access token; include it only if your system requires it explicitly.
         
-        ### One-Line Summary > Changes the password for a logged-in user after validating a one-time password-change code.
+        ### One-Line Summary 
+        
+        > Changes the password for a logged-in user after validating a one-time password-change code.
 
         :param new_password: New Password (required)
         :type new_password: str
@@ -1046,7 +1058,11 @@ class DefaultApi:
         
         Changes the password of an **authenticated user** who is currently logged in. This endpoint is used when a user is already signed in and wants to update their password as a security or preference action. The system validates a **one-time password-change verification code** (`activation_code`) issued specifically for the change-password flow. If the code is valid and not expired, the user’s password is updated to `new_password` and takes effect immediately. If verification fails, the password remains unchanged and an error response is returned.
         
-        ### Authentication ✅ **Required**: Bearer token for the logged-in session
+        ### Authentication ✅
+        
+        **Required**:
+        
+        Bearer token for the logged-in session
         
         ``` Authorization: Bearer <access_token> ```
         
@@ -1056,7 +1072,9 @@ class DefaultApi:
         ### Behavior Notes
         * Typically requires a prior call to **send a verification code** for password change (mode = password change). * `user_id` can be taken from the access token; include it only if your system requires it explicitly.
         
-        ### One-Line Summary > Changes the password for a logged-in user after validating a one-time password-change code.
+        ### One-Line Summary 
+        
+        > Changes the password for a logged-in user after validating a one-time password-change code.
 
         :param new_password: New Password (required)
         :type new_password: str
@@ -5124,7 +5142,8 @@ class DefaultApi:
         ---
         
         ### **Error Response** The API returns an error response when:
-        * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated) * Authorization fails or the bearer token is missing or invalid ⚠️ In all error cases, **no account state change occurs**.
+        * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated)
+        * Authorization fails or the bearer token is missing or invalid ⚠️ In all error cases, **no account state change occurs**.
         
         ---
         
@@ -5238,7 +5257,8 @@ class DefaultApi:
         ---
         
         ### **Error Response** The API returns an error response when:
-        * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated) * Authorization fails or the bearer token is missing or invalid ⚠️ In all error cases, **no account state change occurs**.
+        * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated)
+        * Authorization fails or the bearer token is missing or invalid ⚠️ In all error cases, **no account state change occurs**.
         
         ---
         
@@ -5352,7 +5372,8 @@ class DefaultApi:
         ---
         
         ### **Error Response** The API returns an error response when:
-        * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated) * Authorization fails or the bearer token is missing or invalid ⚠️ In all error cases, **no account state change occurs**.
+        * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated)
+        * Authorization fails or the bearer token is missing or invalid ⚠️ In all error cases, **no account state change occurs**.
         
         ---
         

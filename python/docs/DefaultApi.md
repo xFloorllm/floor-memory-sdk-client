@@ -351,7 +351,9 @@ Name | Type | Description  | Notes
 
 Change Password
 
-### 1) `POST /password/change` — Change Password (Logged-in User)
+1)
+
+`POST /password/change` — Change Password (Logged-in User)
 
 Changes the password of an **authenticated user** who is currently logged in.
 
