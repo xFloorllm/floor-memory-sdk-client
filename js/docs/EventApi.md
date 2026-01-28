@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ### event
 
-> EventResponse event(inputInfo, opts)
+> EventResponse event(inputInfo, appId, opts)
 
 Create Event (Post Content)
 
@@ -147,10 +147,11 @@ bearer.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new XfloorFloorMemorySdkJs.EventApi();
 let inputInfo = "inputInfo_example"; // String | Input parameters, bid is optional
+let appId = "appId_example"; // String | App ID created in developer console.
 let opts = {
   'files': "/path/to/file" // File | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
 };
-apiInstance.event(inputInfo, opts, (error, data, response) => {
+apiInstance.event(inputInfo, appId, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -175,6 +176,9 @@ Notes
  **inputInfo**
 
 | **String**| Input parameters, bid is optional |
+ **appId**
+
+| **String**| App ID created in developer console. |
  **files**
 
 | **File**| Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected |

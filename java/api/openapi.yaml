@@ -4118,9 +4118,14 @@ components:
           description: "Input parameters, bid is optional"
           example: "{ \"floor_id\": \"my_floor\",   \"block_id\": \"17845683456\"\
             ,    \"user_id\": \"145623907625\",    \"title\": \"My floor\",    \"\
-            description\": \"My floor details\", \"app_id\": \"165434879028\"}"
+            description\": \"My floor details\"}"
+          type: string
+        app_id:
+          description: App ID created in developer console.
+          example: "165434879028"
           type: string
       required:
+      - app_id
       - input_info
       type: object
     event_400_response_error:

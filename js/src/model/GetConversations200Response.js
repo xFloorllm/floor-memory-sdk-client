@@ -19,7 +19,7 @@ import GetConversations200ResponseConversationInner from './GetConversations200R
 /**
  * The GetConversations200Response model module.
  * @module model/GetConversations200Response
- * @version 1.0.6
+ * @version 1.0.7
  */
 class GetConversations200Response {
     /**

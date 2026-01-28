@@ -46,6 +46,7 @@ class EventApi:
     def event(
         self,
         input_info: Annotated[StrictStr, Field(description="Input parameters, bid is optional")],
+        app_id: Annotated[StrictStr, Field(description="App ID created in developer console.")],
         files: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected")] = None,
         _request_timeout: Union[
             None,
@@ -186,6 +187,8 @@ class EventApi:
 
         :param input_info: Input parameters, bid is optional (required)
         :type input_info: str
+        :param app_id: App ID created in developer console. (required)
+        :type app_id: str
         :param files: Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
         :type files: bytearray
         :param _request_timeout: timeout setting for this request. If one
@@ -212,6 +215,7 @@ class EventApi:
 
         _param = self._event_serialize(
             input_info=input_info,
+            app_id=app_id,
             files=files,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -238,6 +242,7 @@ class EventApi:
     def event_with_http_info(
         self,
         input_info: Annotated[StrictStr, Field(description="Input parameters, bid is optional")],
+        app_id: Annotated[StrictStr, Field(description="App ID created in developer console.")],
         files: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected")] = None,
         _request_timeout: Union[
             None,
@@ -378,6 +383,8 @@ class EventApi:
 
         :param input_info: Input parameters, bid is optional (required)
         :type input_info: str
+        :param app_id: App ID created in developer console. (required)
+        :type app_id: str
         :param files: Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
         :type files: bytearray
         :param _request_timeout: timeout setting for this request. If one
@@ -404,6 +411,7 @@ class EventApi:
 
         _param = self._event_serialize(
             input_info=input_info,
+            app_id=app_id,
             files=files,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -430,6 +438,7 @@ class EventApi:
     def event_without_preload_content(
         self,
         input_info: Annotated[StrictStr, Field(description="Input parameters, bid is optional")],
+        app_id: Annotated[StrictStr, Field(description="App ID created in developer console.")],
         files: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected")] = None,
         _request_timeout: Union[
             None,
@@ -570,6 +579,8 @@ class EventApi:
 
         :param input_info: Input parameters, bid is optional (required)
         :type input_info: str
+        :param app_id: App ID created in developer console. (required)
+        :type app_id: str
         :param files: Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
         :type files: bytearray
         :param _request_timeout: timeout setting for this request. If one
@@ -596,6 +607,7 @@ class EventApi:
 
         _param = self._event_serialize(
             input_info=input_info,
+            app_id=app_id,
             files=files,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -617,6 +629,7 @@ class EventApi:
     def _event_serialize(
         self,
         input_info,
+        app_id,
         files,
         _request_auth,
         _content_type,
@@ -646,6 +659,8 @@ class EventApi:
             _files['files'] = files
         if input_info is not None:
             _form_params.append(('input_info', input_info))
+        if app_id is not None:
+            _form_params.append(('app_id', app_id))
         # process the body parameter
 
 

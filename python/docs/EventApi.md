@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **event**
-> EventResponse event(input_info, files=files)
+> EventResponse event(input_info, app_id, files=files)
 
 Create Event (Post Content)
 
@@ -221,11 +221,12 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = xfloor_memory_sdk.EventApi(api_client)
     input_info = 'input_info_example' # str | Input parameters, bid is optional
+    app_id = 'app_id_example' # str | App ID created in developer console.
     files = None # bytearray | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected (optional)
 
     try:
         # Create Event (Post Content)
-        api_response = api_instance.event(input_info, files=files)
+        api_response = api_instance.event(input_info, app_id, files=files)
         print("The response of EventApi->event:\n")
         pprint(api_response)
     except Exception as e:
@@ -250,6 +251,9 @@ Notes
  **input_info**
 
 | **str**| Input parameters, bid is optional |
+ **app_id**
+
+| **str**| App ID created in developer console. |
  **files**
 
 | **bytearray**| Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected |

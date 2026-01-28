@@ -10,7 +10,7 @@ All URIs are relative to *https://appfloor.in*
 
 ### event
 
-> EventResponse event(inputInfo, files)
+> EventResponse event(inputInfo, appId, files)
 
 Create Event (Post Content)
 
@@ -156,6 +156,8 @@ async function example() {
   const body = {
     // string | Input parameters, bid is optional
     inputInfo: inputInfo_example,
+    // string | App ID created in developer console.
+    appId: appId_example,
     // Blob | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected (optional)
     files: BINARY_DATA_HERE,
   } satisfies EventRequest;
@@ -178,6 +180,7 @@ example().catch(console.error);
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **inputInfo** | `string` | Input parameters, bid is optional | [Defaults to `undefined`] |
+| **appId** | `string` | App ID created in developer console. | [Defaults to `undefined`] |
 | **files** | `Blob` | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected | [Optional] [Defaults to `undefined`] |
 
 ### Return type

@@ -1,6 +1,6 @@
 [project]
 name = "xfloor_memory_sdk"
-version = "1.0.6"
+version = "1.0.7"
 description = "Floor Memory"
 authors = [
   {name = "Ipomo",email = "contact@ipomo.in"},

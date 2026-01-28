@@ -43,8 +43,9 @@ public class EventApiTest {
     @Test
     public void eventTest() throws ApiException {
         String inputInfo = null;
+        String appId = null;
         File files = null;
-        EventResponse response = api.event(inputInfo, files);
+        EventResponse response = api.event(inputInfo, appId, files);
         // TODO: test validations
     }
 

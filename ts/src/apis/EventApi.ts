@@ -29,6 +29,7 @@ import {
 
 export interface EventRequest {
     inputInfo: string;
+    appId: string;
     files?: Blob;
 }
 
@@ -46,6 +47,13 @@ export class EventApi extends runtime.BaseAPI {
             throw new runtime.RequiredError(
                 'inputInfo',
                 'Required parameter "inputInfo" was null or undefined when calling event().'
+            );
+        }
+
+        if (requestParameters['appId'] == null) {
+            throw new runtime.RequiredError(
+                'appId',
+                'Required parameter "appId" was null or undefined when calling event().'
             );
         }
 
@@ -83,6 +91,10 @@ export class EventApi extends runtime.BaseAPI {
 
         if (requestParameters['inputInfo'] != null) {
             formParams.append('input_info', requestParameters['inputInfo'] as any);
+        }
+
+        if (requestParameters['appId'] != null) {
+            formParams.append('app_id', requestParameters['appId'] as any);
         }
 
 

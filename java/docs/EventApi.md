@@ -9,7 +9,7 @@ All URIs are relative to *https://appfloor.in*
 
 <a id="event"></a>
 # **event**
-> EventResponse event(inputInfo, files)
+> EventResponse event(inputInfo, appId, files)
 
 Create Event (Post Content)
 
@@ -156,9 +156,10 @@ public class Example {
 
     EventApi apiInstance = new EventApi(defaultClient);
     String inputInfo = "inputInfo_example"; // String | Input parameters, bid is optional
+    String appId = "appId_example"; // String | App ID created in developer console.
     File files = new File("/path/to/file"); // File | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
     try {
-      EventResponse result = apiInstance.event(inputInfo, files);
+      EventResponse result = apiInstance.event(inputInfo, appId, files);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling EventApi#event");
@@ -176,6 +177,8 @@ public class Example {
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **inputInfo** | **String**| Input parameters, bid is optional |
+|
+| **appId** | **String**| App ID created in developer console. |
 |
 | **files** | **File**| Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected | [optional] |
 
