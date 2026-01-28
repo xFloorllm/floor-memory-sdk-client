@@ -1082,9 +1082,9 @@ public class DefaultApi {
     }
     /**
      * Build call for makeFloorPrivate
-     * @param floorId Floor ID (optional)
-     * @param userId User ID (optional)
-     * @param appId App ID (optional)
+     * @param floorId Floor ID (required)
+     * @param userId User ID (required)
+     * @param appId App ID (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1096,7 +1096,7 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call makeFloorPrivateCall(@javax.annotation.Nullable String floorId, @javax.annotation.Nullable String userId, @javax.annotation.Nullable String appId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call makeFloorPrivateCall(@javax.annotation.Nonnull String floorId, @javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String appId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1153,7 +1153,22 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call makeFloorPrivateValidateBeforeCall(@javax.annotation.Nullable String floorId, @javax.annotation.Nullable String userId, @javax.annotation.Nullable String appId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call makeFloorPrivateValidateBeforeCall(@javax.annotation.Nonnull String floorId, @javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String appId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'floorId' is set
+        if (floorId == null) {
+            throw new ApiException("Missing the required parameter 'floorId' when calling makeFloorPrivate(Async)");
+        }
+
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling makeFloorPrivate(Async)");
+        }
+
+        // verify the required parameter 'appId' is set
+        if (appId == null) {
+            throw new ApiException("Missing the required parameter 'appId' when calling makeFloorPrivate(Async)");
+        }
+
         return makeFloorPrivateCall(floorId, userId, appId, _callback);
 
     }
@@ -1161,9 +1176,9 @@ public class DefaultApi {
     /**
      * Make floor Private
      * This API changes a floor’s visibility to **PRIVATE**.  It is used when a floor owner wants to **restrict access** to a floor that is currently public. After the update, the floor becomes private and is no longer accessible to non-authorized users (based on your platform’s access rules).  This endpoint is **state-changing**:  * If the floor is **PUBLIC**, it will be converted to **PRIVATE** * If the floor is already **PRIVATE**, the API returns success (idempotent) or an “already private” response depending on implementation  This API is commonly used in:  * Floor settings → “Privacy” toggle * Developer-managed pod workflows (app_id context) * Admin tools (if applicable)  ---  ## Request Method  &#x60;POST&#x60;  ---  ## Content-Type  &#x60;application/x-www-form-urlencoded&#x60; (or &#x60;multipart/form-data&#x60; if your system uses form-data) *(Document whichever you actually accept; below assumes standard form fields.)*  ---  ## Request Parameters (Form Fields)  | Field      | Type   | Required | Description                                                          | | ---------- | ------ | -------- | -------------------------------------------------------------------- | | &#x60;user_id&#x60;  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.      | | &#x60;floor_id&#x60; | String | **Yes**  | Public identifier of the floor to update.                            | | &#x60;app_id&#x60;   | String | No       | Calling application identifier (used for developer/pod integration). |  ---  ## Authorization Rules (Critical)  * The caller must be authenticated as &#x60;user_id&#x60; * **Only the floor owner** can change floor visibility * If the user is not the owner, the request must be rejected  ---  ## Behavior Rules  * Converts visibility from **PUBLIC → PRIVATE** * Does not modify floor content or blocks * Access enforcement for private floors is applied immediately after the change  **Idempotency**  * Calling this API multiple times should not cause repeated changes * If already private, the API should either:    * return success with a message like &#x60;\&quot;already private\&quot;&#x60;, or   * return a specific error/status indicating no-op  ---  ## Response Format  &#x60;application/json&#x60;  ---  ## Sample Success Response  *(Example — adjust to match your actual response format)*  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PRIVATE\&quot;,   \&quot;message\&quot;: \&quot;Floor is now private\&quot; } &#x60;&#x60;&#x60;  ---  ## Sample No-Op Response (Already Private)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PRIVATE\&quot;,   \&quot;message\&quot;: \&quot;Floor is already private\&quot; } &#x60;&#x60;&#x60;  ---  ## Error Responses (Examples)  ### Not Authorized (Not Owner)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Only the floor owner can change floor visibility\&quot; } &#x60;&#x60;&#x60;  ### Floor Not Found  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Floor not found\&quot; } &#x60;&#x60;&#x60;  ### Invalid Request  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;user_id and floor_id are required\&quot; } &#x60;&#x60;&#x60;  ---  ## Notes  * This API is intended to control floor visibility only; membership/invite rules (for private floors) are handled elsewhere. * &#x60;app_id&#x60; is provided for developer/pod applications and is optional unless enforced by your app model. * If you support floor types like &#x60;POD&#x60;, document whether pods are allowed to be private or not (some platforms restrict this). 
-     * @param floorId Floor ID (optional)
-     * @param userId User ID (optional)
-     * @param appId App ID (optional)
+     * @param floorId Floor ID (required)
+     * @param userId User ID (required)
+     * @param appId App ID (required)
      * @return GetFloorInformation200Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1174,7 +1189,7 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public GetFloorInformation200Response makeFloorPrivate(@javax.annotation.Nullable String floorId, @javax.annotation.Nullable String userId, @javax.annotation.Nullable String appId) throws ApiException {
+    public GetFloorInformation200Response makeFloorPrivate(@javax.annotation.Nonnull String floorId, @javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String appId) throws ApiException {
         ApiResponse<GetFloorInformation200Response> localVarResp = makeFloorPrivateWithHttpInfo(floorId, userId, appId);
         return localVarResp.getData();
     }
@@ -1182,9 +1197,9 @@ public class DefaultApi {
     /**
      * Make floor Private
      * This API changes a floor’s visibility to **PRIVATE**.  It is used when a floor owner wants to **restrict access** to a floor that is currently public. After the update, the floor becomes private and is no longer accessible to non-authorized users (based on your platform’s access rules).  This endpoint is **state-changing**:  * If the floor is **PUBLIC**, it will be converted to **PRIVATE** * If the floor is already **PRIVATE**, the API returns success (idempotent) or an “already private” response depending on implementation  This API is commonly used in:  * Floor settings → “Privacy” toggle * Developer-managed pod workflows (app_id context) * Admin tools (if applicable)  ---  ## Request Method  &#x60;POST&#x60;  ---  ## Content-Type  &#x60;application/x-www-form-urlencoded&#x60; (or &#x60;multipart/form-data&#x60; if your system uses form-data) *(Document whichever you actually accept; below assumes standard form fields.)*  ---  ## Request Parameters (Form Fields)  | Field      | Type   | Required | Description                                                          | | ---------- | ------ | -------- | -------------------------------------------------------------------- | | &#x60;user_id&#x60;  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.      | | &#x60;floor_id&#x60; | String | **Yes**  | Public identifier of the floor to update.                            | | &#x60;app_id&#x60;   | String | No       | Calling application identifier (used for developer/pod integration). |  ---  ## Authorization Rules (Critical)  * The caller must be authenticated as &#x60;user_id&#x60; * **Only the floor owner** can change floor visibility * If the user is not the owner, the request must be rejected  ---  ## Behavior Rules  * Converts visibility from **PUBLIC → PRIVATE** * Does not modify floor content or blocks * Access enforcement for private floors is applied immediately after the change  **Idempotency**  * Calling this API multiple times should not cause repeated changes * If already private, the API should either:    * return success with a message like &#x60;\&quot;already private\&quot;&#x60;, or   * return a specific error/status indicating no-op  ---  ## Response Format  &#x60;application/json&#x60;  ---  ## Sample Success Response  *(Example — adjust to match your actual response format)*  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PRIVATE\&quot;,   \&quot;message\&quot;: \&quot;Floor is now private\&quot; } &#x60;&#x60;&#x60;  ---  ## Sample No-Op Response (Already Private)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PRIVATE\&quot;,   \&quot;message\&quot;: \&quot;Floor is already private\&quot; } &#x60;&#x60;&#x60;  ---  ## Error Responses (Examples)  ### Not Authorized (Not Owner)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Only the floor owner can change floor visibility\&quot; } &#x60;&#x60;&#x60;  ### Floor Not Found  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Floor not found\&quot; } &#x60;&#x60;&#x60;  ### Invalid Request  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;user_id and floor_id are required\&quot; } &#x60;&#x60;&#x60;  ---  ## Notes  * This API is intended to control floor visibility only; membership/invite rules (for private floors) are handled elsewhere. * &#x60;app_id&#x60; is provided for developer/pod applications and is optional unless enforced by your app model. * If you support floor types like &#x60;POD&#x60;, document whether pods are allowed to be private or not (some platforms restrict this). 
-     * @param floorId Floor ID (optional)
-     * @param userId User ID (optional)
-     * @param appId App ID (optional)
+     * @param floorId Floor ID (required)
+     * @param userId User ID (required)
+     * @param appId App ID (required)
      * @return ApiResponse&lt;GetFloorInformation200Response&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1195,7 +1210,7 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<GetFloorInformation200Response> makeFloorPrivateWithHttpInfo(@javax.annotation.Nullable String floorId, @javax.annotation.Nullable String userId, @javax.annotation.Nullable String appId) throws ApiException {
+    public ApiResponse<GetFloorInformation200Response> makeFloorPrivateWithHttpInfo(@javax.annotation.Nonnull String floorId, @javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String appId) throws ApiException {
         okhttp3.Call localVarCall = makeFloorPrivateValidateBeforeCall(floorId, userId, appId, null);
         Type localVarReturnType = new TypeToken<GetFloorInformation200Response>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1204,9 +1219,9 @@ public class DefaultApi {
     /**
      * Make floor Private (asynchronously)
      * This API changes a floor’s visibility to **PRIVATE**.  It is used when a floor owner wants to **restrict access** to a floor that is currently public. After the update, the floor becomes private and is no longer accessible to non-authorized users (based on your platform’s access rules).  This endpoint is **state-changing**:  * If the floor is **PUBLIC**, it will be converted to **PRIVATE** * If the floor is already **PRIVATE**, the API returns success (idempotent) or an “already private” response depending on implementation  This API is commonly used in:  * Floor settings → “Privacy” toggle * Developer-managed pod workflows (app_id context) * Admin tools (if applicable)  ---  ## Request Method  &#x60;POST&#x60;  ---  ## Content-Type  &#x60;application/x-www-form-urlencoded&#x60; (or &#x60;multipart/form-data&#x60; if your system uses form-data) *(Document whichever you actually accept; below assumes standard form fields.)*  ---  ## Request Parameters (Form Fields)  | Field      | Type   | Required | Description                                                          | | ---------- | ------ | -------- | -------------------------------------------------------------------- | | &#x60;user_id&#x60;  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.      | | &#x60;floor_id&#x60; | String | **Yes**  | Public identifier of the floor to update.                            | | &#x60;app_id&#x60;   | String | No       | Calling application identifier (used for developer/pod integration). |  ---  ## Authorization Rules (Critical)  * The caller must be authenticated as &#x60;user_id&#x60; * **Only the floor owner** can change floor visibility * If the user is not the owner, the request must be rejected  ---  ## Behavior Rules  * Converts visibility from **PUBLIC → PRIVATE** * Does not modify floor content or blocks * Access enforcement for private floors is applied immediately after the change  **Idempotency**  * Calling this API multiple times should not cause repeated changes * If already private, the API should either:    * return success with a message like &#x60;\&quot;already private\&quot;&#x60;, or   * return a specific error/status indicating no-op  ---  ## Response Format  &#x60;application/json&#x60;  ---  ## Sample Success Response  *(Example — adjust to match your actual response format)*  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PRIVATE\&quot;,   \&quot;message\&quot;: \&quot;Floor is now private\&quot; } &#x60;&#x60;&#x60;  ---  ## Sample No-Op Response (Already Private)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PRIVATE\&quot;,   \&quot;message\&quot;: \&quot;Floor is already private\&quot; } &#x60;&#x60;&#x60;  ---  ## Error Responses (Examples)  ### Not Authorized (Not Owner)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Only the floor owner can change floor visibility\&quot; } &#x60;&#x60;&#x60;  ### Floor Not Found  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Floor not found\&quot; } &#x60;&#x60;&#x60;  ### Invalid Request  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;user_id and floor_id are required\&quot; } &#x60;&#x60;&#x60;  ---  ## Notes  * This API is intended to control floor visibility only; membership/invite rules (for private floors) are handled elsewhere. * &#x60;app_id&#x60; is provided for developer/pod applications and is optional unless enforced by your app model. * If you support floor types like &#x60;POD&#x60;, document whether pods are allowed to be private or not (some platforms restrict this). 
-     * @param floorId Floor ID (optional)
-     * @param userId User ID (optional)
-     * @param appId App ID (optional)
+     * @param floorId Floor ID (required)
+     * @param userId User ID (required)
+     * @param appId App ID (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1218,7 +1233,7 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call makeFloorPrivateAsync(@javax.annotation.Nullable String floorId, @javax.annotation.Nullable String userId, @javax.annotation.Nullable String appId, final ApiCallback<GetFloorInformation200Response> _callback) throws ApiException {
+    public okhttp3.Call makeFloorPrivateAsync(@javax.annotation.Nonnull String floorId, @javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String appId, final ApiCallback<GetFloorInformation200Response> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = makeFloorPrivateValidateBeforeCall(floorId, userId, appId, _callback);
         Type localVarReturnType = new TypeToken<GetFloorInformation200Response>(){}.getType();
@@ -1227,9 +1242,9 @@ public class DefaultApi {
     }
     /**
      * Build call for makeFloorPublic
-     * @param floorId Floor ID (optional)
-     * @param userId User ID (optional)
-     * @param appId App ID (optional)
+     * @param floorId Floor ID (required)
+     * @param userId User ID (required)
+     * @param appId App ID (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1241,7 +1256,7 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call makeFloorPublicCall(@javax.annotation.Nullable String floorId, @javax.annotation.Nullable String userId, @javax.annotation.Nullable String appId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call makeFloorPublicCall(@javax.annotation.Nonnull String floorId, @javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String appId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1298,7 +1313,22 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call makeFloorPublicValidateBeforeCall(@javax.annotation.Nullable String floorId, @javax.annotation.Nullable String userId, @javax.annotation.Nullable String appId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call makeFloorPublicValidateBeforeCall(@javax.annotation.Nonnull String floorId, @javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String appId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'floorId' is set
+        if (floorId == null) {
+            throw new ApiException("Missing the required parameter 'floorId' when calling makeFloorPublic(Async)");
+        }
+
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling makeFloorPublic(Async)");
+        }
+
+        // verify the required parameter 'appId' is set
+        if (appId == null) {
+            throw new ApiException("Missing the required parameter 'appId' when calling makeFloorPublic(Async)");
+        }
+
         return makeFloorPublicCall(floorId, userId, appId, _callback);
 
     }
@@ -1306,9 +1336,9 @@ public class DefaultApi {
     /**
      * Make floor public
      * This API changes a floor’s visibility to **PUBLIC**.  It is used when a floor owner wants to **make a private floor accessible to everyone**. After the update, the floor becomes public and can be viewed and discovered by any user, subject to platform rules (search, feeds, pods, etc.).  This endpoint performs a **visibility state transition**:  * **PRIVATE → PUBLIC** * If the floor is already public, the operation is treated as **idempotent** (no state change).  This API is typically used from:  * Floor settings → Privacy / Visibility controls * Owner or admin tools * Developer or pod-based applications using &#x60;app_id&#x60;  ---  ## Request Method  &#x60;POST&#x60;  ---  ## Content-Type  &#x60;application/x-www-form-urlencoded&#x60; (or &#x60;multipart/form-data&#x60;, depending on your implementation)  ---  ## Request Parameters (Form Fields)  | Field      | Type   | Required | Description                                                                     | | ---------- | ------ | -------- | ------------------------------------------------------------------------------- | | &#x60;user_id&#x60;  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.                 | | &#x60;floor_id&#x60; | String | **Yes**  | Public identifier of the floor whose visibility is to be changed.               | | &#x60;app_id&#x60;   | String | No       | Identifier of the calling application (used mainly for pod/developer contexts). |  ---  ## Authorization Rules (Critical)  * The caller must be authenticated as &#x60;user_id&#x60; * **Only the floor owner** is allowed to change the floor’s visibility * Requests from non-owners must be rejected  ---  ## Behavior Rules  * Converts floor visibility from **PRIVATE → PUBLIC** * Does not modify floor content, blocks, or ownership * Visibility change takes effect immediately  ### Idempotency  * If the floor is already public, the API should:    * Return success with a message indicating no change, or   * Return a specific “already public” status (implementation-dependent)  ---  ## Response Format  &#x60;application/json&#x60;  ---  ## Sample Success Response  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PUBLIC\&quot;,   \&quot;message\&quot;: \&quot;Floor is now public\&quot; } &#x60;&#x60;&#x60;  ---  ## Sample No-Op Response (Already Public)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PUBLIC\&quot;,   \&quot;message\&quot;: \&quot;Floor is already public\&quot; } &#x60;&#x60;&#x60;  ---  ## Error Responses (Examples)  ### Not Authorized (Not Owner)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Only the floor owner can change floor visibility\&quot; } &#x60;&#x60;&#x60;  ---  ### Floor Not Found  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Floor not found\&quot; } &#x60;&#x60;&#x60;  ---  ### Invalid Request  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;user_id and floor_id are required\&quot; } &#x60;&#x60;&#x60;  ---  ## Notes for Developers  * This API controls **visibility only**. Membership, invitations, and moderation rules are handled by separate APIs. * &#x60;app_id&#x60; is optional and primarily used for developer-managed or pod floors. * Clients should refresh floor metadata (e.g., via &#x60;/api/floor/info&#x60;) after a successful visibility change.  ---  ### Mental Model (One Line)  &gt; **This API answers: “Make this floor visible to everyone.”** 
-     * @param floorId Floor ID (optional)
-     * @param userId User ID (optional)
-     * @param appId App ID (optional)
+     * @param floorId Floor ID (required)
+     * @param userId User ID (required)
+     * @param appId App ID (required)
      * @return GetFloorInformation200Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1319,7 +1349,7 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public GetFloorInformation200Response makeFloorPublic(@javax.annotation.Nullable String floorId, @javax.annotation.Nullable String userId, @javax.annotation.Nullable String appId) throws ApiException {
+    public GetFloorInformation200Response makeFloorPublic(@javax.annotation.Nonnull String floorId, @javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String appId) throws ApiException {
         ApiResponse<GetFloorInformation200Response> localVarResp = makeFloorPublicWithHttpInfo(floorId, userId, appId);
         return localVarResp.getData();
     }
@@ -1327,9 +1357,9 @@ public class DefaultApi {
     /**
      * Make floor public
      * This API changes a floor’s visibility to **PUBLIC**.  It is used when a floor owner wants to **make a private floor accessible to everyone**. After the update, the floor becomes public and can be viewed and discovered by any user, subject to platform rules (search, feeds, pods, etc.).  This endpoint performs a **visibility state transition**:  * **PRIVATE → PUBLIC** * If the floor is already public, the operation is treated as **idempotent** (no state change).  This API is typically used from:  * Floor settings → Privacy / Visibility controls * Owner or admin tools * Developer or pod-based applications using &#x60;app_id&#x60;  ---  ## Request Method  &#x60;POST&#x60;  ---  ## Content-Type  &#x60;application/x-www-form-urlencoded&#x60; (or &#x60;multipart/form-data&#x60;, depending on your implementation)  ---  ## Request Parameters (Form Fields)  | Field      | Type   | Required | Description                                                                     | | ---------- | ------ | -------- | ------------------------------------------------------------------------------- | | &#x60;user_id&#x60;  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.                 | | &#x60;floor_id&#x60; | String | **Yes**  | Public identifier of the floor whose visibility is to be changed.               | | &#x60;app_id&#x60;   | String | No       | Identifier of the calling application (used mainly for pod/developer contexts). |  ---  ## Authorization Rules (Critical)  * The caller must be authenticated as &#x60;user_id&#x60; * **Only the floor owner** is allowed to change the floor’s visibility * Requests from non-owners must be rejected  ---  ## Behavior Rules  * Converts floor visibility from **PRIVATE → PUBLIC** * Does not modify floor content, blocks, or ownership * Visibility change takes effect immediately  ### Idempotency  * If the floor is already public, the API should:    * Return success with a message indicating no change, or   * Return a specific “already public” status (implementation-dependent)  ---  ## Response Format  &#x60;application/json&#x60;  ---  ## Sample Success Response  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PUBLIC\&quot;,   \&quot;message\&quot;: \&quot;Floor is now public\&quot; } &#x60;&#x60;&#x60;  ---  ## Sample No-Op Response (Already Public)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PUBLIC\&quot;,   \&quot;message\&quot;: \&quot;Floor is already public\&quot; } &#x60;&#x60;&#x60;  ---  ## Error Responses (Examples)  ### Not Authorized (Not Owner)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Only the floor owner can change floor visibility\&quot; } &#x60;&#x60;&#x60;  ---  ### Floor Not Found  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Floor not found\&quot; } &#x60;&#x60;&#x60;  ---  ### Invalid Request  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;user_id and floor_id are required\&quot; } &#x60;&#x60;&#x60;  ---  ## Notes for Developers  * This API controls **visibility only**. Membership, invitations, and moderation rules are handled by separate APIs. * &#x60;app_id&#x60; is optional and primarily used for developer-managed or pod floors. * Clients should refresh floor metadata (e.g., via &#x60;/api/floor/info&#x60;) after a successful visibility change.  ---  ### Mental Model (One Line)  &gt; **This API answers: “Make this floor visible to everyone.”** 
-     * @param floorId Floor ID (optional)
-     * @param userId User ID (optional)
-     * @param appId App ID (optional)
+     * @param floorId Floor ID (required)
+     * @param userId User ID (required)
+     * @param appId App ID (required)
      * @return ApiResponse&lt;GetFloorInformation200Response&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1340,7 +1370,7 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<GetFloorInformation200Response> makeFloorPublicWithHttpInfo(@javax.annotation.Nullable String floorId, @javax.annotation.Nullable String userId, @javax.annotation.Nullable String appId) throws ApiException {
+    public ApiResponse<GetFloorInformation200Response> makeFloorPublicWithHttpInfo(@javax.annotation.Nonnull String floorId, @javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String appId) throws ApiException {
         okhttp3.Call localVarCall = makeFloorPublicValidateBeforeCall(floorId, userId, appId, null);
         Type localVarReturnType = new TypeToken<GetFloorInformation200Response>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1349,9 +1379,9 @@ public class DefaultApi {
     /**
      * Make floor public (asynchronously)
      * This API changes a floor’s visibility to **PUBLIC**.  It is used when a floor owner wants to **make a private floor accessible to everyone**. After the update, the floor becomes public and can be viewed and discovered by any user, subject to platform rules (search, feeds, pods, etc.).  This endpoint performs a **visibility state transition**:  * **PRIVATE → PUBLIC** * If the floor is already public, the operation is treated as **idempotent** (no state change).  This API is typically used from:  * Floor settings → Privacy / Visibility controls * Owner or admin tools * Developer or pod-based applications using &#x60;app_id&#x60;  ---  ## Request Method  &#x60;POST&#x60;  ---  ## Content-Type  &#x60;application/x-www-form-urlencoded&#x60; (or &#x60;multipart/form-data&#x60;, depending on your implementation)  ---  ## Request Parameters (Form Fields)  | Field      | Type   | Required | Description                                                                     | | ---------- | ------ | -------- | ------------------------------------------------------------------------------- | | &#x60;user_id&#x60;  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.                 | | &#x60;floor_id&#x60; | String | **Yes**  | Public identifier of the floor whose visibility is to be changed.               | | &#x60;app_id&#x60;   | String | No       | Identifier of the calling application (used mainly for pod/developer contexts). |  ---  ## Authorization Rules (Critical)  * The caller must be authenticated as &#x60;user_id&#x60; * **Only the floor owner** is allowed to change the floor’s visibility * Requests from non-owners must be rejected  ---  ## Behavior Rules  * Converts floor visibility from **PRIVATE → PUBLIC** * Does not modify floor content, blocks, or ownership * Visibility change takes effect immediately  ### Idempotency  * If the floor is already public, the API should:    * Return success with a message indicating no change, or   * Return a specific “already public” status (implementation-dependent)  ---  ## Response Format  &#x60;application/json&#x60;  ---  ## Sample Success Response  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PUBLIC\&quot;,   \&quot;message\&quot;: \&quot;Floor is now public\&quot; } &#x60;&#x60;&#x60;  ---  ## Sample No-Op Response (Already Public)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PUBLIC\&quot;,   \&quot;message\&quot;: \&quot;Floor is already public\&quot; } &#x60;&#x60;&#x60;  ---  ## Error Responses (Examples)  ### Not Authorized (Not Owner)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Only the floor owner can change floor visibility\&quot; } &#x60;&#x60;&#x60;  ---  ### Floor Not Found  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Floor not found\&quot; } &#x60;&#x60;&#x60;  ---  ### Invalid Request  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;user_id and floor_id are required\&quot; } &#x60;&#x60;&#x60;  ---  ## Notes for Developers  * This API controls **visibility only**. Membership, invitations, and moderation rules are handled by separate APIs. * &#x60;app_id&#x60; is optional and primarily used for developer-managed or pod floors. * Clients should refresh floor metadata (e.g., via &#x60;/api/floor/info&#x60;) after a successful visibility change.  ---  ### Mental Model (One Line)  &gt; **This API answers: “Make this floor visible to everyone.”** 
-     * @param floorId Floor ID (optional)
-     * @param userId User ID (optional)
-     * @param appId App ID (optional)
+     * @param floorId Floor ID (required)
+     * @param userId User ID (required)
+     * @param appId App ID (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1363,7 +1393,7 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call makeFloorPublicAsync(@javax.annotation.Nullable String floorId, @javax.annotation.Nullable String userId, @javax.annotation.Nullable String appId, final ApiCallback<GetFloorInformation200Response> _callback) throws ApiException {
+    public okhttp3.Call makeFloorPublicAsync(@javax.annotation.Nonnull String floorId, @javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String appId, final ApiCallback<GetFloorInformation200Response> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = makeFloorPublicValidateBeforeCall(floorId, userId, appId, _callback);
         Type localVarReturnType = new TypeToken<GetFloorInformation200Response>(){}.getType();
@@ -1522,10 +1552,10 @@ public class DefaultApi {
     }
     /**
      * Build call for renameFloor
-     * @param userId User ID (optional)
-     * @param appId App ID (optional)
-     * @param from Old floor ID (optional)
-     * @param to New floor ID (optional)
+     * @param userId User ID (required)
+     * @param appId App ID (required)
+     * @param from Old floor ID (required)
+     * @param to New floor ID (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1537,7 +1567,7 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call renameFloorCall(@javax.annotation.Nullable String userId, @javax.annotation.Nullable String appId, @javax.annotation.Nullable String from, @javax.annotation.Nullable String to, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call renameFloorCall(@javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String appId, @javax.annotation.Nonnull String from, @javax.annotation.Nonnull String to, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1598,7 +1628,27 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call renameFloorValidateBeforeCall(@javax.annotation.Nullable String userId, @javax.annotation.Nullable String appId, @javax.annotation.Nullable String from, @javax.annotation.Nullable String to, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call renameFloorValidateBeforeCall(@javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String appId, @javax.annotation.Nonnull String from, @javax.annotation.Nonnull String to, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling renameFloor(Async)");
+        }
+
+        // verify the required parameter 'appId' is set
+        if (appId == null) {
+            throw new ApiException("Missing the required parameter 'appId' when calling renameFloor(Async)");
+        }
+
+        // verify the required parameter 'from' is set
+        if (from == null) {
+            throw new ApiException("Missing the required parameter 'from' when calling renameFloor(Async)");
+        }
+
+        // verify the required parameter 'to' is set
+        if (to == null) {
+            throw new ApiException("Missing the required parameter 'to' when calling renameFloor(Async)");
+        }
+
         return renameFloorCall(userId, appId, from, to, _callback);
 
     }
@@ -1606,10 +1656,10 @@ public class DefaultApi {
     /**
      * Rename floor
      * This API renames a floor by changing knowing the **floor identifier (floor_id)**.  It allows the **floor owner** to update the public-facing floor ID (slug/handle) from an old value to a new value. This is typically used when the owner wants to rebrand, reorganize, or correct the floor’s identifier.  ⚠️ **This operation affects how the floor is accessed and referenced externally**, so it must be performed carefully.  ---  ## Ownership &amp; Authorization (Critical)  * The caller **must be authenticated** * **Only the floor owner** is allowed to rename a floor * Members, followers, or non-owners **cannot** perform this operation * Ownership is validated internally using &#x60;user_id&#x60;  &gt; If the user is not the owner, the request must be rejected.  ---  ## Request Method  &#x60;POST&#x60;  ---  ## Content-Type  &#x60;application/x-www-form-urlencoded&#x60; (or equivalent form-data encoding)  ---  ## Request Parameters (Form Fields)  | Parameter | Type   | Required | Description                                                                     | | --------- | ------ | -------- | ------------------------------------------------------------------------------- | | &#x60;user_id&#x60; | String | **Yes**  | User requesting the rename. Must be the **owner** of the floor.                 | | &#x60;from&#x60;    | String | **Yes**  | Existing floor ID (current identifier to be renamed).                           | | &#x60;to&#x60;      | String | **Yes**  | New floor ID to assign to the floor.                                            | | &#x60;app_id&#x60;  | String | No       | Identifier of the calling application (used mainly for pod/developer contexts). |  ---  ## Rename Rules &amp; Constraints  * The &#x60;from&#x60; floor ID **must exist** * The &#x60;to&#x60; floor ID **must be unique** and not already in use * The rename operation updates **only the floor ID**    * Floor ownership, blocks, posts, and internal &#x60;fid&#x60; remain unchanged * Any links or references using the old floor ID may no longer be valid after rename  ---  ## Behavior Summary  | Scenario                     | Result                                            | | ---------------------------- | ------------------------------------------------- | | Valid owner + unique new ID  | Floor ID renamed successfully                     | | Non-owner user               | Request rejected                                  | | &#x60;from&#x60; floor ID not found    | Error                                             | | &#x60;to&#x60; floor ID already exists | Error                                             | | &#x60;from&#x60; &#x3D;&#x3D; &#x60;to&#x60;               | No-op or validation error (implementation choice) |  ---  ## Response Format  &#x60;application/json&#x60;  ---  ## Sample Success Response  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;old_floor_id\&quot;: \&quot;oldfloorid\&quot;,   \&quot;new_floor_id\&quot;: \&quot;newfloorid\&quot;,   \&quot;message\&quot;: \&quot;Floor ID renamed successfully\&quot; } &#x60;&#x60;&#x60;  ---  ## Sample Error Responses  ### Not Floor Owner  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Only the floor owner can rename the floor\&quot; } &#x60;&#x60;&#x60;  ---  ### Floor Not Found  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Source floor ID does not exist\&quot; } &#x60;&#x60;&#x60;  ---  ### Floor ID Already Exists  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Target floor ID is already in use\&quot; } &#x60;&#x60;&#x60;  ---  ### Invalid Request  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;user_id, from, and to are required\&quot; } &#x60;&#x60;&#x60;  ---  ## Notes for Developers  * This API **renames the public identifier only**; the internal immutable floor ID (&#x60;fid&#x60;) is not affected. * Clients should refresh cached floor metadata after a successful rename. * If your platform supports deep links or bookmarks, consider redirect or alias handling for old floor IDs (if supported).  ---  ### One-Line Mental Model  &gt; **This API answers: “Change the public identity (ID) of a floor, owner-only.”** 
-     * @param userId User ID (optional)
-     * @param appId App ID (optional)
-     * @param from Old floor ID (optional)
-     * @param to New floor ID (optional)
+     * @param userId User ID (required)
+     * @param appId App ID (required)
+     * @param from Old floor ID (required)
+     * @param to New floor ID (required)
      * @return GetFloorInformation200Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1620,7 +1670,7 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public GetFloorInformation200Response renameFloor(@javax.annotation.Nullable String userId, @javax.annotation.Nullable String appId, @javax.annotation.Nullable String from, @javax.annotation.Nullable String to) throws ApiException {
+    public GetFloorInformation200Response renameFloor(@javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String appId, @javax.annotation.Nonnull String from, @javax.annotation.Nonnull String to) throws ApiException {
         ApiResponse<GetFloorInformation200Response> localVarResp = renameFloorWithHttpInfo(userId, appId, from, to);
         return localVarResp.getData();
     }
@@ -1628,10 +1678,10 @@ public class DefaultApi {
     /**
      * Rename floor
      * This API renames a floor by changing knowing the **floor identifier (floor_id)**.  It allows the **floor owner** to update the public-facing floor ID (slug/handle) from an old value to a new value. This is typically used when the owner wants to rebrand, reorganize, or correct the floor’s identifier.  ⚠️ **This operation affects how the floor is accessed and referenced externally**, so it must be performed carefully.  ---  ## Ownership &amp; Authorization (Critical)  * The caller **must be authenticated** * **Only the floor owner** is allowed to rename a floor * Members, followers, or non-owners **cannot** perform this operation * Ownership is validated internally using &#x60;user_id&#x60;  &gt; If the user is not the owner, the request must be rejected.  ---  ## Request Method  &#x60;POST&#x60;  ---  ## Content-Type  &#x60;application/x-www-form-urlencoded&#x60; (or equivalent form-data encoding)  ---  ## Request Parameters (Form Fields)  | Parameter | Type   | Required | Description                                                                     | | --------- | ------ | -------- | ------------------------------------------------------------------------------- | | &#x60;user_id&#x60; | String | **Yes**  | User requesting the rename. Must be the **owner** of the floor.                 | | &#x60;from&#x60;    | String | **Yes**  | Existing floor ID (current identifier to be renamed).                           | | &#x60;to&#x60;      | String | **Yes**  | New floor ID to assign to the floor.                                            | | &#x60;app_id&#x60;  | String | No       | Identifier of the calling application (used mainly for pod/developer contexts). |  ---  ## Rename Rules &amp; Constraints  * The &#x60;from&#x60; floor ID **must exist** * The &#x60;to&#x60; floor ID **must be unique** and not already in use * The rename operation updates **only the floor ID**    * Floor ownership, blocks, posts, and internal &#x60;fid&#x60; remain unchanged * Any links or references using the old floor ID may no longer be valid after rename  ---  ## Behavior Summary  | Scenario                     | Result                                            | | ---------------------------- | ------------------------------------------------- | | Valid owner + unique new ID  | Floor ID renamed successfully                     | | Non-owner user               | Request rejected                                  | | &#x60;from&#x60; floor ID not found    | Error                                             | | &#x60;to&#x60; floor ID already exists | Error                                             | | &#x60;from&#x60; &#x3D;&#x3D; &#x60;to&#x60;               | No-op or validation error (implementation choice) |  ---  ## Response Format  &#x60;application/json&#x60;  ---  ## Sample Success Response  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;old_floor_id\&quot;: \&quot;oldfloorid\&quot;,   \&quot;new_floor_id\&quot;: \&quot;newfloorid\&quot;,   \&quot;message\&quot;: \&quot;Floor ID renamed successfully\&quot; } &#x60;&#x60;&#x60;  ---  ## Sample Error Responses  ### Not Floor Owner  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Only the floor owner can rename the floor\&quot; } &#x60;&#x60;&#x60;  ---  ### Floor Not Found  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Source floor ID does not exist\&quot; } &#x60;&#x60;&#x60;  ---  ### Floor ID Already Exists  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Target floor ID is already in use\&quot; } &#x60;&#x60;&#x60;  ---  ### Invalid Request  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;user_id, from, and to are required\&quot; } &#x60;&#x60;&#x60;  ---  ## Notes for Developers  * This API **renames the public identifier only**; the internal immutable floor ID (&#x60;fid&#x60;) is not affected. * Clients should refresh cached floor metadata after a successful rename. * If your platform supports deep links or bookmarks, consider redirect or alias handling for old floor IDs (if supported).  ---  ### One-Line Mental Model  &gt; **This API answers: “Change the public identity (ID) of a floor, owner-only.”** 
-     * @param userId User ID (optional)
-     * @param appId App ID (optional)
-     * @param from Old floor ID (optional)
-     * @param to New floor ID (optional)
+     * @param userId User ID (required)
+     * @param appId App ID (required)
+     * @param from Old floor ID (required)
+     * @param to New floor ID (required)
      * @return ApiResponse&lt;GetFloorInformation200Response&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1642,7 +1692,7 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<GetFloorInformation200Response> renameFloorWithHttpInfo(@javax.annotation.Nullable String userId, @javax.annotation.Nullable String appId, @javax.annotation.Nullable String from, @javax.annotation.Nullable String to) throws ApiException {
+    public ApiResponse<GetFloorInformation200Response> renameFloorWithHttpInfo(@javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String appId, @javax.annotation.Nonnull String from, @javax.annotation.Nonnull String to) throws ApiException {
         okhttp3.Call localVarCall = renameFloorValidateBeforeCall(userId, appId, from, to, null);
         Type localVarReturnType = new TypeToken<GetFloorInformation200Response>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1651,10 +1701,10 @@ public class DefaultApi {
     /**
      * Rename floor (asynchronously)
      * This API renames a floor by changing knowing the **floor identifier (floor_id)**.  It allows the **floor owner** to update the public-facing floor ID (slug/handle) from an old value to a new value. This is typically used when the owner wants to rebrand, reorganize, or correct the floor’s identifier.  ⚠️ **This operation affects how the floor is accessed and referenced externally**, so it must be performed carefully.  ---  ## Ownership &amp; Authorization (Critical)  * The caller **must be authenticated** * **Only the floor owner** is allowed to rename a floor * Members, followers, or non-owners **cannot** perform this operation * Ownership is validated internally using &#x60;user_id&#x60;  &gt; If the user is not the owner, the request must be rejected.  ---  ## Request Method  &#x60;POST&#x60;  ---  ## Content-Type  &#x60;application/x-www-form-urlencoded&#x60; (or equivalent form-data encoding)  ---  ## Request Parameters (Form Fields)  | Parameter | Type   | Required | Description                                                                     | | --------- | ------ | -------- | ------------------------------------------------------------------------------- | | &#x60;user_id&#x60; | String | **Yes**  | User requesting the rename. Must be the **owner** of the floor.                 | | &#x60;from&#x60;    | String | **Yes**  | Existing floor ID (current identifier to be renamed).                           | | &#x60;to&#x60;      | String | **Yes**  | New floor ID to assign to the floor.                                            | | &#x60;app_id&#x60;  | String | No       | Identifier of the calling application (used mainly for pod/developer contexts). |  ---  ## Rename Rules &amp; Constraints  * The &#x60;from&#x60; floor ID **must exist** * The &#x60;to&#x60; floor ID **must be unique** and not already in use * The rename operation updates **only the floor ID**    * Floor ownership, blocks, posts, and internal &#x60;fid&#x60; remain unchanged * Any links or references using the old floor ID may no longer be valid after rename  ---  ## Behavior Summary  | Scenario                     | Result                                            | | ---------------------------- | ------------------------------------------------- | | Valid owner + unique new ID  | Floor ID renamed successfully                     | | Non-owner user               | Request rejected                                  | | &#x60;from&#x60; floor ID not found    | Error                                             | | &#x60;to&#x60; floor ID already exists | Error                                             | | &#x60;from&#x60; &#x3D;&#x3D; &#x60;to&#x60;               | No-op or validation error (implementation choice) |  ---  ## Response Format  &#x60;application/json&#x60;  ---  ## Sample Success Response  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;old_floor_id\&quot;: \&quot;oldfloorid\&quot;,   \&quot;new_floor_id\&quot;: \&quot;newfloorid\&quot;,   \&quot;message\&quot;: \&quot;Floor ID renamed successfully\&quot; } &#x60;&#x60;&#x60;  ---  ## Sample Error Responses  ### Not Floor Owner  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Only the floor owner can rename the floor\&quot; } &#x60;&#x60;&#x60;  ---  ### Floor Not Found  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Source floor ID does not exist\&quot; } &#x60;&#x60;&#x60;  ---  ### Floor ID Already Exists  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Target floor ID is already in use\&quot; } &#x60;&#x60;&#x60;  ---  ### Invalid Request  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;user_id, from, and to are required\&quot; } &#x60;&#x60;&#x60;  ---  ## Notes for Developers  * This API **renames the public identifier only**; the internal immutable floor ID (&#x60;fid&#x60;) is not affected. * Clients should refresh cached floor metadata after a successful rename. * If your platform supports deep links or bookmarks, consider redirect or alias handling for old floor IDs (if supported).  ---  ### One-Line Mental Model  &gt; **This API answers: “Change the public identity (ID) of a floor, owner-only.”** 
-     * @param userId User ID (optional)
-     * @param appId App ID (optional)
-     * @param from Old floor ID (optional)
-     * @param to New floor ID (optional)
+     * @param userId User ID (required)
+     * @param appId App ID (required)
+     * @param from Old floor ID (required)
+     * @param to New floor ID (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1666,7 +1716,7 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call renameFloorAsync(@javax.annotation.Nullable String userId, @javax.annotation.Nullable String appId, @javax.annotation.Nullable String from, @javax.annotation.Nullable String to, final ApiCallback<GetFloorInformation200Response> _callback) throws ApiException {
+    public okhttp3.Call renameFloorAsync(@javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String appId, @javax.annotation.Nonnull String from, @javax.annotation.Nonnull String to, final ApiCallback<GetFloorInformation200Response> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = renameFloorValidateBeforeCall(userId, appId, from, to, _callback);
         Type localVarReturnType = new TypeToken<GetFloorInformation200Response>(){}.getType();

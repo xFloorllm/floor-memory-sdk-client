@@ -1102,7 +1102,7 @@ paths:
         explode: true
         in: query
         name: app_id
-        required: false
+        required: true
         schema:
           type: string
         style: form
@@ -1844,7 +1844,7 @@ paths:
           type: string
         style: simple
       - description: User ID  - 13 digit numeric identity
-        example: "1345896753"
+        example: "1345896753484"
         explode: true
         in: query
         name: user_id
@@ -1853,11 +1853,11 @@ paths:
           type: string
         style: form
       - description: App ID - 13 digit numeric identity
-        example: "1387654378"
+        example: "1387654378393"
         explode: true
         in: query
         name: app_id
-        required: false
+        required: true
         schema:
           type: string
         style: form
@@ -2206,7 +2206,7 @@ paths:
         explode: true
         in: query
         name: floor_id
-        required: false
+        required: true
         schema:
           type: string
         style: form
@@ -2214,7 +2214,7 @@ paths:
         explode: true
         in: query
         name: user_id
-        required: false
+        required: true
         schema:
           type: string
         style: form
@@ -2222,7 +2222,7 @@ paths:
         explode: true
         in: query
         name: app_id
-        required: false
+        required: true
         schema:
           type: string
         style: form
@@ -2402,7 +2402,7 @@ paths:
         explode: true
         in: query
         name: floor_id
-        required: false
+        required: true
         schema:
           type: string
         style: form
@@ -2410,7 +2410,7 @@ paths:
         explode: true
         in: query
         name: user_id
-        required: false
+        required: true
         schema:
           type: string
         style: form
@@ -2418,7 +2418,7 @@ paths:
         explode: true
         in: query
         name: app_id
-        required: false
+        required: true
         schema:
           type: string
         style: form
@@ -2599,7 +2599,7 @@ paths:
         explode: true
         in: query
         name: user_id
-        required: false
+        required: true
         schema:
           type: string
         style: form
@@ -2607,7 +2607,7 @@ paths:
         explode: true
         in: query
         name: app_id
-        required: false
+        required: true
         schema:
           type: string
         style: form
@@ -2615,7 +2615,7 @@ paths:
         explode: true
         in: query
         name: from
-        required: false
+        required: true
         schema:
           type: string
         style: form
@@ -2623,7 +2623,7 @@ paths:
         explode: true
         in: query
         name: to
-        required: false
+        required: true
         schema:
           type: string
         style: form
@@ -4079,6 +4079,7 @@ components:
         filters:
           $ref: "#/components/schemas/query_request_filters"
       required:
+      - app_id
       - floor_ids
       - query
       - user_id
@@ -4115,9 +4116,9 @@ components:
           type: string
         input_info:
           description: "Input parameters, bid is optional"
-          example: "{ \"floor_id\": \"my_floor\",   \"bid\": \"17845683456\",    \"\
-            user_id\": \"145623907625\",    \"title\": \"My floor\",    \"description\"\
-            : \"My floor details\", \"app_id\": \"165434879028\"}"
+          example: "{ \"floor_id\": \"my_floor\",   \"block_id\": \"17845683456\"\
+            ,    \"user_id\": \"145623907625\",    \"title\": \"My floor\",    \"\
+            description\": \"My floor details\", \"app_id\": \"165434879028\"}"
           type: string
       required:
       - input_info
@@ -5076,7 +5077,7 @@ components:
           type: string
         app_id:
           description: Registered App ID
-          example: '"1675645678"'
+          example: '"1675645678908"'
           type: string
       required:
       - name

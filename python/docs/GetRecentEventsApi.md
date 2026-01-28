@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_recent_events**
-> GetRecentEvents200Response get_recent_events(floor_id, user_id=user_id, app_id=app_id)
+> GetRecentEvents200Response get_recent_events(floor_id, app_id, user_id=user_id)
 
 Recent Events
 
@@ -209,12 +209,12 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = xfloor_memory_sdk.GetRecentEventsApi(api_client)
     floor_id = 'floor_id_example' # str | 
+    app_id = 'app_id_example' # str | 
     user_id = 'user_id_example' # str |  (optional)
-    app_id = 'app_id_example' # str |  (optional)
 
     try:
         # Recent Events
-        api_response = api_instance.get_recent_events(floor_id, user_id=user_id, app_id=app_id)
+        api_response = api_instance.get_recent_events(floor_id, app_id, user_id=user_id)
         print("The response of GetRecentEventsApi->get_recent_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -240,13 +240,11 @@ Notes
 
 | **str**|
 |
- **user_id**
+ **app_id**
 
 | **str**|
 |
-
-[optional]
- **app_id**
+ **user_id**
 
 | **str**|
 |

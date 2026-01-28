@@ -45,8 +45,8 @@ class GetRecentEventsApi:
     def get_recent_events(
         self,
         floor_id: StrictStr,
+        app_id: StrictStr,
         user_id: Optional[StrictStr] = None,
-        app_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -182,10 +182,10 @@ class GetRecentEventsApi:
 
         :param floor_id:  (required)
         :type floor_id: str
+        :param app_id:  (required)
+        :type app_id: str
         :param user_id: 
         :type user_id: str
-        :param app_id: 
-        :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -210,8 +210,8 @@ class GetRecentEventsApi:
 
         _param = self._get_recent_events_serialize(
             floor_id=floor_id,
-            user_id=user_id,
             app_id=app_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -237,8 +237,8 @@ class GetRecentEventsApi:
     def get_recent_events_with_http_info(
         self,
         floor_id: StrictStr,
+        app_id: StrictStr,
         user_id: Optional[StrictStr] = None,
-        app_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -374,10 +374,10 @@ class GetRecentEventsApi:
 
         :param floor_id:  (required)
         :type floor_id: str
+        :param app_id:  (required)
+        :type app_id: str
         :param user_id: 
         :type user_id: str
-        :param app_id: 
-        :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -402,8 +402,8 @@ class GetRecentEventsApi:
 
         _param = self._get_recent_events_serialize(
             floor_id=floor_id,
-            user_id=user_id,
             app_id=app_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -429,8 +429,8 @@ class GetRecentEventsApi:
     def get_recent_events_without_preload_content(
         self,
         floor_id: StrictStr,
+        app_id: StrictStr,
         user_id: Optional[StrictStr] = None,
-        app_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -566,10 +566,10 @@ class GetRecentEventsApi:
 
         :param floor_id:  (required)
         :type floor_id: str
+        :param app_id:  (required)
+        :type app_id: str
         :param user_id: 
         :type user_id: str
-        :param app_id: 
-        :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -594,8 +594,8 @@ class GetRecentEventsApi:
 
         _param = self._get_recent_events_serialize(
             floor_id=floor_id,
-            user_id=user_id,
             app_id=app_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -616,8 +616,8 @@ class GetRecentEventsApi:
     def _get_recent_events_serialize(
         self,
         floor_id,
-        user_id,
         app_id,
+        user_id,
         _request_auth,
         _content_type,
         _headers,

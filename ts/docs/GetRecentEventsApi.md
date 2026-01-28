@@ -10,7 +10,7 @@ All URIs are relative to *https://appfloor.in*
 
 ### getRecentEvents
 
-> GetRecentEvents200Response getRecentEvents(floorId, userId, appId)
+> GetRecentEvents200Response getRecentEvents(floorId, appId, userId)
 
 Recent Events
 
@@ -152,10 +152,10 @@ async function example() {
   const body = {
     // string | 
     floorId: floorId_example,
+    // string | 
+    appId: appId_example,
     // string |  (optional)
     userId: userId_example,
-    // string |  (optional)
-    appId: appId_example,
   } satisfies GetRecentEventsRequest;
 
   try {
@@ -177,9 +177,9 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **floorId** | `string` |
 | [Defaults to `undefined`] |
-| **userId** | `string` |
-| [Optional] [Defaults to `undefined`] |
 | **appId** | `string` |
+| [Defaults to `undefined`] |
+| **userId** | `string` |
 | [Optional] [Defaults to `undefined`] |
 
 ### Return type

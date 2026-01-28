@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ### getRecentEvents
 
-> GetRecentEvents200Response getRecentEvents(floorId, opts)
+> GetRecentEvents200Response getRecentEvents(floorId, appId, opts)
 
 Recent Events
 
@@ -143,11 +143,11 @@ bearer.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new XfloorFloorMemorySdkJs.GetRecentEventsApi();
 let floorId = "floorId_example"; // String | 
+let appId = "appId_example"; // String | 
 let opts = {
-  'userId': "userId_example", // String | 
-  'appId': "appId_example" // String | 
+  'userId': "userId_example" // String | 
 };
-apiInstance.getRecentEvents(floorId, opts, (error, data, response) => {
+apiInstance.getRecentEvents(floorId, appId, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -173,13 +173,11 @@ Notes
 
 | **String**|
 |
- **userId**
+ **appId**
 
 | **String**|
 |
-
-[optional]
- **appId**
+ **userId**
 
 | **String**|
 |

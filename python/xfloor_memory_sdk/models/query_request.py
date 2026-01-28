@@ -35,7 +35,7 @@ class QueryRequest(BaseModel):
     floor_ids: List[StrictStr] = Field(description="List of floor IDs")
     include_metadata: Optional[StrictStr] = Field(default=None, description="Include meta data or not")
     summary_needed: Optional[StrictStr] = Field(default=None, description="Need LLM summary for the lists of posts sent")
-    app_id: Optional[StrictStr] = Field(default=None, description="App ID")
+    app_id: StrictStr = Field(description="App ID")
     filters: Optional[QueryRequestFilters] = None
     __properties: ClassVar[List[str]] = ["user_id", "query", "floor_ids", "include_metadata", "summary_needed", "app_id", "filters"]
 

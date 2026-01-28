@@ -42,9 +42,9 @@ public class GetRecentEventsApiTest {
     @Test
     public void getRecentEventsTest() throws ApiException {
         String floorId = null;
-        String userId = null;
         String appId = null;
-        GetRecentEvents200Response response = api.getRecentEvents(floorId, userId, appId);
+        String userId = null;
+        GetRecentEvents200Response response = api.getRecentEvents(floorId, appId, userId);
         // TODO: test validations
     }
 

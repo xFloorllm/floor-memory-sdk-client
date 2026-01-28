@@ -34,8 +34,6 @@ Notes
 **appId**
 
 | **String** | App ID |
-
-[optional]
 **filters**
 
 | [**QueryRequestFilters**](QueryRequestFilters.md) |

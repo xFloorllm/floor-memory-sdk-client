@@ -931,7 +931,7 @@ Notes
 
 ### makeFloorPrivate
 
-> GetFloorInformation200Response makeFloorPrivate(opts)
+> GetFloorInformation200Response makeFloorPrivate(floorId, userId, appId)
 
 Make floor Private
 
@@ -1044,12 +1044,10 @@ let bearer = defaultClient.authentications['bearer'];
 bearer.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new XfloorFloorMemorySdkJs.DefaultApi();
-let opts = {
-  'floorId': "floorId_example", // String | Floor ID
-  'userId': "userId_example", // String | User ID
-  'appId': "appId_example" // String | App ID
-};
-apiInstance.makeFloorPrivate(opts, (error, data, response) => {
+let floorId = "floorId_example"; // String | Floor ID
+let userId = "userId_example"; // String | User ID
+let appId = "appId_example"; // String | App ID
+apiInstance.makeFloorPrivate(floorId, userId, appId, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -1074,18 +1072,12 @@ Notes
  **floorId**
 
 | **String**| Floor ID |
-
-[optional]
  **userId**
 
 | **String**| User ID |
-
-[optional]
  **appId**
 
 | **String**| App ID |
-
-[optional]
 
 ### Return type
 
@@ -1103,7 +1095,7 @@ Notes
 
 ### makeFloorPublic
 
-> GetFloorInformation200Response makeFloorPublic(opts)
+> GetFloorInformation200Response makeFloorPublic(floorId, userId, appId)
 
 Make floor public
 
@@ -1230,12 +1222,10 @@ let bearer = defaultClient.authentications['bearer'];
 bearer.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new XfloorFloorMemorySdkJs.DefaultApi();
-let opts = {
-  'floorId': "floorId_example", // String | Floor ID
-  'userId': "userId_example", // String | User ID
-  'appId': "appId_example" // String | App ID
-};
-apiInstance.makeFloorPublic(opts, (error, data, response) => {
+let floorId = "floorId_example"; // String | Floor ID
+let userId = "userId_example"; // String | User ID
+let appId = "appId_example"; // String | App ID
+apiInstance.makeFloorPublic(floorId, userId, appId, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -1260,18 +1250,12 @@ Notes
  **floorId**
 
 | **String**| Floor ID |
-
-[optional]
  **userId**
 
 | **String**| User ID |
-
-[optional]
  **appId**
 
 | **String**| App ID |
-
-[optional]
 
 ### Return type
 
@@ -1376,7 +1360,7 @@ Notes
 
 ### renameFloor
 
-> GetFloorInformation200Response renameFloor(opts)
+> GetFloorInformation200Response renameFloor(userId, appId, from, to)
 
 Rename floor
 
@@ -1514,13 +1498,11 @@ of a floor, owner-only.”**
 import XfloorFloorMemorySdkJs from '@xfloor/floor-memory-sdk-js';
 
 let apiInstance = new XfloorFloorMemorySdkJs.DefaultApi();
-let opts = {
-  'userId': "userId_example", // String | User ID
-  'appId': "appId_example", // String | App ID
-  'from': "from_example", // String | Old floor ID
-  'to': "to_example" // String | New floor ID
-};
-apiInstance.renameFloor(opts, (error, data, response) => {
+let userId = "userId_example"; // String | User ID
+let appId = "appId_example"; // String | App ID
+let from = "from_example"; // String | Old floor ID
+let to = "to_example"; // String | New floor ID
+apiInstance.renameFloor(userId, appId, from, to, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -1545,23 +1527,15 @@ Notes
  **userId**
 
 | **String**| User ID |
-
-[optional]
  **appId**
 
 | **String**| App ID |
-
-[optional]
  **from**
 
 | **String**| Old floor ID |
-
-[optional]
  **to**
 
 | **String**| New floor ID |
-
-[optional]
 
 ### Return type
 

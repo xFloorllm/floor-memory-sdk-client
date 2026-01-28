@@ -64,7 +64,7 @@ export interface QueryRequest {
      * @type {string}
      * @memberof QueryRequest
      */
-    appId?: string;
+    appId: string;
     /**
      * 
      * @type {QueryRequestFilters}
@@ -80,6 +80,7 @@ export function instanceOfQueryRequest(value: object): value is QueryRequest {
     if (!('userId' in value) || value['userId'] === undefined) return false;
     if (!('query' in value) || value['query'] === undefined) return false;
     if (!('floorIds' in value) || value['floorIds'] === undefined) return false;
+    if (!('appId' in value) || value['appId'] === undefined) return false;
     return true;
 }
 
@@ -98,7 +99,7 @@ export function QueryRequestFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'floorIds': json['floor_ids'],
         'includeMetadata': json['include_metadata'] == null ? undefined : json['include_metadata'],
         'summaryNeeded': json['summary_needed'] == null ? undefined : json['summary_needed'],
-        'appId': json['app_id'] == null ? undefined : json['app_id'],
+        'appId': json['app_id'],
         'filters': json['filters'] == null ? undefined : QueryRequestFiltersFromJSON(json['filters']),
     };
 }

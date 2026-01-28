@@ -19,7 +19,7 @@ import QueryRequestFilters from './QueryRequestFilters';
 /**
  * The QueryRequest model module.
  * @module model/QueryRequest
- * @version 1.0.5
+ * @version 1.0.6
  */
 class QueryRequest {
     /**
@@ -28,10 +28,11 @@ class QueryRequest {
      * @param userId {String} User ID
      * @param query {String} Query text for conversations
      * @param floorIds {Array.<String>} List of floor IDs
+     * @param appId {String} App ID
      */
-    constructor(userId, query, floorIds) { 
+    constructor(userId, query, floorIds, appId) { 
         
-        QueryRequest.initialize(this, userId, query, floorIds);
+        QueryRequest.initialize(this, userId, query, floorIds, appId);
     }
 
     /**
@@ -39,10 +40,11 @@ class QueryRequest {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, userId, query, floorIds) { 
+    static initialize(obj, userId, query, floorIds, appId) { 
         obj['user_id'] = userId;
         obj['query'] = query;
         obj['floor_ids'] = floorIds;
+        obj['app_id'] = appId;
     }
 
     /**
@@ -128,7 +130,7 @@ class QueryRequest {
 
 }
 
-QueryRequest.RequiredProperties = ["user_id", "query", "floor_ids"];
+QueryRequest.RequiredProperties = ["user_id", "query", "floor_ids", "app_id"];
 
 /**
  * User ID

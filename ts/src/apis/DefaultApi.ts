@@ -108,15 +108,15 @@ export interface GetConversationsRequest {
 }
 
 export interface MakeFloorPrivateRequest {
-    floorId?: string;
-    userId?: string;
-    appId?: string;
+    floorId: string;
+    userId: string;
+    appId: string;
 }
 
 export interface MakeFloorPublicRequest {
-    floorId?: string;
-    userId?: string;
-    appId?: string;
+    floorId: string;
+    userId: string;
+    appId: string;
 }
 
 export interface RegisterExternalUserIdentityRequest {
@@ -127,10 +127,10 @@ export interface RegisterExternalUserIdentityRequest {
 }
 
 export interface RenameFloorRequest {
-    userId?: string;
-    appId?: string;
-    from?: string;
-    to?: string;
+    userId: string;
+    appId: string;
+    from: string;
+    to: string;
 }
 
 export interface ResetPasswordRequest {
@@ -622,6 +622,27 @@ export class DefaultApi extends runtime.BaseAPI {
      * Make floor Private
      */
     async makeFloorPrivateRaw(requestParameters: MakeFloorPrivateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetFloorInformation200Response>> {
+        if (requestParameters['floorId'] == null) {
+            throw new runtime.RequiredError(
+                'floorId',
+                'Required parameter "floorId" was null or undefined when calling makeFloorPrivate().'
+            );
+        }
+
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling makeFloorPrivate().'
+            );
+        }
+
+        if (requestParameters['appId'] == null) {
+            throw new runtime.RequiredError(
+                'appId',
+                'Required parameter "appId" was null or undefined when calling makeFloorPrivate().'
+            );
+        }
+
         const queryParameters: any = {};
 
         if (requestParameters['floorId'] != null) {
@@ -663,7 +684,7 @@ export class DefaultApi extends runtime.BaseAPI {
      * This API changes a floor’s visibility to **PRIVATE**.  It is used when a floor owner wants to **restrict access** to a floor that is currently public. After the update, the floor becomes private and is no longer accessible to non-authorized users (based on your platform’s access rules).  This endpoint is **state-changing**:  * If the floor is **PUBLIC**, it will be converted to **PRIVATE** * If the floor is already **PRIVATE**, the API returns success (idempotent) or an “already private” response depending on implementation  This API is commonly used in:  * Floor settings → “Privacy” toggle * Developer-managed pod workflows (app_id context) * Admin tools (if applicable)  ---  ## Request Method  `POST`  ---  ## Content-Type  `application/x-www-form-urlencoded` (or `multipart/form-data` if your system uses form-data) *(Document whichever you actually accept; below assumes standard form fields.)*  ---  ## Request Parameters (Form Fields)  | Field      | Type   | Required | Description                                                          | | ---------- | ------ | -------- | -------------------------------------------------------------------- | | `user_id`  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.      | | `floor_id` | String | **Yes**  | Public identifier of the floor to update.                            | | `app_id`   | String | No       | Calling application identifier (used for developer/pod integration). |  ---  ## Authorization Rules (Critical)  * The caller must be authenticated as `user_id` * **Only the floor owner** can change floor visibility * If the user is not the owner, the request must be rejected  ---  ## Behavior Rules  * Converts visibility from **PUBLIC → PRIVATE** * Does not modify floor content or blocks * Access enforcement for private floors is applied immediately after the change  **Idempotency**  * Calling this API multiple times should not cause repeated changes * If already private, the API should either:    * return success with a message like `\"already private\"`, or   * return a specific error/status indicating no-op  ---  ## Response Format  `application/json`  ---  ## Sample Success Response  *(Example — adjust to match your actual response format)*  ```json {   \"status\": \"SUCCESS\",   \"floor_id\": \"my_floor\",   \"visibility\": \"PRIVATE\",   \"message\": \"Floor is now private\" } ```  ---  ## Sample No-Op Response (Already Private)  ```json {   \"status\": \"SUCCESS\",   \"floor_id\": \"my_floor\",   \"visibility\": \"PRIVATE\",   \"message\": \"Floor is already private\" } ```  ---  ## Error Responses (Examples)  ### Not Authorized (Not Owner)  ```json {   \"status\": \"ERROR\",   \"message\": \"Only the floor owner can change floor visibility\" } ```  ### Floor Not Found  ```json {   \"status\": \"ERROR\",   \"message\": \"Floor not found\" } ```  ### Invalid Request  ```json {   \"status\": \"ERROR\",   \"message\": \"user_id and floor_id are required\" } ```  ---  ## Notes  * This API is intended to control floor visibility only; membership/invite rules (for private floors) are handled elsewhere. * `app_id` is provided for developer/pod applications and is optional unless enforced by your app model. * If you support floor types like `POD`, document whether pods are allowed to be private or not (some platforms restrict this). 
      * Make floor Private
      */
-    async makeFloorPrivate(requestParameters: MakeFloorPrivateRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetFloorInformation200Response> {
+    async makeFloorPrivate(requestParameters: MakeFloorPrivateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetFloorInformation200Response> {
         const response = await this.makeFloorPrivateRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -673,6 +694,27 @@ export class DefaultApi extends runtime.BaseAPI {
      * Make floor public
      */
     async makeFloorPublicRaw(requestParameters: MakeFloorPublicRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetFloorInformation200Response>> {
+        if (requestParameters['floorId'] == null) {
+            throw new runtime.RequiredError(
+                'floorId',
+                'Required parameter "floorId" was null or undefined when calling makeFloorPublic().'
+            );
+        }
+
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling makeFloorPublic().'
+            );
+        }
+
+        if (requestParameters['appId'] == null) {
+            throw new runtime.RequiredError(
+                'appId',
+                'Required parameter "appId" was null or undefined when calling makeFloorPublic().'
+            );
+        }
+
         const queryParameters: any = {};
 
         if (requestParameters['floorId'] != null) {
@@ -714,7 +756,7 @@ export class DefaultApi extends runtime.BaseAPI {
      * This API changes a floor’s visibility to **PUBLIC**.  It is used when a floor owner wants to **make a private floor accessible to everyone**. After the update, the floor becomes public and can be viewed and discovered by any user, subject to platform rules (search, feeds, pods, etc.).  This endpoint performs a **visibility state transition**:  * **PRIVATE → PUBLIC** * If the floor is already public, the operation is treated as **idempotent** (no state change).  This API is typically used from:  * Floor settings → Privacy / Visibility controls * Owner or admin tools * Developer or pod-based applications using `app_id`  ---  ## Request Method  `POST`  ---  ## Content-Type  `application/x-www-form-urlencoded` (or `multipart/form-data`, depending on your implementation)  ---  ## Request Parameters (Form Fields)  | Field      | Type   | Required | Description                                                                     | | ---------- | ------ | -------- | ------------------------------------------------------------------------------- | | `user_id`  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.                 | | `floor_id` | String | **Yes**  | Public identifier of the floor whose visibility is to be changed.               | | `app_id`   | String | No       | Identifier of the calling application (used mainly for pod/developer contexts). |  ---  ## Authorization Rules (Critical)  * The caller must be authenticated as `user_id` * **Only the floor owner** is allowed to change the floor’s visibility * Requests from non-owners must be rejected  ---  ## Behavior Rules  * Converts floor visibility from **PRIVATE → PUBLIC** * Does not modify floor content, blocks, or ownership * Visibility change takes effect immediately  ### Idempotency  * If the floor is already public, the API should:    * Return success with a message indicating no change, or   * Return a specific “already public” status (implementation-dependent)  ---  ## Response Format  `application/json`  ---  ## Sample Success Response  ```json {   \"status\": \"SUCCESS\",   \"floor_id\": \"my_floor\",   \"visibility\": \"PUBLIC\",   \"message\": \"Floor is now public\" } ```  ---  ## Sample No-Op Response (Already Public)  ```json {   \"status\": \"SUCCESS\",   \"floor_id\": \"my_floor\",   \"visibility\": \"PUBLIC\",   \"message\": \"Floor is already public\" } ```  ---  ## Error Responses (Examples)  ### Not Authorized (Not Owner)  ```json {   \"status\": \"ERROR\",   \"message\": \"Only the floor owner can change floor visibility\" } ```  ---  ### Floor Not Found  ```json {   \"status\": \"ERROR\",   \"message\": \"Floor not found\" } ```  ---  ### Invalid Request  ```json {   \"status\": \"ERROR\",   \"message\": \"user_id and floor_id are required\" } ```  ---  ## Notes for Developers  * This API controls **visibility only**. Membership, invitations, and moderation rules are handled by separate APIs. * `app_id` is optional and primarily used for developer-managed or pod floors. * Clients should refresh floor metadata (e.g., via `/api/floor/info`) after a successful visibility change.  ---  ### Mental Model (One Line)  > **This API answers: “Make this floor visible to everyone.”** 
      * Make floor public
      */
-    async makeFloorPublic(requestParameters: MakeFloorPublicRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetFloorInformation200Response> {
+    async makeFloorPublic(requestParameters: MakeFloorPublicRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetFloorInformation200Response> {
         const response = await this.makeFloorPublicRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -794,6 +836,34 @@ export class DefaultApi extends runtime.BaseAPI {
      * Rename floor
      */
     async renameFloorRaw(requestParameters: RenameFloorRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetFloorInformation200Response>> {
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling renameFloor().'
+            );
+        }
+
+        if (requestParameters['appId'] == null) {
+            throw new runtime.RequiredError(
+                'appId',
+                'Required parameter "appId" was null or undefined when calling renameFloor().'
+            );
+        }
+
+        if (requestParameters['from'] == null) {
+            throw new runtime.RequiredError(
+                'from',
+                'Required parameter "from" was null or undefined when calling renameFloor().'
+            );
+        }
+
+        if (requestParameters['to'] == null) {
+            throw new runtime.RequiredError(
+                'to',
+                'Required parameter "to" was null or undefined when calling renameFloor().'
+            );
+        }
+
         const queryParameters: any = {};
 
         if (requestParameters['userId'] != null) {
@@ -831,7 +901,7 @@ export class DefaultApi extends runtime.BaseAPI {
      * This API renames a floor by changing knowing the **floor identifier (floor_id)**.  It allows the **floor owner** to update the public-facing floor ID (slug/handle) from an old value to a new value. This is typically used when the owner wants to rebrand, reorganize, or correct the floor’s identifier.  ⚠️ **This operation affects how the floor is accessed and referenced externally**, so it must be performed carefully.  ---  ## Ownership & Authorization (Critical)  * The caller **must be authenticated** * **Only the floor owner** is allowed to rename a floor * Members, followers, or non-owners **cannot** perform this operation * Ownership is validated internally using `user_id`  > If the user is not the owner, the request must be rejected.  ---  ## Request Method  `POST`  ---  ## Content-Type  `application/x-www-form-urlencoded` (or equivalent form-data encoding)  ---  ## Request Parameters (Form Fields)  | Parameter | Type   | Required | Description                                                                     | | --------- | ------ | -------- | ------------------------------------------------------------------------------- | | `user_id` | String | **Yes**  | User requesting the rename. Must be the **owner** of the floor.                 | | `from`    | String | **Yes**  | Existing floor ID (current identifier to be renamed).                           | | `to`      | String | **Yes**  | New floor ID to assign to the floor.                                            | | `app_id`  | String | No       | Identifier of the calling application (used mainly for pod/developer contexts). |  ---  ## Rename Rules & Constraints  * The `from` floor ID **must exist** * The `to` floor ID **must be unique** and not already in use * The rename operation updates **only the floor ID**    * Floor ownership, blocks, posts, and internal `fid` remain unchanged * Any links or references using the old floor ID may no longer be valid after rename  ---  ## Behavior Summary  | Scenario                     | Result                                            | | ---------------------------- | ------------------------------------------------- | | Valid owner + unique new ID  | Floor ID renamed successfully                     | | Non-owner user               | Request rejected                                  | | `from` floor ID not found    | Error                                             | | `to` floor ID already exists | Error                                             | | `from` == `to`               | No-op or validation error (implementation choice) |  ---  ## Response Format  `application/json`  ---  ## Sample Success Response  ```json {   \"status\": \"SUCCESS\",   \"old_floor_id\": \"oldfloorid\",   \"new_floor_id\": \"newfloorid\",   \"message\": \"Floor ID renamed successfully\" } ```  ---  ## Sample Error Responses  ### Not Floor Owner  ```json {   \"status\": \"ERROR\",   \"message\": \"Only the floor owner can rename the floor\" } ```  ---  ### Floor Not Found  ```json {   \"status\": \"ERROR\",   \"message\": \"Source floor ID does not exist\" } ```  ---  ### Floor ID Already Exists  ```json {   \"status\": \"ERROR\",   \"message\": \"Target floor ID is already in use\" } ```  ---  ### Invalid Request  ```json {   \"status\": \"ERROR\",   \"message\": \"user_id, from, and to are required\" } ```  ---  ## Notes for Developers  * This API **renames the public identifier only**; the internal immutable floor ID (`fid`) is not affected. * Clients should refresh cached floor metadata after a successful rename. * If your platform supports deep links or bookmarks, consider redirect or alias handling for old floor IDs (if supported).  ---  ### One-Line Mental Model  > **This API answers: “Change the public identity (ID) of a floor, owner-only.”** 
      * Rename floor
      */
-    async renameFloor(requestParameters: RenameFloorRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetFloorInformation200Response> {
+    async renameFloor(requestParameters: RenameFloorRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetFloorInformation200Response> {
         const response = await this.renameFloorRaw(requestParameters, initOverrides);
         return await response.value();
     }

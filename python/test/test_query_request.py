@@ -57,6 +57,7 @@ class TestQueryRequest(unittest.TestCase):
                 floor_ids = [
                     ''
                     ],
+                app_id = '',
         )
         """
 

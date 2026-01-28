@@ -20,7 +20,7 @@ import Media from './Media';
 /**
  * The FloorInfo model module.
  * @module model/FloorInfo
- * @version 1.0.5
+ * @version 1.0.6
  */
 class FloorInfo {
     /**

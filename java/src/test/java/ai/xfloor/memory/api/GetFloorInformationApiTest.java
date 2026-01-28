@@ -42,9 +42,9 @@ public class GetFloorInformationApiTest {
     @Test
     public void getFloorInformationTest() throws ApiException {
         String floorId = null;
-        String userId = null;
         String appId = null;
-        GetFloorInformation200Response response = api.getFloorInformation(floorId, userId, appId);
+        String userId = null;
+        GetFloorInformation200Response response = api.getFloorInformation(floorId, appId, userId);
         // TODO: test validations
     }
 

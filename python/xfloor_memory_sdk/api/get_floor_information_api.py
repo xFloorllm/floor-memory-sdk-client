@@ -46,8 +46,8 @@ class GetFloorInformationApi:
     def get_floor_information(
         self,
         floor_id: StrictStr,
+        app_id: Annotated[StrictStr, Field(description="App ID - 13 digit numeric identity")],
         user_id: Annotated[Optional[StrictStr], Field(description="User ID  - 13 digit numeric identity")] = None,
-        app_id: Annotated[Optional[StrictStr], Field(description="App ID - 13 digit numeric identity")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -225,10 +225,10 @@ class GetFloorInformationApi:
 
         :param floor_id:  (required)
         :type floor_id: str
+        :param app_id: App ID - 13 digit numeric identity (required)
+        :type app_id: str
         :param user_id: User ID  - 13 digit numeric identity
         :type user_id: str
-        :param app_id: App ID - 13 digit numeric identity
-        :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -253,8 +253,8 @@ class GetFloorInformationApi:
 
         _param = self._get_floor_information_serialize(
             floor_id=floor_id,
-            user_id=user_id,
             app_id=app_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -280,8 +280,8 @@ class GetFloorInformationApi:
     def get_floor_information_with_http_info(
         self,
         floor_id: StrictStr,
+        app_id: Annotated[StrictStr, Field(description="App ID - 13 digit numeric identity")],
         user_id: Annotated[Optional[StrictStr], Field(description="User ID  - 13 digit numeric identity")] = None,
-        app_id: Annotated[Optional[StrictStr], Field(description="App ID - 13 digit numeric identity")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -459,10 +459,10 @@ class GetFloorInformationApi:
 
         :param floor_id:  (required)
         :type floor_id: str
+        :param app_id: App ID - 13 digit numeric identity (required)
+        :type app_id: str
         :param user_id: User ID  - 13 digit numeric identity
         :type user_id: str
-        :param app_id: App ID - 13 digit numeric identity
-        :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -487,8 +487,8 @@ class GetFloorInformationApi:
 
         _param = self._get_floor_information_serialize(
             floor_id=floor_id,
-            user_id=user_id,
             app_id=app_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -514,8 +514,8 @@ class GetFloorInformationApi:
     def get_floor_information_without_preload_content(
         self,
         floor_id: StrictStr,
+        app_id: Annotated[StrictStr, Field(description="App ID - 13 digit numeric identity")],
         user_id: Annotated[Optional[StrictStr], Field(description="User ID  - 13 digit numeric identity")] = None,
-        app_id: Annotated[Optional[StrictStr], Field(description="App ID - 13 digit numeric identity")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -693,10 +693,10 @@ class GetFloorInformationApi:
 
         :param floor_id:  (required)
         :type floor_id: str
+        :param app_id: App ID - 13 digit numeric identity (required)
+        :type app_id: str
         :param user_id: User ID  - 13 digit numeric identity
         :type user_id: str
-        :param app_id: App ID - 13 digit numeric identity
-        :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -721,8 +721,8 @@ class GetFloorInformationApi:
 
         _param = self._get_floor_information_serialize(
             floor_id=floor_id,
-            user_id=user_id,
             app_id=app_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -743,8 +743,8 @@ class GetFloorInformationApi:
     def _get_floor_information_serialize(
         self,
         floor_id,
-        user_id,
         app_id,
+        user_id,
         _request_auth,
         _content_type,
         _headers,

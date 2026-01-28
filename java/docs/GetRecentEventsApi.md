@@ -9,7 +9,7 @@ All URIs are relative to *https://appfloor.in*
 
 <a id="getRecentEvents"></a>
 # **getRecentEvents**
-> GetRecentEvents200Response getRecentEvents(floorId, userId, appId)
+> GetRecentEvents200Response getRecentEvents(floorId, appId, userId)
 
 Recent Events
 
@@ -152,10 +152,10 @@ public class Example {
 
     GetRecentEventsApi apiInstance = new GetRecentEventsApi(defaultClient);
     String floorId = "floorId_example"; // String | 
-    String userId = "userId_example"; // String | 
     String appId = "appId_example"; // String | 
+    String userId = "userId_example"; // String | 
     try {
-      GetRecentEvents200Response result = apiInstance.getRecentEvents(floorId, userId, appId);
+      GetRecentEvents200Response result = apiInstance.getRecentEvents(floorId, appId, userId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling GetRecentEventsApi#getRecentEvents");
@@ -174,9 +174,9 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **floorId** | **String**|
 | |
-| **userId** | **String**|
-| [optional] |
 | **appId** | **String**|
+| |
+| **userId** | **String**|
 | [optional] |
 
 ### Return type

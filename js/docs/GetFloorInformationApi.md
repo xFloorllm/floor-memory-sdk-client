@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ### getFloorInformation
 
-> GetFloorInformation200Response getFloorInformation(floorId, opts)
+> GetFloorInformation200Response getFloorInformation(floorId, appId, opts)
 
 Basic information of a floor
 
@@ -185,11 +185,11 @@ bearer.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new XfloorFloorMemorySdkJs.GetFloorInformationApi();
 let floorId = "floorId_example"; // String | 
+let appId = "1387654378393"; // String | App ID - 13 digit numeric identity
 let opts = {
-  'userId': "1345896753", // String | User ID  - 13 digit numeric identity
-  'appId': "1387654378" // String | App ID - 13 digit numeric identity
+  'userId': "1345896753484" // String | User ID  - 13 digit numeric identity
 };
-apiInstance.getFloorInformation(floorId, opts, (error, data, response) => {
+apiInstance.getFloorInformation(floorId, appId, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -215,15 +215,13 @@ Notes
 
 | **String**|
 |
+ **appId**
+
+| **String**| App ID - 13 digit numeric identity |
  **userId**
 
 | **String**| User ID
 - 13 digit numeric identity |
-
-[optional]
- **appId**
-
-| **String**| App ID - 13 digit numeric identity |
 
 [optional]
 

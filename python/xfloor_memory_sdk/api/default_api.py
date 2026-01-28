@@ -3412,9 +3412,9 @@ class DefaultApi:
     @validate_call
     def make_floor_private(
         self,
-        floor_id: Annotated[Optional[StrictStr], Field(description="Floor ID")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User ID")] = None,
-        app_id: Annotated[Optional[StrictStr], Field(description="App ID")] = None,
+        floor_id: Annotated[StrictStr, Field(description="Floor ID")],
+        user_id: Annotated[StrictStr, Field(description="User ID")],
+        app_id: Annotated[StrictStr, Field(description="App ID")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3529,11 +3529,11 @@ class DefaultApi:
         
         are handled elsewhere. * `app_id` is provided for developer/pod applications and is optional unless enforced by your app model. * If you support floor types like `POD`, document whether pods are allowed to be private or not (some platforms restrict this).
 
-        :param floor_id: Floor ID
+        :param floor_id: Floor ID (required)
         :type floor_id: str
-        :param user_id: User ID
+        :param user_id: User ID (required)
         :type user_id: str
-        :param app_id: App ID
+        :param app_id: App ID (required)
         :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3585,9 +3585,9 @@ class DefaultApi:
     @validate_call
     def make_floor_private_with_http_info(
         self,
-        floor_id: Annotated[Optional[StrictStr], Field(description="Floor ID")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User ID")] = None,
-        app_id: Annotated[Optional[StrictStr], Field(description="App ID")] = None,
+        floor_id: Annotated[StrictStr, Field(description="Floor ID")],
+        user_id: Annotated[StrictStr, Field(description="User ID")],
+        app_id: Annotated[StrictStr, Field(description="App ID")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3702,11 +3702,11 @@ class DefaultApi:
         
         are handled elsewhere. * `app_id` is provided for developer/pod applications and is optional unless enforced by your app model. * If you support floor types like `POD`, document whether pods are allowed to be private or not (some platforms restrict this).
 
-        :param floor_id: Floor ID
+        :param floor_id: Floor ID (required)
         :type floor_id: str
-        :param user_id: User ID
+        :param user_id: User ID (required)
         :type user_id: str
-        :param app_id: App ID
+        :param app_id: App ID (required)
         :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3758,9 +3758,9 @@ class DefaultApi:
     @validate_call
     def make_floor_private_without_preload_content(
         self,
-        floor_id: Annotated[Optional[StrictStr], Field(description="Floor ID")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User ID")] = None,
-        app_id: Annotated[Optional[StrictStr], Field(description="App ID")] = None,
+        floor_id: Annotated[StrictStr, Field(description="Floor ID")],
+        user_id: Annotated[StrictStr, Field(description="User ID")],
+        app_id: Annotated[StrictStr, Field(description="App ID")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3875,11 +3875,11 @@ class DefaultApi:
         
         are handled elsewhere. * `app_id` is provided for developer/pod applications and is optional unless enforced by your app model. * If you support floor types like `POD`, document whether pods are allowed to be private or not (some platforms restrict this).
 
-        :param floor_id: Floor ID
+        :param floor_id: Floor ID (required)
         :type floor_id: str
-        :param user_id: User ID
+        :param user_id: User ID (required)
         :type user_id: str
-        :param app_id: App ID
+        :param app_id: App ID (required)
         :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4003,9 +4003,9 @@ class DefaultApi:
     @validate_call
     def make_floor_public(
         self,
-        floor_id: Annotated[Optional[StrictStr], Field(description="Floor ID")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User ID")] = None,
-        app_id: Annotated[Optional[StrictStr], Field(description="App ID")] = None,
+        floor_id: Annotated[StrictStr, Field(description="Floor ID")],
+        user_id: Annotated[StrictStr, Field(description="User ID")],
+        app_id: Annotated[StrictStr, Field(description="App ID")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4134,11 +4134,11 @@ class DefaultApi:
         
         > **This API answers: “Make this floor visible to everyone.”**
 
-        :param floor_id: Floor ID
+        :param floor_id: Floor ID (required)
         :type floor_id: str
-        :param user_id: User ID
+        :param user_id: User ID (required)
         :type user_id: str
-        :param app_id: App ID
+        :param app_id: App ID (required)
         :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4190,9 +4190,9 @@ class DefaultApi:
     @validate_call
     def make_floor_public_with_http_info(
         self,
-        floor_id: Annotated[Optional[StrictStr], Field(description="Floor ID")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User ID")] = None,
-        app_id: Annotated[Optional[StrictStr], Field(description="App ID")] = None,
+        floor_id: Annotated[StrictStr, Field(description="Floor ID")],
+        user_id: Annotated[StrictStr, Field(description="User ID")],
+        app_id: Annotated[StrictStr, Field(description="App ID")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4321,11 +4321,11 @@ class DefaultApi:
         
         > **This API answers: “Make this floor visible to everyone.”**
 
-        :param floor_id: Floor ID
+        :param floor_id: Floor ID (required)
         :type floor_id: str
-        :param user_id: User ID
+        :param user_id: User ID (required)
         :type user_id: str
-        :param app_id: App ID
+        :param app_id: App ID (required)
         :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4377,9 +4377,9 @@ class DefaultApi:
     @validate_call
     def make_floor_public_without_preload_content(
         self,
-        floor_id: Annotated[Optional[StrictStr], Field(description="Floor ID")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User ID")] = None,
-        app_id: Annotated[Optional[StrictStr], Field(description="App ID")] = None,
+        floor_id: Annotated[StrictStr, Field(description="Floor ID")],
+        user_id: Annotated[StrictStr, Field(description="User ID")],
+        app_id: Annotated[StrictStr, Field(description="App ID")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4508,11 +4508,11 @@ class DefaultApi:
         
         > **This API answers: “Make this floor visible to everyone.”**
 
-        :param floor_id: Floor ID
+        :param floor_id: Floor ID (required)
         :type floor_id: str
-        :param user_id: User ID
+        :param user_id: User ID (required)
         :type user_id: str
-        :param app_id: App ID
+        :param app_id: App ID (required)
         :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4961,10 +4961,10 @@ class DefaultApi:
     @validate_call
     def rename_floor(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User ID")] = None,
-        app_id: Annotated[Optional[StrictStr], Field(description="App ID")] = None,
-        var_from: Annotated[Optional[StrictStr], Field(description="Old floor ID")] = None,
-        to: Annotated[Optional[StrictStr], Field(description="New floor ID")] = None,
+        user_id: Annotated[StrictStr, Field(description="User ID")],
+        app_id: Annotated[StrictStr, Field(description="App ID")],
+        var_from: Annotated[StrictStr, Field(description="Old floor ID")],
+        to: Annotated[StrictStr, Field(description="New floor ID")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5108,13 +5108,13 @@ class DefaultApi:
         
         of a floor, owner-only.”**
 
-        :param user_id: User ID
+        :param user_id: User ID (required)
         :type user_id: str
-        :param app_id: App ID
+        :param app_id: App ID (required)
         :type app_id: str
-        :param var_from: Old floor ID
+        :param var_from: Old floor ID (required)
         :type var_from: str
-        :param to: New floor ID
+        :param to: New floor ID (required)
         :type to: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5167,10 +5167,10 @@ class DefaultApi:
     @validate_call
     def rename_floor_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User ID")] = None,
-        app_id: Annotated[Optional[StrictStr], Field(description="App ID")] = None,
-        var_from: Annotated[Optional[StrictStr], Field(description="Old floor ID")] = None,
-        to: Annotated[Optional[StrictStr], Field(description="New floor ID")] = None,
+        user_id: Annotated[StrictStr, Field(description="User ID")],
+        app_id: Annotated[StrictStr, Field(description="App ID")],
+        var_from: Annotated[StrictStr, Field(description="Old floor ID")],
+        to: Annotated[StrictStr, Field(description="New floor ID")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5314,13 +5314,13 @@ class DefaultApi:
         
         of a floor, owner-only.”**
 
-        :param user_id: User ID
+        :param user_id: User ID (required)
         :type user_id: str
-        :param app_id: App ID
+        :param app_id: App ID (required)
         :type app_id: str
-        :param var_from: Old floor ID
+        :param var_from: Old floor ID (required)
         :type var_from: str
-        :param to: New floor ID
+        :param to: New floor ID (required)
         :type to: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5373,10 +5373,10 @@ class DefaultApi:
     @validate_call
     def rename_floor_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User ID")] = None,
-        app_id: Annotated[Optional[StrictStr], Field(description="App ID")] = None,
-        var_from: Annotated[Optional[StrictStr], Field(description="Old floor ID")] = None,
-        to: Annotated[Optional[StrictStr], Field(description="New floor ID")] = None,
+        user_id: Annotated[StrictStr, Field(description="User ID")],
+        app_id: Annotated[StrictStr, Field(description="App ID")],
+        var_from: Annotated[StrictStr, Field(description="Old floor ID")],
+        to: Annotated[StrictStr, Field(description="New floor ID")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5520,13 +5520,13 @@ class DefaultApi:
         
         of a floor, owner-only.”**
 
-        :param user_id: User ID
+        :param user_id: User ID (required)
         :type user_id: str
-        :param app_id: App ID
+        :param app_id: App ID (required)
         :type app_id: str
-        :param var_from: Old floor ID
+        :param var_from: Old floor ID (required)
         :type var_from: str
-        :param to: New floor ID
+        :param to: New floor ID (required)
         :type to: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

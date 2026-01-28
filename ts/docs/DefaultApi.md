@@ -1134,11 +1134,11 @@ async function example() {
   const api = new DefaultApi(config);
 
   const body = {
-    // string | Floor ID (optional)
+    // string | Floor ID
     floorId: floorId_example,
-    // string | User ID (optional)
+    // string | User ID
     userId: userId_example,
-    // string | App ID (optional)
+    // string | App ID
     appId: appId_example,
   } satisfies MakeFloorPrivateRequest;
 
@@ -1159,9 +1159,9 @@ example().catch(console.error);
 
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **floorId** | `string` | Floor ID | [Optional] [Defaults to `undefined`] |
-| **userId** | `string` | User ID | [Optional] [Defaults to `undefined`] |
-| **appId** | `string` | App ID | [Optional] [Defaults to `undefined`] |
+| **floorId** | `string` | Floor ID | [Defaults to `undefined`] |
+| **userId** | `string` | User ID | [Defaults to `undefined`] |
+| **appId** | `string` | App ID | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -1327,11 +1327,11 @@ async function example() {
   const api = new DefaultApi(config);
 
   const body = {
-    // string | Floor ID (optional)
+    // string | Floor ID
     floorId: floorId_example,
-    // string | User ID (optional)
+    // string | User ID
     userId: userId_example,
-    // string | App ID (optional)
+    // string | App ID
     appId: appId_example,
   } satisfies MakeFloorPublicRequest;
 
@@ -1352,9 +1352,9 @@ example().catch(console.error);
 
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **floorId** | `string` | Floor ID | [Optional] [Defaults to `undefined`] |
-| **userId** | `string` | User ID | [Optional] [Defaults to `undefined`] |
-| **appId** | `string` | App ID | [Optional] [Defaults to `undefined`] |
+| **floorId** | `string` | Floor ID | [Defaults to `undefined`] |
+| **userId** | `string` | User ID | [Defaults to `undefined`] |
+| **appId** | `string` | App ID | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -1619,13 +1619,13 @@ async function example() {
   const api = new DefaultApi();
 
   const body = {
-    // string | User ID (optional)
+    // string | User ID
     userId: userId_example,
-    // string | App ID (optional)
+    // string | App ID
     appId: appId_example,
-    // string | Old floor ID (optional)
+    // string | Old floor ID
     from: from_example,
-    // string | New floor ID (optional)
+    // string | New floor ID
     to: to_example,
   } satisfies RenameFloorRequest;
 
@@ -1646,10 +1646,10 @@ example().catch(console.error);
 
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **userId** | `string` | User ID | [Optional] [Defaults to `undefined`] |
-| **appId** | `string` | App ID | [Optional] [Defaults to `undefined`] |
-| **from** | `string` | Old floor ID | [Optional] [Defaults to `undefined`] |
-| **to** | `string` | New floor ID | [Optional] [Defaults to `undefined`] |
+| **userId** | `string` | User ID | [Defaults to `undefined`] |
+| **appId** | `string` | App ID | [Defaults to `undefined`] |
+| **from** | `string` | Old floor ID | [Defaults to `undefined`] |
+| **to** | `string` | New floor ID | [Defaults to `undefined`] |
 
 ### Return type
 

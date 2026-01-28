@@ -1126,9 +1126,12 @@ public class Example {
 
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **floorId** | **String**| Floor ID | [optional] |
-| **userId** | **String**| User ID | [optional] |
-| **appId** | **String**| App ID | [optional] |
+| **floorId** | **String**| Floor ID |
+|
+| **userId** | **String**| User ID |
+|
+| **appId** | **String**| App ID |
+|
 
 ### Return type
 
@@ -1313,9 +1316,12 @@ public class Example {
 
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **floorId** | **String**| Floor ID | [optional] |
-| **userId** | **String**| User ID | [optional] |
-| **appId** | **String**| App ID | [optional] |
+| **floorId** | **String**| Floor ID |
+|
+| **userId** | **String**| User ID |
+|
+| **appId** | **String**| App ID |
+|
 
 ### Return type
 
@@ -1592,10 +1598,14 @@ public class Example {
 
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **userId** | **String**| User ID | [optional] |
-| **appId** | **String**| App ID | [optional] |
-| **from** | **String**| Old floor ID | [optional] |
-| **to** | **String**| New floor ID | [optional] |
+| **userId** | **String**| User ID |
+|
+| **appId** | **String**| App ID |
+|
+| **from** | **String**| Old floor ID |
+|
+| **to** | **String**| New floor ID |
+|
 
 ### Return type
 

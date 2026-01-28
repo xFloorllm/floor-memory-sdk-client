@@ -9,7 +9,7 @@ All URIs are relative to *https://appfloor.in*
 
 <a id="getFloorInformation"></a>
 # **getFloorInformation**
-> GetFloorInformation200Response getFloorInformation(floorId, userId, appId)
+> GetFloorInformation200Response getFloorInformation(floorId, appId, userId)
 
 Basic information of a floor
 
@@ -194,10 +194,10 @@ public class Example {
 
     GetFloorInformationApi apiInstance = new GetFloorInformationApi(defaultClient);
     String floorId = "floorId_example"; // String | 
-    String userId = "1345896753"; // String | User ID  - 13 digit numeric identity
-    String appId = "1387654378"; // String | App ID - 13 digit numeric identity
+    String appId = "1387654378393"; // String | App ID - 13 digit numeric identity
+    String userId = "1345896753484"; // String | User ID  - 13 digit numeric identity
     try {
-      GetFloorInformation200Response result = apiInstance.getFloorInformation(floorId, userId, appId);
+      GetFloorInformation200Response result = apiInstance.getFloorInformation(floorId, appId, userId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling GetFloorInformationApi#getFloorInformation");
@@ -216,9 +216,10 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **floorId** | **String**|
 | |
+| **appId** | **String**| App ID - 13 digit numeric identity |
+|
 | **userId** | **String**| User ID
 - 13 digit numeric identity | [optional] |
-| **appId** | **String**| App ID - 13 digit numeric identity | [optional] |
 
 ### Return type
 

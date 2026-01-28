@@ -1264,7 +1264,7 @@ Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **make_floor_private**
-> GetFloorInformation200Response make_floor_private(floor_id=floor_id, user_id=user_id, app_id=app_id)
+> GetFloorInformation200Response make_floor_private(floor_id, user_id, app_id)
 
 Make floor Private
 
@@ -1440,13 +1440,13 @@ configuration = xfloor_memory_sdk.Configuration(
 with xfloor_memory_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = xfloor_memory_sdk.DefaultApi(api_client)
-    floor_id = 'floor_id_example' # str | Floor ID (optional)
-    user_id = 'user_id_example' # str | User ID (optional)
-    app_id = 'app_id_example' # str | App ID (optional)
+    floor_id = 'floor_id_example' # str | Floor ID
+    user_id = 'user_id_example' # str | User ID
+    app_id = 'app_id_example' # str | App ID
 
     try:
         # Make floor Private
-        api_response = api_instance.make_floor_private(floor_id=floor_id, user_id=user_id, app_id=app_id)
+        api_response = api_instance.make_floor_private(floor_id, user_id, app_id)
         print("The response of DefaultApi->make_floor_private:\n")
         pprint(api_response)
     except Exception as e:
@@ -1471,18 +1471,12 @@ Notes
  **floor_id**
 
 | **str**| Floor ID |
-
-[optional]
  **user_id**
 
 | **str**| User ID |
-
-[optional]
  **app_id**
 
 | **str**| App ID |
-
-[optional]
 
 ### Return type
 
@@ -1511,7 +1505,7 @@ Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **make_floor_public**
-> GetFloorInformation200Response make_floor_public(floor_id=floor_id, user_id=user_id, app_id=app_id)
+> GetFloorInformation200Response make_floor_public(floor_id, user_id, app_id)
 
 Make floor public
 
@@ -1694,13 +1688,13 @@ configuration = xfloor_memory_sdk.Configuration(
 with xfloor_memory_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = xfloor_memory_sdk.DefaultApi(api_client)
-    floor_id = 'floor_id_example' # str | Floor ID (optional)
-    user_id = 'user_id_example' # str | User ID (optional)
-    app_id = 'app_id_example' # str | App ID (optional)
+    floor_id = 'floor_id_example' # str | Floor ID
+    user_id = 'user_id_example' # str | User ID
+    app_id = 'app_id_example' # str | App ID
 
     try:
         # Make floor public
-        api_response = api_instance.make_floor_public(floor_id=floor_id, user_id=user_id, app_id=app_id)
+        api_response = api_instance.make_floor_public(floor_id, user_id, app_id)
         print("The response of DefaultApi->make_floor_public:\n")
         pprint(api_response)
     except Exception as e:
@@ -1725,18 +1719,12 @@ Notes
  **floor_id**
 
 | **str**| Floor ID |
-
-[optional]
  **user_id**
 
 | **str**| User ID |
-
-[optional]
  **app_id**
 
 | **str**| App ID |
-
-[optional]
 
 ### Return type
 
@@ -1888,7 +1876,7 @@ Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **rename_floor**
-> GetFloorInformation200Response rename_floor(user_id=user_id, app_id=app_id, var_from=var_from, to=to)
+> GetFloorInformation200Response rename_floor(user_id, app_id, var_from, to)
 
 Rename floor
 
@@ -2064,14 +2052,14 @@ configuration = xfloor_memory_sdk.Configuration(
 with xfloor_memory_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = xfloor_memory_sdk.DefaultApi(api_client)
-    user_id = 'user_id_example' # str | User ID (optional)
-    app_id = 'app_id_example' # str | App ID (optional)
-    var_from = 'var_from_example' # str | Old floor ID (optional)
-    to = 'to_example' # str | New floor ID (optional)
+    user_id = 'user_id_example' # str | User ID
+    app_id = 'app_id_example' # str | App ID
+    var_from = 'var_from_example' # str | Old floor ID
+    to = 'to_example' # str | New floor ID
 
     try:
         # Rename floor
-        api_response = api_instance.rename_floor(user_id=user_id, app_id=app_id, var_from=var_from, to=to)
+        api_response = api_instance.rename_floor(user_id, app_id, var_from, to)
         print("The response of DefaultApi->rename_floor:\n")
         pprint(api_response)
     except Exception as e:
@@ -2096,23 +2084,15 @@ Notes
  **user_id**
 
 | **str**| User ID |
-
-[optional]
  **app_id**
 
 | **str**| App ID |
-
-[optional]
  **var_from**
 
 | **str**| Old floor ID |
-
-[optional]
  **to**
 
 | **str**| New floor ID |
-
-[optional]
 
 ### Return type
 

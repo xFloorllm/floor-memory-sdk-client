@@ -29,8 +29,8 @@ import {
 
 export interface GetFloorInformationRequest {
     floorId: string;
+    appId: string;
     userId?: string;
-    appId?: string;
 }
 
 /**
@@ -47,6 +47,13 @@ export class GetFloorInformationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError(
                 'floorId',
                 'Required parameter "floorId" was null or undefined when calling getFloorInformation().'
+            );
+        }
+
+        if (requestParameters['appId'] == null) {
+            throw new runtime.RequiredError(
+                'appId',
+                'Required parameter "appId" was null or undefined when calling getFloorInformation().'
             );
         }
 

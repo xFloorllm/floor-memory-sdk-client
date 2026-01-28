@@ -10,7 +10,7 @@ All URIs are relative to *https://appfloor.in*
 
 ### getFloorInformation
 
-> GetFloorInformation200Response getFloorInformation(floorId, userId, appId)
+> GetFloorInformation200Response getFloorInformation(floorId, appId, userId)
 
 Basic information of a floor
 
@@ -194,10 +194,10 @@ async function example() {
   const body = {
     // string | 
     floorId: floorId_example,
+    // string | App ID - 13 digit numeric identity
+    appId: 1387654378393,
     // string | User ID  - 13 digit numeric identity (optional)
-    userId: 1345896753,
-    // string | App ID - 13 digit numeric identity (optional)
-    appId: 1387654378,
+    userId: 1345896753484,
   } satisfies GetFloorInformationRequest;
 
   try {
@@ -219,9 +219,9 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **floorId** | `string` |
 | [Defaults to `undefined`] |
+| **appId** | `string` | App ID - 13 digit numeric identity | [Defaults to `undefined`] |
 | **userId** | `string` | User ID
 - 13 digit numeric identity | [Optional] [Defaults to `undefined`] |
-| **appId** | `string` | App ID - 13 digit numeric identity | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 

@@ -82,7 +82,7 @@ public class QueryRequest {
 
   public static final String SERIALIZED_NAME_APP_ID = "app_id";
   @SerializedName(SERIALIZED_NAME_APP_ID)
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   private String appId;
 
   public static final String SERIALIZED_NAME_FILTERS = "filters";
@@ -196,7 +196,7 @@ public class QueryRequest {
   }
 
 
-  public QueryRequest appId(@javax.annotation.Nullable String appId) {
+  public QueryRequest appId(@javax.annotation.Nonnull String appId) {
     this.appId = appId;
     return this;
   }
@@ -205,12 +205,12 @@ public class QueryRequest {
    * App ID
    * @return appId
    */
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   public String getAppId() {
     return appId;
   }
 
-  public void setAppId(@javax.annotation.Nullable String appId) {
+  public void setAppId(@javax.annotation.Nonnull String appId) {
     this.appId = appId;
   }
 
@@ -293,7 +293,7 @@ public class QueryRequest {
     openapiFields = new HashSet<String>(Arrays.asList("user_id", "query", "floor_ids", "include_metadata", "summary_needed", "app_id", "filters"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("user_id", "query", "floor_ids"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("user_id", "query", "floor_ids", "app_id"));
   }
 
   /**
@@ -342,7 +342,7 @@ public class QueryRequest {
       if ((jsonObj.get("summary_needed") != null && !jsonObj.get("summary_needed").isJsonNull()) && !jsonObj.get("summary_needed").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `summary_needed` to be a primitive type in the JSON string but got `%s`", jsonObj.get("summary_needed").toString()));
       }
-      if ((jsonObj.get("app_id") != null && !jsonObj.get("app_id").isJsonNull()) && !jsonObj.get("app_id").isJsonPrimitive()) {
+      if (!jsonObj.get("app_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `app_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("app_id").toString()));
       }
       // validate the optional field `filters`

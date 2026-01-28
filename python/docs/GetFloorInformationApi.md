@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_floor_information**
-> GetFloorInformation200Response get_floor_information(floor_id, user_id=user_id, app_id=app_id)
+> GetFloorInformation200Response get_floor_information(floor_id, app_id, user_id=user_id)
 
 Basic information of a floor
 
@@ -244,12 +244,12 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = xfloor_memory_sdk.GetFloorInformationApi(api_client)
     floor_id = 'floor_id_example' # str | 
-    user_id = '1345896753' # str | User ID  - 13 digit numeric identity (optional)
-    app_id = '1387654378' # str | App ID - 13 digit numeric identity (optional)
+    app_id = '1387654378393' # str | App ID - 13 digit numeric identity
+    user_id = '1345896753484' # str | User ID  - 13 digit numeric identity (optional)
 
     try:
         # Basic information of a floor
-        api_response = api_instance.get_floor_information(floor_id, user_id=user_id, app_id=app_id)
+        api_response = api_instance.get_floor_information(floor_id, app_id, user_id=user_id)
         print("The response of GetFloorInformationApi->get_floor_information:\n")
         pprint(api_response)
     except Exception as e:
@@ -275,15 +275,13 @@ Notes
 
 | **str**|
 |
+ **app_id**
+
+| **str**| App ID - 13 digit numeric identity |
  **user_id**
 
 | **str**| User ID
 - 13 digit numeric identity |
-
-[optional]
- **app_id**
-
-| **str**| App ID - 13 digit numeric identity |
 
 [optional]
 
