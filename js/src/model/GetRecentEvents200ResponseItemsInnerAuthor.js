@@ -19,7 +19,7 @@ import Media from './Media';
 /**
  * The GetRecentEvents200ResponseItemsInnerAuthor model module.
  * @module model/GetRecentEvents200ResponseItemsInnerAuthor
- * @version 1.0.4
+ * @version 1.0.5
  */
 class GetRecentEvents200ResponseItemsInnerAuthor {
     /**

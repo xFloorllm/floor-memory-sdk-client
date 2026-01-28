@@ -18,20 +18,20 @@ import ApiClient from '../ApiClient';
 /**
  * The BlockDetails model module.
  * @module model/BlockDetails
- * @version 1.0.4
+ * @version 1.0.5
  */
 class BlockDetails {
     /**
      * Constructs a new <code>BlockDetails</code>.
      * Block Details
      * @alias module:model/BlockDetails
-     * @param bid {String} Block ID
+     * @param blockId {String} Block ID
      * @param type {String} Block Type
      * @param title {String} Title of the block
      */
-    constructor(bid, type, title) { 
+    constructor(blockId, type, title) { 
         
-        BlockDetails.initialize(this, bid, type, title);
+        BlockDetails.initialize(this, blockId, type, title);
     }
 
     /**
@@ -39,8 +39,8 @@ class BlockDetails {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, bid, type, title) { 
-        obj['bid'] = bid;
+    static initialize(obj, blockId, type, title) { 
+        obj['block_id'] = blockId;
         obj['type'] = type;
         obj['title'] = title;
     }
@@ -56,8 +56,8 @@ class BlockDetails {
         if (data) {
             obj = obj || new BlockDetails();
 
-            if (data.hasOwnProperty('bid')) {
-                obj['bid'] = ApiClient.convertToType(data['bid'], 'String');
+            if (data.hasOwnProperty('block_id')) {
+                obj['block_id'] = ApiClient.convertToType(data['block_id'], 'String');
             }
             if (data.hasOwnProperty('type')) {
                 obj['type'] = ApiClient.convertToType(data['type'], 'String');
@@ -82,8 +82,8 @@ class BlockDetails {
             }
         }
         // ensure the json data is a string
-        if (data['bid'] && !(typeof data['bid'] === 'string' || data['bid'] instanceof String)) {
-            throw new Error("Expected the field `bid` to be a primitive type in the JSON string but got " + data['bid']);
+        if (data['block_id'] && !(typeof data['block_id'] === 'string' || data['block_id'] instanceof String)) {
+            throw new Error("Expected the field `block_id` to be a primitive type in the JSON string but got " + data['block_id']);
         }
         // ensure the json data is a string
         if (data['type'] && !(typeof data['type'] === 'string' || data['type'] instanceof String)) {
@@ -100,13 +100,13 @@ class BlockDetails {
 
 }
 
-BlockDetails.RequiredProperties = ["bid", "type", "title"];
+BlockDetails.RequiredProperties = ["block_id", "type", "title"];
 
 /**
  * Block ID
- * @member {String} bid
+ * @member {String} block_id
  */
-BlockDetails.prototype['bid'] = undefined;
+BlockDetails.prototype['block_id'] = undefined;
 
 /**
  * Block Type

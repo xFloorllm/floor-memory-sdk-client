@@ -4,20 +4,197 @@ All URIs are relative to *https://appfloor.in*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**api_developer_create_app_post**](DefaultApi.md#api_developer_create_app_post) | **POST** /api/developer/create/app | Create App
+[**api_developer_modify_app_post**](DefaultApi.md#api_developer_modify_app_post) | **POST** /api/developer/modify/app | Modify Floorpod App
 [**change_email**](DefaultApi.md#change_email) | **POST** /auth-service/change/email | Change email ID
 [**change_mobile_number**](DefaultApi.md#change_mobile_number) | **POST** /auth-service/change/mobile | Change Mobile number
 [**change_password**](DefaultApi.md#change_password) | **POST** /auth-service/password/change | Change Password
+[**conversation_threads**](DefaultApi.md#conversation_threads) | **GET** /agent/memory/threads | Get the conversational threads
+[**get_conversations**](DefaultApi.md#get_conversations) | **GET** /agent/memory/conversations | Conversations
 [**make_floor_private**](DefaultApi.md#make_floor_private) | **POST** /api/memory/make/floor/private | Make floor Private
 [**make_floor_public**](DefaultApi.md#make_floor_public) | **POST** /api/memory/make/floor/public | Make floor public
 [**register_external_user_identity**](DefaultApi.md#register_external_user_identity) | **POST** /memory/identity/external-user | External User Registration
 [**rename_floor**](DefaultApi.md#rename_floor) | **POST** /api/memory/change/floor/id | Rename floor
 [**reset_password**](DefaultApi.md#reset_password) | **POST** /auth-service/password/reset | Reset Password
+[**send_sign_in_validation_code**](DefaultApi.md#send_sign_in_validation_code) | **POST** /auth-service/send/sign/in/validation/code | Send Sign-In Validation Code (OTP)
 [**send_validation_code**](DefaultApi.md#send_validation_code) | **POST** /auth-service/send/validation/code | Send Validation code
 [**sign_in_with_email**](DefaultApi.md#sign_in_with_email) | **POST** /auth-service/sign/in/with/email | Sign In with email ID
 [**sign_in_with_mobile_number**](DefaultApi.md#sign_in_with_mobile_number) | **POST** /auth-service/sign/in/with/mobile/number | Sign In with Mobile number
 [**sign_up**](DefaultApi.md#sign_up) | **POST** /auth-service/sign/up | Sign Up
 [**validate_code**](DefaultApi.md#validate_code) | **POST** /auth-service/validate/activation/code | Validation
 
+
+# **api_developer_create_app_post**
+> object api_developer_create_app_post(input_info, icon=icon)
+
+Create App
+
+Create a custom app using APIs. A 13 digit app ID gets created which takes title and description the app. An icon of specified size needs to be uploaded.
+
+### Example
+
+
+```python
+import xfloor_memory_sdk
+from xfloor_memory_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://appfloor.in
+# See configuration.py for a list of all supported configuration parameters.
+configuration = xfloor_memory_sdk.Configuration(
+    host = "https://appfloor.in"
+)
+
+
+# Enter a context with an instance of the API client
+with xfloor_memory_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xfloor_memory_sdk.DefaultApi(api_client)
+    input_info = 'input_info_example' # str | 
+    icon = None # bytearray |  (optional)
+
+    try:
+        # Create App
+        api_response = api_instance.api_developer_create_app_post(input_info, icon=icon)
+        print("The response of DefaultApi->api_developer_create_app_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->api_developer_create_app_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **input_info**
+
+| **str**|
+|
+ **icon**
+
+| **bytearray**|
+|
+
+[optional]
+
+### Return type
+
+**object**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |
+|
+- |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **api_developer_modify_app_post**
+> object api_developer_modify_app_post(input_info, file=file)
+
+Modify Floorpod App
+
+Modify title, details or the app icon
+
+### Example
+
+
+```python
+import xfloor_memory_sdk
+from xfloor_memory_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://appfloor.in
+# See configuration.py for a list of all supported configuration parameters.
+configuration = xfloor_memory_sdk.Configuration(
+    host = "https://appfloor.in"
+)
+
+
+# Enter a context with an instance of the API client
+with xfloor_memory_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xfloor_memory_sdk.DefaultApi(api_client)
+    input_info = 'input_info_example' # str | User ID, App ID, Title, Details. User ID and App ID are required parameters. Title/details are optional.
+    file = None # bytearray | Upload the new PNG icon file. (optional)
+
+    try:
+        # Modify Floorpod App
+        api_response = api_instance.api_developer_modify_app_post(input_info, file=file)
+        print("The response of DefaultApi->api_developer_modify_app_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->api_developer_modify_app_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **input_info**
+
+| **str**| User ID, App ID, Title, Details. User ID and App ID are required parameters. Title/details are optional. |
+ **file**
+
+| **bytearray**| Upload the new PNG icon file. |
+
+[optional]
+
+### Return type
+
+**object**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |
+|
+- |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **change_email**
 > object change_email(new_email_id, activation_code)
@@ -519,6 +696,568 @@ Notes
 |
 - |
 **400** |
+|
+- |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **conversation_threads**
+> ConversationThreads200Response conversation_threads(user_id, floor_id)
+
+Get the conversational threads
+
+### Conversation Model
+
+- A **Thread** represents a single conversational context.
+- A **Conversation** is the ordered exchange of messages within a thread.
+- Threads are scoped per user and per floor.
+
+This API retrieves the list of **conversational threads** associated with a specific **user** within a specific **floor**.
+
+A **thread** represents a persistent conversation context between the user and the system (agent/assistant) inside a floor. Each thread maintains its own history and state, allowing users to resume previous conversations without losing context.
+
+The API returns **only thread metadata**, not the message content itself. This makes it suitable for:
+
+* Displaying a conversation list or sidebar
+* Allowing users to select and resume past conversations
+* Managing conversational memory per floor
+
+---
+
+### Key Concepts
+
+* **Thread**: A long-lived conversational context tied to a user and a floor
+* **Floor-scoped memory**: Conversations are isolated per floor; threads from one floor are not visible in another
+* **User-specific**: Threads are private to the requesting user
+
+---
+
+**Request Method**
+
+
+
+`GET`
+
+---
+
+**Request Parameters (Query Parameters)**
+
+| Parameter Name | Type | Required | Description |
+| -------------- | ------ | -------- | ---------------------------------------------------------------------------- |
+| `user_id` | String | **Yes** | Unique identifier of the user whose conversation threads are being requested |
+| `floor_id` | String | **Yes** | Identifier of the floor in which the conversations exist |
+
+---
+
+### Authorization & Access Rules
+
+* The caller must be authenticated as the given `user_id`
+* A user can retrieve **only their own threads**
+* Threads are scoped to the provided `floor_id`
+* Threads from other floors or other users are not accessible
+
+---
+
+### Response Format
+
+`application/json`
+
+---
+
+### Response Description
+
+The response contains:
+
+* The `user_id` for which threads were fetched
+* A list of thread metadata objects, sorted by **most recently updated first**
+
+---
+
+### Response Structure
+
+### Top-Level Fields
+
+| Field | Type | Description |
+| --------- | ------ | ------------------------------------------------------------------------- |
+| `user_id` | String | Identifier of the user |
+| `threads` | Array | List of conversation threads belonging to the user in the specified floor |
+
+---
+
+### Thread Object (`threads[]`)
+
+| Field | Type | Description |
+| -------------- | ------------------- | ------------------------------------------------- |
+| `thread_id` | String | Unique identifier of the conversation thread |
+| `title` | String | Human-readable title summarizing the conversation |
+| `last_updated` | String (YYYY-MM-DD) | Date when the thread was last updated |
+
+---
+
+### Sample
+
+Success Response
+
+```json
+{
+  "user_id": "59",
+  "threads": [
+    {
+      "thread_id": "55",
+      "title": "elegant potentially hopelessly ambitious sneak",
+      "last_updated": "2025-04-26"
+    },
+    {
+      "thread_id": "79",
+      "title": "sans profitable alienated by even overstay miserly practical",
+      "last_updated": "2025-04-24"
+    },
+    {
+      "thread_id": "89",
+      "title": "although light uh-huh despite instead vol sorrowful",
+      "last_updated": "2025-02-16"
+    }
+  ]
+}
+```
+
+---
+
+### Typical Use Cases
+
+* Show a **list of past conversations** in a chat UI
+* Allow users to **resume a previous thread**
+* Display conversation history grouped by floor
+* Build agent dashboards with user-specific memory
+
+---
+
+### Notes
+
+* This API returns **metadata only**; message history is retrieved using a separate thread-messages API
+* If no threads exist, the `threads` array will be empty
+* Thread titles may be system-generated or user-editable depending on implementation
+
+---
+
+### Common
+
+Error Responses (Examples)
+
+### Missing Parameters
+
+```json
+{
+  "status": "ERROR",
+  "message": "user_id and floor_id are required"
+}
+```
+
+### Unauthorised Access
+
+```json
+{
+  "status": "ERROR",
+  "message": "Unauthorized access to conversation threads"
+}
+```
+
+
+### Example
+
+* Bearer Authentication (bearer):
+
+```python
+import xfloor_memory_sdk
+from xfloor_memory_sdk.models.conversation_threads200_response import ConversationThreads200Response
+from xfloor_memory_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://appfloor.in
+# See configuration.py for a list of all supported configuration parameters.
+configuration = xfloor_memory_sdk.Configuration(
+    host = "https://appfloor.in"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearer
+configuration = xfloor_memory_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with xfloor_memory_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xfloor_memory_sdk.DefaultApi(api_client)
+    user_id = 'user_id_example' # str | User ID
+    floor_id = 'floor_id_example' # str | Floor ID
+
+    try:
+        # Get the conversational threads
+        api_response = api_instance.conversation_threads(user_id, floor_id)
+        print("The response of DefaultApi->conversation_threads:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->conversation_threads: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **user_id**
+
+| **str**| User ID |
+ **floor_id**
+
+| **str**| Floor ID |
+
+### Return type
+
+[**ConversationThreads200Response**](ConversationThreads200Response.md)
+
+### Authorization
+
+[bearer](../README.md#bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |
+|
+- |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_conversations**
+> GetConversations200Response get_conversations(user_id=user_id, thread_id=thread_id)
+
+Conversations
+
+This API returns the **full conversation history** for a specific **thread** belonging to a user within a floor.
+
+A **thread** represents a persistent conversation session. Each item in the returned `conversation` array contains:
+
+* The **user request payload** (user query + context)
+* The **assistant response payload** (full LLM completion object)
+* The **retrieval trace** (metadata of posts fetched/used for the answer, including scores and identifiers)
+
+This endpoint is intended for **developers** building custom conversational UIs and tooling that require:
+
+* Full conversation replay
+* Debug visibility into the assistant output object (`choices`, model info, etc.)
+* RAG explainability via `fetch_multiple_posts.results[]`
+
+---
+
+**Request Method**
+
+
+
+`GET`
+
+---
+
+### Query Parameters
+
+| Parameter | Type | Required | Description |
+| ----------- | ------ | -------- | --------------------------------------------------------------------------- |
+| `user_id` | String | **Yes** | Owner of the conversation thread. The thread must belong to this user. |
+| `floor_id` | String | **Yes** | Floor identifier in which the thread exists. Threads are scoped to a floor. |
+| `thread_id` | String | **Yes** | Thread identifier whose conversations should be returned. |
+
+---
+
+### Authorization & Access Rules
+
+* The caller must be authenticated as the given `user_id` (or have equivalent developer/system permission).
+* A user can access **only their own threads**.
+* Cross-user or cross-floor access must be rejected.
+
+---
+
+### Response Format
+
+`application/json`
+
+---
+
+### Response Description
+
+Returns the thread-level conversation payload:
+
+* `user_id`: the user who owns the thread
+* `thread_id`: the requested thread
+* `conversation`: ordered list of conversation entries (each entry = user object + assistant object)
+
+---
+
+### Response Schema
+
+### Top-Level Fields
+
+| Field | Type | Description |
+| -------------- | ------ | ---------------------------- |
+| `user_id` | String | Owner of the thread |
+| `thread_id` | String | Thread identifier |
+| `conversation` | Array | List of conversation entries |
+
+---
+
+### `conversation[]` Entry Structure
+
+Each entry contains two objects: `user` and `assistant`.
+
+---
+
+### `user` Object
+
+| Field | Type | Description |
+| ------------------ | ------ | ------------------------------------------------------------------- |
+| `context` | Object | Context used when processing the query (floor metadata, mode, etc.) |
+| `user_query` | String | The user’s query message |
+| `user_id` | String | User identifier (should match top-level `user_id`) |
+| `user_thread` | String | Thread identifier (should match top-level `thread_id`) |
+| `recorded_content` | String | Persisted user content (often same as `user_query`) |
+
+#### `user.context`
+
+| Field | Type | Description |
+| ---------------- | ------ | ---------------------------------------------- |
+| `floor_id` | String | Floor UID/slug where the conversation occurred |
+| `title` | String | Floor title at the time of the query |
+| `fid` | String | Immutable internal floor ID |
+| `floor_category` | String | Floor category identifier |
+| `floor_mode` | String | Floor mode indicator (example: `"1"`) |
+
+---
+
+### `assistant` Object
+
+This contains the **full completion response** plus retrieval details.
+
+| Field | Type | Description |
+| ---------------------- | ------ | --------------------------------------------------- |
+| `id` | String | Completion id (e.g., `chatcmpl-*`) |
+| `object` | String | Response type (e.g., `chat.completion`) |
+| `created` | Number | Timestamp when response was created (epoch seconds) |
+| `floor_mode` | String | Floor mode applied for generation |
+| `model` | String | Model identifier used |
+| `choices` | Array | Generated outputs and metadata |
+| `fetch_multiple_posts` | Object | Retrieval trace (if retrieval was performed) |
+| `content_type` | String | Retrieved content type (e.g., `post`) |
+
+---
+
+### `assistant.choices[]`
+
+| Field | Type | Description |
+| ------------------ | ------ | -------------------------------------------------------------------------- |
+| `index` | Number | Choice index |
+| `message` | Object | Assistant message content |
+| `finish_reason` | String | Why generation stopped (`stop`, `length`, etc.) |
+| `ai_model_details` | Object | Model runtime parameters (temperature, top_p, max_tokens, penalties, etc.) |
+| `prompt_details` | Object | Prompt configuration used (system prompt, system_prompt_id, etc.) |
+
+> **Note:** `prompt_details.system_prompt` may be large and is returned as-is for developer inspection.
+
+---
+
+### `assistant.fetch_multiple_posts`
+
+Describes the retrieval operation performed for the query.
+
+| Field | Type | Description |
+| -------------- | ------ | -------------------------------------- |
+| `content_type` | String | Type of retrieved content (`post`) |
+| `query` | String | Query used for retrieval |
+| `status` | String | Retrieval status (`success`, `failed`) |
+| `message` | String | Retrieval message |
+| `results` | Array | List of matched posts and metadata |
+
+---
+
+### `assistant.fetch_multiple_posts.results[]`
+
+| Field | Type | Description |
+| ------------ | ------ | ----------------------------------------------------------------- |
+| `from_floor` | String | Indicates source floor relation (e.g., same floor / linked floor) |
+| `content` | String | Raw JSON string of the matched post metadata/content |
+| `author` | String | Author id of the matched post |
+| `block_type` | Number | Block type of the matched post |
+| `pid` | String | Post/document id |
+| `bid` | String | Block id containing the post |
+| `fid` | String | Floor internal id where the post belongs |
+| `score` | Number | Similarity score |
+| `match_type` | String | Match type (`text`, etc.) |
+
+---
+
+### Sample
+
+Success Response
+
+Your provided payload is the canonical example. It includes:
+
+* the user query and floor context
+* the full assistant completion object
+* the full retrieval results with post metadata
+* the response shown covers a few important items.
+
+---
+
+### Common
+
+Error Responses
+
+### Missing Parameters
+
+```json
+{
+  "status": "ERROR",
+  "message": "user_id, floor_id, and thread_id are required"
+}
+```
+
+### Unauthorized Access
+
+```json
+{
+  "status": "ERROR",
+  "message": "Unauthorized access to thread"
+}
+```
+
+### Thread Not Found
+
+```json
+{
+  "status": "ERROR",
+  "message": "Thread not found"
+}
+```
+
+---
+
+### Developer
+
+Notes (Important)
+
+* The `content` field inside retrieval results is a **stringified JSON**. Developers may parse it to access fields such as `post_title`, `post_details`, etc.
+* `choices` may contain multiple outputs depending on backend configuration.
+* This API returns a “full debug payload” suitable for developers. If you later create a lightweight UI endpoint, it should strip execution details and return only `user_query`, `assistant.content`, and curated post references.
+
+
+
+### Example
+
+* Bearer Authentication (bearer):
+
+```python
+import xfloor_memory_sdk
+from xfloor_memory_sdk.models.get_conversations200_response import GetConversations200Response
+from xfloor_memory_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://appfloor.in
+# See configuration.py for a list of all supported configuration parameters.
+configuration = xfloor_memory_sdk.Configuration(
+    host = "https://appfloor.in"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearer
+configuration = xfloor_memory_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with xfloor_memory_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xfloor_memory_sdk.DefaultApi(api_client)
+    user_id = 'user_id_example' # str |  (optional)
+    thread_id = 'thread_id_example' # str |  (optional)
+
+    try:
+        # Conversations
+        api_response = api_instance.get_conversations(user_id=user_id, thread_id=thread_id)
+        print("The response of DefaultApi->get_conversations:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_conversations: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **user_id**
+
+| **str**|
+|
+
+[optional]
+ **thread_id**
+
+| **str**|
+|
+
+[optional]
+
+### Return type
+
+[**GetConversations200Response**](GetConversations200Response.md)
+
+### Authorization
+
+[bearer](../README.md#bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |
 |
 - |
 
@@ -1528,6 +2267,208 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |
+|
+- |
+**400** |
+|
+- |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **send_sign_in_validation_code**
+> SendSignInValidationCode200Response send_sign_in_validation_code(app_id, mobile_number=mobile_number, email_id=email_id)
+
+Send Sign-In Validation Code (OTP)
+
+This API initiates the **sign-in validation process** by sending a **one-time validation code (OTP)** to the user.
+
+The OTP is delivered to **either the mobile number or the email address** provided in the request.
+This endpoint is typically called **before completing sign-in**, to verify that the user owns the supplied contact identifier.
+
+The calling application is responsible for:
+
+* Collecting the OTP from the user
+* Submitting it to the OTP verification API (handled separately)
+
+---
+
+### **Use Case**
+
+* User attempts to sign in
+* User provides **mobile number or email**
+* System sends a **validation code (OTP)**
+* User enters OTP to complete sign-in
+
+---
+
+### **Request Method**
+
+`POST`
+
+---
+
+### **Formdata Parameters**
+
+| Parameter Name | Type | Required | Description |
+| --------------- | ------ | --------- | ------------------------------------------- |
+| `mobile_number` | String | Optional* | Mobile number to which the OTP will be sent |
+| `email_id` | String | Optional* | Email address to which the OTP will be sent |
+| `app_id` | String | Optional | Identifier of the calling application |
+
+* **Either `mobile_number` or `email_id` must be provided.**
+Providing both is allowed; the system may choose one based on configuration.
+
+---
+
+### **Request Rules**
+
+* At least **one** of `mobile_number` or `email_id` is mandatory
+* If both are missing, the request will be rejected
+* OTP delivery channel depends on the provided identifier
+
+---
+
+### **Response Format**
+
+`application/json`
+
+---
+
+### **Sample
+
+Success Response**
+
+```json
+{
+  "status": "SUCCESS",
+  "message": "Validation code sent successfully"
+}
+```
+
+---
+
+### **Sample
+
+Error Responses**
+
+### Missing Identifier
+
+```json
+{
+  "status": "ERROR",
+  "message": "Either mobile_number or email_id must be provided"
+}
+```
+
+### Invalid Identifier
+
+```json
+{
+  "status": "ERROR",
+  "message": "Invalid mobile number or email address"
+}
+```
+
+---
+
+### **Notes**
+
+* This API **only sends** the validation code
+* OTP verification must be performed using the corresponding **verify validation code** API
+* Rate limiting and retry restrictions may apply to prevent abuse
+
+
+
+### Example
+
+* Bearer Authentication (bearer):
+
+```python
+import xfloor_memory_sdk
+from xfloor_memory_sdk.models.send_sign_in_validation_code200_response import SendSignInValidationCode200Response
+from xfloor_memory_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://appfloor.in
+# See configuration.py for a list of all supported configuration parameters.
+configuration = xfloor_memory_sdk.Configuration(
+    host = "https://appfloor.in"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearer
+configuration = xfloor_memory_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with xfloor_memory_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xfloor_memory_sdk.DefaultApi(api_client)
+    app_id = 'app_id_example' # str | App ID
+    mobile_number = 'mobile_number_example' # str | Mobile number (optional)
+    email_id = 'email_id_example' # str | Email ID (optional)
+
+    try:
+        # Send Sign-In Validation Code (OTP)
+        api_response = api_instance.send_sign_in_validation_code(app_id, mobile_number=mobile_number, email_id=email_id)
+        print("The response of DefaultApi->send_sign_in_validation_code:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->send_sign_in_validation_code: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name
+
+| Type | Description |
+
+Notes
+-------------
+
+| ------------- | ------------- |
+
+-------------
+ **app_id**
+
+| **str**| App ID |
+ **mobile_number**
+
+| **str**| Mobile number |
+
+[optional]
+ **email_id**
+
+| **str**| Email ID |
+
+[optional]
+
+### Return type
+
+[**SendSignInValidationCode200Response**](SendSignInValidationCode200Response.md)
+
+### Authorization
+
+[bearer](../README.md#bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details

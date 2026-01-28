@@ -15,11 +15,15 @@ package ai.xfloor.memory.api;
 
 import ai.xfloor.memory.client.ApiException;
 import ai.xfloor.memory.model.ChangePassword200Response;
+import ai.xfloor.memory.model.ConversationThreads200Response;
 import ai.xfloor.memory.model.EditFloor400Response;
+import java.io.File;
+import ai.xfloor.memory.model.GetConversations200Response;
 import ai.xfloor.memory.model.GetFloorInformation200Response;
 import ai.xfloor.memory.model.GetRecentEvents400Response;
 import ai.xfloor.memory.model.ResetPassword200Response;
 import ai.xfloor.memory.model.ResetPassword400Response;
+import ai.xfloor.memory.model.SendSignInValidationCode200Response;
 import ai.xfloor.memory.model.SendValidationCode200Response;
 import ai.xfloor.memory.model.SendValidationCodeRequest;
 import ai.xfloor.memory.model.SignInWithEmail200Response;
@@ -43,6 +47,36 @@ import java.util.Map;
 public class DefaultApiTest {
 
     private final DefaultApi api = new DefaultApi();
+
+    /**
+     * Create App
+     *
+     * Create a custom app using APIs. A 13 digit app ID gets created which takes title and description the app. An icon of specified size needs to be uploaded.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void apiDeveloperCreateAppPostTest() throws ApiException {
+        String inputInfo = null;
+        File icon = null;
+        Object response = api.apiDeveloperCreateAppPost(inputInfo, icon);
+        // TODO: test validations
+    }
+
+    /**
+     * Modify Floorpod App
+     *
+     * Modify title, details or the app icon
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void apiDeveloperModifyAppPostTest() throws ApiException {
+        String inputInfo = null;
+        File _file = null;
+        Object response = api.apiDeveloperModifyAppPost(inputInfo, _file);
+        // TODO: test validations
+    }
 
     /**
      * Change email ID
@@ -86,6 +120,36 @@ public class DefaultApiTest {
         String activationCode = null;
         String userId = null;
         ChangePassword200Response response = api.changePassword(newPassword, activationCode, userId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get the conversational threads
+     *
+     * ### Conversation Model  - A **Thread** represents a single conversational context. - A **Conversation** is the ordered exchange of messages within a thread. - Threads are scoped per user and per floor.  This API retrieves the list of **conversational threads** associated with a specific **user** within a specific **floor**.  A **thread** represents a persistent conversation context between the user and the system (agent/assistant) inside a floor. Each thread maintains its own history and state, allowing users to resume previous conversations without losing context.  The API returns **only thread metadata**, not the message content itself. This makes it suitable for:  * Displaying a conversation list or sidebar * Allowing users to select and resume past conversations * Managing conversational memory per floor  ---  ## Key Concepts  * **Thread**: A long-lived conversational context tied to a user and a floor * **Floor-scoped memory**: Conversations are isolated per floor; threads from one floor are not visible in another * **User-specific**: Threads are private to the requesting user  ---  ## Request Method  &#x60;GET&#x60;  ---  ## Request Parameters (Query Parameters)  | Parameter Name | Type   | Required | Description                                                                  | | -------------- | ------ | -------- | ---------------------------------------------------------------------------- | | &#x60;user_id&#x60;      | String | **Yes**  | Unique identifier of the user whose conversation threads are being requested | | &#x60;floor_id&#x60;     | String | **Yes**  | Identifier of the floor in which the conversations exist                     |  ---  ## Authorization &amp; Access Rules  * The caller must be authenticated as the given &#x60;user_id&#x60; * A user can retrieve **only their own threads** * Threads are scoped to the provided &#x60;floor_id&#x60; * Threads from other floors or other users are not accessible  ---  ## Response Format  &#x60;application/json&#x60;  ---  ## Response Description  The response contains:  * The &#x60;user_id&#x60; for which threads were fetched * A list of thread metadata objects, sorted by **most recently updated first**  ---  ## Response Structure  ### Top-Level Fields  | Field     | Type   | Description                                                               | | --------- | ------ | ------------------------------------------------------------------------- | | &#x60;user_id&#x60; | String | Identifier of the user                                                    | | &#x60;threads&#x60; | Array  | List of conversation threads belonging to the user in the specified floor |  ---  ### Thread Object (&#x60;threads[]&#x60;)  | Field          | Type                | Description                                       | | -------------- | ------------------- | ------------------------------------------------- | | &#x60;thread_id&#x60;    | String              | Unique identifier of the conversation thread      | | &#x60;title&#x60;        | String              | Human-readable title summarizing the conversation | | &#x60;last_updated&#x60; | String (YYYY-MM-DD) | Date when the thread was last updated             |  ---  ## Sample Success Response  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;59\&quot;,   \&quot;threads\&quot;: [     {       \&quot;thread_id\&quot;: \&quot;55\&quot;,       \&quot;title\&quot;: \&quot;elegant potentially hopelessly ambitious sneak\&quot;,       \&quot;last_updated\&quot;: \&quot;2025-04-26\&quot;     },     {       \&quot;thread_id\&quot;: \&quot;79\&quot;,       \&quot;title\&quot;: \&quot;sans profitable alienated by even overstay miserly practical\&quot;,       \&quot;last_updated\&quot;: \&quot;2025-04-24\&quot;     },     {       \&quot;thread_id\&quot;: \&quot;89\&quot;,       \&quot;title\&quot;: \&quot;although light uh-huh despite instead vol sorrowful\&quot;,       \&quot;last_updated\&quot;: \&quot;2025-02-16\&quot;     }   ] } &#x60;&#x60;&#x60;  ---  ## Typical Use Cases  * Show a **list of past conversations** in a chat UI * Allow users to **resume a previous thread** * Display conversation history grouped by floor * Build agent dashboards with user-specific memory  ---  ## Notes  * This API returns **metadata only**; message history is retrieved using a separate thread-messages API * If no threads exist, the &#x60;threads&#x60; array will be empty * Thread titles may be system-generated or user-editable depending on implementation  ---  ## Common Error Responses (Examples)  ### Missing Parameters  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;user_id and floor_id are required\&quot; } &#x60;&#x60;&#x60;  ### Unauthorised Access  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Unauthorized access to conversation threads\&quot; } &#x60;&#x60;&#x60; 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void conversationThreadsTest() throws ApiException {
+        String userId = null;
+        String floorId = null;
+        ConversationThreads200Response response = api.conversationThreads(userId, floorId);
+        // TODO: test validations
+    }
+
+    /**
+     * Conversations
+     *
+     * This API returns the **full conversation history** for a specific **thread** belonging to a user within a floor.  A **thread** represents a persistent conversation session. Each item in the returned &#x60;conversation&#x60; array contains:  * The **user request payload** (user query + context) * The **assistant response payload** (full LLM completion object) * The **retrieval trace** (metadata of posts fetched/used for the answer, including scores and identifiers)  This endpoint is intended for **developers** building custom conversational UIs and tooling that require:  * Full conversation replay * Debug visibility into the assistant output object (&#x60;choices&#x60;, model info, etc.) * RAG explainability via &#x60;fetch_multiple_posts.results[]&#x60;  ---  ## Request Method  &#x60;GET&#x60;  ---  ## Query Parameters  | Parameter   | Type   | Required | Description                                                                 | | ----------- | ------ | -------- | --------------------------------------------------------------------------- | | &#x60;user_id&#x60;   | String | **Yes**  | Owner of the conversation thread. The thread must belong to this user.      | | &#x60;floor_id&#x60;  | String | **Yes**  | Floor identifier in which the thread exists. Threads are scoped to a floor. | | &#x60;thread_id&#x60; | String | **Yes**  | Thread identifier whose conversations should be returned.                   |  ---  ## Authorization &amp; Access Rules  * The caller must be authenticated as the given &#x60;user_id&#x60; (or have equivalent developer/system permission). * A user can access **only their own threads**. * Cross-user or cross-floor access must be rejected.  ---  ## Response Format  &#x60;application/json&#x60;  ---  ## Response Description  Returns the thread-level conversation payload:  * &#x60;user_id&#x60;: the user who owns the thread * &#x60;thread_id&#x60;: the requested thread * &#x60;conversation&#x60;: ordered list of conversation entries (each entry &#x3D; user object + assistant object)  ---  ## Response Schema  ### Top-Level Fields  | Field          | Type   | Description                  | | -------------- | ------ | ---------------------------- | | &#x60;user_id&#x60;      | String | Owner of the thread          | | &#x60;thread_id&#x60;    | String | Thread identifier            | | &#x60;conversation&#x60; | Array  | List of conversation entries |  ---  ## &#x60;conversation[]&#x60; Entry Structure  Each entry contains two objects: &#x60;user&#x60; and &#x60;assistant&#x60;.  ---  ### &#x60;user&#x60; Object  | Field              | Type   | Description                                                         | | ------------------ | ------ | ------------------------------------------------------------------- | | &#x60;context&#x60;          | Object | Context used when processing the query (floor metadata, mode, etc.) | | &#x60;user_query&#x60;       | String | The user’s query message                                            | | &#x60;user_id&#x60;          | String | User identifier (should match top-level &#x60;user_id&#x60;)                  | | &#x60;user_thread&#x60;      | String | Thread identifier (should match top-level &#x60;thread_id&#x60;)              | | &#x60;recorded_content&#x60; | String | Persisted user content (often same as &#x60;user_query&#x60;)                 |  #### &#x60;user.context&#x60;  | Field            | Type   | Description                                    | | ---------------- | ------ | ---------------------------------------------- | | &#x60;floor_id&#x60;       | String | Floor UID/slug where the conversation occurred | | &#x60;title&#x60;          | String | Floor title at the time of the query           | | &#x60;fid&#x60;            | String | Immutable internal floor ID                    | | &#x60;floor_category&#x60; | String | Floor category identifier                      | | &#x60;floor_mode&#x60;     | String | Floor mode indicator (example: &#x60;\&quot;1\&quot;&#x60;)          |  ---  ### &#x60;assistant&#x60; Object  This contains the **full completion response** plus retrieval details.  | Field                  | Type   | Description                                         | | ---------------------- | ------ | --------------------------------------------------- | | &#x60;id&#x60;                   | String | Completion id (e.g., &#x60;chatcmpl-*&#x60;)                  | | &#x60;object&#x60;               | String | Response type (e.g., &#x60;chat.completion&#x60;)             | | &#x60;created&#x60;              | Number | Timestamp when response was created (epoch seconds) | | &#x60;floor_mode&#x60;           | String | Floor mode applied for generation                   | | &#x60;model&#x60;                | String | Model identifier used                               | | &#x60;choices&#x60;              | Array  | Generated outputs and metadata                      | | &#x60;fetch_multiple_posts&#x60; | Object | Retrieval trace (if retrieval was performed)        | | &#x60;content_type&#x60;         | String | Retrieved content type (e.g., &#x60;post&#x60;)               |  ---  ## &#x60;assistant.choices[]&#x60;  | Field              | Type   | Description                                                                | | ------------------ | ------ | -------------------------------------------------------------------------- | | &#x60;index&#x60;            | Number | Choice index                                                               | | &#x60;message&#x60;          | Object | Assistant message content                                                  | | &#x60;finish_reason&#x60;    | String | Why generation stopped (&#x60;stop&#x60;, &#x60;length&#x60;, etc.)                            | | &#x60;ai_model_details&#x60; | Object | Model runtime parameters (temperature, top_p, max_tokens, penalties, etc.) | | &#x60;prompt_details&#x60;   | Object | Prompt configuration used (system prompt, system_prompt_id, etc.)          |  &gt; **Note:** &#x60;prompt_details.system_prompt&#x60; may be large and is returned as-is for developer inspection.  ---  ## &#x60;assistant.fetch_multiple_posts&#x60;  Describes the retrieval operation performed for the query.  | Field          | Type   | Description                            | | -------------- | ------ | -------------------------------------- | | &#x60;content_type&#x60; | String | Type of retrieved content (&#x60;post&#x60;)     | | &#x60;query&#x60;        | String | Query used for retrieval               | | &#x60;status&#x60;       | String | Retrieval status (&#x60;success&#x60;, &#x60;failed&#x60;) | | &#x60;message&#x60;      | String | Retrieval message                      | | &#x60;results&#x60;      | Array  | List of matched posts and metadata     |  ---  ## &#x60;assistant.fetch_multiple_posts.results[]&#x60;  | Field        | Type   | Description                                                       | | ------------ | ------ | ----------------------------------------------------------------- | | &#x60;from_floor&#x60; | String | Indicates source floor relation (e.g., same floor / linked floor) | | &#x60;content&#x60;    | String | Raw JSON string of the matched post metadata/content              | | &#x60;author&#x60;     | String | Author id of the matched post                                     | | &#x60;block_type&#x60; | Number | Block type of the matched post                                    | | &#x60;pid&#x60;        | String | Post/document id                                                  | | &#x60;bid&#x60;        | String | Block id containing the post                                      | | &#x60;fid&#x60;        | String | Floor internal id where the post belongs                          | | &#x60;score&#x60;      | Number | Similarity score                                                  | | &#x60;match_type&#x60; | String | Match type (&#x60;text&#x60;, etc.)                                         |  ---  ## Sample Success Response  Your provided payload is the canonical example. It includes:  * the user query and floor context * the full assistant completion object * the full retrieval results with post metadata * the response shown covers a few important items.  ---  ## Common Error Responses  ### Missing Parameters  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;user_id, floor_id, and thread_id are required\&quot; } &#x60;&#x60;&#x60;  ### Unauthorized Access  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Unauthorized access to thread\&quot; } &#x60;&#x60;&#x60;  ### Thread Not Found  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Thread not found\&quot; } &#x60;&#x60;&#x60;  ---  ## Developer Notes (Important)  * The &#x60;content&#x60; field inside retrieval results is a **stringified JSON**. Developers may parse it to access fields such as &#x60;post_title&#x60;, &#x60;post_details&#x60;, etc. * &#x60;choices&#x60; may contain multiple outputs depending on backend configuration. * This API returns a “full debug payload” suitable for developers. If you later create a lightweight UI endpoint, it should strip execution details and return only &#x60;user_query&#x60;, &#x60;assistant.content&#x60;, and curated post references.  
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getConversationsTest() throws ApiException {
+        String userId = null;
+        String threadId = null;
+        GetConversations200Response response = api.getConversations(userId, threadId);
         // TODO: test validations
     }
 
@@ -169,6 +233,22 @@ public class DefaultApiTest {
         String mobileNumber = null;
         String appId = null;
         ResetPassword200Response response = api.resetPassword(activationCode, emailId, mobileNumber, appId);
+        // TODO: test validations
+    }
+
+    /**
+     * Send Sign-In Validation Code (OTP)
+     *
+     * This API initiates the **sign-in validation process** by sending a **one-time validation code (OTP)** to the user.  The OTP is delivered to **either the mobile number or the email address** provided in the request. This endpoint is typically called **before completing sign-in**, to verify that the user owns the supplied contact identifier.  The calling application is responsible for:  * Collecting the OTP from the user * Submitting it to the OTP verification API (handled separately)  ---  ## **Use Case**  * User attempts to sign in * User provides **mobile number or email** * System sends a **validation code (OTP)** * User enters OTP to complete sign-in  ---  ## **Request Method**  &#x60;POST&#x60;  ---  ## **Formdata Parameters**  | Parameter Name  | Type   | Required  | Description                                 | | --------------- | ------ | --------- | ------------------------------------------- | | &#x60;mobile_number&#x60; | String | Optional* | Mobile number to which the OTP will be sent | | &#x60;email_id&#x60;      | String | Optional* | Email address to which the OTP will be sent | | &#x60;app_id&#x60;        | String | Optional  | Identifier of the calling application       |  * **Either &#x60;mobile_number&#x60; or &#x60;email_id&#x60; must be provided.** Providing both is allowed; the system may choose one based on configuration.  ---  ## **Request Rules**  * At least **one** of &#x60;mobile_number&#x60; or &#x60;email_id&#x60; is mandatory * If both are missing, the request will be rejected * OTP delivery channel depends on the provided identifier  ---  ## **Response Format**  &#x60;application/json&#x60;  ---  ## **Sample Success Response**  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;message\&quot;: \&quot;Validation code sent successfully\&quot; } &#x60;&#x60;&#x60;  ---  ## **Sample Error Responses**  ### Missing Identifier  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Either mobile_number or email_id must be provided\&quot; } &#x60;&#x60;&#x60;  ### Invalid Identifier  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Invalid mobile number or email address\&quot; } &#x60;&#x60;&#x60;  ---  ## **Notes**  * This API **only sends** the validation code * OTP verification must be performed using the corresponding **verify validation code** API * Rate limiting and retry restrictions may apply to prevent abuse  
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void sendSignInValidationCodeTest() throws ApiException {
+        String appId = null;
+        String mobileNumber = null;
+        String emailId = null;
+        SendSignInValidationCode200Response response = api.sendSignInValidationCode(appId, mobileNumber, emailId);
         // TODO: test validations
     }
 

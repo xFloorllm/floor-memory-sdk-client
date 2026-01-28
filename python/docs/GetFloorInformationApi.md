@@ -93,7 +93,7 @@ This field is typically used by clients to:
 ```json
 "blocks": [
   {
-    "BID": "1765960948723",
+    "block_id": "1765960948723",
     "type": "1",
     "title": "Feeds"
   }
@@ -106,7 +106,7 @@ Each block represents a **content category or service** available inside the flo
 
 | Field | Type | Description |
 | ------- | ------ | ----------------------------------------------------- |
-| `BID` | String | Unique identifier of the block |
+| `block_id` | String | Unique identifier of the block |
 | `type` | String | Block type identifier (e.g., feed, blog, forum, quiz) |
 | `title` | String | Display name of the block |
 
@@ -155,7 +155,7 @@ Success Response
   "is_owner": "0",
   "blocks": [
     {
-      "BID": "1765960948723",
+      "block_id": "1765960948723",
       "type": "1",
       "title": "Feeds"
     }

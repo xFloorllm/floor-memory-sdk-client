@@ -54,8 +54,8 @@
       //expect(instance).to.be.a(XfloorFloorMemorySdkJs.BlockDetails);
     });
 
-    it('should have the property bid (base name: "bid")', function() {
-      // uncomment below and update the code to test the property bid
+    it('should have the property blockId (base name: "block_id")', function() {
+      // uncomment below and update the code to test the property blockId
       //var instance = new XfloorFloorMemorySdkJs.BlockDetails();
       //expect(instance).to.be();
     });

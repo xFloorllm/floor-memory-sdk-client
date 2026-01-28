@@ -42,7 +42,7 @@ class TestFloorInfo(unittest.TestCase):
                 fid = '',
                 blocks = [
                     xfloor_memory_sdk.models.block_details.BlockDetails(
-                        bid = '', 
+                        block_id = '', 
                         type = '', 
                         title = '', )
                     ],

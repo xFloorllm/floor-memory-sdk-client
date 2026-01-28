@@ -47,7 +47,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>ai.xfloor.sdk</groupId>
   <artifactId>floor-memory-sdk-client</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -63,7 +63,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "ai.xfloor.sdk:floor-memory-sdk-client:1.0.4"
+     implementation "ai.xfloor.sdk:floor-memory-sdk-client:1.0.5"
   }
 ```
 
@@ -77,7 +77,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/floor-memory-sdk-client-1.0.4.jar`
+* `target/floor-memory-sdk-client-1.0.5.jar`
 * `target/lib/*.jar`
 
 ### Getting Started
@@ -90,7 +90,6 @@ Please follow the [installation](#installation) instruction and execute the foll
 import ai.xfloor.memory.client.ApiClient;
 import ai.xfloor.memory.client.ApiException;
 import ai.xfloor.memory.client.Configuration;
-import ai.xfloor.memory.client.auth.*;
 import ai.xfloor.memory.model.*;
 import ai.xfloor.memory.api.DefaultApi;
 
@@ -98,19 +97,15 @@ public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
     defaultClient.setBasePath("https://appfloor.in");
-    
-    // Configure HTTP bearer authorization: bearer
-    HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
-    bearer.setBearerToken("BEARER TOKEN");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
-    String newEmailId = "newEmailId_example"; // String | New Email ID
-    String activationCode = "activationCode_example"; // String | Validation code
+    String inputInfo = "inputInfo_example"; // String | 
+    File icon = new File("/path/to/file"); // File | 
     try {
-      Object result = apiInstance.changeEmail(newEmailId, activationCode);
+      Object result = apiInstance.apiDeveloperCreateAppPost(inputInfo, icon);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling DefaultApi#changeEmail");
+      System.err.println("Exception when calling DefaultApi#apiDeveloperCreateAppPost");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -137,6 +132,16 @@ Description
 -------------
 *DefaultApi*
 
+| [**apiDeveloperCreateAppPost**](docs/DefaultApi.md#apiDeveloperCreateAppPost) | **POST** /api/developer/create/app |
+
+Create App
+*DefaultApi*
+
+| [**apiDeveloperModifyAppPost**](docs/DefaultApi.md#apiDeveloperModifyAppPost) | **POST** /api/developer/modify/app |
+
+Modify Floorpod App
+*DefaultApi*
+
 | [**changeEmail**](docs/DefaultApi.md#changeEmail) | **POST** /auth-service/change/email |
 
 Change email ID
@@ -150,6 +155,16 @@ Change Mobile number
 | [**changePassword**](docs/DefaultApi.md#changePassword) | **POST** /auth-service/password/change |
 
 Change Password
+*DefaultApi*
+
+| [**conversationThreads**](docs/DefaultApi.md#conversationThreads) | **GET** /agent/memory/threads |
+
+Get the conversational threads
+*DefaultApi*
+
+| [**getConversations**](docs/DefaultApi.md#getConversations) | **GET** /agent/memory/conversations |
+
+Conversations
 *DefaultApi*
 
 | [**makeFloorPrivate**](docs/DefaultApi.md#makeFloorPrivate) | **POST** /api/memory/make/floor/private |
@@ -175,6 +190,11 @@ Rename floor
 | [**resetPassword**](docs/DefaultApi.md#resetPassword) | **POST** /auth-service/password/reset |
 
 Reset Password
+*DefaultApi*
+
+| [**sendSignInValidationCode**](docs/DefaultApi.md#sendSignInValidationCode) | **POST** /auth-service/send/sign/in/validation/code |
+
+Send Sign-In Validation Code (OTP)
 *DefaultApi*
 
 | [**sendValidationCode**](docs/DefaultApi.md#sendValidationCode) | **POST** /auth-service/send/validation/code |
@@ -231,12 +251,25 @@ Query (Primary API)
 
  - [BlockDetails](docs/BlockDetails.md)
  - [ChangePassword200Response](docs/ChangePassword200Response.md)
+ - [ConversationThreads200Response](docs/ConversationThreads200Response.md)
+ - [ConversationThreads200ResponseThreadsInner](docs/ConversationThreads200ResponseThreadsInner.md)
  - [EditFloor400Response](docs/EditFloor400Response.md)
  - [EditFloor400ResponseError](docs/EditFloor400ResponseError.md)
  - [Event400Response](docs/Event400Response.md)
  - [Event400ResponseError](docs/Event400ResponseError.md)
  - [EventResponse](docs/EventResponse.md)
  - [FloorInfo](docs/FloorInfo.md)
+ - [GetConversations200Response](docs/GetConversations200Response.md)
+ - [GetConversations200ResponseConversationInner](docs/GetConversations200ResponseConversationInner.md)
+ - [GetConversations200ResponseConversationInnerAssistant](docs/GetConversations200ResponseConversationInnerAssistant.md)
+ - [GetConversations200ResponseConversationInnerAssistantChoicesInner](docs/GetConversations200ResponseConversationInnerAssistantChoicesInner.md)
+ - [GetConversations200ResponseConversationInnerAssistantChoicesInnerAiModelDetails](docs/GetConversations200ResponseConversationInnerAssistantChoicesInnerAiModelDetails.md)
+ - [GetConversations200ResponseConversationInnerAssistantChoicesInnerMessage](docs/GetConversations200ResponseConversationInnerAssistantChoicesInnerMessage.md)
+ - [GetConversations200ResponseConversationInnerAssistantChoicesInnerPromptDetails](docs/GetConversations200ResponseConversationInnerAssistantChoicesInnerPromptDetails.md)
+ - [GetConversations200ResponseConversationInnerAssistantFetchMultiplePosts](docs/GetConversations200ResponseConversationInnerAssistantFetchMultiplePosts.md)
+ - [GetConversations200ResponseConversationInnerAssistantFetchMultiplePostsResultsInner](docs/GetConversations200ResponseConversationInnerAssistantFetchMultiplePostsResultsInner.md)
+ - [GetConversations200ResponseConversationInnerUser](docs/GetConversations200ResponseConversationInnerUser.md)
+ - [GetConversations200ResponseConversationInnerUserContext](docs/GetConversations200ResponseConversationInnerUserContext.md)
  - [GetFloorInformation200Response](docs/GetFloorInformation200Response.md)
  - [GetRecentEvents200Response](docs/GetRecentEvents200Response.md)
  - [GetRecentEvents200ResponseItemsInner](docs/GetRecentEvents200ResponseItemsInner.md)
@@ -245,6 +278,7 @@ Query (Primary API)
  - [GetRecentEvents400ResponseError](docs/GetRecentEvents400ResponseError.md)
  - [Media](docs/Media.md)
  - [Model400ErrorCode](docs/Model400ErrorCode.md)
+ - [PostAdd](docs/PostAdd.md)
  - [Query422Response](docs/Query422Response.md)
  - [Query422ResponseError](docs/Query422ResponseError.md)
  - [QueryRequest](docs/QueryRequest.md)
@@ -253,6 +287,7 @@ Query (Primary API)
  - [QueryResponseItemsInner](docs/QueryResponseItemsInner.md)
  - [ResetPassword200Response](docs/ResetPassword200Response.md)
  - [ResetPassword400Response](docs/ResetPassword400Response.md)
+ - [SendSignInValidationCode200Response](docs/SendSignInValidationCode200Response.md)
  - [SendValidationCode200Response](docs/SendValidationCode200Response.md)
  - [SendValidationCodeRequest](docs/SendValidationCodeRequest.md)
  - [SignInWithEmail200Response](docs/SignInWithEmail200Response.md)
@@ -261,6 +296,7 @@ Query (Primary API)
  - [SignInWithEmail200ResponseProfileAvatar](docs/SignInWithEmail200ResponseProfileAvatar.md)
  - [SignUp200Response](docs/SignUp200Response.md)
  - [SignUpResponse](docs/SignUpResponse.md)
+ - [Threads](docs/Threads.md)
  - [UserDetails](docs/UserDetails.md)
  - [ValidateCode400Response](docs/ValidateCode400Response.md)
  - [ValidateCode400ResponseError](docs/ValidateCode400ResponseError.md)

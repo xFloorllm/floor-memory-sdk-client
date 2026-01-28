@@ -29,10 +29,10 @@ class BlockDetails(BaseModel):
     """
     Block Details
     """ # noqa: E501
-    bid: StrictStr = Field(description="Block ID")
+    block_id: StrictStr = Field(description="Block ID")
     type: StrictStr = Field(description="Block Type")
     title: StrictStr = Field(description="Title of the block")
-    __properties: ClassVar[List[str]] = ["bid", "type", "title"]
+    __properties: ClassVar[List[str]] = ["block_id", "type", "title"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +85,7 @@ class BlockDetails(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "bid": obj.get("bid"),
+            "block_id": obj.get("block_id"),
             "type": obj.get("type"),
             "title": obj.get("title")
         })

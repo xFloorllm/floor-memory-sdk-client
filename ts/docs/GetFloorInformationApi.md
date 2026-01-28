@@ -81,7 +81,7 @@ This field is typically used by clients to:
 
 ```json \"blocks\":
 
-[ { \"BID\": \"1765960948723\", \"type\": \"1\", \"title\": \"Feeds\" } ]
+[ { \"block_id\": \"1765960948723\", \"type\": \"1\", \"title\": \"Feeds\" } ]
 
 ``` Each block represents a **content category or service** available inside the floor.
 
@@ -89,7 +89,7 @@ This field is typically used by clients to:
 
 | Field | Type | Description |
 | ------- | ------ | ----------------------------------------------------- |
-| `BID` | String | Unique identifier of the block |
+| `block_id` | String | Unique identifier of the block |
 | `type` | String | Block type identifier (e.g., feed, blog, forum, quiz) |
 | `title` | String | Display name of the block |
 
@@ -136,7 +136,7 @@ Success Response
 
 ```json { \"is_owner\":
 
-\"0\", \"blocks\": [ { \"BID\": \"1765960948723\", \"type\": \"1\", \"title\": \"Feeds\" } ], \"floor_uid\": \"1765960956967\", \"floor_id\": \"raghupodfloor1\", \"details\": \"raghu\", \"avatar\": { \"id\": \"1767009204367\", \"url\": \"https://d2e5822u5ecuq8.cloudfront.net/room/1765960956967/logo/1765960956967.jpg\" }, \"title\": \"raghu\", \"floor_type\": \"POD\", \"app_id\": \"1765949734005\" }
+\"0\", \"blocks\": [ { \"block_id\": \"1765960948723\", \"type\": \"1\", \"title\": \"Feeds\" } ], \"floor_uid\": \"1765960956967\", \"floor_id\": \"raghupodfloor1\", \"details\": \"raghu\", \"avatar\": { \"id\": \"1767009204367\", \"url\": \"https://d2e5822u5ecuq8.cloudfront.net/room/1765960956967/logo/1765960956967.jpg\" }, \"title\": \"raghu\", \"floor_type\": \"POD\", \"app_id\": \"1765949734005\" }
 
 ```
 

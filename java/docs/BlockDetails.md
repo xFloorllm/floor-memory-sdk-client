@@ -8,7 +8,7 @@ Block Details
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**bid** | **String** | Block ID |
+|**blockId** | **String** | Block ID |
 |
 |**type** | **String** | Block Type |
 |

@@ -17,7 +17,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.4"
+__version__ = "1.0.5"
 
 # Define package exports
 __all__ = [
@@ -38,12 +38,25 @@ __all__ = [
     "ApiException",
     "BlockDetails",
     "ChangePassword200Response",
+    "ConversationThreads200Response",
+    "ConversationThreads200ResponseThreadsInner",
     "EditFloor400Response",
     "EditFloor400ResponseError",
     "Event400Response",
     "Event400ResponseError",
     "EventResponse",
     "FloorInfo",
+    "GetConversations200Response",
+    "GetConversations200ResponseConversationInner",
+    "GetConversations200ResponseConversationInnerAssistant",
+    "GetConversations200ResponseConversationInnerAssistantChoicesInner",
+    "GetConversations200ResponseConversationInnerAssistantChoicesInnerAiModelDetails",
+    "GetConversations200ResponseConversationInnerAssistantChoicesInnerMessage",
+    "GetConversations200ResponseConversationInnerAssistantChoicesInnerPromptDetails",
+    "GetConversations200ResponseConversationInnerAssistantFetchMultiplePosts",
+    "GetConversations200ResponseConversationInnerAssistantFetchMultiplePostsResultsInner",
+    "GetConversations200ResponseConversationInnerUser",
+    "GetConversations200ResponseConversationInnerUserContext",
     "GetFloorInformation200Response",
     "GetRecentEvents200Response",
     "GetRecentEvents200ResponseItemsInner",
@@ -52,6 +65,7 @@ __all__ = [
     "GetRecentEvents400ResponseError",
     "Media",
     "Model400ErrorCode",
+    "PostAdd",
     "Query422Response",
     "Query422ResponseError",
     "QueryRequest",
@@ -60,6 +74,7 @@ __all__ = [
     "QueryResponseItemsInner",
     "ResetPassword200Response",
     "ResetPassword400Response",
+    "SendSignInValidationCode200Response",
     "SendValidationCode200Response",
     "SendValidationCodeRequest",
     "SignInWithEmail200Response",
@@ -68,6 +83,7 @@ __all__ = [
     "SignInWithEmail200ResponseProfileAvatar",
     "SignUp200Response",
     "SignUpResponse",
+    "Threads",
     "UserDetails",
     "ValidateCode400Response",
     "ValidateCode400ResponseError",
@@ -97,12 +113,25 @@ from xfloor_memory_sdk.exceptions import ApiException as ApiException
 # import models into sdk package
 from xfloor_memory_sdk.models.block_details import BlockDetails as BlockDetails
 from xfloor_memory_sdk.models.change_password200_response import ChangePassword200Response as ChangePassword200Response
+from xfloor_memory_sdk.models.conversation_threads200_response import ConversationThreads200Response as ConversationThreads200Response
+from xfloor_memory_sdk.models.conversation_threads200_response_threads_inner import ConversationThreads200ResponseThreadsInner as ConversationThreads200ResponseThreadsInner
 from xfloor_memory_sdk.models.edit_floor400_response import EditFloor400Response as EditFloor400Response
 from xfloor_memory_sdk.models.edit_floor400_response_error import EditFloor400ResponseError as EditFloor400ResponseError
 from xfloor_memory_sdk.models.event400_response import Event400Response as Event400Response
 from xfloor_memory_sdk.models.event400_response_error import Event400ResponseError as Event400ResponseError
 from xfloor_memory_sdk.models.event_response import EventResponse as EventResponse
 from xfloor_memory_sdk.models.floor_info import FloorInfo as FloorInfo
+from xfloor_memory_sdk.models.get_conversations200_response import GetConversations200Response as GetConversations200Response
+from xfloor_memory_sdk.models.get_conversations200_response_conversation_inner import GetConversations200ResponseConversationInner as GetConversations200ResponseConversationInner
+from xfloor_memory_sdk.models.get_conversations200_response_conversation_inner_assistant import GetConversations200ResponseConversationInnerAssistant as GetConversations200ResponseConversationInnerAssistant
+from xfloor_memory_sdk.models.get_conversations200_response_conversation_inner_assistant_choices_inner import GetConversations200ResponseConversationInnerAssistantChoicesInner as GetConversations200ResponseConversationInnerAssistantChoicesInner
+from xfloor_memory_sdk.models.get_conversations200_response_conversation_inner_assistant_choices_inner_ai_model_details import GetConversations200ResponseConversationInnerAssistantChoicesInnerAiModelDetails as GetConversations200ResponseConversationInnerAssistantChoicesInnerAiModelDetails
+from xfloor_memory_sdk.models.get_conversations200_response_conversation_inner_assistant_choices_inner_message import GetConversations200ResponseConversationInnerAssistantChoicesInnerMessage as GetConversations200ResponseConversationInnerAssistantChoicesInnerMessage
+from xfloor_memory_sdk.models.get_conversations200_response_conversation_inner_assistant_choices_inner_prompt_details import GetConversations200ResponseConversationInnerAssistantChoicesInnerPromptDetails as GetConversations200ResponseConversationInnerAssistantChoicesInnerPromptDetails
+from xfloor_memory_sdk.models.get_conversations200_response_conversation_inner_assistant_fetch_multiple_posts import GetConversations200ResponseConversationInnerAssistantFetchMultiplePosts as GetConversations200ResponseConversationInnerAssistantFetchMultiplePosts
+from xfloor_memory_sdk.models.get_conversations200_response_conversation_inner_assistant_fetch_multiple_posts_results_inner import GetConversations200ResponseConversationInnerAssistantFetchMultiplePostsResultsInner as GetConversations200ResponseConversationInnerAssistantFetchMultiplePostsResultsInner
+from xfloor_memory_sdk.models.get_conversations200_response_conversation_inner_user import GetConversations200ResponseConversationInnerUser as GetConversations200ResponseConversationInnerUser
+from xfloor_memory_sdk.models.get_conversations200_response_conversation_inner_user_context import GetConversations200ResponseConversationInnerUserContext as GetConversations200ResponseConversationInnerUserContext
 from xfloor_memory_sdk.models.get_floor_information200_response import GetFloorInformation200Response as GetFloorInformation200Response
 from xfloor_memory_sdk.models.get_recent_events200_response import GetRecentEvents200Response as GetRecentEvents200Response
 from xfloor_memory_sdk.models.get_recent_events200_response_items_inner import GetRecentEvents200ResponseItemsInner as GetRecentEvents200ResponseItemsInner
@@ -111,6 +140,7 @@ from xfloor_memory_sdk.models.get_recent_events400_response import GetRecentEven
 from xfloor_memory_sdk.models.get_recent_events400_response_error import GetRecentEvents400ResponseError as GetRecentEvents400ResponseError
 from xfloor_memory_sdk.models.media import Media as Media
 from xfloor_memory_sdk.models.model400_error_code import Model400ErrorCode as Model400ErrorCode
+from xfloor_memory_sdk.models.post_add import PostAdd as PostAdd
 from xfloor_memory_sdk.models.query422_response import Query422Response as Query422Response
 from xfloor_memory_sdk.models.query422_response_error import Query422ResponseError as Query422ResponseError
 from xfloor_memory_sdk.models.query_request import QueryRequest as QueryRequest
@@ -119,6 +149,7 @@ from xfloor_memory_sdk.models.query_response import QueryResponse as QueryRespon
 from xfloor_memory_sdk.models.query_response_items_inner import QueryResponseItemsInner as QueryResponseItemsInner
 from xfloor_memory_sdk.models.reset_password200_response import ResetPassword200Response as ResetPassword200Response
 from xfloor_memory_sdk.models.reset_password400_response import ResetPassword400Response as ResetPassword400Response
+from xfloor_memory_sdk.models.send_sign_in_validation_code200_response import SendSignInValidationCode200Response as SendSignInValidationCode200Response
 from xfloor_memory_sdk.models.send_validation_code200_response import SendValidationCode200Response as SendValidationCode200Response
 from xfloor_memory_sdk.models.send_validation_code_request import SendValidationCodeRequest as SendValidationCodeRequest
 from xfloor_memory_sdk.models.sign_in_with_email200_response import SignInWithEmail200Response as SignInWithEmail200Response
@@ -127,6 +158,7 @@ from xfloor_memory_sdk.models.sign_in_with_email200_response_profile import Sign
 from xfloor_memory_sdk.models.sign_in_with_email200_response_profile_avatar import SignInWithEmail200ResponseProfileAvatar as SignInWithEmail200ResponseProfileAvatar
 from xfloor_memory_sdk.models.sign_up200_response import SignUp200Response as SignUp200Response
 from xfloor_memory_sdk.models.sign_up_response import SignUpResponse as SignUpResponse
+from xfloor_memory_sdk.models.threads import Threads as Threads
 from xfloor_memory_sdk.models.user_details import UserDetails as UserDetails
 from xfloor_memory_sdk.models.validate_code400_response import ValidateCode400Response as ValidateCode400Response
 from xfloor_memory_sdk.models.validate_code400_response_error import ValidateCode400ResponseError as ValidateCode400ResponseError

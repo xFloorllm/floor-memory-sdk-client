@@ -48,6 +48,26 @@
   }
 
   describe('DefaultApi', function() {
+    describe('apiDeveloperCreateAppPost', function() {
+      it('should call apiDeveloperCreateAppPost successfully', function(done) {
+        //uncomment below and update the code to test apiDeveloperCreateAppPost
+        //instance.apiDeveloperCreateAppPost(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('apiDeveloperModifyAppPost', function() {
+      it('should call apiDeveloperModifyAppPost successfully', function(done) {
+        //uncomment below and update the code to test apiDeveloperModifyAppPost
+        //instance.apiDeveloperModifyAppPost(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe('changeEmail', function() {
       it('should call changeEmail successfully', function(done) {
         //uncomment below and update the code to test changeEmail
@@ -72,6 +92,26 @@
       it('should call changePassword successfully', function(done) {
         //uncomment below and update the code to test changePassword
         //instance.changePassword(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('conversationThreads', function() {
+      it('should call conversationThreads successfully', function(done) {
+        //uncomment below and update the code to test conversationThreads
+        //instance.conversationThreads(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('getConversations', function() {
+      it('should call getConversations successfully', function(done) {
+        //uncomment below and update the code to test getConversations
+        //instance.getConversations(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
@@ -122,6 +162,16 @@
       it('should call resetPassword successfully', function(done) {
         //uncomment below and update the code to test resetPassword
         //instance.resetPassword(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('sendSignInValidationCode', function() {
+      it('should call sendSignInValidationCode successfully', function(done) {
+        //uncomment below and update the code to test sendSignInValidationCode
+        //instance.sendSignInValidationCode(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

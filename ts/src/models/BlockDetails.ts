@@ -26,7 +26,7 @@ export interface BlockDetails {
      * @type {string}
      * @memberof BlockDetails
      */
-    bid: string;
+    blockId: string;
     /**
      * Block Type
      * @type {string}
@@ -45,7 +45,7 @@ export interface BlockDetails {
  * Check if a given object implements the BlockDetails interface.
  */
 export function instanceOfBlockDetails(value: object): value is BlockDetails {
-    if (!('bid' in value) || value['bid'] === undefined) return false;
+    if (!('blockId' in value) || value['blockId'] === undefined) return false;
     if (!('type' in value) || value['type'] === undefined) return false;
     if (!('title' in value) || value['title'] === undefined) return false;
     return true;
@@ -61,7 +61,7 @@ export function BlockDetailsFromJSONTyped(json: any, ignoreDiscriminator: boolea
     }
     return {
         
-        'bid': json['bid'],
+        'blockId': json['block_id'],
         'type': json['type'],
         'title': json['title'],
     };
@@ -78,7 +78,7 @@ export function BlockDetailsToJSONTyped(value?: BlockDetails | null, ignoreDiscr
 
     return {
         
-        'bid': value['bid'],
+        'block_id': value['blockId'],
         'type': value['type'],
         'title': value['title'],
     };

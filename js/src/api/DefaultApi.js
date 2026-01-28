@@ -16,11 +16,14 @@
 
 import ApiClient from "../ApiClient";
 import ChangePassword200Response from '../model/ChangePassword200Response';
+import ConversationThreads200Response from '../model/ConversationThreads200Response';
 import EditFloor400Response from '../model/EditFloor400Response';
+import GetConversations200Response from '../model/GetConversations200Response';
 import GetFloorInformation200Response from '../model/GetFloorInformation200Response';
 import GetRecentEvents400Response from '../model/GetRecentEvents400Response';
 import ResetPassword200Response from '../model/ResetPassword200Response';
 import ResetPassword400Response from '../model/ResetPassword400Response';
+import SendSignInValidationCode200Response from '../model/SendSignInValidationCode200Response';
 import SendValidationCode200Response from '../model/SendValidationCode200Response';
 import SendValidationCodeRequest from '../model/SendValidationCodeRequest';
 import SignInWithEmail200Response from '../model/SignInWithEmail200Response';
@@ -33,7 +36,7 @@ import ValidateCodeRequest from '../model/ValidateCodeRequest';
 /**
 * Default service.
 * @module api/DefaultApi
-* @version 1.0.4
+* @version 1.0.5
 */
 export default class DefaultApi {
 
@@ -48,6 +51,100 @@ export default class DefaultApi {
         this.apiClient = apiClient || ApiClient.instance;
     }
 
+
+    /**
+     * Callback function to receive the result of the apiDeveloperCreateAppPost operation.
+     * @callback module:api/DefaultApi~apiDeveloperCreateAppPostCallback
+     * @param {String} error Error message, if any.
+     * @param {Object} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Create App
+     * Create a custom app using APIs. A 13 digit app ID gets created which takes title and description the app. An icon of specified size needs to be uploaded.
+     * @param {String} inputInfo 
+     * @param {Object} opts Optional parameters
+     * @param {File} [icon] 
+     * @param {module:api/DefaultApi~apiDeveloperCreateAppPostCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Object}
+     */
+    apiDeveloperCreateAppPost(inputInfo, opts, callback) {
+      opts = opts || {};
+      let postBody = null;
+      // verify the required parameter 'inputInfo' is set
+      if (inputInfo === undefined || inputInfo === null) {
+        throw new Error("Missing the required parameter 'inputInfo' when calling apiDeveloperCreateAppPost");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+        'input_info': inputInfo,
+        'icon': opts['icon']
+      };
+
+      let authNames = [];
+      let contentTypes = ['multipart/form-data'];
+      let accepts = ['application/json'];
+      let returnType = Object;
+      return this.apiClient.callApi(
+        '/api/developer/create/app', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the apiDeveloperModifyAppPost operation.
+     * @callback module:api/DefaultApi~apiDeveloperModifyAppPostCallback
+     * @param {String} error Error message, if any.
+     * @param {Object} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Modify Floorpod App
+     * Modify title, details or the app icon
+     * @param {String} inputInfo User ID, App ID, Title, Details. User ID and App ID are required parameters. Title/details are optional.
+     * @param {Object} opts Optional parameters
+     * @param {File} [file] Upload the new PNG icon file.
+     * @param {module:api/DefaultApi~apiDeveloperModifyAppPostCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Object}
+     */
+    apiDeveloperModifyAppPost(inputInfo, opts, callback) {
+      opts = opts || {};
+      let postBody = null;
+      // verify the required parameter 'inputInfo' is set
+      if (inputInfo === undefined || inputInfo === null) {
+        throw new Error("Missing the required parameter 'inputInfo' when calling apiDeveloperModifyAppPost");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+        'input_info': inputInfo,
+        'file': opts['file']
+      };
+
+      let authNames = [];
+      let contentTypes = ['multipart/form-data'];
+      let accepts = ['application/json'];
+      let returnType = Object;
+      return this.apiClient.callApi(
+        '/api/developer/modify/app', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
 
     /**
      * Callback function to receive the result of the changeEmail operation.
@@ -188,6 +285,98 @@ export default class DefaultApi {
       let returnType = ChangePassword200Response;
       return this.apiClient.callApi(
         '/auth-service/password/change', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the conversationThreads operation.
+     * @callback module:api/DefaultApi~conversationThreadsCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/ConversationThreads200Response} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get the conversational threads
+     * ### Conversation Model  - A **Thread** represents a single conversational context. - A **Conversation** is the ordered exchange of messages within a thread. - Threads are scoped per user and per floor.  This API retrieves the list of **conversational threads** associated with a specific **user** within a specific **floor**.  A **thread** represents a persistent conversation context between the user and the system (agent/assistant) inside a floor. Each thread maintains its own history and state, allowing users to resume previous conversations without losing context.  The API returns **only thread metadata**, not the message content itself. This makes it suitable for:  * Displaying a conversation list or sidebar * Allowing users to select and resume past conversations * Managing conversational memory per floor  ---  ## Key Concepts  * **Thread**: A long-lived conversational context tied to a user and a floor * **Floor-scoped memory**: Conversations are isolated per floor; threads from one floor are not visible in another * **User-specific**: Threads are private to the requesting user  ---  ## Request Method  `GET`  ---  ## Request Parameters (Query Parameters)  | Parameter Name | Type   | Required | Description                                                                  | | -------------- | ------ | -------- | ---------------------------------------------------------------------------- | | `user_id`      | String | **Yes**  | Unique identifier of the user whose conversation threads are being requested | | `floor_id`     | String | **Yes**  | Identifier of the floor in which the conversations exist                     |  ---  ## Authorization & Access Rules  * The caller must be authenticated as the given `user_id` * A user can retrieve **only their own threads** * Threads are scoped to the provided `floor_id` * Threads from other floors or other users are not accessible  ---  ## Response Format  `application/json`  ---  ## Response Description  The response contains:  * The `user_id` for which threads were fetched * A list of thread metadata objects, sorted by **most recently updated first**  ---  ## Response Structure  ### Top-Level Fields  | Field     | Type   | Description                                                               | | --------- | ------ | ------------------------------------------------------------------------- | | `user_id` | String | Identifier of the user                                                    | | `threads` | Array  | List of conversation threads belonging to the user in the specified floor |  ---  ### Thread Object (`threads[]`)  | Field          | Type                | Description                                       | | -------------- | ------------------- | ------------------------------------------------- | | `thread_id`    | String              | Unique identifier of the conversation thread      | | `title`        | String              | Human-readable title summarizing the conversation | | `last_updated` | String (YYYY-MM-DD) | Date when the thread was last updated             |  ---  ## Sample Success Response  ```json {   \"user_id\": \"59\",   \"threads\": [     {       \"thread_id\": \"55\",       \"title\": \"elegant potentially hopelessly ambitious sneak\",       \"last_updated\": \"2025-04-26\"     },     {       \"thread_id\": \"79\",       \"title\": \"sans profitable alienated by even overstay miserly practical\",       \"last_updated\": \"2025-04-24\"     },     {       \"thread_id\": \"89\",       \"title\": \"although light uh-huh despite instead vol sorrowful\",       \"last_updated\": \"2025-02-16\"     }   ] } ```  ---  ## Typical Use Cases  * Show a **list of past conversations** in a chat UI * Allow users to **resume a previous thread** * Display conversation history grouped by floor * Build agent dashboards with user-specific memory  ---  ## Notes  * This API returns **metadata only**; message history is retrieved using a separate thread-messages API * If no threads exist, the `threads` array will be empty * Thread titles may be system-generated or user-editable depending on implementation  ---  ## Common Error Responses (Examples)  ### Missing Parameters  ```json {   \"status\": \"ERROR\",   \"message\": \"user_id and floor_id are required\" } ```  ### Unauthorised Access  ```json {   \"status\": \"ERROR\",   \"message\": \"Unauthorized access to conversation threads\" } ``` 
+     * @param {String} userId User ID
+     * @param {String} floorId Floor ID
+     * @param {module:api/DefaultApi~conversationThreadsCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/ConversationThreads200Response}
+     */
+    conversationThreads(userId, floorId, callback) {
+      let postBody = null;
+      // verify the required parameter 'userId' is set
+      if (userId === undefined || userId === null) {
+        throw new Error("Missing the required parameter 'userId' when calling conversationThreads");
+      }
+      // verify the required parameter 'floorId' is set
+      if (floorId === undefined || floorId === null) {
+        throw new Error("Missing the required parameter 'floorId' when calling conversationThreads");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+        'user_id': userId,
+        'floor_id': floorId
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearer'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = ConversationThreads200Response;
+      return this.apiClient.callApi(
+        '/agent/memory/threads', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getConversations operation.
+     * @callback module:api/DefaultApi~getConversationsCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/GetConversations200Response} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Conversations
+     * This API returns the **full conversation history** for a specific **thread** belonging to a user within a floor.  A **thread** represents a persistent conversation session. Each item in the returned `conversation` array contains:  * The **user request payload** (user query + context) * The **assistant response payload** (full LLM completion object) * The **retrieval trace** (metadata of posts fetched/used for the answer, including scores and identifiers)  This endpoint is intended for **developers** building custom conversational UIs and tooling that require:  * Full conversation replay * Debug visibility into the assistant output object (`choices`, model info, etc.) * RAG explainability via `fetch_multiple_posts.results[]`  ---  ## Request Method  `GET`  ---  ## Query Parameters  | Parameter   | Type   | Required | Description                                                                 | | ----------- | ------ | -------- | --------------------------------------------------------------------------- | | `user_id`   | String | **Yes**  | Owner of the conversation thread. The thread must belong to this user.      | | `floor_id`  | String | **Yes**  | Floor identifier in which the thread exists. Threads are scoped to a floor. | | `thread_id` | String | **Yes**  | Thread identifier whose conversations should be returned.                   |  ---  ## Authorization & Access Rules  * The caller must be authenticated as the given `user_id` (or have equivalent developer/system permission). * A user can access **only their own threads**. * Cross-user or cross-floor access must be rejected.  ---  ## Response Format  `application/json`  ---  ## Response Description  Returns the thread-level conversation payload:  * `user_id`: the user who owns the thread * `thread_id`: the requested thread * `conversation`: ordered list of conversation entries (each entry = user object + assistant object)  ---  ## Response Schema  ### Top-Level Fields  | Field          | Type   | Description                  | | -------------- | ------ | ---------------------------- | | `user_id`      | String | Owner of the thread          | | `thread_id`    | String | Thread identifier            | | `conversation` | Array  | List of conversation entries |  ---  ## `conversation[]` Entry Structure  Each entry contains two objects: `user` and `assistant`.  ---  ### `user` Object  | Field              | Type   | Description                                                         | | ------------------ | ------ | ------------------------------------------------------------------- | | `context`          | Object | Context used when processing the query (floor metadata, mode, etc.) | | `user_query`       | String | The user’s query message                                            | | `user_id`          | String | User identifier (should match top-level `user_id`)                  | | `user_thread`      | String | Thread identifier (should match top-level `thread_id`)              | | `recorded_content` | String | Persisted user content (often same as `user_query`)                 |  #### `user.context`  | Field            | Type   | Description                                    | | ---------------- | ------ | ---------------------------------------------- | | `floor_id`       | String | Floor UID/slug where the conversation occurred | | `title`          | String | Floor title at the time of the query           | | `fid`            | String | Immutable internal floor ID                    | | `floor_category` | String | Floor category identifier                      | | `floor_mode`     | String | Floor mode indicator (example: `\"1\"`)          |  ---  ### `assistant` Object  This contains the **full completion response** plus retrieval details.  | Field                  | Type   | Description                                         | | ---------------------- | ------ | --------------------------------------------------- | | `id`                   | String | Completion id (e.g., `chatcmpl-*`)                  | | `object`               | String | Response type (e.g., `chat.completion`)             | | `created`              | Number | Timestamp when response was created (epoch seconds) | | `floor_mode`           | String | Floor mode applied for generation                   | | `model`                | String | Model identifier used                               | | `choices`              | Array  | Generated outputs and metadata                      | | `fetch_multiple_posts` | Object | Retrieval trace (if retrieval was performed)        | | `content_type`         | String | Retrieved content type (e.g., `post`)               |  ---  ## `assistant.choices[]`  | Field              | Type   | Description                                                                | | ------------------ | ------ | -------------------------------------------------------------------------- | | `index`            | Number | Choice index                                                               | | `message`          | Object | Assistant message content                                                  | | `finish_reason`    | String | Why generation stopped (`stop`, `length`, etc.)                            | | `ai_model_details` | Object | Model runtime parameters (temperature, top_p, max_tokens, penalties, etc.) | | `prompt_details`   | Object | Prompt configuration used (system prompt, system_prompt_id, etc.)          |  > **Note:** `prompt_details.system_prompt` may be large and is returned as-is for developer inspection.  ---  ## `assistant.fetch_multiple_posts`  Describes the retrieval operation performed for the query.  | Field          | Type   | Description                            | | -------------- | ------ | -------------------------------------- | | `content_type` | String | Type of retrieved content (`post`)     | | `query`        | String | Query used for retrieval               | | `status`       | String | Retrieval status (`success`, `failed`) | | `message`      | String | Retrieval message                      | | `results`      | Array  | List of matched posts and metadata     |  ---  ## `assistant.fetch_multiple_posts.results[]`  | Field        | Type   | Description                                                       | | ------------ | ------ | ----------------------------------------------------------------- | | `from_floor` | String | Indicates source floor relation (e.g., same floor / linked floor) | | `content`    | String | Raw JSON string of the matched post metadata/content              | | `author`     | String | Author id of the matched post                                     | | `block_type` | Number | Block type of the matched post                                    | | `pid`        | String | Post/document id                                                  | | `bid`        | String | Block id containing the post                                      | | `fid`        | String | Floor internal id where the post belongs                          | | `score`      | Number | Similarity score                                                  | | `match_type` | String | Match type (`text`, etc.)                                         |  ---  ## Sample Success Response  Your provided payload is the canonical example. It includes:  * the user query and floor context * the full assistant completion object * the full retrieval results with post metadata * the response shown covers a few important items.  ---  ## Common Error Responses  ### Missing Parameters  ```json {   \"status\": \"ERROR\",   \"message\": \"user_id, floor_id, and thread_id are required\" } ```  ### Unauthorized Access  ```json {   \"status\": \"ERROR\",   \"message\": \"Unauthorized access to thread\" } ```  ### Thread Not Found  ```json {   \"status\": \"ERROR\",   \"message\": \"Thread not found\" } ```  ---  ## Developer Notes (Important)  * The `content` field inside retrieval results is a **stringified JSON**. Developers may parse it to access fields such as `post_title`, `post_details`, etc. * `choices` may contain multiple outputs depending on backend configuration. * This API returns a “full debug payload” suitable for developers. If you later create a lightweight UI endpoint, it should strip execution details and return only `user_query`, `assistant.content`, and curated post references.  
+     * @param {Object} opts Optional parameters
+     * @param {String} [userId] 
+     * @param {String} [threadId] 
+     * @param {module:api/DefaultApi~getConversationsCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/GetConversations200Response}
+     */
+    getConversations(opts, callback) {
+      opts = opts || {};
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+        'user_id': opts['userId'],
+        'thread_id': opts['threadId']
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearer'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = GetConversations200Response;
+      return this.apiClient.callApi(
+        '/agent/memory/conversations', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
@@ -423,6 +612,55 @@ export default class DefaultApi {
       let returnType = ResetPassword200Response;
       return this.apiClient.callApi(
         '/auth-service/password/reset', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the sendSignInValidationCode operation.
+     * @callback module:api/DefaultApi~sendSignInValidationCodeCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/SendSignInValidationCode200Response} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Send Sign-In Validation Code (OTP)
+     * This API initiates the **sign-in validation process** by sending a **one-time validation code (OTP)** to the user.  The OTP is delivered to **either the mobile number or the email address** provided in the request. This endpoint is typically called **before completing sign-in**, to verify that the user owns the supplied contact identifier.  The calling application is responsible for:  * Collecting the OTP from the user * Submitting it to the OTP verification API (handled separately)  ---  ## **Use Case**  * User attempts to sign in * User provides **mobile number or email** * System sends a **validation code (OTP)** * User enters OTP to complete sign-in  ---  ## **Request Method**  `POST`  ---  ## **Formdata Parameters**  | Parameter Name  | Type   | Required  | Description                                 | | --------------- | ------ | --------- | ------------------------------------------- | | `mobile_number` | String | Optional* | Mobile number to which the OTP will be sent | | `email_id`      | String | Optional* | Email address to which the OTP will be sent | | `app_id`        | String | Optional  | Identifier of the calling application       |  * **Either `mobile_number` or `email_id` must be provided.** Providing both is allowed; the system may choose one based on configuration.  ---  ## **Request Rules**  * At least **one** of `mobile_number` or `email_id` is mandatory * If both are missing, the request will be rejected * OTP delivery channel depends on the provided identifier  ---  ## **Response Format**  `application/json`  ---  ## **Sample Success Response**  ```json {   \"status\": \"SUCCESS\",   \"message\": \"Validation code sent successfully\" } ```  ---  ## **Sample Error Responses**  ### Missing Identifier  ```json {   \"status\": \"ERROR\",   \"message\": \"Either mobile_number or email_id must be provided\" } ```  ### Invalid Identifier  ```json {   \"status\": \"ERROR\",   \"message\": \"Invalid mobile number or email address\" } ```  ---  ## **Notes**  * This API **only sends** the validation code * OTP verification must be performed using the corresponding **verify validation code** API * Rate limiting and retry restrictions may apply to prevent abuse  
+     * @param {String} appId App ID
+     * @param {Object} opts Optional parameters
+     * @param {String} [mobileNumber] Mobile number
+     * @param {String} [emailId] Email ID
+     * @param {module:api/DefaultApi~sendSignInValidationCodeCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/SendSignInValidationCode200Response}
+     */
+    sendSignInValidationCode(appId, opts, callback) {
+      opts = opts || {};
+      let postBody = null;
+      // verify the required parameter 'appId' is set
+      if (appId === undefined || appId === null) {
+        throw new Error("Missing the required parameter 'appId' when calling sendSignInValidationCode");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+        'mobile_number': opts['mobileNumber'],
+        'email_id': opts['emailId'],
+        'app_id': appId
+      };
+
+      let authNames = ['bearer'];
+      let contentTypes = ['multipart/form-data'];
+      let accepts = ['application/json'];
+      let returnType = SendSignInValidationCode200Response;
+      return this.apiClient.callApi(
+        '/auth-service/send/sign/in/validation/code', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

@@ -17,12 +17,25 @@
 import ApiClient from './ApiClient';
 import BlockDetails from './model/BlockDetails';
 import ChangePassword200Response from './model/ChangePassword200Response';
+import ConversationThreads200Response from './model/ConversationThreads200Response';
+import ConversationThreads200ResponseThreadsInner from './model/ConversationThreads200ResponseThreadsInner';
 import EditFloor400Response from './model/EditFloor400Response';
 import EditFloor400ResponseError from './model/EditFloor400ResponseError';
 import Event400Response from './model/Event400Response';
 import Event400ResponseError from './model/Event400ResponseError';
 import EventResponse from './model/EventResponse';
 import FloorInfo from './model/FloorInfo';
+import GetConversations200Response from './model/GetConversations200Response';
+import GetConversations200ResponseConversationInner from './model/GetConversations200ResponseConversationInner';
+import GetConversations200ResponseConversationInnerAssistant from './model/GetConversations200ResponseConversationInnerAssistant';
+import GetConversations200ResponseConversationInnerAssistantChoicesInner from './model/GetConversations200ResponseConversationInnerAssistantChoicesInner';
+import GetConversations200ResponseConversationInnerAssistantChoicesInnerAiModelDetails from './model/GetConversations200ResponseConversationInnerAssistantChoicesInnerAiModelDetails';
+import GetConversations200ResponseConversationInnerAssistantChoicesInnerMessage from './model/GetConversations200ResponseConversationInnerAssistantChoicesInnerMessage';
+import GetConversations200ResponseConversationInnerAssistantChoicesInnerPromptDetails from './model/GetConversations200ResponseConversationInnerAssistantChoicesInnerPromptDetails';
+import GetConversations200ResponseConversationInnerAssistantFetchMultiplePosts from './model/GetConversations200ResponseConversationInnerAssistantFetchMultiplePosts';
+import GetConversations200ResponseConversationInnerAssistantFetchMultiplePostsResultsInner from './model/GetConversations200ResponseConversationInnerAssistantFetchMultiplePostsResultsInner';
+import GetConversations200ResponseConversationInnerUser from './model/GetConversations200ResponseConversationInnerUser';
+import GetConversations200ResponseConversationInnerUserContext from './model/GetConversations200ResponseConversationInnerUserContext';
 import GetFloorInformation200Response from './model/GetFloorInformation200Response';
 import GetRecentEvents200Response from './model/GetRecentEvents200Response';
 import GetRecentEvents200ResponseItemsInner from './model/GetRecentEvents200ResponseItemsInner';
@@ -31,6 +44,7 @@ import GetRecentEvents400Response from './model/GetRecentEvents400Response';
 import GetRecentEvents400ResponseError from './model/GetRecentEvents400ResponseError';
 import Media from './model/Media';
 import Model400ErrorCode from './model/Model400ErrorCode';
+import PostAdd from './model/PostAdd';
 import Query422Response from './model/Query422Response';
 import Query422ResponseError from './model/Query422ResponseError';
 import QueryRequest from './model/QueryRequest';
@@ -39,6 +53,7 @@ import QueryResponse from './model/QueryResponse';
 import QueryResponseItemsInner from './model/QueryResponseItemsInner';
 import ResetPassword200Response from './model/ResetPassword200Response';
 import ResetPassword400Response from './model/ResetPassword400Response';
+import SendSignInValidationCode200Response from './model/SendSignInValidationCode200Response';
 import SendValidationCode200Response from './model/SendValidationCode200Response';
 import SendValidationCodeRequest from './model/SendValidationCodeRequest';
 import SignInWithEmail200Response from './model/SignInWithEmail200Response';
@@ -47,6 +62,7 @@ import SignInWithEmail200ResponseProfile from './model/SignInWithEmail200Respons
 import SignInWithEmail200ResponseProfileAvatar from './model/SignInWithEmail200ResponseProfileAvatar';
 import SignUp200Response from './model/SignUp200Response';
 import SignUpResponse from './model/SignUpResponse';
+import Threads from './model/Threads';
 import UserDetails from './model/UserDetails';
 import ValidateCode400Response from './model/ValidateCode400Response';
 import ValidateCode400ResponseError from './model/ValidateCode400ResponseError';
@@ -89,7 +105,7 @@ import QueryApi from './api/QueryApi';
 * </pre>
 * </p>
 * @module index
-* @version 1.0.4
+* @version 1.0.5
 */
 export {
     /**
@@ -109,6 +125,18 @@ export {
      * @property {module:model/ChangePassword200Response}
      */
     ChangePassword200Response,
+
+    /**
+     * The ConversationThreads200Response model constructor.
+     * @property {module:model/ConversationThreads200Response}
+     */
+    ConversationThreads200Response,
+
+    /**
+     * The ConversationThreads200ResponseThreadsInner model constructor.
+     * @property {module:model/ConversationThreads200ResponseThreadsInner}
+     */
+    ConversationThreads200ResponseThreadsInner,
 
     /**
      * The EditFloor400Response model constructor.
@@ -145,6 +173,72 @@ export {
      * @property {module:model/FloorInfo}
      */
     FloorInfo,
+
+    /**
+     * The GetConversations200Response model constructor.
+     * @property {module:model/GetConversations200Response}
+     */
+    GetConversations200Response,
+
+    /**
+     * The GetConversations200ResponseConversationInner model constructor.
+     * @property {module:model/GetConversations200ResponseConversationInner}
+     */
+    GetConversations200ResponseConversationInner,
+
+    /**
+     * The GetConversations200ResponseConversationInnerAssistant model constructor.
+     * @property {module:model/GetConversations200ResponseConversationInnerAssistant}
+     */
+    GetConversations200ResponseConversationInnerAssistant,
+
+    /**
+     * The GetConversations200ResponseConversationInnerAssistantChoicesInner model constructor.
+     * @property {module:model/GetConversations200ResponseConversationInnerAssistantChoicesInner}
+     */
+    GetConversations200ResponseConversationInnerAssistantChoicesInner,
+
+    /**
+     * The GetConversations200ResponseConversationInnerAssistantChoicesInnerAiModelDetails model constructor.
+     * @property {module:model/GetConversations200ResponseConversationInnerAssistantChoicesInnerAiModelDetails}
+     */
+    GetConversations200ResponseConversationInnerAssistantChoicesInnerAiModelDetails,
+
+    /**
+     * The GetConversations200ResponseConversationInnerAssistantChoicesInnerMessage model constructor.
+     * @property {module:model/GetConversations200ResponseConversationInnerAssistantChoicesInnerMessage}
+     */
+    GetConversations200ResponseConversationInnerAssistantChoicesInnerMessage,
+
+    /**
+     * The GetConversations200ResponseConversationInnerAssistantChoicesInnerPromptDetails model constructor.
+     * @property {module:model/GetConversations200ResponseConversationInnerAssistantChoicesInnerPromptDetails}
+     */
+    GetConversations200ResponseConversationInnerAssistantChoicesInnerPromptDetails,
+
+    /**
+     * The GetConversations200ResponseConversationInnerAssistantFetchMultiplePosts model constructor.
+     * @property {module:model/GetConversations200ResponseConversationInnerAssistantFetchMultiplePosts}
+     */
+    GetConversations200ResponseConversationInnerAssistantFetchMultiplePosts,
+
+    /**
+     * The GetConversations200ResponseConversationInnerAssistantFetchMultiplePostsResultsInner model constructor.
+     * @property {module:model/GetConversations200ResponseConversationInnerAssistantFetchMultiplePostsResultsInner}
+     */
+    GetConversations200ResponseConversationInnerAssistantFetchMultiplePostsResultsInner,
+
+    /**
+     * The GetConversations200ResponseConversationInnerUser model constructor.
+     * @property {module:model/GetConversations200ResponseConversationInnerUser}
+     */
+    GetConversations200ResponseConversationInnerUser,
+
+    /**
+     * The GetConversations200ResponseConversationInnerUserContext model constructor.
+     * @property {module:model/GetConversations200ResponseConversationInnerUserContext}
+     */
+    GetConversations200ResponseConversationInnerUserContext,
 
     /**
      * The GetFloorInformation200Response model constructor.
@@ -195,6 +289,12 @@ export {
     Model400ErrorCode,
 
     /**
+     * The PostAdd model constructor.
+     * @property {module:model/PostAdd}
+     */
+    PostAdd,
+
+    /**
      * The Query422Response model constructor.
      * @property {module:model/Query422Response}
      */
@@ -243,6 +343,12 @@ export {
     ResetPassword400Response,
 
     /**
+     * The SendSignInValidationCode200Response model constructor.
+     * @property {module:model/SendSignInValidationCode200Response}
+     */
+    SendSignInValidationCode200Response,
+
+    /**
      * The SendValidationCode200Response model constructor.
      * @property {module:model/SendValidationCode200Response}
      */
@@ -289,6 +395,12 @@ export {
      * @property {module:model/SignUpResponse}
      */
     SignUpResponse,
+
+    /**
+     * The Threads model constructor.
+     * @property {module:model/Threads}
+     */
+    Threads,
 
     /**
      * The UserDetails model constructor.

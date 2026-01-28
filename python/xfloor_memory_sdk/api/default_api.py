@@ -19,12 +19,15 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
-from typing import Any, Dict, Optional
+from pydantic import Field, StrictBytes, StrictStr
+from typing import Any, Dict, Optional, Tuple, Union
 from typing_extensions import Annotated
 from xfloor_memory_sdk.models.change_password200_response import ChangePassword200Response
+from xfloor_memory_sdk.models.conversation_threads200_response import ConversationThreads200Response
+from xfloor_memory_sdk.models.get_conversations200_response import GetConversations200Response
 from xfloor_memory_sdk.models.get_floor_information200_response import GetFloorInformation200Response
 from xfloor_memory_sdk.models.reset_password200_response import ResetPassword200Response
+from xfloor_memory_sdk.models.send_sign_in_validation_code200_response import SendSignInValidationCode200Response
 from xfloor_memory_sdk.models.send_validation_code200_response import SendValidationCode200Response
 from xfloor_memory_sdk.models.send_validation_code_request import SendValidationCodeRequest
 from xfloor_memory_sdk.models.sign_in_with_email200_response import SignInWithEmail200Response
@@ -48,6 +51,582 @@ class DefaultApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+
+    @validate_call
+    def api_developer_create_app_post(
+        self,
+        input_info: StrictStr,
+        icon: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> object:
+        """Create App
+
+        Create a custom app using APIs. A 13 digit app ID gets created which takes title and description the app. An icon of specified size needs to be uploaded.
+
+        :param input_info: (required)
+        :type input_info: str
+        :param icon:
+        :type icon: bytearray
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_developer_create_app_post_serialize(
+            input_info=input_info,
+            icon=icon,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def api_developer_create_app_post_with_http_info(
+        self,
+        input_info: StrictStr,
+        icon: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[object]:
+        """Create App
+
+        Create a custom app using APIs. A 13 digit app ID gets created which takes title and description the app. An icon of specified size needs to be uploaded.
+
+        :param input_info: (required)
+        :type input_info: str
+        :param icon:
+        :type icon: bytearray
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_developer_create_app_post_serialize(
+            input_info=input_info,
+            icon=icon,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def api_developer_create_app_post_without_preload_content(
+        self,
+        input_info: StrictStr,
+        icon: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Create App
+
+        Create a custom app using APIs. A 13 digit app ID gets created which takes title and description the app. An icon of specified size needs to be uploaded.
+
+        :param input_info: (required)
+        :type input_info: str
+        :param icon:
+        :type icon: bytearray
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_developer_create_app_post_serialize(
+            input_info=input_info,
+            icon=icon,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _api_developer_create_app_post_serialize(
+        self,
+        input_info,
+        icon,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if input_info is not None:
+            _form_params.append(('input_info', input_info))
+        if icon is not None:
+            _files['icon'] = icon
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'multipart/form-data'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/developer/create/app',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def api_developer_modify_app_post(
+        self,
+        input_info: Annotated[StrictStr, Field(description="User ID, App ID, Title, Details. User ID and App ID are required parameters. Title/details are optional.")],
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Upload the new PNG icon file.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> object:
+        """Modify Floorpod App
+
+        Modify title, details or the app icon
+
+        :param input_info: User ID, App ID, Title, Details. User ID and App ID are required parameters. Title/details are optional. (required)
+        :type input_info: str
+        :param file: Upload the new PNG icon file.
+        :type file: bytearray
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_developer_modify_app_post_serialize(
+            input_info=input_info,
+            file=file,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def api_developer_modify_app_post_with_http_info(
+        self,
+        input_info: Annotated[StrictStr, Field(description="User ID, App ID, Title, Details. User ID and App ID are required parameters. Title/details are optional.")],
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Upload the new PNG icon file.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[object]:
+        """Modify Floorpod App
+
+        Modify title, details or the app icon
+
+        :param input_info: User ID, App ID, Title, Details. User ID and App ID are required parameters. Title/details are optional. (required)
+        :type input_info: str
+        :param file: Upload the new PNG icon file.
+        :type file: bytearray
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_developer_modify_app_post_serialize(
+            input_info=input_info,
+            file=file,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def api_developer_modify_app_post_without_preload_content(
+        self,
+        input_info: Annotated[StrictStr, Field(description="User ID, App ID, Title, Details. User ID and App ID are required parameters. Title/details are optional.")],
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Upload the new PNG icon file.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Modify Floorpod App
+
+        Modify title, details or the app icon
+
+        :param input_info: User ID, App ID, Title, Details. User ID and App ID are required parameters. Title/details are optional. (required)
+        :type input_info: str
+        :param file: Upload the new PNG icon file.
+        :type file: bytearray
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._api_developer_modify_app_post_serialize(
+            input_info=input_info,
+            file=file,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _api_developer_modify_app_post_serialize(
+        self,
+        input_info,
+        file,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if input_info is not None:
+            _form_params.append(('input_info', input_info))
+        if file is not None:
+            _files['file'] = file
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'multipart/form-data'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/developer/modify/app',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
 
 
     @validate_call
@@ -1379,6 +1958,1442 @@ class DefaultApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/auth-service/password/change',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def conversation_threads(
+        self,
+        user_id: Annotated[StrictStr, Field(description="User ID")],
+        floor_id: Annotated[StrictStr, Field(description="Floor ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ConversationThreads200Response:
+        """Get the conversational threads
+
+        ### Conversation Model
+        - A **Thread** represents a single conversational context.
+        - A **Conversation** is the ordered exchange of messages within a thread.
+        - Threads are scoped per user and per floor.
+        
+        This API retrieves the list of **conversational threads** associated with a specific **user** within a specific **floor**. A **thread** represents a persistent conversation context between the user and the system (agent/assistant)
+        
+        inside a floor. Each thread maintains its own history and state, allowing users to resume previous conversations without losing context. The API returns **only thread metadata**, not the message content itself. This makes it suitable for:
+        * Displaying a conversation list or sidebar
+        * Allowing users to select and resume past conversations * Managing conversational memory per floor
+        
+        ---
+        
+        ### Key Concepts
+        * **Thread**:
+        
+        A long-lived conversational context tied to a user and a floor * **Floor-scoped memory**: Conversations are isolated per floor; threads from one floor are not visible in another * **User-specific**: Threads are private to the requesting user
+        
+        ---
+        
+        **Request Method**
+        
+         `GET`
+        
+        ---
+        
+        **Request Parameters (Query Parameters)**
+        
+        | Parameter Name | Type | Required | Description |
+        | -------------- | ------ | -------- | ---------------------------------------------------------------------------- |
+        | `user_id` | String | **Yes** | Unique identifier of the user whose conversation threads are being requested |
+        | `floor_id` | String | **Yes** | Identifier of the floor in which the conversations exist |
+        
+        ---
+        
+        ### Authorization & Access Rules
+        * The caller must be authenticated as the given `user_id`
+        * A user can retrieve **only their own threads**
+        * Threads are scoped to the provided `floor_id`
+        * Threads from other floors or other users are not accessible
+        
+        ---
+        
+        ### Response Format `application/json`
+        
+        ---
+        
+        ### Response Description The response contains:
+        * The `user_id` for which threads were fetched
+        * A list of thread metadata objects, sorted by **most recently updated first**
+        
+        ---
+        
+        ### Response Structure
+        
+        ### Top-Level Fields
+        
+        | Field | Type | Description |
+        | --------- | ------ | ------------------------------------------------------------------------- |
+        | `user_id` | String | Identifier of the user |
+        | `threads` | Array | List of conversation threads belonging to the user in the specified floor |
+        
+        ---
+        
+        ### Thread Object (`threads[]`)
+        
+        | Field | Type | Description |
+        | -------------- | ------------------- | ------------------------------------------------- |
+        | `thread_id` | String | Unique identifier of the conversation thread |
+        | `title` | String | Human-readable title summarizing the conversation |
+        | `last_updated` | String (YYYY-MM-DD) | Date when the thread was last updated |
+        
+        ---
+        
+        ### Sample
+        
+        Success Response
+        
+        ```json { \"user_id\":
+        
+        \"59\", \"threads\": [ { \"thread_id\": \"55\", \"title\": \"elegant potentially hopelessly ambitious sneak\", \"last_updated\": \"2025-04-26\" }, { \"thread_id\": \"79\", \"title\": \"sans profitable alienated by even overstay miserly practical\", \"last_updated\": \"2025-04-24\" }, { \"thread_id\": \"89\", \"title\": \"although light uh-huh despite instead vol sorrowful\", \"last_updated\": \"2025-02-16\" } ] }
+        
+        ```
+        
+        ---
+        
+        ### Typical Use Cases
+        * Show a **list of past conversations** in a chat UI
+        * Allow users to **resume a previous thread**
+        * Display conversation history grouped by floor
+        * Build agent dashboards with user-specific memory
+        
+        ---
+        
+        ### Notes
+        * This API returns **metadata only**; message history is retrieved using a separate thread-messages API
+        * If no threads exist, the `threads` array will be empty * Thread titles may be system-generated or user-editable depending on implementation
+        
+        ---
+        
+        ### Common
+        
+        Error Responses (Examples)
+        
+        ### Missing Parameters
+        
+        ```json { \"status\":
+        
+        \"ERROR\", \"message\": \"user_id and floor_id are required\" }
+        
+        ```
+        
+        ### Unauthorised Access
+        
+        ```json { \"status\": \"ERROR\", \"message\": \"Unauthorized access to conversation threads\" }
+        
+        ```
+
+        :param user_id: User ID (required)
+        :type user_id: str
+        :param floor_id: Floor ID (required)
+        :type floor_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._conversation_threads_serialize(
+            user_id=user_id,
+            floor_id=floor_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ConversationThreads200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def conversation_threads_with_http_info(
+        self,
+        user_id: Annotated[StrictStr, Field(description="User ID")],
+        floor_id: Annotated[StrictStr, Field(description="Floor ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ConversationThreads200Response]:
+        """Get the conversational threads
+
+        ### Conversation Model
+        - A **Thread** represents a single conversational context.
+        - A **Conversation** is the ordered exchange of messages within a thread.
+        - Threads are scoped per user and per floor.
+        
+        This API retrieves the list of **conversational threads** associated with a specific **user** within a specific **floor**. A **thread** represents a persistent conversation context between the user and the system (agent/assistant)
+        
+        inside a floor. Each thread maintains its own history and state, allowing users to resume previous conversations without losing context. The API returns **only thread metadata**, not the message content itself. This makes it suitable for:
+        * Displaying a conversation list or sidebar
+        * Allowing users to select and resume past conversations * Managing conversational memory per floor
+        
+        ---
+        
+        ### Key Concepts
+        * **Thread**:
+        
+        A long-lived conversational context tied to a user and a floor * **Floor-scoped memory**: Conversations are isolated per floor; threads from one floor are not visible in another * **User-specific**: Threads are private to the requesting user
+        
+        ---
+        
+        **Request Method**
+        
+         `GET`
+        
+        ---
+        
+        **Request Parameters (Query Parameters)**
+        
+        | Parameter Name | Type | Required | Description |
+        | -------------- | ------ | -------- | ---------------------------------------------------------------------------- |
+        | `user_id` | String | **Yes** | Unique identifier of the user whose conversation threads are being requested |
+        | `floor_id` | String | **Yes** | Identifier of the floor in which the conversations exist |
+        
+        ---
+        
+        ### Authorization & Access Rules
+        * The caller must be authenticated as the given `user_id`
+        * A user can retrieve **only their own threads**
+        * Threads are scoped to the provided `floor_id`
+        * Threads from other floors or other users are not accessible
+        
+        ---
+        
+        ### Response Format `application/json`
+        
+        ---
+        
+        ### Response Description The response contains:
+        * The `user_id` for which threads were fetched
+        * A list of thread metadata objects, sorted by **most recently updated first**
+        
+        ---
+        
+        ### Response Structure
+        
+        ### Top-Level Fields
+        
+        | Field | Type | Description |
+        | --------- | ------ | ------------------------------------------------------------------------- |
+        | `user_id` | String | Identifier of the user |
+        | `threads` | Array | List of conversation threads belonging to the user in the specified floor |
+        
+        ---
+        
+        ### Thread Object (`threads[]`)
+        
+        | Field | Type | Description |
+        | -------------- | ------------------- | ------------------------------------------------- |
+        | `thread_id` | String | Unique identifier of the conversation thread |
+        | `title` | String | Human-readable title summarizing the conversation |
+        | `last_updated` | String (YYYY-MM-DD) | Date when the thread was last updated |
+        
+        ---
+        
+        ### Sample
+        
+        Success Response
+        
+        ```json { \"user_id\":
+        
+        \"59\", \"threads\": [ { \"thread_id\": \"55\", \"title\": \"elegant potentially hopelessly ambitious sneak\", \"last_updated\": \"2025-04-26\" }, { \"thread_id\": \"79\", \"title\": \"sans profitable alienated by even overstay miserly practical\", \"last_updated\": \"2025-04-24\" }, { \"thread_id\": \"89\", \"title\": \"although light uh-huh despite instead vol sorrowful\", \"last_updated\": \"2025-02-16\" } ] }
+        
+        ```
+        
+        ---
+        
+        ### Typical Use Cases
+        * Show a **list of past conversations** in a chat UI
+        * Allow users to **resume a previous thread**
+        * Display conversation history grouped by floor
+        * Build agent dashboards with user-specific memory
+        
+        ---
+        
+        ### Notes
+        * This API returns **metadata only**; message history is retrieved using a separate thread-messages API
+        * If no threads exist, the `threads` array will be empty * Thread titles may be system-generated or user-editable depending on implementation
+        
+        ---
+        
+        ### Common
+        
+        Error Responses (Examples)
+        
+        ### Missing Parameters
+        
+        ```json { \"status\":
+        
+        \"ERROR\", \"message\": \"user_id and floor_id are required\" }
+        
+        ```
+        
+        ### Unauthorised Access
+        
+        ```json { \"status\": \"ERROR\", \"message\": \"Unauthorized access to conversation threads\" }
+        
+        ```
+
+        :param user_id: User ID (required)
+        :type user_id: str
+        :param floor_id: Floor ID (required)
+        :type floor_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._conversation_threads_serialize(
+            user_id=user_id,
+            floor_id=floor_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ConversationThreads200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def conversation_threads_without_preload_content(
+        self,
+        user_id: Annotated[StrictStr, Field(description="User ID")],
+        floor_id: Annotated[StrictStr, Field(description="Floor ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get the conversational threads
+
+        ### Conversation Model
+        - A **Thread** represents a single conversational context.
+        - A **Conversation** is the ordered exchange of messages within a thread.
+        - Threads are scoped per user and per floor.
+        
+        This API retrieves the list of **conversational threads** associated with a specific **user** within a specific **floor**. A **thread** represents a persistent conversation context between the user and the system (agent/assistant)
+        
+        inside a floor. Each thread maintains its own history and state, allowing users to resume previous conversations without losing context. The API returns **only thread metadata**, not the message content itself. This makes it suitable for:
+        * Displaying a conversation list or sidebar
+        * Allowing users to select and resume past conversations * Managing conversational memory per floor
+        
+        ---
+        
+        ### Key Concepts
+        * **Thread**:
+        
+        A long-lived conversational context tied to a user and a floor * **Floor-scoped memory**: Conversations are isolated per floor; threads from one floor are not visible in another * **User-specific**: Threads are private to the requesting user
+        
+        ---
+        
+        **Request Method**
+        
+         `GET`
+        
+        ---
+        
+        **Request Parameters (Query Parameters)**
+        
+        | Parameter Name | Type | Required | Description |
+        | -------------- | ------ | -------- | ---------------------------------------------------------------------------- |
+        | `user_id` | String | **Yes** | Unique identifier of the user whose conversation threads are being requested |
+        | `floor_id` | String | **Yes** | Identifier of the floor in which the conversations exist |
+        
+        ---
+        
+        ### Authorization & Access Rules
+        * The caller must be authenticated as the given `user_id`
+        * A user can retrieve **only their own threads**
+        * Threads are scoped to the provided `floor_id`
+        * Threads from other floors or other users are not accessible
+        
+        ---
+        
+        ### Response Format `application/json`
+        
+        ---
+        
+        ### Response Description The response contains:
+        * The `user_id` for which threads were fetched
+        * A list of thread metadata objects, sorted by **most recently updated first**
+        
+        ---
+        
+        ### Response Structure
+        
+        ### Top-Level Fields
+        
+        | Field | Type | Description |
+        | --------- | ------ | ------------------------------------------------------------------------- |
+        | `user_id` | String | Identifier of the user |
+        | `threads` | Array | List of conversation threads belonging to the user in the specified floor |
+        
+        ---
+        
+        ### Thread Object (`threads[]`)
+        
+        | Field | Type | Description |
+        | -------------- | ------------------- | ------------------------------------------------- |
+        | `thread_id` | String | Unique identifier of the conversation thread |
+        | `title` | String | Human-readable title summarizing the conversation |
+        | `last_updated` | String (YYYY-MM-DD) | Date when the thread was last updated |
+        
+        ---
+        
+        ### Sample
+        
+        Success Response
+        
+        ```json { \"user_id\":
+        
+        \"59\", \"threads\": [ { \"thread_id\": \"55\", \"title\": \"elegant potentially hopelessly ambitious sneak\", \"last_updated\": \"2025-04-26\" }, { \"thread_id\": \"79\", \"title\": \"sans profitable alienated by even overstay miserly practical\", \"last_updated\": \"2025-04-24\" }, { \"thread_id\": \"89\", \"title\": \"although light uh-huh despite instead vol sorrowful\", \"last_updated\": \"2025-02-16\" } ] }
+        
+        ```
+        
+        ---
+        
+        ### Typical Use Cases
+        * Show a **list of past conversations** in a chat UI
+        * Allow users to **resume a previous thread**
+        * Display conversation history grouped by floor
+        * Build agent dashboards with user-specific memory
+        
+        ---
+        
+        ### Notes
+        * This API returns **metadata only**; message history is retrieved using a separate thread-messages API
+        * If no threads exist, the `threads` array will be empty * Thread titles may be system-generated or user-editable depending on implementation
+        
+        ---
+        
+        ### Common
+        
+        Error Responses (Examples)
+        
+        ### Missing Parameters
+        
+        ```json { \"status\":
+        
+        \"ERROR\", \"message\": \"user_id and floor_id are required\" }
+        
+        ```
+        
+        ### Unauthorised Access
+        
+        ```json { \"status\": \"ERROR\", \"message\": \"Unauthorized access to conversation threads\" }
+        
+        ```
+
+        :param user_id: User ID (required)
+        :type user_id: str
+        :param floor_id: Floor ID (required)
+        :type floor_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._conversation_threads_serialize(
+            user_id=user_id,
+            floor_id=floor_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ConversationThreads200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _conversation_threads_serialize(
+        self,
+        user_id,
+        floor_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if user_id is not None:
+            
+            _query_params.append(('user_id', user_id))
+            
+        if floor_id is not None:
+            
+            _query_params.append(('floor_id', floor_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/agent/memory/threads',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_conversations(
+        self,
+        user_id: Optional[StrictStr] = None,
+        thread_id: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetConversations200Response:
+        """Conversations
+
+        This API returns the **full conversation history** for a specific **thread** belonging to a user within a floor. A **thread** represents a persistent conversation session. Each item in the returned `conversation` array contains:
+        * The **user request payload** (user query + context)
+        * The **assistant response payload** (full LLM completion object) * The **retrieval trace** (metadata of posts fetched/used for the answer, including scores and identifiers) This endpoint is intended for **developers** building custom conversational UIs and tooling that require:
+        * Full conversation replay
+        * Debug visibility into the assistant output object (`choices`, model info, etc.) * RAG explainability via `fetch_multiple_posts.results[]`
+        
+        ---
+        
+        **Request Method**
+        
+         `GET`
+        
+        ---
+        
+        ### Query Parameters
+        
+        | Parameter | Type | Required | Description |
+        | ----------- | ------ | -------- | --------------------------------------------------------------------------- |
+        | `user_id` | String | **Yes** | Owner of the conversation thread. The thread must belong to this user. |
+        | `floor_id` | String | **Yes** | Floor identifier in which the thread exists. Threads are scoped to a floor. |
+        | `thread_id` | String | **Yes** | Thread identifier whose conversations should be returned. |
+        
+        ---
+        
+        ### Authorization & Access Rules
+        * The caller must be authenticated as the given `user_id` (or have equivalent developer/system permission).
+        * A user can access **only their own threads**.
+        * Cross-user or cross-floor access must be rejected.
+        
+        ---
+        
+        ### Response Format `application/json`
+        
+        ---
+        
+        ### Response Description Returns the thread-level conversation payload:
+        * `user_id`: the user who owns the thread
+        * `thread_id`: the requested thread * `conversation`: ordered list of conversation entries (each entry = user object + assistant object)
+        
+        ---
+        
+        ### Response Schema
+        
+        ### Top-Level Fields
+        
+        | Field | Type | Description |
+        | -------------- | ------ | ---------------------------- |
+        | `user_id` | String | Owner of the thread |
+        | `thread_id` | String | Thread identifier |
+        | `conversation` | Array | List of conversation entries |
+        
+        ---
+        
+        ### `conversation[]` Entry Structure Each entry contains two objects:
+        
+        `user` and `assistant`.
+        
+        ---
+        
+        ### `user` Object
+        
+        | Field | Type | Description |
+        | ------------------ | ------ | ------------------------------------------------------------------- |
+        | `context` | Object | Context used when processing the query (floor metadata, mode, etc.) |
+        | `user_query` | String | The user’s query message |
+        | `user_id` | String | User identifier (should match top-level `user_id`) |
+        | `user_thread` | String | Thread identifier (should match top-level `thread_id`) |
+        | `recorded_content` | String | Persisted user content (often same as `user_query`) |
+        
+        #### `user.context` | Field | Type | Description |
+        | ---------------- | ------ | ---------------------------------------------- |
+        | `floor_id` | String | Floor UID/slug where the conversation occurred |
+        | `title` | String | Floor title at the time of the query |
+        | `fid` | String | Immutable internal floor ID |
+        | `floor_category` | String | Floor category identifier |
+        | `floor_mode` | String | Floor mode indicator (example: `\"1\"`) |
+        
+        ---
+        
+        ### `assistant` Object
+        
+        This contains the **full completion response** plus retrieval details.
+        
+        | Field | Type | Description |
+        | ---------------------- | ------ | --------------------------------------------------- |
+        | `id` | String | Completion id (e.g., `chatcmpl-*`) |
+        | `object` | String | Response type (e.g., `chat.completion`) |
+        | `created` | Number | Timestamp when response was created (epoch seconds) |
+        | `floor_mode` | String | Floor mode applied for generation |
+        | `model` | String | Model identifier used |
+        | `choices` | Array | Generated outputs and metadata |
+        | `fetch_multiple_posts` | Object | Retrieval trace (if retrieval was performed) |
+        | `content_type` | String | Retrieved content type (e.g., `post`) |
+        
+        ---
+        
+        ### `assistant.choices[]`
+        
+        | Field | Type | Description |
+        | ------------------ | ------ | -------------------------------------------------------------------------- |
+        | `index` | Number | Choice index |
+        | `message` | Object | Assistant message content |
+        | `finish_reason` | String | Why generation stopped (`stop`, `length`, etc.) |
+        | `ai_model_details` | Object | Model runtime parameters (temperature, top_p, max_tokens, penalties, etc.) |
+        | `prompt_details` | Object | Prompt configuration used (system prompt, system_prompt_id, etc.) |
+        
+        > **Note:** `prompt_details.system_prompt` may be large and is returned as-is for developer inspection.
+        
+        ---
+        
+        ### `assistant.fetch_multiple_posts` Describes the retrieval operation performed for the query.
+        
+        | Field | Type | Description |
+        | -------------- | ------ | -------------------------------------- |
+        | `content_type` | String | Type of retrieved content (`post`) |
+        | `query` | String | Query used for retrieval |
+        | `status` | String | Retrieval status (`success`, `failed`) |
+        | `message` | String | Retrieval message |
+        | `results` | Array | List of matched posts and metadata |
+        
+        ---
+        
+        ### `assistant.fetch_multiple_posts.results[]`
+        
+        | Field | Type | Description |
+        | ------------ | ------ | ----------------------------------------------------------------- |
+        | `from_floor` | String | Indicates source floor relation (e.g., same floor / linked floor) |
+        | `content` | String | Raw JSON string of the matched post metadata/content |
+        | `author` | String | Author id of the matched post |
+        | `block_type` | Number | Block type of the matched post |
+        | `pid` | String | Post/document id |
+        | `bid` | String | Block id containing the post |
+        | `fid` | String | Floor internal id where the post belongs |
+        | `score` | Number | Similarity score |
+        | `match_type` | String | Match type (`text`, etc.) |
+        
+        ---
+        
+        ### Sample
+        
+        Success Response Your provided payload is the canonical example. It includes:
+        * the user query and floor context
+        * the full assistant completion object * the full retrieval results with post metadata * the response shown covers a few important items.
+        
+        ---
+        
+        ### Common
+        
+        Error Responses
+        
+        ### Missing Parameters
+        
+        ```json { \"status\":
+        
+        \"ERROR\", \"message\": \"user_id, floor_id, and thread_id are required\" }
+        
+        ```
+        
+        ### Unauthorized Access
+        
+        ```json { \"status\": \"ERROR\", \"message\": \"Unauthorized access to thread\" }
+        
+        ```
+        
+        ### Thread Not Found
+        
+        ```json { \"status\": \"ERROR\", \"message\": \"Thread not found\" }
+        
+        ```
+        
+        ---
+        
+        ### Developer
+        
+        Notes (Important)
+        * The `content` field inside retrieval results is a **stringified JSON**. Developers may parse it to access fields such as `post_title`, `post_details`, etc.
+        * `choices` may contain multiple outputs depending on backend configuration. * This API returns a “full debug payload” suitable for developers. If you later create a lightweight UI endpoint, it should strip execution details and return only `user_query`, `assistant.content`, and curated post references.
+
+        :param user_id: 
+        :type user_id: str
+        :param thread_id: 
+        :type thread_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_conversations_serialize(
+            user_id=user_id,
+            thread_id=thread_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetConversations200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_conversations_with_http_info(
+        self,
+        user_id: Optional[StrictStr] = None,
+        thread_id: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetConversations200Response]:
+        """Conversations
+
+        This API returns the **full conversation history** for a specific **thread** belonging to a user within a floor. A **thread** represents a persistent conversation session. Each item in the returned `conversation` array contains:
+        * The **user request payload** (user query + context)
+        * The **assistant response payload** (full LLM completion object) * The **retrieval trace** (metadata of posts fetched/used for the answer, including scores and identifiers) This endpoint is intended for **developers** building custom conversational UIs and tooling that require:
+        * Full conversation replay
+        * Debug visibility into the assistant output object (`choices`, model info, etc.) * RAG explainability via `fetch_multiple_posts.results[]`
+        
+        ---
+        
+        **Request Method**
+        
+         `GET`
+        
+        ---
+        
+        ### Query Parameters
+        
+        | Parameter | Type | Required | Description |
+        | ----------- | ------ | -------- | --------------------------------------------------------------------------- |
+        | `user_id` | String | **Yes** | Owner of the conversation thread. The thread must belong to this user. |
+        | `floor_id` | String | **Yes** | Floor identifier in which the thread exists. Threads are scoped to a floor. |
+        | `thread_id` | String | **Yes** | Thread identifier whose conversations should be returned. |
+        
+        ---
+        
+        ### Authorization & Access Rules
+        * The caller must be authenticated as the given `user_id` (or have equivalent developer/system permission).
+        * A user can access **only their own threads**.
+        * Cross-user or cross-floor access must be rejected.
+        
+        ---
+        
+        ### Response Format `application/json`
+        
+        ---
+        
+        ### Response Description Returns the thread-level conversation payload:
+        * `user_id`: the user who owns the thread
+        * `thread_id`: the requested thread * `conversation`: ordered list of conversation entries (each entry = user object + assistant object)
+        
+        ---
+        
+        ### Response Schema
+        
+        ### Top-Level Fields
+        
+        | Field | Type | Description |
+        | -------------- | ------ | ---------------------------- |
+        | `user_id` | String | Owner of the thread |
+        | `thread_id` | String | Thread identifier |
+        | `conversation` | Array | List of conversation entries |
+        
+        ---
+        
+        ### `conversation[]` Entry Structure Each entry contains two objects:
+        
+        `user` and `assistant`.
+        
+        ---
+        
+        ### `user` Object
+        
+        | Field | Type | Description |
+        | ------------------ | ------ | ------------------------------------------------------------------- |
+        | `context` | Object | Context used when processing the query (floor metadata, mode, etc.) |
+        | `user_query` | String | The user’s query message |
+        | `user_id` | String | User identifier (should match top-level `user_id`) |
+        | `user_thread` | String | Thread identifier (should match top-level `thread_id`) |
+        | `recorded_content` | String | Persisted user content (often same as `user_query`) |
+        
+        #### `user.context` | Field | Type | Description |
+        | ---------------- | ------ | ---------------------------------------------- |
+        | `floor_id` | String | Floor UID/slug where the conversation occurred |
+        | `title` | String | Floor title at the time of the query |
+        | `fid` | String | Immutable internal floor ID |
+        | `floor_category` | String | Floor category identifier |
+        | `floor_mode` | String | Floor mode indicator (example: `\"1\"`) |
+        
+        ---
+        
+        ### `assistant` Object
+        
+        This contains the **full completion response** plus retrieval details.
+        
+        | Field | Type | Description |
+        | ---------------------- | ------ | --------------------------------------------------- |
+        | `id` | String | Completion id (e.g., `chatcmpl-*`) |
+        | `object` | String | Response type (e.g., `chat.completion`) |
+        | `created` | Number | Timestamp when response was created (epoch seconds) |
+        | `floor_mode` | String | Floor mode applied for generation |
+        | `model` | String | Model identifier used |
+        | `choices` | Array | Generated outputs and metadata |
+        | `fetch_multiple_posts` | Object | Retrieval trace (if retrieval was performed) |
+        | `content_type` | String | Retrieved content type (e.g., `post`) |
+        
+        ---
+        
+        ### `assistant.choices[]`
+        
+        | Field | Type | Description |
+        | ------------------ | ------ | -------------------------------------------------------------------------- |
+        | `index` | Number | Choice index |
+        | `message` | Object | Assistant message content |
+        | `finish_reason` | String | Why generation stopped (`stop`, `length`, etc.) |
+        | `ai_model_details` | Object | Model runtime parameters (temperature, top_p, max_tokens, penalties, etc.) |
+        | `prompt_details` | Object | Prompt configuration used (system prompt, system_prompt_id, etc.) |
+        
+        > **Note:** `prompt_details.system_prompt` may be large and is returned as-is for developer inspection.
+        
+        ---
+        
+        ### `assistant.fetch_multiple_posts` Describes the retrieval operation performed for the query.
+        
+        | Field | Type | Description |
+        | -------------- | ------ | -------------------------------------- |
+        | `content_type` | String | Type of retrieved content (`post`) |
+        | `query` | String | Query used for retrieval |
+        | `status` | String | Retrieval status (`success`, `failed`) |
+        | `message` | String | Retrieval message |
+        | `results` | Array | List of matched posts and metadata |
+        
+        ---
+        
+        ### `assistant.fetch_multiple_posts.results[]`
+        
+        | Field | Type | Description |
+        | ------------ | ------ | ----------------------------------------------------------------- |
+        | `from_floor` | String | Indicates source floor relation (e.g., same floor / linked floor) |
+        | `content` | String | Raw JSON string of the matched post metadata/content |
+        | `author` | String | Author id of the matched post |
+        | `block_type` | Number | Block type of the matched post |
+        | `pid` | String | Post/document id |
+        | `bid` | String | Block id containing the post |
+        | `fid` | String | Floor internal id where the post belongs |
+        | `score` | Number | Similarity score |
+        | `match_type` | String | Match type (`text`, etc.) |
+        
+        ---
+        
+        ### Sample
+        
+        Success Response Your provided payload is the canonical example. It includes:
+        * the user query and floor context
+        * the full assistant completion object * the full retrieval results with post metadata * the response shown covers a few important items.
+        
+        ---
+        
+        ### Common
+        
+        Error Responses
+        
+        ### Missing Parameters
+        
+        ```json { \"status\":
+        
+        \"ERROR\", \"message\": \"user_id, floor_id, and thread_id are required\" }
+        
+        ```
+        
+        ### Unauthorized Access
+        
+        ```json { \"status\": \"ERROR\", \"message\": \"Unauthorized access to thread\" }
+        
+        ```
+        
+        ### Thread Not Found
+        
+        ```json { \"status\": \"ERROR\", \"message\": \"Thread not found\" }
+        
+        ```
+        
+        ---
+        
+        ### Developer
+        
+        Notes (Important)
+        * The `content` field inside retrieval results is a **stringified JSON**. Developers may parse it to access fields such as `post_title`, `post_details`, etc.
+        * `choices` may contain multiple outputs depending on backend configuration. * This API returns a “full debug payload” suitable for developers. If you later create a lightweight UI endpoint, it should strip execution details and return only `user_query`, `assistant.content`, and curated post references.
+
+        :param user_id: 
+        :type user_id: str
+        :param thread_id: 
+        :type thread_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_conversations_serialize(
+            user_id=user_id,
+            thread_id=thread_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetConversations200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_conversations_without_preload_content(
+        self,
+        user_id: Optional[StrictStr] = None,
+        thread_id: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Conversations
+
+        This API returns the **full conversation history** for a specific **thread** belonging to a user within a floor. A **thread** represents a persistent conversation session. Each item in the returned `conversation` array contains:
+        * The **user request payload** (user query + context)
+        * The **assistant response payload** (full LLM completion object) * The **retrieval trace** (metadata of posts fetched/used for the answer, including scores and identifiers) This endpoint is intended for **developers** building custom conversational UIs and tooling that require:
+        * Full conversation replay
+        * Debug visibility into the assistant output object (`choices`, model info, etc.) * RAG explainability via `fetch_multiple_posts.results[]`
+        
+        ---
+        
+        **Request Method**
+        
+         `GET`
+        
+        ---
+        
+        ### Query Parameters
+        
+        | Parameter | Type | Required | Description |
+        | ----------- | ------ | -------- | --------------------------------------------------------------------------- |
+        | `user_id` | String | **Yes** | Owner of the conversation thread. The thread must belong to this user. |
+        | `floor_id` | String | **Yes** | Floor identifier in which the thread exists. Threads are scoped to a floor. |
+        | `thread_id` | String | **Yes** | Thread identifier whose conversations should be returned. |
+        
+        ---
+        
+        ### Authorization & Access Rules
+        * The caller must be authenticated as the given `user_id` (or have equivalent developer/system permission).
+        * A user can access **only their own threads**.
+        * Cross-user or cross-floor access must be rejected.
+        
+        ---
+        
+        ### Response Format `application/json`
+        
+        ---
+        
+        ### Response Description Returns the thread-level conversation payload:
+        * `user_id`: the user who owns the thread
+        * `thread_id`: the requested thread * `conversation`: ordered list of conversation entries (each entry = user object + assistant object)
+        
+        ---
+        
+        ### Response Schema
+        
+        ### Top-Level Fields
+        
+        | Field | Type | Description |
+        | -------------- | ------ | ---------------------------- |
+        | `user_id` | String | Owner of the thread |
+        | `thread_id` | String | Thread identifier |
+        | `conversation` | Array | List of conversation entries |
+        
+        ---
+        
+        ### `conversation[]` Entry Structure Each entry contains two objects:
+        
+        `user` and `assistant`.
+        
+        ---
+        
+        ### `user` Object
+        
+        | Field | Type | Description |
+        | ------------------ | ------ | ------------------------------------------------------------------- |
+        | `context` | Object | Context used when processing the query (floor metadata, mode, etc.) |
+        | `user_query` | String | The user’s query message |
+        | `user_id` | String | User identifier (should match top-level `user_id`) |
+        | `user_thread` | String | Thread identifier (should match top-level `thread_id`) |
+        | `recorded_content` | String | Persisted user content (often same as `user_query`) |
+        
+        #### `user.context` | Field | Type | Description |
+        | ---------------- | ------ | ---------------------------------------------- |
+        | `floor_id` | String | Floor UID/slug where the conversation occurred |
+        | `title` | String | Floor title at the time of the query |
+        | `fid` | String | Immutable internal floor ID |
+        | `floor_category` | String | Floor category identifier |
+        | `floor_mode` | String | Floor mode indicator (example: `\"1\"`) |
+        
+        ---
+        
+        ### `assistant` Object
+        
+        This contains the **full completion response** plus retrieval details.
+        
+        | Field | Type | Description |
+        | ---------------------- | ------ | --------------------------------------------------- |
+        | `id` | String | Completion id (e.g., `chatcmpl-*`) |
+        | `object` | String | Response type (e.g., `chat.completion`) |
+        | `created` | Number | Timestamp when response was created (epoch seconds) |
+        | `floor_mode` | String | Floor mode applied for generation |
+        | `model` | String | Model identifier used |
+        | `choices` | Array | Generated outputs and metadata |
+        | `fetch_multiple_posts` | Object | Retrieval trace (if retrieval was performed) |
+        | `content_type` | String | Retrieved content type (e.g., `post`) |
+        
+        ---
+        
+        ### `assistant.choices[]`
+        
+        | Field | Type | Description |
+        | ------------------ | ------ | -------------------------------------------------------------------------- |
+        | `index` | Number | Choice index |
+        | `message` | Object | Assistant message content |
+        | `finish_reason` | String | Why generation stopped (`stop`, `length`, etc.) |
+        | `ai_model_details` | Object | Model runtime parameters (temperature, top_p, max_tokens, penalties, etc.) |
+        | `prompt_details` | Object | Prompt configuration used (system prompt, system_prompt_id, etc.) |
+        
+        > **Note:** `prompt_details.system_prompt` may be large and is returned as-is for developer inspection.
+        
+        ---
+        
+        ### `assistant.fetch_multiple_posts` Describes the retrieval operation performed for the query.
+        
+        | Field | Type | Description |
+        | -------------- | ------ | -------------------------------------- |
+        | `content_type` | String | Type of retrieved content (`post`) |
+        | `query` | String | Query used for retrieval |
+        | `status` | String | Retrieval status (`success`, `failed`) |
+        | `message` | String | Retrieval message |
+        | `results` | Array | List of matched posts and metadata |
+        
+        ---
+        
+        ### `assistant.fetch_multiple_posts.results[]`
+        
+        | Field | Type | Description |
+        | ------------ | ------ | ----------------------------------------------------------------- |
+        | `from_floor` | String | Indicates source floor relation (e.g., same floor / linked floor) |
+        | `content` | String | Raw JSON string of the matched post metadata/content |
+        | `author` | String | Author id of the matched post |
+        | `block_type` | Number | Block type of the matched post |
+        | `pid` | String | Post/document id |
+        | `bid` | String | Block id containing the post |
+        | `fid` | String | Floor internal id where the post belongs |
+        | `score` | Number | Similarity score |
+        | `match_type` | String | Match type (`text`, etc.) |
+        
+        ---
+        
+        ### Sample
+        
+        Success Response Your provided payload is the canonical example. It includes:
+        * the user query and floor context
+        * the full assistant completion object * the full retrieval results with post metadata * the response shown covers a few important items.
+        
+        ---
+        
+        ### Common
+        
+        Error Responses
+        
+        ### Missing Parameters
+        
+        ```json { \"status\":
+        
+        \"ERROR\", \"message\": \"user_id, floor_id, and thread_id are required\" }
+        
+        ```
+        
+        ### Unauthorized Access
+        
+        ```json { \"status\": \"ERROR\", \"message\": \"Unauthorized access to thread\" }
+        
+        ```
+        
+        ### Thread Not Found
+        
+        ```json { \"status\": \"ERROR\", \"message\": \"Thread not found\" }
+        
+        ```
+        
+        ---
+        
+        ### Developer
+        
+        Notes (Important)
+        * The `content` field inside retrieval results is a **stringified JSON**. Developers may parse it to access fields such as `post_title`, `post_details`, etc.
+        * `choices` may contain multiple outputs depending on backend configuration. * This API returns a “full debug payload” suitable for developers. If you later create a lightweight UI endpoint, it should strip execution details and return only `user_query`, `assistant.content`, and curated post references.
+
+        :param user_id: 
+        :type user_id: str
+        :param thread_id: 
+        :type thread_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_conversations_serialize(
+            user_id=user_id,
+            thread_id=thread_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetConversations200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_conversations_serialize(
+        self,
+        user_id,
+        thread_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if user_id is not None:
+            
+            _query_params.append(('user_id', user_id))
+            
+        if thread_id is not None:
+            
+            _query_params.append(('thread_id', thread_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/agent/memory/conversations',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3998,6 +6013,529 @@ class DefaultApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/auth-service/password/reset',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def send_sign_in_validation_code(
+        self,
+        app_id: Annotated[StrictStr, Field(description="App ID")],
+        mobile_number: Annotated[Optional[StrictStr], Field(description="Mobile number")] = None,
+        email_id: Annotated[Optional[StrictStr], Field(description="Email ID")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> SendSignInValidationCode200Response:
+        """Send Sign-In Validation Code (OTP)
+
+        This API initiates the **sign-in validation process** by sending a **one-time validation code (OTP)** to the user. The OTP is delivered to **either the mobile number or the email address** provided in the request. This endpoint is typically called **before completing sign-in**, to verify that the user owns the supplied contact identifier. The calling application is responsible for:
+        * Collecting the OTP from the user
+        * Submitting it to the OTP verification API (handled separately)
+        
+        ---
+        
+        ### **Use Case**
+        * User attempts to sign in
+        * User provides **mobile number or email** * System sends a **validation code (OTP)**
+        * User enters OTP to complete sign-in
+        
+        ---
+        
+        ### **Request Method**
+        
+         `POST`
+        
+        ---
+        
+        ### **Formdata Parameters**
+        
+        | Parameter Name | Type | Required | Description |
+        | --------------- | ------ | --------- | ------------------------------------------- |
+        | `mobile_number` | String | Optional* | Mobile number to which the OTP will be sent |
+        | `email_id` | String | Optional* | Email address to which the OTP will be sent |
+        | `app_id` | String | Optional | Identifier of the calling application |
+        * **Either `mobile_number` or `email_id` must be provided.** Providing both is allowed; the system may choose one based on configuration.
+        
+        ---
+        
+        ### **Request Rules**
+        * At least **one** of `mobile_number` or `email_id` is mandatory
+        * If both are missing, the request will be rejected * OTP delivery channel depends on the provided identifier
+        
+        ---
+        
+        ### **Response Format**
+        
+         `application/json`
+        
+        ---
+        
+        ### **Sample
+        
+        Success Response**
+        
+        ```json { \"status\": \"SUCCESS\", \"message\": \"Validation code sent successfully\" }
+        
+        ```
+        
+        ---
+        
+        ### **Sample
+        
+        Error Responses**
+        
+        ### Missing Identifier
+        
+        ```json { \"status\": \"ERROR\", \"message\": \"Either mobile_number or email_id must be provided\" }
+        
+        ```
+        
+        ### Invalid Identifier
+        
+        ```json { \"status\": \"ERROR\", \"message\": \"Invalid mobile number or email address\" }
+        
+        ```
+        
+        ---
+        
+        ### **Notes**
+        * This API **only sends** the validation code
+        * OTP verification must be performed using the corresponding **verify validation code** API * Rate limiting and retry restrictions may apply to prevent abuse
+
+        :param app_id: App ID (required)
+        :type app_id: str
+        :param mobile_number: Mobile number
+        :type mobile_number: str
+        :param email_id: Email ID
+        :type email_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._send_sign_in_validation_code_serialize(
+            app_id=app_id,
+            mobile_number=mobile_number,
+            email_id=email_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "SendSignInValidationCode200Response",
+            '400': "ResetPassword400Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def send_sign_in_validation_code_with_http_info(
+        self,
+        app_id: Annotated[StrictStr, Field(description="App ID")],
+        mobile_number: Annotated[Optional[StrictStr], Field(description="Mobile number")] = None,
+        email_id: Annotated[Optional[StrictStr], Field(description="Email ID")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[SendSignInValidationCode200Response]:
+        """Send Sign-In Validation Code (OTP)
+
+        This API initiates the **sign-in validation process** by sending a **one-time validation code (OTP)** to the user. The OTP is delivered to **either the mobile number or the email address** provided in the request. This endpoint is typically called **before completing sign-in**, to verify that the user owns the supplied contact identifier. The calling application is responsible for:
+        * Collecting the OTP from the user
+        * Submitting it to the OTP verification API (handled separately)
+        
+        ---
+        
+        ### **Use Case**
+        * User attempts to sign in
+        * User provides **mobile number or email** * System sends a **validation code (OTP)**
+        * User enters OTP to complete sign-in
+        
+        ---
+        
+        ### **Request Method**
+        
+         `POST`
+        
+        ---
+        
+        ### **Formdata Parameters**
+        
+        | Parameter Name | Type | Required | Description |
+        | --------------- | ------ | --------- | ------------------------------------------- |
+        | `mobile_number` | String | Optional* | Mobile number to which the OTP will be sent |
+        | `email_id` | String | Optional* | Email address to which the OTP will be sent |
+        | `app_id` | String | Optional | Identifier of the calling application |
+        * **Either `mobile_number` or `email_id` must be provided.** Providing both is allowed; the system may choose one based on configuration.
+        
+        ---
+        
+        ### **Request Rules**
+        * At least **one** of `mobile_number` or `email_id` is mandatory
+        * If both are missing, the request will be rejected * OTP delivery channel depends on the provided identifier
+        
+        ---
+        
+        ### **Response Format**
+        
+         `application/json`
+        
+        ---
+        
+        ### **Sample
+        
+        Success Response**
+        
+        ```json { \"status\": \"SUCCESS\", \"message\": \"Validation code sent successfully\" }
+        
+        ```
+        
+        ---
+        
+        ### **Sample
+        
+        Error Responses**
+        
+        ### Missing Identifier
+        
+        ```json { \"status\": \"ERROR\", \"message\": \"Either mobile_number or email_id must be provided\" }
+        
+        ```
+        
+        ### Invalid Identifier
+        
+        ```json { \"status\": \"ERROR\", \"message\": \"Invalid mobile number or email address\" }
+        
+        ```
+        
+        ---
+        
+        ### **Notes**
+        * This API **only sends** the validation code
+        * OTP verification must be performed using the corresponding **verify validation code** API * Rate limiting and retry restrictions may apply to prevent abuse
+
+        :param app_id: App ID (required)
+        :type app_id: str
+        :param mobile_number: Mobile number
+        :type mobile_number: str
+        :param email_id: Email ID
+        :type email_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._send_sign_in_validation_code_serialize(
+            app_id=app_id,
+            mobile_number=mobile_number,
+            email_id=email_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "SendSignInValidationCode200Response",
+            '400': "ResetPassword400Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def send_sign_in_validation_code_without_preload_content(
+        self,
+        app_id: Annotated[StrictStr, Field(description="App ID")],
+        mobile_number: Annotated[Optional[StrictStr], Field(description="Mobile number")] = None,
+        email_id: Annotated[Optional[StrictStr], Field(description="Email ID")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Send Sign-In Validation Code (OTP)
+
+        This API initiates the **sign-in validation process** by sending a **one-time validation code (OTP)** to the user. The OTP is delivered to **either the mobile number or the email address** provided in the request. This endpoint is typically called **before completing sign-in**, to verify that the user owns the supplied contact identifier. The calling application is responsible for:
+        * Collecting the OTP from the user
+        * Submitting it to the OTP verification API (handled separately)
+        
+        ---
+        
+        ### **Use Case**
+        * User attempts to sign in
+        * User provides **mobile number or email** * System sends a **validation code (OTP)**
+        * User enters OTP to complete sign-in
+        
+        ---
+        
+        ### **Request Method**
+        
+         `POST`
+        
+        ---
+        
+        ### **Formdata Parameters**
+        
+        | Parameter Name | Type | Required | Description |
+        | --------------- | ------ | --------- | ------------------------------------------- |
+        | `mobile_number` | String | Optional* | Mobile number to which the OTP will be sent |
+        | `email_id` | String | Optional* | Email address to which the OTP will be sent |
+        | `app_id` | String | Optional | Identifier of the calling application |
+        * **Either `mobile_number` or `email_id` must be provided.** Providing both is allowed; the system may choose one based on configuration.
+        
+        ---
+        
+        ### **Request Rules**
+        * At least **one** of `mobile_number` or `email_id` is mandatory
+        * If both are missing, the request will be rejected * OTP delivery channel depends on the provided identifier
+        
+        ---
+        
+        ### **Response Format**
+        
+         `application/json`
+        
+        ---
+        
+        ### **Sample
+        
+        Success Response**
+        
+        ```json { \"status\": \"SUCCESS\", \"message\": \"Validation code sent successfully\" }
+        
+        ```
+        
+        ---
+        
+        ### **Sample
+        
+        Error Responses**
+        
+        ### Missing Identifier
+        
+        ```json { \"status\": \"ERROR\", \"message\": \"Either mobile_number or email_id must be provided\" }
+        
+        ```
+        
+        ### Invalid Identifier
+        
+        ```json { \"status\": \"ERROR\", \"message\": \"Invalid mobile number or email address\" }
+        
+        ```
+        
+        ---
+        
+        ### **Notes**
+        * This API **only sends** the validation code
+        * OTP verification must be performed using the corresponding **verify validation code** API * Rate limiting and retry restrictions may apply to prevent abuse
+
+        :param app_id: App ID (required)
+        :type app_id: str
+        :param mobile_number: Mobile number
+        :type mobile_number: str
+        :param email_id: Email ID
+        :type email_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._send_sign_in_validation_code_serialize(
+            app_id=app_id,
+            mobile_number=mobile_number,
+            email_id=email_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "SendSignInValidationCode200Response",
+            '400': "ResetPassword400Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _send_sign_in_validation_code_serialize(
+        self,
+        app_id,
+        mobile_number,
+        email_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if mobile_number is not None:
+            _form_params.append(('mobile_number', mobile_number))
+        if email_id is not None:
+            _form_params.append(('email_id', email_id))
+        if app_id is not None:
+            _form_params.append(('app_id', app_id))
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'multipart/form-data'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/auth-service/send/sign/in/validation/code',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

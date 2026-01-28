@@ -52,10 +52,10 @@ import ai.xfloor.memory.client.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.18.0")
 public class BlockDetails {
-  public static final String SERIALIZED_NAME_BID = "bid";
-  @SerializedName(SERIALIZED_NAME_BID)
+  public static final String SERIALIZED_NAME_BLOCK_ID = "block_id";
+  @SerializedName(SERIALIZED_NAME_BLOCK_ID)
   @javax.annotation.Nonnull
-  private String bid;
+  private String blockId;
 
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
@@ -70,22 +70,22 @@ public class BlockDetails {
   public BlockDetails() {
   }
 
-  public BlockDetails bid(@javax.annotation.Nonnull String bid) {
-    this.bid = bid;
+  public BlockDetails blockId(@javax.annotation.Nonnull String blockId) {
+    this.blockId = blockId;
     return this;
   }
 
   /**
    * Block ID
-   * @return bid
+   * @return blockId
    */
   @javax.annotation.Nonnull
-  public String getBid() {
-    return bid;
+  public String getBlockId() {
+    return blockId;
   }
 
-  public void setBid(@javax.annotation.Nonnull String bid) {
-    this.bid = bid;
+  public void setBlockId(@javax.annotation.Nonnull String blockId) {
+    this.blockId = blockId;
   }
 
 
@@ -137,21 +137,21 @@ public class BlockDetails {
       return false;
     }
     BlockDetails blockDetails = (BlockDetails) o;
-    return Objects.equals(this.bid, blockDetails.bid) &&
+    return Objects.equals(this.blockId, blockDetails.blockId) &&
         Objects.equals(this.type, blockDetails.type) &&
         Objects.equals(this.title, blockDetails.title);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bid, type, title);
+    return Objects.hash(blockId, type, title);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class BlockDetails {\n");
-    sb.append("    bid: ").append(toIndentedString(bid)).append("\n");
+    sb.append("    blockId: ").append(toIndentedString(blockId)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("}");
@@ -175,10 +175,10 @@ public class BlockDetails {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("bid", "type", "title"));
+    openapiFields = new HashSet<String>(Arrays.asList("block_id", "type", "title"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("bid", "type", "title"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("block_id", "type", "title"));
   }
 
   /**
@@ -209,8 +209,8 @@ public class BlockDetails {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("bid").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `bid` to be a primitive type in the JSON string but got `%s`", jsonObj.get("bid").toString()));
+      if (!jsonObj.get("block_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `block_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("block_id").toString()));
       }
       if (!jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));

@@ -7,7 +7,7 @@ Block Details
 
 Name | Type
 ------------ | -------------
-`bid` | string
+`blockId` | string
 `type` | string
 `title` | string
 
@@ -18,7 +18,7 @@ import type { BlockDetails } from '@xfloor/floor-memory-sdk-ts'
 
 // TODO: Update the object below with actual values
 const example = {
-  "bid": null,
+  "blockId": null,
   "type": null,
   "title": null,
 } satisfies BlockDetails

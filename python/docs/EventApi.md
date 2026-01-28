@@ -12,21 +12,26 @@ Method | HTTP request | Description
 
 Create Event (Post Content)
 
-Posts into the given floor_id. This is asynchronous ingestion. 200 OK means queued, not immediately retrievable.
+### Create Event (Content Ingestion)
+
+Posts content into the specified `floor_id`.
+This API performs **asynchronous ingestion** — a `200 OK` response means the content has been **accepted and queued**, not immediately retrievable.
+
 This API allows a user to **post personal content into their POD (Personal Object Database)**.
-The posted content is stored under a specified **floor**, embedded by the platform, and made available for **semantic querying, conversational retrieval, and memory-based interactions**.
+
+The posted content is stored under a specified **floor**, embedded by the platform, and made available for **semantic querying, conversational retrieval, and memory-based interactions** once processing completes.
 
 It is primarily used to:
 
-* Save reminders, notes, writeups, or personal knowledge
-* Upload content that the user wants the system to remember
+* Save reminders, notes, write-ups, or personal knowledge
+* Upload content the user wants the system to remember
 * Add information that should later be discoverable via conversational queries
 
 The content may consist of **text only** or **text combined with one or more media files**.
 
 ---
 
-### **Key Capabilities**
+### Key Capabilities
 
 * Stores user-generated content inside a specific floor
 * Supports **multi-modal inputs** (text + media)
@@ -36,11 +41,11 @@ The content may consist of **text only** or **text combined with one or more med
   * `/agent/memory/query`
   * conversational agents
   * future recall and analytics
-* Associates content with user, block, and application context
+* Associates content with **user**, **block**, and **application** context (when provided)
 
 ---
 
-### **Authentication**
+### Authentication
 
 * Requires a valid, authenticated `user_id`
 * The calling application is responsible for user authentication
@@ -48,19 +53,19 @@ The content may consist of **text only** or **text combined with one or more med
 
 ---
 
-### **Request Type**
+### Request Type
 
 **Content-Type:** `multipart/form-data`
 
 ---
 
-### **Request Parameters**
+**Request Parameters
 
-### **1. Files (Optional)**
+1. Files (Optional)**
 
 | Field | Type | Required | Description |
-| ------- | ------ | -------- | --------------------------------------------------------------------- |
-| `files` | file[] | Optional | Media files to attach to the content. Multiple files may be uploaded. |
+| ------- | -------- | -------- | --------------------------------------------------------------------- |
+| `files` | `file[]` | Optional | Media files to attach to the content. Multiple files may be uploaded. |
 
 **Supported formats include (but are not limited to):**
 
@@ -73,103 +78,116 @@ These files are processed and embedded along with the textual content where appl
 
 ---
 
-### **2. Input Information (Required)**
+2. Input Information (Required)
 
 | Field | Type | Required | Description |
-| ------------ | ------------- | -------- | ----------------------------------------------------------------- |
-| `input_info` | string (JSON) | Yes | JSON string containing metadata and textual content for the post. |
+| ------------ | --------------- | -------- | ----------------------------------------------------------------- |
+| `input_info` | `string (JSON)` | Yes | JSON string containing metadata and textual content for the post. |
 
 ---
 
-### **`input_info` Structure**
+### `input_info` Structure
 
 ```json
 {
   "floor_id": "my_floor",
-  "BID": "17845683456",
+  "block_id": "17845683456",
+  "block_type": "post",
   "user_id": "145623907625",
-  "title": "My floor",
-  "description": "My floor details",
+  "title": "My note",
+  "description": "Things I should remember",
   "app_id": "165434879028"
 }
 ```
 
 ---
 
-### **Field Descriptions**
+### Field Descriptions
 
 | Field | Type | Required | Description |
-| ------------- | ------ | -------- | ---------------------------------------------------------------------------------- |
-| `floor_id` | string | Yes | Identifier of the user’s floor (POD) where the content will be stored. |
-| `block_type` | string | Yes | Type of block under which the content is categorized (e.g., post, note, reminder). |
-| `BID` | string | Yes | Block identifier associated with this content. |
-| `user_id` | string | Yes | Unique identifier of the user posting the content. |
-| `title` | string | Optional | Title or short heading for the content. |
-| `description` | string | Yes | Main textual content to be stored and embedded. |
-| `app_id` | string | Optional | Identifier of the calling application. |
+| ------------- | -------- | -------- | --------------------------------------------------------------------------------------------------------- |
+| `floor_id` | `string` | Yes | Identifier of the user’s floor (POD) where the content will be stored. |
+| `block_id` | `string` | Optional | Identifier of the block within the floor used to group or categorize content. |
+| `block_type` | `string` | Optional | Logical category of the content (e.g., `post`, `note`, `reminder`). Used for routing and UI organization. |
+| `user_id` | `string` | Yes | Unique identifier of the user posting the content. |
+| `title` | `string` | Optional | Short title or heading for the content. |
+| `description` | `string` | Yes | Main textual content to be stored and embedded. |
+| `app_id` | `string` | Optional | Identifier of the calling application context. |
 
 ---
 
-### **Behavior**
+### Behavior
 
 1. The API validates the user and floor context.
 2. Textual content (`title` and `description`) is ingested.
-3. Attached media files are processed and linked to the content.
+3. Attached media files (if any) are processed and linked to the content.
 4. Embeddings are generated for:
 
-   * Text
-   * Supported media (where applicable)
-5. The content becomes part of the user’s **personal memory store**.
-6. The stored data is immediately available for querying and conversational retrieval.
+   * text
+   * supported media (where applicable)
+5. The content becomes part of the user’s **personal memory store (POD)**.
+6. Once background processing completes, the content becomes available for:
+
+   * semantic search
+   * conversational retrieval
+   * memory-based interactions
 
 ---
 
-### **Successful Response**
+### Successful Response
 
 On success, the API confirms that:
 
-* The content has been stored
-* Embeddings have been generated
-* The memory item is available for future queries
+* The content has been **accepted**
+* Processing has been **queued**
+* Reference identifiers are returned
 
-A success status and reference identifiers are returned.
+> A successful response indicates **acceptance**, not immediate availability.
 
 ---
 
-### **Error Handling**
+### Error Handling
 
 The API may return errors if:
 
 * Required fields are missing (`floor_id`, `user_id`, `description`)
-* Unsupported file formats are uploaded
+* Uploaded files use unsupported formats
 * The user does not have access to the specified floor
 * The request payload is malformed
 * Internal embedding or storage operations fail
 
 ---
 
-### **Typical Use Cases**
+### Typical Use Cases
 
 * Saving personal reminders
 * Posting notes or observations
-* Uploading documents for future reference
-* Creating a personal knowledge base
-* Feeding data into conversational agents
+* Uploading documents for later recall
+* Building a personal knowledge base
+* Feeding content into conversational agents
 
 ---
 
-### **One-Line Summary**
+### ⚠️ Asynchronous Ingestion Notice
 
-> Stores user-generated text and media into a personal POD, embeds it for semantic search, and makes it available for conversational querying.
+Content ingestion is **asynchronous**.
 
-⚠️ Content Ingestion is Asynchronous
+A `200 OK` response means the request was **successfully queued**.
+Newly ingested content may take time to become searchable via the Query API.
 
-The Create Event API queues content for processing.
-A successful response indicates **acceptance**, not availability.
+Use **Recent Events** or retry queries after a short delay to confirm availability.
 
-Newly ingested content may take time to become searchable
-via the Query API.
+---
 
+### One-Line Summary
+
+> Stores user-generated text and media into a personal POD, embeds it asynchronously, and makes it available for semantic and conversational querying.
+
+If you want, next I can:
+
+* align this **exactly** with the OpenAPI schema fields
+* generate **JS / TS / Python / Java snippets** using this definition
+* add **state diagrams** (queued → processing → searchable) for docs
 
 
 ### Example

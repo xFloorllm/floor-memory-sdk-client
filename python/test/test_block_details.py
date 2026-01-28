@@ -36,13 +36,13 @@ class TestBlockDetails(unittest.TestCase):
         model = BlockDetails()
         if include_optional:
             return BlockDetails(
-                bid = '',
+                block_id = '',
                 type = '',
                 title = ''
             )
         else:
             return BlockDetails(
-                bid = '',
+                block_id = '',
                 type = '',
                 title = '',
         )

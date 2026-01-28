@@ -38,11 +38,11 @@ public class BlockDetailsTest {
     }
 
     /**
-     * Test the property 'bid'
+     * Test the property 'blockId'
      */
     @Test
-    public void bidTest() {
-        // TODO: test bid
+    public void blockIdTest() {
+        // TODO: test blockId
     }
 
     /**
