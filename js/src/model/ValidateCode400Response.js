@@ -19,7 +19,7 @@ import ValidateCode400ResponseError from './ValidateCode400ResponseError';
 /**
  * The ValidateCode400Response model module.
  * @module model/ValidateCode400Response
- * @version 1.0.8
+ * @version 1.0.9
  */
 class ValidateCode400Response {
     /**

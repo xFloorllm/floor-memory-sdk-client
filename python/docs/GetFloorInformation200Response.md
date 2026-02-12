@@ -38,6 +38,12 @@ Notes
 |
 
 [optional]
+**is_owner**
+
+| **str** | Is the user Owner |
+**floor_type**
+
+| **str** | Type of floor (POD, PUBLIC or PRIVATE) |
 
 ### Example
 

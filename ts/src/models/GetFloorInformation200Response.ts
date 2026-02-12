@@ -72,6 +72,18 @@ export interface GetFloorInformation200Response {
      * @memberof GetFloorInformation200Response
      */
     avatar?: Media;
+    /**
+     * Is the user Owner
+     * @type {string}
+     * @memberof GetFloorInformation200Response
+     */
+    isOwner: string;
+    /**
+     * Type of floor (POD, PUBLIC or PRIVATE)
+     * @type {string}
+     * @memberof GetFloorInformation200Response
+     */
+    floorType: string;
 }
 
 /**
@@ -81,6 +93,8 @@ export function instanceOfGetFloorInformation200Response(value: object): value i
     if (!('floorId' in value) || value['floorId'] === undefined) return false;
     if (!('title' in value) || value['title'] === undefined) return false;
     if (!('floorUid' in value) || value['floorUid'] === undefined) return false;
+    if (!('isOwner' in value) || value['isOwner'] === undefined) return false;
+    if (!('floorType' in value) || value['floorType'] === undefined) return false;
     return true;
 }
 
@@ -100,6 +114,8 @@ export function GetFloorInformation200ResponseFromJSONTyped(json: any, ignoreDis
         'floorUid': json['floor_uid'],
         'blocks': json['blocks'] == null ? undefined : ((json['blocks'] as Array<any>).map(BlockDetailsFromJSON)),
         'avatar': json['avatar'] == null ? undefined : MediaFromJSON(json['avatar']),
+        'isOwner': json['is_owner'],
+        'floorType': json['floor_type'],
     };
 }
 
@@ -120,6 +136,8 @@ export function GetFloorInformation200ResponseToJSONTyped(value?: GetFloorInform
         'floor_uid': value['floorUid'],
         'blocks': value['blocks'] == null ? undefined : ((value['blocks'] as Array<any>).map(BlockDetailsToJSON)),
         'avatar': MediaToJSON(value['avatar']),
+        'is_owner': value['isOwner'],
+        'floor_type': value['floorType'],
     };
 }
 

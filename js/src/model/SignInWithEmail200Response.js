@@ -20,7 +20,7 @@ import SignInWithEmail200ResponseProfile from './SignInWithEmail200ResponseProfi
 /**
  * The SignInWithEmail200Response model module.
  * @module model/SignInWithEmail200Response
- * @version 1.0.8
+ * @version 1.0.9
  */
 class SignInWithEmail200Response {
     /**

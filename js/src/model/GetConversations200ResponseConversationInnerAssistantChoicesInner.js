@@ -21,7 +21,7 @@ import GetConversations200ResponseConversationInnerAssistantChoicesInnerPromptDe
 /**
  * The GetConversations200ResponseConversationInnerAssistantChoicesInner model module.
  * @module model/GetConversations200ResponseConversationInnerAssistantChoicesInner
- * @version 1.0.8
+ * @version 1.0.9
  */
 class GetConversations200ResponseConversationInnerAssistantChoicesInner {
     /**

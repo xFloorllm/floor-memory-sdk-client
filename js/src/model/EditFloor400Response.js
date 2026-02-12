@@ -19,7 +19,7 @@ import EditFloor400ResponseError from './EditFloor400ResponseError';
 /**
  * The EditFloor400Response model module.
  * @module model/EditFloor400Response
- * @version 1.0.8
+ * @version 1.0.9
  */
 class EditFloor400Response {
     /**

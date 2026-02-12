@@ -37,5 +37,11 @@ Notes
 |
 
 [optional]
+**isOwner**
+
+| **String** | Is the user Owner |
+**floorType**
+
+| **String** | Type of floor (POD, PUBLIC or PRIVATE) |
 
 

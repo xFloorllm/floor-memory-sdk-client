@@ -89,4 +89,20 @@ public class GetFloorInformation200ResponseTest {
         // TODO: test avatar
     }
 
+    /**
+     * Test the property 'isOwner'
+     */
+    @Test
+    public void isOwnerTest() {
+        // TODO: test isOwner
+    }
+
+    /**
+     * Test the property 'floorType'
+     */
+    @Test
+    public void floorTypeTest() {
+        // TODO: test floorType
+    }
+
 }

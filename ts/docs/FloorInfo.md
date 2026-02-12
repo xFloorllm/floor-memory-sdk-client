@@ -13,6 +13,8 @@ Name | Type
 `floorUid` | string
 `blocks` | [Array&lt;BlockDetails&gt;](BlockDetails.md)
 `avatar` | [Media](Media.md)
+`isOwner` | string
+`floorType` | string
 
 ### Example
 
@@ -27,6 +29,8 @@ const example = {
   "floorUid": null,
   "blocks": null,
   "avatar": null,
+  "isOwner": null,
+  "floorType": null,
 } satisfies FloorInfo
 
 console.log(example)

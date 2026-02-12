@@ -86,6 +86,16 @@ public class FloorInfo {
   @javax.annotation.Nullable
   private Media avatar;
 
+  public static final String SERIALIZED_NAME_IS_OWNER = "is_owner";
+  @SerializedName(SERIALIZED_NAME_IS_OWNER)
+  @javax.annotation.Nonnull
+  private String isOwner;
+
+  public static final String SERIALIZED_NAME_FLOOR_TYPE = "floor_type";
+  @SerializedName(SERIALIZED_NAME_FLOOR_TYPE)
+  @javax.annotation.Nonnull
+  private String floorType;
+
   public FloorInfo() {
   }
 
@@ -211,6 +221,44 @@ public class FloorInfo {
   }
 
 
+  public FloorInfo isOwner(@javax.annotation.Nonnull String isOwner) {
+    this.isOwner = isOwner;
+    return this;
+  }
+
+  /**
+   * Is the user Owner
+   * @return isOwner
+   */
+  @javax.annotation.Nonnull
+  public String getIsOwner() {
+    return isOwner;
+  }
+
+  public void setIsOwner(@javax.annotation.Nonnull String isOwner) {
+    this.isOwner = isOwner;
+  }
+
+
+  public FloorInfo floorType(@javax.annotation.Nonnull String floorType) {
+    this.floorType = floorType;
+    return this;
+  }
+
+  /**
+   * Type of floor (POD, PUBLIC or PRIVATE)
+   * @return floorType
+   */
+  @javax.annotation.Nonnull
+  public String getFloorType() {
+    return floorType;
+  }
+
+  public void setFloorType(@javax.annotation.Nonnull String floorType) {
+    this.floorType = floorType;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -226,12 +274,14 @@ public class FloorInfo {
         Objects.equals(this.details, floorInfo.details) &&
         Objects.equals(this.floorUid, floorInfo.floorUid) &&
         Objects.equals(this.blocks, floorInfo.blocks) &&
-        Objects.equals(this.avatar, floorInfo.avatar);
+        Objects.equals(this.avatar, floorInfo.avatar) &&
+        Objects.equals(this.isOwner, floorInfo.isOwner) &&
+        Objects.equals(this.floorType, floorInfo.floorType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(floorId, title, details, floorUid, blocks, avatar);
+    return Objects.hash(floorId, title, details, floorUid, blocks, avatar, isOwner, floorType);
   }
 
   @Override
@@ -244,6 +294,8 @@ public class FloorInfo {
     sb.append("    floorUid: ").append(toIndentedString(floorUid)).append("\n");
     sb.append("    blocks: ").append(toIndentedString(blocks)).append("\n");
     sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
+    sb.append("    isOwner: ").append(toIndentedString(isOwner)).append("\n");
+    sb.append("    floorType: ").append(toIndentedString(floorType)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -265,10 +317,10 @@ public class FloorInfo {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("floor_id", "title", "details", "floor_uid", "blocks", "avatar"));
+    openapiFields = new HashSet<String>(Arrays.asList("floor_id", "title", "details", "floor_uid", "blocks", "avatar", "is_owner", "floor_type"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("floor_id", "title", "floor_uid"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("floor_id", "title", "floor_uid", "is_owner", "floor_type"));
   }
 
   /**
@@ -328,6 +380,12 @@ public class FloorInfo {
       // validate the optional field `avatar`
       if (jsonObj.get("avatar") != null && !jsonObj.get("avatar").isJsonNull()) {
         Media.validateJsonElement(jsonObj.get("avatar"));
+      }
+      if (!jsonObj.get("is_owner").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `is_owner` to be a primitive type in the JSON string but got `%s`", jsonObj.get("is_owner").toString()));
+      }
+      if (!jsonObj.get("floor_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `floor_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("floor_type").toString()));
       }
   }
 

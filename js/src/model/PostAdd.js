@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The PostAdd model module.
  * @module model/PostAdd
- * @version 1.0.8
+ * @version 1.0.9
  */
 class PostAdd {
     /**

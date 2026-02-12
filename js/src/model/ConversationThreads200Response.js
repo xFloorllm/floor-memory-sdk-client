@@ -19,7 +19,7 @@ import ConversationThreads200ResponseThreadsInner from './ConversationThreads200
 /**
  * The ConversationThreads200Response model module.
  * @module model/ConversationThreads200Response
- * @version 1.0.8
+ * @version 1.0.9
  */
 class ConversationThreads200Response {
     /**

@@ -90,6 +90,18 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property isOwner (base name: "is_owner")', function() {
+      // uncomment below and update the code to test the property isOwner
+      //var instance = new XfloorFloorMemorySdkJs.GetFloorInformation200Response();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property floorType (base name: "floor_type")', function() {
+      // uncomment below and update the code to test the property floorType
+      //var instance = new XfloorFloorMemorySdkJs.GetFloorInformation200Response();
+      //expect(instance).to.be();
+    });
+
   });
 
 }));

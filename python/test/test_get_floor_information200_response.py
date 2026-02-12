@@ -48,13 +48,17 @@ class TestGetFloorInformation200Response(unittest.TestCase):
                     ],
                 avatar = xfloor_memory_sdk.models.media.Media(
                     url = '', 
-                    type = '', )
+                    type = '', ),
+                is_owner = '',
+                floor_type = ''
             )
         else:
             return GetFloorInformation200Response(
                 floor_id = '',
                 title = '',
                 floor_uid = '',
+                is_owner = '',
+                floor_type = '',
         )
         """
 

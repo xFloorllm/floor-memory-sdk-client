@@ -20,7 +20,7 @@ import Media from './Media';
 /**
  * The GetFloorInformation200Response model module.
  * @module model/GetFloorInformation200Response
- * @version 1.0.8
+ * @version 1.0.9
  */
 class GetFloorInformation200Response {
     /**
@@ -29,10 +29,12 @@ class GetFloorInformation200Response {
      * @param floorId {String} Pod floor ID
      * @param title {String} Title
      * @param floorUid {String} Unique numeric ID of the pod floor
+     * @param isOwner {String} Is the user Owner
+     * @param floorType {String} Type of floor (POD, PUBLIC or PRIVATE)
      */
-    constructor(floorId, title, floorUid) { 
+    constructor(floorId, title, floorUid, isOwner, floorType) { 
         
-        GetFloorInformation200Response.initialize(this, floorId, title, floorUid);
+        GetFloorInformation200Response.initialize(this, floorId, title, floorUid, isOwner, floorType);
     }
 
     /**
@@ -40,10 +42,12 @@ class GetFloorInformation200Response {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, floorId, title, floorUid) { 
+    static initialize(obj, floorId, title, floorUid, isOwner, floorType) { 
         obj['floor_id'] = floorId;
         obj['title'] = title;
         obj['floor_uid'] = floorUid;
+        obj['is_owner'] = isOwner;
+        obj['floor_type'] = floorType;
     }
 
     /**
@@ -74,6 +78,12 @@ class GetFloorInformation200Response {
             }
             if (data.hasOwnProperty('avatar')) {
                 obj['avatar'] = Media.constructFromObject(data['avatar']);
+            }
+            if (data.hasOwnProperty('is_owner')) {
+                obj['is_owner'] = ApiClient.convertToType(data['is_owner'], 'String');
+            }
+            if (data.hasOwnProperty('floor_type')) {
+                obj['floor_type'] = ApiClient.convertToType(data['floor_type'], 'String');
             }
         }
         return obj;
@@ -121,6 +131,14 @@ class GetFloorInformation200Response {
         if (data['avatar']) { // data not null
           Media.validateJSON(data['avatar']);
         }
+        // ensure the json data is a string
+        if (data['is_owner'] && !(typeof data['is_owner'] === 'string' || data['is_owner'] instanceof String)) {
+            throw new Error("Expected the field `is_owner` to be a primitive type in the JSON string but got " + data['is_owner']);
+        }
+        // ensure the json data is a string
+        if (data['floor_type'] && !(typeof data['floor_type'] === 'string' || data['floor_type'] instanceof String)) {
+            throw new Error("Expected the field `floor_type` to be a primitive type in the JSON string but got " + data['floor_type']);
+        }
 
         return true;
     }
@@ -128,7 +146,7 @@ class GetFloorInformation200Response {
 
 }
 
-GetFloorInformation200Response.RequiredProperties = ["floor_id", "title", "floor_uid"];
+GetFloorInformation200Response.RequiredProperties = ["floor_id", "title", "floor_uid", "is_owner", "floor_type"];
 
 /**
  * Pod floor ID
@@ -164,6 +182,18 @@ GetFloorInformation200Response.prototype['blocks'] = undefined;
  * @member {module:model/Media} avatar
  */
 GetFloorInformation200Response.prototype['avatar'] = undefined;
+
+/**
+ * Is the user Owner
+ * @member {String} is_owner
+ */
+GetFloorInformation200Response.prototype['is_owner'] = undefined;
+
+/**
+ * Type of floor (POD, PUBLIC or PRIVATE)
+ * @member {String} floor_type
+ */
+GetFloorInformation200Response.prototype['floor_type'] = undefined;
 
 
 

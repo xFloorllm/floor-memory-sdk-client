@@ -2,7 +2,7 @@ lazy val root = (project in file(".")).
   settings(
     organization := "ai.xfloor.sdk",
     name := "floor-memory-sdk-client",
-    version := "1.0.8",
+    version := "1.0.9",
     scalaVersion := "2.11.12",
     scalacOptions ++= Seq("-feature"),
     compile / javacOptions ++= Seq("-Xlint:deprecation"),

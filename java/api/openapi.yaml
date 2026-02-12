@@ -3983,9 +3983,17 @@ components:
           type: array
         avatar:
           $ref: "#/components/schemas/Media"
+        is_owner:
+          description: Is the user Owner
+          type: string
+        floor_type:
+          description: "Type of floor (POD, PUBLIC or PRIVATE)"
+          type: string
       required:
       - floor_id
+      - floor_type
       - floor_uid
+      - is_owner
       - title
       type: object
     Threads:
@@ -4962,6 +4970,7 @@ components:
         - type: type
           title: title
           block_id: block_id
+        is_owner: is_owner
         floor_uid: floor_uid
         floor_id: floor_id
         details: details
@@ -4969,6 +4978,7 @@ components:
           type: type
           url: url
         title: title
+        floor_type: floor_type
       properties:
         floor_id:
           description: Pod floor ID
@@ -4989,9 +4999,17 @@ components:
           type: array
         avatar:
           $ref: "#/components/schemas/Media"
+        is_owner:
+          description: Is the user Owner
+          type: string
+        floor_type:
+          description: "Type of floor (POD, PUBLIC or PRIVATE)"
+          type: string
       required:
       - floor_id
+      - floor_type
       - floor_uid
+      - is_owner
       - title
       type: object
     editFloor_request:

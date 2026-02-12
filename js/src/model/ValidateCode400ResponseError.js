@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The ValidateCode400ResponseError model module.
  * @module model/ValidateCode400ResponseError
- * @version 1.0.8
+ * @version 1.0.9
  */
 class ValidateCode400ResponseError {
     /**
