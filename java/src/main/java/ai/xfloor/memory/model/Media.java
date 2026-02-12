@@ -90,7 +90,7 @@ public class Media {
   }
 
   /**
-   * ID of the media
+   * Media Type
    * @return type
    */
   @javax.annotation.Nonnull

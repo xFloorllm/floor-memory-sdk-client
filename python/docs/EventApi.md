@@ -1,6 +1,6 @@
 # xfloor_memory_sdk.EventApi
 
-All URIs are relative to *https://appfloor.in*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -92,11 +92,10 @@ These files are processed and embedded along with the textual content where appl
 {
   "floor_id": "my_floor",
   "block_id": "17845683456",
-  "block_type": "post",
+  "block_type": "1",
   "user_id": "145623907625",
   "title": "My note",
-  "description": "Things I should remember",
-  "app_id": "165434879028"
+  "description": "Things I should remember"
 }
 ```
 
@@ -108,7 +107,7 @@ These files are processed and embedded along with the textual content where appl
 | ------------- | -------- | -------- | --------------------------------------------------------------------------------------------------------- |
 | `floor_id` | `string` | Yes | Identifier of the user’s floor (POD) where the content will be stored. |
 | `block_id` | `string` | Optional | Identifier of the block within the floor used to group or categorize content. |
-| `block_type` | `string` | Optional | Logical category of the content (e.g., `post`, `note`, `reminder`). Used for routing and UI organization. |
+| `block_type` | `string` | Optional | Logical category of the content (e.g., `0 for post`, `1 for forum`). Used for routing and UI organization. |
 | `user_id` | `string` | Yes | Unique identifier of the user posting the content. |
 | `title` | `string` | Optional | Short title or heading for the content. |
 | `description` | `string` | Yes | Main textual content to be stored and embedded. |
@@ -200,10 +199,10 @@ from xfloor_memory_sdk.models.event_response import EventResponse
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters

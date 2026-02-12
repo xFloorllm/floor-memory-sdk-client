@@ -1,6 +1,6 @@
 # xfloor_memory_sdk.QueryApi
 
-All URIs are relative to *https://appfloor.in*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -165,7 +165,7 @@ application/json
 
 | Field | Always Present | Description | Rendering Guidance |
 | ------------------ | ------------------ | ------------------------------------------- | ---------------------- |
-| `answer` | Yes | Assistant-generated conversational response | **Render prominently** |
+| `answer` | No | Assistant-generated conversational response. Depends on summary_needed. Is present if summary_needed=1 | **Render prominently** |
 | `items` | Yes (may be empty) | List of matched content used for grounding | Render optionally |
 | `items[].metadata` | Conditional | Included only if `include_metadata = "1"` | Render on demand |
 
@@ -227,10 +227,10 @@ from xfloor_memory_sdk.models.query_response import QueryResponse
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters

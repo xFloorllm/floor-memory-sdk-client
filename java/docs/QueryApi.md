@@ -1,6 +1,6 @@
 # QueryApi
 
-All URIs are relative to *https://appfloor.in*
+All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
@@ -105,7 +105,7 @@ Query (Primary API)
 
 | Field | Always Present | Description | Rendering Guidance |
 | ------------------ | ------------------ | ------------------------------------------- | ---------------------- |
-| `answer` | Yes | Assistant-generated conversational response | **Render prominently** |
+| `answer` | No | Assistant-generated conversational response. Depends on summary_needed. Is present if summary_needed=1 | **Render prominently** |
 | `items` | Yes (may be empty) | List of matched content used for grounding | Render optionally |
 | `items[].metadata` | Conditional | Included only if `include_metadata = \"1\"` | Render on demand |
 
@@ -152,7 +152,7 @@ import ai.xfloor.memory.api.QueryApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://appfloor.in");
+    defaultClient.setBasePath("http://localhost");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");

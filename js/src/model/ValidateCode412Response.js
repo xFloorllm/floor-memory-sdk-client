@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The ValidateCode412Response model module.
  * @module model/ValidateCode412Response
- * @version 1.0.7
+ * @version 1.0.8
  */
 class ValidateCode412Response {
     /**

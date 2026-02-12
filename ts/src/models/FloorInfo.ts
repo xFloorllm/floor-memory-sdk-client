@@ -59,7 +59,7 @@ export interface FloorInfo {
      * @type {string}
      * @memberof FloorInfo
      */
-    fid: string;
+    floorUid: string;
     /**
      * List of blocks
      * @type {Array<BlockDetails>}
@@ -80,7 +80,7 @@ export interface FloorInfo {
 export function instanceOfFloorInfo(value: object): value is FloorInfo {
     if (!('floorId' in value) || value['floorId'] === undefined) return false;
     if (!('title' in value) || value['title'] === undefined) return false;
-    if (!('fid' in value) || value['fid'] === undefined) return false;
+    if (!('floorUid' in value) || value['floorUid'] === undefined) return false;
     return true;
 }
 
@@ -97,7 +97,7 @@ export function FloorInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'floorId': json['floor_id'],
         'title': json['title'],
         'details': json['details'] == null ? undefined : json['details'],
-        'fid': json['fid'],
+        'floorUid': json['floor_uid'],
         'blocks': json['blocks'] == null ? undefined : ((json['blocks'] as Array<any>).map(BlockDetailsFromJSON)),
         'avatar': json['avatar'] == null ? undefined : MediaFromJSON(json['avatar']),
     };
@@ -117,7 +117,7 @@ export function FloorInfoToJSONTyped(value?: FloorInfo | null, ignoreDiscriminat
         'floor_id': value['floorId'],
         'title': value['title'],
         'details': value['details'],
-        'fid': value['fid'],
+        'floor_uid': value['floorUid'],
         'blocks': value['blocks'] == null ? undefined : ((value['blocks'] as Array<any>).map(BlockDetailsToJSON)),
         'avatar': MediaToJSON(value['avatar']),
     };

@@ -20,7 +20,7 @@ import Media from './Media';
 /**
  * The GetFloorInformation200Response model module.
  * @module model/GetFloorInformation200Response
- * @version 1.0.7
+ * @version 1.0.8
  */
 class GetFloorInformation200Response {
     /**
@@ -28,11 +28,11 @@ class GetFloorInformation200Response {
      * @alias module:model/GetFloorInformation200Response
      * @param floorId {String} Pod floor ID
      * @param title {String} Title
-     * @param fid {String} Unique numeric ID of the pod floor
+     * @param floorUid {String} Unique numeric ID of the pod floor
      */
-    constructor(floorId, title, fid) { 
+    constructor(floorId, title, floorUid) { 
         
-        GetFloorInformation200Response.initialize(this, floorId, title, fid);
+        GetFloorInformation200Response.initialize(this, floorId, title, floorUid);
     }
 
     /**
@@ -40,10 +40,10 @@ class GetFloorInformation200Response {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, floorId, title, fid) { 
+    static initialize(obj, floorId, title, floorUid) { 
         obj['floor_id'] = floorId;
         obj['title'] = title;
-        obj['fid'] = fid;
+        obj['floor_uid'] = floorUid;
     }
 
     /**
@@ -66,8 +66,8 @@ class GetFloorInformation200Response {
             if (data.hasOwnProperty('details')) {
                 obj['details'] = ApiClient.convertToType(data['details'], 'String');
             }
-            if (data.hasOwnProperty('fid')) {
-                obj['fid'] = ApiClient.convertToType(data['fid'], 'String');
+            if (data.hasOwnProperty('floor_uid')) {
+                obj['floor_uid'] = ApiClient.convertToType(data['floor_uid'], 'String');
             }
             if (data.hasOwnProperty('blocks')) {
                 obj['blocks'] = ApiClient.convertToType(data['blocks'], [BlockDetails]);
@@ -104,8 +104,8 @@ class GetFloorInformation200Response {
             throw new Error("Expected the field `details` to be a primitive type in the JSON string but got " + data['details']);
         }
         // ensure the json data is a string
-        if (data['fid'] && !(typeof data['fid'] === 'string' || data['fid'] instanceof String)) {
-            throw new Error("Expected the field `fid` to be a primitive type in the JSON string but got " + data['fid']);
+        if (data['floor_uid'] && !(typeof data['floor_uid'] === 'string' || data['floor_uid'] instanceof String)) {
+            throw new Error("Expected the field `floor_uid` to be a primitive type in the JSON string but got " + data['floor_uid']);
         }
         if (data['blocks']) { // data not null
             // ensure the json data is an array
@@ -128,7 +128,7 @@ class GetFloorInformation200Response {
 
 }
 
-GetFloorInformation200Response.RequiredProperties = ["floor_id", "title", "fid"];
+GetFloorInformation200Response.RequiredProperties = ["floor_id", "title", "floor_uid"];
 
 /**
  * Pod floor ID
@@ -150,9 +150,9 @@ GetFloorInformation200Response.prototype['details'] = undefined;
 
 /**
  * Unique numeric ID of the pod floor
- * @member {String} fid
+ * @member {String} floor_uid
  */
-GetFloorInformation200Response.prototype['fid'] = undefined;
+GetFloorInformation200Response.prototype['floor_uid'] = undefined;
 
 /**
  * List of blocks

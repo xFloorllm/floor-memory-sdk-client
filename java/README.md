@@ -47,7 +47,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>ai.xfloor.sdk</groupId>
   <artifactId>floor-memory-sdk-client</artifactId>
-  <version>1.0.7</version>
+  <version>1.0.8</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -63,7 +63,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "ai.xfloor.sdk:floor-memory-sdk-client:1.0.7"
+     implementation "ai.xfloor.sdk:floor-memory-sdk-client:1.0.8"
   }
 ```
 
@@ -77,7 +77,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/floor-memory-sdk-client-1.0.7.jar`
+* `target/floor-memory-sdk-client-1.0.8.jar`
 * `target/lib/*.jar`
 
 ### Getting Started
@@ -96,7 +96,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://appfloor.in");
+    defaultClient.setBasePath("http://localhost");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
     String inputInfo = "inputInfo_example"; // String | 
@@ -118,7 +118,7 @@ public class Example {
 
 ### Documentation for API Endpoints
 
-All URIs are relative to *https://appfloor.in*
+All URIs are relative to *http://localhost*
 
 Class
 

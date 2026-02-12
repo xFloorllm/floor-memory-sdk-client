@@ -17,6 +17,6 @@ Notes
 | **String** | Url where media is stored |
 **type**
 
-| **String** | ID of the media |
+| **String** | Media Type |
 
 

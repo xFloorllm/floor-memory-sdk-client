@@ -23,7 +23,7 @@ Notes
 | **String** | Brief description about the Pod floor |
 
 [optional]
-**fid**
+**floorUid**
 
 | **String** | Unique numeric ID of the pod floor |
 **blocks**

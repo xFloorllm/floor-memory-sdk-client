@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The ResetPassword400Response model module.
  * @module model/ResetPassword400Response
- * @version 1.0.7
+ * @version 1.0.8
  */
 class ResetPassword400Response {
     /**

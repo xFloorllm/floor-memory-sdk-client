@@ -66,11 +66,11 @@ public class GetFloorInformation200ResponseTest {
     }
 
     /**
-     * Test the property 'fid'
+     * Test the property 'floorUid'
      */
     @Test
-    public void fidTest() {
-        // TODO: test fid
+    public void floorUidTest() {
+        // TODO: test floorUid
     }
 
     /**

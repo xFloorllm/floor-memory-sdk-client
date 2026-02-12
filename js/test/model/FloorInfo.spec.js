@@ -72,8 +72,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property fid (base name: "fid")', function() {
-      // uncomment below and update the code to test the property fid
+    it('should have the property floorUid (base name: "floor_uid")', function() {
+      // uncomment below and update the code to test the property floorUid
       //var instance = new XfloorFloorMemorySdkJs.FloorInfo();
       //expect(instance).to.be();
     });

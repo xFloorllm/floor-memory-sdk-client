@@ -28,7 +28,7 @@ export interface Media {
      */
     url: string;
     /**
-     * ID of the media
+     * Media Type
      * @type {string}
      * @memberof Media
      */

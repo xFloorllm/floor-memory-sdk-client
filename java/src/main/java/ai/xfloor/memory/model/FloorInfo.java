@@ -71,10 +71,10 @@ public class FloorInfo {
   @javax.annotation.Nullable
   private String details;
 
-  public static final String SERIALIZED_NAME_FID = "fid";
-  @SerializedName(SERIALIZED_NAME_FID)
+  public static final String SERIALIZED_NAME_FLOOR_UID = "floor_uid";
+  @SerializedName(SERIALIZED_NAME_FLOOR_UID)
   @javax.annotation.Nonnull
-  private String fid;
+  private String floorUid;
 
   public static final String SERIALIZED_NAME_BLOCKS = "blocks";
   @SerializedName(SERIALIZED_NAME_BLOCKS)
@@ -146,22 +146,22 @@ public class FloorInfo {
   }
 
 
-  public FloorInfo fid(@javax.annotation.Nonnull String fid) {
-    this.fid = fid;
+  public FloorInfo floorUid(@javax.annotation.Nonnull String floorUid) {
+    this.floorUid = floorUid;
     return this;
   }
 
   /**
    * Unique numeric ID of the pod floor
-   * @return fid
+   * @return floorUid
    */
   @javax.annotation.Nonnull
-  public String getFid() {
-    return fid;
+  public String getFloorUid() {
+    return floorUid;
   }
 
-  public void setFid(@javax.annotation.Nonnull String fid) {
-    this.fid = fid;
+  public void setFloorUid(@javax.annotation.Nonnull String floorUid) {
+    this.floorUid = floorUid;
   }
 
 
@@ -224,14 +224,14 @@ public class FloorInfo {
     return Objects.equals(this.floorId, floorInfo.floorId) &&
         Objects.equals(this.title, floorInfo.title) &&
         Objects.equals(this.details, floorInfo.details) &&
-        Objects.equals(this.fid, floorInfo.fid) &&
+        Objects.equals(this.floorUid, floorInfo.floorUid) &&
         Objects.equals(this.blocks, floorInfo.blocks) &&
         Objects.equals(this.avatar, floorInfo.avatar);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(floorId, title, details, fid, blocks, avatar);
+    return Objects.hash(floorId, title, details, floorUid, blocks, avatar);
   }
 
   @Override
@@ -241,7 +241,7 @@ public class FloorInfo {
     sb.append("    floorId: ").append(toIndentedString(floorId)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    details: ").append(toIndentedString(details)).append("\n");
-    sb.append("    fid: ").append(toIndentedString(fid)).append("\n");
+    sb.append("    floorUid: ").append(toIndentedString(floorUid)).append("\n");
     sb.append("    blocks: ").append(toIndentedString(blocks)).append("\n");
     sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
     sb.append("}");
@@ -265,10 +265,10 @@ public class FloorInfo {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("floor_id", "title", "details", "fid", "blocks", "avatar"));
+    openapiFields = new HashSet<String>(Arrays.asList("floor_id", "title", "details", "floor_uid", "blocks", "avatar"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("floor_id", "title", "fid"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("floor_id", "title", "floor_uid"));
   }
 
   /**
@@ -308,8 +308,8 @@ public class FloorInfo {
       if ((jsonObj.get("details") != null && !jsonObj.get("details").isJsonNull()) && !jsonObj.get("details").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `details` to be a primitive type in the JSON string but got `%s`", jsonObj.get("details").toString()));
       }
-      if (!jsonObj.get("fid").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `fid` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fid").toString()));
+      if (!jsonObj.get("floor_uid").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `floor_uid` to be a primitive type in the JSON string but got `%s`", jsonObj.get("floor_uid").toString()));
       }
       if (jsonObj.get("blocks") != null && !jsonObj.get("blocks").isJsonNull()) {
         JsonArray jsonArrayblocks = jsonObj.getAsJsonArray("blocks");

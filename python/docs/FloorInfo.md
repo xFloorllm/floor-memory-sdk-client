@@ -25,7 +25,7 @@ Notes
 | **str** | Brief description about the Pod floor |
 
 [optional]
-**fid**
+**floor_uid**
 
 | **str** | Unique numeric ID of the pod floor |
 **blocks**

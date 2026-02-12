@@ -18,7 +18,7 @@ Notes
 | **str** | Url where media is stored |
 **type**
 
-| **str** | ID of the media |
+| **str** | Media Type |
 
 ### Example
 

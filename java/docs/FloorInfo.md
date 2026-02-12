@@ -13,7 +13,7 @@ User's Pod floor Infomation
 |**title** | **String** | Title |
 |
 |**details** | **String** | Brief description about the Pod floor | [optional] |
-|**fid** | **String** | Unique numeric ID of the pod floor |
+|**floorUid** | **String** | Unique numeric ID of the pod floor |
 |
 |**blocks** | [**List<BlockDetails>**](BlockDetails.md) | List of blocks | [optional] |
 |**avatar** | [**Media**](Media.md) |

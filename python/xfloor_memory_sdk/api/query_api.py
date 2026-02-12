@@ -151,7 +151,7 @@ class QueryApi:
         
         | Field | Always Present | Description | Rendering Guidance |
         | ------------------ | ------------------ | ------------------------------------------- | ---------------------- |
-        | `answer` | Yes | Assistant-generated conversational response | **Render prominently** |
+        | `answer` | No | Assistant-generated conversational response. Depends on summary_needed. Is present if summary_needed=1 | **Render prominently** |
         | `items` | Yes (may be empty) | List of matched content used for grounding | Render optionally |
         | `items[].metadata` | Conditional | Included only if `include_metadata = \"1\"` | Render on demand |
         
@@ -343,7 +343,7 @@ class QueryApi:
         
         | Field | Always Present | Description | Rendering Guidance |
         | ------------------ | ------------------ | ------------------------------------------- | ---------------------- |
-        | `answer` | Yes | Assistant-generated conversational response | **Render prominently** |
+        | `answer` | No | Assistant-generated conversational response. Depends on summary_needed. Is present if summary_needed=1 | **Render prominently** |
         | `items` | Yes (may be empty) | List of matched content used for grounding | Render optionally |
         | `items[].metadata` | Conditional | Included only if `include_metadata = \"1\"` | Render on demand |
         
@@ -535,7 +535,7 @@ class QueryApi:
         
         | Field | Always Present | Description | Rendering Guidance |
         | ------------------ | ------------------ | ------------------------------------------- | ---------------------- |
-        | `answer` | Yes | Assistant-generated conversational response | **Render prominently** |
+        | `answer` | No | Assistant-generated conversational response. Depends on summary_needed. Is present if summary_needed=1 | **Render prominently** |
         | `items` | Yes (may be empty) | List of matched content used for grounding | Render optionally |
         | `items[].metadata` | Conditional | Included only if `include_metadata = \"1\"` | Render on demand |
         

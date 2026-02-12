@@ -30,7 +30,7 @@ class Media(BaseModel):
     Media
     """ # noqa: E501
     url: StrictStr = Field(description="Url where media is stored")
-    type: StrictStr = Field(description="ID of the media")
+    type: StrictStr = Field(description="Media Type")
     __properties: ClassVar[List[str]] = ["url", "type"]
 
     model_config = ConfigDict(

@@ -9,7 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**url** | **String** | Url where media is stored |
 |
-|**type** | **String** | ID of the media |
+|**type** | **String** | Media Type |
 |
 
 

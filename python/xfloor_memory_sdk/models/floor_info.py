@@ -34,10 +34,10 @@ class FloorInfo(BaseModel):
     floor_id: StrictStr = Field(description="Pod floor ID")
     title: StrictStr = Field(description="Title")
     details: Optional[StrictStr] = Field(default=None, description="Brief description about the Pod floor")
-    fid: StrictStr = Field(description="Unique numeric ID of the pod floor")
+    floor_uid: StrictStr = Field(description="Unique numeric ID of the pod floor")
     blocks: Optional[List[BlockDetails]] = Field(default=None, description="List of blocks")
     avatar: Optional[Media] = None
-    __properties: ClassVar[List[str]] = ["floor_id", "title", "details", "fid", "blocks", "avatar"]
+    __properties: ClassVar[List[str]] = ["floor_id", "title", "details", "floor_uid", "blocks", "avatar"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,7 +103,7 @@ class FloorInfo(BaseModel):
             "floor_id": obj.get("floor_id"),
             "title": obj.get("title"),
             "details": obj.get("details"),
-            "fid": obj.get("fid"),
+            "floor_uid": obj.get("floor_uid"),
             "blocks": [BlockDetails.from_dict(_item) for _item in obj["blocks"]] if obj.get("blocks") is not None else None,
             "avatar": Media.from_dict(obj["avatar"]) if obj.get("avatar") is not None else None
         })

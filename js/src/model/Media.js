@@ -18,14 +18,14 @@ import ApiClient from '../ApiClient';
 /**
  * The Media model module.
  * @module model/Media
- * @version 1.0.7
+ * @version 1.0.8
  */
 class Media {
     /**
      * Constructs a new <code>Media</code>.
      * @alias module:model/Media
      * @param url {String} Url where media is stored
-     * @param type {String} ID of the media
+     * @param type {String} Media Type
      */
     constructor(url, type) { 
         
@@ -99,7 +99,7 @@ Media.RequiredProperties = ["url", "type"];
 Media.prototype['url'] = undefined;
 
 /**
- * ID of the media
+ * Media Type
  * @member {String} type
  */
 Media.prototype['type'] = undefined;

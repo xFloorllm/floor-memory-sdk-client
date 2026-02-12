@@ -1,6 +1,6 @@
 # xfloor_memory_sdk.DefaultApi
 
-All URIs are relative to *https://appfloor.in*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -39,10 +39,10 @@ import xfloor_memory_sdk
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 
@@ -126,10 +126,10 @@ import xfloor_memory_sdk
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 
@@ -302,10 +302,10 @@ import xfloor_memory_sdk
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -485,10 +485,10 @@ import xfloor_memory_sdk
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -615,10 +615,10 @@ from xfloor_memory_sdk.models.change_password200_response import ChangePassword2
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -873,10 +873,10 @@ from xfloor_memory_sdk.models.conversation_threads200_response import Conversati
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1180,10 +1180,10 @@ from xfloor_memory_sdk.models.get_conversations200_response import GetConversati
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1420,10 +1420,10 @@ from xfloor_memory_sdk.models.get_floor_information200_response import GetFloorI
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1668,10 +1668,10 @@ from xfloor_memory_sdk.models.get_floor_information200_response import GetFloorI
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1778,10 +1778,10 @@ from xfloor_memory_sdk.models.sign_in_with_email200_response import SignInWithEm
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2041,10 +2041,10 @@ from xfloor_memory_sdk.models.get_floor_information200_response import GetFloorI
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 
@@ -2177,10 +2177,10 @@ from xfloor_memory_sdk.models.reset_password200_response import ResetPassword200
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 
@@ -2376,10 +2376,10 @@ from xfloor_memory_sdk.models.send_sign_in_validation_code200_response import Se
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2564,10 +2564,10 @@ from xfloor_memory_sdk.models.send_validation_code_request import SendValidation
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2723,10 +2723,10 @@ from xfloor_memory_sdk.models.sign_in_with_email200_response import SignInWithEm
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2892,10 +2892,10 @@ from xfloor_memory_sdk.models.sign_in_with_email200_response import SignInWithEm
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -3005,10 +3005,10 @@ from xfloor_memory_sdk.models.sign_up200_response import SignUp200Response
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -3222,10 +3222,10 @@ from xfloor_memory_sdk.models.validate_code_request import ValidateCodeRequest
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters

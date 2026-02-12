@@ -9,7 +9,7 @@ Name | Type
 `floorId` | string
 `title` | string
 `details` | string
-`fid` | string
+`floorUid` | string
 `blocks` | [Array&lt;BlockDetails&gt;](BlockDetails.md)
 `avatar` | [Media](Media.md)
 
@@ -23,7 +23,7 @@ const example = {
   "floorId": null,
   "title": null,
   "details": null,
-  "fid": null,
+  "floorUid": null,
   "blocks": null,
   "avatar": null,
 } satisfies GetFloorInformation200Response

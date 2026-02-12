@@ -1,6 +1,6 @@
 # EventApi
 
-All URIs are relative to *https://appfloor.in*
+All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
@@ -66,7 +66,7 @@ Posts content into the specified `floor_id`. This API performs **asynchronous in
 
 ```json { \"floor_id\":
 
-\"my_floor\", \"block_id\": \"17845683456\", \"block_type\": \"post\", \"user_id\": \"145623907625\", \"title\": \"My note\", \"description\": \"Things I should remember\", \"app_id\": \"165434879028\" }
+\"my_floor\", \"block_id\": \"17845683456\", \"block_type\": \"1\", \"user_id\": \"145623907625\", \"title\": \"My note\", \"description\": \"Things I should remember\" }
 
 ```
 
@@ -78,7 +78,7 @@ Posts content into the specified `floor_id`. This API performs **asynchronous in
 | ------------- | -------- | -------- | --------------------------------------------------------------------------------------------------------- |
 | `floor_id` | `string` | Yes | Identifier of the user’s floor (POD) where the content will be stored. |
 | `block_id` | `string` | Optional | Identifier of the block within the floor used to group or categorize content. |
-| `block_type` | `string` | Optional | Logical category of the content (e.g., `post`, `note`, `reminder`). Used for routing and UI organization. |
+| `block_type` | `string` | Optional | Logical category of the content (e.g., `0 for post`, `1 for forum`). Used for routing and UI organization. |
 | `user_id` | `string` | Yes | Unique identifier of the user posting the content. |
 | `title` | `string` | Optional | Short title or heading for the content. |
 | `description` | `string` | Yes | Main textual content to be stored and embedded. |
@@ -148,7 +148,7 @@ import ai.xfloor.memory.api.EventApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://appfloor.in");
+    defaultClient.setBasePath("http://localhost");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");

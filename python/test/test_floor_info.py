@@ -39,7 +39,7 @@ class TestFloorInfo(unittest.TestCase):
                 floor_id = '',
                 title = '',
                 details = '',
-                fid = '',
+                floor_uid = '',
                 blocks = [
                     xfloor_memory_sdk.models.block_details.BlockDetails(
                         block_id = '', 
@@ -54,7 +54,7 @@ class TestFloorInfo(unittest.TestCase):
             return FloorInfo(
                 floor_id = '',
                 title = '',
-                fid = '',
+                floor_uid = '',
         )
         """
 
