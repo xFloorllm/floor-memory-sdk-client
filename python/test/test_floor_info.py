@@ -50,7 +50,8 @@ class TestFloorInfo(unittest.TestCase):
                     url = '', 
                     type = '', ),
                 is_owner = '',
-                floor_type = ''
+                floor_type = '',
+                app_id = ''
             )
         else:
             return FloorInfo(

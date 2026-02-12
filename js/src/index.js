@@ -105,7 +105,7 @@ import QueryApi from './api/QueryApi';
 * </pre>
 * </p>
 * @module index
-* @version 1.0.9
+* @version 1.0.10
 */
 export {
     /**

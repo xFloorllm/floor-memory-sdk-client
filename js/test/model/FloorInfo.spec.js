@@ -102,6 +102,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property appId (base name: "app_id")', function() {
+      // uncomment below and update the code to test the property appId
+      //var instance = new XfloorFloorMemorySdkJs.FloorInfo();
+      //expect(instance).to.be();
+    });
+
   });
 
 }));

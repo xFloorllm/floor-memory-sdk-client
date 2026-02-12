@@ -14,6 +14,7 @@ Name | Type
 `avatar` | [Media](Media.md)
 `isOwner` | string
 `floorType` | string
+`appId` | string
 
 ### Example
 
@@ -30,6 +31,7 @@ const example = {
   "avatar": null,
   "isOwner": null,
   "floorType": null,
+  "appId": null,
 } satisfies GetFloorInformation200Response
 
 console.log(example)

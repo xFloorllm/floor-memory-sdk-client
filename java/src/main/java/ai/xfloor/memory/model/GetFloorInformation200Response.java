@@ -96,6 +96,11 @@ public class GetFloorInformation200Response {
   @javax.annotation.Nonnull
   private String floorType;
 
+  public static final String SERIALIZED_NAME_APP_ID = "app_id";
+  @SerializedName(SERIALIZED_NAME_APP_ID)
+  @javax.annotation.Nullable
+  private String appId;
+
   public GetFloorInformation200Response() {
   }
 
@@ -259,6 +264,25 @@ public class GetFloorInformation200Response {
   }
 
 
+  public GetFloorInformation200Response appId(@javax.annotation.Nullable String appId) {
+    this.appId = appId;
+    return this;
+  }
+
+  /**
+   * Optional - Applicable only if pod is present.
+   * @return appId
+   */
+  @javax.annotation.Nullable
+  public String getAppId() {
+    return appId;
+  }
+
+  public void setAppId(@javax.annotation.Nullable String appId) {
+    this.appId = appId;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -276,12 +300,13 @@ public class GetFloorInformation200Response {
         Objects.equals(this.blocks, getFloorInformation200Response.blocks) &&
         Objects.equals(this.avatar, getFloorInformation200Response.avatar) &&
         Objects.equals(this.isOwner, getFloorInformation200Response.isOwner) &&
-        Objects.equals(this.floorType, getFloorInformation200Response.floorType);
+        Objects.equals(this.floorType, getFloorInformation200Response.floorType) &&
+        Objects.equals(this.appId, getFloorInformation200Response.appId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(floorId, title, details, floorUid, blocks, avatar, isOwner, floorType);
+    return Objects.hash(floorId, title, details, floorUid, blocks, avatar, isOwner, floorType, appId);
   }
 
   @Override
@@ -296,6 +321,7 @@ public class GetFloorInformation200Response {
     sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
     sb.append("    isOwner: ").append(toIndentedString(isOwner)).append("\n");
     sb.append("    floorType: ").append(toIndentedString(floorType)).append("\n");
+    sb.append("    appId: ").append(toIndentedString(appId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -317,7 +343,7 @@ public class GetFloorInformation200Response {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("floor_id", "title", "details", "floor_uid", "blocks", "avatar", "is_owner", "floor_type"));
+    openapiFields = new HashSet<String>(Arrays.asList("floor_id", "title", "details", "floor_uid", "blocks", "avatar", "is_owner", "floor_type", "app_id"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(Arrays.asList("floor_id", "title", "floor_uid", "is_owner", "floor_type"));
@@ -386,6 +412,9 @@ public class GetFloorInformation200Response {
       }
       if (!jsonObj.get("floor_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `floor_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("floor_type").toString()));
+      }
+      if ((jsonObj.get("app_id") != null && !jsonObj.get("app_id").isJsonNull()) && !jsonObj.get("app_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `app_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("app_id").toString()));
       }
   }
 

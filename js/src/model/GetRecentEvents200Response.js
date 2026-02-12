@@ -19,7 +19,7 @@ import GetRecentEvents200ResponseItemsInner from './GetRecentEvents200ResponseIt
 /**
  * The GetRecentEvents200Response model module.
  * @module model/GetRecentEvents200Response
- * @version 1.0.9
+ * @version 1.0.10
  */
 class GetRecentEvents200Response {
     /**

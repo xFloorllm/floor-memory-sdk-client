@@ -44,6 +44,11 @@ Notes
 **floor_type**
 
 | **str** | Type of floor (POD, PUBLIC or PRIVATE) |
+**app_id**
+
+| **str** | Optional - Applicable only if pod is present. |
+
+[optional]
 
 ### Example
 

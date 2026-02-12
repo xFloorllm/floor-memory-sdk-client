@@ -20,7 +20,7 @@ import Media from './Media';
 /**
  * The GetFloorInformation200Response model module.
  * @module model/GetFloorInformation200Response
- * @version 1.0.9
+ * @version 1.0.10
  */
 class GetFloorInformation200Response {
     /**
@@ -85,6 +85,9 @@ class GetFloorInformation200Response {
             if (data.hasOwnProperty('floor_type')) {
                 obj['floor_type'] = ApiClient.convertToType(data['floor_type'], 'String');
             }
+            if (data.hasOwnProperty('app_id')) {
+                obj['app_id'] = ApiClient.convertToType(data['app_id'], 'String');
+            }
         }
         return obj;
     }
@@ -138,6 +141,10 @@ class GetFloorInformation200Response {
         // ensure the json data is a string
         if (data['floor_type'] && !(typeof data['floor_type'] === 'string' || data['floor_type'] instanceof String)) {
             throw new Error("Expected the field `floor_type` to be a primitive type in the JSON string but got " + data['floor_type']);
+        }
+        // ensure the json data is a string
+        if (data['app_id'] && !(typeof data['app_id'] === 'string' || data['app_id'] instanceof String)) {
+            throw new Error("Expected the field `app_id` to be a primitive type in the JSON string but got " + data['app_id']);
         }
 
         return true;
@@ -194,6 +201,12 @@ GetFloorInformation200Response.prototype['is_owner'] = undefined;
  * @member {String} floor_type
  */
 GetFloorInformation200Response.prototype['floor_type'] = undefined;
+
+/**
+ * Optional - Applicable only if pod is present.
+ * @member {String} app_id
+ */
+GetFloorInformation200Response.prototype['app_id'] = undefined;
 
 
 

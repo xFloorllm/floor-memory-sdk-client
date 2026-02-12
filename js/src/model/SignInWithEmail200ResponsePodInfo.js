@@ -20,7 +20,7 @@ import Media from './Media';
 /**
  * The SignInWithEmail200ResponsePodInfo model module.
  * @module model/SignInWithEmail200ResponsePodInfo
- * @version 1.0.9
+ * @version 1.0.10
  */
 class SignInWithEmail200ResponsePodInfo {
     /**

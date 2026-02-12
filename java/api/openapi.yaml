@@ -3989,6 +3989,9 @@ components:
         floor_type:
           description: "Type of floor (POD, PUBLIC or PRIVATE)"
           type: string
+        app_id:
+          description: Optional - Applicable only if pod is present.
+          type: string
       required:
       - floor_id
       - floor_type
@@ -4979,6 +4982,7 @@ components:
           url: url
         title: title
         floor_type: floor_type
+        app_id: app_id
       properties:
         floor_id:
           description: Pod floor ID
@@ -5004,6 +5008,9 @@ components:
           type: string
         floor_type:
           description: "Type of floor (POD, PUBLIC or PRIVATE)"
+          type: string
+        app_id:
+          description: Optional - Applicable only if pod is present.
           type: string
       required:
       - floor_id

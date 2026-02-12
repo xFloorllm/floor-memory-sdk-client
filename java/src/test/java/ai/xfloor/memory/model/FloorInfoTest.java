@@ -105,4 +105,12 @@ public class FloorInfoTest {
         // TODO: test floorType
     }
 
+    /**
+     * Test the property 'appId'
+     */
+    @Test
+    public void appIdTest() {
+        // TODO: test appId
+    }
+
 }

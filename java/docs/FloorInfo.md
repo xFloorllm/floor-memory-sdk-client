@@ -22,6 +22,7 @@ User's Pod floor Infomation
 |
 |**floorType** | **String** | Type of floor (POD, PUBLIC or PRIVATE) |
 |
+|**appId** | **String** | Optional - Applicable only if pod is present. | [optional] |
 
 
 

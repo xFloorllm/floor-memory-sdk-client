@@ -39,7 +39,8 @@ class FloorInfo(BaseModel):
     avatar: Optional[Media] = None
     is_owner: StrictStr = Field(description="Is the user Owner")
     floor_type: StrictStr = Field(description="Type of floor (POD, PUBLIC or PRIVATE)")
-    __properties: ClassVar[List[str]] = ["floor_id", "title", "details", "floor_uid", "blocks", "avatar", "is_owner", "floor_type"]
+    app_id: Optional[StrictStr] = Field(default=None, description="Optional - Applicable only if pod is present.")
+    __properties: ClassVar[List[str]] = ["floor_id", "title", "details", "floor_uid", "blocks", "avatar", "is_owner", "floor_type", "app_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -109,7 +110,8 @@ class FloorInfo(BaseModel):
             "blocks": [BlockDetails.from_dict(_item) for _item in obj["blocks"]] if obj.get("blocks") is not None else None,
             "avatar": Media.from_dict(obj["avatar"]) if obj.get("avatar") is not None else None,
             "is_owner": obj.get("is_owner"),
-            "floor_type": obj.get("floor_type")
+            "floor_type": obj.get("floor_type"),
+            "app_id": obj.get("app_id")
         })
         return _obj
 

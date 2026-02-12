@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The ChangePassword200Response model module.
  * @module model/ChangePassword200Response
- * @version 1.0.9
+ * @version 1.0.10
  */
 class ChangePassword200Response {
     /**

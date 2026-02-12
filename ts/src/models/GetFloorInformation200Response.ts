@@ -84,6 +84,12 @@ export interface GetFloorInformation200Response {
      * @memberof GetFloorInformation200Response
      */
     floorType: string;
+    /**
+     * Optional - Applicable only if pod is present.
+     * @type {string}
+     * @memberof GetFloorInformation200Response
+     */
+    appId?: string;
 }
 
 /**
@@ -116,6 +122,7 @@ export function GetFloorInformation200ResponseFromJSONTyped(json: any, ignoreDis
         'avatar': json['avatar'] == null ? undefined : MediaFromJSON(json['avatar']),
         'isOwner': json['is_owner'],
         'floorType': json['floor_type'],
+        'appId': json['app_id'] == null ? undefined : json['app_id'],
     };
 }
 
@@ -138,6 +145,7 @@ export function GetFloorInformation200ResponseToJSONTyped(value?: GetFloorInform
         'avatar': MediaToJSON(value['avatar']),
         'is_owner': value['isOwner'],
         'floor_type': value['floorType'],
+        'app_id': value['appId'],
     };
 }
 

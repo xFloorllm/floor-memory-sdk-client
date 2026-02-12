@@ -105,4 +105,12 @@ public class GetFloorInformation200ResponseTest {
         // TODO: test floorType
     }
 
+    /**
+     * Test the property 'appId'
+     */
+    @Test
+    public void appIdTest() {
+        // TODO: test appId
+    }
+
 }

@@ -84,6 +84,12 @@ export interface FloorInfo {
      * @memberof FloorInfo
      */
     floorType: string;
+    /**
+     * Optional - Applicable only if pod is present.
+     * @type {string}
+     * @memberof FloorInfo
+     */
+    appId?: string;
 }
 
 /**
@@ -116,6 +122,7 @@ export function FloorInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'avatar': json['avatar'] == null ? undefined : MediaFromJSON(json['avatar']),
         'isOwner': json['is_owner'],
         'floorType': json['floor_type'],
+        'appId': json['app_id'] == null ? undefined : json['app_id'],
     };
 }
 
@@ -138,6 +145,7 @@ export function FloorInfoToJSONTyped(value?: FloorInfo | null, ignoreDiscriminat
         'avatar': MediaToJSON(value['avatar']),
         'is_owner': value['isOwner'],
         'floor_type': value['floorType'],
+        'app_id': value['appId'],
     };
 }
 
