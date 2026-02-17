@@ -47,7 +47,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>ai.xfloor.sdk</groupId>
   <artifactId>floor-memory-sdk-client</artifactId>
-  <version>1.0.10</version>
+  <version>1.0.11</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -63,7 +63,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "ai.xfloor.sdk:floor-memory-sdk-client:1.0.10"
+     implementation "ai.xfloor.sdk:floor-memory-sdk-client:1.0.11"
   }
 ```
 
@@ -77,7 +77,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/floor-memory-sdk-client-1.0.10.jar`
+* `target/floor-memory-sdk-client-1.0.11.jar`
 * `target/lib/*.jar`
 
 ### Getting Started
@@ -323,3 +323,28 @@ It's recommended to create an instance of `ApiClient` per thread in a multithrea
 
 contact@ipomo.in
 
+
+
+
+
+<!-- xfloor:platform-notes:start -->
+## Platform Notes (macOS, Linux, Windows)
+
+### macOS / Linux
+```bash
+mvn clean install
+mvn clean deploy
+```
+
+### Windows (PowerShell or CMD)
+```powershell
+mvn clean install
+mvn clean deploy
+```
+
+If your project uses Maven Wrapper on Windows, run:
+```powershell
+.\mvnw.cmd clean install
+.\mvnw.cmd clean deploy
+```
+<!-- xfloor:platform-notes:end -->

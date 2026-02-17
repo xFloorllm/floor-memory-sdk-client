@@ -1,6 +1,6 @@
 {
   "name": "@xfloor/floor-memory-sdk-js",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "JavaScript SDK for xFloor Memory APIs (Memory + Registration).",
   "license": "MIT",
   "main": "dist/index.js",

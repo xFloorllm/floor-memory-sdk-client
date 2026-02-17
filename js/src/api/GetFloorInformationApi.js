@@ -21,7 +21,7 @@ import GetRecentEvents400Response from '../model/GetRecentEvents400Response';
 /**
 * GetFloorInformation service.
 * @module api/GetFloorInformationApi
-* @version 1.0.10
+* @version 1.0.11
 */
 export default class GetFloorInformationApi {
 
