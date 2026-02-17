@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The SignUp200Response model module.
  * @module model/SignUp200Response
- * @version 1.0.11
+ * @version 1.0.12
  */
 class SignUp200Response {
     /**

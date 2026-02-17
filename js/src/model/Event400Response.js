@@ -19,7 +19,7 @@ import Event400ResponseError from './Event400ResponseError';
 /**
  * The Event400Response model module.
  * @module model/Event400Response
- * @version 1.0.11
+ * @version 1.0.12
  */
 class Event400Response {
     /**
