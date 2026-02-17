@@ -19,7 +19,7 @@ import GetConversations200ResponseConversationInnerUserContext from './GetConver
 /**
  * The GetConversations200ResponseConversationInnerUser model module.
  * @module model/GetConversations200ResponseConversationInnerUser
- * @version 1.0.12
+ * @version 1.0.13
  */
 class GetConversations200ResponseConversationInnerUser {
     /**

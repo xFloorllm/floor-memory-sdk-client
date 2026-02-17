@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The Threads model module.
  * @module model/Threads
- * @version 1.0.12
+ * @version 1.0.13
  */
 class Threads {
     /**
