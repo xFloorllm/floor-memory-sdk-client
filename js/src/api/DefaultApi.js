@@ -25,7 +25,6 @@ import ResetPassword200Response from '../model/ResetPassword200Response';
 import ResetPassword400Response from '../model/ResetPassword400Response';
 import SendSignInValidationCode200Response from '../model/SendSignInValidationCode200Response';
 import SendValidationCode200Response from '../model/SendValidationCode200Response';
-import SendValidationCodeRequest from '../model/SendValidationCodeRequest';
 import SignInWithEmail200Response from '../model/SignInWithEmail200Response';
 import SignUp200Response from '../model/SignUp200Response';
 import UserDetails from '../model/UserDetails';
@@ -36,7 +35,7 @@ import ValidateCodeRequest from '../model/ValidateCodeRequest';
 /**
 * Default service.
 * @module api/DefaultApi
-* @version 1.0.13
+* @version 1.0.14
 */
 export default class DefaultApi {
 
@@ -393,7 +392,7 @@ export default class DefaultApi {
     /**
      * Make floor Private
      * This API changes a floor’s visibility to **PRIVATE**.  It is used when a floor owner wants to **restrict access** to a floor that is currently public. After the update, the floor becomes private and is no longer accessible to non-authorized users (based on your platform’s access rules).  This endpoint is **state-changing**:  * If the floor is **PUBLIC**, it will be converted to **PRIVATE** * If the floor is already **PRIVATE**, the API returns success (idempotent) or an “already private” response depending on implementation  This API is commonly used in:  * Floor settings → “Privacy” toggle * Developer-managed pod workflows (app_id context) * Admin tools (if applicable)  ---  ## Request Method  `POST`  ---  ## Content-Type  `application/x-www-form-urlencoded` (or `multipart/form-data` if your system uses form-data) *(Document whichever you actually accept; below assumes standard form fields.)*  ---  ## Request Parameters (Form Fields)  | Field      | Type   | Required | Description                                                          | | ---------- | ------ | -------- | -------------------------------------------------------------------- | | `user_id`  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.      | | `floor_id` | String | **Yes**  | Public identifier of the floor to update.                            | | `app_id`   | String | No       | Calling application identifier (used for developer/pod integration). |  ---  ## Authorization Rules (Critical)  * The caller must be authenticated as `user_id` * **Only the floor owner** can change floor visibility * If the user is not the owner, the request must be rejected  ---  ## Behavior Rules  * Converts visibility from **PUBLIC → PRIVATE** * Does not modify floor content or blocks * Access enforcement for private floors is applied immediately after the change  **Idempotency**  * Calling this API multiple times should not cause repeated changes * If already private, the API should either:    * return success with a message like `\"already private\"`, or   * return a specific error/status indicating no-op  ---  ## Response Format  `application/json`  ---  ## Sample Success Response  *(Example — adjust to match your actual response format)*  ```json {   \"status\": \"SUCCESS\",   \"floor_id\": \"my_floor\",   \"visibility\": \"PRIVATE\",   \"message\": \"Floor is now private\" } ```  ---  ## Sample No-Op Response (Already Private)  ```json {   \"status\": \"SUCCESS\",   \"floor_id\": \"my_floor\",   \"visibility\": \"PRIVATE\",   \"message\": \"Floor is already private\" } ```  ---  ## Error Responses (Examples)  ### Not Authorized (Not Owner)  ```json {   \"status\": \"ERROR\",   \"message\": \"Only the floor owner can change floor visibility\" } ```  ### Floor Not Found  ```json {   \"status\": \"ERROR\",   \"message\": \"Floor not found\" } ```  ### Invalid Request  ```json {   \"status\": \"ERROR\",   \"message\": \"user_id and floor_id are required\" } ```  ---  ## Notes  * This API is intended to control floor visibility only; membership/invite rules (for private floors) are handled elsewhere. * `app_id` is provided for developer/pod applications and is optional unless enforced by your app model. * If you support floor types like `POD`, document whether pods are allowed to be private or not (some platforms restrict this). 
-     * @param {String} floorId Floor ID
+     * @param {String} floorId 
      * @param {String} userId User ID
      * @param {String} appId App ID
      * @param {module:api/DefaultApi~makeFloorPrivateCallback} callback The callback function, accepting three arguments: error, data, response
@@ -415,9 +414,9 @@ export default class DefaultApi {
       }
 
       let pathParams = {
+        'floor_id': floorId
       };
       let queryParams = {
-        'floor_id': floorId,
         'user_id': userId,
         'app_id': appId
       };
@@ -431,7 +430,7 @@ export default class DefaultApi {
       let accepts = ['application/json'];
       let returnType = GetFloorInformation200Response;
       return this.apiClient.callApi(
-        '/api/memory/make/floor/private', 'POST',
+        '/api/memory/make/floor/private/{floor_id}', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
@@ -448,7 +447,7 @@ export default class DefaultApi {
     /**
      * Make floor public
      * This API changes a floor’s visibility to **PUBLIC**.  It is used when a floor owner wants to **make a private floor accessible to everyone**. After the update, the floor becomes public and can be viewed and discovered by any user, subject to platform rules (search, feeds, pods, etc.).  This endpoint performs a **visibility state transition**:  * **PRIVATE → PUBLIC** * If the floor is already public, the operation is treated as **idempotent** (no state change).  This API is typically used from:  * Floor settings → Privacy / Visibility controls * Owner or admin tools * Developer or pod-based applications using `app_id`  ---  ## Request Method  `POST`  ---  ## Content-Type  `application/x-www-form-urlencoded` (or `multipart/form-data`, depending on your implementation)  ---  ## Request Parameters (Form Fields)  | Field      | Type   | Required | Description                                                                     | | ---------- | ------ | -------- | ------------------------------------------------------------------------------- | | `user_id`  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.                 | | `floor_id` | String | **Yes**  | Public identifier of the floor whose visibility is to be changed.               | | `app_id`   | String | No       | Identifier of the calling application (used mainly for pod/developer contexts). |  ---  ## Authorization Rules (Critical)  * The caller must be authenticated as `user_id` * **Only the floor owner** is allowed to change the floor’s visibility * Requests from non-owners must be rejected  ---  ## Behavior Rules  * Converts floor visibility from **PRIVATE → PUBLIC** * Does not modify floor content, blocks, or ownership * Visibility change takes effect immediately  ### Idempotency  * If the floor is already public, the API should:    * Return success with a message indicating no change, or   * Return a specific “already public” status (implementation-dependent)  ---  ## Response Format  `application/json`  ---  ## Sample Success Response  ```json {   \"status\": \"SUCCESS\",   \"floor_id\": \"my_floor\",   \"visibility\": \"PUBLIC\",   \"message\": \"Floor is now public\" } ```  ---  ## Sample No-Op Response (Already Public)  ```json {   \"status\": \"SUCCESS\",   \"floor_id\": \"my_floor\",   \"visibility\": \"PUBLIC\",   \"message\": \"Floor is already public\" } ```  ---  ## Error Responses (Examples)  ### Not Authorized (Not Owner)  ```json {   \"status\": \"ERROR\",   \"message\": \"Only the floor owner can change floor visibility\" } ```  ---  ### Floor Not Found  ```json {   \"status\": \"ERROR\",   \"message\": \"Floor not found\" } ```  ---  ### Invalid Request  ```json {   \"status\": \"ERROR\",   \"message\": \"user_id and floor_id are required\" } ```  ---  ## Notes for Developers  * This API controls **visibility only**. Membership, invitations, and moderation rules are handled by separate APIs. * `app_id` is optional and primarily used for developer-managed or pod floors. * Clients should refresh floor metadata (e.g., via `/api/floor/info`) after a successful visibility change.  ---  ### Mental Model (One Line)  > **This API answers: “Make this floor visible to everyone.”** 
-     * @param {String} floorId Floor ID
+     * @param {String} floorId 
      * @param {String} userId User ID
      * @param {String} appId App ID
      * @param {module:api/DefaultApi~makeFloorPublicCallback} callback The callback function, accepting three arguments: error, data, response
@@ -470,9 +469,9 @@ export default class DefaultApi {
       }
 
       let pathParams = {
+        'floor_id': floorId
       };
       let queryParams = {
-        'floor_id': floorId,
         'user_id': userId,
         'app_id': appId
       };
@@ -486,7 +485,7 @@ export default class DefaultApi {
       let accepts = ['application/json'];
       let returnType = GetFloorInformation200Response;
       return this.apiClient.callApi(
-        '/api/memory/make/floor/public', 'POST',
+        '/api/memory/make/floor/public/{floor_id}', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
@@ -589,7 +588,7 @@ export default class DefaultApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authNames = ['bearer'];
       let contentTypes = [];
       let accepts = ['application/json'];
       let returnType = GetFloorInformation200Response;
@@ -711,15 +710,21 @@ export default class DefaultApi {
     /**
      * Send Validation code
      * Generates and sends a one-time validation code to the user for verification of sensitive or critical account operations.  This API is used across multiple authentication and account-management flows. The validation code is delivered to the user via the appropriate channel (**email or mobile number**), based on the requested operation mode and the input provided.  The generated code is **time-bound**, **single-use**, and must be validated using the corresponding verification APIs to complete the requested action.  ---  ### **Usage Scenarios (Mode Definition)**  | Mode | Purpose                       | | ---- | ----------------------------- | | `0`  | Email or mobile number change | | `1`  | Password change               | | `2`  | Delete account                | | `3`  | Clear account                 | | `4`  | Signup Verification           | | `5`  | Using OTP for Login           | | `6`  | OTP for forgot password       |  **Mode `4` – Signup Verification** For login verification, the validation code is sent to **either the email ID or the mobile number provided in the request**. At least **one of email or mobile number must be supplied** for this mode.  ---  ### **Behavior**  * Generates a secure, one-time validation code * Sends the code to the appropriate channel:    * Email or mobile number, depending on the operation mode and input * Associates the code with:    * User identity (or login identifier)   * Requested operation (`mode`)   * Application context (if applicable) * Validation codes are valid for a limited duration and **cannot be reused**  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**, **except** where explicitly allowed (for example, login-related flows).  ``` Authorization: Bearer <access_token> ```  ---  ### **Successful Response**  On success, the API confirms that the validation code has been generated and successfully dispatched to the user.  ---  ### **Error Response**  The API returns an error response if:  * The user does not exist or is not eligible for the requested operation * The requested mode is invalid or unsupported * Required identifiers (email or mobile number for login verification) are missing * Rate limits are exceeded * Authorization fails (where applicable)  ---  ### **Security Notes (Recommended)**  * Validation codes are single-use and time-bound * Rate limiting is enforced to prevent abuse * Repeated failures may trigger temporary blocking or additional verification  ---  ### **One-Line Summary**  > Sends a one-time validation code for secure account and authentication operations, including login via email or mobile number.
-     * @param {module:model/SendValidationCodeRequest} sendValidationCodeRequest 
+     * @param {String} mode 
+     * @param {Object} opts Optional parameters
+     * @param {String} [userId] 
+     * @param {String} [mobileNumber] 
+     * @param {String} [emailId] 
+     * @param {String} [appId] 
      * @param {module:api/DefaultApi~sendValidationCodeCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/SendValidationCode200Response}
      */
-    sendValidationCode(sendValidationCodeRequest, callback) {
-      let postBody = sendValidationCodeRequest;
-      // verify the required parameter 'sendValidationCodeRequest' is set
-      if (sendValidationCodeRequest === undefined || sendValidationCodeRequest === null) {
-        throw new Error("Missing the required parameter 'sendValidationCodeRequest' when calling sendValidationCode");
+    sendValidationCode(mode, opts, callback) {
+      opts = opts || {};
+      let postBody = null;
+      // verify the required parameter 'mode' is set
+      if (mode === undefined || mode === null) {
+        throw new Error("Missing the required parameter 'mode' when calling sendValidationCode");
       }
 
       let pathParams = {
@@ -729,10 +734,15 @@ export default class DefaultApi {
       let headerParams = {
       };
       let formParams = {
+        'user_id': opts['userId'],
+        'mobile_number': opts['mobileNumber'],
+        'mode': mode,
+        'email_id': opts['emailId'],
+        'app_id': opts['appId']
       };
 
       let authNames = ['bearer'];
-      let contentTypes = ['application/json'];
+      let contentTypes = ['multipart/form-data'];
       let accepts = ['application/json'];
       let returnType = SendValidationCode200Response;
       return this.apiClient.callApi(
@@ -812,15 +822,28 @@ export default class DefaultApi {
     /**
      * Sign In with Mobile number
      * Authenticates a user using a registered mobile number. The authentication method is determined by the specified `mode`.  * When `login_type` is set to **`1`**, the user is authenticated using the **password** associated with the account. * When `login_type` is set to **`2`**, the user is authenticated using a **one-time activation code (OTP)** sent to the registered mobile number.  For OTP-based authentication (`login_type = 1`), the client **must first call the Send Validation Code API** with the appropriate login mode to generate and deliver the activation code.  ---  ### **Request Formdata**  | Field        | Type          | Required | Description                                                       | | ------------ | ------------- | -------- | ----------------------------------------------------------------- | | `mobile_number` | string | Yes      | Mobile number| | `pass_code` | string | Yes      | Password/Validation code depending on the login_type| | `login_type` | string | Yes      | login type 1 for password 2 for validation code|   |`app_id` | string | Yes      | App ID |    **Field Description**  * `mobile_number` – Registered mobile number of the user * `pass_code` – Password / Validation code (password when `login_type= 1`; validation code when `login_type = 2`) * `login_type` – Login type    * `1` → Password-based login   * `2` → Activation code (OTP)–based login  ---  ### **Behavior Notes**  * When `login_type = 2`, password validation is skipped. * OTP-based login requires a prior call to `/auth-service/send/sign/in/validation/code`. * Missing or invalid credentials for the selected mode will result in authentication failure.  ---  ### **Successful Response**  On successful authentication, the user is signed in and a success response is returned according to the authentication flow.  ---  ### **Error Response**  The API returns an error response if:  * The mobile number is not registered * The password is incorrect (`login_type = 1`) * The activation code is missing, invalid, or expired (`login_type = 2`) * An invalid or unsupported mode is provided  ---  ### **One-Line Summary**  > Signs in a user using a mobile number with either password-based or OTP-based authentication, based on the selected mode.
-     * @param {Object.<String, Object>} body 
+     * @param {String} mobileNumber Mobile number
+     * @param {String} passCode Pass code takes either password or validation code depending on the login_type
+     * @param {String} loginType 1 for password, 2 for activate code
+     * @param {Object} opts Optional parameters
+     * @param {String} [appId] App ID
      * @param {module:api/DefaultApi~signInWithMobileNumberCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/SignInWithEmail200Response}
      */
-    signInWithMobileNumber(body, callback) {
-      let postBody = body;
-      // verify the required parameter 'body' is set
-      if (body === undefined || body === null) {
-        throw new Error("Missing the required parameter 'body' when calling signInWithMobileNumber");
+    signInWithMobileNumber(mobileNumber, passCode, loginType, opts, callback) {
+      opts = opts || {};
+      let postBody = null;
+      // verify the required parameter 'mobileNumber' is set
+      if (mobileNumber === undefined || mobileNumber === null) {
+        throw new Error("Missing the required parameter 'mobileNumber' when calling signInWithMobileNumber");
+      }
+      // verify the required parameter 'passCode' is set
+      if (passCode === undefined || passCode === null) {
+        throw new Error("Missing the required parameter 'passCode' when calling signInWithMobileNumber");
+      }
+      // verify the required parameter 'loginType' is set
+      if (loginType === undefined || loginType === null) {
+        throw new Error("Missing the required parameter 'loginType' when calling signInWithMobileNumber");
       }
 
       let pathParams = {
@@ -830,10 +853,14 @@ export default class DefaultApi {
       let headerParams = {
       };
       let formParams = {
+        'mobile_number': mobileNumber,
+        'pass_code': passCode,
+        'login_type': loginType,
+        'app_id': opts['appId']
       };
 
       let authNames = ['bearer'];
-      let contentTypes = ['application/json'];
+      let contentTypes = ['multipart/form-data'];
       let accepts = ['application/json'];
       let returnType = SignInWithEmail200Response;
       return this.apiClient.callApi(

@@ -47,7 +47,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>ai.xfloor.sdk</groupId>
   <artifactId>floor-memory-sdk-client</artifactId>
-  <version>1.0.13</version>
+  <version>1.0.14</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -63,7 +63,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "ai.xfloor.sdk:floor-memory-sdk-client:1.0.13"
+     implementation "ai.xfloor.sdk:floor-memory-sdk-client:1.0.14"
   }
 ```
 
@@ -77,7 +77,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/floor-memory-sdk-client-1.0.13.jar`
+* `target/floor-memory-sdk-client-1.0.14.jar`
 * `target/lib/*.jar`
 
 ### Getting Started
@@ -96,7 +96,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
     String inputInfo = "inputInfo_example"; // String | 
@@ -118,7 +118,7 @@ public class Example {
 
 ### Documentation for API Endpoints
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://appfloor.in*
 
 Class
 
@@ -167,12 +167,12 @@ Get the conversational threads
 Conversations
 *DefaultApi*
 
-| [**makeFloorPrivate**](docs/DefaultApi.md#makeFloorPrivate) | **POST** /api/memory/make/floor/private |
+| [**makeFloorPrivate**](docs/DefaultApi.md#makeFloorPrivate) | **POST** /api/memory/make/floor/private/{floor_id} |
 
 Make floor Private
 *DefaultApi*
 
-| [**makeFloorPublic**](docs/DefaultApi.md#makeFloorPublic) | **POST** /api/memory/make/floor/public |
+| [**makeFloorPublic**](docs/DefaultApi.md#makeFloorPublic) | **POST** /api/memory/make/floor/public/{floor_id} |
 
 Make floor public
 *DefaultApi*
@@ -289,7 +289,6 @@ Query (Primary API)
  - [ResetPassword400Response](docs/ResetPassword400Response.md)
  - [SendSignInValidationCode200Response](docs/SendSignInValidationCode200Response.md)
  - [SendValidationCode200Response](docs/SendValidationCode200Response.md)
- - [SendValidationCodeRequest](docs/SendValidationCodeRequest.md)
  - [SignInWithEmail200Response](docs/SignInWithEmail200Response.md)
  - [SignInWithEmail200ResponsePodInfo](docs/SignInWithEmail200ResponsePodInfo.md)
  - [SignInWithEmail200ResponseProfile](docs/SignInWithEmail200ResponseProfile.md)

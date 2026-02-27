@@ -27,7 +27,6 @@ import type {
   ResetPassword400Response,
   SendSignInValidationCode200Response,
   SendValidationCode200Response,
-  SendValidationCodeRequest,
   SignInWithEmail200Response,
   SignUp200Response,
   UserDetails,
@@ -56,8 +55,6 @@ import {
     SendSignInValidationCode200ResponseToJSON,
     SendValidationCode200ResponseFromJSON,
     SendValidationCode200ResponseToJSON,
-    SendValidationCodeRequestFromJSON,
-    SendValidationCodeRequestToJSON,
     SignInWithEmail200ResponseFromJSON,
     SignInWithEmail200ResponseToJSON,
     SignUp200ResponseFromJSON,
@@ -146,8 +143,12 @@ export interface SendSignInValidationCodeRequest {
     emailId?: string;
 }
 
-export interface SendValidationCodeOperationRequest {
-    sendValidationCodeRequest: SendValidationCodeRequest;
+export interface SendValidationCodeRequest {
+    mode: string;
+    userId?: string;
+    mobileNumber?: string;
+    emailId?: string;
+    appId?: string;
 }
 
 export interface SignInWithEmailRequest {
@@ -158,7 +159,10 @@ export interface SignInWithEmailRequest {
 }
 
 export interface SignInWithMobileNumberRequest {
-    body: object;
+    mobileNumber: string;
+    passCode: string;
+    loginType: string;
+    appId?: string;
 }
 
 export interface SignUpRequest {
@@ -645,10 +649,6 @@ export class DefaultApi extends runtime.BaseAPI {
 
         const queryParameters: any = {};
 
-        if (requestParameters['floorId'] != null) {
-            queryParameters['floor_id'] = requestParameters['floorId'];
-        }
-
         if (requestParameters['userId'] != null) {
             queryParameters['user_id'] = requestParameters['userId'];
         }
@@ -668,7 +668,8 @@ export class DefaultApi extends runtime.BaseAPI {
             }
         }
 
-        let urlPath = `/api/memory/make/floor/private`;
+        let urlPath = `/api/memory/make/floor/private/{floor_id}`;
+        urlPath = urlPath.replace(`{${"floor_id"}}`, encodeURIComponent(String(requestParameters['floorId'])));
 
         const response = await this.request({
             path: urlPath,
@@ -717,10 +718,6 @@ export class DefaultApi extends runtime.BaseAPI {
 
         const queryParameters: any = {};
 
-        if (requestParameters['floorId'] != null) {
-            queryParameters['floor_id'] = requestParameters['floorId'];
-        }
-
         if (requestParameters['userId'] != null) {
             queryParameters['user_id'] = requestParameters['userId'];
         }
@@ -740,7 +737,8 @@ export class DefaultApi extends runtime.BaseAPI {
             }
         }
 
-        let urlPath = `/api/memory/make/floor/public`;
+        let urlPath = `/api/memory/make/floor/public/{floor_id}`;
+        urlPath = urlPath.replace(`{${"floor_id"}}`, encodeURIComponent(String(requestParameters['floorId'])));
 
         const response = await this.request({
             path: urlPath,
@@ -884,6 +882,14 @@ export class DefaultApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("bearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
 
         let urlPath = `/api/memory/change/floor/id`;
 
@@ -1037,19 +1043,17 @@ export class DefaultApi extends runtime.BaseAPI {
      * Generates and sends a one-time validation code to the user for verification of sensitive or critical account operations.  This API is used across multiple authentication and account-management flows. The validation code is delivered to the user via the appropriate channel (**email or mobile number**), based on the requested operation mode and the input provided.  The generated code is **time-bound**, **single-use**, and must be validated using the corresponding verification APIs to complete the requested action.  ---  ### **Usage Scenarios (Mode Definition)**  | Mode | Purpose                       | | ---- | ----------------------------- | | `0`  | Email or mobile number change | | `1`  | Password change               | | `2`  | Delete account                | | `3`  | Clear account                 | | `4`  | Signup Verification           | | `5`  | Using OTP for Login           | | `6`  | OTP for forgot password       |  **Mode `4` – Signup Verification** For login verification, the validation code is sent to **either the email ID or the mobile number provided in the request**. At least **one of email or mobile number must be supplied** for this mode.  ---  ### **Behavior**  * Generates a secure, one-time validation code * Sends the code to the appropriate channel:    * Email or mobile number, depending on the operation mode and input * Associates the code with:    * User identity (or login identifier)   * Requested operation (`mode`)   * Application context (if applicable) * Validation codes are valid for a limited duration and **cannot be reused**  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**, **except** where explicitly allowed (for example, login-related flows).  ``` Authorization: Bearer <access_token> ```  ---  ### **Successful Response**  On success, the API confirms that the validation code has been generated and successfully dispatched to the user.  ---  ### **Error Response**  The API returns an error response if:  * The user does not exist or is not eligible for the requested operation * The requested mode is invalid or unsupported * Required identifiers (email or mobile number for login verification) are missing * Rate limits are exceeded * Authorization fails (where applicable)  ---  ### **Security Notes (Recommended)**  * Validation codes are single-use and time-bound * Rate limiting is enforced to prevent abuse * Repeated failures may trigger temporary blocking or additional verification  ---  ### **One-Line Summary**  > Sends a one-time validation code for secure account and authentication operations, including login via email or mobile number.
      * Send Validation code
      */
-    async sendValidationCodeRaw(requestParameters: SendValidationCodeOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SendValidationCode200Response>> {
-        if (requestParameters['sendValidationCodeRequest'] == null) {
+    async sendValidationCodeRaw(requestParameters: SendValidationCodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SendValidationCode200Response>> {
+        if (requestParameters['mode'] == null) {
             throw new runtime.RequiredError(
-                'sendValidationCodeRequest',
-                'Required parameter "sendValidationCodeRequest" was null or undefined when calling sendValidationCode().'
+                'mode',
+                'Required parameter "mode" was null or undefined when calling sendValidationCode().'
             );
         }
 
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.accessToken) {
             const token = this.configuration.accessToken;
@@ -1059,6 +1063,40 @@ export class DefaultApi extends runtime.BaseAPI {
                 headerParameters["Authorization"] = `Bearer ${tokenString}`;
             }
         }
+        const consumes: runtime.Consume[] = [
+            { contentType: 'multipart/form-data' },
+        ];
+        // @ts-ignore: canConsumeForm may be unused
+        const canConsumeForm = runtime.canConsumeForm(consumes);
+
+        let formParams: { append(param: string, value: any): any };
+        let useForm = false;
+        if (useForm) {
+            formParams = new FormData();
+        } else {
+            formParams = new URLSearchParams();
+        }
+
+        if (requestParameters['userId'] != null) {
+            formParams.append('user_id', requestParameters['userId'] as any);
+        }
+
+        if (requestParameters['mobileNumber'] != null) {
+            formParams.append('mobile_number', requestParameters['mobileNumber'] as any);
+        }
+
+        if (requestParameters['mode'] != null) {
+            formParams.append('mode', requestParameters['mode'] as any);
+        }
+
+        if (requestParameters['emailId'] != null) {
+            formParams.append('email_id', requestParameters['emailId'] as any);
+        }
+
+        if (requestParameters['appId'] != null) {
+            formParams.append('app_id', requestParameters['appId'] as any);
+        }
+
 
         let urlPath = `/auth-service/send/validation/code`;
 
@@ -1067,7 +1105,7 @@ export class DefaultApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: SendValidationCodeRequestToJSON(requestParameters['sendValidationCodeRequest']),
+            body: formParams,
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SendValidationCode200ResponseFromJSON(jsonValue));
@@ -1077,7 +1115,7 @@ export class DefaultApi extends runtime.BaseAPI {
      * Generates and sends a one-time validation code to the user for verification of sensitive or critical account operations.  This API is used across multiple authentication and account-management flows. The validation code is delivered to the user via the appropriate channel (**email or mobile number**), based on the requested operation mode and the input provided.  The generated code is **time-bound**, **single-use**, and must be validated using the corresponding verification APIs to complete the requested action.  ---  ### **Usage Scenarios (Mode Definition)**  | Mode | Purpose                       | | ---- | ----------------------------- | | `0`  | Email or mobile number change | | `1`  | Password change               | | `2`  | Delete account                | | `3`  | Clear account                 | | `4`  | Signup Verification           | | `5`  | Using OTP for Login           | | `6`  | OTP for forgot password       |  **Mode `4` – Signup Verification** For login verification, the validation code is sent to **either the email ID or the mobile number provided in the request**. At least **one of email or mobile number must be supplied** for this mode.  ---  ### **Behavior**  * Generates a secure, one-time validation code * Sends the code to the appropriate channel:    * Email or mobile number, depending on the operation mode and input * Associates the code with:    * User identity (or login identifier)   * Requested operation (`mode`)   * Application context (if applicable) * Validation codes are valid for a limited duration and **cannot be reused**  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**, **except** where explicitly allowed (for example, login-related flows).  ``` Authorization: Bearer <access_token> ```  ---  ### **Successful Response**  On success, the API confirms that the validation code has been generated and successfully dispatched to the user.  ---  ### **Error Response**  The API returns an error response if:  * The user does not exist or is not eligible for the requested operation * The requested mode is invalid or unsupported * Required identifiers (email or mobile number for login verification) are missing * Rate limits are exceeded * Authorization fails (where applicable)  ---  ### **Security Notes (Recommended)**  * Validation codes are single-use and time-bound * Rate limiting is enforced to prevent abuse * Repeated failures may trigger temporary blocking or additional verification  ---  ### **One-Line Summary**  > Sends a one-time validation code for secure account and authentication operations, including login via email or mobile number.
      * Send Validation code
      */
-    async sendValidationCode(requestParameters: SendValidationCodeOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SendValidationCode200Response> {
+    async sendValidationCode(requestParameters: SendValidationCodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SendValidationCode200Response> {
         const response = await this.sendValidationCodeRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -1178,18 +1216,30 @@ export class DefaultApi extends runtime.BaseAPI {
      * Sign In with Mobile number
      */
     async signInWithMobileNumberRaw(requestParameters: SignInWithMobileNumberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SignInWithEmail200Response>> {
-        if (requestParameters['body'] == null) {
+        if (requestParameters['mobileNumber'] == null) {
             throw new runtime.RequiredError(
-                'body',
-                'Required parameter "body" was null or undefined when calling signInWithMobileNumber().'
+                'mobileNumber',
+                'Required parameter "mobileNumber" was null or undefined when calling signInWithMobileNumber().'
+            );
+        }
+
+        if (requestParameters['passCode'] == null) {
+            throw new runtime.RequiredError(
+                'passCode',
+                'Required parameter "passCode" was null or undefined when calling signInWithMobileNumber().'
+            );
+        }
+
+        if (requestParameters['loginType'] == null) {
+            throw new runtime.RequiredError(
+                'loginType',
+                'Required parameter "loginType" was null or undefined when calling signInWithMobileNumber().'
             );
         }
 
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.accessToken) {
             const token = this.configuration.accessToken;
@@ -1199,6 +1249,36 @@ export class DefaultApi extends runtime.BaseAPI {
                 headerParameters["Authorization"] = `Bearer ${tokenString}`;
             }
         }
+        const consumes: runtime.Consume[] = [
+            { contentType: 'multipart/form-data' },
+        ];
+        // @ts-ignore: canConsumeForm may be unused
+        const canConsumeForm = runtime.canConsumeForm(consumes);
+
+        let formParams: { append(param: string, value: any): any };
+        let useForm = false;
+        if (useForm) {
+            formParams = new FormData();
+        } else {
+            formParams = new URLSearchParams();
+        }
+
+        if (requestParameters['mobileNumber'] != null) {
+            formParams.append('mobile_number', requestParameters['mobileNumber'] as any);
+        }
+
+        if (requestParameters['passCode'] != null) {
+            formParams.append('pass_code', requestParameters['passCode'] as any);
+        }
+
+        if (requestParameters['loginType'] != null) {
+            formParams.append('login_type', requestParameters['loginType'] as any);
+        }
+
+        if (requestParameters['appId'] != null) {
+            formParams.append('app_id', requestParameters['appId'] as any);
+        }
+
 
         let urlPath = `/auth-service/sign/in/with/mobile/number`;
 
@@ -1207,7 +1287,7 @@ export class DefaultApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters['body'] as any,
+            body: formParams,
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SignInWithEmail200ResponseFromJSON(jsonValue));

@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The Event400ResponseError model module.
  * @module model/Event400ResponseError
- * @version 1.0.13
+ * @version 1.0.14
  */
 class Event400ResponseError {
     /**

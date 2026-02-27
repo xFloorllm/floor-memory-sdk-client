@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The GetConversations200ResponseConversationInnerUserContext model module.
  * @module model/GetConversations200ResponseConversationInnerUserContext
- * @version 1.0.13
+ * @version 1.0.14
  */
 class GetConversations200ResponseConversationInnerUserContext {
     /**

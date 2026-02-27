@@ -1,6 +1,6 @@
 # DefaultApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://appfloor.in*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
@@ -11,8 +11,8 @@ All URIs are relative to *http://localhost*
 | [**changePassword**](DefaultApi.md#changePassword) | **POST** /auth-service/password/change | Change Password |
 | [**conversationThreads**](DefaultApi.md#conversationThreads) | **GET** /agent/memory/threads | Get the conversational threads |
 | [**getConversations**](DefaultApi.md#getConversations) | **GET** /agent/memory/conversations | Conversations |
-| [**makeFloorPrivate**](DefaultApi.md#makeFloorPrivate) | **POST** /api/memory/make/floor/private | Make floor Private |
-| [**makeFloorPublic**](DefaultApi.md#makeFloorPublic) | **POST** /api/memory/make/floor/public | Make floor public |
+| [**makeFloorPrivate**](DefaultApi.md#makeFloorPrivate) | **POST** /api/memory/make/floor/private/{floor_id} | Make floor Private |
+| [**makeFloorPublic**](DefaultApi.md#makeFloorPublic) | **POST** /api/memory/make/floor/public/{floor_id} | Make floor public |
 | [**registerExternalUserIdentity**](DefaultApi.md#registerExternalUserIdentity) | **POST** /memory/identity/external-user | External User Registration |
 | [**renameFloor**](DefaultApi.md#renameFloor) | **POST** /api/memory/change/floor/id | Rename floor |
 | [**resetPassword**](DefaultApi.md#resetPassword) | **POST** /auth-service/password/reset | Reset Password |
@@ -44,7 +44,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
     String inputInfo = "inputInfo_example"; // String | 
@@ -112,7 +112,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
     String inputInfo = "inputInfo_example"; // String | User ID, App ID, Title, Details. User ID and App ID are required parameters. Title/details are optional.
@@ -245,7 +245,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -386,7 +386,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -485,7 +485,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -679,7 +679,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -928,7 +928,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -1098,14 +1098,14 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
     bearer.setBearerToken("BEARER TOKEN");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
-    String floorId = "floorId_example"; // String | Floor ID
+    String floorId = "floorId_example"; // String | 
     String userId = "userId_example"; // String | User ID
     String appId = "appId_example"; // String | App ID
     try {
@@ -1126,8 +1126,8 @@ public class Example {
 
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **floorId** | **String**| Floor ID |
-|
+| **floorId** | **String**|
+| |
 | **userId** | **String**| User ID |
 |
 | **appId** | **String**| App ID |
@@ -1288,14 +1288,14 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
     bearer.setBearerToken("BEARER TOKEN");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
-    String floorId = "floorId_example"; // String | Floor ID
+    String floorId = "floorId_example"; // String | 
     String userId = "userId_example"; // String | User ID
     String appId = "appId_example"; // String | App ID
     try {
@@ -1316,8 +1316,8 @@ public class Example {
 
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **floorId** | **String**| Floor ID |
-|
+| **floorId** | **String**|
+| |
 | **userId** | **String**| User ID |
 |
 | **appId** | **String**| App ID |
@@ -1369,7 +1369,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -1567,13 +1567,18 @@ of a floor, owner-only.”**
 import ai.xfloor.memory.client.ApiClient;
 import ai.xfloor.memory.client.ApiException;
 import ai.xfloor.memory.client.Configuration;
+import ai.xfloor.memory.client.auth.*;
 import ai.xfloor.memory.client.models.*;
 import ai.xfloor.memory.api.DefaultApi;
 
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
+    
+    // Configure HTTP bearer authorization: bearer
+    HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
+    bearer.setBearerToken("BEARER TOKEN");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
     String userId = "userId_example"; // String | User ID
@@ -1613,7 +1618,7 @@ public class Example {
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -1670,7 +1675,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
     String activationCode = "activationCode_example"; // String | Activation Code
@@ -1817,7 +1822,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -1875,7 +1880,7 @@ public class Example {
 
 <a id="sendValidationCode"></a>
 # **sendValidationCode**
-> SendValidationCode200Response sendValidationCode(sendValidationCodeRequest)
+> SendValidationCode200Response sendValidationCode(mode, userId, mobileNumber, emailId, appId)
 
 Send Validation code
 
@@ -1960,16 +1965,20 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
     bearer.setBearerToken("BEARER TOKEN");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
-    SendValidationCodeRequest sendValidationCodeRequest = new SendValidationCodeRequest(); // SendValidationCodeRequest | 
+    String mode = "mode_example"; // String | 
+    String userId = "userId_example"; // String | 
+    String mobileNumber = "mobileNumber_example"; // String | 
+    String emailId = "emailId_example"; // String | 
+    String appId = "appId_example"; // String | 
     try {
-      SendValidationCode200Response result = apiInstance.sendValidationCode(sendValidationCodeRequest);
+      SendValidationCode200Response result = apiInstance.sendValidationCode(mode, userId, mobileNumber, emailId, appId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#sendValidationCode");
@@ -1986,8 +1995,16 @@ public class Example {
 
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **sendValidationCodeRequest** | [**SendValidationCodeRequest**](SendValidationCodeRequest.md)|
+| **mode** | **String**|
 | |
+| **userId** | **String**|
+| [optional] |
+| **mobileNumber** | **String**|
+| [optional] |
+| **emailId** | **String**|
+| [optional] |
+| **appId** | **String**|
+| [optional] |
 
 ### Return type
 
@@ -1999,7 +2016,7 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -2082,7 +2099,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -2144,7 +2161,7 @@ public class Example {
 
 <a id="signInWithMobileNumber"></a>
 # **signInWithMobileNumber**
-> SignInWithEmail200Response signInWithMobileNumber(body)
+> SignInWithEmail200Response signInWithMobileNumber(mobileNumber, passCode, loginType, appId)
 
 Sign In with Mobile number
 
@@ -2210,16 +2227,19 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
     bearer.setBearerToken("BEARER TOKEN");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
-    Object body = null; // Object | 
+    String mobileNumber = "mobileNumber_example"; // String | Mobile number
+    String passCode = "passCode_example"; // String | Pass code takes either password or validation code depending on the login_type
+    String loginType = "loginType_example"; // String | 1 for password, 2 for activate code
+    String appId = "appId_example"; // String | App ID
     try {
-      SignInWithEmail200Response result = apiInstance.signInWithMobileNumber(body);
+      SignInWithEmail200Response result = apiInstance.signInWithMobileNumber(mobileNumber, passCode, loginType, appId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#signInWithMobileNumber");
@@ -2236,8 +2256,13 @@ public class Example {
 
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **body** | **Object**|
-| |
+| **mobileNumber** | **String**| Mobile number |
+|
+| **passCode** | **String**| Pass code takes either password or validation code depending on the login_type |
+|
+| **loginType** | **String**| 1 for password, 2 for activate code |
+|
+| **appId** | **String**| App ID | [optional] |
 
 ### Return type
 
@@ -2249,7 +2274,7 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -2289,7 +2314,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -2437,7 +2462,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");

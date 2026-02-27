@@ -53,4 +53,12 @@ public class SignUp200ResponseTest {
         // TODO: test success
     }
 
+    /**
+     * Test the property 'name'
+     */
+    @Test
+    public void nameTest() {
+        // TODO: test name
+    }
+
 }

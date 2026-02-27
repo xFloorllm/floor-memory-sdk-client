@@ -1,6 +1,6 @@
 # XfloorFloorMemorySdkJs.DefaultApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://appfloor.in*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -11,8 +11,8 @@ Method | HTTP request | Description
 [**changePassword**](DefaultApi.md#changePassword) | **POST** /auth-service/password/change | Change Password
 [**conversationThreads**](DefaultApi.md#conversationThreads) | **GET** /agent/memory/threads | Get the conversational threads
 [**getConversations**](DefaultApi.md#getConversations) | **GET** /agent/memory/conversations | Conversations
-[**makeFloorPrivate**](DefaultApi.md#makeFloorPrivate) | **POST** /api/memory/make/floor/private | Make floor Private
-[**makeFloorPublic**](DefaultApi.md#makeFloorPublic) | **POST** /api/memory/make/floor/public | Make floor public
+[**makeFloorPrivate**](DefaultApi.md#makeFloorPrivate) | **POST** /api/memory/make/floor/private/{floor_id} | Make floor Private
+[**makeFloorPublic**](DefaultApi.md#makeFloorPublic) | **POST** /api/memory/make/floor/public/{floor_id} | Make floor public
 [**registerExternalUserIdentity**](DefaultApi.md#registerExternalUserIdentity) | **POST** /memory/identity/external-user | External User Registration
 [**renameFloor**](DefaultApi.md#renameFloor) | **POST** /api/memory/change/floor/id | Rename floor
 [**resetPassword**](DefaultApi.md#resetPassword) | **POST** /auth-service/password/reset | Reset Password
@@ -1044,7 +1044,7 @@ let bearer = defaultClient.authentications['bearer'];
 bearer.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new XfloorFloorMemorySdkJs.DefaultApi();
-let floorId = "floorId_example"; // String | Floor ID
+let floorId = "floorId_example"; // String | 
 let userId = "userId_example"; // String | User ID
 let appId = "appId_example"; // String | App ID
 apiInstance.makeFloorPrivate(floorId, userId, appId, (error, data, response) => {
@@ -1071,7 +1071,8 @@ Notes
 -------------
  **floorId**
 
-| **String**| Floor ID |
+| **String**|
+|
  **userId**
 
 | **String**| User ID |
@@ -1222,7 +1223,7 @@ let bearer = defaultClient.authentications['bearer'];
 bearer.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new XfloorFloorMemorySdkJs.DefaultApi();
-let floorId = "floorId_example"; // String | Floor ID
+let floorId = "floorId_example"; // String | 
 let userId = "userId_example"; // String | User ID
 let appId = "appId_example"; // String | App ID
 apiInstance.makeFloorPublic(floorId, userId, appId, (error, data, response) => {
@@ -1249,7 +1250,8 @@ Notes
 -------------
  **floorId**
 
-| **String**| Floor ID |
+| **String**|
+|
  **userId**
 
 | **String**| User ID |
@@ -1496,6 +1498,10 @@ of a floor, owner-only.”**
 
 ```javascript
 import XfloorFloorMemorySdkJs from '@xfloor/floor-memory-sdk-js';
+let defaultClient = XfloorFloorMemorySdkJs.ApiClient.instance;
+// Configure Bearer access token for authorization: bearer
+let bearer = defaultClient.authentications['bearer'];
+bearer.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new XfloorFloorMemorySdkJs.DefaultApi();
 let userId = "userId_example"; // String | User ID
@@ -1543,7 +1549,7 @@ Notes
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -1793,7 +1799,7 @@ Notes
 
 ### sendValidationCode
 
-> SendValidationCode200Response sendValidationCode(sendValidationCodeRequest)
+> SendValidationCode200Response sendValidationCode(mode, opts)
 
 Send Validation code
 
@@ -1875,8 +1881,14 @@ let bearer = defaultClient.authentications['bearer'];
 bearer.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new XfloorFloorMemorySdkJs.DefaultApi();
-let sendValidationCodeRequest = new XfloorFloorMemorySdkJs.SendValidationCodeRequest(); // SendValidationCodeRequest | 
-apiInstance.sendValidationCode(sendValidationCodeRequest, (error, data, response) => {
+let mode = "mode_example"; // String | 
+let opts = {
+  'userId': "userId_example", // String | 
+  'mobileNumber': "mobileNumber_example", // String | 
+  'emailId': "emailId_example", // String | 
+  'appId': "appId_example" // String | 
+};
+apiInstance.sendValidationCode(mode, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -1898,10 +1910,34 @@ Notes
 | ------------- | ------------- |
 
 -------------
- **sendValidationCodeRequest**
+ **mode**
 
-| [**SendValidationCodeRequest**](SendValidationCodeRequest.md)|
+| **String**|
 |
+ **userId**
+
+| **String**|
+|
+
+[optional]
+ **mobileNumber**
+
+| **String**|
+|
+
+[optional]
+ **emailId**
+
+| **String**|
+|
+
+[optional]
+ **appId**
+
+| **String**|
+|
+
+[optional]
 
 ### Return type
 
@@ -1913,7 +1949,7 @@ Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: multipart/form-data
 - **Accept**: application/json
 
 
@@ -2043,7 +2079,7 @@ Notes
 
 ### signInWithMobileNumber
 
-> SignInWithEmail200Response signInWithMobileNumber(body)
+> SignInWithEmail200Response signInWithMobileNumber(mobileNumber, passCode, loginType, opts)
 
 Sign In with Mobile number
 
@@ -2106,8 +2142,13 @@ let bearer = defaultClient.authentications['bearer'];
 bearer.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new XfloorFloorMemorySdkJs.DefaultApi();
-let body = {key: null}; // Object | 
-apiInstance.signInWithMobileNumber(body, (error, data, response) => {
+let mobileNumber = "mobileNumber_example"; // String | Mobile number
+let passCode = "passCode_example"; // String | Pass code takes either password or validation code depending on the login_type
+let loginType = "loginType_example"; // String | 1 for password, 2 for activate code
+let opts = {
+  'appId': "appId_example" // String | App ID
+};
+apiInstance.signInWithMobileNumber(mobileNumber, passCode, loginType, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -2129,10 +2170,20 @@ Notes
 | ------------- | ------------- |
 
 -------------
- **body**
+ **mobileNumber**
 
-| **Object**|
-|
+| **String**| Mobile number |
+ **passCode**
+
+| **String**| Pass code takes either password or validation code depending on the login_type |
+ **loginType**
+
+| **String**| 1 for password, 2 for activate code |
+ **appId**
+
+| **String**| App ID |
+
+[optional]
 
 ### Return type
 
@@ -2144,7 +2195,7 @@ Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: multipart/form-data
 - **Accept**: application/json
 
 

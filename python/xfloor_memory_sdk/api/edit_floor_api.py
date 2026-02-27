@@ -95,7 +95,6 @@ class EditFloorApi:
         
         | Field Name | Type | Required | Description |
         | ---------- | ------ | ------------ | ---------------------------------------- |
-        | `fid` | String | Recommended* | Immutable internal floor ID |
         | `floor_id` | String | Optional* | Public / human-readable floor identifier |
         | `title` | String | Optional | New floor title |
         | `details` | String | Optional | New floor description |
@@ -273,7 +272,6 @@ class EditFloorApi:
         
         | Field Name | Type | Required | Description |
         | ---------- | ------ | ------------ | ---------------------------------------- |
-        | `fid` | String | Recommended* | Immutable internal floor ID |
         | `floor_id` | String | Optional* | Public / human-readable floor identifier |
         | `title` | String | Optional | New floor title |
         | `details` | String | Optional | New floor description |
@@ -451,7 +449,6 @@ class EditFloorApi:
         
         | Field Name | Type | Required | Description |
         | ---------- | ------ | ------------ | ---------------------------------------- |
-        | `fid` | String | Recommended* | Immutable internal floor ID |
         | `floor_id` | String | Optional* | Public / human-readable floor identifier |
         | `title` | String | Optional | New floor title |
         | `details` | String | Optional | New floor description |

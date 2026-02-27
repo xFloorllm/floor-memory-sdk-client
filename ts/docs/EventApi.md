@@ -1,6 +1,6 @@
 # EventApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://appfloor.in*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
@@ -10,7 +10,7 @@ All URIs are relative to *http://localhost*
 
 ### event
 
-> EventResponse event(inputInfo, appId, files)
+> EventResponse event(inputInfo, appId, userId, files)
 
 Create Event (Post Content)
 
@@ -158,8 +158,10 @@ async function example() {
     inputInfo: inputInfo_example,
     // string | App ID created in developer console.
     appId: appId_example,
-    // Blob | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected (optional)
-    files: BINARY_DATA_HERE,
+    // string
+    userId: userId_example,
+    // Array<string> | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected (optional)
+    files: ...,
   } satisfies EventRequest;
 
   try {
@@ -181,7 +183,9 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **inputInfo** | `string` | Input parameters, bid is optional | [Defaults to `undefined`] |
 | **appId** | `string` | App ID created in developer console. | [Defaults to `undefined`] |
-| **files** | `Blob` | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected | [Optional] [Defaults to `undefined`] |
+| **userId** | `string` |
+| [Defaults to `undefined`] |
+| **files** | `Array<string>` | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected | [Optional] |
 
 ### Return type
 

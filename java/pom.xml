@@ -5,7 +5,7 @@
     <artifactId>floor-memory-sdk-client</artifactId>
     <packaging>jar</packaging>
     <name>floor-memory-sdk-client</name>
-    <version>1.0.13</version>
+    <version>1.0.14</version>
     <url>https://github.com/xFloorllm/floor-memory-sdk-client</url>
     <description>OpenAPI Java</description>
     <scm>

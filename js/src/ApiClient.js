@@ -18,7 +18,7 @@ import superagent from "superagent";
 
 /**
 * @module ApiClient
-* @version 1.0.13
+* @version 1.0.14
 */
 
 /**
@@ -34,11 +34,11 @@ class ApiClient {
      * Overrides the default value set in spec file if present
      * @param {String} basePath
      */
-    constructor(basePath = 'http://localhost') {
+    constructor(basePath = 'https://appfloor.in') {
         /**
          * The base URL against which to resolve every API call's (relative) path.
          * @type {String}
-         * @default http://localhost
+         * @default https://appfloor.in
          */
         this.basePath = basePath.replace(/\/+$/, '');
 
@@ -56,7 +56,7 @@ class ApiClient {
          * @default {}
          */
         this.defaultHeaders = {
-            'User-Agent': 'OpenAPI-Generator/1.0.13/Javascript'
+            'User-Agent': 'OpenAPI-Generator/1.0.14/Javascript'
         };
 
         /**
@@ -597,8 +597,8 @@ class ApiClient {
     hostSettings() {
         return [
             {
-              'url': "",
-              'description': "No description provided",
+              'url': "https://appfloor.in",
+              'description': "Prod Env",
             }
       ];
     }

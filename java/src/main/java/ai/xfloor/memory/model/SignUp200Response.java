@@ -62,6 +62,11 @@ public class SignUp200Response {
   @javax.annotation.Nonnull
   private String success;
 
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nullable
+  private String name;
+
   public SignUp200Response() {
   }
 
@@ -103,6 +108,25 @@ public class SignUp200Response {
   }
 
 
+  public SignUp200Response name(@javax.annotation.Nullable String name) {
+    this.name = name;
+    return this;
+  }
+
+  /**
+   * Get name
+   * @return name
+   */
+  @javax.annotation.Nullable
+  public String getName() {
+    return name;
+  }
+
+  public void setName(@javax.annotation.Nullable String name) {
+    this.name = name;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -114,12 +138,13 @@ public class SignUp200Response {
     }
     SignUp200Response signUp200Response = (SignUp200Response) o;
     return Objects.equals(this.userId, signUp200Response.userId) &&
-        Objects.equals(this.success, signUp200Response.success);
+        Objects.equals(this.success, signUp200Response.success) &&
+        Objects.equals(this.name, signUp200Response.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, success);
+    return Objects.hash(userId, success, name);
   }
 
   @Override
@@ -128,6 +153,7 @@ public class SignUp200Response {
     sb.append("class SignUp200Response {\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    success: ").append(toIndentedString(success)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -149,7 +175,7 @@ public class SignUp200Response {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("user_id", "success"));
+    openapiFields = new HashSet<String>(Arrays.asList("user_id", "success", "name"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(Arrays.asList("user_id", "success"));
@@ -188,6 +214,9 @@ public class SignUp200Response {
       }
       if (!jsonObj.get("success").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `success` to be a primitive type in the JSON string but got `%s`", jsonObj.get("success").toString()));
+      }
+      if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
       }
   }
 

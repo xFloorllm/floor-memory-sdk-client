@@ -1,6 +1,6 @@
 # XfloorFloorMemorySdkJs.EventApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://appfloor.in*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ### event
 
-> EventResponse event(inputInfo, appId, opts)
+> EventResponse event(inputInfo, appId, userId, opts)
 
 Create Event (Post Content)
 
@@ -148,10 +148,11 @@ bearer.accessToken = "YOUR ACCESS TOKEN"
 let apiInstance = new XfloorFloorMemorySdkJs.EventApi();
 let inputInfo = "inputInfo_example"; // String | Input parameters, bid is optional
 let appId = "appId_example"; // String | App ID created in developer console.
+let userId = "userId_example"; // String | 
 let opts = {
-  'files': "/path/to/file" // File | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
+  'files': ["null"] // [String] | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
 };
-apiInstance.event(inputInfo, appId, opts, (error, data, response) => {
+apiInstance.event(inputInfo, appId, userId, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -179,9 +180,13 @@ Notes
  **appId**
 
 | **String**| App ID created in developer console. |
+ **userId**
+
+| **String**|
+|
  **files**
 
-| **File**| Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected |
+| [**[String]**](String.md)| Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected |
 
 [optional]
 

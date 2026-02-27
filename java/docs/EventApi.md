@@ -1,6 +1,6 @@
 # EventApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://appfloor.in*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
@@ -9,7 +9,7 @@ All URIs are relative to *http://localhost*
 
 <a id="event"></a>
 # **event**
-> EventResponse event(inputInfo, appId, files)
+> EventResponse event(inputInfo, appId, userId, files)
 
 Create Event (Post Content)
 
@@ -148,7 +148,7 @@ import ai.xfloor.memory.api.EventApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -157,9 +157,10 @@ public class Example {
     EventApi apiInstance = new EventApi(defaultClient);
     String inputInfo = "inputInfo_example"; // String | Input parameters, bid is optional
     String appId = "appId_example"; // String | App ID created in developer console.
-    File files = new File("/path/to/file"); // File | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
+    String userId = "userId_example"; // String | 
+    List<String> files = Arrays.asList(); // List<String> | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
     try {
-      EventResponse result = apiInstance.event(inputInfo, appId, files);
+      EventResponse result = apiInstance.event(inputInfo, appId, userId, files);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling EventApi#event");
@@ -180,7 +181,9 @@ public class Example {
 |
 | **appId** | **String**| App ID created in developer console. |
 |
-| **files** | **File**| Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected | [optional] |
+| **userId** | **String**|
+| |
+| **files** | [**List<String>**](String.md)| Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected | [optional] |
 
 ### Return type
 

@@ -8,6 +8,7 @@ Name | Type
 ------------ | -------------
 `userId` | string
 `success` | string
+`name` | string
 
 ### Example
 
@@ -18,6 +19,7 @@ import type { SignUp200Response } from '@xfloor/floor-memory-sdk-ts'
 const example = {
   "userId": null,
   "success": null,
+  "name": null,
 } satisfies SignUp200Response
 
 console.log(example)

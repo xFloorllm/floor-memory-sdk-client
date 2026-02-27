@@ -55,7 +55,6 @@ import ResetPassword200Response from './model/ResetPassword200Response';
 import ResetPassword400Response from './model/ResetPassword400Response';
 import SendSignInValidationCode200Response from './model/SendSignInValidationCode200Response';
 import SendValidationCode200Response from './model/SendValidationCode200Response';
-import SendValidationCodeRequest from './model/SendValidationCodeRequest';
 import SignInWithEmail200Response from './model/SignInWithEmail200Response';
 import SignInWithEmail200ResponsePodInfo from './model/SignInWithEmail200ResponsePodInfo';
 import SignInWithEmail200ResponseProfile from './model/SignInWithEmail200ResponseProfile';
@@ -105,7 +104,7 @@ import QueryApi from './api/QueryApi';
 * </pre>
 * </p>
 * @module index
-* @version 1.0.13
+* @version 1.0.14
 */
 export {
     /**
@@ -353,12 +352,6 @@ export {
      * @property {module:model/SendValidationCode200Response}
      */
     SendValidationCode200Response,
-
-    /**
-     * The SendValidationCodeRequest model constructor.
-     * @property {module:model/SendValidationCodeRequest}
-     */
-    SendValidationCodeRequest,
 
     /**
      * The SignInWithEmail200Response model constructor.

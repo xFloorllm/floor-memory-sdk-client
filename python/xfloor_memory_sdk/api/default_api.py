@@ -29,7 +29,6 @@ from xfloor_memory_sdk.models.get_floor_information200_response import GetFloorI
 from xfloor_memory_sdk.models.reset_password200_response import ResetPassword200Response
 from xfloor_memory_sdk.models.send_sign_in_validation_code200_response import SendSignInValidationCode200Response
 from xfloor_memory_sdk.models.send_validation_code200_response import SendValidationCode200Response
-from xfloor_memory_sdk.models.send_validation_code_request import SendValidationCodeRequest
 from xfloor_memory_sdk.models.sign_in_with_email200_response import SignInWithEmail200Response
 from xfloor_memory_sdk.models.sign_up200_response import SignUp200Response
 from xfloor_memory_sdk.models.user_details import UserDetails
@@ -3412,7 +3411,7 @@ class DefaultApi:
     @validate_call
     def make_floor_private(
         self,
-        floor_id: Annotated[StrictStr, Field(description="Floor ID")],
+        floor_id: StrictStr,
         user_id: Annotated[StrictStr, Field(description="User ID")],
         app_id: Annotated[StrictStr, Field(description="App ID")],
         _request_timeout: Union[
@@ -3529,7 +3528,7 @@ class DefaultApi:
         
         are handled elsewhere. * `app_id` is provided for developer/pod applications and is optional unless enforced by your app model. * If you support floor types like `POD`, document whether pods are allowed to be private or not (some platforms restrict this).
 
-        :param floor_id: Floor ID (required)
+        :param floor_id:  (required)
         :type floor_id: str
         :param user_id: User ID (required)
         :type user_id: str
@@ -3585,7 +3584,7 @@ class DefaultApi:
     @validate_call
     def make_floor_private_with_http_info(
         self,
-        floor_id: Annotated[StrictStr, Field(description="Floor ID")],
+        floor_id: StrictStr,
         user_id: Annotated[StrictStr, Field(description="User ID")],
         app_id: Annotated[StrictStr, Field(description="App ID")],
         _request_timeout: Union[
@@ -3702,7 +3701,7 @@ class DefaultApi:
         
         are handled elsewhere. * `app_id` is provided for developer/pod applications and is optional unless enforced by your app model. * If you support floor types like `POD`, document whether pods are allowed to be private or not (some platforms restrict this).
 
-        :param floor_id: Floor ID (required)
+        :param floor_id:  (required)
         :type floor_id: str
         :param user_id: User ID (required)
         :type user_id: str
@@ -3758,7 +3757,7 @@ class DefaultApi:
     @validate_call
     def make_floor_private_without_preload_content(
         self,
-        floor_id: Annotated[StrictStr, Field(description="Floor ID")],
+        floor_id: StrictStr,
         user_id: Annotated[StrictStr, Field(description="User ID")],
         app_id: Annotated[StrictStr, Field(description="App ID")],
         _request_timeout: Union[
@@ -3875,7 +3874,7 @@ class DefaultApi:
         
         are handled elsewhere. * `app_id` is provided for developer/pod applications and is optional unless enforced by your app model. * If you support floor types like `POD`, document whether pods are allowed to be private or not (some platforms restrict this).
 
-        :param floor_id: Floor ID (required)
+        :param floor_id:  (required)
         :type floor_id: str
         :param user_id: User ID (required)
         :type user_id: str
@@ -3950,11 +3949,9 @@ class DefaultApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        # process the query parameters
         if floor_id is not None:
-            
-            _query_params.append(('floor_id', floor_id))
-            
+            _path_params['floor_id'] = floor_id
+        # process the query parameters
         if user_id is not None:
             
             _query_params.append(('user_id', user_id))
@@ -3984,7 +3981,7 @@ class DefaultApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/memory/make/floor/private',
+            resource_path='/api/memory/make/floor/private/{floor_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4003,7 +4000,7 @@ class DefaultApi:
     @validate_call
     def make_floor_public(
         self,
-        floor_id: Annotated[StrictStr, Field(description="Floor ID")],
+        floor_id: StrictStr,
         user_id: Annotated[StrictStr, Field(description="User ID")],
         app_id: Annotated[StrictStr, Field(description="App ID")],
         _request_timeout: Union[
@@ -4134,7 +4131,7 @@ class DefaultApi:
         
         > **This API answers: “Make this floor visible to everyone.”**
 
-        :param floor_id: Floor ID (required)
+        :param floor_id:  (required)
         :type floor_id: str
         :param user_id: User ID (required)
         :type user_id: str
@@ -4190,7 +4187,7 @@ class DefaultApi:
     @validate_call
     def make_floor_public_with_http_info(
         self,
-        floor_id: Annotated[StrictStr, Field(description="Floor ID")],
+        floor_id: StrictStr,
         user_id: Annotated[StrictStr, Field(description="User ID")],
         app_id: Annotated[StrictStr, Field(description="App ID")],
         _request_timeout: Union[
@@ -4321,7 +4318,7 @@ class DefaultApi:
         
         > **This API answers: “Make this floor visible to everyone.”**
 
-        :param floor_id: Floor ID (required)
+        :param floor_id:  (required)
         :type floor_id: str
         :param user_id: User ID (required)
         :type user_id: str
@@ -4377,7 +4374,7 @@ class DefaultApi:
     @validate_call
     def make_floor_public_without_preload_content(
         self,
-        floor_id: Annotated[StrictStr, Field(description="Floor ID")],
+        floor_id: StrictStr,
         user_id: Annotated[StrictStr, Field(description="User ID")],
         app_id: Annotated[StrictStr, Field(description="App ID")],
         _request_timeout: Union[
@@ -4508,7 +4505,7 @@ class DefaultApi:
         
         > **This API answers: “Make this floor visible to everyone.”**
 
-        :param floor_id: Floor ID (required)
+        :param floor_id:  (required)
         :type floor_id: str
         :param user_id: User ID (required)
         :type user_id: str
@@ -4583,11 +4580,9 @@ class DefaultApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        # process the query parameters
         if floor_id is not None:
-            
-            _query_params.append(('floor_id', floor_id))
-            
+            _path_params['floor_id'] = floor_id
+        # process the query parameters
         if user_id is not None:
             
             _query_params.append(('user_id', user_id))
@@ -4617,7 +4612,7 @@ class DefaultApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/memory/make/floor/public',
+            resource_path='/api/memory/make/floor/public/{floor_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5632,6 +5627,7 @@ class DefaultApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'bearer'
         ]
 
         return self.api_client.param_serialize(
@@ -6554,7 +6550,11 @@ class DefaultApi:
     @validate_call
     def send_validation_code(
         self,
-        send_validation_code_request: SendValidationCodeRequest,
+        mode: StrictStr,
+        user_id: Optional[StrictStr] = None,
+        mobile_number: Optional[StrictStr] = None,
+        email_id: Optional[StrictStr] = None,
+        app_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6638,8 +6638,16 @@ class DefaultApi:
         
         > Sends a one-time validation code for secure account and authentication operations, including login via email or mobile number.
 
-        :param send_validation_code_request: (required)
-        :type send_validation_code_request: SendValidationCodeRequest
+        :param mode: (required)
+        :type mode: str
+        :param user_id:
+        :type user_id: str
+        :param mobile_number:
+        :type mobile_number: str
+        :param email_id:
+        :type email_id: str
+        :param app_id:
+        :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6663,7 +6671,11 @@ class DefaultApi:
         """ # noqa: E501
 
         _param = self._send_validation_code_serialize(
-            send_validation_code_request=send_validation_code_request,
+            mode=mode,
+            user_id=user_id,
+            mobile_number=mobile_number,
+            email_id=email_id,
+            app_id=app_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6688,7 +6700,11 @@ class DefaultApi:
     @validate_call
     def send_validation_code_with_http_info(
         self,
-        send_validation_code_request: SendValidationCodeRequest,
+        mode: StrictStr,
+        user_id: Optional[StrictStr] = None,
+        mobile_number: Optional[StrictStr] = None,
+        email_id: Optional[StrictStr] = None,
+        app_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6772,8 +6788,16 @@ class DefaultApi:
         
         > Sends a one-time validation code for secure account and authentication operations, including login via email or mobile number.
 
-        :param send_validation_code_request: (required)
-        :type send_validation_code_request: SendValidationCodeRequest
+        :param mode: (required)
+        :type mode: str
+        :param user_id:
+        :type user_id: str
+        :param mobile_number:
+        :type mobile_number: str
+        :param email_id:
+        :type email_id: str
+        :param app_id:
+        :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6797,7 +6821,11 @@ class DefaultApi:
         """ # noqa: E501
 
         _param = self._send_validation_code_serialize(
-            send_validation_code_request=send_validation_code_request,
+            mode=mode,
+            user_id=user_id,
+            mobile_number=mobile_number,
+            email_id=email_id,
+            app_id=app_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6822,7 +6850,11 @@ class DefaultApi:
     @validate_call
     def send_validation_code_without_preload_content(
         self,
-        send_validation_code_request: SendValidationCodeRequest,
+        mode: StrictStr,
+        user_id: Optional[StrictStr] = None,
+        mobile_number: Optional[StrictStr] = None,
+        email_id: Optional[StrictStr] = None,
+        app_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6906,8 +6938,16 @@ class DefaultApi:
         
         > Sends a one-time validation code for secure account and authentication operations, including login via email or mobile number.
 
-        :param send_validation_code_request: (required)
-        :type send_validation_code_request: SendValidationCodeRequest
+        :param mode: (required)
+        :type mode: str
+        :param user_id:
+        :type user_id: str
+        :param mobile_number:
+        :type mobile_number: str
+        :param email_id:
+        :type email_id: str
+        :param app_id:
+        :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6931,7 +6971,11 @@ class DefaultApi:
         """ # noqa: E501
 
         _param = self._send_validation_code_serialize(
-            send_validation_code_request=send_validation_code_request,
+            mode=mode,
+            user_id=user_id,
+            mobile_number=mobile_number,
+            email_id=email_id,
+            app_id=app_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6951,7 +6995,11 @@ class DefaultApi:
 
     def _send_validation_code_serialize(
         self,
-        send_validation_code_request,
+        mode,
+        user_id,
+        mobile_number,
+        email_id,
+        app_id,
         _request_auth,
         _content_type,
         _headers,
@@ -6976,9 +7024,17 @@ class DefaultApi:
         # process the query parameters
         # process the header parameters
         # process the form parameters
+        if user_id is not None:
+            _form_params.append(('user_id', user_id))
+        if mobile_number is not None:
+            _form_params.append(('mobile_number', mobile_number))
+        if mode is not None:
+            _form_params.append(('mode', mode))
+        if email_id is not None:
+            _form_params.append(('email_id', email_id))
+        if app_id is not None:
+            _form_params.append(('app_id', app_id))
         # process the body parameter
-        if send_validation_code_request is not None:
-            _body_params = send_validation_code_request
 
 
         # set the HTTP header `Accept`
@@ -6996,7 +7052,7 @@ class DefaultApi:
             _default_content_type = (
                 self.api_client.select_header_content_type(
                     [
-                        'application/json'
+                        'multipart/form-data'
                     ]
                 )
             )
@@ -7498,7 +7554,10 @@ class DefaultApi:
     @validate_call
     def sign_in_with_mobile_number(
         self,
-        body: Dict[str, Any],
+        mobile_number: Annotated[StrictStr, Field(description="Mobile number")],
+        pass_code: Annotated[StrictStr, Field(description="Pass code takes either password or validation code depending on the login_type")],
+        login_type: Annotated[StrictStr, Field(description="1 for password, 2 for activate code")],
+        app_id: Annotated[Optional[StrictStr], Field(description="App ID")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7563,8 +7622,14 @@ class DefaultApi:
         
         > Signs in a user using a mobile number with either password-based or OTP-based authentication, based on the selected mode.
 
-        :param body: (required)
-        :type body: object
+        :param mobile_number: Mobile number (required)
+        :type mobile_number: str
+        :param pass_code: Pass code takes either password or validation code depending on the login_type (required)
+        :type pass_code: str
+        :param login_type: 1 for password, 2 for activate code (required)
+        :type login_type: str
+        :param app_id: App ID
+        :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7588,7 +7653,10 @@ class DefaultApi:
         """ # noqa: E501
 
         _param = self._sign_in_with_mobile_number_serialize(
-            body=body,
+            mobile_number=mobile_number,
+            pass_code=pass_code,
+            login_type=login_type,
+            app_id=app_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7613,7 +7681,10 @@ class DefaultApi:
     @validate_call
     def sign_in_with_mobile_number_with_http_info(
         self,
-        body: Dict[str, Any],
+        mobile_number: Annotated[StrictStr, Field(description="Mobile number")],
+        pass_code: Annotated[StrictStr, Field(description="Pass code takes either password or validation code depending on the login_type")],
+        login_type: Annotated[StrictStr, Field(description="1 for password, 2 for activate code")],
+        app_id: Annotated[Optional[StrictStr], Field(description="App ID")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7678,8 +7749,14 @@ class DefaultApi:
         
         > Signs in a user using a mobile number with either password-based or OTP-based authentication, based on the selected mode.
 
-        :param body: (required)
-        :type body: object
+        :param mobile_number: Mobile number (required)
+        :type mobile_number: str
+        :param pass_code: Pass code takes either password or validation code depending on the login_type (required)
+        :type pass_code: str
+        :param login_type: 1 for password, 2 for activate code (required)
+        :type login_type: str
+        :param app_id: App ID
+        :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7703,7 +7780,10 @@ class DefaultApi:
         """ # noqa: E501
 
         _param = self._sign_in_with_mobile_number_serialize(
-            body=body,
+            mobile_number=mobile_number,
+            pass_code=pass_code,
+            login_type=login_type,
+            app_id=app_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7728,7 +7808,10 @@ class DefaultApi:
     @validate_call
     def sign_in_with_mobile_number_without_preload_content(
         self,
-        body: Dict[str, Any],
+        mobile_number: Annotated[StrictStr, Field(description="Mobile number")],
+        pass_code: Annotated[StrictStr, Field(description="Pass code takes either password or validation code depending on the login_type")],
+        login_type: Annotated[StrictStr, Field(description="1 for password, 2 for activate code")],
+        app_id: Annotated[Optional[StrictStr], Field(description="App ID")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7793,8 +7876,14 @@ class DefaultApi:
         
         > Signs in a user using a mobile number with either password-based or OTP-based authentication, based on the selected mode.
 
-        :param body: (required)
-        :type body: object
+        :param mobile_number: Mobile number (required)
+        :type mobile_number: str
+        :param pass_code: Pass code takes either password or validation code depending on the login_type (required)
+        :type pass_code: str
+        :param login_type: 1 for password, 2 for activate code (required)
+        :type login_type: str
+        :param app_id: App ID
+        :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7818,7 +7907,10 @@ class DefaultApi:
         """ # noqa: E501
 
         _param = self._sign_in_with_mobile_number_serialize(
-            body=body,
+            mobile_number=mobile_number,
+            pass_code=pass_code,
+            login_type=login_type,
+            app_id=app_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7838,7 +7930,10 @@ class DefaultApi:
 
     def _sign_in_with_mobile_number_serialize(
         self,
-        body,
+        mobile_number,
+        pass_code,
+        login_type,
+        app_id,
         _request_auth,
         _content_type,
         _headers,
@@ -7863,9 +7958,15 @@ class DefaultApi:
         # process the query parameters
         # process the header parameters
         # process the form parameters
+        if mobile_number is not None:
+            _form_params.append(('mobile_number', mobile_number))
+        if pass_code is not None:
+            _form_params.append(('pass_code', pass_code))
+        if login_type is not None:
+            _form_params.append(('login_type', login_type))
+        if app_id is not None:
+            _form_params.append(('app_id', app_id))
         # process the body parameter
-        if body is not None:
-            _body_params = body
 
 
         # set the HTTP header `Accept`
@@ -7883,7 +7984,7 @@ class DefaultApi:
             _default_content_type = (
                 self.api_client.select_header_content_type(
                     [
-                        'application/json'
+                        'multipart/form-data'
                     ]
                 )
             )

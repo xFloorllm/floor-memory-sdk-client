@@ -40,7 +40,6 @@ export * from './ResetPassword200Response';
 export * from './ResetPassword400Response';
 export * from './SendSignInValidationCode200Response';
 export * from './SendValidationCode200Response';
-export * from './SendValidationCodeRequest';
 export * from './SignInWithEmail200Response';
 export * from './SignInWithEmail200ResponsePodInfo';
 export * from './SignInWithEmail200ResponseProfile';

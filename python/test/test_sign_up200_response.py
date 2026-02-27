@@ -37,7 +37,8 @@ class TestSignUp200Response(unittest.TestCase):
         if include_optional:
             return SignUp200Response(
                 user_id = '',
-                success = ''
+                success = '',
+                name = ''
             )
         else:
             return SignUp200Response(

@@ -19,6 +19,12 @@ Notes
 **success**
 
 | **str** | Success string - \"Enter Validation code\" |
+**name**
+
+| **str** |
+|
+
+[optional]
 
 ### Example
 

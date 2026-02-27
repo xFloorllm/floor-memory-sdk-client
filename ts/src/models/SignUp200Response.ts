@@ -33,6 +33,12 @@ export interface SignUp200Response {
      * @memberof SignUp200Response
      */
     success: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SignUp200Response
+     */
+    name?: string;
 }
 
 /**
@@ -56,6 +62,7 @@ export function SignUp200ResponseFromJSONTyped(json: any, ignoreDiscriminator: b
         
         'userId': json['user_id'],
         'success': json['success'],
+        'name': json['name'] == null ? undefined : json['name'],
     };
 }
 
@@ -72,6 +79,7 @@ export function SignUp200ResponseToJSONTyped(value?: SignUp200Response | null, i
         
         'user_id': value['userId'],
         'success': value['success'],
+        'name': value['name'],
     };
 }
 

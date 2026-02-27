@@ -18,7 +18,8 @@ info:
   title: Floor Memory
   version: 1.0.0
 servers:
-- url: /
+- description: Prod Env
+  url: https://appfloor.in
 tags:
 - name: query
 - name: event
@@ -594,10 +595,6 @@ paths:
       requestBody:
         content:
           multipart/form-data:
-            encoding:
-              files:
-                contentType: image/jpeg
-                style: form
             examples: {}
             schema:
               $ref: "#/components/schemas/event_request"
@@ -1927,7 +1924,6 @@ paths:
 
         | Field Name | Type   | Required     | Description                              |
         | ---------- | ------ | ------------ | ---------------------------------------- |
-        | `fid`      | String | Recommended* | Immutable internal floor ID              |
         | `floor_id` | String | Optional*    | Public / human-readable floor identifier |
         | `title`    | String | Optional     | New floor title                          |
         | `details`  | String | Optional     | New floor description                    |
@@ -2060,7 +2056,7 @@ paths:
       x-content-type: multipart/form-data
       x-accepts:
       - application/json
-  /api/memory/make/floor/private:
+  /api/memory/make/floor/private/{floor_id}:
     post:
       deprecated: false
       description: |
@@ -2200,14 +2196,14 @@ paths:
         * If you support floor types like `POD`, document whether pods are allowed to be private or not (some platforms restrict this).
       operationId: makeFloorPrivate
       parameters:
-      - description: Floor ID
-        explode: true
-        in: query
+      - description: ""
+        explode: false
+        in: path
         name: floor_id
         required: true
         schema:
           type: string
-        style: form
+        style: simple
       - description: User ID
         explode: true
         in: query
@@ -2249,7 +2245,7 @@ paths:
       tags: []
       x-accepts:
       - application/json
-  /api/memory/make/floor/public:
+  /api/memory/make/floor/public/{floor_id}:
     post:
       deprecated: false
       description: |
@@ -2396,14 +2392,14 @@ paths:
         > **This API answers: “Make this floor visible to everyone.”**
       operationId: makeFloorPublic
       parameters:
-      - description: Floor ID
-        explode: true
-        in: query
+      - description: ""
+        explode: false
+        in: path
         name: floor_id
         required: true
         schema:
           type: string
-        style: form
+        style: simple
       - description: User ID
         explode: true
         in: query
@@ -2638,7 +2634,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/getRecentEvents_400_response"
           description: ""
-      security: []
+      security:
+      - bearer: []
       summary: Rename floor
       tags: []
       x-accepts:
@@ -2817,11 +2814,10 @@ paths:
       parameters: []
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             examples: {}
             schema:
-              properties: {}
-              type: object
+              $ref: "#/components/schemas/signInWithMobileNumber_request"
         required: true
       responses:
         "200":
@@ -2853,7 +2849,7 @@ paths:
       - bearer: []
       summary: Sign In with Mobile number
       tags: []
-      x-content-type: application/json
+      x-content-type: multipart/form-data
       x-accepts:
       - application/json
   /auth-service/validate/activation/code:
@@ -3525,7 +3521,7 @@ paths:
       parameters: []
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             examples: {}
             schema:
               $ref: "#/components/schemas/sendValidationCode_request"
@@ -3560,7 +3556,7 @@ paths:
       - bearer: []
       summary: Send Validation code
       tags: []
-      x-content-type: application/json
+      x-content-type: multipart/form-data
       x-accepts:
       - application/json
   /memory/identity/external-user:
@@ -4119,10 +4115,11 @@ components:
         files:
           description: "Attach relevant media here, which includes, jpg, mp3, pdf,\
             \ mp4 files. More than one media can be selected"
-          example: !!binary |-
-            WyIiXQ==
-          format: binary
-          type: string
+          example:
+          - ""
+          items:
+            type: string
+          type: array
         input_info:
           description: "Input parameters, bid is optional"
           example: "{ \"floor_id\": \"my_floor\",   \"block_id\": \"17845683456\"\
@@ -4133,9 +4130,13 @@ components:
           description: App ID created in developer console.
           example: "165434879028"
           type: string
+        user_id:
+          example: ""
+          type: string
       required:
       - app_id
       - input_info
+      - user_id
       type: object
     event_400_response_error:
       example:
@@ -5089,23 +5090,23 @@ components:
       properties:
         name:
           description: New User Name
-          example: '"Jon Doe"'
+          example: Jon Doe
           type: string
         email_id:
           description: Email ID of the user
-          example: '"myemail@email.com"'
+          example: myemail@email.com
           type: string
         mobile_number:
           description: Mobile number
-          example: '"9084568934"'
+          example: "9084568934"
           type: string
         password:
           description: Password
-          example: '"xxxxxxxx"'
+          example: xxxxxxxx
           type: string
         app_id:
           description: Registered App ID
-          example: '"1675645678908"'
+          example: "1675645678908"
           type: string
       required:
       - name
@@ -5115,12 +5116,15 @@ components:
       example:
         user_id: user_id
         success: success
+        name: name
       properties:
         user_id:
           description: User ID
           type: string
         success:
           description: Success string - "Enter Validation code"
+          type: string
+        name:
           type: string
       required:
       - success
@@ -5299,6 +5303,30 @@ components:
       - pod_info
       - profile
       type: object
+    signInWithMobileNumber_request:
+      properties:
+        mobile_number:
+          description: Mobile number
+          example: ""
+          type: string
+        pass_code:
+          description: Pass code takes either password or validation code depending
+            on the login_type
+          example: ""
+          type: string
+        login_type:
+          description: "1 for password, 2 for activate code"
+          example: ""
+          type: string
+        app_id:
+          description: App ID
+          example: ""
+          type: string
+      required:
+      - login_type
+      - mobile_number
+      - pass_code
+      type: object
     validateCode_request:
       properties:
         user_id:
@@ -5448,15 +5476,19 @@ components:
     sendValidationCode_request:
       properties:
         user_id:
-          description: user id
+          example: ""
+          type: string
+        mobile_number:
+          example: ""
           type: string
         mode:
-          description: "Mode - 0 for getting activation code to change email or mobile\
-            \ number, 1 for password change"
-          type: string
-        mobiles_number:
+          example: ""
           type: string
         email_id:
+          example: ""
+          type: string
+        app_id:
+          example: ""
           type: string
       required:
       - mode

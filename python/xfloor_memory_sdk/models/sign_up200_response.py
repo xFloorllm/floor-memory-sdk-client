@@ -21,7 +21,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,7 +31,8 @@ class SignUp200Response(BaseModel):
     """ # noqa: E501
     user_id: StrictStr = Field(description="User ID")
     success: StrictStr = Field(description="Success string - \"Enter Validation code\"")
-    __properties: ClassVar[List[str]] = ["user_id", "success"]
+    name: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["user_id", "success", "name"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +86,8 @@ class SignUp200Response(BaseModel):
 
         _obj = cls.model_validate({
             "user_id": obj.get("user_id"),
-            "success": obj.get("success")
+            "success": obj.get("success"),
+            "name": obj.get("name")
         })
         return _obj
 

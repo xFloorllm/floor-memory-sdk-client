@@ -1,6 +1,6 @@
 # EditFloorApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://appfloor.in*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
@@ -42,7 +42,6 @@ This API updates an existing floor’s profile metadata using **multipart form d
 
 | Field Name | Type | Required | Description |
 | ---------- | ------ | ------------ | ---------------------------------------- |
-| `fid` | String | Recommended* | Immutable internal floor ID |
 | `floor_id` | String | Optional* | Public / human-readable floor identifier |
 | `title` | String | Optional | New floor title |
 | `details` | String | Optional | New floor description |
@@ -118,7 +117,7 @@ import ai.xfloor.memory.api.EditFloorApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");

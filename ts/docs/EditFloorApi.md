@@ -1,6 +1,6 @@
 # EditFloorApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://appfloor.in*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
@@ -43,7 +43,6 @@ This API updates an existing floor’s profile metadata using **multipart form d
 
 | Field Name | Type | Required | Description |
 | ---------- | ------ | ------------ | ---------------------------------------- |
-| `fid` | String | Recommended* | Immutable internal floor ID |
 | `floor_id` | String | Optional* | Public / human-readable floor identifier |
 | `title` | String | Optional | New floor title |
 | `details` | String | Optional | New floor description |

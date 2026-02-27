@@ -19,8 +19,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBytes, StrictStr
-from typing import Optional, Tuple, Union
+from pydantic import Field, StrictStr
+from typing import List, Optional
 from typing_extensions import Annotated
 from xfloor_memory_sdk.models.event_response import EventResponse
 
@@ -47,7 +47,8 @@ class EventApi:
         self,
         input_info: Annotated[StrictStr, Field(description="Input parameters, bid is optional")],
         app_id: Annotated[StrictStr, Field(description="App ID created in developer console.")],
-        files: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected")] = None,
+        user_id: StrictStr,
+        files: Annotated[Optional[List[StrictStr]], Field(description="Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -189,8 +190,10 @@ class EventApi:
         :type input_info: str
         :param app_id: App ID created in developer console. (required)
         :type app_id: str
+        :param user_id: (required)
+        :type user_id: str
         :param files: Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
-        :type files: bytearray
+        :type files: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -216,6 +219,7 @@ class EventApi:
         _param = self._event_serialize(
             input_info=input_info,
             app_id=app_id,
+            user_id=user_id,
             files=files,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -243,7 +247,8 @@ class EventApi:
         self,
         input_info: Annotated[StrictStr, Field(description="Input parameters, bid is optional")],
         app_id: Annotated[StrictStr, Field(description="App ID created in developer console.")],
-        files: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected")] = None,
+        user_id: StrictStr,
+        files: Annotated[Optional[List[StrictStr]], Field(description="Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -385,8 +390,10 @@ class EventApi:
         :type input_info: str
         :param app_id: App ID created in developer console. (required)
         :type app_id: str
+        :param user_id: (required)
+        :type user_id: str
         :param files: Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
-        :type files: bytearray
+        :type files: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -412,6 +419,7 @@ class EventApi:
         _param = self._event_serialize(
             input_info=input_info,
             app_id=app_id,
+            user_id=user_id,
             files=files,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -439,7 +447,8 @@ class EventApi:
         self,
         input_info: Annotated[StrictStr, Field(description="Input parameters, bid is optional")],
         app_id: Annotated[StrictStr, Field(description="App ID created in developer console.")],
-        files: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected")] = None,
+        user_id: StrictStr,
+        files: Annotated[Optional[List[StrictStr]], Field(description="Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -581,8 +590,10 @@ class EventApi:
         :type input_info: str
         :param app_id: App ID created in developer console. (required)
         :type app_id: str
+        :param user_id: (required)
+        :type user_id: str
         :param files: Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
-        :type files: bytearray
+        :type files: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -608,6 +619,7 @@ class EventApi:
         _param = self._event_serialize(
             input_info=input_info,
             app_id=app_id,
+            user_id=user_id,
             files=files,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -630,6 +642,7 @@ class EventApi:
         self,
         input_info,
         app_id,
+        user_id,
         files,
         _request_auth,
         _content_type,
@@ -640,6 +653,7 @@ class EventApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'files': 'csv',
         }
 
         _path_params: Dict[str, str] = {}
@@ -656,11 +670,13 @@ class EventApi:
         # process the header parameters
         # process the form parameters
         if files is not None:
-            _files['files'] = files
+            _form_params.append(('files', files))
         if input_info is not None:
             _form_params.append(('input_info', input_info))
         if app_id is not None:
             _form_params.append(('app_id', app_id))
+        if user_id is not None:
+            _form_params.append(('user_id', user_id))
         # process the body parameter
 
 

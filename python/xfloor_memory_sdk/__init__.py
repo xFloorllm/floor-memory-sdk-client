@@ -17,7 +17,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.13"
+__version__ = "1.0.14"
 
 # Define package exports
 __all__ = [
@@ -76,7 +76,6 @@ __all__ = [
     "ResetPassword400Response",
     "SendSignInValidationCode200Response",
     "SendValidationCode200Response",
-    "SendValidationCodeRequest",
     "SignInWithEmail200Response",
     "SignInWithEmail200ResponsePodInfo",
     "SignInWithEmail200ResponseProfile",
@@ -151,7 +150,6 @@ from xfloor_memory_sdk.models.reset_password200_response import ResetPassword200
 from xfloor_memory_sdk.models.reset_password400_response import ResetPassword400Response as ResetPassword400Response
 from xfloor_memory_sdk.models.send_sign_in_validation_code200_response import SendSignInValidationCode200Response as SendSignInValidationCode200Response
 from xfloor_memory_sdk.models.send_validation_code200_response import SendValidationCode200Response as SendValidationCode200Response
-from xfloor_memory_sdk.models.send_validation_code_request import SendValidationCodeRequest as SendValidationCodeRequest
 from xfloor_memory_sdk.models.sign_in_with_email200_response import SignInWithEmail200Response as SignInWithEmail200Response
 from xfloor_memory_sdk.models.sign_in_with_email200_response_pod_info import SignInWithEmail200ResponsePodInfo as SignInWithEmail200ResponsePodInfo
 from xfloor_memory_sdk.models.sign_in_with_email200_response_profile import SignInWithEmail200ResponseProfile as SignInWithEmail200ResponseProfile

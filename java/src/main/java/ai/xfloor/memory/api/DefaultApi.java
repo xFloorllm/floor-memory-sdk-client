@@ -40,7 +40,6 @@ import ai.xfloor.memory.model.ResetPassword200Response;
 import ai.xfloor.memory.model.ResetPassword400Response;
 import ai.xfloor.memory.model.SendSignInValidationCode200Response;
 import ai.xfloor.memory.model.SendValidationCode200Response;
-import ai.xfloor.memory.model.SendValidationCodeRequest;
 import ai.xfloor.memory.model.SignInWithEmail200Response;
 import ai.xfloor.memory.model.SignUp200Response;
 import ai.xfloor.memory.model.UserDetails;
@@ -1082,7 +1081,7 @@ public class DefaultApi {
     }
     /**
      * Build call for makeFloorPrivate
-     * @param floorId Floor ID (required)
+     * @param floorId  (required)
      * @param userId User ID (required)
      * @param appId App ID (required)
      * @param _callback Callback for upload/download progress
@@ -1113,17 +1112,14 @@ public class DefaultApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/api/memory/make/floor/private";
+        String localVarPath = "/api/memory/make/floor/private/{floor_id}"
+            .replace("{" + "floor_id" + "}", localVarApiClient.escapeString(floorId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (floorId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("floor_id", floorId));
-        }
 
         if (userId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("user_id", userId));
@@ -1176,7 +1172,7 @@ public class DefaultApi {
     /**
      * Make floor Private
      * This API changes a floor’s visibility to **PRIVATE**.  It is used when a floor owner wants to **restrict access** to a floor that is currently public. After the update, the floor becomes private and is no longer accessible to non-authorized users (based on your platform’s access rules).  This endpoint is **state-changing**:  * If the floor is **PUBLIC**, it will be converted to **PRIVATE** * If the floor is already **PRIVATE**, the API returns success (idempotent) or an “already private” response depending on implementation  This API is commonly used in:  * Floor settings → “Privacy” toggle * Developer-managed pod workflows (app_id context) * Admin tools (if applicable)  ---  ## Request Method  &#x60;POST&#x60;  ---  ## Content-Type  &#x60;application/x-www-form-urlencoded&#x60; (or &#x60;multipart/form-data&#x60; if your system uses form-data) *(Document whichever you actually accept; below assumes standard form fields.)*  ---  ## Request Parameters (Form Fields)  | Field      | Type   | Required | Description                                                          | | ---------- | ------ | -------- | -------------------------------------------------------------------- | | &#x60;user_id&#x60;  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.      | | &#x60;floor_id&#x60; | String | **Yes**  | Public identifier of the floor to update.                            | | &#x60;app_id&#x60;   | String | No       | Calling application identifier (used for developer/pod integration). |  ---  ## Authorization Rules (Critical)  * The caller must be authenticated as &#x60;user_id&#x60; * **Only the floor owner** can change floor visibility * If the user is not the owner, the request must be rejected  ---  ## Behavior Rules  * Converts visibility from **PUBLIC → PRIVATE** * Does not modify floor content or blocks * Access enforcement for private floors is applied immediately after the change  **Idempotency**  * Calling this API multiple times should not cause repeated changes * If already private, the API should either:    * return success with a message like &#x60;\&quot;already private\&quot;&#x60;, or   * return a specific error/status indicating no-op  ---  ## Response Format  &#x60;application/json&#x60;  ---  ## Sample Success Response  *(Example — adjust to match your actual response format)*  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PRIVATE\&quot;,   \&quot;message\&quot;: \&quot;Floor is now private\&quot; } &#x60;&#x60;&#x60;  ---  ## Sample No-Op Response (Already Private)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PRIVATE\&quot;,   \&quot;message\&quot;: \&quot;Floor is already private\&quot; } &#x60;&#x60;&#x60;  ---  ## Error Responses (Examples)  ### Not Authorized (Not Owner)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Only the floor owner can change floor visibility\&quot; } &#x60;&#x60;&#x60;  ### Floor Not Found  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Floor not found\&quot; } &#x60;&#x60;&#x60;  ### Invalid Request  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;user_id and floor_id are required\&quot; } &#x60;&#x60;&#x60;  ---  ## Notes  * This API is intended to control floor visibility only; membership/invite rules (for private floors) are handled elsewhere. * &#x60;app_id&#x60; is provided for developer/pod applications and is optional unless enforced by your app model. * If you support floor types like &#x60;POD&#x60;, document whether pods are allowed to be private or not (some platforms restrict this). 
-     * @param floorId Floor ID (required)
+     * @param floorId  (required)
      * @param userId User ID (required)
      * @param appId App ID (required)
      * @return GetFloorInformation200Response
@@ -1197,7 +1193,7 @@ public class DefaultApi {
     /**
      * Make floor Private
      * This API changes a floor’s visibility to **PRIVATE**.  It is used when a floor owner wants to **restrict access** to a floor that is currently public. After the update, the floor becomes private and is no longer accessible to non-authorized users (based on your platform’s access rules).  This endpoint is **state-changing**:  * If the floor is **PUBLIC**, it will be converted to **PRIVATE** * If the floor is already **PRIVATE**, the API returns success (idempotent) or an “already private” response depending on implementation  This API is commonly used in:  * Floor settings → “Privacy” toggle * Developer-managed pod workflows (app_id context) * Admin tools (if applicable)  ---  ## Request Method  &#x60;POST&#x60;  ---  ## Content-Type  &#x60;application/x-www-form-urlencoded&#x60; (or &#x60;multipart/form-data&#x60; if your system uses form-data) *(Document whichever you actually accept; below assumes standard form fields.)*  ---  ## Request Parameters (Form Fields)  | Field      | Type   | Required | Description                                                          | | ---------- | ------ | -------- | -------------------------------------------------------------------- | | &#x60;user_id&#x60;  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.      | | &#x60;floor_id&#x60; | String | **Yes**  | Public identifier of the floor to update.                            | | &#x60;app_id&#x60;   | String | No       | Calling application identifier (used for developer/pod integration). |  ---  ## Authorization Rules (Critical)  * The caller must be authenticated as &#x60;user_id&#x60; * **Only the floor owner** can change floor visibility * If the user is not the owner, the request must be rejected  ---  ## Behavior Rules  * Converts visibility from **PUBLIC → PRIVATE** * Does not modify floor content or blocks * Access enforcement for private floors is applied immediately after the change  **Idempotency**  * Calling this API multiple times should not cause repeated changes * If already private, the API should either:    * return success with a message like &#x60;\&quot;already private\&quot;&#x60;, or   * return a specific error/status indicating no-op  ---  ## Response Format  &#x60;application/json&#x60;  ---  ## Sample Success Response  *(Example — adjust to match your actual response format)*  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PRIVATE\&quot;,   \&quot;message\&quot;: \&quot;Floor is now private\&quot; } &#x60;&#x60;&#x60;  ---  ## Sample No-Op Response (Already Private)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PRIVATE\&quot;,   \&quot;message\&quot;: \&quot;Floor is already private\&quot; } &#x60;&#x60;&#x60;  ---  ## Error Responses (Examples)  ### Not Authorized (Not Owner)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Only the floor owner can change floor visibility\&quot; } &#x60;&#x60;&#x60;  ### Floor Not Found  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Floor not found\&quot; } &#x60;&#x60;&#x60;  ### Invalid Request  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;user_id and floor_id are required\&quot; } &#x60;&#x60;&#x60;  ---  ## Notes  * This API is intended to control floor visibility only; membership/invite rules (for private floors) are handled elsewhere. * &#x60;app_id&#x60; is provided for developer/pod applications and is optional unless enforced by your app model. * If you support floor types like &#x60;POD&#x60;, document whether pods are allowed to be private or not (some platforms restrict this). 
-     * @param floorId Floor ID (required)
+     * @param floorId  (required)
      * @param userId User ID (required)
      * @param appId App ID (required)
      * @return ApiResponse&lt;GetFloorInformation200Response&gt;
@@ -1219,7 +1215,7 @@ public class DefaultApi {
     /**
      * Make floor Private (asynchronously)
      * This API changes a floor’s visibility to **PRIVATE**.  It is used when a floor owner wants to **restrict access** to a floor that is currently public. After the update, the floor becomes private and is no longer accessible to non-authorized users (based on your platform’s access rules).  This endpoint is **state-changing**:  * If the floor is **PUBLIC**, it will be converted to **PRIVATE** * If the floor is already **PRIVATE**, the API returns success (idempotent) or an “already private” response depending on implementation  This API is commonly used in:  * Floor settings → “Privacy” toggle * Developer-managed pod workflows (app_id context) * Admin tools (if applicable)  ---  ## Request Method  &#x60;POST&#x60;  ---  ## Content-Type  &#x60;application/x-www-form-urlencoded&#x60; (or &#x60;multipart/form-data&#x60; if your system uses form-data) *(Document whichever you actually accept; below assumes standard form fields.)*  ---  ## Request Parameters (Form Fields)  | Field      | Type   | Required | Description                                                          | | ---------- | ------ | -------- | -------------------------------------------------------------------- | | &#x60;user_id&#x60;  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.      | | &#x60;floor_id&#x60; | String | **Yes**  | Public identifier of the floor to update.                            | | &#x60;app_id&#x60;   | String | No       | Calling application identifier (used for developer/pod integration). |  ---  ## Authorization Rules (Critical)  * The caller must be authenticated as &#x60;user_id&#x60; * **Only the floor owner** can change floor visibility * If the user is not the owner, the request must be rejected  ---  ## Behavior Rules  * Converts visibility from **PUBLIC → PRIVATE** * Does not modify floor content or blocks * Access enforcement for private floors is applied immediately after the change  **Idempotency**  * Calling this API multiple times should not cause repeated changes * If already private, the API should either:    * return success with a message like &#x60;\&quot;already private\&quot;&#x60;, or   * return a specific error/status indicating no-op  ---  ## Response Format  &#x60;application/json&#x60;  ---  ## Sample Success Response  *(Example — adjust to match your actual response format)*  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PRIVATE\&quot;,   \&quot;message\&quot;: \&quot;Floor is now private\&quot; } &#x60;&#x60;&#x60;  ---  ## Sample No-Op Response (Already Private)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PRIVATE\&quot;,   \&quot;message\&quot;: \&quot;Floor is already private\&quot; } &#x60;&#x60;&#x60;  ---  ## Error Responses (Examples)  ### Not Authorized (Not Owner)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Only the floor owner can change floor visibility\&quot; } &#x60;&#x60;&#x60;  ### Floor Not Found  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Floor not found\&quot; } &#x60;&#x60;&#x60;  ### Invalid Request  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;user_id and floor_id are required\&quot; } &#x60;&#x60;&#x60;  ---  ## Notes  * This API is intended to control floor visibility only; membership/invite rules (for private floors) are handled elsewhere. * &#x60;app_id&#x60; is provided for developer/pod applications and is optional unless enforced by your app model. * If you support floor types like &#x60;POD&#x60;, document whether pods are allowed to be private or not (some platforms restrict this). 
-     * @param floorId Floor ID (required)
+     * @param floorId  (required)
      * @param userId User ID (required)
      * @param appId App ID (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -1242,7 +1238,7 @@ public class DefaultApi {
     }
     /**
      * Build call for makeFloorPublic
-     * @param floorId Floor ID (required)
+     * @param floorId  (required)
      * @param userId User ID (required)
      * @param appId App ID (required)
      * @param _callback Callback for upload/download progress
@@ -1273,17 +1269,14 @@ public class DefaultApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/api/memory/make/floor/public";
+        String localVarPath = "/api/memory/make/floor/public/{floor_id}"
+            .replace("{" + "floor_id" + "}", localVarApiClient.escapeString(floorId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (floorId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("floor_id", floorId));
-        }
 
         if (userId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("user_id", userId));
@@ -1336,7 +1329,7 @@ public class DefaultApi {
     /**
      * Make floor public
      * This API changes a floor’s visibility to **PUBLIC**.  It is used when a floor owner wants to **make a private floor accessible to everyone**. After the update, the floor becomes public and can be viewed and discovered by any user, subject to platform rules (search, feeds, pods, etc.).  This endpoint performs a **visibility state transition**:  * **PRIVATE → PUBLIC** * If the floor is already public, the operation is treated as **idempotent** (no state change).  This API is typically used from:  * Floor settings → Privacy / Visibility controls * Owner or admin tools * Developer or pod-based applications using &#x60;app_id&#x60;  ---  ## Request Method  &#x60;POST&#x60;  ---  ## Content-Type  &#x60;application/x-www-form-urlencoded&#x60; (or &#x60;multipart/form-data&#x60;, depending on your implementation)  ---  ## Request Parameters (Form Fields)  | Field      | Type   | Required | Description                                                                     | | ---------- | ------ | -------- | ------------------------------------------------------------------------------- | | &#x60;user_id&#x60;  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.                 | | &#x60;floor_id&#x60; | String | **Yes**  | Public identifier of the floor whose visibility is to be changed.               | | &#x60;app_id&#x60;   | String | No       | Identifier of the calling application (used mainly for pod/developer contexts). |  ---  ## Authorization Rules (Critical)  * The caller must be authenticated as &#x60;user_id&#x60; * **Only the floor owner** is allowed to change the floor’s visibility * Requests from non-owners must be rejected  ---  ## Behavior Rules  * Converts floor visibility from **PRIVATE → PUBLIC** * Does not modify floor content, blocks, or ownership * Visibility change takes effect immediately  ### Idempotency  * If the floor is already public, the API should:    * Return success with a message indicating no change, or   * Return a specific “already public” status (implementation-dependent)  ---  ## Response Format  &#x60;application/json&#x60;  ---  ## Sample Success Response  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PUBLIC\&quot;,   \&quot;message\&quot;: \&quot;Floor is now public\&quot; } &#x60;&#x60;&#x60;  ---  ## Sample No-Op Response (Already Public)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PUBLIC\&quot;,   \&quot;message\&quot;: \&quot;Floor is already public\&quot; } &#x60;&#x60;&#x60;  ---  ## Error Responses (Examples)  ### Not Authorized (Not Owner)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Only the floor owner can change floor visibility\&quot; } &#x60;&#x60;&#x60;  ---  ### Floor Not Found  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Floor not found\&quot; } &#x60;&#x60;&#x60;  ---  ### Invalid Request  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;user_id and floor_id are required\&quot; } &#x60;&#x60;&#x60;  ---  ## Notes for Developers  * This API controls **visibility only**. Membership, invitations, and moderation rules are handled by separate APIs. * &#x60;app_id&#x60; is optional and primarily used for developer-managed or pod floors. * Clients should refresh floor metadata (e.g., via &#x60;/api/floor/info&#x60;) after a successful visibility change.  ---  ### Mental Model (One Line)  &gt; **This API answers: “Make this floor visible to everyone.”** 
-     * @param floorId Floor ID (required)
+     * @param floorId  (required)
      * @param userId User ID (required)
      * @param appId App ID (required)
      * @return GetFloorInformation200Response
@@ -1357,7 +1350,7 @@ public class DefaultApi {
     /**
      * Make floor public
      * This API changes a floor’s visibility to **PUBLIC**.  It is used when a floor owner wants to **make a private floor accessible to everyone**. After the update, the floor becomes public and can be viewed and discovered by any user, subject to platform rules (search, feeds, pods, etc.).  This endpoint performs a **visibility state transition**:  * **PRIVATE → PUBLIC** * If the floor is already public, the operation is treated as **idempotent** (no state change).  This API is typically used from:  * Floor settings → Privacy / Visibility controls * Owner or admin tools * Developer or pod-based applications using &#x60;app_id&#x60;  ---  ## Request Method  &#x60;POST&#x60;  ---  ## Content-Type  &#x60;application/x-www-form-urlencoded&#x60; (or &#x60;multipart/form-data&#x60;, depending on your implementation)  ---  ## Request Parameters (Form Fields)  | Field      | Type   | Required | Description                                                                     | | ---------- | ------ | -------- | ------------------------------------------------------------------------------- | | &#x60;user_id&#x60;  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.                 | | &#x60;floor_id&#x60; | String | **Yes**  | Public identifier of the floor whose visibility is to be changed.               | | &#x60;app_id&#x60;   | String | No       | Identifier of the calling application (used mainly for pod/developer contexts). |  ---  ## Authorization Rules (Critical)  * The caller must be authenticated as &#x60;user_id&#x60; * **Only the floor owner** is allowed to change the floor’s visibility * Requests from non-owners must be rejected  ---  ## Behavior Rules  * Converts floor visibility from **PRIVATE → PUBLIC** * Does not modify floor content, blocks, or ownership * Visibility change takes effect immediately  ### Idempotency  * If the floor is already public, the API should:    * Return success with a message indicating no change, or   * Return a specific “already public” status (implementation-dependent)  ---  ## Response Format  &#x60;application/json&#x60;  ---  ## Sample Success Response  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PUBLIC\&quot;,   \&quot;message\&quot;: \&quot;Floor is now public\&quot; } &#x60;&#x60;&#x60;  ---  ## Sample No-Op Response (Already Public)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PUBLIC\&quot;,   \&quot;message\&quot;: \&quot;Floor is already public\&quot; } &#x60;&#x60;&#x60;  ---  ## Error Responses (Examples)  ### Not Authorized (Not Owner)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Only the floor owner can change floor visibility\&quot; } &#x60;&#x60;&#x60;  ---  ### Floor Not Found  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Floor not found\&quot; } &#x60;&#x60;&#x60;  ---  ### Invalid Request  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;user_id and floor_id are required\&quot; } &#x60;&#x60;&#x60;  ---  ## Notes for Developers  * This API controls **visibility only**. Membership, invitations, and moderation rules are handled by separate APIs. * &#x60;app_id&#x60; is optional and primarily used for developer-managed or pod floors. * Clients should refresh floor metadata (e.g., via &#x60;/api/floor/info&#x60;) after a successful visibility change.  ---  ### Mental Model (One Line)  &gt; **This API answers: “Make this floor visible to everyone.”** 
-     * @param floorId Floor ID (required)
+     * @param floorId  (required)
      * @param userId User ID (required)
      * @param appId App ID (required)
      * @return ApiResponse&lt;GetFloorInformation200Response&gt;
@@ -1379,7 +1372,7 @@ public class DefaultApi {
     /**
      * Make floor public (asynchronously)
      * This API changes a floor’s visibility to **PUBLIC**.  It is used when a floor owner wants to **make a private floor accessible to everyone**. After the update, the floor becomes public and can be viewed and discovered by any user, subject to platform rules (search, feeds, pods, etc.).  This endpoint performs a **visibility state transition**:  * **PRIVATE → PUBLIC** * If the floor is already public, the operation is treated as **idempotent** (no state change).  This API is typically used from:  * Floor settings → Privacy / Visibility controls * Owner or admin tools * Developer or pod-based applications using &#x60;app_id&#x60;  ---  ## Request Method  &#x60;POST&#x60;  ---  ## Content-Type  &#x60;application/x-www-form-urlencoded&#x60; (or &#x60;multipart/form-data&#x60;, depending on your implementation)  ---  ## Request Parameters (Form Fields)  | Field      | Type   | Required | Description                                                                     | | ---------- | ------ | -------- | ------------------------------------------------------------------------------- | | &#x60;user_id&#x60;  | String | **Yes**  | User requesting the change. Must be the **owner** of the floor.                 | | &#x60;floor_id&#x60; | String | **Yes**  | Public identifier of the floor whose visibility is to be changed.               | | &#x60;app_id&#x60;   | String | No       | Identifier of the calling application (used mainly for pod/developer contexts). |  ---  ## Authorization Rules (Critical)  * The caller must be authenticated as &#x60;user_id&#x60; * **Only the floor owner** is allowed to change the floor’s visibility * Requests from non-owners must be rejected  ---  ## Behavior Rules  * Converts floor visibility from **PRIVATE → PUBLIC** * Does not modify floor content, blocks, or ownership * Visibility change takes effect immediately  ### Idempotency  * If the floor is already public, the API should:    * Return success with a message indicating no change, or   * Return a specific “already public” status (implementation-dependent)  ---  ## Response Format  &#x60;application/json&#x60;  ---  ## Sample Success Response  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PUBLIC\&quot;,   \&quot;message\&quot;: \&quot;Floor is now public\&quot; } &#x60;&#x60;&#x60;  ---  ## Sample No-Op Response (Already Public)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;SUCCESS\&quot;,   \&quot;floor_id\&quot;: \&quot;my_floor\&quot;,   \&quot;visibility\&quot;: \&quot;PUBLIC\&quot;,   \&quot;message\&quot;: \&quot;Floor is already public\&quot; } &#x60;&#x60;&#x60;  ---  ## Error Responses (Examples)  ### Not Authorized (Not Owner)  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Only the floor owner can change floor visibility\&quot; } &#x60;&#x60;&#x60;  ---  ### Floor Not Found  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;Floor not found\&quot; } &#x60;&#x60;&#x60;  ---  ### Invalid Request  &#x60;&#x60;&#x60;json {   \&quot;status\&quot;: \&quot;ERROR\&quot;,   \&quot;message\&quot;: \&quot;user_id and floor_id are required\&quot; } &#x60;&#x60;&#x60;  ---  ## Notes for Developers  * This API controls **visibility only**. Membership, invitations, and moderation rules are handled by separate APIs. * &#x60;app_id&#x60; is optional and primarily used for developer-managed or pod floors. * Clients should refresh floor metadata (e.g., via &#x60;/api/floor/info&#x60;) after a successful visibility change.  ---  ### Mental Model (One Line)  &gt; **This API answers: “Make this floor visible to everyone.”** 
-     * @param floorId Floor ID (required)
+     * @param floorId  (required)
      * @param userId User ID (required)
      * @param appId App ID (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -1623,7 +1616,7 @@ public class DefaultApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "bearer" };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -2034,7 +2027,11 @@ public class DefaultApi {
     }
     /**
      * Build call for sendValidationCode
-     * @param sendValidationCodeRequest  (required)
+     * @param mode  (required)
+     * @param userId  (optional)
+     * @param mobileNumber  (optional)
+     * @param emailId  (optional)
+     * @param appId  (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2046,7 +2043,7 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call sendValidationCodeCall(@javax.annotation.Nonnull SendValidationCodeRequest sendValidationCodeRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call sendValidationCodeCall(@javax.annotation.Nonnull String mode, @javax.annotation.Nullable String userId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String appId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2060,7 +2057,7 @@ public class DefaultApi {
             basePath = null;
         }
 
-        Object localVarPostBody = sendValidationCodeRequest;
+        Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/auth-service/send/validation/code";
@@ -2071,6 +2068,26 @@ public class DefaultApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
+        if (userId != null) {
+            localVarFormParams.put("user_id", userId);
+        }
+
+        if (mobileNumber != null) {
+            localVarFormParams.put("mobile_number", mobileNumber);
+        }
+
+        if (mode != null) {
+            localVarFormParams.put("mode", mode);
+        }
+
+        if (emailId != null) {
+            localVarFormParams.put("email_id", emailId);
+        }
+
+        if (appId != null) {
+            localVarFormParams.put("app_id", appId);
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -2080,7 +2097,7 @@ public class DefaultApi {
         }
 
         final String[] localVarContentTypes = {
-            "application/json"
+            "multipart/form-data"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -2092,20 +2109,24 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call sendValidationCodeValidateBeforeCall(@javax.annotation.Nonnull SendValidationCodeRequest sendValidationCodeRequest, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'sendValidationCodeRequest' is set
-        if (sendValidationCodeRequest == null) {
-            throw new ApiException("Missing the required parameter 'sendValidationCodeRequest' when calling sendValidationCode(Async)");
+    private okhttp3.Call sendValidationCodeValidateBeforeCall(@javax.annotation.Nonnull String mode, @javax.annotation.Nullable String userId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String appId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'mode' is set
+        if (mode == null) {
+            throw new ApiException("Missing the required parameter 'mode' when calling sendValidationCode(Async)");
         }
 
-        return sendValidationCodeCall(sendValidationCodeRequest, _callback);
+        return sendValidationCodeCall(mode, userId, mobileNumber, emailId, appId, _callback);
 
     }
 
     /**
      * Send Validation code
      * Generates and sends a one-time validation code to the user for verification of sensitive or critical account operations.  This API is used across multiple authentication and account-management flows. The validation code is delivered to the user via the appropriate channel (**email or mobile number**), based on the requested operation mode and the input provided.  The generated code is **time-bound**, **single-use**, and must be validated using the corresponding verification APIs to complete the requested action.  ---  ### **Usage Scenarios (Mode Definition)**  | Mode | Purpose                       | | ---- | ----------------------------- | | &#x60;0&#x60;  | Email or mobile number change | | &#x60;1&#x60;  | Password change               | | &#x60;2&#x60;  | Delete account                | | &#x60;3&#x60;  | Clear account                 | | &#x60;4&#x60;  | Signup Verification           | | &#x60;5&#x60;  | Using OTP for Login           | | &#x60;6&#x60;  | OTP for forgot password       |  **Mode &#x60;4&#x60; – Signup Verification** For login verification, the validation code is sent to **either the email ID or the mobile number provided in the request**. At least **one of email or mobile number must be supplied** for this mode.  ---  ### **Behavior**  * Generates a secure, one-time validation code * Sends the code to the appropriate channel:    * Email or mobile number, depending on the operation mode and input * Associates the code with:    * User identity (or login identifier)   * Requested operation (&#x60;mode&#x60;)   * Application context (if applicable) * Validation codes are valid for a limited duration and **cannot be reused**  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**, **except** where explicitly allowed (for example, login-related flows).  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ### **Successful Response**  On success, the API confirms that the validation code has been generated and successfully dispatched to the user.  ---  ### **Error Response**  The API returns an error response if:  * The user does not exist or is not eligible for the requested operation * The requested mode is invalid or unsupported * Required identifiers (email or mobile number for login verification) are missing * Rate limits are exceeded * Authorization fails (where applicable)  ---  ### **Security Notes (Recommended)**  * Validation codes are single-use and time-bound * Rate limiting is enforced to prevent abuse * Repeated failures may trigger temporary blocking or additional verification  ---  ### **One-Line Summary**  &gt; Sends a one-time validation code for secure account and authentication operations, including login via email or mobile number.
-     * @param sendValidationCodeRequest  (required)
+     * @param mode  (required)
+     * @param userId  (optional)
+     * @param mobileNumber  (optional)
+     * @param emailId  (optional)
+     * @param appId  (optional)
      * @return SendValidationCode200Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2116,15 +2137,19 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public SendValidationCode200Response sendValidationCode(@javax.annotation.Nonnull SendValidationCodeRequest sendValidationCodeRequest) throws ApiException {
-        ApiResponse<SendValidationCode200Response> localVarResp = sendValidationCodeWithHttpInfo(sendValidationCodeRequest);
+    public SendValidationCode200Response sendValidationCode(@javax.annotation.Nonnull String mode, @javax.annotation.Nullable String userId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String appId) throws ApiException {
+        ApiResponse<SendValidationCode200Response> localVarResp = sendValidationCodeWithHttpInfo(mode, userId, mobileNumber, emailId, appId);
         return localVarResp.getData();
     }
 
     /**
      * Send Validation code
      * Generates and sends a one-time validation code to the user for verification of sensitive or critical account operations.  This API is used across multiple authentication and account-management flows. The validation code is delivered to the user via the appropriate channel (**email or mobile number**), based on the requested operation mode and the input provided.  The generated code is **time-bound**, **single-use**, and must be validated using the corresponding verification APIs to complete the requested action.  ---  ### **Usage Scenarios (Mode Definition)**  | Mode | Purpose                       | | ---- | ----------------------------- | | &#x60;0&#x60;  | Email or mobile number change | | &#x60;1&#x60;  | Password change               | | &#x60;2&#x60;  | Delete account                | | &#x60;3&#x60;  | Clear account                 | | &#x60;4&#x60;  | Signup Verification           | | &#x60;5&#x60;  | Using OTP for Login           | | &#x60;6&#x60;  | OTP for forgot password       |  **Mode &#x60;4&#x60; – Signup Verification** For login verification, the validation code is sent to **either the email ID or the mobile number provided in the request**. At least **one of email or mobile number must be supplied** for this mode.  ---  ### **Behavior**  * Generates a secure, one-time validation code * Sends the code to the appropriate channel:    * Email or mobile number, depending on the operation mode and input * Associates the code with:    * User identity (or login identifier)   * Requested operation (&#x60;mode&#x60;)   * Application context (if applicable) * Validation codes are valid for a limited duration and **cannot be reused**  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**, **except** where explicitly allowed (for example, login-related flows).  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ### **Successful Response**  On success, the API confirms that the validation code has been generated and successfully dispatched to the user.  ---  ### **Error Response**  The API returns an error response if:  * The user does not exist or is not eligible for the requested operation * The requested mode is invalid or unsupported * Required identifiers (email or mobile number for login verification) are missing * Rate limits are exceeded * Authorization fails (where applicable)  ---  ### **Security Notes (Recommended)**  * Validation codes are single-use and time-bound * Rate limiting is enforced to prevent abuse * Repeated failures may trigger temporary blocking or additional verification  ---  ### **One-Line Summary**  &gt; Sends a one-time validation code for secure account and authentication operations, including login via email or mobile number.
-     * @param sendValidationCodeRequest  (required)
+     * @param mode  (required)
+     * @param userId  (optional)
+     * @param mobileNumber  (optional)
+     * @param emailId  (optional)
+     * @param appId  (optional)
      * @return ApiResponse&lt;SendValidationCode200Response&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2135,8 +2160,8 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<SendValidationCode200Response> sendValidationCodeWithHttpInfo(@javax.annotation.Nonnull SendValidationCodeRequest sendValidationCodeRequest) throws ApiException {
-        okhttp3.Call localVarCall = sendValidationCodeValidateBeforeCall(sendValidationCodeRequest, null);
+    public ApiResponse<SendValidationCode200Response> sendValidationCodeWithHttpInfo(@javax.annotation.Nonnull String mode, @javax.annotation.Nullable String userId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String appId) throws ApiException {
+        okhttp3.Call localVarCall = sendValidationCodeValidateBeforeCall(mode, userId, mobileNumber, emailId, appId, null);
         Type localVarReturnType = new TypeToken<SendValidationCode200Response>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2144,7 +2169,11 @@ public class DefaultApi {
     /**
      * Send Validation code (asynchronously)
      * Generates and sends a one-time validation code to the user for verification of sensitive or critical account operations.  This API is used across multiple authentication and account-management flows. The validation code is delivered to the user via the appropriate channel (**email or mobile number**), based on the requested operation mode and the input provided.  The generated code is **time-bound**, **single-use**, and must be validated using the corresponding verification APIs to complete the requested action.  ---  ### **Usage Scenarios (Mode Definition)**  | Mode | Purpose                       | | ---- | ----------------------------- | | &#x60;0&#x60;  | Email or mobile number change | | &#x60;1&#x60;  | Password change               | | &#x60;2&#x60;  | Delete account                | | &#x60;3&#x60;  | Clear account                 | | &#x60;4&#x60;  | Signup Verification           | | &#x60;5&#x60;  | Using OTP for Login           | | &#x60;6&#x60;  | OTP for forgot password       |  **Mode &#x60;4&#x60; – Signup Verification** For login verification, the validation code is sent to **either the email ID or the mobile number provided in the request**. At least **one of email or mobile number must be supplied** for this mode.  ---  ### **Behavior**  * Generates a secure, one-time validation code * Sends the code to the appropriate channel:    * Email or mobile number, depending on the operation mode and input * Associates the code with:    * User identity (or login identifier)   * Requested operation (&#x60;mode&#x60;)   * Application context (if applicable) * Validation codes are valid for a limited duration and **cannot be reused**  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**, **except** where explicitly allowed (for example, login-related flows).  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ### **Successful Response**  On success, the API confirms that the validation code has been generated and successfully dispatched to the user.  ---  ### **Error Response**  The API returns an error response if:  * The user does not exist or is not eligible for the requested operation * The requested mode is invalid or unsupported * Required identifiers (email or mobile number for login verification) are missing * Rate limits are exceeded * Authorization fails (where applicable)  ---  ### **Security Notes (Recommended)**  * Validation codes are single-use and time-bound * Rate limiting is enforced to prevent abuse * Repeated failures may trigger temporary blocking or additional verification  ---  ### **One-Line Summary**  &gt; Sends a one-time validation code for secure account and authentication operations, including login via email or mobile number.
-     * @param sendValidationCodeRequest  (required)
+     * @param mode  (required)
+     * @param userId  (optional)
+     * @param mobileNumber  (optional)
+     * @param emailId  (optional)
+     * @param appId  (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -2156,9 +2185,9 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call sendValidationCodeAsync(@javax.annotation.Nonnull SendValidationCodeRequest sendValidationCodeRequest, final ApiCallback<SendValidationCode200Response> _callback) throws ApiException {
+    public okhttp3.Call sendValidationCodeAsync(@javax.annotation.Nonnull String mode, @javax.annotation.Nullable String userId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String appId, final ApiCallback<SendValidationCode200Response> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = sendValidationCodeValidateBeforeCall(sendValidationCodeRequest, _callback);
+        okhttp3.Call localVarCall = sendValidationCodeValidateBeforeCall(mode, userId, mobileNumber, emailId, appId, _callback);
         Type localVarReturnType = new TypeToken<SendValidationCode200Response>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -2334,7 +2363,10 @@ public class DefaultApi {
     }
     /**
      * Build call for signInWithMobileNumber
-     * @param body  (required)
+     * @param mobileNumber Mobile number (required)
+     * @param passCode Pass code takes either password or validation code depending on the login_type (required)
+     * @param loginType 1 for password, 2 for activate code (required)
+     * @param appId App ID (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2346,7 +2378,7 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call signInWithMobileNumberCall(@javax.annotation.Nonnull Object body, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call signInWithMobileNumberCall(@javax.annotation.Nonnull String mobileNumber, @javax.annotation.Nonnull String passCode, @javax.annotation.Nonnull String loginType, @javax.annotation.Nullable String appId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2360,7 +2392,7 @@ public class DefaultApi {
             basePath = null;
         }
 
-        Object localVarPostBody = body;
+        Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/auth-service/sign/in/with/mobile/number";
@@ -2371,6 +2403,22 @@ public class DefaultApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
+        if (mobileNumber != null) {
+            localVarFormParams.put("mobile_number", mobileNumber);
+        }
+
+        if (passCode != null) {
+            localVarFormParams.put("pass_code", passCode);
+        }
+
+        if (loginType != null) {
+            localVarFormParams.put("login_type", loginType);
+        }
+
+        if (appId != null) {
+            localVarFormParams.put("app_id", appId);
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -2380,7 +2428,7 @@ public class DefaultApi {
         }
 
         final String[] localVarContentTypes = {
-            "application/json"
+            "multipart/form-data"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -2392,20 +2440,33 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call signInWithMobileNumberValidateBeforeCall(@javax.annotation.Nonnull Object body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling signInWithMobileNumber(Async)");
+    private okhttp3.Call signInWithMobileNumberValidateBeforeCall(@javax.annotation.Nonnull String mobileNumber, @javax.annotation.Nonnull String passCode, @javax.annotation.Nonnull String loginType, @javax.annotation.Nullable String appId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'mobileNumber' is set
+        if (mobileNumber == null) {
+            throw new ApiException("Missing the required parameter 'mobileNumber' when calling signInWithMobileNumber(Async)");
         }
 
-        return signInWithMobileNumberCall(body, _callback);
+        // verify the required parameter 'passCode' is set
+        if (passCode == null) {
+            throw new ApiException("Missing the required parameter 'passCode' when calling signInWithMobileNumber(Async)");
+        }
+
+        // verify the required parameter 'loginType' is set
+        if (loginType == null) {
+            throw new ApiException("Missing the required parameter 'loginType' when calling signInWithMobileNumber(Async)");
+        }
+
+        return signInWithMobileNumberCall(mobileNumber, passCode, loginType, appId, _callback);
 
     }
 
     /**
      * Sign In with Mobile number
      * Authenticates a user using a registered mobile number. The authentication method is determined by the specified &#x60;mode&#x60;.  * When &#x60;login_type&#x60; is set to **&#x60;1&#x60;**, the user is authenticated using the **password** associated with the account. * When &#x60;login_type&#x60; is set to **&#x60;2&#x60;**, the user is authenticated using a **one-time activation code (OTP)** sent to the registered mobile number.  For OTP-based authentication (&#x60;login_type &#x3D; 1&#x60;), the client **must first call the Send Validation Code API** with the appropriate login mode to generate and deliver the activation code.  ---  ### **Request Formdata**  | Field        | Type          | Required | Description                                                       | | ------------ | ------------- | -------- | ----------------------------------------------------------------- | | &#x60;mobile_number&#x60; | string | Yes      | Mobile number| | &#x60;pass_code&#x60; | string | Yes      | Password/Validation code depending on the login_type| | &#x60;login_type&#x60; | string | Yes      | login type 1 for password 2 for validation code|   |&#x60;app_id&#x60; | string | Yes      | App ID |    **Field Description**  * &#x60;mobile_number&#x60; – Registered mobile number of the user * &#x60;pass_code&#x60; – Password / Validation code (password when &#x60;login_type&#x3D; 1&#x60;; validation code when &#x60;login_type &#x3D; 2&#x60;) * &#x60;login_type&#x60; – Login type    * &#x60;1&#x60; → Password-based login   * &#x60;2&#x60; → Activation code (OTP)–based login  ---  ### **Behavior Notes**  * When &#x60;login_type &#x3D; 2&#x60;, password validation is skipped. * OTP-based login requires a prior call to &#x60;/auth-service/send/sign/in/validation/code&#x60;. * Missing or invalid credentials for the selected mode will result in authentication failure.  ---  ### **Successful Response**  On successful authentication, the user is signed in and a success response is returned according to the authentication flow.  ---  ### **Error Response**  The API returns an error response if:  * The mobile number is not registered * The password is incorrect (&#x60;login_type &#x3D; 1&#x60;) * The activation code is missing, invalid, or expired (&#x60;login_type &#x3D; 2&#x60;) * An invalid or unsupported mode is provided  ---  ### **One-Line Summary**  &gt; Signs in a user using a mobile number with either password-based or OTP-based authentication, based on the selected mode.
-     * @param body  (required)
+     * @param mobileNumber Mobile number (required)
+     * @param passCode Pass code takes either password or validation code depending on the login_type (required)
+     * @param loginType 1 for password, 2 for activate code (required)
+     * @param appId App ID (optional)
      * @return SignInWithEmail200Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2416,15 +2477,18 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public SignInWithEmail200Response signInWithMobileNumber(@javax.annotation.Nonnull Object body) throws ApiException {
-        ApiResponse<SignInWithEmail200Response> localVarResp = signInWithMobileNumberWithHttpInfo(body);
+    public SignInWithEmail200Response signInWithMobileNumber(@javax.annotation.Nonnull String mobileNumber, @javax.annotation.Nonnull String passCode, @javax.annotation.Nonnull String loginType, @javax.annotation.Nullable String appId) throws ApiException {
+        ApiResponse<SignInWithEmail200Response> localVarResp = signInWithMobileNumberWithHttpInfo(mobileNumber, passCode, loginType, appId);
         return localVarResp.getData();
     }
 
     /**
      * Sign In with Mobile number
      * Authenticates a user using a registered mobile number. The authentication method is determined by the specified &#x60;mode&#x60;.  * When &#x60;login_type&#x60; is set to **&#x60;1&#x60;**, the user is authenticated using the **password** associated with the account. * When &#x60;login_type&#x60; is set to **&#x60;2&#x60;**, the user is authenticated using a **one-time activation code (OTP)** sent to the registered mobile number.  For OTP-based authentication (&#x60;login_type &#x3D; 1&#x60;), the client **must first call the Send Validation Code API** with the appropriate login mode to generate and deliver the activation code.  ---  ### **Request Formdata**  | Field        | Type          | Required | Description                                                       | | ------------ | ------------- | -------- | ----------------------------------------------------------------- | | &#x60;mobile_number&#x60; | string | Yes      | Mobile number| | &#x60;pass_code&#x60; | string | Yes      | Password/Validation code depending on the login_type| | &#x60;login_type&#x60; | string | Yes      | login type 1 for password 2 for validation code|   |&#x60;app_id&#x60; | string | Yes      | App ID |    **Field Description**  * &#x60;mobile_number&#x60; – Registered mobile number of the user * &#x60;pass_code&#x60; – Password / Validation code (password when &#x60;login_type&#x3D; 1&#x60;; validation code when &#x60;login_type &#x3D; 2&#x60;) * &#x60;login_type&#x60; – Login type    * &#x60;1&#x60; → Password-based login   * &#x60;2&#x60; → Activation code (OTP)–based login  ---  ### **Behavior Notes**  * When &#x60;login_type &#x3D; 2&#x60;, password validation is skipped. * OTP-based login requires a prior call to &#x60;/auth-service/send/sign/in/validation/code&#x60;. * Missing or invalid credentials for the selected mode will result in authentication failure.  ---  ### **Successful Response**  On successful authentication, the user is signed in and a success response is returned according to the authentication flow.  ---  ### **Error Response**  The API returns an error response if:  * The mobile number is not registered * The password is incorrect (&#x60;login_type &#x3D; 1&#x60;) * The activation code is missing, invalid, or expired (&#x60;login_type &#x3D; 2&#x60;) * An invalid or unsupported mode is provided  ---  ### **One-Line Summary**  &gt; Signs in a user using a mobile number with either password-based or OTP-based authentication, based on the selected mode.
-     * @param body  (required)
+     * @param mobileNumber Mobile number (required)
+     * @param passCode Pass code takes either password or validation code depending on the login_type (required)
+     * @param loginType 1 for password, 2 for activate code (required)
+     * @param appId App ID (optional)
      * @return ApiResponse&lt;SignInWithEmail200Response&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2435,8 +2499,8 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<SignInWithEmail200Response> signInWithMobileNumberWithHttpInfo(@javax.annotation.Nonnull Object body) throws ApiException {
-        okhttp3.Call localVarCall = signInWithMobileNumberValidateBeforeCall(body, null);
+    public ApiResponse<SignInWithEmail200Response> signInWithMobileNumberWithHttpInfo(@javax.annotation.Nonnull String mobileNumber, @javax.annotation.Nonnull String passCode, @javax.annotation.Nonnull String loginType, @javax.annotation.Nullable String appId) throws ApiException {
+        okhttp3.Call localVarCall = signInWithMobileNumberValidateBeforeCall(mobileNumber, passCode, loginType, appId, null);
         Type localVarReturnType = new TypeToken<SignInWithEmail200Response>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2444,7 +2508,10 @@ public class DefaultApi {
     /**
      * Sign In with Mobile number (asynchronously)
      * Authenticates a user using a registered mobile number. The authentication method is determined by the specified &#x60;mode&#x60;.  * When &#x60;login_type&#x60; is set to **&#x60;1&#x60;**, the user is authenticated using the **password** associated with the account. * When &#x60;login_type&#x60; is set to **&#x60;2&#x60;**, the user is authenticated using a **one-time activation code (OTP)** sent to the registered mobile number.  For OTP-based authentication (&#x60;login_type &#x3D; 1&#x60;), the client **must first call the Send Validation Code API** with the appropriate login mode to generate and deliver the activation code.  ---  ### **Request Formdata**  | Field        | Type          | Required | Description                                                       | | ------------ | ------------- | -------- | ----------------------------------------------------------------- | | &#x60;mobile_number&#x60; | string | Yes      | Mobile number| | &#x60;pass_code&#x60; | string | Yes      | Password/Validation code depending on the login_type| | &#x60;login_type&#x60; | string | Yes      | login type 1 for password 2 for validation code|   |&#x60;app_id&#x60; | string | Yes      | App ID |    **Field Description**  * &#x60;mobile_number&#x60; – Registered mobile number of the user * &#x60;pass_code&#x60; – Password / Validation code (password when &#x60;login_type&#x3D; 1&#x60;; validation code when &#x60;login_type &#x3D; 2&#x60;) * &#x60;login_type&#x60; – Login type    * &#x60;1&#x60; → Password-based login   * &#x60;2&#x60; → Activation code (OTP)–based login  ---  ### **Behavior Notes**  * When &#x60;login_type &#x3D; 2&#x60;, password validation is skipped. * OTP-based login requires a prior call to &#x60;/auth-service/send/sign/in/validation/code&#x60;. * Missing or invalid credentials for the selected mode will result in authentication failure.  ---  ### **Successful Response**  On successful authentication, the user is signed in and a success response is returned according to the authentication flow.  ---  ### **Error Response**  The API returns an error response if:  * The mobile number is not registered * The password is incorrect (&#x60;login_type &#x3D; 1&#x60;) * The activation code is missing, invalid, or expired (&#x60;login_type &#x3D; 2&#x60;) * An invalid or unsupported mode is provided  ---  ### **One-Line Summary**  &gt; Signs in a user using a mobile number with either password-based or OTP-based authentication, based on the selected mode.
-     * @param body  (required)
+     * @param mobileNumber Mobile number (required)
+     * @param passCode Pass code takes either password or validation code depending on the login_type (required)
+     * @param loginType 1 for password, 2 for activate code (required)
+     * @param appId App ID (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -2456,9 +2523,9 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call signInWithMobileNumberAsync(@javax.annotation.Nonnull Object body, final ApiCallback<SignInWithEmail200Response> _callback) throws ApiException {
+    public okhttp3.Call signInWithMobileNumberAsync(@javax.annotation.Nonnull String mobileNumber, @javax.annotation.Nonnull String passCode, @javax.annotation.Nonnull String loginType, @javax.annotation.Nullable String appId, final ApiCallback<SignInWithEmail200Response> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = signInWithMobileNumberValidateBeforeCall(body, _callback);
+        okhttp3.Call localVarCall = signInWithMobileNumberValidateBeforeCall(mobileNumber, passCode, loginType, appId, _callback);
         Type localVarReturnType = new TypeToken<SignInWithEmail200Response>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

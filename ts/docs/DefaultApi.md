@@ -1,6 +1,6 @@
 # DefaultApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://appfloor.in*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
@@ -11,13 +11,13 @@ All URIs are relative to *http://localhost*
 | [**changePassword**](DefaultApi.md#changepassword) | **POST** /auth-service/password/change | Change Password |
 | [**conversationThreads**](DefaultApi.md#conversationthreads) | **GET** /agent/memory/threads | Get the conversational threads |
 | [**getConversations**](DefaultApi.md#getconversations) | **GET** /agent/memory/conversations | Conversations |
-| [**makeFloorPrivate**](DefaultApi.md#makefloorprivate) | **POST** /api/memory/make/floor/private | Make floor Private |
-| [**makeFloorPublic**](DefaultApi.md#makefloorpublic) | **POST** /api/memory/make/floor/public | Make floor public |
+| [**makeFloorPrivate**](DefaultApi.md#makefloorprivate) | **POST** /api/memory/make/floor/private/{floor_id} | Make floor Private |
+| [**makeFloorPublic**](DefaultApi.md#makefloorpublic) | **POST** /api/memory/make/floor/public/{floor_id} | Make floor public |
 | [**registerExternalUserIdentity**](DefaultApi.md#registerexternaluseridentity) | **POST** /memory/identity/external-user | External User Registration |
 | [**renameFloor**](DefaultApi.md#renamefloor) | **POST** /api/memory/change/floor/id | Rename floor |
 | [**resetPassword**](DefaultApi.md#resetpassword) | **POST** /auth-service/password/reset | Reset Password |
 | [**sendSignInValidationCode**](DefaultApi.md#sendsigninvalidationcode) | **POST** /auth-service/send/sign/in/validation/code | Send Sign-In Validation Code (OTP) |
-| [**sendValidationCode**](DefaultApi.md#sendvalidationcodeoperation) | **POST** /auth-service/send/validation/code | Send Validation code |
+| [**sendValidationCode**](DefaultApi.md#sendvalidationcode) | **POST** /auth-service/send/validation/code | Send Validation code |
 | [**signInWithEmail**](DefaultApi.md#signinwithemail) | **POST** /auth-service/sign/in/with/email | Sign In with email ID |
 | [**signInWithMobileNumber**](DefaultApi.md#signinwithmobilenumber) | **POST** /auth-service/sign/in/with/mobile/number | Sign In with Mobile number |
 | [**signUp**](DefaultApi.md#signup) | **POST** /auth-service/sign/up | Sign Up |
@@ -1134,7 +1134,7 @@ async function example() {
   const api = new DefaultApi(config);
 
   const body = {
-    // string | Floor ID
+    // string | 
     floorId: floorId_example,
     // string | User ID
     userId: userId_example,
@@ -1159,7 +1159,8 @@ example().catch(console.error);
 
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **floorId** | `string` | Floor ID | [Defaults to `undefined`] |
+| **floorId** | `string` |
+| [Defaults to `undefined`] |
 | **userId** | `string` | User ID | [Defaults to `undefined`] |
 | **appId** | `string` | App ID | [Defaults to `undefined`] |
 
@@ -1327,7 +1328,7 @@ async function example() {
   const api = new DefaultApi(config);
 
   const body = {
-    // string | Floor ID
+    // string | 
     floorId: floorId_example,
     // string | User ID
     userId: userId_example,
@@ -1352,7 +1353,8 @@ example().catch(console.error);
 
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **floorId** | `string` | Floor ID | [Defaults to `undefined`] |
+| **floorId** | `string` |
+| [Defaults to `undefined`] |
 | **userId** | `string` | User ID | [Defaults to `undefined`] |
 | **appId** | `string` | App ID | [Defaults to `undefined`] |
 
@@ -1616,7 +1618,11 @@ import type { RenameFloorRequest } from '@xfloor/floor-memory-sdk-ts';
 
 async function example() {
   console.log("🚀 Testing @xfloor/floor-memory-sdk-ts SDK...");
-  const api = new DefaultApi();
+  const config = new Configuration({ 
+    // Configure HTTP bearer authorization: bearer
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DefaultApi(config);
 
   const body = {
     // string | User ID
@@ -1657,7 +1663,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -1935,7 +1941,7 @@ example().catch(console.error);
 
 ### sendValidationCode
 
-> SendValidationCode200Response sendValidationCode(sendValidationCodeRequest)
+> SendValidationCode200Response sendValidationCode(mode, userId, mobileNumber, emailId, appId)
 
 Send Validation code
 
@@ -2014,7 +2020,7 @@ import {
   Configuration,
   DefaultApi,
 } from '@xfloor/floor-memory-sdk-ts';
-import type { SendValidationCodeOperationRequest } from '@xfloor/floor-memory-sdk-ts';
+import type { SendValidationCodeRequest } from '@xfloor/floor-memory-sdk-ts';
 
 async function example() {
   console.log("🚀 Testing @xfloor/floor-memory-sdk-ts SDK...");
@@ -2025,9 +2031,17 @@ async function example() {
   const api = new DefaultApi(config);
 
   const body = {
-    // SendValidationCodeRequest
-    sendValidationCodeRequest: ...,
-  } satisfies SendValidationCodeOperationRequest;
+    // string
+    mode: mode_example,
+    // string (optional)
+    userId: userId_example,
+    // string (optional)
+    mobileNumber: mobileNumber_example,
+    // string (optional)
+    emailId: emailId_example,
+    // string (optional)
+    appId: appId_example,
+  } satisfies SendValidationCodeRequest;
 
   try {
     const data = await api.sendValidationCode(body);
@@ -2046,8 +2060,16 @@ example().catch(console.error);
 
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **sendValidationCodeRequest** | [SendValidationCodeRequest](SendValidationCodeRequest.md) |
-| |
+| **mode** | `string` |
+| [Defaults to `undefined`] |
+| **userId** | `string` |
+| [Optional] [Defaults to `undefined`] |
+| **mobileNumber** | `string` |
+| [Optional] [Defaults to `undefined`] |
+| **emailId** | `string` |
+| [Optional] [Defaults to `undefined`] |
+| **appId** | `string` |
+| [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -2059,7 +2081,7 @@ example().catch(console.error);
 
 ### HTTP request headers
 
-- **Content-Type**: `application/json`
+- **Content-Type**: `multipart/form-data`
 - **Accept**: `application/json`
 
 
@@ -2212,7 +2234,7 @@ example().catch(console.error);
 
 ### signInWithMobileNumber
 
-> SignInWithEmail200Response signInWithMobileNumber(body)
+> SignInWithEmail200Response signInWithMobileNumber(mobileNumber, passCode, loginType, appId)
 
 Sign In with Mobile number
 
@@ -2283,8 +2305,14 @@ async function example() {
   const api = new DefaultApi(config);
 
   const body = {
-    // object
-    body: Object,
+    // string | Mobile number
+    mobileNumber: mobileNumber_example,
+    // string | Pass code takes either password or validation code depending on the login_type
+    passCode: passCode_example,
+    // string | 1 for password, 2 for activate code
+    loginType: loginType_example,
+    // string | App ID (optional)
+    appId: appId_example,
   } satisfies SignInWithMobileNumberRequest;
 
   try {
@@ -2304,8 +2332,10 @@ example().catch(console.error);
 
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **body** | `object` |
-| |
+| **mobileNumber** | `string` | Mobile number | [Defaults to `undefined`] |
+| **passCode** | `string` | Pass code takes either password or validation code depending on the login_type | [Defaults to `undefined`] |
+| **loginType** | `string` | 1 for password, 2 for activate code | [Defaults to `undefined`] |
+| **appId** | `string` | App ID | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -2317,7 +2347,7 @@ example().catch(console.error);
 
 ### HTTP request headers
 
-- **Content-Type**: `application/json`
+- **Content-Type**: `multipart/form-data`
 - **Accept**: `application/json`
 
 

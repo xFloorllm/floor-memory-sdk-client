@@ -1,6 +1,6 @@
 # xfloor_memory_sdk.EventApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://appfloor.in*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **event**
-> EventResponse event(input_info, app_id, files=files)
+> EventResponse event(input_info, app_id, user_id, files=files)
 
 Create Event (Post Content)
 
@@ -199,10 +199,10 @@ from xfloor_memory_sdk.models.event_response import EventResponse
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://appfloor.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "http://localhost"
+    host = "https://appfloor.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -221,11 +221,12 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
     api_instance = xfloor_memory_sdk.EventApi(api_client)
     input_info = 'input_info_example' # str | Input parameters, bid is optional
     app_id = 'app_id_example' # str | App ID created in developer console.
-    files = None # bytearray | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected (optional)
+    user_id = 'user_id_example' # str | 
+    files = ['files_example'] # List[str] | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected (optional)
 
     try:
         # Create Event (Post Content)
-        api_response = api_instance.event(input_info, app_id, files=files)
+        api_response = api_instance.event(input_info, app_id, user_id, files=files)
         print("The response of EventApi->event:\n")
         pprint(api_response)
     except Exception as e:
@@ -253,9 +254,13 @@ Notes
  **app_id**
 
 | **str**| App ID created in developer console. |
+ **user_id**
+
+| **str**|
+|
  **files**
 
-| **bytearray**| Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected |
+| [**List[str]**](str.md)| Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected |
 
 [optional]
 

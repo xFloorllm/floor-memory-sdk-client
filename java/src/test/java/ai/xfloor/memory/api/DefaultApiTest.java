@@ -25,7 +25,6 @@ import ai.xfloor.memory.model.ResetPassword200Response;
 import ai.xfloor.memory.model.ResetPassword400Response;
 import ai.xfloor.memory.model.SendSignInValidationCode200Response;
 import ai.xfloor.memory.model.SendValidationCode200Response;
-import ai.xfloor.memory.model.SendValidationCodeRequest;
 import ai.xfloor.memory.model.SignInWithEmail200Response;
 import ai.xfloor.memory.model.SignUp200Response;
 import ai.xfloor.memory.model.UserDetails;
@@ -261,8 +260,12 @@ public class DefaultApiTest {
      */
     @Test
     public void sendValidationCodeTest() throws ApiException {
-        SendValidationCodeRequest sendValidationCodeRequest = null;
-        SendValidationCode200Response response = api.sendValidationCode(sendValidationCodeRequest);
+        String mode = null;
+        String userId = null;
+        String mobileNumber = null;
+        String emailId = null;
+        String appId = null;
+        SendValidationCode200Response response = api.sendValidationCode(mode, userId, mobileNumber, emailId, appId);
         // TODO: test validations
     }
 
@@ -292,8 +295,11 @@ public class DefaultApiTest {
      */
     @Test
     public void signInWithMobileNumberTest() throws ApiException {
-        Object body = null;
-        SignInWithEmail200Response response = api.signInWithMobileNumber(body);
+        String mobileNumber = null;
+        String passCode = null;
+        String loginType = null;
+        String appId = null;
+        SignInWithEmail200Response response = api.signInWithMobileNumber(mobileNumber, passCode, loginType, appId);
         // TODO: test validations
     }
 

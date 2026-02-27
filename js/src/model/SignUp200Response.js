@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The SignUp200Response model module.
  * @module model/SignUp200Response
- * @version 1.0.13
+ * @version 1.0.14
  */
 class SignUp200Response {
     /**
@@ -59,6 +59,9 @@ class SignUp200Response {
             if (data.hasOwnProperty('success')) {
                 obj['success'] = ApiClient.convertToType(data['success'], 'String');
             }
+            if (data.hasOwnProperty('name')) {
+                obj['name'] = ApiClient.convertToType(data['name'], 'String');
+            }
         }
         return obj;
     }
@@ -83,6 +86,10 @@ class SignUp200Response {
         if (data['success'] && !(typeof data['success'] === 'string' || data['success'] instanceof String)) {
             throw new Error("Expected the field `success` to be a primitive type in the JSON string but got " + data['success']);
         }
+        // ensure the json data is a string
+        if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
+            throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
+        }
 
         return true;
     }
@@ -103,6 +110,11 @@ SignUp200Response.prototype['user_id'] = undefined;
  * @member {String} success
  */
 SignUp200Response.prototype['success'] = undefined;
+
+/**
+ * @member {String} name
+ */
+SignUp200Response.prototype['name'] = undefined;
 
 
 

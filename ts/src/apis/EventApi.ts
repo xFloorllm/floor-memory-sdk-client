@@ -30,7 +30,8 @@ import {
 export interface EventRequest {
     inputInfo: string;
     appId: string;
-    files?: Blob;
+    userId: string;
+    files?: Array<string>;
 }
 
 /**
@@ -57,6 +58,13 @@ export class EventApi extends runtime.BaseAPI {
             );
         }
 
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling event().'
+            );
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -77,8 +85,6 @@ export class EventApi extends runtime.BaseAPI {
 
         let formParams: { append(param: string, value: any): any };
         let useForm = false;
-        // use FormData to transmit files using content-type "multipart/form-data"
-        useForm = canConsumeForm;
         if (useForm) {
             formParams = new FormData();
         } else {
@@ -86,7 +92,7 @@ export class EventApi extends runtime.BaseAPI {
         }
 
         if (requestParameters['files'] != null) {
-            formParams.append('files', requestParameters['files'] as any);
+            formParams.append('files', requestParameters['files']!.join(runtime.COLLECTION_FORMATS["csv"]));
         }
 
         if (requestParameters['inputInfo'] != null) {
@@ -95,6 +101,10 @@ export class EventApi extends runtime.BaseAPI {
 
         if (requestParameters['appId'] != null) {
             formParams.append('app_id', requestParameters['appId'] as any);
+        }
+
+        if (requestParameters['userId'] != null) {
+            formParams.append('user_id', requestParameters['userId'] as any);
         }
 
 
