@@ -20,7 +20,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBytes, StrictStr
-from typing import Optional, Tuple, Union
+from typing import List, Optional, Tuple, Union
 from typing_extensions import Annotated
 from xfloor_memory_sdk.models.event_response import EventResponse
 
@@ -48,7 +48,7 @@ class EventApi:
         input_info: Annotated[StrictStr, Field(description="Input parameters, bid is optional")],
         app_id: Annotated[StrictStr, Field(description="App ID created in developer console.")],
         user_id: StrictStr,
-        files: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected")] = None,
+        files: Annotated[Optional[List[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]]], Field(description="Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -193,7 +193,7 @@ class EventApi:
         :param user_id: (required)
         :type user_id: str
         :param files: Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
-        :type files: bytearray
+        :type files: List[bytearray]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -248,7 +248,7 @@ class EventApi:
         input_info: Annotated[StrictStr, Field(description="Input parameters, bid is optional")],
         app_id: Annotated[StrictStr, Field(description="App ID created in developer console.")],
         user_id: StrictStr,
-        files: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected")] = None,
+        files: Annotated[Optional[List[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]]], Field(description="Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -393,7 +393,7 @@ class EventApi:
         :param user_id: (required)
         :type user_id: str
         :param files: Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
-        :type files: bytearray
+        :type files: List[bytearray]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -448,7 +448,7 @@ class EventApi:
         input_info: Annotated[StrictStr, Field(description="Input parameters, bid is optional")],
         app_id: Annotated[StrictStr, Field(description="App ID created in developer console.")],
         user_id: StrictStr,
-        files: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected")] = None,
+        files: Annotated[Optional[List[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]]], Field(description="Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -593,7 +593,7 @@ class EventApi:
         :param user_id: (required)
         :type user_id: str
         :param files: Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
-        :type files: bytearray
+        :type files: List[bytearray]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -653,6 +653,7 @@ class EventApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'files': 'csv',
         }
 
         _path_params: Dict[str, str] = {}

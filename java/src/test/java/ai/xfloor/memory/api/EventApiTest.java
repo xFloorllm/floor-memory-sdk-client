@@ -45,7 +45,7 @@ public class EventApiTest {
         String inputInfo = null;
         String appId = null;
         String userId = null;
-        File files = null;
+        List<File> files = null;
         EventResponse response = api.event(inputInfo, appId, userId, files);
         // TODO: test validations
     }

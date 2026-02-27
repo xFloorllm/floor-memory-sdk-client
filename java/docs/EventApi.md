@@ -158,7 +158,7 @@ public class Example {
     String inputInfo = "inputInfo_example"; // String | Input parameters, bid is optional
     String appId = "appId_example"; // String | App ID created in developer console.
     String userId = "userId_example"; // String | 
-    File files = new File("/path/to/file"); // File | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
+    List<File> files = Arrays.asList(); // List<File> | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
     try {
       EventResponse result = apiInstance.event(inputInfo, appId, userId, files);
       System.out.println(result);
@@ -183,7 +183,7 @@ public class Example {
 |
 | **userId** | **String**|
 | |
-| **files** | **File**| Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected | [optional] |
+| **files** | **List<File>**| Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected | [optional] |
 
 ### Return type
 

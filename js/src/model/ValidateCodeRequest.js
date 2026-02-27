@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The ValidateCodeRequest model module.
  * @module model/ValidateCodeRequest
- * @version 1.0.15
+ * @version 1.0.16
  */
 class ValidateCodeRequest {
     /**

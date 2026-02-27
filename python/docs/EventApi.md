@@ -222,7 +222,7 @@ with xfloor_memory_sdk.ApiClient(configuration) as api_client:
     input_info = 'input_info_example' # str | Input parameters, bid is optional
     app_id = 'app_id_example' # str | App ID created in developer console.
     user_id = 'user_id_example' # str | 
-    files = None # bytearray | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected (optional)
+    files = None # List[bytearray] | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected (optional)
 
     try:
         # Create Event (Post Content)
@@ -260,7 +260,7 @@ Notes
 |
  **files**
 
-| **bytearray**| Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected |
+| **List[bytearray]**| Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected |
 
 [optional]
 

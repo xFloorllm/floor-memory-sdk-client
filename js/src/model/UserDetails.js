@@ -20,7 +20,7 @@ import SignInWithEmail200ResponseProfile from './SignInWithEmail200ResponseProfi
 /**
  * The UserDetails model module.
  * @module model/UserDetails
- * @version 1.0.15
+ * @version 1.0.16
  */
 class UserDetails {
     /**

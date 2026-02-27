@@ -150,7 +150,7 @@ let inputInfo = "inputInfo_example"; // String | Input parameters, bid is option
 let appId = "appId_example"; // String | App ID created in developer console.
 let userId = "userId_example"; // String | 
 let opts = {
-  'files': "/path/to/file" // File | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
+  'files': ["null"] // [File] | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
 };
 apiInstance.event(inputInfo, appId, userId, opts, (error, data, response) => {
   if (error) {
@@ -186,7 +186,7 @@ Notes
 |
  **files**
 
-| **File**| Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected |
+| **[File]**| Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected |
 
 [optional]
 

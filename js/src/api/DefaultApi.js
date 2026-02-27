@@ -35,7 +35,7 @@ import ValidateCodeRequest from '../model/ValidateCodeRequest';
 /**
 * Default service.
 * @module api/DefaultApi
-* @version 1.0.15
+* @version 1.0.16
 */
 export default class DefaultApi {
 

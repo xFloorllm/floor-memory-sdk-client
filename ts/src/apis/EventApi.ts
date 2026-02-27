@@ -31,7 +31,7 @@ export interface EventRequest {
     inputInfo: string;
     appId: string;
     userId: string;
-    files?: Blob;
+    files?: Array<Blob>;
 }
 
 /**
@@ -94,7 +94,9 @@ export class EventApi extends runtime.BaseAPI {
         }
 
         if (requestParameters['files'] != null) {
-            formParams.append('files', requestParameters['files'] as any);
+            requestParameters['files'].forEach((element) => {
+                formParams.append('files', element as any);
+            })
         }
 
         if (requestParameters['inputInfo'] != null) {

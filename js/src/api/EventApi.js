@@ -21,7 +21,7 @@ import EventResponse from '../model/EventResponse';
 /**
 * Event service.
 * @module api/EventApi
-* @version 1.0.15
+* @version 1.0.16
 */
 export default class EventApi {
 
@@ -52,7 +52,7 @@ export default class EventApi {
      * @param {String} appId App ID created in developer console.
      * @param {String} userId 
      * @param {Object} opts Optional parameters
-     * @param {File} [files] Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
+     * @param {Array.<File>} [files] Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected
      * @param {module:api/EventApi~eventCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/EventResponse}
      */
@@ -79,7 +79,7 @@ export default class EventApi {
       let headerParams = {
       };
       let formParams = {
-        'files': opts['files'],
+        'files': this.apiClient.buildCollectionParam(opts['files'], 'passthrough'),
         'input_info': inputInfo,
         'app_id': appId,
         'user_id': userId
