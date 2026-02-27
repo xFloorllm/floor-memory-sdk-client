@@ -19,7 +19,7 @@ import GetRecentEvents400ResponseError from './GetRecentEvents400ResponseError';
 /**
  * The GetRecentEvents400Response model module.
  * @module model/GetRecentEvents400Response
- * @version 1.0.14
+ * @version 1.0.15
  */
 class GetRecentEvents400Response {
     /**

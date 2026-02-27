@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The GetConversations200ResponseConversationInnerAssistantChoicesInnerMessage model module.
  * @module model/GetConversations200ResponseConversationInnerAssistantChoicesInnerMessage
- * @version 1.0.14
+ * @version 1.0.15
  */
 class GetConversations200ResponseConversationInnerAssistantChoicesInnerMessage {
     /**

@@ -19,7 +19,7 @@ import GetConversations200ResponseConversationInnerAssistantFetchMultiplePostsRe
 /**
  * The GetConversations200ResponseConversationInnerAssistantFetchMultiplePosts model module.
  * @module model/GetConversations200ResponseConversationInnerAssistantFetchMultiplePosts
- * @version 1.0.14
+ * @version 1.0.15
  */
 class GetConversations200ResponseConversationInnerAssistantFetchMultiplePosts {
     /**

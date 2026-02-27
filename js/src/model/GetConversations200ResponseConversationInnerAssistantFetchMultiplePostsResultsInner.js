@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The GetConversations200ResponseConversationInnerAssistantFetchMultiplePostsResultsInner model module.
  * @module model/GetConversations200ResponseConversationInnerAssistantFetchMultiplePostsResultsInner
- * @version 1.0.14
+ * @version 1.0.15
  */
 class GetConversations200ResponseConversationInnerAssistantFetchMultiplePostsResultsInner {
     /**

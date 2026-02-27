@@ -160,8 +160,8 @@ async function example() {
     appId: appId_example,
     // string
     userId: userId_example,
-    // Array<string> | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected (optional)
-    files: ...,
+    // Blob | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected (optional)
+    files: BINARY_DATA_HERE,
   } satisfies EventRequest;
 
   try {
@@ -185,7 +185,7 @@ example().catch(console.error);
 | **appId** | `string` | App ID created in developer console. | [Defaults to `undefined`] |
 | **userId** | `string` |
 | [Defaults to `undefined`] |
-| **files** | `Array<string>` | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected | [Optional] |
+| **files** | `Blob` | Attach relevant media here, which includes, jpg, mp3, pdf, mp4 files. More than one media can be selected | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 

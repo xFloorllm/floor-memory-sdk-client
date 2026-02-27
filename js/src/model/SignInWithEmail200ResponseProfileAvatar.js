@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The SignInWithEmail200ResponseProfileAvatar model module.
  * @module model/SignInWithEmail200ResponseProfileAvatar
- * @version 1.0.14
+ * @version 1.0.15
  */
 class SignInWithEmail200ResponseProfileAvatar {
     /**

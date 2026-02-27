@@ -31,7 +31,7 @@ export interface EventRequest {
     inputInfo: string;
     appId: string;
     userId: string;
-    files?: Array<string>;
+    files?: Blob;
 }
 
 /**
@@ -85,6 +85,8 @@ export class EventApi extends runtime.BaseAPI {
 
         let formParams: { append(param: string, value: any): any };
         let useForm = false;
+        // use FormData to transmit files using content-type "multipart/form-data"
+        useForm = canConsumeForm;
         if (useForm) {
             formParams = new FormData();
         } else {
@@ -92,7 +94,7 @@ export class EventApi extends runtime.BaseAPI {
         }
 
         if (requestParameters['files'] != null) {
-            formParams.append('files', requestParameters['files']!.join(runtime.COLLECTION_FORMATS["csv"]));
+            formParams.append('files', requestParameters['files'] as any);
         }
 
         if (requestParameters['inputInfo'] != null) {

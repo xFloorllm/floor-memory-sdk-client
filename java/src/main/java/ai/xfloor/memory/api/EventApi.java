@@ -31,6 +31,7 @@ import java.io.IOException;
 
 import ai.xfloor.memory.model.Event400Response;
 import ai.xfloor.memory.model.EventResponse;
+import java.io.File;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -92,7 +93,7 @@ public class EventApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call eventCall(@javax.annotation.Nonnull String inputInfo, @javax.annotation.Nonnull String appId, @javax.annotation.Nonnull String userId, @javax.annotation.Nullable List<String> files, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call eventCall(@javax.annotation.Nonnull String inputInfo, @javax.annotation.Nonnull String appId, @javax.annotation.Nonnull String userId, @javax.annotation.Nullable File files, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -154,7 +155,7 @@ public class EventApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call eventValidateBeforeCall(@javax.annotation.Nonnull String inputInfo, @javax.annotation.Nonnull String appId, @javax.annotation.Nonnull String userId, @javax.annotation.Nullable List<String> files, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call eventValidateBeforeCall(@javax.annotation.Nonnull String inputInfo, @javax.annotation.Nonnull String appId, @javax.annotation.Nonnull String userId, @javax.annotation.Nullable File files, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'inputInfo' is set
         if (inputInfo == null) {
             throw new ApiException("Missing the required parameter 'inputInfo' when calling event(Async)");
@@ -191,7 +192,7 @@ public class EventApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public EventResponse event(@javax.annotation.Nonnull String inputInfo, @javax.annotation.Nonnull String appId, @javax.annotation.Nonnull String userId, @javax.annotation.Nullable List<String> files) throws ApiException {
+    public EventResponse event(@javax.annotation.Nonnull String inputInfo, @javax.annotation.Nonnull String appId, @javax.annotation.Nonnull String userId, @javax.annotation.Nullable File files) throws ApiException {
         ApiResponse<EventResponse> localVarResp = eventWithHttpInfo(inputInfo, appId, userId, files);
         return localVarResp.getData();
     }
@@ -213,7 +214,7 @@ public class EventApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<EventResponse> eventWithHttpInfo(@javax.annotation.Nonnull String inputInfo, @javax.annotation.Nonnull String appId, @javax.annotation.Nonnull String userId, @javax.annotation.Nullable List<String> files) throws ApiException {
+    public ApiResponse<EventResponse> eventWithHttpInfo(@javax.annotation.Nonnull String inputInfo, @javax.annotation.Nonnull String appId, @javax.annotation.Nonnull String userId, @javax.annotation.Nullable File files) throws ApiException {
         okhttp3.Call localVarCall = eventValidateBeforeCall(inputInfo, appId, userId, files, null);
         Type localVarReturnType = new TypeToken<EventResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -237,7 +238,7 @@ public class EventApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call eventAsync(@javax.annotation.Nonnull String inputInfo, @javax.annotation.Nonnull String appId, @javax.annotation.Nonnull String userId, @javax.annotation.Nullable List<String> files, final ApiCallback<EventResponse> _callback) throws ApiException {
+    public okhttp3.Call eventAsync(@javax.annotation.Nonnull String inputInfo, @javax.annotation.Nonnull String appId, @javax.annotation.Nonnull String userId, @javax.annotation.Nullable File files, final ApiCallback<EventResponse> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = eventValidateBeforeCall(inputInfo, appId, userId, files, _callback);
         Type localVarReturnType = new TypeToken<EventResponse>(){}.getType();

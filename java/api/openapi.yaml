@@ -4115,11 +4115,10 @@ components:
         files:
           description: "Attach relevant media here, which includes, jpg, mp3, pdf,\
             \ mp4 files. More than one media can be selected"
-          example:
-          - ""
-          items:
-            type: string
-          type: array
+          example: !!binary |-
+            WyIiXQ==
+          format: binary
+          type: string
         input_info:
           description: "Input parameters, bid is optional"
           example: "{ \"floor_id\": \"my_floor\",   \"block_id\": \"17845683456\"\

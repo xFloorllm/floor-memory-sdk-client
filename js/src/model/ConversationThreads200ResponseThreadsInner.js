@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The ConversationThreads200ResponseThreadsInner model module.
  * @module model/ConversationThreads200ResponseThreadsInner
- * @version 1.0.14
+ * @version 1.0.15
  */
 class ConversationThreads200ResponseThreadsInner {
     /**

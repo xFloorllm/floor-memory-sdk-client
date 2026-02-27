@@ -16,6 +16,7 @@ package ai.xfloor.memory.api;
 import ai.xfloor.memory.client.ApiException;
 import ai.xfloor.memory.model.Event400Response;
 import ai.xfloor.memory.model.EventResponse;
+import java.io.File;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -44,7 +45,7 @@ public class EventApiTest {
         String inputInfo = null;
         String appId = null;
         String userId = null;
-        List<String> files = null;
+        File files = null;
         EventResponse response = api.event(inputInfo, appId, userId, files);
         // TODO: test validations
     }
