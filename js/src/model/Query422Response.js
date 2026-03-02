@@ -19,7 +19,7 @@ import Query422ResponseError from './Query422ResponseError';
 /**
  * The Query422Response model module.
  * @module model/Query422Response
- * @version 1.0.17
+ * @version 1.0.18
  */
 class Query422Response {
     /**

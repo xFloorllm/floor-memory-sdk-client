@@ -29,7 +29,6 @@ from xfloor_memory_sdk.models.send_validation_code200_response import SendValida
 from xfloor_memory_sdk.models.sign_in_with_email200_response import SignInWithEmail200Response
 from xfloor_memory_sdk.models.sign_up200_response import SignUp200Response
 from xfloor_memory_sdk.models.user_details import UserDetails
-from xfloor_memory_sdk.models.validate_code_request import ValidateCodeRequest
 
 from xfloor_memory_sdk.api_client import ApiClient, RequestSerialized
 from xfloor_memory_sdk.api_response import ApiResponse
@@ -539,7 +538,8 @@ class DefaultApi:
     @validate_call
     def change_mobile_number(
         self,
-        body: Dict[str, Any],
+        new_mobile_number: Annotated[StrictStr, Field(description="New mobile number")],
+        activation_code: Annotated[StrictStr, Field(description="Activation code")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -622,8 +622,10 @@ class DefaultApi:
         
         > Changes a user’s mobile number after validating an activation code sent to the new mobile number.
 
-        :param body: (required)
-        :type body: object
+        :param new_mobile_number: New mobile number (required)
+        :type new_mobile_number: str
+        :param activation_code: Activation code (required)
+        :type activation_code: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -647,7 +649,8 @@ class DefaultApi:
         """ # noqa: E501
 
         _param = self._change_mobile_number_serialize(
-            body=body,
+            new_mobile_number=new_mobile_number,
+            activation_code=activation_code,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -672,7 +675,8 @@ class DefaultApi:
     @validate_call
     def change_mobile_number_with_http_info(
         self,
-        body: Dict[str, Any],
+        new_mobile_number: Annotated[StrictStr, Field(description="New mobile number")],
+        activation_code: Annotated[StrictStr, Field(description="Activation code")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -755,8 +759,10 @@ class DefaultApi:
         
         > Changes a user’s mobile number after validating an activation code sent to the new mobile number.
 
-        :param body: (required)
-        :type body: object
+        :param new_mobile_number: New mobile number (required)
+        :type new_mobile_number: str
+        :param activation_code: Activation code (required)
+        :type activation_code: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -780,7 +786,8 @@ class DefaultApi:
         """ # noqa: E501
 
         _param = self._change_mobile_number_serialize(
-            body=body,
+            new_mobile_number=new_mobile_number,
+            activation_code=activation_code,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -805,7 +812,8 @@ class DefaultApi:
     @validate_call
     def change_mobile_number_without_preload_content(
         self,
-        body: Dict[str, Any],
+        new_mobile_number: Annotated[StrictStr, Field(description="New mobile number")],
+        activation_code: Annotated[StrictStr, Field(description="Activation code")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -888,8 +896,10 @@ class DefaultApi:
         
         > Changes a user’s mobile number after validating an activation code sent to the new mobile number.
 
-        :param body: (required)
-        :type body: object
+        :param new_mobile_number: New mobile number (required)
+        :type new_mobile_number: str
+        :param activation_code: Activation code (required)
+        :type activation_code: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -913,7 +923,8 @@ class DefaultApi:
         """ # noqa: E501
 
         _param = self._change_mobile_number_serialize(
-            body=body,
+            new_mobile_number=new_mobile_number,
+            activation_code=activation_code,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -933,7 +944,8 @@ class DefaultApi:
 
     def _change_mobile_number_serialize(
         self,
-        body,
+        new_mobile_number,
+        activation_code,
         _request_auth,
         _content_type,
         _headers,
@@ -958,9 +970,11 @@ class DefaultApi:
         # process the query parameters
         # process the header parameters
         # process the form parameters
+        if new_mobile_number is not None:
+            _form_params.append(('new_mobile_number', new_mobile_number))
+        if activation_code is not None:
+            _form_params.append(('activation_code', activation_code))
         # process the body parameter
-        if body is not None:
-            _body_params = body
 
 
         # set the HTTP header `Accept`
@@ -978,7 +992,7 @@ class DefaultApi:
             _default_content_type = (
                 self.api_client.select_header_content_type(
                     [
-                        'application/json'
+                        'multipart/form-data'
                     ]
                 )
             )
@@ -3311,10 +3325,11 @@ class DefaultApi:
     @validate_call
     def reset_password(
         self,
-        activation_code: Annotated[StrictStr, Field(description="Activation Code")],
-        email_id: Annotated[Optional[StrictStr], Field(description="Email ID")] = None,
-        mobile_number: Annotated[Optional[StrictStr], Field(description="Mobile number")] = None,
-        app_id: Annotated[Optional[StrictStr], Field(description="App ID")] = None,
+        new_password: StrictStr,
+        activation_code: StrictStr,
+        mobile_number: Optional[StrictStr] = None,
+        email_id: Optional[StrictStr] = None,
+        app_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3352,13 +3367,15 @@ class DefaultApi:
         
         ### One-Line Summary > Resets a user’s password (forgot-password flow) after validating a one-time reset code sent to email or mobile.
 
-        :param activation_code: Activation Code (required)
+        :param new_password: (required)
+        :type new_password: str
+        :param activation_code: (required)
         :type activation_code: str
-        :param email_id: Email ID
-        :type email_id: str
-        :param mobile_number: Mobile number
+        :param mobile_number:
         :type mobile_number: str
-        :param app_id: App ID
+        :param email_id:
+        :type email_id: str
+        :param app_id:
         :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3383,9 +3400,10 @@ class DefaultApi:
         """ # noqa: E501
 
         _param = self._reset_password_serialize(
+            new_password=new_password,
             activation_code=activation_code,
-            email_id=email_id,
             mobile_number=mobile_number,
+            email_id=email_id,
             app_id=app_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3411,10 +3429,11 @@ class DefaultApi:
     @validate_call
     def reset_password_with_http_info(
         self,
-        activation_code: Annotated[StrictStr, Field(description="Activation Code")],
-        email_id: Annotated[Optional[StrictStr], Field(description="Email ID")] = None,
-        mobile_number: Annotated[Optional[StrictStr], Field(description="Mobile number")] = None,
-        app_id: Annotated[Optional[StrictStr], Field(description="App ID")] = None,
+        new_password: StrictStr,
+        activation_code: StrictStr,
+        mobile_number: Optional[StrictStr] = None,
+        email_id: Optional[StrictStr] = None,
+        app_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3452,13 +3471,15 @@ class DefaultApi:
         
         ### One-Line Summary > Resets a user’s password (forgot-password flow) after validating a one-time reset code sent to email or mobile.
 
-        :param activation_code: Activation Code (required)
+        :param new_password: (required)
+        :type new_password: str
+        :param activation_code: (required)
         :type activation_code: str
-        :param email_id: Email ID
-        :type email_id: str
-        :param mobile_number: Mobile number
+        :param mobile_number:
         :type mobile_number: str
-        :param app_id: App ID
+        :param email_id:
+        :type email_id: str
+        :param app_id:
         :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3483,9 +3504,10 @@ class DefaultApi:
         """ # noqa: E501
 
         _param = self._reset_password_serialize(
+            new_password=new_password,
             activation_code=activation_code,
-            email_id=email_id,
             mobile_number=mobile_number,
+            email_id=email_id,
             app_id=app_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3511,10 +3533,11 @@ class DefaultApi:
     @validate_call
     def reset_password_without_preload_content(
         self,
-        activation_code: Annotated[StrictStr, Field(description="Activation Code")],
-        email_id: Annotated[Optional[StrictStr], Field(description="Email ID")] = None,
-        mobile_number: Annotated[Optional[StrictStr], Field(description="Mobile number")] = None,
-        app_id: Annotated[Optional[StrictStr], Field(description="App ID")] = None,
+        new_password: StrictStr,
+        activation_code: StrictStr,
+        mobile_number: Optional[StrictStr] = None,
+        email_id: Optional[StrictStr] = None,
+        app_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3552,13 +3575,15 @@ class DefaultApi:
         
         ### One-Line Summary > Resets a user’s password (forgot-password flow) after validating a one-time reset code sent to email or mobile.
 
-        :param activation_code: Activation Code (required)
+        :param new_password: (required)
+        :type new_password: str
+        :param activation_code: (required)
         :type activation_code: str
-        :param email_id: Email ID
-        :type email_id: str
-        :param mobile_number: Mobile number
+        :param mobile_number:
         :type mobile_number: str
-        :param app_id: App ID
+        :param email_id:
+        :type email_id: str
+        :param app_id:
         :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3583,9 +3608,10 @@ class DefaultApi:
         """ # noqa: E501
 
         _param = self._reset_password_serialize(
+            new_password=new_password,
             activation_code=activation_code,
-            email_id=email_id,
             mobile_number=mobile_number,
+            email_id=email_id,
             app_id=app_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3606,9 +3632,10 @@ class DefaultApi:
 
     def _reset_password_serialize(
         self,
+        new_password,
         activation_code,
-        email_id,
         mobile_number,
+        email_id,
         app_id,
         _request_auth,
         _content_type,
@@ -3632,24 +3659,18 @@ class DefaultApi:
 
         # process the path parameters
         # process the query parameters
-        if email_id is not None:
-            
-            _query_params.append(('email_id', email_id))
-            
-        if mobile_number is not None:
-            
-            _query_params.append(('mobile_number', mobile_number))
-            
-        if activation_code is not None:
-            
-            _query_params.append(('activation_code', activation_code))
-            
-        if app_id is not None:
-            
-            _query_params.append(('app_id', app_id))
-            
         # process the header parameters
         # process the form parameters
+        if mobile_number is not None:
+            _form_params.append(('mobile_number', mobile_number))
+        if email_id is not None:
+            _form_params.append(('email_id', email_id))
+        if new_password is not None:
+            _form_params.append(('new_password', new_password))
+        if activation_code is not None:
+            _form_params.append(('activation_code', activation_code))
+        if app_id is not None:
+            _form_params.append(('app_id', app_id))
         # process the body parameter
 
 
@@ -3661,6 +3682,19 @@ class DefaultApi:
                 ]
             )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'multipart/form-data'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -5509,7 +5543,10 @@ class DefaultApi:
     @validate_call
     def validate_code(
         self,
-        validate_code_request: ValidateCodeRequest,
+        user_id: StrictStr,
+        activation_code: StrictStr,
+        mode: StrictStr,
+        app_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5593,8 +5630,14 @@ class DefaultApi:
         
         > Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
 
-        :param validate_code_request: (required)
-        :type validate_code_request: ValidateCodeRequest
+        :param user_id: (required)
+        :type user_id: str
+        :param activation_code: (required)
+        :type activation_code: str
+        :param mode: (required)
+        :type mode: str
+        :param app_id:
+        :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5618,7 +5661,10 @@ class DefaultApi:
         """ # noqa: E501
 
         _param = self._validate_code_serialize(
-            validate_code_request=validate_code_request,
+            user_id=user_id,
+            activation_code=activation_code,
+            mode=mode,
+            app_id=app_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5644,7 +5690,10 @@ class DefaultApi:
     @validate_call
     def validate_code_with_http_info(
         self,
-        validate_code_request: ValidateCodeRequest,
+        user_id: StrictStr,
+        activation_code: StrictStr,
+        mode: StrictStr,
+        app_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5728,8 +5777,14 @@ class DefaultApi:
         
         > Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
 
-        :param validate_code_request: (required)
-        :type validate_code_request: ValidateCodeRequest
+        :param user_id: (required)
+        :type user_id: str
+        :param activation_code: (required)
+        :type activation_code: str
+        :param mode: (required)
+        :type mode: str
+        :param app_id:
+        :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5753,7 +5808,10 @@ class DefaultApi:
         """ # noqa: E501
 
         _param = self._validate_code_serialize(
-            validate_code_request=validate_code_request,
+            user_id=user_id,
+            activation_code=activation_code,
+            mode=mode,
+            app_id=app_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5779,7 +5837,10 @@ class DefaultApi:
     @validate_call
     def validate_code_without_preload_content(
         self,
-        validate_code_request: ValidateCodeRequest,
+        user_id: StrictStr,
+        activation_code: StrictStr,
+        mode: StrictStr,
+        app_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5863,8 +5924,14 @@ class DefaultApi:
         
         > Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
 
-        :param validate_code_request: (required)
-        :type validate_code_request: ValidateCodeRequest
+        :param user_id: (required)
+        :type user_id: str
+        :param activation_code: (required)
+        :type activation_code: str
+        :param mode: (required)
+        :type mode: str
+        :param app_id:
+        :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5888,7 +5955,10 @@ class DefaultApi:
         """ # noqa: E501
 
         _param = self._validate_code_serialize(
-            validate_code_request=validate_code_request,
+            user_id=user_id,
+            activation_code=activation_code,
+            mode=mode,
+            app_id=app_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5909,7 +5979,10 @@ class DefaultApi:
 
     def _validate_code_serialize(
         self,
-        validate_code_request,
+        user_id,
+        activation_code,
+        mode,
+        app_id,
         _request_auth,
         _content_type,
         _headers,
@@ -5934,9 +6007,15 @@ class DefaultApi:
         # process the query parameters
         # process the header parameters
         # process the form parameters
+        if user_id is not None:
+            _form_params.append(('user_id', user_id))
+        if activation_code is not None:
+            _form_params.append(('activation_code', activation_code))
+        if mode is not None:
+            _form_params.append(('mode', mode))
+        if app_id is not None:
+            _form_params.append(('app_id', app_id))
         # process the body parameter
-        if validate_code_request is not None:
-            _body_params = validate_code_request
 
 
         # set the HTTP header `Accept`
@@ -5954,7 +6033,7 @@ class DefaultApi:
             _default_content_type = (
                 self.api_client.select_header_content_type(
                     [
-                        'application/json'
+                        'multipart/form-data'
                     ]
                 )
             )

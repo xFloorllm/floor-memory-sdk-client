@@ -22,7 +22,7 @@ import QueryResponse from '../model/QueryResponse';
 /**
 * Query service.
 * @module api/QueryApi
-* @version 1.0.17
+* @version 1.0.18
 */
 export default class QueryApi {
 

@@ -18,7 +18,8 @@ info:
   title: Floor Memory
   version: 1.0.0
 servers:
-- url: /
+- description: Testing Env
+  url: https://floortv.in
 tags:
 - name: query
 - name: event
@@ -2273,7 +2274,7 @@ paths:
       parameters: []
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             examples: {}
             schema:
               $ref: "#/components/schemas/validateCode_request"
@@ -2308,7 +2309,7 @@ paths:
       - bearer: []
       summary: Validation
       tags: []
-      x-content-type: application/json
+      x-content-type: multipart/form-data
       x-accepts:
       - application/json
   /auth-service/password/change:
@@ -2429,39 +2430,14 @@ paths:
 
 
       operationId: resetPassword
-      parameters:
-      - description: Email ID
-        explode: true
-        in: query
-        name: email_id
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: Mobile number
-        explode: true
-        in: query
-        name: mobile_number
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: Activation Code
-        explode: true
-        in: query
-        name: activation_code
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            examples: {}
+            schema:
+              $ref: "#/components/schemas/resetPassword_request"
         required: true
-        schema:
-          type: string
-        style: form
-      - description: App ID
-        explode: true
-        in: query
-        name: app_id
-        required: false
-        schema:
-          type: string
-        style: form
       responses:
         "200":
           content:
@@ -2484,6 +2460,7 @@ paths:
       security: []
       summary: Reset Password
       tags: []
+      x-content-type: multipart/form-data
       x-accepts:
       - application/json
   /auth-service/change/email:
@@ -2705,11 +2682,10 @@ paths:
       parameters: []
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             examples: {}
             schema:
-              properties: {}
-              type: object
+              $ref: "#/components/schemas/changeMobileNumber_request"
         required: true
       responses:
         "200":
@@ -2742,7 +2718,7 @@ paths:
       - bearer: []
       summary: Change Mobile number
       tags: []
-      x-content-type: application/json
+      x-content-type: multipart/form-data
       x-accepts:
       - application/json
   /auth-service/send/validation/code:
@@ -3739,20 +3715,19 @@ components:
     validateCode_request:
       properties:
         user_id:
-          description: User ID
+          example: ""
           type: string
         activation_code:
-          description: Validation code
-          type: string
-        app_id:
-          description: App ID which is given while registering as developer
+          example: ""
           type: string
         mode:
-          description: "4 for sign up, 5 for login"
+          example: ""
+          type: string
+        app_id:
+          example: ""
           type: string
       required:
       - activation_code
-      - app_id
       - mode
       - user_id
       type: object
@@ -3832,6 +3807,27 @@ components:
       required:
       - success
       type: object
+    resetPassword_request:
+      properties:
+        mobile_number:
+          example: ""
+          type: string
+        email_id:
+          example: ""
+          type: string
+        new_password:
+          example: ""
+          type: string
+        activation_code:
+          example: ""
+          type: string
+        app_id:
+          example: ""
+          type: string
+      required:
+      - activation_code
+      - new_password
+      type: object
     resetPassword_200_response:
       example:
         success: success
@@ -3881,6 +3877,20 @@ components:
       required:
       - activation_code
       - new_email_id
+      type: object
+    changeMobileNumber_request:
+      properties:
+        new_mobile_number:
+          description: New mobile number
+          example: ""
+          type: string
+        activation_code:
+          description: Activation code
+          example: ""
+          type: string
+      required:
+      - activation_code
+      - new_mobile_number
       type: object
     sendValidationCode_request:
       properties:

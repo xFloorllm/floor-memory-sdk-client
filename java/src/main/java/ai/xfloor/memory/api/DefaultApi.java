@@ -41,7 +41,6 @@ import ai.xfloor.memory.model.SignUp200Response;
 import ai.xfloor.memory.model.UserDetails;
 import ai.xfloor.memory.model.ValidateCode400Response;
 import ai.xfloor.memory.model.ValidateCode412Response;
-import ai.xfloor.memory.model.ValidateCodeRequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -236,7 +235,8 @@ public class DefaultApi {
     }
     /**
      * Build call for changeMobileNumber
-     * @param body  (required)
+     * @param newMobileNumber New mobile number (required)
+     * @param activationCode Activation code (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -248,7 +248,7 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call changeMobileNumberCall(@javax.annotation.Nonnull Object body, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call changeMobileNumberCall(@javax.annotation.Nonnull String newMobileNumber, @javax.annotation.Nonnull String activationCode, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -262,7 +262,7 @@ public class DefaultApi {
             basePath = null;
         }
 
-        Object localVarPostBody = body;
+        Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/auth-service/change/mobile";
@@ -273,6 +273,14 @@ public class DefaultApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
+        if (newMobileNumber != null) {
+            localVarFormParams.put("new_mobile_number", newMobileNumber);
+        }
+
+        if (activationCode != null) {
+            localVarFormParams.put("activation_code", activationCode);
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -282,7 +290,7 @@ public class DefaultApi {
         }
 
         final String[] localVarContentTypes = {
-            "application/json"
+            "multipart/form-data"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -294,20 +302,26 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call changeMobileNumberValidateBeforeCall(@javax.annotation.Nonnull Object body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling changeMobileNumber(Async)");
+    private okhttp3.Call changeMobileNumberValidateBeforeCall(@javax.annotation.Nonnull String newMobileNumber, @javax.annotation.Nonnull String activationCode, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'newMobileNumber' is set
+        if (newMobileNumber == null) {
+            throw new ApiException("Missing the required parameter 'newMobileNumber' when calling changeMobileNumber(Async)");
         }
 
-        return changeMobileNumberCall(body, _callback);
+        // verify the required parameter 'activationCode' is set
+        if (activationCode == null) {
+            throw new ApiException("Missing the required parameter 'activationCode' when calling changeMobileNumber(Async)");
+        }
+
+        return changeMobileNumberCall(newMobileNumber, activationCode, _callback);
 
     }
 
     /**
      * Change Mobile number
      * Updates the mobile number associated with an existing user account after validating a one-time activation code sent to the **new mobile number**.  This operation can only be performed by a **logged-in user**. When a user initiates a mobile number change, an activation code is sent to the newly provided mobile number. The mobile number update takes effect only after the activation code is successfully validated.  If the activation code validation fails, the mobile number remains unchanged.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ### **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;new_mobile_number\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot; } &#x60;&#x60;&#x60;  **Field Description**  * &#x60;user_id&#x60; – Unique identifier of the logged-in user * &#x60;new_mobile_number&#x60; – New mobile number to be associated with the account * &#x60;activation_code&#x60; – One-time activation code sent to the new mobile number for verification  ---  ### **Flow Summary**  1. User is authenticated and logged in 2. User requests to change mobile number 3. System sends an activation code to the **new mobile number** 4. User submits the activation code via this API 5. On successful validation, the mobile number is updated  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user’s mobile number is updated immediately * A &#x60;success&#x60; string is returned confirming the mobile number change  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the user or mobile number * The new mobile number is already in use * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing mobile number remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to &#x60;/auth-service/send/validation/code&#x60; with the proper mode. ---  ### **Security Notes (Recommended)**  * Activation codes are single-use and time-bound * Mobile number changes require prior authentication * Rate limiting may be applied to prevent abuse  ---  ### **One-Line Summary**  &gt; Changes a user’s mobile number after validating an activation code sent to the new mobile number.
-     * @param body  (required)
+     * @param newMobileNumber New mobile number (required)
+     * @param activationCode Activation code (required)
      * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -318,15 +332,16 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public Object changeMobileNumber(@javax.annotation.Nonnull Object body) throws ApiException {
-        ApiResponse<Object> localVarResp = changeMobileNumberWithHttpInfo(body);
+    public Object changeMobileNumber(@javax.annotation.Nonnull String newMobileNumber, @javax.annotation.Nonnull String activationCode) throws ApiException {
+        ApiResponse<Object> localVarResp = changeMobileNumberWithHttpInfo(newMobileNumber, activationCode);
         return localVarResp.getData();
     }
 
     /**
      * Change Mobile number
      * Updates the mobile number associated with an existing user account after validating a one-time activation code sent to the **new mobile number**.  This operation can only be performed by a **logged-in user**. When a user initiates a mobile number change, an activation code is sent to the newly provided mobile number. The mobile number update takes effect only after the activation code is successfully validated.  If the activation code validation fails, the mobile number remains unchanged.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ### **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;new_mobile_number\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot; } &#x60;&#x60;&#x60;  **Field Description**  * &#x60;user_id&#x60; – Unique identifier of the logged-in user * &#x60;new_mobile_number&#x60; – New mobile number to be associated with the account * &#x60;activation_code&#x60; – One-time activation code sent to the new mobile number for verification  ---  ### **Flow Summary**  1. User is authenticated and logged in 2. User requests to change mobile number 3. System sends an activation code to the **new mobile number** 4. User submits the activation code via this API 5. On successful validation, the mobile number is updated  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user’s mobile number is updated immediately * A &#x60;success&#x60; string is returned confirming the mobile number change  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the user or mobile number * The new mobile number is already in use * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing mobile number remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to &#x60;/auth-service/send/validation/code&#x60; with the proper mode. ---  ### **Security Notes (Recommended)**  * Activation codes are single-use and time-bound * Mobile number changes require prior authentication * Rate limiting may be applied to prevent abuse  ---  ### **One-Line Summary**  &gt; Changes a user’s mobile number after validating an activation code sent to the new mobile number.
-     * @param body  (required)
+     * @param newMobileNumber New mobile number (required)
+     * @param activationCode Activation code (required)
      * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -337,8 +352,8 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Object> changeMobileNumberWithHttpInfo(@javax.annotation.Nonnull Object body) throws ApiException {
-        okhttp3.Call localVarCall = changeMobileNumberValidateBeforeCall(body, null);
+    public ApiResponse<Object> changeMobileNumberWithHttpInfo(@javax.annotation.Nonnull String newMobileNumber, @javax.annotation.Nonnull String activationCode) throws ApiException {
+        okhttp3.Call localVarCall = changeMobileNumberValidateBeforeCall(newMobileNumber, activationCode, null);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -346,7 +361,8 @@ public class DefaultApi {
     /**
      * Change Mobile number (asynchronously)
      * Updates the mobile number associated with an existing user account after validating a one-time activation code sent to the **new mobile number**.  This operation can only be performed by a **logged-in user**. When a user initiates a mobile number change, an activation code is sent to the newly provided mobile number. The mobile number update takes effect only after the activation code is successfully validated.  If the activation code validation fails, the mobile number remains unchanged.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ### **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;new_mobile_number\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot; } &#x60;&#x60;&#x60;  **Field Description**  * &#x60;user_id&#x60; – Unique identifier of the logged-in user * &#x60;new_mobile_number&#x60; – New mobile number to be associated with the account * &#x60;activation_code&#x60; – One-time activation code sent to the new mobile number for verification  ---  ### **Flow Summary**  1. User is authenticated and logged in 2. User requests to change mobile number 3. System sends an activation code to the **new mobile number** 4. User submits the activation code via this API 5. On successful validation, the mobile number is updated  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user’s mobile number is updated immediately * A &#x60;success&#x60; string is returned confirming the mobile number change  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the user or mobile number * The new mobile number is already in use * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing mobile number remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to &#x60;/auth-service/send/validation/code&#x60; with the proper mode. ---  ### **Security Notes (Recommended)**  * Activation codes are single-use and time-bound * Mobile number changes require prior authentication * Rate limiting may be applied to prevent abuse  ---  ### **One-Line Summary**  &gt; Changes a user’s mobile number after validating an activation code sent to the new mobile number.
-     * @param body  (required)
+     * @param newMobileNumber New mobile number (required)
+     * @param activationCode Activation code (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -358,9 +374,9 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call changeMobileNumberAsync(@javax.annotation.Nonnull Object body, final ApiCallback<Object> _callback) throws ApiException {
+    public okhttp3.Call changeMobileNumberAsync(@javax.annotation.Nonnull String newMobileNumber, @javax.annotation.Nonnull String activationCode, final ApiCallback<Object> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = changeMobileNumberValidateBeforeCall(body, _callback);
+        okhttp3.Call localVarCall = changeMobileNumberValidateBeforeCall(newMobileNumber, activationCode, _callback);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1010,10 +1026,11 @@ public class DefaultApi {
     }
     /**
      * Build call for resetPassword
-     * @param activationCode Activation Code (required)
-     * @param emailId Email ID (optional)
-     * @param mobileNumber Mobile number (optional)
-     * @param appId App ID (optional)
+     * @param newPassword  (required)
+     * @param activationCode  (required)
+     * @param mobileNumber  (optional)
+     * @param emailId  (optional)
+     * @param appId  (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1025,7 +1042,7 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call resetPasswordCall(@javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String appId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call resetPasswordCall(@javax.annotation.Nonnull String newPassword, @javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String appId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1050,20 +1067,24 @@ public class DefaultApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        if (emailId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("email_id", emailId));
+        if (mobileNumber != null) {
+            localVarFormParams.put("mobile_number", mobileNumber);
         }
 
-        if (mobileNumber != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("mobile_number", mobileNumber));
+        if (emailId != null) {
+            localVarFormParams.put("email_id", emailId);
+        }
+
+        if (newPassword != null) {
+            localVarFormParams.put("new_password", newPassword);
         }
 
         if (activationCode != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("activation_code", activationCode));
+            localVarFormParams.put("activation_code", activationCode);
         }
 
         if (appId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("app_id", appId));
+            localVarFormParams.put("app_id", appId);
         }
 
         final String[] localVarAccepts = {
@@ -1075,6 +1096,7 @@ public class DefaultApi {
         }
 
         final String[] localVarContentTypes = {
+            "multipart/form-data"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -1086,23 +1108,29 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call resetPasswordValidateBeforeCall(@javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String appId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call resetPasswordValidateBeforeCall(@javax.annotation.Nonnull String newPassword, @javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String appId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'newPassword' is set
+        if (newPassword == null) {
+            throw new ApiException("Missing the required parameter 'newPassword' when calling resetPassword(Async)");
+        }
+
         // verify the required parameter 'activationCode' is set
         if (activationCode == null) {
             throw new ApiException("Missing the required parameter 'activationCode' when calling resetPassword(Async)");
         }
 
-        return resetPasswordCall(activationCode, emailId, mobileNumber, appId, _callback);
+        return resetPasswordCall(newPassword, activationCode, mobileNumber, emailId, appId, _callback);
 
     }
 
     /**
      * Reset Password
      * ---  ## Reset Password (Forgot Password, Not Logged In)  Resets the password of a user who **cannot log in** and is using a **forgot-password** flow.  This endpoint is used when the user is not authenticated and requests a password reset using a verified identity channel such as **email** or **mobile number**. The system validates a **one-time reset verification code** (&#x60;activation_code&#x60;) issued for the reset-password flow. If valid and not expired, the password is updated to &#x60;new_password&#x60; and takes effect immediately.  If verification fails, the password remains unchanged and an error response is returned.  ### Authentication  ✅ **Recommended** (better security): a short-lived **reset token** issued after initiating reset  &#x60;&#x60;&#x60; Authorization: Bearer &lt;reset_token&gt; &#x60;&#x60;&#x60;  &gt; If you don’t use a reset token, you must enforce strong rate limiting + OTP attempt throttling on this endpoint.  ### Request Body (Form Data)  * &#x60;email_id&#x60; or &#x60;mobile_number&#x60; (required to identify user) * &#x60;activation_code&#x60; (required) * &#x60;new_password&#x60; (required) * &#x60;user_id&#x60; (optional, if your reset flow already resolved it)  ### Behavior Notes  * Requires a prior call to **initiate reset** and send OTP/code (mode &#x3D; forgot password). * Must enforce code attempt limits and expiration strictly.  ### One-Line Summary  &gt; Resets a user’s password (forgot-password flow) after validating a one-time reset code sent to email or mobile.   
-     * @param activationCode Activation Code (required)
-     * @param emailId Email ID (optional)
-     * @param mobileNumber Mobile number (optional)
-     * @param appId App ID (optional)
+     * @param newPassword  (required)
+     * @param activationCode  (required)
+     * @param mobileNumber  (optional)
+     * @param emailId  (optional)
+     * @param appId  (optional)
      * @return ResetPassword200Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1113,18 +1141,19 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ResetPassword200Response resetPassword(@javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String appId) throws ApiException {
-        ApiResponse<ResetPassword200Response> localVarResp = resetPasswordWithHttpInfo(activationCode, emailId, mobileNumber, appId);
+    public ResetPassword200Response resetPassword(@javax.annotation.Nonnull String newPassword, @javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String appId) throws ApiException {
+        ApiResponse<ResetPassword200Response> localVarResp = resetPasswordWithHttpInfo(newPassword, activationCode, mobileNumber, emailId, appId);
         return localVarResp.getData();
     }
 
     /**
      * Reset Password
      * ---  ## Reset Password (Forgot Password, Not Logged In)  Resets the password of a user who **cannot log in** and is using a **forgot-password** flow.  This endpoint is used when the user is not authenticated and requests a password reset using a verified identity channel such as **email** or **mobile number**. The system validates a **one-time reset verification code** (&#x60;activation_code&#x60;) issued for the reset-password flow. If valid and not expired, the password is updated to &#x60;new_password&#x60; and takes effect immediately.  If verification fails, the password remains unchanged and an error response is returned.  ### Authentication  ✅ **Recommended** (better security): a short-lived **reset token** issued after initiating reset  &#x60;&#x60;&#x60; Authorization: Bearer &lt;reset_token&gt; &#x60;&#x60;&#x60;  &gt; If you don’t use a reset token, you must enforce strong rate limiting + OTP attempt throttling on this endpoint.  ### Request Body (Form Data)  * &#x60;email_id&#x60; or &#x60;mobile_number&#x60; (required to identify user) * &#x60;activation_code&#x60; (required) * &#x60;new_password&#x60; (required) * &#x60;user_id&#x60; (optional, if your reset flow already resolved it)  ### Behavior Notes  * Requires a prior call to **initiate reset** and send OTP/code (mode &#x3D; forgot password). * Must enforce code attempt limits and expiration strictly.  ### One-Line Summary  &gt; Resets a user’s password (forgot-password flow) after validating a one-time reset code sent to email or mobile.   
-     * @param activationCode Activation Code (required)
-     * @param emailId Email ID (optional)
-     * @param mobileNumber Mobile number (optional)
-     * @param appId App ID (optional)
+     * @param newPassword  (required)
+     * @param activationCode  (required)
+     * @param mobileNumber  (optional)
+     * @param emailId  (optional)
+     * @param appId  (optional)
      * @return ApiResponse&lt;ResetPassword200Response&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1135,8 +1164,8 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ResetPassword200Response> resetPasswordWithHttpInfo(@javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String appId) throws ApiException {
-        okhttp3.Call localVarCall = resetPasswordValidateBeforeCall(activationCode, emailId, mobileNumber, appId, null);
+    public ApiResponse<ResetPassword200Response> resetPasswordWithHttpInfo(@javax.annotation.Nonnull String newPassword, @javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String appId) throws ApiException {
+        okhttp3.Call localVarCall = resetPasswordValidateBeforeCall(newPassword, activationCode, mobileNumber, emailId, appId, null);
         Type localVarReturnType = new TypeToken<ResetPassword200Response>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1144,10 +1173,11 @@ public class DefaultApi {
     /**
      * Reset Password (asynchronously)
      * ---  ## Reset Password (Forgot Password, Not Logged In)  Resets the password of a user who **cannot log in** and is using a **forgot-password** flow.  This endpoint is used when the user is not authenticated and requests a password reset using a verified identity channel such as **email** or **mobile number**. The system validates a **one-time reset verification code** (&#x60;activation_code&#x60;) issued for the reset-password flow. If valid and not expired, the password is updated to &#x60;new_password&#x60; and takes effect immediately.  If verification fails, the password remains unchanged and an error response is returned.  ### Authentication  ✅ **Recommended** (better security): a short-lived **reset token** issued after initiating reset  &#x60;&#x60;&#x60; Authorization: Bearer &lt;reset_token&gt; &#x60;&#x60;&#x60;  &gt; If you don’t use a reset token, you must enforce strong rate limiting + OTP attempt throttling on this endpoint.  ### Request Body (Form Data)  * &#x60;email_id&#x60; or &#x60;mobile_number&#x60; (required to identify user) * &#x60;activation_code&#x60; (required) * &#x60;new_password&#x60; (required) * &#x60;user_id&#x60; (optional, if your reset flow already resolved it)  ### Behavior Notes  * Requires a prior call to **initiate reset** and send OTP/code (mode &#x3D; forgot password). * Must enforce code attempt limits and expiration strictly.  ### One-Line Summary  &gt; Resets a user’s password (forgot-password flow) after validating a one-time reset code sent to email or mobile.   
-     * @param activationCode Activation Code (required)
-     * @param emailId Email ID (optional)
-     * @param mobileNumber Mobile number (optional)
-     * @param appId App ID (optional)
+     * @param newPassword  (required)
+     * @param activationCode  (required)
+     * @param mobileNumber  (optional)
+     * @param emailId  (optional)
+     * @param appId  (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1159,9 +1189,9 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call resetPasswordAsync(@javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String appId, final ApiCallback<ResetPassword200Response> _callback) throws ApiException {
+    public okhttp3.Call resetPasswordAsync(@javax.annotation.Nonnull String newPassword, @javax.annotation.Nonnull String activationCode, @javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String appId, final ApiCallback<ResetPassword200Response> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = resetPasswordValidateBeforeCall(activationCode, emailId, mobileNumber, appId, _callback);
+        okhttp3.Call localVarCall = resetPasswordValidateBeforeCall(newPassword, activationCode, mobileNumber, emailId, appId, _callback);
         Type localVarReturnType = new TypeToken<ResetPassword200Response>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1845,7 +1875,10 @@ public class DefaultApi {
     }
     /**
      * Build call for validateCode
-     * @param validateCodeRequest  (required)
+     * @param userId  (required)
+     * @param activationCode  (required)
+     * @param mode  (required)
+     * @param appId  (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1858,7 +1891,7 @@ public class DefaultApi {
         <tr><td> 412 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call validateCodeCall(@javax.annotation.Nonnull ValidateCodeRequest validateCodeRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call validateCodeCall(@javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String activationCode, @javax.annotation.Nonnull String mode, @javax.annotation.Nullable String appId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1872,7 +1905,7 @@ public class DefaultApi {
             basePath = null;
         }
 
-        Object localVarPostBody = validateCodeRequest;
+        Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/auth-service/validate/activation/code";
@@ -1883,6 +1916,22 @@ public class DefaultApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
+        if (userId != null) {
+            localVarFormParams.put("user_id", userId);
+        }
+
+        if (activationCode != null) {
+            localVarFormParams.put("activation_code", activationCode);
+        }
+
+        if (mode != null) {
+            localVarFormParams.put("mode", mode);
+        }
+
+        if (appId != null) {
+            localVarFormParams.put("app_id", appId);
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1892,7 +1941,7 @@ public class DefaultApi {
         }
 
         final String[] localVarContentTypes = {
-            "application/json"
+            "multipart/form-data"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -1904,20 +1953,33 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call validateCodeValidateBeforeCall(@javax.annotation.Nonnull ValidateCodeRequest validateCodeRequest, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'validateCodeRequest' is set
-        if (validateCodeRequest == null) {
-            throw new ApiException("Missing the required parameter 'validateCodeRequest' when calling validateCode(Async)");
+    private okhttp3.Call validateCodeValidateBeforeCall(@javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String activationCode, @javax.annotation.Nonnull String mode, @javax.annotation.Nullable String appId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling validateCode(Async)");
         }
 
-        return validateCodeCall(validateCodeRequest, _callback);
+        // verify the required parameter 'activationCode' is set
+        if (activationCode == null) {
+            throw new ApiException("Missing the required parameter 'activationCode' when calling validateCode(Async)");
+        }
+
+        // verify the required parameter 'mode' is set
+        if (mode == null) {
+            throw new ApiException("Missing the required parameter 'mode' when calling validateCode(Async)");
+        }
+
+        return validateCodeCall(userId, activationCode, mode, appId, _callback);
 
     }
 
     /**
      * Validation
      * ## **Validate Activation / Verification Code**  This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**.  Depending on the mode, the API may:  * Activate a newly registered account * Confirm a login attempt * Verify a password change or reset * Validate email or mobile updates * Confirm account deletion or clearing requests  The API verifies the provided &#x60;activation_code&#x60; against the given &#x60;user_id&#x60;, &#x60;mode&#x60;, and application context. If validation succeeds, the requested operation is completed and the API returns the relevant **POD information** and **user profile details** (where applicable).  If validation fails, the operation is **not performed** and an appropriate error response is returned.  ---  ## **Authentication**  This endpoint requires **Bearer Token authentication**.  **Header**  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ## **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot;,   \&quot;app_id\&quot;: \&quot;string\&quot;,   \&quot;mode\&quot;: \&quot;string\&quot; } &#x60;&#x60;&#x60;  ### **Field Descriptions**  * **user_id** – Unique identifier of the user initiating the operation * **activation_code** – One-time verification code sent to the user * **app_id** – Application identifier (optional or context-specific) * **mode** – Operation context for which the verification is being performed  ---  ## **Usage Scenarios (Mode Definitions)**  | Mode | Purpose                                  | | ---- | ---------------------------------------- | | 0    | Email or mobile number change            | | 1    | Password change                          | | 2    | Delete account                           | | 3    | Clear account                            | | 4    | Signup verification (account activation) | | 5    | Login verification                       | | 6    | Forgot password verification             |  ---  ## **Successful Response**  On successful validation:  * The requested operation (based on &#x60;mode&#x60;) is completed * The API returns:    * **POD information** associated with the user (if applicable)   * **User profile details** (if applicable)  Examples:  * For **signup verification**, the user account is activated * For **login**, access is confirmed * For **password reset**, the user may proceed to set a new password * For **account deletion**, the request is confirmed  ---  ## **Error Response**  The API returns an error response when:  * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated) * Authorization fails or the bearer token is missing or invalid  ⚠️ In all error cases, **no account state change occurs**.  ---  ## **One-Line Summary**  &gt; Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
-     * @param validateCodeRequest  (required)
+     * @param userId  (required)
+     * @param activationCode  (required)
+     * @param mode  (required)
+     * @param appId  (optional)
      * @return UserDetails
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1929,15 +1991,18 @@ public class DefaultApi {
         <tr><td> 412 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public UserDetails validateCode(@javax.annotation.Nonnull ValidateCodeRequest validateCodeRequest) throws ApiException {
-        ApiResponse<UserDetails> localVarResp = validateCodeWithHttpInfo(validateCodeRequest);
+    public UserDetails validateCode(@javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String activationCode, @javax.annotation.Nonnull String mode, @javax.annotation.Nullable String appId) throws ApiException {
+        ApiResponse<UserDetails> localVarResp = validateCodeWithHttpInfo(userId, activationCode, mode, appId);
         return localVarResp.getData();
     }
 
     /**
      * Validation
      * ## **Validate Activation / Verification Code**  This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**.  Depending on the mode, the API may:  * Activate a newly registered account * Confirm a login attempt * Verify a password change or reset * Validate email or mobile updates * Confirm account deletion or clearing requests  The API verifies the provided &#x60;activation_code&#x60; against the given &#x60;user_id&#x60;, &#x60;mode&#x60;, and application context. If validation succeeds, the requested operation is completed and the API returns the relevant **POD information** and **user profile details** (where applicable).  If validation fails, the operation is **not performed** and an appropriate error response is returned.  ---  ## **Authentication**  This endpoint requires **Bearer Token authentication**.  **Header**  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ## **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot;,   \&quot;app_id\&quot;: \&quot;string\&quot;,   \&quot;mode\&quot;: \&quot;string\&quot; } &#x60;&#x60;&#x60;  ### **Field Descriptions**  * **user_id** – Unique identifier of the user initiating the operation * **activation_code** – One-time verification code sent to the user * **app_id** – Application identifier (optional or context-specific) * **mode** – Operation context for which the verification is being performed  ---  ## **Usage Scenarios (Mode Definitions)**  | Mode | Purpose                                  | | ---- | ---------------------------------------- | | 0    | Email or mobile number change            | | 1    | Password change                          | | 2    | Delete account                           | | 3    | Clear account                            | | 4    | Signup verification (account activation) | | 5    | Login verification                       | | 6    | Forgot password verification             |  ---  ## **Successful Response**  On successful validation:  * The requested operation (based on &#x60;mode&#x60;) is completed * The API returns:    * **POD information** associated with the user (if applicable)   * **User profile details** (if applicable)  Examples:  * For **signup verification**, the user account is activated * For **login**, access is confirmed * For **password reset**, the user may proceed to set a new password * For **account deletion**, the request is confirmed  ---  ## **Error Response**  The API returns an error response when:  * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated) * Authorization fails or the bearer token is missing or invalid  ⚠️ In all error cases, **no account state change occurs**.  ---  ## **One-Line Summary**  &gt; Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
-     * @param validateCodeRequest  (required)
+     * @param userId  (required)
+     * @param activationCode  (required)
+     * @param mode  (required)
+     * @param appId  (optional)
      * @return ApiResponse&lt;UserDetails&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1949,8 +2014,8 @@ public class DefaultApi {
         <tr><td> 412 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<UserDetails> validateCodeWithHttpInfo(@javax.annotation.Nonnull ValidateCodeRequest validateCodeRequest) throws ApiException {
-        okhttp3.Call localVarCall = validateCodeValidateBeforeCall(validateCodeRequest, null);
+    public ApiResponse<UserDetails> validateCodeWithHttpInfo(@javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String activationCode, @javax.annotation.Nonnull String mode, @javax.annotation.Nullable String appId) throws ApiException {
+        okhttp3.Call localVarCall = validateCodeValidateBeforeCall(userId, activationCode, mode, appId, null);
         Type localVarReturnType = new TypeToken<UserDetails>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1958,7 +2023,10 @@ public class DefaultApi {
     /**
      * Validation (asynchronously)
      * ## **Validate Activation / Verification Code**  This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**.  Depending on the mode, the API may:  * Activate a newly registered account * Confirm a login attempt * Verify a password change or reset * Validate email or mobile updates * Confirm account deletion or clearing requests  The API verifies the provided &#x60;activation_code&#x60; against the given &#x60;user_id&#x60;, &#x60;mode&#x60;, and application context. If validation succeeds, the requested operation is completed and the API returns the relevant **POD information** and **user profile details** (where applicable).  If validation fails, the operation is **not performed** and an appropriate error response is returned.  ---  ## **Authentication**  This endpoint requires **Bearer Token authentication**.  **Header**  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ## **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot;,   \&quot;app_id\&quot;: \&quot;string\&quot;,   \&quot;mode\&quot;: \&quot;string\&quot; } &#x60;&#x60;&#x60;  ### **Field Descriptions**  * **user_id** – Unique identifier of the user initiating the operation * **activation_code** – One-time verification code sent to the user * **app_id** – Application identifier (optional or context-specific) * **mode** – Operation context for which the verification is being performed  ---  ## **Usage Scenarios (Mode Definitions)**  | Mode | Purpose                                  | | ---- | ---------------------------------------- | | 0    | Email or mobile number change            | | 1    | Password change                          | | 2    | Delete account                           | | 3    | Clear account                            | | 4    | Signup verification (account activation) | | 5    | Login verification                       | | 6    | Forgot password verification             |  ---  ## **Successful Response**  On successful validation:  * The requested operation (based on &#x60;mode&#x60;) is completed * The API returns:    * **POD information** associated with the user (if applicable)   * **User profile details** (if applicable)  Examples:  * For **signup verification**, the user account is activated * For **login**, access is confirmed * For **password reset**, the user may proceed to set a new password * For **account deletion**, the request is confirmed  ---  ## **Error Response**  The API returns an error response when:  * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated) * Authorization fails or the bearer token is missing or invalid  ⚠️ In all error cases, **no account state change occurs**.  ---  ## **One-Line Summary**  &gt; Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
-     * @param validateCodeRequest  (required)
+     * @param userId  (required)
+     * @param activationCode  (required)
+     * @param mode  (required)
+     * @param appId  (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1971,9 +2039,9 @@ public class DefaultApi {
         <tr><td> 412 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call validateCodeAsync(@javax.annotation.Nonnull ValidateCodeRequest validateCodeRequest, final ApiCallback<UserDetails> _callback) throws ApiException {
+    public okhttp3.Call validateCodeAsync(@javax.annotation.Nonnull String userId, @javax.annotation.Nonnull String activationCode, @javax.annotation.Nonnull String mode, @javax.annotation.Nullable String appId, final ApiCallback<UserDetails> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = validateCodeValidateBeforeCall(validateCodeRequest, _callback);
+        okhttp3.Call localVarCall = validateCodeValidateBeforeCall(userId, activationCode, mode, appId, _callback);
         Type localVarReturnType = new TypeToken<UserDetails>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

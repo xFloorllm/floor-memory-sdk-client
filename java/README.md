@@ -47,7 +47,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>ai.xfloor.sdk</groupId>
   <artifactId>floor-memory-sdk-client</artifactId>
-  <version>1.0.17</version>
+  <version>1.0.18</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -63,7 +63,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "ai.xfloor.sdk:floor-memory-sdk-client:1.0.17"
+     implementation "ai.xfloor.sdk:floor-memory-sdk-client:1.0.18"
   }
 ```
 
@@ -77,7 +77,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/floor-memory-sdk-client-1.0.17.jar`
+* `target/floor-memory-sdk-client-1.0.18.jar`
 * `target/lib/*.jar`
 
 ### Getting Started
@@ -97,7 +97,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost");
+    defaultClient.setBasePath("https://floortv.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -123,7 +123,7 @@ public class Example {
 
 ### Documentation for API Endpoints
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://floortv.in*
 
 Class
 
@@ -259,7 +259,6 @@ Query (Primary API)
  - [ValidateCode400Response](docs/ValidateCode400Response.md)
  - [ValidateCode400ResponseError](docs/ValidateCode400ResponseError.md)
  - [ValidateCode412Response](docs/ValidateCode412Response.md)
- - [ValidateCodeRequest](docs/ValidateCodeRequest.md)
 
 
 <a id="documentation-for-authorization"></a>
@@ -280,8 +279,6 @@ It's recommended to create an instance of `ApiClient` per thread in a multithrea
 ### Author
 
 contact@ipomo.in
-
-
 
 
 

@@ -35,4 +35,3 @@ export * from './UserDetails';
 export * from './ValidateCode400Response';
 export * from './ValidateCode400ResponseError';
 export * from './ValidateCode412Response';
-export * from './ValidateCodeRequest';

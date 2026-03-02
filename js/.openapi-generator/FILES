@@ -44,7 +44,6 @@ docs/UserDetails.md
 docs/ValidateCode400Response.md
 docs/ValidateCode400ResponseError.md
 docs/ValidateCode412Response.md
-docs/ValidateCodeRequest.md
 git_push.sh
 mocha.opts
 package.json
@@ -91,7 +90,6 @@ src/model/UserDetails.js
 src/model/ValidateCode400Response.js
 src/model/ValidateCode400ResponseError.js
 src/model/ValidateCode412Response.js
-src/model/ValidateCodeRequest.js
 test/api/DefaultApi.spec.js
 test/api/EditFloorApi.spec.js
 test/api/EventApi.spec.js
@@ -133,4 +131,3 @@ test/model/UserDetails.spec.js
 test/model/ValidateCode400Response.spec.js
 test/model/ValidateCode400ResponseError.spec.js
 test/model/ValidateCode412Response.spec.js
-test/model/ValidateCodeRequest.spec.js

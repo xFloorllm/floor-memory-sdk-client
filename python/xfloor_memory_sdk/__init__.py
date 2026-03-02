@@ -17,7 +17,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.17"
+__version__ = "1.0.18"
 
 # Define package exports
 __all__ = [
@@ -71,7 +71,6 @@ __all__ = [
     "ValidateCode400Response",
     "ValidateCode400ResponseError",
     "ValidateCode412Response",
-    "ValidateCodeRequest",
 ]
 
 # import apis into sdk package
@@ -129,5 +128,4 @@ from xfloor_memory_sdk.models.user_details import UserDetails as UserDetails
 from xfloor_memory_sdk.models.validate_code400_response import ValidateCode400Response as ValidateCode400Response
 from xfloor_memory_sdk.models.validate_code400_response_error import ValidateCode400ResponseError as ValidateCode400ResponseError
 from xfloor_memory_sdk.models.validate_code412_response import ValidateCode412Response as ValidateCode412Response
-from xfloor_memory_sdk.models.validate_code_request import ValidateCodeRequest as ValidateCodeRequest
 

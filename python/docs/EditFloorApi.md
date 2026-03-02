@@ -1,6 +1,6 @@
 # xfloor_memory_sdk.EditFloorApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://floortv.in*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -156,10 +156,10 @@ from xfloor_memory_sdk.models.get_floor_information200_response import GetFloorI
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://floortv.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "http://localhost"
+    host = "https://floortv.in"
 )
 
 # The client must configure the authentication and authorization parameters

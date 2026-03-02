@@ -47,7 +47,6 @@ docs/UserDetails.md
 docs/ValidateCode400Response.md
 docs/ValidateCode400ResponseError.md
 docs/ValidateCode412Response.md
-docs/ValidateCodeRequest.md
 git_push.sh
 gradle.properties
 gradle/wrapper/gradle-wrapper.jar
@@ -116,7 +115,6 @@ src/main/java/ai/xfloor/memory/model/UserDetails.java
 src/main/java/ai/xfloor/memory/model/ValidateCode400Response.java
 src/main/java/ai/xfloor/memory/model/ValidateCode400ResponseError.java
 src/main/java/ai/xfloor/memory/model/ValidateCode412Response.java
-src/main/java/ai/xfloor/memory/model/ValidateCodeRequest.java
 src/test/java/ai/xfloor/memory/api/DefaultApiTest.java
 src/test/java/ai/xfloor/memory/api/EditFloorApiTest.java
 src/test/java/ai/xfloor/memory/api/EventApiTest.java
@@ -158,4 +156,3 @@ src/test/java/ai/xfloor/memory/model/UserDetailsTest.java
 src/test/java/ai/xfloor/memory/model/ValidateCode400ResponseErrorTest.java
 src/test/java/ai/xfloor/memory/model/ValidateCode400ResponseTest.java
 src/test/java/ai/xfloor/memory/model/ValidateCode412ResponseTest.java
-src/test/java/ai/xfloor/memory/model/ValidateCodeRequestTest.java

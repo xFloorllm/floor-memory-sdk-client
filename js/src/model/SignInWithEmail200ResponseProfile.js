@@ -20,7 +20,7 @@ import SignInWithEmail200ResponseProfileAvatar from './SignInWithEmail200Respons
 /**
  * The SignInWithEmail200ResponseProfile model module.
  * @module model/SignInWithEmail200ResponseProfile
- * @version 1.0.17
+ * @version 1.0.18
  */
 class SignInWithEmail200ResponseProfile {
     /**

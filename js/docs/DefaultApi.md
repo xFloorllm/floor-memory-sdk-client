@@ -1,6 +1,6 @@
 # XfloorFloorMemorySdkJs.DefaultApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://floortv.in*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -149,7 +149,7 @@ Notes
 
 ### changeMobileNumber
 
-> Object changeMobileNumber(body)
+> Object changeMobileNumber(newMobileNumber, activationCode)
 
 Change Mobile number
 
@@ -230,8 +230,9 @@ let bearer = defaultClient.authentications['bearer'];
 bearer.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new XfloorFloorMemorySdkJs.DefaultApi();
-let body = {key: null}; // Object | 
-apiInstance.changeMobileNumber(body, (error, data, response) => {
+let newMobileNumber = "newMobileNumber_example"; // String | New mobile number
+let activationCode = "activationCode_example"; // String | Activation code
+apiInstance.changeMobileNumber(newMobileNumber, activationCode, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -253,10 +254,12 @@ Notes
 | ------------- | ------------- |
 
 -------------
- **body**
+ **newMobileNumber**
 
-| **Object**|
-|
+| **String**| New mobile number |
+ **activationCode**
+
+| **String**| Activation code |
 
 ### Return type
 
@@ -268,7 +271,7 @@ Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: multipart/form-data
 - **Accept**: application/json
 
 
@@ -912,7 +915,7 @@ Notes
 
 ### resetPassword
 
-> ResetPassword200Response resetPassword(activationCode, opts)
+> ResetPassword200Response resetPassword(newPassword, activationCode, opts)
 
 Reset Password
 
@@ -944,13 +947,14 @@ Reset Password
 import XfloorFloorMemorySdkJs from '@xfloor/floor-memory-sdk-js';
 
 let apiInstance = new XfloorFloorMemorySdkJs.DefaultApi();
-let activationCode = "activationCode_example"; // String | Activation Code
+let newPassword = "newPassword_example"; // String | 
+let activationCode = "activationCode_example"; // String | 
 let opts = {
-  'emailId': "emailId_example", // String | Email ID
-  'mobileNumber': "mobileNumber_example", // String | Mobile number
-  'appId': "appId_example" // String | App ID
+  'mobileNumber': "mobileNumber_example", // String | 
+  'emailId': "emailId_example", // String | 
+  'appId': "appId_example" // String | 
 };
-apiInstance.resetPassword(activationCode, opts, (error, data, response) => {
+apiInstance.resetPassword(newPassword, activationCode, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -972,22 +976,30 @@ Notes
 | ------------- | ------------- |
 
 -------------
+ **newPassword**
+
+| **String**|
+|
  **activationCode**
 
-| **String**| Activation Code |
- **emailId**
-
-| **String**| Email ID |
-
-[optional]
+| **String**|
+|
  **mobileNumber**
 
-| **String**| Mobile number |
+| **String**|
+|
+
+[optional]
+ **emailId**
+
+| **String**|
+|
 
 [optional]
  **appId**
 
-| **String**| App ID |
+| **String**|
+|
 
 [optional]
 
@@ -1001,7 +1013,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: multipart/form-data
 - **Accept**: application/json
 
 
@@ -1498,7 +1510,7 @@ Notes
 
 ### validateCode
 
-> UserDetails validateCode(validateCodeRequest)
+> UserDetails validateCode(userId, activationCode, mode, opts)
 
 Validation
 
@@ -1580,8 +1592,13 @@ let bearer = defaultClient.authentications['bearer'];
 bearer.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new XfloorFloorMemorySdkJs.DefaultApi();
-let validateCodeRequest = new XfloorFloorMemorySdkJs.ValidateCodeRequest(); // ValidateCodeRequest | 
-apiInstance.validateCode(validateCodeRequest, (error, data, response) => {
+let userId = "userId_example"; // String | 
+let activationCode = "activationCode_example"; // String | 
+let mode = "mode_example"; // String | 
+let opts = {
+  'appId': "appId_example" // String | 
+};
+apiInstance.validateCode(userId, activationCode, mode, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -1603,10 +1620,24 @@ Notes
 | ------------- | ------------- |
 
 -------------
- **validateCodeRequest**
+ **userId**
 
-| [**ValidateCodeRequest**](ValidateCodeRequest.md)|
+| **String**|
 |
+ **activationCode**
+
+| **String**|
+|
+ **mode**
+
+| **String**|
+|
+ **appId**
+
+| **String**|
+|
+
+[optional]
 
 ### Return type
 
@@ -1618,6 +1649,6 @@ Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: multipart/form-data
 - **Accept**: application/json
 

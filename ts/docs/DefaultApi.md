@@ -1,6 +1,6 @@
 # DefaultApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://floortv.in*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
@@ -15,7 +15,7 @@ All URIs are relative to *http://localhost*
 | [**signInWithEmail**](DefaultApi.md#signinwithemail) | **POST** /auth-service/sign/in/with/email | Sign In with email ID |
 | [**signInWithMobileNumber**](DefaultApi.md#signinwithmobilenumber) | **POST** /auth-service/sign/in/with/mobile/number | Sign In with Mobile number |
 | [**signUp**](DefaultApi.md#signup) | **POST** /auth-service/sign/up | Sign Up |
-| [**validateCode**](DefaultApi.md#validatecodeoperation) | **POST** /auth-service/validate/activation/code | Validation |
+| [**validateCode**](DefaultApi.md#validatecode) | **POST** /auth-service/validate/activation/code | Validation |
 
 
 
@@ -165,7 +165,7 @@ example().catch(console.error);
 
 ### changeMobileNumber
 
-> object changeMobileNumber(body)
+> object changeMobileNumber(newMobileNumber, activationCode)
 
 Change Mobile number
 
@@ -254,8 +254,10 @@ async function example() {
   const api = new DefaultApi(config);
 
   const body = {
-    // object
-    body: Object,
+    // string | New mobile number
+    newMobileNumber: newMobileNumber_example,
+    // string | Activation code
+    activationCode: activationCode_example,
   } satisfies ChangeMobileNumberRequest;
 
   try {
@@ -275,8 +277,8 @@ example().catch(console.error);
 
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **body** | `object` |
-| |
+| **newMobileNumber** | `string` | New mobile number | [Defaults to `undefined`] |
+| **activationCode** | `string` | Activation code | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -288,7 +290,7 @@ example().catch(console.error);
 
 ### HTTP request headers
 
-- **Content-Type**: `application/json`
+- **Content-Type**: `multipart/form-data`
 - **Accept**: `application/json`
 
 
@@ -1000,7 +1002,7 @@ example().catch(console.error);
 
 ### resetPassword
 
-> ResetPassword200Response resetPassword(activationCode, emailId, mobileNumber, appId)
+> ResetPassword200Response resetPassword(newPassword, activationCode, mobileNumber, emailId, appId)
 
 Reset Password
 
@@ -1040,13 +1042,15 @@ async function example() {
   const api = new DefaultApi();
 
   const body = {
-    // string | Activation Code
+    // string
+    newPassword: newPassword_example,
+    // string
     activationCode: activationCode_example,
-    // string | Email ID (optional)
-    emailId: emailId_example,
-    // string | Mobile number (optional)
+    // string (optional)
     mobileNumber: mobileNumber_example,
-    // string | App ID (optional)
+    // string (optional)
+    emailId: emailId_example,
+    // string (optional)
     appId: appId_example,
   } satisfies ResetPasswordRequest;
 
@@ -1067,10 +1071,16 @@ example().catch(console.error);
 
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **activationCode** | `string` | Activation Code | [Defaults to `undefined`] |
-| **emailId** | `string` | Email ID | [Optional] [Defaults to `undefined`] |
-| **mobileNumber** | `string` | Mobile number | [Optional] [Defaults to `undefined`] |
-| **appId** | `string` | App ID | [Optional] [Defaults to `undefined`] |
+| **newPassword** | `string` |
+| [Defaults to `undefined`] |
+| **activationCode** | `string` |
+| [Defaults to `undefined`] |
+| **mobileNumber** | `string` |
+| [Optional] [Defaults to `undefined`] |
+| **emailId** | `string` |
+| [Optional] [Defaults to `undefined`] |
+| **appId** | `string` |
+| [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -1082,7 +1092,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: `multipart/form-data`
 - **Accept**: `application/json`
 
 
@@ -1620,7 +1630,7 @@ example().catch(console.error);
 
 ### validateCode
 
-> UserDetails validateCode(validateCodeRequest)
+> UserDetails validateCode(userId, activationCode, mode, appId)
 
 Validation
 
@@ -1699,7 +1709,7 @@ import {
   Configuration,
   DefaultApi,
 } from '@xfloor/floor-memory-sdk-ts';
-import type { ValidateCodeOperationRequest } from '@xfloor/floor-memory-sdk-ts';
+import type { ValidateCodeRequest } from '@xfloor/floor-memory-sdk-ts';
 
 async function example() {
   console.log("🚀 Testing @xfloor/floor-memory-sdk-ts SDK...");
@@ -1710,9 +1720,15 @@ async function example() {
   const api = new DefaultApi(config);
 
   const body = {
-    // ValidateCodeRequest
-    validateCodeRequest: ...,
-  } satisfies ValidateCodeOperationRequest;
+    // string
+    userId: userId_example,
+    // string
+    activationCode: activationCode_example,
+    // string
+    mode: mode_example,
+    // string (optional)
+    appId: appId_example,
+  } satisfies ValidateCodeRequest;
 
   try {
     const data = await api.validateCode(body);
@@ -1731,8 +1747,14 @@ example().catch(console.error);
 
 | Name | Type | Description | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **validateCodeRequest** | [ValidateCodeRequest](ValidateCodeRequest.md) |
-| |
+| **userId** | `string` |
+| [Defaults to `undefined`] |
+| **activationCode** | `string` |
+| [Defaults to `undefined`] |
+| **mode** | `string` |
+| [Defaults to `undefined`] |
+| **appId** | `string` |
+| [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -1744,7 +1766,7 @@ example().catch(console.error);
 
 ### HTTP request headers
 
-- **Content-Type**: `application/json`
+- **Content-Type**: `multipart/form-data`
 - **Accept**: `application/json`
 
 

@@ -20,7 +20,7 @@ import Media from './Media';
 /**
  * The GetRecentEvents200ResponseItemsInner model module.
  * @module model/GetRecentEvents200ResponseItemsInner
- * @version 1.0.17
+ * @version 1.0.18
  */
 class GetRecentEvents200ResponseItemsInner {
     /**

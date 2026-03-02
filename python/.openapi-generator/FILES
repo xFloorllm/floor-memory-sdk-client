@@ -45,7 +45,6 @@ docs/UserDetails.md
 docs/ValidateCode400Response.md
 docs/ValidateCode400ResponseError.md
 docs/ValidateCode412Response.md
-docs/ValidateCodeRequest.md
 git_push.sh
 pyproject.toml
 requirements.txt
@@ -94,7 +93,6 @@ test/test_user_details.py
 test/test_validate_code400_response.py
 test/test_validate_code400_response_error.py
 test/test_validate_code412_response.py
-test/test_validate_code_request.py
 tox.ini
 xfloor_memory_sdk/__init__.py
 xfloor_memory_sdk/api/__init__.py
@@ -144,6 +142,5 @@ xfloor_memory_sdk/models/user_details.py
 xfloor_memory_sdk/models/validate_code400_response.py
 xfloor_memory_sdk/models/validate_code400_response_error.py
 xfloor_memory_sdk/models/validate_code412_response.py
-xfloor_memory_sdk/models/validate_code_request.py
 xfloor_memory_sdk/py.typed
 xfloor_memory_sdk/rest.py

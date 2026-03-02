@@ -19,7 +19,7 @@ import QueryResponseItemsInner from './QueryResponseItemsInner';
 /**
  * The QueryResponse model module.
  * @module model/QueryResponse
- * @version 1.0.17
+ * @version 1.0.18
  */
 class QueryResponse {
     /**

@@ -1,6 +1,6 @@
 # xfloor_memory_sdk.DefaultApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://floortv.in*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -124,10 +124,10 @@ import xfloor_memory_sdk
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://floortv.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "http://localhost"
+    host = "https://floortv.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -205,7 +205,7 @@ Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **change_mobile_number**
-> object change_mobile_number(body)
+> object change_mobile_number(new_mobile_number, activation_code)
 
 Change Mobile number
 
@@ -307,10 +307,10 @@ import xfloor_memory_sdk
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://floortv.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "http://localhost"
+    host = "https://floortv.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -327,11 +327,12 @@ configuration = xfloor_memory_sdk.Configuration(
 with xfloor_memory_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = xfloor_memory_sdk.DefaultApi(api_client)
-    body = None # object | 
+    new_mobile_number = 'new_mobile_number_example' # str | New mobile number
+    activation_code = 'activation_code_example' # str | Activation code
 
     try:
         # Change Mobile number
-        api_response = api_instance.change_mobile_number(body)
+        api_response = api_instance.change_mobile_number(new_mobile_number, activation_code)
         print("The response of DefaultApi->change_mobile_number:\n")
         pprint(api_response)
     except Exception as e:
@@ -353,10 +354,12 @@ Notes
 | ------------- | ------------- |
 
 -------------
- **body**
+ **new_mobile_number**
 
-| **object**|
-|
+| **str**| New mobile number |
+ **activation_code**
+
+| **str**| Activation code |
 
 ### Return type
 
@@ -368,7 +371,7 @@ Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -437,10 +440,10 @@ from xfloor_memory_sdk.models.change_password200_response import ChangePassword2
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://floortv.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "http://localhost"
+    host = "https://floortv.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -680,10 +683,10 @@ from xfloor_memory_sdk.models.get_floor_information200_response import GetFloorI
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://floortv.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "http://localhost"
+    host = "https://floortv.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -929,10 +932,10 @@ from xfloor_memory_sdk.models.get_floor_information200_response import GetFloorI
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://floortv.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "http://localhost"
+    host = "https://floortv.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1181,10 +1184,10 @@ from xfloor_memory_sdk.models.get_floor_information200_response import GetFloorI
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://floortv.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "http://localhost"
+    host = "https://floortv.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1270,7 +1273,7 @@ Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **reset_password**
-> ResetPassword200Response reset_password(activation_code, email_id=email_id, mobile_number=mobile_number, app_id=app_id)
+> ResetPassword200Response reset_password(new_password, activation_code, mobile_number=mobile_number, email_id=email_id, app_id=app_id)
 
 Reset Password
 
@@ -1326,10 +1329,10 @@ from xfloor_memory_sdk.models.reset_password200_response import ResetPassword200
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://floortv.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "http://localhost"
+    host = "https://floortv.in"
 )
 
 
@@ -1337,14 +1340,15 @@ configuration = xfloor_memory_sdk.Configuration(
 with xfloor_memory_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = xfloor_memory_sdk.DefaultApi(api_client)
-    activation_code = 'activation_code_example' # str | Activation Code
-    email_id = 'email_id_example' # str | Email ID (optional)
-    mobile_number = 'mobile_number_example' # str | Mobile number (optional)
-    app_id = 'app_id_example' # str | App ID (optional)
+    new_password = 'new_password_example' # str | 
+    activation_code = 'activation_code_example' # str | 
+    mobile_number = 'mobile_number_example' # str |  (optional)
+    email_id = 'email_id_example' # str |  (optional)
+    app_id = 'app_id_example' # str |  (optional)
 
     try:
         # Reset Password
-        api_response = api_instance.reset_password(activation_code, email_id=email_id, mobile_number=mobile_number, app_id=app_id)
+        api_response = api_instance.reset_password(new_password, activation_code, mobile_number=mobile_number, email_id=email_id, app_id=app_id)
         print("The response of DefaultApi->reset_password:\n")
         pprint(api_response)
     except Exception as e:
@@ -1366,22 +1370,30 @@ Notes
 | ------------- | ------------- |
 
 -------------
+ **new_password**
+
+| **str**|
+|
  **activation_code**
 
-| **str**| Activation Code |
- **email_id**
-
-| **str**| Email ID |
-
-[optional]
+| **str**|
+|
  **mobile_number**
 
-| **str**| Mobile number |
+| **str**|
+|
+
+[optional]
+ **email_id**
+
+| **str**|
+|
 
 [optional]
  **app_id**
 
-| **str**| App ID |
+| **str**|
+|
 
 [optional]
 
@@ -1395,7 +1407,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -1510,10 +1522,10 @@ from xfloor_memory_sdk.models.send_validation_code200_response import SendValida
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://floortv.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "http://localhost"
+    host = "https://floortv.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1697,10 +1709,10 @@ from xfloor_memory_sdk.models.sign_in_with_email200_response import SignInWithEm
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://floortv.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "http://localhost"
+    host = "https://floortv.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1866,10 +1878,10 @@ from xfloor_memory_sdk.models.sign_in_with_email200_response import SignInWithEm
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://floortv.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "http://localhost"
+    host = "https://floortv.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1992,10 +2004,10 @@ from xfloor_memory_sdk.models.sign_up200_response import SignUp200Response
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://floortv.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "http://localhost"
+    host = "https://floortv.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2091,7 +2103,7 @@ Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **validate_code**
-> UserDetails validate_code(validate_code_request)
+> UserDetails validate_code(user_id, activation_code, mode, app_id=app_id)
 
 Validation
 
@@ -2205,14 +2217,13 @@ The API returns an error response when:
 ```python
 import xfloor_memory_sdk
 from xfloor_memory_sdk.models.user_details import UserDetails
-from xfloor_memory_sdk.models.validate_code_request import ValidateCodeRequest
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://floortv.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "http://localhost"
+    host = "https://floortv.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2229,11 +2240,14 @@ configuration = xfloor_memory_sdk.Configuration(
 with xfloor_memory_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = xfloor_memory_sdk.DefaultApi(api_client)
-    validate_code_request = xfloor_memory_sdk.ValidateCodeRequest() # ValidateCodeRequest | 
+    user_id = 'user_id_example' # str | 
+    activation_code = 'activation_code_example' # str | 
+    mode = 'mode_example' # str | 
+    app_id = 'app_id_example' # str |  (optional)
 
     try:
         # Validation
-        api_response = api_instance.validate_code(validate_code_request)
+        api_response = api_instance.validate_code(user_id, activation_code, mode, app_id=app_id)
         print("The response of DefaultApi->validate_code:\n")
         pprint(api_response)
     except Exception as e:
@@ -2255,10 +2269,24 @@ Notes
 | ------------- | ------------- |
 
 -------------
- **validate_code_request**
+ **user_id**
 
-| [**ValidateCodeRequest**](ValidateCodeRequest.md)|
+| **str**|
 |
+ **activation_code**
+
+| **str**|
+|
+ **mode**
+
+| **str**|
+|
+ **app_id**
+
+| **str**|
+|
+
+[optional]
 
 ### Return type
 
@@ -2270,7 +2298,7 @@ Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details

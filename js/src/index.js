@@ -50,7 +50,6 @@ import UserDetails from './model/UserDetails';
 import ValidateCode400Response from './model/ValidateCode400Response';
 import ValidateCode400ResponseError from './model/ValidateCode400ResponseError';
 import ValidateCode412Response from './model/ValidateCode412Response';
-import ValidateCodeRequest from './model/ValidateCodeRequest';
 import DefaultApi from './api/DefaultApi';
 import EditFloorApi from './api/EditFloorApi';
 import EventApi from './api/EventApi';
@@ -88,7 +87,7 @@ import QueryApi from './api/QueryApi';
 * </pre>
 * </p>
 * @module index
-* @version 1.0.17
+* @version 1.0.18
 */
 export {
     /**
@@ -306,12 +305,6 @@ export {
      * @property {module:model/ValidateCode412Response}
      */
     ValidateCode412Response,
-
-    /**
-     * The ValidateCodeRequest model constructor.
-     * @property {module:model/ValidateCodeRequest}
-     */
-    ValidateCodeRequest,
 
     /**
     * The DefaultApi service constructor.

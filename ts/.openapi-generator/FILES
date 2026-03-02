@@ -43,7 +43,6 @@ docs/UserDetails.md
 docs/ValidateCode400Response.md
 docs/ValidateCode400ResponseError.md
 docs/ValidateCode412Response.md
-docs/ValidateCodeRequest.md
 package.json
 src/apis/DefaultApi.ts
 src/apis/EditFloorApi.ts
@@ -88,7 +87,6 @@ src/models/UserDetails.ts
 src/models/ValidateCode400Response.ts
 src/models/ValidateCode400ResponseError.ts
 src/models/ValidateCode412Response.ts
-src/models/ValidateCodeRequest.ts
 src/models/index.ts
 src/runtime.ts
 tsconfig.json

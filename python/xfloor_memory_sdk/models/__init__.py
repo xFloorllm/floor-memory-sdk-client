@@ -51,5 +51,4 @@ from xfloor_memory_sdk.models.user_details import UserDetails
 from xfloor_memory_sdk.models.validate_code400_response import ValidateCode400Response
 from xfloor_memory_sdk.models.validate_code400_response_error import ValidateCode400ResponseError
 from xfloor_memory_sdk.models.validate_code412_response import ValidateCode412Response
-from xfloor_memory_sdk.models.validate_code_request import ValidateCodeRequest
 

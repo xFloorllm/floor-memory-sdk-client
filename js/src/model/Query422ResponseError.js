@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The Query422ResponseError model module.
  * @module model/Query422ResponseError
- * @version 1.0.17
+ * @version 1.0.18
  */
 class Query422ResponseError {
     /**

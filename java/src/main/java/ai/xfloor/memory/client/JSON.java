@@ -133,7 +133,6 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.ValidateCode400Response.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.ValidateCode400ResponseError.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.ValidateCode412Response.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.ValidateCodeRequest.CustomTypeAdapterFactory());
         gson = gsonBuilder.create();
     }
 

@@ -26,7 +26,6 @@ import ai.xfloor.memory.model.SignUp200Response;
 import ai.xfloor.memory.model.UserDetails;
 import ai.xfloor.memory.model.ValidateCode400Response;
 import ai.xfloor.memory.model.ValidateCode412Response;
-import ai.xfloor.memory.model.ValidateCodeRequest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -67,8 +66,9 @@ public class DefaultApiTest {
      */
     @Test
     public void changeMobileNumberTest() throws ApiException {
-        Object body = null;
-        Object response = api.changeMobileNumber(body);
+        String newMobileNumber = null;
+        String activationCode = null;
+        Object response = api.changeMobileNumber(newMobileNumber, activationCode);
         // TODO: test validations
     }
 
@@ -146,11 +146,12 @@ public class DefaultApiTest {
      */
     @Test
     public void resetPasswordTest() throws ApiException {
+        String newPassword = null;
         String activationCode = null;
-        String emailId = null;
         String mobileNumber = null;
+        String emailId = null;
         String appId = null;
-        ResetPassword200Response response = api.resetPassword(activationCode, emailId, mobileNumber, appId);
+        ResetPassword200Response response = api.resetPassword(newPassword, activationCode, mobileNumber, emailId, appId);
         // TODO: test validations
     }
 
@@ -233,8 +234,11 @@ public class DefaultApiTest {
      */
     @Test
     public void validateCodeTest() throws ApiException {
-        ValidateCodeRequest validateCodeRequest = null;
-        UserDetails response = api.validateCode(validateCodeRequest);
+        String userId = null;
+        String activationCode = null;
+        String mode = null;
+        String appId = null;
+        UserDetails response = api.validateCode(userId, activationCode, mode, appId);
         // TODO: test validations
     }
 

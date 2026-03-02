@@ -1,6 +1,6 @@
 # QueryApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://floortv.in*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|

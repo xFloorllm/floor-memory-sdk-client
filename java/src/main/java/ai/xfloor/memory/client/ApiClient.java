@@ -63,11 +63,11 @@ import ai.xfloor.memory.client.auth.ApiKeyAuth;
  */
 public class ApiClient {
 
-    protected String basePath = "http://localhost";
+    protected String basePath = "https://floortv.in";
     protected List<ServerConfiguration> servers = new ArrayList<ServerConfiguration>(Arrays.asList(
     new ServerConfiguration(
-      "",
-      "No description provided",
+      "https://floortv.in",
+      "Testing Env",
       new HashMap<String, ServerVariable>()
     )
   ));
@@ -144,7 +144,7 @@ public class ApiClient {
         json = new JSON();
 
         // Set default User-Agent.
-        setUserAgent("OpenAPI-Generator/1.0.17/java");
+        setUserAgent("OpenAPI-Generator/1.0.18/java");
 
         authentications = new HashMap<String, Authentication>();
     }
@@ -161,7 +161,7 @@ public class ApiClient {
     /**
      * Set base path
      *
-     * @param basePath Base path of the URL (e.g http://localhost)
+     * @param basePath Base path of the URL (e.g https://floortv.in)
      * @return An instance of ApiClient
      */
     public ApiClient setBasePath(String basePath) {

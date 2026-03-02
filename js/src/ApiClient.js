@@ -18,7 +18,7 @@ import superagent from "superagent";
 
 /**
 * @module ApiClient
-* @version 1.0.17
+* @version 1.0.18
 */
 
 /**
@@ -34,11 +34,11 @@ class ApiClient {
      * Overrides the default value set in spec file if present
      * @param {String} basePath
      */
-    constructor(basePath = 'http://localhost') {
+    constructor(basePath = 'https://floortv.in') {
         /**
          * The base URL against which to resolve every API call's (relative) path.
          * @type {String}
-         * @default http://localhost
+         * @default https://floortv.in
          */
         this.basePath = basePath.replace(/\/+$/, '');
 
@@ -56,7 +56,7 @@ class ApiClient {
          * @default {}
          */
         this.defaultHeaders = {
-            'User-Agent': 'OpenAPI-Generator/1.0.17/Javascript'
+            'User-Agent': 'OpenAPI-Generator/1.0.18/Javascript'
         };
 
         /**
@@ -597,8 +597,8 @@ class ApiClient {
     hostSettings() {
         return [
             {
-              'url': "",
-              'description': "No description provided",
+              'url': "https://floortv.in",
+              'description': "Testing Env",
             }
       ];
     }

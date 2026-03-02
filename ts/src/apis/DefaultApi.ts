@@ -29,7 +29,6 @@ import type {
   UserDetails,
   ValidateCode400Response,
   ValidateCode412Response,
-  ValidateCodeRequest,
 } from '../models/index';
 import {
     ChangePassword200ResponseFromJSON,
@@ -56,8 +55,6 @@ import {
     ValidateCode400ResponseToJSON,
     ValidateCode412ResponseFromJSON,
     ValidateCode412ResponseToJSON,
-    ValidateCodeRequestFromJSON,
-    ValidateCodeRequestToJSON,
 } from '../models/index';
 
 export interface ChangeEmailRequest {
@@ -66,7 +63,8 @@ export interface ChangeEmailRequest {
 }
 
 export interface ChangeMobileNumberRequest {
-    body: object;
+    newMobileNumber: string;
+    activationCode: string;
 }
 
 export interface ChangePasswordRequest {
@@ -95,9 +93,10 @@ export interface RenameFloorRequest {
 }
 
 export interface ResetPasswordRequest {
+    newPassword: string;
     activationCode: string;
-    emailId?: string;
     mobileNumber?: string;
+    emailId?: string;
     appId?: string;
 }
 
@@ -131,8 +130,11 @@ export interface SignUpRequest {
     appId?: string;
 }
 
-export interface ValidateCodeOperationRequest {
-    validateCodeRequest: ValidateCodeRequest;
+export interface ValidateCodeRequest {
+    userId: string;
+    activationCode: string;
+    mode: string;
+    appId?: string;
 }
 
 /**
@@ -221,18 +223,23 @@ export class DefaultApi extends runtime.BaseAPI {
      * Change Mobile number
      */
     async changeMobileNumberRaw(requestParameters: ChangeMobileNumberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
-        if (requestParameters['body'] == null) {
+        if (requestParameters['newMobileNumber'] == null) {
             throw new runtime.RequiredError(
-                'body',
-                'Required parameter "body" was null or undefined when calling changeMobileNumber().'
+                'newMobileNumber',
+                'Required parameter "newMobileNumber" was null or undefined when calling changeMobileNumber().'
+            );
+        }
+
+        if (requestParameters['activationCode'] == null) {
+            throw new runtime.RequiredError(
+                'activationCode',
+                'Required parameter "activationCode" was null or undefined when calling changeMobileNumber().'
             );
         }
 
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.accessToken) {
             const token = this.configuration.accessToken;
@@ -242,6 +249,28 @@ export class DefaultApi extends runtime.BaseAPI {
                 headerParameters["Authorization"] = `Bearer ${tokenString}`;
             }
         }
+        const consumes: runtime.Consume[] = [
+            { contentType: 'multipart/form-data' },
+        ];
+        // @ts-ignore: canConsumeForm may be unused
+        const canConsumeForm = runtime.canConsumeForm(consumes);
+
+        let formParams: { append(param: string, value: any): any };
+        let useForm = false;
+        if (useForm) {
+            formParams = new FormData();
+        } else {
+            formParams = new URLSearchParams();
+        }
+
+        if (requestParameters['newMobileNumber'] != null) {
+            formParams.append('new_mobile_number', requestParameters['newMobileNumber'] as any);
+        }
+
+        if (requestParameters['activationCode'] != null) {
+            formParams.append('activation_code', requestParameters['activationCode'] as any);
+        }
+
 
         let urlPath = `/auth-service/change/mobile`;
 
@@ -250,7 +279,7 @@ export class DefaultApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters['body'] as any,
+            body: formParams,
         }, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
@@ -571,6 +600,13 @@ export class DefaultApi extends runtime.BaseAPI {
      * Reset Password
      */
     async resetPasswordRaw(requestParameters: ResetPasswordRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ResetPassword200Response>> {
+        if (requestParameters['newPassword'] == null) {
+            throw new runtime.RequiredError(
+                'newPassword',
+                'Required parameter "newPassword" was null or undefined when calling resetPassword().'
+            );
+        }
+
         if (requestParameters['activationCode'] == null) {
             throw new runtime.RequiredError(
                 'activationCode',
@@ -580,23 +616,41 @@ export class DefaultApi extends runtime.BaseAPI {
 
         const queryParameters: any = {};
 
-        if (requestParameters['emailId'] != null) {
-            queryParameters['email_id'] = requestParameters['emailId'];
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const consumes: runtime.Consume[] = [
+            { contentType: 'multipart/form-data' },
+        ];
+        // @ts-ignore: canConsumeForm may be unused
+        const canConsumeForm = runtime.canConsumeForm(consumes);
+
+        let formParams: { append(param: string, value: any): any };
+        let useForm = false;
+        if (useForm) {
+            formParams = new FormData();
+        } else {
+            formParams = new URLSearchParams();
         }
 
         if (requestParameters['mobileNumber'] != null) {
-            queryParameters['mobile_number'] = requestParameters['mobileNumber'];
+            formParams.append('mobile_number', requestParameters['mobileNumber'] as any);
+        }
+
+        if (requestParameters['emailId'] != null) {
+            formParams.append('email_id', requestParameters['emailId'] as any);
+        }
+
+        if (requestParameters['newPassword'] != null) {
+            formParams.append('new_password', requestParameters['newPassword'] as any);
         }
 
         if (requestParameters['activationCode'] != null) {
-            queryParameters['activation_code'] = requestParameters['activationCode'];
+            formParams.append('activation_code', requestParameters['activationCode'] as any);
         }
 
         if (requestParameters['appId'] != null) {
-            queryParameters['app_id'] = requestParameters['appId'];
+            formParams.append('app_id', requestParameters['appId'] as any);
         }
-
-        const headerParameters: runtime.HTTPHeaders = {};
 
 
         let urlPath = `/auth-service/password/reset`;
@@ -606,6 +660,7 @@ export class DefaultApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: formParams,
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ResetPassword200ResponseFromJSON(jsonValue));
@@ -975,19 +1030,31 @@ export class DefaultApi extends runtime.BaseAPI {
      * ## **Validate Activation / Verification Code**  This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**.  Depending on the mode, the API may:  * Activate a newly registered account * Confirm a login attempt * Verify a password change or reset * Validate email or mobile updates * Confirm account deletion or clearing requests  The API verifies the provided `activation_code` against the given `user_id`, `mode`, and application context. If validation succeeds, the requested operation is completed and the API returns the relevant **POD information** and **user profile details** (where applicable).  If validation fails, the operation is **not performed** and an appropriate error response is returned.  ---  ## **Authentication**  This endpoint requires **Bearer Token authentication**.  **Header**  ``` Authorization: Bearer <access_token> ```  ---  ## **Request Body**  ```json {   \"user_id\": \"string\",   \"activation_code\": \"string\",   \"app_id\": \"string\",   \"mode\": \"string\" } ```  ### **Field Descriptions**  * **user_id** – Unique identifier of the user initiating the operation * **activation_code** – One-time verification code sent to the user * **app_id** – Application identifier (optional or context-specific) * **mode** – Operation context for which the verification is being performed  ---  ## **Usage Scenarios (Mode Definitions)**  | Mode | Purpose                                  | | ---- | ---------------------------------------- | | 0    | Email or mobile number change            | | 1    | Password change                          | | 2    | Delete account                           | | 3    | Clear account                            | | 4    | Signup verification (account activation) | | 5    | Login verification                       | | 6    | Forgot password verification             |  ---  ## **Successful Response**  On successful validation:  * The requested operation (based on `mode`) is completed * The API returns:    * **POD information** associated with the user (if applicable)   * **User profile details** (if applicable)  Examples:  * For **signup verification**, the user account is activated * For **login**, access is confirmed * For **password reset**, the user may proceed to set a new password * For **account deletion**, the request is confirmed  ---  ## **Error Response**  The API returns an error response when:  * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated) * Authorization fails or the bearer token is missing or invalid  ⚠️ In all error cases, **no account state change occurs**.  ---  ## **One-Line Summary**  > Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
      * Validation
      */
-    async validateCodeRaw(requestParameters: ValidateCodeOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserDetails>> {
-        if (requestParameters['validateCodeRequest'] == null) {
+    async validateCodeRaw(requestParameters: ValidateCodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserDetails>> {
+        if (requestParameters['userId'] == null) {
             throw new runtime.RequiredError(
-                'validateCodeRequest',
-                'Required parameter "validateCodeRequest" was null or undefined when calling validateCode().'
+                'userId',
+                'Required parameter "userId" was null or undefined when calling validateCode().'
+            );
+        }
+
+        if (requestParameters['activationCode'] == null) {
+            throw new runtime.RequiredError(
+                'activationCode',
+                'Required parameter "activationCode" was null or undefined when calling validateCode().'
+            );
+        }
+
+        if (requestParameters['mode'] == null) {
+            throw new runtime.RequiredError(
+                'mode',
+                'Required parameter "mode" was null or undefined when calling validateCode().'
             );
         }
 
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.accessToken) {
             const token = this.configuration.accessToken;
@@ -997,6 +1064,36 @@ export class DefaultApi extends runtime.BaseAPI {
                 headerParameters["Authorization"] = `Bearer ${tokenString}`;
             }
         }
+        const consumes: runtime.Consume[] = [
+            { contentType: 'multipart/form-data' },
+        ];
+        // @ts-ignore: canConsumeForm may be unused
+        const canConsumeForm = runtime.canConsumeForm(consumes);
+
+        let formParams: { append(param: string, value: any): any };
+        let useForm = false;
+        if (useForm) {
+            formParams = new FormData();
+        } else {
+            formParams = new URLSearchParams();
+        }
+
+        if (requestParameters['userId'] != null) {
+            formParams.append('user_id', requestParameters['userId'] as any);
+        }
+
+        if (requestParameters['activationCode'] != null) {
+            formParams.append('activation_code', requestParameters['activationCode'] as any);
+        }
+
+        if (requestParameters['mode'] != null) {
+            formParams.append('mode', requestParameters['mode'] as any);
+        }
+
+        if (requestParameters['appId'] != null) {
+            formParams.append('app_id', requestParameters['appId'] as any);
+        }
+
 
         let urlPath = `/auth-service/validate/activation/code`;
 
@@ -1005,7 +1102,7 @@ export class DefaultApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: ValidateCodeRequestToJSON(requestParameters['validateCodeRequest']),
+            body: formParams,
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserDetailsFromJSON(jsonValue));
@@ -1015,7 +1112,7 @@ export class DefaultApi extends runtime.BaseAPI {
      * ## **Validate Activation / Verification Code**  This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**.  Depending on the mode, the API may:  * Activate a newly registered account * Confirm a login attempt * Verify a password change or reset * Validate email or mobile updates * Confirm account deletion or clearing requests  The API verifies the provided `activation_code` against the given `user_id`, `mode`, and application context. If validation succeeds, the requested operation is completed and the API returns the relevant **POD information** and **user profile details** (where applicable).  If validation fails, the operation is **not performed** and an appropriate error response is returned.  ---  ## **Authentication**  This endpoint requires **Bearer Token authentication**.  **Header**  ``` Authorization: Bearer <access_token> ```  ---  ## **Request Body**  ```json {   \"user_id\": \"string\",   \"activation_code\": \"string\",   \"app_id\": \"string\",   \"mode\": \"string\" } ```  ### **Field Descriptions**  * **user_id** – Unique identifier of the user initiating the operation * **activation_code** – One-time verification code sent to the user * **app_id** – Application identifier (optional or context-specific) * **mode** – Operation context for which the verification is being performed  ---  ## **Usage Scenarios (Mode Definitions)**  | Mode | Purpose                                  | | ---- | ---------------------------------------- | | 0    | Email or mobile number change            | | 1    | Password change                          | | 2    | Delete account                           | | 3    | Clear account                            | | 4    | Signup verification (account activation) | | 5    | Login verification                       | | 6    | Forgot password verification             |  ---  ## **Successful Response**  On successful validation:  * The requested operation (based on `mode`) is completed * The API returns:    * **POD information** associated with the user (if applicable)   * **User profile details** (if applicable)  Examples:  * For **signup verification**, the user account is activated * For **login**, access is confirmed * For **password reset**, the user may proceed to set a new password * For **account deletion**, the request is confirmed  ---  ## **Error Response**  The API returns an error response when:  * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated) * Authorization fails or the bearer token is missing or invalid  ⚠️ In all error cases, **no account state change occurs**.  ---  ## **One-Line Summary**  > Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
      * Validation
      */
-    async validateCode(requestParameters: ValidateCodeOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserDetails> {
+    async validateCode(requestParameters: ValidateCodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserDetails> {
         const response = await this.validateCodeRaw(requestParameters, initOverrides);
         return await response.value();
     }

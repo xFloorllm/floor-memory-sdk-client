@@ -27,12 +27,11 @@ import SignUp200Response from '../model/SignUp200Response';
 import UserDetails from '../model/UserDetails';
 import ValidateCode400Response from '../model/ValidateCode400Response';
 import ValidateCode412Response from '../model/ValidateCode412Response';
-import ValidateCodeRequest from '../model/ValidateCodeRequest';
 
 /**
 * Default service.
 * @module api/DefaultApi
-* @version 1.0.17
+* @version 1.0.18
 */
 export default class DefaultApi {
 
@@ -108,15 +107,20 @@ export default class DefaultApi {
     /**
      * Change Mobile number
      * Updates the mobile number associated with an existing user account after validating a one-time activation code sent to the **new mobile number**.  This operation can only be performed by a **logged-in user**. When a user initiates a mobile number change, an activation code is sent to the newly provided mobile number. The mobile number update takes effect only after the activation code is successfully validated.  If the activation code validation fails, the mobile number remains unchanged.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  ``` Authorization: Bearer <access_token> ```  ---  ### **Request Body**  ```json {   \"user_id\": \"string\",   \"new_mobile_number\": \"string\",   \"activation_code\": \"string\" } ```  **Field Description**  * `user_id` – Unique identifier of the logged-in user * `new_mobile_number` – New mobile number to be associated with the account * `activation_code` – One-time activation code sent to the new mobile number for verification  ---  ### **Flow Summary**  1. User is authenticated and logged in 2. User requests to change mobile number 3. System sends an activation code to the **new mobile number** 4. User submits the activation code via this API 5. On successful validation, the mobile number is updated  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user’s mobile number is updated immediately * A `success` string is returned confirming the mobile number change  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the user or mobile number * The new mobile number is already in use * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing mobile number remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to `/auth-service/send/validation/code` with the proper mode. ---  ### **Security Notes (Recommended)**  * Activation codes are single-use and time-bound * Mobile number changes require prior authentication * Rate limiting may be applied to prevent abuse  ---  ### **One-Line Summary**  > Changes a user’s mobile number after validating an activation code sent to the new mobile number.
-     * @param {Object.<String, Object>} body 
+     * @param {String} newMobileNumber New mobile number
+     * @param {String} activationCode Activation code
      * @param {module:api/DefaultApi~changeMobileNumberCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Object}
      */
-    changeMobileNumber(body, callback) {
-      let postBody = body;
-      // verify the required parameter 'body' is set
-      if (body === undefined || body === null) {
-        throw new Error("Missing the required parameter 'body' when calling changeMobileNumber");
+    changeMobileNumber(newMobileNumber, activationCode, callback) {
+      let postBody = null;
+      // verify the required parameter 'newMobileNumber' is set
+      if (newMobileNumber === undefined || newMobileNumber === null) {
+        throw new Error("Missing the required parameter 'newMobileNumber' when calling changeMobileNumber");
+      }
+      // verify the required parameter 'activationCode' is set
+      if (activationCode === undefined || activationCode === null) {
+        throw new Error("Missing the required parameter 'activationCode' when calling changeMobileNumber");
       }
 
       let pathParams = {
@@ -126,10 +130,12 @@ export default class DefaultApi {
       let headerParams = {
       };
       let formParams = {
+        'new_mobile_number': newMobileNumber,
+        'activation_code': activationCode
       };
 
       let authNames = ['bearer'];
-      let contentTypes = ['application/json'];
+      let contentTypes = ['multipart/form-data'];
       let accepts = ['application/json'];
       let returnType = Object;
       return this.apiClient.callApi(
@@ -374,17 +380,22 @@ export default class DefaultApi {
     /**
      * Reset Password
      * ---  ## Reset Password (Forgot Password, Not Logged In)  Resets the password of a user who **cannot log in** and is using a **forgot-password** flow.  This endpoint is used when the user is not authenticated and requests a password reset using a verified identity channel such as **email** or **mobile number**. The system validates a **one-time reset verification code** (`activation_code`) issued for the reset-password flow. If valid and not expired, the password is updated to `new_password` and takes effect immediately.  If verification fails, the password remains unchanged and an error response is returned.  ### Authentication  ✅ **Recommended** (better security): a short-lived **reset token** issued after initiating reset  ``` Authorization: Bearer <reset_token> ```  > If you don’t use a reset token, you must enforce strong rate limiting + OTP attempt throttling on this endpoint.  ### Request Body (Form Data)  * `email_id` or `mobile_number` (required to identify user) * `activation_code` (required) * `new_password` (required) * `user_id` (optional, if your reset flow already resolved it)  ### Behavior Notes  * Requires a prior call to **initiate reset** and send OTP/code (mode = forgot password). * Must enforce code attempt limits and expiration strictly.  ### One-Line Summary  > Resets a user’s password (forgot-password flow) after validating a one-time reset code sent to email or mobile.   
-     * @param {String} activationCode Activation Code
+     * @param {String} newPassword 
+     * @param {String} activationCode 
      * @param {Object} opts Optional parameters
-     * @param {String} [emailId] Email ID
-     * @param {String} [mobileNumber] Mobile number
-     * @param {String} [appId] App ID
+     * @param {String} [mobileNumber] 
+     * @param {String} [emailId] 
+     * @param {String} [appId] 
      * @param {module:api/DefaultApi~resetPasswordCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/ResetPassword200Response}
      */
-    resetPassword(activationCode, opts, callback) {
+    resetPassword(newPassword, activationCode, opts, callback) {
       opts = opts || {};
       let postBody = null;
+      // verify the required parameter 'newPassword' is set
+      if (newPassword === undefined || newPassword === null) {
+        throw new Error("Missing the required parameter 'newPassword' when calling resetPassword");
+      }
       // verify the required parameter 'activationCode' is set
       if (activationCode === undefined || activationCode === null) {
         throw new Error("Missing the required parameter 'activationCode' when calling resetPassword");
@@ -393,18 +404,19 @@ export default class DefaultApi {
       let pathParams = {
       };
       let queryParams = {
-        'email_id': opts['emailId'],
-        'mobile_number': opts['mobileNumber'],
-        'activation_code': activationCode,
-        'app_id': opts['appId']
       };
       let headerParams = {
       };
       let formParams = {
+        'mobile_number': opts['mobileNumber'],
+        'email_id': opts['emailId'],
+        'new_password': newPassword,
+        'activation_code': activationCode,
+        'app_id': opts['appId']
       };
 
       let authNames = [];
-      let contentTypes = [];
+      let contentTypes = ['multipart/form-data'];
       let accepts = ['application/json'];
       let returnType = ResetPassword200Response;
       return this.apiClient.callApi(
@@ -653,15 +665,28 @@ export default class DefaultApi {
     /**
      * Validation
      * ## **Validate Activation / Verification Code**  This API **validates a one-time verification code** submitted by a user and **executes the corresponding account operation** based on the specified **mode**.  Depending on the mode, the API may:  * Activate a newly registered account * Confirm a login attempt * Verify a password change or reset * Validate email or mobile updates * Confirm account deletion or clearing requests  The API verifies the provided `activation_code` against the given `user_id`, `mode`, and application context. If validation succeeds, the requested operation is completed and the API returns the relevant **POD information** and **user profile details** (where applicable).  If validation fails, the operation is **not performed** and an appropriate error response is returned.  ---  ## **Authentication**  This endpoint requires **Bearer Token authentication**.  **Header**  ``` Authorization: Bearer <access_token> ```  ---  ## **Request Body**  ```json {   \"user_id\": \"string\",   \"activation_code\": \"string\",   \"app_id\": \"string\",   \"mode\": \"string\" } ```  ### **Field Descriptions**  * **user_id** – Unique identifier of the user initiating the operation * **activation_code** – One-time verification code sent to the user * **app_id** – Application identifier (optional or context-specific) * **mode** – Operation context for which the verification is being performed  ---  ## **Usage Scenarios (Mode Definitions)**  | Mode | Purpose                                  | | ---- | ---------------------------------------- | | 0    | Email or mobile number change            | | 1    | Password change                          | | 2    | Delete account                           | | 3    | Clear account                            | | 4    | Signup verification (account activation) | | 5    | Login verification                       | | 6    | Forgot password verification             |  ---  ## **Successful Response**  On successful validation:  * The requested operation (based on `mode`) is completed * The API returns:    * **POD information** associated with the user (if applicable)   * **User profile details** (if applicable)  Examples:  * For **signup verification**, the user account is activated * For **login**, access is confirmed * For **password reset**, the user may proceed to set a new password * For **account deletion**, the request is confirmed  ---  ## **Error Response**  The API returns an error response when:  * The activation code is invalid or expired * The activation code does not match the user or operation mode * The requested operation is already completed (e.g., user already activated) * Authorization fails or the bearer token is missing or invalid  ⚠️ In all error cases, **no account state change occurs**.  ---  ## **One-Line Summary**  > Validates a one-time verification code and securely completes the requested user account operation (signup, login, password change, or account actions), returning POD and profile details on success.
-     * @param {module:model/ValidateCodeRequest} validateCodeRequest 
+     * @param {String} userId 
+     * @param {String} activationCode 
+     * @param {String} mode 
+     * @param {Object} opts Optional parameters
+     * @param {String} [appId] 
      * @param {module:api/DefaultApi~validateCodeCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/UserDetails}
      */
-    validateCode(validateCodeRequest, callback) {
-      let postBody = validateCodeRequest;
-      // verify the required parameter 'validateCodeRequest' is set
-      if (validateCodeRequest === undefined || validateCodeRequest === null) {
-        throw new Error("Missing the required parameter 'validateCodeRequest' when calling validateCode");
+    validateCode(userId, activationCode, mode, opts, callback) {
+      opts = opts || {};
+      let postBody = null;
+      // verify the required parameter 'userId' is set
+      if (userId === undefined || userId === null) {
+        throw new Error("Missing the required parameter 'userId' when calling validateCode");
+      }
+      // verify the required parameter 'activationCode' is set
+      if (activationCode === undefined || activationCode === null) {
+        throw new Error("Missing the required parameter 'activationCode' when calling validateCode");
+      }
+      // verify the required parameter 'mode' is set
+      if (mode === undefined || mode === null) {
+        throw new Error("Missing the required parameter 'mode' when calling validateCode");
       }
 
       let pathParams = {
@@ -671,10 +696,14 @@ export default class DefaultApi {
       let headerParams = {
       };
       let formParams = {
+        'user_id': userId,
+        'activation_code': activationCode,
+        'mode': mode,
+        'app_id': opts['appId']
       };
 
       let authNames = ['bearer'];
-      let contentTypes = ['application/json'];
+      let contentTypes = ['multipart/form-data'];
       let accepts = ['application/json'];
       let returnType = UserDetails;
       return this.apiClient.callApi(
