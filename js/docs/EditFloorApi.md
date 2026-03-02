@@ -1,6 +1,6 @@
 # XfloorFloorMemorySdkJs.EditFloorApi
 
-All URIs are relative to *https://appfloor.in*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

@@ -1,6 +1,6 @@
 # xfloor_memory_sdk.EventApi
 
-All URIs are relative to *https://appfloor.in*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -199,10 +199,10 @@ from xfloor_memory_sdk.models.event_response import EventResponse
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://appfloor.in
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters

@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The QueryResponseItemsInner model module.
  * @module model/QueryResponseItemsInner
- * @version 1.0.16
+ * @version 1.0.17
  */
 class QueryResponseItemsInner {
     /**

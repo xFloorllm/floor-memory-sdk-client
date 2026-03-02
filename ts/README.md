@@ -1,5 +1,5 @@
-# @xfloor/floor-memory-sdk-ts@1.0.16
-A TypeScript SDK client for the appfloor.in API.
+# @xfloor/floor-memory-sdk-ts@1.0.17
+A TypeScript SDK client for the localhost API.
 
 ### Usage
 
@@ -17,21 +17,25 @@ import {
   Configuration,
   DefaultApi,
 } from '@xfloor/floor-memory-sdk-ts';
-import type { ApiDeveloperCreateAppPostRequest } from '@xfloor/floor-memory-sdk-ts';
+import type { ChangeEmailRequest } from '@xfloor/floor-memory-sdk-ts';
 
 async function example() {
   console.log("🚀 Testing @xfloor/floor-memory-sdk-ts SDK...");
-  const api = new DefaultApi();
+  const config = new Configuration({ 
+    // Configure HTTP bearer authorization: bearer
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DefaultApi(config);
 
   const body = {
-    // string
-    inputInfo: inputInfo_example,
-    // Blob (optional)
-    icon: BINARY_DATA_HERE,
-  } satisfies ApiDeveloperCreateAppPostRequest;
+    // string | New Email ID
+    newEmailId: newEmailId_example,
+    // string | Validation code
+    activationCode: activationCode_example,
+  } satisfies ChangeEmailRequest;
 
   try {
-    const data = await api.apiDeveloperCreateAppPost(body);
+    const data = await api.changeEmail(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -47,7 +51,7 @@ example().catch(console.error);
 
 ### API Endpoints
 
-All URIs are relative to *https://appfloor.in*
+All URIs are relative to *http://localhost*
 
 | Class | Method | HTTP request |
 
@@ -55,16 +59,6 @@ Description
 | ----- | ------ | ------------ |
 
 -------------
-*DefaultApi*
-
-| [**apiDeveloperCreateAppPost**](docs/DefaultApi.md#apidevelopercreateapppost) | **POST** /api/developer/create/app |
-
-Create App
-*DefaultApi*
-
-| [**apiDeveloperModifyAppPost**](docs/DefaultApi.md#apidevelopermodifyapppost) | **POST** /api/developer/modify/app |
-
-Modify Floorpod App
 *DefaultApi*
 
 | [**changeEmail**](docs/DefaultApi.md#changeemail) | **POST** /auth-service/change/email |
@@ -82,16 +76,6 @@ Change Mobile number
 Change Password
 *DefaultApi*
 
-| [**conversationThreads**](docs/DefaultApi.md#conversationthreads) | **GET** /agent/memory/threads |
-
-Get the conversational threads
-*DefaultApi*
-
-| [**getConversations**](docs/DefaultApi.md#getconversations) | **GET** /agent/memory/conversations |
-
-Conversations
-*DefaultApi*
-
 | [**makeFloorPrivate**](docs/DefaultApi.md#makefloorprivate) | **POST** /api/memory/make/floor/private/{floor_id} |
 
 Make floor Private
@@ -102,11 +86,6 @@ Make floor Private
 Make floor public
 *DefaultApi*
 
-| [**registerExternalUserIdentity**](docs/DefaultApi.md#registerexternaluseridentity) | **POST** /memory/identity/external-user |
-
-External User Registration
-*DefaultApi*
-
 | [**renameFloor**](docs/DefaultApi.md#renamefloor) | **POST** /api/memory/change/floor/id |
 
 Rename floor
@@ -115,11 +94,6 @@ Rename floor
 | [**resetPassword**](docs/DefaultApi.md#resetpassword) | **POST** /auth-service/password/reset |
 
 Reset Password
-*DefaultApi*
-
-| [**sendSignInValidationCode**](docs/DefaultApi.md#sendsigninvalidationcode) | **POST** /auth-service/send/sign/in/validation/code |
-
-Send Sign-In Validation Code (OTP)
 *DefaultApi*
 
 | [**sendValidationCode**](docs/DefaultApi.md#sendvalidationcode) | **POST** /auth-service/send/validation/code |
@@ -176,25 +150,12 @@ Query (Primary API)
 
 - [BlockDetails](docs/BlockDetails.md)
 - [ChangePassword200Response](docs/ChangePassword200Response.md)
-- [ConversationThreads200Response](docs/ConversationThreads200Response.md)
-- [ConversationThreads200ResponseThreadsInner](docs/ConversationThreads200ResponseThreadsInner.md)
 - [EditFloor400Response](docs/EditFloor400Response.md)
 - [EditFloor400ResponseError](docs/EditFloor400ResponseError.md)
 - [Event400Response](docs/Event400Response.md)
 - [Event400ResponseError](docs/Event400ResponseError.md)
 - [EventResponse](docs/EventResponse.md)
 - [FloorInfo](docs/FloorInfo.md)
-- [GetConversations200Response](docs/GetConversations200Response.md)
-- [GetConversations200ResponseConversationInner](docs/GetConversations200ResponseConversationInner.md)
-- [GetConversations200ResponseConversationInnerAssistant](docs/GetConversations200ResponseConversationInnerAssistant.md)
-- [GetConversations200ResponseConversationInnerAssistantChoicesInner](docs/GetConversations200ResponseConversationInnerAssistantChoicesInner.md)
-- [GetConversations200ResponseConversationInnerAssistantChoicesInnerAiModelDetails](docs/GetConversations200ResponseConversationInnerAssistantChoicesInnerAiModelDetails.md)
-- [GetConversations200ResponseConversationInnerAssistantChoicesInnerMessage](docs/GetConversations200ResponseConversationInnerAssistantChoicesInnerMessage.md)
-- [GetConversations200ResponseConversationInnerAssistantChoicesInnerPromptDetails](docs/GetConversations200ResponseConversationInnerAssistantChoicesInnerPromptDetails.md)
-- [GetConversations200ResponseConversationInnerAssistantFetchMultiplePosts](docs/GetConversations200ResponseConversationInnerAssistantFetchMultiplePosts.md)
-- [GetConversations200ResponseConversationInnerAssistantFetchMultiplePostsResultsInner](docs/GetConversations200ResponseConversationInnerAssistantFetchMultiplePostsResultsInner.md)
-- [GetConversations200ResponseConversationInnerUser](docs/GetConversations200ResponseConversationInnerUser.md)
-- [GetConversations200ResponseConversationInnerUserContext](docs/GetConversations200ResponseConversationInnerUserContext.md)
 - [GetFloorInformation200Response](docs/GetFloorInformation200Response.md)
 - [GetRecentEvents200Response](docs/GetRecentEvents200Response.md)
 - [GetRecentEvents200ResponseItemsInner](docs/GetRecentEvents200ResponseItemsInner.md)
@@ -203,7 +164,6 @@ Query (Primary API)
 - [GetRecentEvents400ResponseError](docs/GetRecentEvents400ResponseError.md)
 - [Media](docs/Media.md)
 - [Model400ErrorCode](docs/Model400ErrorCode.md)
-- [PostAdd](docs/PostAdd.md)
 - [Query422Response](docs/Query422Response.md)
 - [Query422ResponseError](docs/Query422ResponseError.md)
 - [QueryRequest](docs/QueryRequest.md)
@@ -212,7 +172,6 @@ Query (Primary API)
 - [QueryResponseItemsInner](docs/QueryResponseItemsInner.md)
 - [ResetPassword200Response](docs/ResetPassword200Response.md)
 - [ResetPassword400Response](docs/ResetPassword400Response.md)
-- [SendSignInValidationCode200Response](docs/SendSignInValidationCode200Response.md)
 - [SendValidationCode200Response](docs/SendValidationCode200Response.md)
 - [SignInWithEmail200Response](docs/SignInWithEmail200Response.md)
 - [SignInWithEmail200ResponsePodInfo](docs/SignInWithEmail200ResponsePodInfo.md)
@@ -220,7 +179,6 @@ Query (Primary API)
 - [SignInWithEmail200ResponseProfileAvatar](docs/SignInWithEmail200ResponseProfileAvatar.md)
 - [SignUp200Response](docs/SignUp200Response.md)
 - [SignUpResponse](docs/SignUpResponse.md)
-- [Threads](docs/Threads.md)
 - [UserDetails](docs/UserDetails.md)
 - [ValidateCode400Response](docs/ValidateCode400Response.md)
 - [ValidateCode400ResponseError](docs/ValidateCode400ResponseError.md)
@@ -244,7 +202,7 @@ and is automatically generated by the
 [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `1.0.0`
-- Package version: `1.0.16`
+- Package version: `1.0.17`
 - Generator version: `7.18.0`
 - Build package: `org.openapitools.codegen.languages.TypeScriptFetchClientCodegen`
 

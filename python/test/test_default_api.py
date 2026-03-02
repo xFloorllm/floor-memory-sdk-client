@@ -27,20 +27,6 @@ class TestDefaultApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_api_developer_create_app_post(self) -> None:
-        """Test case for api_developer_create_app_post
-
-        Create App
-        """
-        pass
-
-    def test_api_developer_modify_app_post(self) -> None:
-        """Test case for api_developer_modify_app_post
-
-        Modify Floorpod App
-        """
-        pass
-
     def test_change_email(self) -> None:
         """Test case for change_email
 
@@ -62,20 +48,6 @@ class TestDefaultApi(unittest.TestCase):
         """
         pass
 
-    def test_conversation_threads(self) -> None:
-        """Test case for conversation_threads
-
-        Get the conversational threads
-        """
-        pass
-
-    def test_get_conversations(self) -> None:
-        """Test case for get_conversations
-
-        Conversations
-        """
-        pass
-
     def test_make_floor_private(self) -> None:
         """Test case for make_floor_private
 
@@ -90,13 +62,6 @@ class TestDefaultApi(unittest.TestCase):
         """
         pass
 
-    def test_register_external_user_identity(self) -> None:
-        """Test case for register_external_user_identity
-
-        External User Registration
-        """
-        pass
-
     def test_rename_floor(self) -> None:
         """Test case for rename_floor
 
@@ -108,13 +73,6 @@ class TestDefaultApi(unittest.TestCase):
         """Test case for reset_password
 
         Reset Password
-        """
-        pass
-
-    def test_send_sign_in_validation_code(self) -> None:
-        """Test case for send_sign_in_validation_code
-
-        Send Sign-In Validation Code (OTP)
         """
         pass
 

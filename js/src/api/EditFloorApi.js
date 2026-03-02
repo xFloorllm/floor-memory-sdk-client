@@ -21,7 +21,7 @@ import GetFloorInformation200Response from '../model/GetFloorInformation200Respo
 /**
 * EditFloor service.
 * @module api/EditFloorApi
-* @version 1.0.16
+* @version 1.0.17
 */
 export default class EditFloorApi {
 
