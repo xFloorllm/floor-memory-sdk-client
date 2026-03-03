@@ -1,6 +1,6 @@
 # EditFloorApi
 
-All URIs are relative to *https://floortv.in*
+All URIs are relative to *https://appfloor.in*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
@@ -117,7 +117,7 @@ import ai.xfloor.memory.api.EditFloorApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://floortv.in");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");

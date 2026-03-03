@@ -16,6 +16,18 @@ Notes
 
 | **String** |
 |
+**isOwner**
+
+| **String** |
+|
+
+[optional]
+**appId**
+
+| **String** |
+|
+
+[optional]
 **title**
 
 | **String** |
@@ -26,7 +38,7 @@ Notes
 |
 
 [optional]
-**fid**
+**floorUid**
 
 | **String** |
 |

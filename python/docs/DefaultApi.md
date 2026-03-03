@@ -1,6 +1,6 @@
 # xfloor_memory_sdk.DefaultApi
 
-All URIs are relative to *https://floortv.in*
+All URIs are relative to *https://appfloor.in*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 
 # **change_email**
-> object change_email(new_email_id, activation_code)
+> SignInWithEmail200Response change_email(new_email_id, activation_code)
 
 Change email ID
 
@@ -121,13 +121,14 @@ Notes (Recommended)**
 
 ```python
 import xfloor_memory_sdk
+from xfloor_memory_sdk.models.sign_in_with_email200_response import SignInWithEmail200Response
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://floortv.in
+# Defining the host is optional and defaults to https://appfloor.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://floortv.in"
+    host = "https://appfloor.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -180,7 +181,7 @@ Notes
 
 ### Return type
 
-**object**
+[**SignInWithEmail200Response**](SignInWithEmail200Response.md)
 
 ### Authorization
 
@@ -205,7 +206,7 @@ Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **change_mobile_number**
-> object change_mobile_number(new_mobile_number, activation_code)
+> SignInWithEmail200Response change_mobile_number(new_mobile_number, activation_code)
 
 Change Mobile number
 
@@ -304,13 +305,14 @@ Notes (Recommended)**
 
 ```python
 import xfloor_memory_sdk
+from xfloor_memory_sdk.models.sign_in_with_email200_response import SignInWithEmail200Response
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://floortv.in
+# Defining the host is optional and defaults to https://appfloor.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://floortv.in"
+    host = "https://appfloor.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -363,7 +365,7 @@ Notes
 
 ### Return type
 
-**object**
+[**SignInWithEmail200Response**](SignInWithEmail200Response.md)
 
 ### Authorization
 
@@ -440,10 +442,10 @@ from xfloor_memory_sdk.models.change_password200_response import ChangePassword2
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://floortv.in
+# Defining the host is optional and defaults to https://appfloor.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://floortv.in"
+    host = "https://appfloor.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -683,10 +685,10 @@ from xfloor_memory_sdk.models.get_floor_information200_response import GetFloorI
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://floortv.in
+# Defining the host is optional and defaults to https://appfloor.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://floortv.in"
+    host = "https://appfloor.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -932,10 +934,10 @@ from xfloor_memory_sdk.models.get_floor_information200_response import GetFloorI
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://floortv.in
+# Defining the host is optional and defaults to https://appfloor.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://floortv.in"
+    host = "https://appfloor.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1184,10 +1186,10 @@ from xfloor_memory_sdk.models.get_floor_information200_response import GetFloorI
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://floortv.in
+# Defining the host is optional and defaults to https://appfloor.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://floortv.in"
+    host = "https://appfloor.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1329,10 +1331,10 @@ from xfloor_memory_sdk.models.reset_password200_response import ResetPassword200
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://floortv.in
+# Defining the host is optional and defaults to https://appfloor.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://floortv.in"
+    host = "https://appfloor.in"
 )
 
 
@@ -1522,10 +1524,10 @@ from xfloor_memory_sdk.models.send_validation_code200_response import SendValida
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://floortv.in
+# Defining the host is optional and defaults to https://appfloor.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://floortv.in"
+    host = "https://appfloor.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1709,10 +1711,10 @@ from xfloor_memory_sdk.models.sign_in_with_email200_response import SignInWithEm
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://floortv.in
+# Defining the host is optional and defaults to https://appfloor.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://floortv.in"
+    host = "https://appfloor.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1878,10 +1880,10 @@ from xfloor_memory_sdk.models.sign_in_with_email200_response import SignInWithEm
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://floortv.in
+# Defining the host is optional and defaults to https://appfloor.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://floortv.in"
+    host = "https://appfloor.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2004,10 +2006,10 @@ from xfloor_memory_sdk.models.sign_up200_response import SignUp200Response
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://floortv.in
+# Defining the host is optional and defaults to https://appfloor.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://floortv.in"
+    host = "https://appfloor.in"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2220,10 +2222,10 @@ from xfloor_memory_sdk.models.user_details import UserDetails
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://floortv.in
+# Defining the host is optional and defaults to https://appfloor.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://floortv.in"
+    host = "https://appfloor.in"
 )
 
 # The client must configure the authentication and authorization parameters

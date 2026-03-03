@@ -37,9 +37,11 @@ class TestSignInWithEmail200ResponsePodInfo(unittest.TestCase):
         if include_optional:
             return SignInWithEmail200ResponsePodInfo(
                 floor_id = '',
+                is_owner = '',
+                app_id = '',
                 title = '',
                 details = '',
-                fid = '',
+                floor_uid = '',
                 blocks = [
                     xfloor_memory_sdk.models.block_details.BlockDetails(
                         block_id = '', 
@@ -54,7 +56,7 @@ class TestSignInWithEmail200ResponsePodInfo(unittest.TestCase):
             return SignInWithEmail200ResponsePodInfo(
                 floor_id = '',
                 title = '',
-                fid = '',
+                floor_uid = '',
                 blocks = [
                     xfloor_memory_sdk.models.block_details.BlockDetails(
                         block_id = '', 

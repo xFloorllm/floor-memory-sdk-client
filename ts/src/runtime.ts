@@ -15,7 +15,7 @@
  */
 
 
-export const BASE_PATH = "https://floortv.in".replace(/\/+$/, "");
+export const BASE_PATH = "https://appfloor.in".replace(/\/+$/, "");
 
 export interface ConfigurationParameters {
     basePath?: string; // override base path

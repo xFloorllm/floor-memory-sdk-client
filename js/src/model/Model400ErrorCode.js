@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The Model400ErrorCode model module.
  * @module model/Model400ErrorCode
- * @version 1.0.18
+ * @version 1.0.19
  */
 class Model400ErrorCode {
     /**

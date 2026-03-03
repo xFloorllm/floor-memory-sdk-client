@@ -14,13 +14,13 @@
  */
 
 import ApiClient from '../ApiClient';
-import BlockDetails from './BlockDetails';
+import Remaining from './Remaining';
 import SignInWithEmail200ResponseProfileAvatar from './SignInWithEmail200ResponseProfileAvatar';
 
 /**
  * The SignInWithEmail200ResponseProfile model module.
  * @module model/SignInWithEmail200ResponseProfile
- * @version 1.0.18
+ * @version 1.0.19
  */
 class SignInWithEmail200ResponseProfile {
     /**
@@ -28,12 +28,12 @@ class SignInWithEmail200ResponseProfile {
      * User profile details
      * @alias module:model/SignInWithEmail200ResponseProfile
      * @param floorId {String} Associated floor ID
-     * @param fid {String} Unique ID of floor
+     * @param FID {String} Unique ID of floor
      * @param userId {String} Unique User ID
      */
-    constructor(floorId, fid, userId) { 
+    constructor(floorId, FID, userId) { 
         
-        SignInWithEmail200ResponseProfile.initialize(this, floorId, fid, userId);
+        SignInWithEmail200ResponseProfile.initialize(this, floorId, FID, userId);
     }
 
     /**
@@ -41,9 +41,9 @@ class SignInWithEmail200ResponseProfile {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, floorId, fid, userId) { 
+    static initialize(obj, floorId, FID, userId) { 
         obj['floor_id'] = floorId;
-        obj['fid'] = fid;
+        obj['FID'] = FID;
         obj['user_id'] = userId;
     }
 
@@ -61,11 +61,14 @@ class SignInWithEmail200ResponseProfile {
             if (data.hasOwnProperty('floor_id')) {
                 obj['floor_id'] = ApiClient.convertToType(data['floor_id'], 'String');
             }
-            if (data.hasOwnProperty('fid')) {
-                obj['fid'] = ApiClient.convertToType(data['fid'], 'String');
+            if (data.hasOwnProperty('floors')) {
+                obj['floors'] = Remaining.constructFromObject(data['floors']);
             }
             if (data.hasOwnProperty('blocks')) {
-                obj['blocks'] = ApiClient.convertToType(data['blocks'], [BlockDetails]);
+                obj['blocks'] = Remaining.constructFromObject(data['blocks']);
+            }
+            if (data.hasOwnProperty('FID')) {
+                obj['FID'] = ApiClient.convertToType(data['FID'], 'String');
             }
             if (data.hasOwnProperty('name')) {
                 obj['name'] = ApiClient.convertToType(data['name'], 'String');
@@ -102,19 +105,17 @@ class SignInWithEmail200ResponseProfile {
         if (data['floor_id'] && !(typeof data['floor_id'] === 'string' || data['floor_id'] instanceof String)) {
             throw new Error("Expected the field `floor_id` to be a primitive type in the JSON string but got " + data['floor_id']);
         }
-        // ensure the json data is a string
-        if (data['fid'] && !(typeof data['fid'] === 'string' || data['fid'] instanceof String)) {
-            throw new Error("Expected the field `fid` to be a primitive type in the JSON string but got " + data['fid']);
+        // validate the optional field `floors`
+        if (data['floors']) { // data not null
+          Remaining.validateJSON(data['floors']);
         }
+        // validate the optional field `blocks`
         if (data['blocks']) { // data not null
-            // ensure the json data is an array
-            if (!Array.isArray(data['blocks'])) {
-                throw new Error("Expected the field `blocks` to be an array in the JSON data but got " + data['blocks']);
-            }
-            // validate the optional field `blocks` (array)
-            for (const item of data['blocks']) {
-                BlockDetails.validateJSON(item);
-            };
+          Remaining.validateJSON(data['blocks']);
+        }
+        // ensure the json data is a string
+        if (data['FID'] && !(typeof data['FID'] === 'string' || data['FID'] instanceof String)) {
+            throw new Error("Expected the field `FID` to be a primitive type in the JSON string but got " + data['FID']);
         }
         // ensure the json data is a string
         if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
@@ -143,7 +144,7 @@ class SignInWithEmail200ResponseProfile {
 
 }
 
-SignInWithEmail200ResponseProfile.RequiredProperties = ["floor_id", "fid", "user_id"];
+SignInWithEmail200ResponseProfile.RequiredProperties = ["floor_id", "FID", "user_id"];
 
 /**
  * Associated floor ID
@@ -152,16 +153,20 @@ SignInWithEmail200ResponseProfile.RequiredProperties = ["floor_id", "fid", "user
 SignInWithEmail200ResponseProfile.prototype['floor_id'] = undefined;
 
 /**
- * Unique ID of floor
- * @member {String} fid
+ * @member {module:model/Remaining} floors
  */
-SignInWithEmail200ResponseProfile.prototype['fid'] = undefined;
+SignInWithEmail200ResponseProfile.prototype['floors'] = undefined;
 
 /**
- * List of Blocks
- * @member {Array.<module:model/BlockDetails>} blocks
+ * @member {module:model/Remaining} blocks
  */
 SignInWithEmail200ResponseProfile.prototype['blocks'] = undefined;
+
+/**
+ * Unique ID of floor
+ * @member {String} FID
+ */
+SignInWithEmail200ResponseProfile.prototype['FID'] = undefined;
 
 /**
  * User Name

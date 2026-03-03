@@ -1,6 +1,6 @@
 # XfloorFloorMemorySdkJs.GetRecentEventsApi
 
-All URIs are relative to *https://floortv.in*
+All URIs are relative to *https://appfloor.in*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

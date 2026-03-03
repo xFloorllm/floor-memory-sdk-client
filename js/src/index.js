@@ -37,6 +37,7 @@ import QueryRequest from './model/QueryRequest';
 import QueryRequestFilters from './model/QueryRequestFilters';
 import QueryResponse from './model/QueryResponse';
 import QueryResponseItemsInner from './model/QueryResponseItemsInner';
+import Remaining from './model/Remaining';
 import ResetPassword200Response from './model/ResetPassword200Response';
 import ResetPassword400Response from './model/ResetPassword400Response';
 import SendValidationCode200Response from './model/SendValidationCode200Response';
@@ -87,7 +88,7 @@ import QueryApi from './api/QueryApi';
 * </pre>
 * </p>
 * @module index
-* @version 1.0.18
+* @version 1.0.19
 */
 export {
     /**
@@ -227,6 +228,12 @@ export {
      * @property {module:model/QueryResponseItemsInner}
      */
     QueryResponseItemsInner,
+
+    /**
+     * The Remaining model constructor.
+     * @property {module:model/Remaining}
+     */
+    Remaining,
 
     /**
      * The ResetPassword200Response model constructor.

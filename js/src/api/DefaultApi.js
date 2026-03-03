@@ -31,7 +31,7 @@ import ValidateCode412Response from '../model/ValidateCode412Response';
 /**
 * Default service.
 * @module api/DefaultApi
-* @version 1.0.18
+* @version 1.0.19
 */
 export default class DefaultApi {
 
@@ -51,7 +51,7 @@ export default class DefaultApi {
      * Callback function to receive the result of the changeEmail operation.
      * @callback module:api/DefaultApi~changeEmailCallback
      * @param {String} error Error message, if any.
-     * @param {Object} data The data returned by the service call.
+     * @param {module:model/SignInWithEmail200Response} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -61,7 +61,7 @@ export default class DefaultApi {
      * @param {String} newEmailId New Email ID
      * @param {String} activationCode Validation code
      * @param {module:api/DefaultApi~changeEmailCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Object}
+     * data is of type: {@link module:model/SignInWithEmail200Response}
      */
     changeEmail(newEmailId, activationCode, callback) {
       let postBody = null;
@@ -88,7 +88,7 @@ export default class DefaultApi {
       let authNames = ['bearer'];
       let contentTypes = ['multipart/form-data'];
       let accepts = ['application/json'];
-      let returnType = Object;
+      let returnType = SignInWithEmail200Response;
       return this.apiClient.callApi(
         '/auth-service/change/email', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
@@ -100,7 +100,7 @@ export default class DefaultApi {
      * Callback function to receive the result of the changeMobileNumber operation.
      * @callback module:api/DefaultApi~changeMobileNumberCallback
      * @param {String} error Error message, if any.
-     * @param {Object} data The data returned by the service call.
+     * @param {module:model/SignInWithEmail200Response} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -110,7 +110,7 @@ export default class DefaultApi {
      * @param {String} newMobileNumber New mobile number
      * @param {String} activationCode Activation code
      * @param {module:api/DefaultApi~changeMobileNumberCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Object}
+     * data is of type: {@link module:model/SignInWithEmail200Response}
      */
     changeMobileNumber(newMobileNumber, activationCode, callback) {
       let postBody = null;
@@ -137,7 +137,7 @@ export default class DefaultApi {
       let authNames = ['bearer'];
       let contentTypes = ['multipart/form-data'];
       let accepts = ['application/json'];
-      let returnType = Object;
+      let returnType = SignInWithEmail200Response;
       return this.apiClient.callApi(
         '/auth-service/change/mobile', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,

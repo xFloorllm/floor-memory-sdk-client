@@ -13,7 +13,7 @@
 
 package ai.xfloor.memory.model;
 
-import ai.xfloor.memory.model.BlockDetails;
+import ai.xfloor.memory.model.Remaining;
 import ai.xfloor.memory.model.SignInWithEmail200ResponseProfileAvatar;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
@@ -21,9 +21,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -50,11 +48,11 @@ public class SignInWithEmail200ResponseProfileTest {
     }
 
     /**
-     * Test the property 'fid'
+     * Test the property 'floors'
      */
     @Test
-    public void fidTest() {
-        // TODO: test fid
+    public void floorsTest() {
+        // TODO: test floors
     }
 
     /**
@@ -63,6 +61,14 @@ public class SignInWithEmail200ResponseProfileTest {
     @Test
     public void blocksTest() {
         // TODO: test blocks
+    }
+
+    /**
+     * Test the property 'FID'
+     */
+    @Test
+    public void FIDTest() {
+        // TODO: test FID
     }
 
     /**

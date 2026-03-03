@@ -17,6 +17,18 @@ Notes
 
 | **str** |
 |
+**is_owner**
+
+| **str** |
+|
+
+[optional]
+**app_id**
+
+| **str** |
+|
+
+[optional]
 **title**
 
 | **str** |
@@ -27,7 +39,7 @@ Notes
 |
 
 [optional]
-**fid**
+**floor_uid**
 
 | **str** |
 |

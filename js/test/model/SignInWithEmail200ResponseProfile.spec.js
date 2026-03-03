@@ -60,14 +60,20 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property fid (base name: "fid")', function() {
-      // uncomment below and update the code to test the property fid
+    it('should have the property floors (base name: "floors")', function() {
+      // uncomment below and update the code to test the property floors
       //var instance = new XfloorFloorMemorySdkJs.SignInWithEmail200ResponseProfile();
       //expect(instance).to.be();
     });
 
     it('should have the property blocks (base name: "blocks")', function() {
       // uncomment below and update the code to test the property blocks
+      //var instance = new XfloorFloorMemorySdkJs.SignInWithEmail200ResponseProfile();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property FID (base name: "FID")', function() {
+      // uncomment below and update the code to test the property FID
       //var instance = new XfloorFloorMemorySdkJs.SignInWithEmail200ResponseProfile();
       //expect(instance).to.be();
     });

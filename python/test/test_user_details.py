@@ -38,13 +38,13 @@ class TestUserDetails(unittest.TestCase):
             return UserDetails(
                 profile = xfloor_memory_sdk.models.sign_in_with_email_200_response_profile.signInWithEmail_200_response_profile(
                     floor_id = '', 
+                    floors = xfloor_memory_sdk.models.remaining.Remaining(
+                        permitted = '', 
+                        remaining = '', ), 
+                    blocks = xfloor_memory_sdk.models.remaining.Remaining(
+                        permitted = '', 
+                        remaining = '', ), 
                     fid = '', 
-                    blocks = [
-                        xfloor_memory_sdk.models.block_details.BlockDetails(
-                            block_id = '', 
-                            type = '', 
-                            title = '', )
-                        ], 
                     name = '', 
                     email = '', 
                     mobile_number = '', 
@@ -54,9 +54,11 @@ class TestUserDetails(unittest.TestCase):
                         id = '', ), ),
                 pod_info = xfloor_memory_sdk.models.sign_in_with_email_200_response_pod_info.signInWithEmail_200_response_pod_info(
                     floor_id = '', 
+                    is_owner = '', 
+                    app_id = '', 
                     title = '', 
                     details = '', 
-                    fid = '', 
+                    floor_uid = '', 
                     blocks = [
                         xfloor_memory_sdk.models.block_details.BlockDetails(
                             block_id = '', 
@@ -72,13 +74,13 @@ class TestUserDetails(unittest.TestCase):
             return UserDetails(
                 profile = xfloor_memory_sdk.models.sign_in_with_email_200_response_profile.signInWithEmail_200_response_profile(
                     floor_id = '', 
+                    floors = xfloor_memory_sdk.models.remaining.Remaining(
+                        permitted = '', 
+                        remaining = '', ), 
+                    blocks = xfloor_memory_sdk.models.remaining.Remaining(
+                        permitted = '', 
+                        remaining = '', ), 
                     fid = '', 
-                    blocks = [
-                        xfloor_memory_sdk.models.block_details.BlockDetails(
-                            block_id = '', 
-                            type = '', 
-                            title = '', )
-                        ], 
                     name = '', 
                     email = '', 
                     mobile_number = '', 
@@ -88,9 +90,11 @@ class TestUserDetails(unittest.TestCase):
                         id = '', ), ),
                 pod_info = xfloor_memory_sdk.models.sign_in_with_email_200_response_pod_info.signInWithEmail_200_response_pod_info(
                     floor_id = '', 
+                    is_owner = '', 
+                    app_id = '', 
                     title = '', 
                     details = '', 
-                    fid = '', 
+                    floor_uid = '', 
                     blocks = [
                         xfloor_memory_sdk.models.block_details.BlockDetails(
                             block_id = '', 

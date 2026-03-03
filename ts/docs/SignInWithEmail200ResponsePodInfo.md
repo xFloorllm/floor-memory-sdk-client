@@ -7,9 +7,11 @@
 Name | Type
 ------------ | -------------
 `floorId` | string
+`isOwner` | string
+`appId` | string
 `title` | string
 `details` | string
-`fid` | string
+`floorUid` | string
 `blocks` | [Array&lt;BlockDetails&gt;](BlockDetails.md)
 `avatar` | [Media](Media.md)
 
@@ -21,9 +23,11 @@ import type { SignInWithEmail200ResponsePodInfo } from '@xfloor/floor-memory-sdk
 // TODO: Update the object below with actual values
 const example = {
   "floorId": null,
+  "isOwner": null,
+  "appId": null,
   "title": null,
   "details": null,
-  "fid": null,
+  "floorUid": null,
   "blocks": null,
   "avatar": null,
 } satisfies SignInWithEmail200ResponsePodInfo

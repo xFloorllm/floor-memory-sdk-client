@@ -174,7 +174,7 @@ public class DefaultApi {
      * Updates the email ID associated with an existing user account after validating a one-time activation code sent to the **new email address**.  This operation can only be performed by a **logged-in user**. When a user initiates an email change, an activation code is sent to the newly provided email ID. The email update takes effect only after the activation code is successfully validated.  If the activation code validation fails, the email ID remains unchanged.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ### **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;new_email_id\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot;,   \&quot;app_id\&quot;:\&quot;string\&quot; } &#x60;&#x60;&#x60;  **Field Description**  * &#x60;user_id&#x60; – Unique identifier of the logged-in user * &#x60;new_email_id&#x60; – New email address to be associated with the account * &#x60;activation_code&#x60; – One-time activation code sent to the new email ID for verification  ---  ### **Flow Summary**  1. User is authenticated and logged in 2. User requests to change email ID 3. System sends an activation code to the **new email address** 4. User submits the activation code via this API 5. On successful validation, the email ID is updated  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user’s email ID is updated immediately * A &#x60;success&#x60; string is returned confirming the email change  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the user or email * The new email ID is already in use * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing email ID remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to &#x60;/auth-service/send/validation/code&#x60; with the proper mode.  ---  ### **Security Notes (Recommended)**  * Activation codes are single-use and time-bound * Email changes require prior authentication * Rate limiting may be applied to prevent abuse  ---  ### **One-Line Summary**  &gt; Changes a user’s email ID after validating an activation code sent to the new email address. 
      * @param newEmailId New Email ID (required)
      * @param activationCode Validation code (required)
-     * @return Object
+     * @return SignInWithEmail200Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -184,8 +184,8 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public Object changeEmail(@javax.annotation.Nonnull String newEmailId, @javax.annotation.Nonnull String activationCode) throws ApiException {
-        ApiResponse<Object> localVarResp = changeEmailWithHttpInfo(newEmailId, activationCode);
+    public SignInWithEmail200Response changeEmail(@javax.annotation.Nonnull String newEmailId, @javax.annotation.Nonnull String activationCode) throws ApiException {
+        ApiResponse<SignInWithEmail200Response> localVarResp = changeEmailWithHttpInfo(newEmailId, activationCode);
         return localVarResp.getData();
     }
 
@@ -194,7 +194,7 @@ public class DefaultApi {
      * Updates the email ID associated with an existing user account after validating a one-time activation code sent to the **new email address**.  This operation can only be performed by a **logged-in user**. When a user initiates an email change, an activation code is sent to the newly provided email ID. The email update takes effect only after the activation code is successfully validated.  If the activation code validation fails, the email ID remains unchanged.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ### **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;new_email_id\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot;,   \&quot;app_id\&quot;:\&quot;string\&quot; } &#x60;&#x60;&#x60;  **Field Description**  * &#x60;user_id&#x60; – Unique identifier of the logged-in user * &#x60;new_email_id&#x60; – New email address to be associated with the account * &#x60;activation_code&#x60; – One-time activation code sent to the new email ID for verification  ---  ### **Flow Summary**  1. User is authenticated and logged in 2. User requests to change email ID 3. System sends an activation code to the **new email address** 4. User submits the activation code via this API 5. On successful validation, the email ID is updated  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user’s email ID is updated immediately * A &#x60;success&#x60; string is returned confirming the email change  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the user or email * The new email ID is already in use * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing email ID remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to &#x60;/auth-service/send/validation/code&#x60; with the proper mode.  ---  ### **Security Notes (Recommended)**  * Activation codes are single-use and time-bound * Email changes require prior authentication * Rate limiting may be applied to prevent abuse  ---  ### **One-Line Summary**  &gt; Changes a user’s email ID after validating an activation code sent to the new email address. 
      * @param newEmailId New Email ID (required)
      * @param activationCode Validation code (required)
-     * @return ApiResponse&lt;Object&gt;
+     * @return ApiResponse&lt;SignInWithEmail200Response&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -204,9 +204,9 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Object> changeEmailWithHttpInfo(@javax.annotation.Nonnull String newEmailId, @javax.annotation.Nonnull String activationCode) throws ApiException {
+    public ApiResponse<SignInWithEmail200Response> changeEmailWithHttpInfo(@javax.annotation.Nonnull String newEmailId, @javax.annotation.Nonnull String activationCode) throws ApiException {
         okhttp3.Call localVarCall = changeEmailValidateBeforeCall(newEmailId, activationCode, null);
-        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        Type localVarReturnType = new TypeToken<SignInWithEmail200Response>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -226,10 +226,10 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call changeEmailAsync(@javax.annotation.Nonnull String newEmailId, @javax.annotation.Nonnull String activationCode, final ApiCallback<Object> _callback) throws ApiException {
+    public okhttp3.Call changeEmailAsync(@javax.annotation.Nonnull String newEmailId, @javax.annotation.Nonnull String activationCode, final ApiCallback<SignInWithEmail200Response> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = changeEmailValidateBeforeCall(newEmailId, activationCode, _callback);
-        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        Type localVarReturnType = new TypeToken<SignInWithEmail200Response>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -322,7 +322,7 @@ public class DefaultApi {
      * Updates the mobile number associated with an existing user account after validating a one-time activation code sent to the **new mobile number**.  This operation can only be performed by a **logged-in user**. When a user initiates a mobile number change, an activation code is sent to the newly provided mobile number. The mobile number update takes effect only after the activation code is successfully validated.  If the activation code validation fails, the mobile number remains unchanged.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ### **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;new_mobile_number\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot; } &#x60;&#x60;&#x60;  **Field Description**  * &#x60;user_id&#x60; – Unique identifier of the logged-in user * &#x60;new_mobile_number&#x60; – New mobile number to be associated with the account * &#x60;activation_code&#x60; – One-time activation code sent to the new mobile number for verification  ---  ### **Flow Summary**  1. User is authenticated and logged in 2. User requests to change mobile number 3. System sends an activation code to the **new mobile number** 4. User submits the activation code via this API 5. On successful validation, the mobile number is updated  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user’s mobile number is updated immediately * A &#x60;success&#x60; string is returned confirming the mobile number change  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the user or mobile number * The new mobile number is already in use * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing mobile number remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to &#x60;/auth-service/send/validation/code&#x60; with the proper mode. ---  ### **Security Notes (Recommended)**  * Activation codes are single-use and time-bound * Mobile number changes require prior authentication * Rate limiting may be applied to prevent abuse  ---  ### **One-Line Summary**  &gt; Changes a user’s mobile number after validating an activation code sent to the new mobile number.
      * @param newMobileNumber New mobile number (required)
      * @param activationCode Activation code (required)
-     * @return Object
+     * @return SignInWithEmail200Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -332,8 +332,8 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public Object changeMobileNumber(@javax.annotation.Nonnull String newMobileNumber, @javax.annotation.Nonnull String activationCode) throws ApiException {
-        ApiResponse<Object> localVarResp = changeMobileNumberWithHttpInfo(newMobileNumber, activationCode);
+    public SignInWithEmail200Response changeMobileNumber(@javax.annotation.Nonnull String newMobileNumber, @javax.annotation.Nonnull String activationCode) throws ApiException {
+        ApiResponse<SignInWithEmail200Response> localVarResp = changeMobileNumberWithHttpInfo(newMobileNumber, activationCode);
         return localVarResp.getData();
     }
 
@@ -342,7 +342,7 @@ public class DefaultApi {
      * Updates the mobile number associated with an existing user account after validating a one-time activation code sent to the **new mobile number**.  This operation can only be performed by a **logged-in user**. When a user initiates a mobile number change, an activation code is sent to the newly provided mobile number. The mobile number update takes effect only after the activation code is successfully validated.  If the activation code validation fails, the mobile number remains unchanged.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ### **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;new_mobile_number\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot; } &#x60;&#x60;&#x60;  **Field Description**  * &#x60;user_id&#x60; – Unique identifier of the logged-in user * &#x60;new_mobile_number&#x60; – New mobile number to be associated with the account * &#x60;activation_code&#x60; – One-time activation code sent to the new mobile number for verification  ---  ### **Flow Summary**  1. User is authenticated and logged in 2. User requests to change mobile number 3. System sends an activation code to the **new mobile number** 4. User submits the activation code via this API 5. On successful validation, the mobile number is updated  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user’s mobile number is updated immediately * A &#x60;success&#x60; string is returned confirming the mobile number change  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the user or mobile number * The new mobile number is already in use * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing mobile number remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to &#x60;/auth-service/send/validation/code&#x60; with the proper mode. ---  ### **Security Notes (Recommended)**  * Activation codes are single-use and time-bound * Mobile number changes require prior authentication * Rate limiting may be applied to prevent abuse  ---  ### **One-Line Summary**  &gt; Changes a user’s mobile number after validating an activation code sent to the new mobile number.
      * @param newMobileNumber New mobile number (required)
      * @param activationCode Activation code (required)
-     * @return ApiResponse&lt;Object&gt;
+     * @return ApiResponse&lt;SignInWithEmail200Response&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -352,9 +352,9 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Object> changeMobileNumberWithHttpInfo(@javax.annotation.Nonnull String newMobileNumber, @javax.annotation.Nonnull String activationCode) throws ApiException {
+    public ApiResponse<SignInWithEmail200Response> changeMobileNumberWithHttpInfo(@javax.annotation.Nonnull String newMobileNumber, @javax.annotation.Nonnull String activationCode) throws ApiException {
         okhttp3.Call localVarCall = changeMobileNumberValidateBeforeCall(newMobileNumber, activationCode, null);
-        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        Type localVarReturnType = new TypeToken<SignInWithEmail200Response>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -374,10 +374,10 @@ public class DefaultApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call changeMobileNumberAsync(@javax.annotation.Nonnull String newMobileNumber, @javax.annotation.Nonnull String activationCode, final ApiCallback<Object> _callback) throws ApiException {
+    public okhttp3.Call changeMobileNumberAsync(@javax.annotation.Nonnull String newMobileNumber, @javax.annotation.Nonnull String activationCode, final ApiCallback<SignInWithEmail200Response> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = changeMobileNumberValidateBeforeCall(newMobileNumber, activationCode, _callback);
-        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        Type localVarReturnType = new TypeToken<SignInWithEmail200Response>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

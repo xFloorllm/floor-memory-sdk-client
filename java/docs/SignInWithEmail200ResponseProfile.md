@@ -10,9 +10,12 @@ User profile details
 |------------ | ------------- | ------------- | -------------|
 |**floorId** | **String** | Associated floor ID |
 |
-|**fid** | **String** | Unique ID of floor |
+|**floors** | [**Remaining**](Remaining.md) |
+| [optional] |
+|**blocks** | [**Remaining**](Remaining.md) |
+| [optional] |
+|**FID** | **String** | Unique ID of floor |
 |
-|**blocks** | [**List<BlockDetails>**](BlockDetails.md) | List of Blocks | [optional] |
 |**name** | **String** | User Name | [optional] |
 |**email** | **String** | Email ID | [optional] |
 |**mobileNumber** | **String** | Mobile number | [optional] |

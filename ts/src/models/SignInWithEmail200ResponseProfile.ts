@@ -15,13 +15,6 @@
  */
 
 import { mapValues } from '../runtime';
-import type { BlockDetails } from './BlockDetails';
-import {
-    BlockDetailsFromJSON,
-    BlockDetailsFromJSONTyped,
-    BlockDetailsToJSON,
-    BlockDetailsToJSONTyped,
-} from './BlockDetails';
 import type { SignInWithEmail200ResponseProfileAvatar } from './SignInWithEmail200ResponseProfileAvatar';
 import {
     SignInWithEmail200ResponseProfileAvatarFromJSON,
@@ -29,6 +22,13 @@ import {
     SignInWithEmail200ResponseProfileAvatarToJSON,
     SignInWithEmail200ResponseProfileAvatarToJSONTyped,
 } from './SignInWithEmail200ResponseProfileAvatar';
+import type { Remaining } from './Remaining';
+import {
+    RemainingFromJSON,
+    RemainingFromJSONTyped,
+    RemainingToJSON,
+    RemainingToJSONTyped,
+} from './Remaining';
 
 /**
  * User profile details
@@ -43,17 +43,23 @@ export interface SignInWithEmail200ResponseProfile {
      */
     floorId: string;
     /**
+     * 
+     * @type {Remaining}
+     * @memberof SignInWithEmail200ResponseProfile
+     */
+    floors?: Remaining;
+    /**
+     * 
+     * @type {Remaining}
+     * @memberof SignInWithEmail200ResponseProfile
+     */
+    blocks?: Remaining;
+    /**
      * Unique ID of floor
      * @type {string}
      * @memberof SignInWithEmail200ResponseProfile
      */
-    fid: string;
-    /**
-     * List of Blocks
-     * @type {Array<BlockDetails>}
-     * @memberof SignInWithEmail200ResponseProfile
-     */
-    blocks?: Array<BlockDetails>;
+    fID: string;
     /**
      * User Name
      * @type {string}
@@ -91,7 +97,7 @@ export interface SignInWithEmail200ResponseProfile {
  */
 export function instanceOfSignInWithEmail200ResponseProfile(value: object): value is SignInWithEmail200ResponseProfile {
     if (!('floorId' in value) || value['floorId'] === undefined) return false;
-    if (!('fid' in value) || value['fid'] === undefined) return false;
+    if (!('fID' in value) || value['fID'] === undefined) return false;
     if (!('userId' in value) || value['userId'] === undefined) return false;
     return true;
 }
@@ -107,8 +113,9 @@ export function SignInWithEmail200ResponseProfileFromJSONTyped(json: any, ignore
     return {
         
         'floorId': json['floor_id'],
-        'fid': json['fid'],
-        'blocks': json['blocks'] == null ? undefined : ((json['blocks'] as Array<any>).map(BlockDetailsFromJSON)),
+        'floors': json['floors'] == null ? undefined : RemainingFromJSON(json['floors']),
+        'blocks': json['blocks'] == null ? undefined : RemainingFromJSON(json['blocks']),
+        'fID': json['FID'],
         'name': json['name'] == null ? undefined : json['name'],
         'email': json['email'] == null ? undefined : json['email'],
         'mobileNumber': json['mobile_number'] == null ? undefined : json['mobile_number'],
@@ -129,8 +136,9 @@ export function SignInWithEmail200ResponseProfileToJSONTyped(value?: SignInWithE
     return {
         
         'floor_id': value['floorId'],
-        'fid': value['fid'],
-        'blocks': value['blocks'] == null ? undefined : ((value['blocks'] as Array<any>).map(BlockDetailsToJSON)),
+        'floors': RemainingToJSON(value['floors']),
+        'blocks': RemainingToJSON(value['blocks']),
+        'FID': value['fID'],
         'name': value['name'],
         'email': value['email'],
         'mobile_number': value['mobileNumber'],

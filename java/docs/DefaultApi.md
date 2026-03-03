@@ -1,6 +1,6 @@
 # DefaultApi
 
-All URIs are relative to *https://floortv.in*
+All URIs are relative to *https://appfloor.in*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
@@ -20,7 +20,7 @@ All URIs are relative to *https://floortv.in*
 
 <a id="changeEmail"></a>
 # **changeEmail**
-> Object changeEmail(newEmailId, activationCode)
+> SignInWithEmail200Response changeEmail(newEmailId, activationCode)
 
 Change email ID
 
@@ -104,7 +104,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://floortv.in");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -114,7 +114,7 @@ public class Example {
     String newEmailId = "newEmailId_example"; // String | New Email ID
     String activationCode = "activationCode_example"; // String | Validation code
     try {
-      Object result = apiInstance.changeEmail(newEmailId, activationCode);
+      SignInWithEmail200Response result = apiInstance.changeEmail(newEmailId, activationCode);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#changeEmail");
@@ -138,7 +138,7 @@ public class Example {
 
 ### Return type
 
-**Object**
+[**SignInWithEmail200Response**](SignInWithEmail200Response.md)
 
 ### Authorization
 
@@ -161,7 +161,7 @@ public class Example {
 
 <a id="changeMobileNumber"></a>
 # **changeMobileNumber**
-> Object changeMobileNumber(newMobileNumber, activationCode)
+> SignInWithEmail200Response changeMobileNumber(newMobileNumber, activationCode)
 
 Change Mobile number
 
@@ -245,7 +245,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://floortv.in");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -255,7 +255,7 @@ public class Example {
     String newMobileNumber = "newMobileNumber_example"; // String | New mobile number
     String activationCode = "activationCode_example"; // String | Activation code
     try {
-      Object result = apiInstance.changeMobileNumber(newMobileNumber, activationCode);
+      SignInWithEmail200Response result = apiInstance.changeMobileNumber(newMobileNumber, activationCode);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#changeMobileNumber");
@@ -279,7 +279,7 @@ public class Example {
 
 ### Return type
 
-**Object**
+[**SignInWithEmail200Response**](SignInWithEmail200Response.md)
 
 ### Authorization
 
@@ -347,7 +347,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://floortv.in");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -522,7 +522,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://floortv.in");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -712,7 +712,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://floortv.in");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -917,7 +917,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://floortv.in");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -1018,7 +1018,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://floortv.in");
+    defaultClient.setBasePath("https://appfloor.in");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
     String newPassword = "newPassword_example"; // String | 
@@ -1165,7 +1165,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://floortv.in");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -1299,7 +1299,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://floortv.in");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -1427,7 +1427,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://floortv.in");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -1514,7 +1514,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://floortv.in");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -1662,7 +1662,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://floortv.in");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");

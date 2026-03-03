@@ -22,6 +22,7 @@ export * from './QueryRequest';
 export * from './QueryRequestFilters';
 export * from './QueryResponse';
 export * from './QueryResponseItemsInner';
+export * from './Remaining';
 export * from './ResetPassword200Response';
 export * from './ResetPassword400Response';
 export * from './SendValidationCode200Response';

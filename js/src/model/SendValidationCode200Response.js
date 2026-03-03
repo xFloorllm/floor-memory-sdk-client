@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The SendValidationCode200Response model module.
  * @module model/SendValidationCode200Response
- * @version 1.0.18
+ * @version 1.0.19
  */
 class SendValidationCode200Response {
     /**

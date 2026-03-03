@@ -17,14 +17,21 @@ Notes
 **floor_id**
 
 | **str** | Associated floor ID |
+**floors**
+
+| [**Remaining**](Remaining.md) |
+|
+
+[optional]
+**blocks**
+
+| [**Remaining**](Remaining.md) |
+|
+
+[optional]
 **fid**
 
 | **str** | Unique ID of floor |
-**blocks**
-
-| [**List[BlockDetails]**](BlockDetails.md) | List of Blocks |
-
-[optional]
 **name**
 
 | **str** | User Name |

@@ -20,7 +20,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import Any, Dict, Optional
+from typing import Optional
 from typing_extensions import Annotated
 from xfloor_memory_sdk.models.change_password200_response import ChangePassword200Response
 from xfloor_memory_sdk.models.get_floor_information200_response import GetFloorInformation200Response
@@ -65,7 +65,7 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> SignInWithEmail200Response:
         """Change email ID
 
         Updates the email ID associated with an existing user account after validating a one-time activation code sent to the **new email address**. This operation can only be performed by a **logged-in user**. When a user initiates an email change, an activation code is sent to the newly provided email ID. The email update takes effect only after the activation code is successfully validated. If the activation code validation fails, the email ID remains unchanged.
@@ -171,7 +171,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "SignInWithEmail200Response",
             '400': "GetRecentEvents400Response",
         }
         response_data = self.api_client.call_api(
@@ -202,7 +202,7 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[SignInWithEmail200Response]:
         """Change email ID
 
         Updates the email ID associated with an existing user account after validating a one-time activation code sent to the **new email address**. This operation can only be performed by a **logged-in user**. When a user initiates an email change, an activation code is sent to the newly provided email ID. The email update takes effect only after the activation code is successfully validated. If the activation code validation fails, the email ID remains unchanged.
@@ -308,7 +308,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "SignInWithEmail200Response",
             '400': "GetRecentEvents400Response",
         }
         response_data = self.api_client.call_api(
@@ -445,7 +445,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "SignInWithEmail200Response",
             '400': "GetRecentEvents400Response",
         }
         response_data = self.api_client.call_api(
@@ -552,7 +552,7 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> SignInWithEmail200Response:
         """Change Mobile number
 
         Updates the mobile number associated with an existing user account after validating a one-time activation code sent to the **new mobile number**. This operation can only be performed by a **logged-in user**. When a user initiates a mobile number change, an activation code is sent to the newly provided mobile number. The mobile number update takes effect only after the activation code is successfully validated. If the activation code validation fails, the mobile number remains unchanged.
@@ -658,7 +658,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "SignInWithEmail200Response",
             '400': "GetRecentEvents400Response",
         }
         response_data = self.api_client.call_api(
@@ -689,7 +689,7 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[SignInWithEmail200Response]:
         """Change Mobile number
 
         Updates the mobile number associated with an existing user account after validating a one-time activation code sent to the **new mobile number**. This operation can only be performed by a **logged-in user**. When a user initiates a mobile number change, an activation code is sent to the newly provided mobile number. The mobile number update takes effect only after the activation code is successfully validated. If the activation code validation fails, the mobile number remains unchanged.
@@ -795,7 +795,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "SignInWithEmail200Response",
             '400': "GetRecentEvents400Response",
         }
         response_data = self.api_client.call_api(
@@ -932,7 +932,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "SignInWithEmail200Response",
             '400': "GetRecentEvents400Response",
         }
         response_data = self.api_client.call_api(

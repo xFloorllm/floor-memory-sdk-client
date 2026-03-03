@@ -1,6 +1,6 @@
 # XfloorFloorMemorySdkJs.DefaultApi
 
-All URIs are relative to *https://floortv.in*
+All URIs are relative to *https://appfloor.in*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 ### changeEmail
 
-> Object changeEmail(newEmailId, activationCode)
+> SignInWithEmail200Response changeEmail(newEmailId, activationCode)
 
 Change email ID
 
@@ -135,7 +135,7 @@ Notes
 
 ### Return type
 
-**Object**
+[**SignInWithEmail200Response**](SignInWithEmail200Response.md)
 
 ### Authorization
 
@@ -149,7 +149,7 @@ Notes
 
 ### changeMobileNumber
 
-> Object changeMobileNumber(newMobileNumber, activationCode)
+> SignInWithEmail200Response changeMobileNumber(newMobileNumber, activationCode)
 
 Change Mobile number
 
@@ -263,7 +263,7 @@ Notes
 
 ### Return type
 
-**Object**
+[**SignInWithEmail200Response**](SignInWithEmail200Response.md)
 
 ### Authorization
 

@@ -31,6 +31,7 @@ docs/QueryRequest.md
 docs/QueryRequestFilters.md
 docs/QueryResponse.md
 docs/QueryResponseItemsInner.md
+docs/Remaining.md
 docs/ResetPassword200Response.md
 docs/ResetPassword400Response.md
 docs/SendValidationCode200Response.md
@@ -77,6 +78,7 @@ src/model/QueryRequest.js
 src/model/QueryRequestFilters.js
 src/model/QueryResponse.js
 src/model/QueryResponseItemsInner.js
+src/model/Remaining.js
 src/model/ResetPassword200Response.js
 src/model/ResetPassword400Response.js
 src/model/SendValidationCode200Response.js
@@ -118,6 +120,7 @@ test/model/QueryRequest.spec.js
 test/model/QueryRequestFilters.spec.js
 test/model/QueryResponse.spec.js
 test/model/QueryResponseItemsInner.spec.js
+test/model/Remaining.spec.js
 test/model/ResetPassword200Response.spec.js
 test/model/ResetPassword400Response.spec.js
 test/model/SendValidationCode200Response.spec.js

@@ -17,7 +17,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.18"
+__version__ = "1.0.19"
 
 # Define package exports
 __all__ = [
@@ -58,6 +58,7 @@ __all__ = [
     "QueryRequestFilters",
     "QueryResponse",
     "QueryResponseItemsInner",
+    "Remaining",
     "ResetPassword200Response",
     "ResetPassword400Response",
     "SendValidationCode200Response",
@@ -115,6 +116,7 @@ from xfloor_memory_sdk.models.query_request import QueryRequest as QueryRequest
 from xfloor_memory_sdk.models.query_request_filters import QueryRequestFilters as QueryRequestFilters
 from xfloor_memory_sdk.models.query_response import QueryResponse as QueryResponse
 from xfloor_memory_sdk.models.query_response_items_inner import QueryResponseItemsInner as QueryResponseItemsInner
+from xfloor_memory_sdk.models.remaining import Remaining as Remaining
 from xfloor_memory_sdk.models.reset_password200_response import ResetPassword200Response as ResetPassword200Response
 from xfloor_memory_sdk.models.reset_password400_response import ResetPassword400Response as ResetPassword400Response
 from xfloor_memory_sdk.models.send_validation_code200_response import SendValidationCode200Response as SendValidationCode200Response

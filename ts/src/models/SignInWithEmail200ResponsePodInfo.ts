@@ -47,6 +47,18 @@ export interface SignInWithEmail200ResponsePodInfo {
      * @type {string}
      * @memberof SignInWithEmail200ResponsePodInfo
      */
+    isOwner?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SignInWithEmail200ResponsePodInfo
+     */
+    appId?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SignInWithEmail200ResponsePodInfo
+     */
     title: string;
     /**
      * 
@@ -59,7 +71,7 @@ export interface SignInWithEmail200ResponsePodInfo {
      * @type {string}
      * @memberof SignInWithEmail200ResponsePodInfo
      */
-    fid: string;
+    floorUid: string;
     /**
      * 
      * @type {Array<BlockDetails>}
@@ -80,7 +92,7 @@ export interface SignInWithEmail200ResponsePodInfo {
 export function instanceOfSignInWithEmail200ResponsePodInfo(value: object): value is SignInWithEmail200ResponsePodInfo {
     if (!('floorId' in value) || value['floorId'] === undefined) return false;
     if (!('title' in value) || value['title'] === undefined) return false;
-    if (!('fid' in value) || value['fid'] === undefined) return false;
+    if (!('floorUid' in value) || value['floorUid'] === undefined) return false;
     if (!('blocks' in value) || value['blocks'] === undefined) return false;
     return true;
 }
@@ -96,9 +108,11 @@ export function SignInWithEmail200ResponsePodInfoFromJSONTyped(json: any, ignore
     return {
         
         'floorId': json['floor_id'],
+        'isOwner': json['is_owner'] == null ? undefined : json['is_owner'],
+        'appId': json['app_id'] == null ? undefined : json['app_id'],
         'title': json['title'],
         'details': json['details'] == null ? undefined : json['details'],
-        'fid': json['fid'],
+        'floorUid': json['floor_uid'],
         'blocks': ((json['blocks'] as Array<any>).map(BlockDetailsFromJSON)),
         'avatar': json['avatar'] == null ? undefined : MediaFromJSON(json['avatar']),
     };
@@ -116,9 +130,11 @@ export function SignInWithEmail200ResponsePodInfoToJSONTyped(value?: SignInWithE
     return {
         
         'floor_id': value['floorId'],
+        'is_owner': value['isOwner'],
+        'app_id': value['appId'],
         'title': value['title'],
         'details': value['details'],
-        'fid': value['fid'],
+        'floor_uid': value['floorUid'],
         'blocks': ((value['blocks'] as Array<any>).map(BlockDetailsToJSON)),
         'avatar': MediaToJSON(value['avatar']),
     };

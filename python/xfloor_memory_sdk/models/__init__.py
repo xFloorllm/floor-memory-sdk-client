@@ -38,6 +38,7 @@ from xfloor_memory_sdk.models.query_request import QueryRequest
 from xfloor_memory_sdk.models.query_request_filters import QueryRequestFilters
 from xfloor_memory_sdk.models.query_response import QueryResponse
 from xfloor_memory_sdk.models.query_response_items_inner import QueryResponseItemsInner
+from xfloor_memory_sdk.models.remaining import Remaining
 from xfloor_memory_sdk.models.reset_password200_response import ResetPassword200Response
 from xfloor_memory_sdk.models.reset_password400_response import ResetPassword400Response
 from xfloor_memory_sdk.models.send_validation_code200_response import SendValidationCode200Response

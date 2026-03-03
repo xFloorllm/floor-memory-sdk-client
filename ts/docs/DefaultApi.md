@@ -1,6 +1,6 @@
 # DefaultApi
 
-All URIs are relative to *https://floortv.in*
+All URIs are relative to *https://appfloor.in*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
@@ -21,7 +21,7 @@ All URIs are relative to *https://floortv.in*
 
 ### changeEmail
 
-> object changeEmail(newEmailId, activationCode)
+> SignInWithEmail200Response changeEmail(newEmailId, activationCode)
 
 Change email ID
 
@@ -138,7 +138,7 @@ example().catch(console.error);
 
 ### Return type
 
-**object**
+[**SignInWithEmail200Response**](SignInWithEmail200Response.md)
 
 ### Authorization
 
@@ -165,7 +165,7 @@ example().catch(console.error);
 
 ### changeMobileNumber
 
-> object changeMobileNumber(newMobileNumber, activationCode)
+> SignInWithEmail200Response changeMobileNumber(newMobileNumber, activationCode)
 
 Change Mobile number
 
@@ -282,7 +282,7 @@ example().catch(console.error);
 
 ### Return type
 
-**object**
+[**SignInWithEmail200Response**](SignInWithEmail200Response.md)
 
 ### Authorization
 

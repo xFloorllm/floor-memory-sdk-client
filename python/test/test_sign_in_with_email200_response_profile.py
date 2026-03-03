@@ -37,13 +37,13 @@ class TestSignInWithEmail200ResponseProfile(unittest.TestCase):
         if include_optional:
             return SignInWithEmail200ResponseProfile(
                 floor_id = '',
+                floors = xfloor_memory_sdk.models.remaining.Remaining(
+                    permitted = '', 
+                    remaining = '', ),
+                blocks = xfloor_memory_sdk.models.remaining.Remaining(
+                    permitted = '', 
+                    remaining = '', ),
                 fid = '',
-                blocks = [
-                    xfloor_memory_sdk.models.block_details.BlockDetails(
-                        block_id = '', 
-                        type = '', 
-                        title = '', )
-                    ],
                 name = '',
                 email = '',
                 mobile_number = '',

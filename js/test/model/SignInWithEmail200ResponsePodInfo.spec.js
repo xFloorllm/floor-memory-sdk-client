@@ -60,6 +60,18 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property isOwner (base name: "is_owner")', function() {
+      // uncomment below and update the code to test the property isOwner
+      //var instance = new XfloorFloorMemorySdkJs.SignInWithEmail200ResponsePodInfo();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property appId (base name: "app_id")', function() {
+      // uncomment below and update the code to test the property appId
+      //var instance = new XfloorFloorMemorySdkJs.SignInWithEmail200ResponsePodInfo();
+      //expect(instance).to.be();
+    });
+
     it('should have the property title (base name: "title")', function() {
       // uncomment below and update the code to test the property title
       //var instance = new XfloorFloorMemorySdkJs.SignInWithEmail200ResponsePodInfo();
@@ -72,8 +84,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property fid (base name: "fid")', function() {
-      // uncomment below and update the code to test the property fid
+    it('should have the property floorUid (base name: "floor_uid")', function() {
+      // uncomment below and update the code to test the property floorUid
       //var instance = new XfloorFloorMemorySdkJs.SignInWithEmail200ResponsePodInfo();
       //expect(instance).to.be();
     });

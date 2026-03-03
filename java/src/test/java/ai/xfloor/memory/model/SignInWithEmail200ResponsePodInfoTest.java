@@ -50,6 +50,22 @@ public class SignInWithEmail200ResponsePodInfoTest {
     }
 
     /**
+     * Test the property 'isOwner'
+     */
+    @Test
+    public void isOwnerTest() {
+        // TODO: test isOwner
+    }
+
+    /**
+     * Test the property 'appId'
+     */
+    @Test
+    public void appIdTest() {
+        // TODO: test appId
+    }
+
+    /**
      * Test the property 'title'
      */
     @Test
@@ -66,11 +82,11 @@ public class SignInWithEmail200ResponsePodInfoTest {
     }
 
     /**
-     * Test the property 'fid'
+     * Test the property 'floorUid'
      */
     @Test
-    public void fidTest() {
-        // TODO: test fid
+    public void floorUidTest() {
+        // TODO: test floorUid
     }
 
     /**

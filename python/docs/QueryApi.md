@@ -1,6 +1,6 @@
 # xfloor_memory_sdk.QueryApi
 
-All URIs are relative to *https://floortv.in*
+All URIs are relative to *https://appfloor.in*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -227,10 +227,10 @@ from xfloor_memory_sdk.models.query_response import QueryResponse
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://floortv.in
+# Defining the host is optional and defaults to https://appfloor.in
 # See configuration.py for a list of all supported configuration parameters.
 configuration = xfloor_memory_sdk.Configuration(
-    host = "https://floortv.in"
+    host = "https://appfloor.in"
 )
 
 # The client must configure the authentication and authorization parameters

@@ -9,11 +9,15 @@
 |------------ | ------------- | ------------- | -------------|
 |**floorId** | **String** |
 | |
+|**isOwner** | **String** |
+| [optional] |
+|**appId** | **String** |
+| [optional] |
 |**title** | **String** |
 | |
 |**details** | **String** |
 | [optional] |
-|**fid** | **String** |
+|**floorUid** | **String** |
 | |
 |**blocks** | [**List<BlockDetails>**](BlockDetails.md) |
 | |

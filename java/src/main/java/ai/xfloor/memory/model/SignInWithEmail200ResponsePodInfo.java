@@ -61,6 +61,16 @@ public class SignInWithEmail200ResponsePodInfo {
   @javax.annotation.Nonnull
   private String floorId;
 
+  public static final String SERIALIZED_NAME_IS_OWNER = "is_owner";
+  @SerializedName(SERIALIZED_NAME_IS_OWNER)
+  @javax.annotation.Nullable
+  private String isOwner;
+
+  public static final String SERIALIZED_NAME_APP_ID = "app_id";
+  @SerializedName(SERIALIZED_NAME_APP_ID)
+  @javax.annotation.Nullable
+  private String appId;
+
   public static final String SERIALIZED_NAME_TITLE = "title";
   @SerializedName(SERIALIZED_NAME_TITLE)
   @javax.annotation.Nonnull
@@ -71,10 +81,10 @@ public class SignInWithEmail200ResponsePodInfo {
   @javax.annotation.Nullable
   private String details;
 
-  public static final String SERIALIZED_NAME_FID = "fid";
-  @SerializedName(SERIALIZED_NAME_FID)
+  public static final String SERIALIZED_NAME_FLOOR_UID = "floor_uid";
+  @SerializedName(SERIALIZED_NAME_FLOOR_UID)
   @javax.annotation.Nonnull
-  private String fid;
+  private String floorUid;
 
   public static final String SERIALIZED_NAME_BLOCKS = "blocks";
   @SerializedName(SERIALIZED_NAME_BLOCKS)
@@ -105,6 +115,44 @@ public class SignInWithEmail200ResponsePodInfo {
 
   public void setFloorId(@javax.annotation.Nonnull String floorId) {
     this.floorId = floorId;
+  }
+
+
+  public SignInWithEmail200ResponsePodInfo isOwner(@javax.annotation.Nullable String isOwner) {
+    this.isOwner = isOwner;
+    return this;
+  }
+
+  /**
+   * Get isOwner
+   * @return isOwner
+   */
+  @javax.annotation.Nullable
+  public String getIsOwner() {
+    return isOwner;
+  }
+
+  public void setIsOwner(@javax.annotation.Nullable String isOwner) {
+    this.isOwner = isOwner;
+  }
+
+
+  public SignInWithEmail200ResponsePodInfo appId(@javax.annotation.Nullable String appId) {
+    this.appId = appId;
+    return this;
+  }
+
+  /**
+   * Get appId
+   * @return appId
+   */
+  @javax.annotation.Nullable
+  public String getAppId() {
+    return appId;
+  }
+
+  public void setAppId(@javax.annotation.Nullable String appId) {
+    this.appId = appId;
   }
 
 
@@ -146,22 +194,22 @@ public class SignInWithEmail200ResponsePodInfo {
   }
 
 
-  public SignInWithEmail200ResponsePodInfo fid(@javax.annotation.Nonnull String fid) {
-    this.fid = fid;
+  public SignInWithEmail200ResponsePodInfo floorUid(@javax.annotation.Nonnull String floorUid) {
+    this.floorUid = floorUid;
     return this;
   }
 
   /**
-   * Get fid
-   * @return fid
+   * Get floorUid
+   * @return floorUid
    */
   @javax.annotation.Nonnull
-  public String getFid() {
-    return fid;
+  public String getFloorUid() {
+    return floorUid;
   }
 
-  public void setFid(@javax.annotation.Nonnull String fid) {
-    this.fid = fid;
+  public void setFloorUid(@javax.annotation.Nonnull String floorUid) {
+    this.floorUid = floorUid;
   }
 
 
@@ -222,16 +270,18 @@ public class SignInWithEmail200ResponsePodInfo {
     }
     SignInWithEmail200ResponsePodInfo signInWithEmail200ResponsePodInfo = (SignInWithEmail200ResponsePodInfo) o;
     return Objects.equals(this.floorId, signInWithEmail200ResponsePodInfo.floorId) &&
+        Objects.equals(this.isOwner, signInWithEmail200ResponsePodInfo.isOwner) &&
+        Objects.equals(this.appId, signInWithEmail200ResponsePodInfo.appId) &&
         Objects.equals(this.title, signInWithEmail200ResponsePodInfo.title) &&
         Objects.equals(this.details, signInWithEmail200ResponsePodInfo.details) &&
-        Objects.equals(this.fid, signInWithEmail200ResponsePodInfo.fid) &&
+        Objects.equals(this.floorUid, signInWithEmail200ResponsePodInfo.floorUid) &&
         Objects.equals(this.blocks, signInWithEmail200ResponsePodInfo.blocks) &&
         Objects.equals(this.avatar, signInWithEmail200ResponsePodInfo.avatar);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(floorId, title, details, fid, blocks, avatar);
+    return Objects.hash(floorId, isOwner, appId, title, details, floorUid, blocks, avatar);
   }
 
   @Override
@@ -239,9 +289,11 @@ public class SignInWithEmail200ResponsePodInfo {
     StringBuilder sb = new StringBuilder();
     sb.append("class SignInWithEmail200ResponsePodInfo {\n");
     sb.append("    floorId: ").append(toIndentedString(floorId)).append("\n");
+    sb.append("    isOwner: ").append(toIndentedString(isOwner)).append("\n");
+    sb.append("    appId: ").append(toIndentedString(appId)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    details: ").append(toIndentedString(details)).append("\n");
-    sb.append("    fid: ").append(toIndentedString(fid)).append("\n");
+    sb.append("    floorUid: ").append(toIndentedString(floorUid)).append("\n");
     sb.append("    blocks: ").append(toIndentedString(blocks)).append("\n");
     sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
     sb.append("}");
@@ -265,10 +317,10 @@ public class SignInWithEmail200ResponsePodInfo {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("floor_id", "title", "details", "fid", "blocks", "avatar"));
+    openapiFields = new HashSet<String>(Arrays.asList("floor_id", "is_owner", "app_id", "title", "details", "floor_uid", "blocks", "avatar"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("floor_id", "title", "fid", "blocks"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("floor_id", "title", "floor_uid", "blocks"));
   }
 
   /**
@@ -302,14 +354,20 @@ public class SignInWithEmail200ResponsePodInfo {
       if (!jsonObj.get("floor_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `floor_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("floor_id").toString()));
       }
+      if ((jsonObj.get("is_owner") != null && !jsonObj.get("is_owner").isJsonNull()) && !jsonObj.get("is_owner").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `is_owner` to be a primitive type in the JSON string but got `%s`", jsonObj.get("is_owner").toString()));
+      }
+      if ((jsonObj.get("app_id") != null && !jsonObj.get("app_id").isJsonNull()) && !jsonObj.get("app_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `app_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("app_id").toString()));
+      }
       if (!jsonObj.get("title").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `title` to be a primitive type in the JSON string but got `%s`", jsonObj.get("title").toString()));
       }
       if ((jsonObj.get("details") != null && !jsonObj.get("details").isJsonNull()) && !jsonObj.get("details").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `details` to be a primitive type in the JSON string but got `%s`", jsonObj.get("details").toString()));
       }
-      if (!jsonObj.get("fid").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `fid` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fid").toString()));
+      if (!jsonObj.get("floor_uid").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `floor_uid` to be a primitive type in the JSON string but got `%s`", jsonObj.get("floor_uid").toString()));
       }
       // ensure the json data is an array
       if (!jsonObj.get("blocks").isJsonArray()) {

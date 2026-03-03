@@ -47,7 +47,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>ai.xfloor.sdk</groupId>
   <artifactId>floor-memory-sdk-client</artifactId>
-  <version>1.0.18</version>
+  <version>1.0.19</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -63,7 +63,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "ai.xfloor.sdk:floor-memory-sdk-client:1.0.18"
+     implementation "ai.xfloor.sdk:floor-memory-sdk-client:1.0.19"
   }
 ```
 
@@ -77,7 +77,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/floor-memory-sdk-client-1.0.18.jar`
+* `target/floor-memory-sdk-client-1.0.19.jar`
 * `target/lib/*.jar`
 
 ### Getting Started
@@ -97,7 +97,7 @@ import ai.xfloor.memory.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://floortv.in");
+    defaultClient.setBasePath("https://appfloor.in");
     
     // Configure HTTP bearer authorization: bearer
     HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
@@ -107,7 +107,7 @@ public class Example {
     String newEmailId = "newEmailId_example"; // String | New Email ID
     String activationCode = "activationCode_example"; // String | Validation code
     try {
-      Object result = apiInstance.changeEmail(newEmailId, activationCode);
+      SignInWithEmail200Response result = apiInstance.changeEmail(newEmailId, activationCode);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#changeEmail");
@@ -123,7 +123,7 @@ public class Example {
 
 ### Documentation for API Endpoints
 
-All URIs are relative to *https://floortv.in*
+All URIs are relative to *https://appfloor.in*
 
 Class
 
@@ -246,6 +246,7 @@ Query (Primary API)
  - [QueryRequestFilters](docs/QueryRequestFilters.md)
  - [QueryResponse](docs/QueryResponse.md)
  - [QueryResponseItemsInner](docs/QueryResponseItemsInner.md)
+ - [Remaining](docs/Remaining.md)
  - [ResetPassword200Response](docs/ResetPassword200Response.md)
  - [ResetPassword400Response](docs/ResetPassword400Response.md)
  - [SendValidationCode200Response](docs/SendValidationCode200Response.md)

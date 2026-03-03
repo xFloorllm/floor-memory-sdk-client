@@ -32,12 +32,14 @@ class SignInWithEmail200ResponsePodInfo(BaseModel):
     SignInWithEmail200ResponsePodInfo
     """ # noqa: E501
     floor_id: StrictStr
+    is_owner: Optional[StrictStr] = None
+    app_id: Optional[StrictStr] = None
     title: StrictStr
     details: Optional[StrictStr] = None
-    fid: StrictStr
+    floor_uid: StrictStr
     blocks: List[BlockDetails]
     avatar: Optional[Media] = None
-    __properties: ClassVar[List[str]] = ["floor_id", "title", "details", "fid", "blocks", "avatar"]
+    __properties: ClassVar[List[str]] = ["floor_id", "is_owner", "app_id", "title", "details", "floor_uid", "blocks", "avatar"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,9 +103,11 @@ class SignInWithEmail200ResponsePodInfo(BaseModel):
 
         _obj = cls.model_validate({
             "floor_id": obj.get("floor_id"),
+            "is_owner": obj.get("is_owner"),
+            "app_id": obj.get("app_id"),
             "title": obj.get("title"),
             "details": obj.get("details"),
-            "fid": obj.get("fid"),
+            "floor_uid": obj.get("floor_uid"),
             "blocks": [BlockDetails.from_dict(_item) for _item in obj["blocks"]] if obj.get("blocks") is not None else None,
             "avatar": Media.from_dict(obj["avatar"]) if obj.get("avatar") is not None else None
         })

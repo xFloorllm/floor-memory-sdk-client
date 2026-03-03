@@ -18,8 +18,8 @@ info:
   title: Floor Memory
   version: 1.0.0
 servers:
-- description: Testing Env
-  url: https://floortv.in
+- description: Prod Env
+  url: https://appfloor.in
 tags:
 - name: query
 - name: event
@@ -2567,8 +2567,7 @@ paths:
           content:
             application/json:
               schema:
-                properties: {}
-                type: object
+                $ref: "#/components/schemas/signInWithEmail_200_response"
           description: ""
         "400":
           content:
@@ -2699,8 +2698,7 @@ paths:
                     "timestamp": "2026-01-12T08:11:59.993079561Z"
                 }
               schema:
-                properties: {}
-                type: object
+                $ref: "#/components/schemas/signInWithEmail_200_response"
           description: ""
         "400":
           content:
@@ -2904,7 +2902,7 @@ components:
     UserDetails:
       example:
         pod_info:
-          fid: fid
+          is_owner: is_owner
           blocks:
           - type: type
             title: title
@@ -2912,22 +2910,23 @@ components:
           - type: type
             title: title
             block_id: block_id
+          floor_uid: floor_uid
           floor_id: floor_id
           details: details
           avatar:
             type: type
             url: url
           title: title
+          app_id: app_id
         profile:
-          fid: fid
+          FID: FID
+          floors:
+            permitted: permitted
+            remaining: remaining
           user_id: user_id
           blocks:
-          - type: type
-            title: title
-            block_id: block_id
-          - type: type
-            title: title
-            block_id: block_id
+            permitted: permitted
+            remaining: remaining
           name: name
           floor_id: floor_id
           avatar:
@@ -3047,6 +3046,16 @@ components:
       - message
       - path
       - timestamp
+      type: object
+    Remaining:
+      example:
+        permitted: permitted
+        remaining: remaining
+      properties:
+        permitted:
+          type: string
+        remaining:
+          type: string
       type: object
     query_request_filters:
       description: JSON format filters
@@ -3557,15 +3566,14 @@ components:
     signInWithEmail_200_response_profile:
       description: User profile details
       example:
-        fid: fid
+        FID: FID
+        floors:
+          permitted: permitted
+          remaining: remaining
         user_id: user_id
         blocks:
-        - type: type
-          title: title
-          block_id: block_id
-        - type: type
-          title: title
-          block_id: block_id
+          permitted: permitted
+          remaining: remaining
         name: name
         floor_id: floor_id
         avatar:
@@ -3577,14 +3585,13 @@ components:
         floor_id:
           description: Associated floor ID
           type: string
-        fid:
+        floors:
+          $ref: "#/components/schemas/Remaining"
+        blocks:
+          $ref: "#/components/schemas/Remaining"
+        FID:
           description: Unique ID of floor
           type: string
-        blocks:
-          description: List of Blocks
-          items:
-            $ref: "#/components/schemas/BlockDetails"
-          type: array
         name:
           description: User Name
           type: string
@@ -3600,13 +3607,13 @@ components:
         avatar:
           $ref: "#/components/schemas/signInWithEmail_200_response_profile_avatar"
       required:
-      - fid
+      - FID
       - floor_id
       - user_id
       type: object
     signInWithEmail_200_response_pod_info:
       example:
-        fid: fid
+        is_owner: is_owner
         blocks:
         - type: type
           title: title
@@ -3614,20 +3621,26 @@ components:
         - type: type
           title: title
           block_id: block_id
+        floor_uid: floor_uid
         floor_id: floor_id
         details: details
         avatar:
           type: type
           url: url
         title: title
+        app_id: app_id
       properties:
         floor_id:
+          type: string
+        is_owner:
+          type: string
+        app_id:
           type: string
         title:
           type: string
         details:
           type: string
-        fid:
+        floor_uid:
           type: string
         blocks:
           items:
@@ -3637,14 +3650,14 @@ components:
           $ref: "#/components/schemas/Media"
       required:
       - blocks
-      - fid
       - floor_id
+      - floor_uid
       - title
       type: object
     signInWithEmail_200_response:
       example:
         pod_info:
-          fid: fid
+          is_owner: is_owner
           blocks:
           - type: type
             title: title
@@ -3652,22 +3665,23 @@ components:
           - type: type
             title: title
             block_id: block_id
+          floor_uid: floor_uid
           floor_id: floor_id
           details: details
           avatar:
             type: type
             url: url
           title: title
+          app_id: app_id
         profile:
-          fid: fid
+          FID: FID
+          floors:
+            permitted: permitted
+            remaining: remaining
           user_id: user_id
           blocks:
-          - type: type
-            title: title
-            block_id: block_id
-          - type: type
-            title: title
-            block_id: block_id
+            permitted: permitted
+            remaining: remaining
           name: name
           floor_id: floor_id
           avatar:

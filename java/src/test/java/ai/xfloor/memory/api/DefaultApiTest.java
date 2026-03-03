@@ -53,7 +53,7 @@ public class DefaultApiTest {
     public void changeEmailTest() throws ApiException {
         String newEmailId = null;
         String activationCode = null;
-        Object response = api.changeEmail(newEmailId, activationCode);
+        SignInWithEmail200Response response = api.changeEmail(newEmailId, activationCode);
         // TODO: test validations
     }
 
@@ -68,7 +68,7 @@ public class DefaultApiTest {
     public void changeMobileNumberTest() throws ApiException {
         String newMobileNumber = null;
         String activationCode = null;
-        Object response = api.changeMobileNumber(newMobileNumber, activationCode);
+        SignInWithEmail200Response response = api.changeMobileNumber(newMobileNumber, activationCode);
         // TODO: test validations
     }
 

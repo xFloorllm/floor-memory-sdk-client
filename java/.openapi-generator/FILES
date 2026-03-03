@@ -34,6 +34,7 @@ docs/QueryRequest.md
 docs/QueryRequestFilters.md
 docs/QueryResponse.md
 docs/QueryResponseItemsInner.md
+docs/Remaining.md
 docs/ResetPassword200Response.md
 docs/ResetPassword400Response.md
 docs/SendValidationCode200Response.md
@@ -102,6 +103,7 @@ src/main/java/ai/xfloor/memory/model/QueryRequest.java
 src/main/java/ai/xfloor/memory/model/QueryRequestFilters.java
 src/main/java/ai/xfloor/memory/model/QueryResponse.java
 src/main/java/ai/xfloor/memory/model/QueryResponseItemsInner.java
+src/main/java/ai/xfloor/memory/model/Remaining.java
 src/main/java/ai/xfloor/memory/model/ResetPassword200Response.java
 src/main/java/ai/xfloor/memory/model/ResetPassword400Response.java
 src/main/java/ai/xfloor/memory/model/SendValidationCode200Response.java
@@ -143,6 +145,7 @@ src/test/java/ai/xfloor/memory/model/QueryRequestFiltersTest.java
 src/test/java/ai/xfloor/memory/model/QueryRequestTest.java
 src/test/java/ai/xfloor/memory/model/QueryResponseItemsInnerTest.java
 src/test/java/ai/xfloor/memory/model/QueryResponseTest.java
+src/test/java/ai/xfloor/memory/model/RemainingTest.java
 src/test/java/ai/xfloor/memory/model/ResetPassword200ResponseTest.java
 src/test/java/ai/xfloor/memory/model/ResetPassword400ResponseTest.java
 src/test/java/ai/xfloor/memory/model/SendValidationCode200ResponseTest.java

@@ -22,7 +22,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from xfloor_memory_sdk.models.block_details import BlockDetails
+from xfloor_memory_sdk.models.remaining import Remaining
 from xfloor_memory_sdk.models.sign_in_with_email200_response_profile_avatar import SignInWithEmail200ResponseProfileAvatar
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,14 +32,15 @@ class SignInWithEmail200ResponseProfile(BaseModel):
     User profile details
     """ # noqa: E501
     floor_id: StrictStr = Field(description="Associated floor ID")
-    fid: StrictStr = Field(description="Unique ID of floor")
-    blocks: Optional[List[BlockDetails]] = Field(default=None, description="List of Blocks")
+    floors: Optional[Remaining] = None
+    blocks: Optional[Remaining] = None
+    fid: StrictStr = Field(description="Unique ID of floor", alias="FID")
     name: Optional[StrictStr] = Field(default=None, description="User Name")
     email: Optional[StrictStr] = Field(default=None, description="Email ID")
     mobile_number: Optional[StrictStr] = Field(default=None, description="Mobile number")
     user_id: StrictStr = Field(description="Unique User ID")
     avatar: Optional[SignInWithEmail200ResponseProfileAvatar] = None
-    __properties: ClassVar[List[str]] = ["floor_id", "fid", "blocks", "name", "email", "mobile_number", "user_id", "avatar"]
+    __properties: ClassVar[List[str]] = ["floor_id", "floors", "blocks", "FID", "name", "email", "mobile_number", "user_id", "avatar"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,13 +81,12 @@ class SignInWithEmail200ResponseProfile(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in blocks (list)
-        _items = []
+        # override the default output from pydantic by calling `to_dict()` of floors
+        if self.floors:
+            _dict['floors'] = self.floors.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of blocks
         if self.blocks:
-            for _item_blocks in self.blocks:
-                if _item_blocks:
-                    _items.append(_item_blocks.to_dict())
-            _dict['blocks'] = _items
+            _dict['blocks'] = self.blocks.to_dict()
         # override the default output from pydantic by calling `to_dict()` of avatar
         if self.avatar:
             _dict['avatar'] = self.avatar.to_dict()
@@ -103,8 +103,9 @@ class SignInWithEmail200ResponseProfile(BaseModel):
 
         _obj = cls.model_validate({
             "floor_id": obj.get("floor_id"),
-            "fid": obj.get("fid"),
-            "blocks": [BlockDetails.from_dict(_item) for _item in obj["blocks"]] if obj.get("blocks") is not None else None,
+            "floors": Remaining.from_dict(obj["floors"]) if obj.get("floors") is not None else None,
+            "blocks": Remaining.from_dict(obj["blocks"]) if obj.get("blocks") is not None else None,
+            "FID": obj.get("FID"),
             "name": obj.get("name"),
             "email": obj.get("email"),
             "mobile_number": obj.get("mobile_number"),

@@ -15,14 +15,21 @@ Notes
 **floorId**
 
 | **String** | Associated floor ID |
-**fid**
+**floors**
 
-| **String** | Unique ID of floor |
-**blocks**
-
-| [**[BlockDetails]**](BlockDetails.md) | List of Blocks |
+| [**Remaining**](Remaining.md) |
+|
 
 [optional]
+**blocks**
+
+| [**Remaining**](Remaining.md) |
+|
+
+[optional]
+**FID**
+
+| **String** | Unique ID of floor |
 **name**
 
 | **String** | User Name |

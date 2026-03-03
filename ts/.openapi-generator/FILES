@@ -30,6 +30,7 @@ docs/QueryRequest.md
 docs/QueryRequestFilters.md
 docs/QueryResponse.md
 docs/QueryResponseItemsInner.md
+docs/Remaining.md
 docs/ResetPassword200Response.md
 docs/ResetPassword400Response.md
 docs/SendValidationCode200Response.md
@@ -74,6 +75,7 @@ src/models/QueryRequest.ts
 src/models/QueryRequestFilters.ts
 src/models/QueryResponse.ts
 src/models/QueryResponseItemsInner.ts
+src/models/Remaining.ts
 src/models/ResetPassword200Response.ts
 src/models/ResetPassword400Response.ts
 src/models/SendValidationCode200Response.ts

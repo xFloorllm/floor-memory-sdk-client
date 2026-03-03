@@ -20,7 +20,7 @@ import Media from './Media';
 /**
  * The SignInWithEmail200ResponsePodInfo model module.
  * @module model/SignInWithEmail200ResponsePodInfo
- * @version 1.0.18
+ * @version 1.0.19
  */
 class SignInWithEmail200ResponsePodInfo {
     /**
@@ -28,12 +28,12 @@ class SignInWithEmail200ResponsePodInfo {
      * @alias module:model/SignInWithEmail200ResponsePodInfo
      * @param floorId {String} 
      * @param title {String} 
-     * @param fid {String} 
+     * @param floorUid {String} 
      * @param blocks {Array.<module:model/BlockDetails>} 
      */
-    constructor(floorId, title, fid, blocks) { 
+    constructor(floorId, title, floorUid, blocks) { 
         
-        SignInWithEmail200ResponsePodInfo.initialize(this, floorId, title, fid, blocks);
+        SignInWithEmail200ResponsePodInfo.initialize(this, floorId, title, floorUid, blocks);
     }
 
     /**
@@ -41,10 +41,10 @@ class SignInWithEmail200ResponsePodInfo {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, floorId, title, fid, blocks) { 
+    static initialize(obj, floorId, title, floorUid, blocks) { 
         obj['floor_id'] = floorId;
         obj['title'] = title;
-        obj['fid'] = fid;
+        obj['floor_uid'] = floorUid;
         obj['blocks'] = blocks;
     }
 
@@ -62,14 +62,20 @@ class SignInWithEmail200ResponsePodInfo {
             if (data.hasOwnProperty('floor_id')) {
                 obj['floor_id'] = ApiClient.convertToType(data['floor_id'], 'String');
             }
+            if (data.hasOwnProperty('is_owner')) {
+                obj['is_owner'] = ApiClient.convertToType(data['is_owner'], 'String');
+            }
+            if (data.hasOwnProperty('app_id')) {
+                obj['app_id'] = ApiClient.convertToType(data['app_id'], 'String');
+            }
             if (data.hasOwnProperty('title')) {
                 obj['title'] = ApiClient.convertToType(data['title'], 'String');
             }
             if (data.hasOwnProperty('details')) {
                 obj['details'] = ApiClient.convertToType(data['details'], 'String');
             }
-            if (data.hasOwnProperty('fid')) {
-                obj['fid'] = ApiClient.convertToType(data['fid'], 'String');
+            if (data.hasOwnProperty('floor_uid')) {
+                obj['floor_uid'] = ApiClient.convertToType(data['floor_uid'], 'String');
             }
             if (data.hasOwnProperty('blocks')) {
                 obj['blocks'] = ApiClient.convertToType(data['blocks'], [BlockDetails]);
@@ -98,6 +104,14 @@ class SignInWithEmail200ResponsePodInfo {
             throw new Error("Expected the field `floor_id` to be a primitive type in the JSON string but got " + data['floor_id']);
         }
         // ensure the json data is a string
+        if (data['is_owner'] && !(typeof data['is_owner'] === 'string' || data['is_owner'] instanceof String)) {
+            throw new Error("Expected the field `is_owner` to be a primitive type in the JSON string but got " + data['is_owner']);
+        }
+        // ensure the json data is a string
+        if (data['app_id'] && !(typeof data['app_id'] === 'string' || data['app_id'] instanceof String)) {
+            throw new Error("Expected the field `app_id` to be a primitive type in the JSON string but got " + data['app_id']);
+        }
+        // ensure the json data is a string
         if (data['title'] && !(typeof data['title'] === 'string' || data['title'] instanceof String)) {
             throw new Error("Expected the field `title` to be a primitive type in the JSON string but got " + data['title']);
         }
@@ -106,8 +120,8 @@ class SignInWithEmail200ResponsePodInfo {
             throw new Error("Expected the field `details` to be a primitive type in the JSON string but got " + data['details']);
         }
         // ensure the json data is a string
-        if (data['fid'] && !(typeof data['fid'] === 'string' || data['fid'] instanceof String)) {
-            throw new Error("Expected the field `fid` to be a primitive type in the JSON string but got " + data['fid']);
+        if (data['floor_uid'] && !(typeof data['floor_uid'] === 'string' || data['floor_uid'] instanceof String)) {
+            throw new Error("Expected the field `floor_uid` to be a primitive type in the JSON string but got " + data['floor_uid']);
         }
         if (data['blocks']) { // data not null
             // ensure the json data is an array
@@ -130,12 +144,22 @@ class SignInWithEmail200ResponsePodInfo {
 
 }
 
-SignInWithEmail200ResponsePodInfo.RequiredProperties = ["floor_id", "title", "fid", "blocks"];
+SignInWithEmail200ResponsePodInfo.RequiredProperties = ["floor_id", "title", "floor_uid", "blocks"];
 
 /**
  * @member {String} floor_id
  */
 SignInWithEmail200ResponsePodInfo.prototype['floor_id'] = undefined;
+
+/**
+ * @member {String} is_owner
+ */
+SignInWithEmail200ResponsePodInfo.prototype['is_owner'] = undefined;
+
+/**
+ * @member {String} app_id
+ */
+SignInWithEmail200ResponsePodInfo.prototype['app_id'] = undefined;
 
 /**
  * @member {String} title
@@ -148,9 +172,9 @@ SignInWithEmail200ResponsePodInfo.prototype['title'] = undefined;
 SignInWithEmail200ResponsePodInfo.prototype['details'] = undefined;
 
 /**
- * @member {String} fid
+ * @member {String} floor_uid
  */
-SignInWithEmail200ResponsePodInfo.prototype['fid'] = undefined;
+SignInWithEmail200ResponsePodInfo.prototype['floor_uid'] = undefined;
 
 /**
  * @member {Array.<module:model/BlockDetails>} blocks
