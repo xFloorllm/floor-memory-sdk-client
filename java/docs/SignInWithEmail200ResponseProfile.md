@@ -10,9 +10,9 @@ User profile details
 |------------ | ------------- | ------------- | -------------|
 |**floorId** | **String** | Associated floor ID |
 |
-|**floors** | [**Remaining**](Remaining.md) |
+|**floorCountInfo** | [**Remaining**](Remaining.md) |
 | [optional] |
-|**blocks** | [**Remaining**](Remaining.md) |
+|**blockCountInfo** | [**Remaining**](Remaining.md) |
 | [optional] |
 |**FID** | **String** | Unique ID of floor |
 |

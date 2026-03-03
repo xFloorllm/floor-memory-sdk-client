@@ -17,13 +17,13 @@ Notes
 **floor_id**
 
 | **str** | Associated floor ID |
-**floors**
+**floor_count_info**
 
 | [**Remaining**](Remaining.md) |
 |
 
 [optional]
-**blocks**
+**block_count_info**
 
 | [**Remaining**](Remaining.md) |
 |

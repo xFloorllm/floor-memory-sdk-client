@@ -47,13 +47,13 @@ export interface SignInWithEmail200ResponseProfile {
      * @type {Remaining}
      * @memberof SignInWithEmail200ResponseProfile
      */
-    floors?: Remaining;
+    floorCountInfo?: Remaining;
     /**
      * 
      * @type {Remaining}
      * @memberof SignInWithEmail200ResponseProfile
      */
-    blocks?: Remaining;
+    blockCountInfo?: Remaining;
     /**
      * Unique ID of floor
      * @type {string}
@@ -113,8 +113,8 @@ export function SignInWithEmail200ResponseProfileFromJSONTyped(json: any, ignore
     return {
         
         'floorId': json['floor_id'],
-        'floors': json['floors'] == null ? undefined : RemainingFromJSON(json['floors']),
-        'blocks': json['blocks'] == null ? undefined : RemainingFromJSON(json['blocks']),
+        'floorCountInfo': json['floor_count_info'] == null ? undefined : RemainingFromJSON(json['floor_count_info']),
+        'blockCountInfo': json['block_count_info'] == null ? undefined : RemainingFromJSON(json['block_count_info']),
         'fID': json['FID'],
         'name': json['name'] == null ? undefined : json['name'],
         'email': json['email'] == null ? undefined : json['email'],
@@ -136,8 +136,8 @@ export function SignInWithEmail200ResponseProfileToJSONTyped(value?: SignInWithE
     return {
         
         'floor_id': value['floorId'],
-        'floors': RemainingToJSON(value['floors']),
-        'blocks': RemainingToJSON(value['blocks']),
+        'floor_count_info': RemainingToJSON(value['floorCountInfo']),
+        'block_count_info': RemainingToJSON(value['blockCountInfo']),
         'FID': value['fID'],
         'name': value['name'],
         'email': value['email'],

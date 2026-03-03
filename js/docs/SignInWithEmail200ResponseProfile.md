@@ -15,13 +15,13 @@ Notes
 **floorId**
 
 | **String** | Associated floor ID |
-**floors**
+**floorCountInfo**
 
 | [**Remaining**](Remaining.md) |
 |
 
 [optional]
-**blocks**
+**blockCountInfo**
 
 | [**Remaining**](Remaining.md) |
 |

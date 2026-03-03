@@ -31,7 +31,7 @@ import ValidateCode412Response from '../model/ValidateCode412Response';
 /**
 * Default service.
 * @module api/DefaultApi
-* @version 1.0.19
+* @version 1.0.20
 */
 export default class DefaultApi {
 

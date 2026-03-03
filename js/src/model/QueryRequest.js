@@ -19,7 +19,7 @@ import QueryRequestFilters from './QueryRequestFilters';
 /**
  * The QueryRequest model module.
  * @module model/QueryRequest
- * @version 1.0.19
+ * @version 1.0.20
  */
 class QueryRequest {
     /**

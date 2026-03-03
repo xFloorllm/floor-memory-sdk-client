@@ -48,19 +48,19 @@ public class SignInWithEmail200ResponseProfileTest {
     }
 
     /**
-     * Test the property 'floors'
+     * Test the property 'floorCountInfo'
      */
     @Test
-    public void floorsTest() {
-        // TODO: test floors
+    public void floorCountInfoTest() {
+        // TODO: test floorCountInfo
     }
 
     /**
-     * Test the property 'blocks'
+     * Test the property 'blockCountInfo'
      */
     @Test
-    public void blocksTest() {
-        // TODO: test blocks
+    public void blockCountInfoTest() {
+        // TODO: test blockCountInfo
     }
 
     /**

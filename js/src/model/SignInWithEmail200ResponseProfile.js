@@ -20,7 +20,7 @@ import SignInWithEmail200ResponseProfileAvatar from './SignInWithEmail200Respons
 /**
  * The SignInWithEmail200ResponseProfile model module.
  * @module model/SignInWithEmail200ResponseProfile
- * @version 1.0.19
+ * @version 1.0.20
  */
 class SignInWithEmail200ResponseProfile {
     /**
@@ -61,11 +61,11 @@ class SignInWithEmail200ResponseProfile {
             if (data.hasOwnProperty('floor_id')) {
                 obj['floor_id'] = ApiClient.convertToType(data['floor_id'], 'String');
             }
-            if (data.hasOwnProperty('floors')) {
-                obj['floors'] = Remaining.constructFromObject(data['floors']);
+            if (data.hasOwnProperty('floor_count_info')) {
+                obj['floor_count_info'] = Remaining.constructFromObject(data['floor_count_info']);
             }
-            if (data.hasOwnProperty('blocks')) {
-                obj['blocks'] = Remaining.constructFromObject(data['blocks']);
+            if (data.hasOwnProperty('block_count_info')) {
+                obj['block_count_info'] = Remaining.constructFromObject(data['block_count_info']);
             }
             if (data.hasOwnProperty('FID')) {
                 obj['FID'] = ApiClient.convertToType(data['FID'], 'String');
@@ -105,13 +105,13 @@ class SignInWithEmail200ResponseProfile {
         if (data['floor_id'] && !(typeof data['floor_id'] === 'string' || data['floor_id'] instanceof String)) {
             throw new Error("Expected the field `floor_id` to be a primitive type in the JSON string but got " + data['floor_id']);
         }
-        // validate the optional field `floors`
-        if (data['floors']) { // data not null
-          Remaining.validateJSON(data['floors']);
+        // validate the optional field `floor_count_info`
+        if (data['floor_count_info']) { // data not null
+          Remaining.validateJSON(data['floor_count_info']);
         }
-        // validate the optional field `blocks`
-        if (data['blocks']) { // data not null
-          Remaining.validateJSON(data['blocks']);
+        // validate the optional field `block_count_info`
+        if (data['block_count_info']) { // data not null
+          Remaining.validateJSON(data['block_count_info']);
         }
         // ensure the json data is a string
         if (data['FID'] && !(typeof data['FID'] === 'string' || data['FID'] instanceof String)) {
@@ -153,14 +153,14 @@ SignInWithEmail200ResponseProfile.RequiredProperties = ["floor_id", "FID", "user
 SignInWithEmail200ResponseProfile.prototype['floor_id'] = undefined;
 
 /**
- * @member {module:model/Remaining} floors
+ * @member {module:model/Remaining} floor_count_info
  */
-SignInWithEmail200ResponseProfile.prototype['floors'] = undefined;
+SignInWithEmail200ResponseProfile.prototype['floor_count_info'] = undefined;
 
 /**
- * @member {module:model/Remaining} blocks
+ * @member {module:model/Remaining} block_count_info
  */
-SignInWithEmail200ResponseProfile.prototype['blocks'] = undefined;
+SignInWithEmail200ResponseProfile.prototype['block_count_info'] = undefined;
 
 /**
  * Unique ID of floor

@@ -60,14 +60,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property floors (base name: "floors")', function() {
-      // uncomment below and update the code to test the property floors
+    it('should have the property floorCountInfo (base name: "floor_count_info")', function() {
+      // uncomment below and update the code to test the property floorCountInfo
       //var instance = new XfloorFloorMemorySdkJs.SignInWithEmail200ResponseProfile();
       //expect(instance).to.be();
     });
 
-    it('should have the property blocks (base name: "blocks")', function() {
-      // uncomment below and update the code to test the property blocks
+    it('should have the property blockCountInfo (base name: "block_count_info")', function() {
+      // uncomment below and update the code to test the property blockCountInfo
       //var instance = new XfloorFloorMemorySdkJs.SignInWithEmail200ResponseProfile();
       //expect(instance).to.be();
     });

@@ -32,15 +32,15 @@ class SignInWithEmail200ResponseProfile(BaseModel):
     User profile details
     """ # noqa: E501
     floor_id: StrictStr = Field(description="Associated floor ID")
-    floors: Optional[Remaining] = None
-    blocks: Optional[Remaining] = None
+    floor_count_info: Optional[Remaining] = None
+    block_count_info: Optional[Remaining] = None
     fid: StrictStr = Field(description="Unique ID of floor", alias="FID")
     name: Optional[StrictStr] = Field(default=None, description="User Name")
     email: Optional[StrictStr] = Field(default=None, description="Email ID")
     mobile_number: Optional[StrictStr] = Field(default=None, description="Mobile number")
     user_id: StrictStr = Field(description="Unique User ID")
     avatar: Optional[SignInWithEmail200ResponseProfileAvatar] = None
-    __properties: ClassVar[List[str]] = ["floor_id", "floors", "blocks", "FID", "name", "email", "mobile_number", "user_id", "avatar"]
+    __properties: ClassVar[List[str]] = ["floor_id", "floor_count_info", "block_count_info", "FID", "name", "email", "mobile_number", "user_id", "avatar"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,12 +81,12 @@ class SignInWithEmail200ResponseProfile(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of floors
-        if self.floors:
-            _dict['floors'] = self.floors.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of blocks
-        if self.blocks:
-            _dict['blocks'] = self.blocks.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of floor_count_info
+        if self.floor_count_info:
+            _dict['floor_count_info'] = self.floor_count_info.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of block_count_info
+        if self.block_count_info:
+            _dict['block_count_info'] = self.block_count_info.to_dict()
         # override the default output from pydantic by calling `to_dict()` of avatar
         if self.avatar:
             _dict['avatar'] = self.avatar.to_dict()
@@ -103,8 +103,8 @@ class SignInWithEmail200ResponseProfile(BaseModel):
 
         _obj = cls.model_validate({
             "floor_id": obj.get("floor_id"),
-            "floors": Remaining.from_dict(obj["floors"]) if obj.get("floors") is not None else None,
-            "blocks": Remaining.from_dict(obj["blocks"]) if obj.get("blocks") is not None else None,
+            "floor_count_info": Remaining.from_dict(obj["floor_count_info"]) if obj.get("floor_count_info") is not None else None,
+            "block_count_info": Remaining.from_dict(obj["block_count_info"]) if obj.get("block_count_info") is not None else None,
             "FID": obj.get("FID"),
             "name": obj.get("name"),
             "email": obj.get("email"),

@@ -2920,15 +2920,15 @@ components:
           app_id: app_id
         profile:
           FID: FID
-          floors:
+          block_count_info:
             permitted: permitted
             remaining: remaining
           user_id: user_id
-          blocks:
-            permitted: permitted
-            remaining: remaining
           name: name
           floor_id: floor_id
+          floor_count_info:
+            permitted: permitted
+            remaining: remaining
           avatar:
             id: id
             url: url
@@ -3567,15 +3567,15 @@ components:
       description: User profile details
       example:
         FID: FID
-        floors:
+        block_count_info:
           permitted: permitted
           remaining: remaining
         user_id: user_id
-        blocks:
-          permitted: permitted
-          remaining: remaining
         name: name
         floor_id: floor_id
+        floor_count_info:
+          permitted: permitted
+          remaining: remaining
         avatar:
           id: id
           url: url
@@ -3585,9 +3585,9 @@ components:
         floor_id:
           description: Associated floor ID
           type: string
-        floors:
+        floor_count_info:
           $ref: "#/components/schemas/Remaining"
-        blocks:
+        block_count_info:
           $ref: "#/components/schemas/Remaining"
         FID:
           description: Unique ID of floor
@@ -3675,15 +3675,15 @@ components:
           app_id: app_id
         profile:
           FID: FID
-          floors:
+          block_count_info:
             permitted: permitted
             remaining: remaining
           user_id: user_id
-          blocks:
-            permitted: permitted
-            remaining: remaining
           name: name
           floor_id: floor_id
+          floor_count_info:
+            permitted: permitted
+            remaining: remaining
           avatar:
             id: id
             url: url

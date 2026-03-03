@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The Media model module.
  * @module model/Media
- * @version 1.0.19
+ * @version 1.0.20
  */
 class Media {
     /**

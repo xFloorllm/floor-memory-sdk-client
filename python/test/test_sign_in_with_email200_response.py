@@ -38,10 +38,10 @@ class TestSignInWithEmail200Response(unittest.TestCase):
             return SignInWithEmail200Response(
                 profile = xfloor_memory_sdk.models.sign_in_with_email_200_response_profile.signInWithEmail_200_response_profile(
                     floor_id = '', 
-                    floors = xfloor_memory_sdk.models.remaining.Remaining(
+                    floor_count_info = xfloor_memory_sdk.models.remaining.Remaining(
                         permitted = '', 
                         remaining = '', ), 
-                    blocks = xfloor_memory_sdk.models.remaining.Remaining(
+                    block_count_info = xfloor_memory_sdk.models.remaining.Remaining(
                         permitted = '', 
                         remaining = '', ), 
                     fid = '', 
@@ -74,10 +74,10 @@ class TestSignInWithEmail200Response(unittest.TestCase):
             return SignInWithEmail200Response(
                 profile = xfloor_memory_sdk.models.sign_in_with_email_200_response_profile.signInWithEmail_200_response_profile(
                     floor_id = '', 
-                    floors = xfloor_memory_sdk.models.remaining.Remaining(
+                    floor_count_info = xfloor_memory_sdk.models.remaining.Remaining(
                         permitted = '', 
                         remaining = '', ), 
-                    blocks = xfloor_memory_sdk.models.remaining.Remaining(
+                    block_count_info = xfloor_memory_sdk.models.remaining.Remaining(
                         permitted = '', 
                         remaining = '', ), 
                     fid = '', 

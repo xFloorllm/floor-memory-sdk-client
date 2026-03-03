@@ -8,8 +8,8 @@ User profile details
 Name | Type
 ------------ | -------------
 `floorId` | string
-`floors` | [Remaining](Remaining.md)
-`blocks` | [Remaining](Remaining.md)
+`floorCountInfo` | [Remaining](Remaining.md)
+`blockCountInfo` | [Remaining](Remaining.md)
 `fID` | string
 `name` | string
 `email` | string
@@ -25,8 +25,8 @@ import type { SignInWithEmail200ResponseProfile } from '@xfloor/floor-memory-sdk
 // TODO: Update the object below with actual values
 const example = {
   "floorId": null,
-  "floors": null,
-  "blocks": null,
+  "floorCountInfo": null,
+  "blockCountInfo": null,
   "fID": null,
   "name": null,
   "email": null,

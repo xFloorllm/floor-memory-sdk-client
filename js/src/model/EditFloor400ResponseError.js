@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The EditFloor400ResponseError model module.
  * @module model/EditFloor400ResponseError
- * @version 1.0.19
+ * @version 1.0.20
  */
 class EditFloor400ResponseError {
     /**

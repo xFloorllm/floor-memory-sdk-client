@@ -59,15 +59,15 @@ public class SignInWithEmail200ResponseProfile {
   @javax.annotation.Nonnull
   private String floorId;
 
-  public static final String SERIALIZED_NAME_FLOORS = "floors";
-  @SerializedName(SERIALIZED_NAME_FLOORS)
+  public static final String SERIALIZED_NAME_FLOOR_COUNT_INFO = "floor_count_info";
+  @SerializedName(SERIALIZED_NAME_FLOOR_COUNT_INFO)
   @javax.annotation.Nullable
-  private Remaining floors;
+  private Remaining floorCountInfo;
 
-  public static final String SERIALIZED_NAME_BLOCKS = "blocks";
-  @SerializedName(SERIALIZED_NAME_BLOCKS)
+  public static final String SERIALIZED_NAME_BLOCK_COUNT_INFO = "block_count_info";
+  @SerializedName(SERIALIZED_NAME_BLOCK_COUNT_INFO)
   @javax.annotation.Nullable
-  private Remaining blocks;
+  private Remaining blockCountInfo;
 
   public static final String SERIALIZED_NAME_F_I_D = "FID";
   @SerializedName(SERIALIZED_NAME_F_I_D)
@@ -121,41 +121,41 @@ public class SignInWithEmail200ResponseProfile {
   }
 
 
-  public SignInWithEmail200ResponseProfile floors(@javax.annotation.Nullable Remaining floors) {
-    this.floors = floors;
+  public SignInWithEmail200ResponseProfile floorCountInfo(@javax.annotation.Nullable Remaining floorCountInfo) {
+    this.floorCountInfo = floorCountInfo;
     return this;
   }
 
   /**
-   * Get floors
-   * @return floors
+   * Get floorCountInfo
+   * @return floorCountInfo
    */
   @javax.annotation.Nullable
-  public Remaining getFloors() {
-    return floors;
+  public Remaining getFloorCountInfo() {
+    return floorCountInfo;
   }
 
-  public void setFloors(@javax.annotation.Nullable Remaining floors) {
-    this.floors = floors;
+  public void setFloorCountInfo(@javax.annotation.Nullable Remaining floorCountInfo) {
+    this.floorCountInfo = floorCountInfo;
   }
 
 
-  public SignInWithEmail200ResponseProfile blocks(@javax.annotation.Nullable Remaining blocks) {
-    this.blocks = blocks;
+  public SignInWithEmail200ResponseProfile blockCountInfo(@javax.annotation.Nullable Remaining blockCountInfo) {
+    this.blockCountInfo = blockCountInfo;
     return this;
   }
 
   /**
-   * Get blocks
-   * @return blocks
+   * Get blockCountInfo
+   * @return blockCountInfo
    */
   @javax.annotation.Nullable
-  public Remaining getBlocks() {
-    return blocks;
+  public Remaining getBlockCountInfo() {
+    return blockCountInfo;
   }
 
-  public void setBlocks(@javax.annotation.Nullable Remaining blocks) {
-    this.blocks = blocks;
+  public void setBlockCountInfo(@javax.annotation.Nullable Remaining blockCountInfo) {
+    this.blockCountInfo = blockCountInfo;
   }
 
 
@@ -284,8 +284,8 @@ public class SignInWithEmail200ResponseProfile {
     }
     SignInWithEmail200ResponseProfile signInWithEmail200ResponseProfile = (SignInWithEmail200ResponseProfile) o;
     return Objects.equals(this.floorId, signInWithEmail200ResponseProfile.floorId) &&
-        Objects.equals(this.floors, signInWithEmail200ResponseProfile.floors) &&
-        Objects.equals(this.blocks, signInWithEmail200ResponseProfile.blocks) &&
+        Objects.equals(this.floorCountInfo, signInWithEmail200ResponseProfile.floorCountInfo) &&
+        Objects.equals(this.blockCountInfo, signInWithEmail200ResponseProfile.blockCountInfo) &&
         Objects.equals(this.FID, signInWithEmail200ResponseProfile.FID) &&
         Objects.equals(this.name, signInWithEmail200ResponseProfile.name) &&
         Objects.equals(this.email, signInWithEmail200ResponseProfile.email) &&
@@ -296,7 +296,7 @@ public class SignInWithEmail200ResponseProfile {
 
   @Override
   public int hashCode() {
-    return Objects.hash(floorId, floors, blocks, FID, name, email, mobileNumber, userId, avatar);
+    return Objects.hash(floorId, floorCountInfo, blockCountInfo, FID, name, email, mobileNumber, userId, avatar);
   }
 
   @Override
@@ -304,8 +304,8 @@ public class SignInWithEmail200ResponseProfile {
     StringBuilder sb = new StringBuilder();
     sb.append("class SignInWithEmail200ResponseProfile {\n");
     sb.append("    floorId: ").append(toIndentedString(floorId)).append("\n");
-    sb.append("    floors: ").append(toIndentedString(floors)).append("\n");
-    sb.append("    blocks: ").append(toIndentedString(blocks)).append("\n");
+    sb.append("    floorCountInfo: ").append(toIndentedString(floorCountInfo)).append("\n");
+    sb.append("    blockCountInfo: ").append(toIndentedString(blockCountInfo)).append("\n");
     sb.append("    FID: ").append(toIndentedString(FID)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
@@ -333,7 +333,7 @@ public class SignInWithEmail200ResponseProfile {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("floor_id", "floors", "blocks", "FID", "name", "email", "mobile_number", "user_id", "avatar"));
+    openapiFields = new HashSet<String>(Arrays.asList("floor_id", "floor_count_info", "block_count_info", "FID", "name", "email", "mobile_number", "user_id", "avatar"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(Arrays.asList("floor_id", "FID", "user_id"));
@@ -370,13 +370,13 @@ public class SignInWithEmail200ResponseProfile {
       if (!jsonObj.get("floor_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `floor_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("floor_id").toString()));
       }
-      // validate the optional field `floors`
-      if (jsonObj.get("floors") != null && !jsonObj.get("floors").isJsonNull()) {
-        Remaining.validateJsonElement(jsonObj.get("floors"));
+      // validate the optional field `floor_count_info`
+      if (jsonObj.get("floor_count_info") != null && !jsonObj.get("floor_count_info").isJsonNull()) {
+        Remaining.validateJsonElement(jsonObj.get("floor_count_info"));
       }
-      // validate the optional field `blocks`
-      if (jsonObj.get("blocks") != null && !jsonObj.get("blocks").isJsonNull()) {
-        Remaining.validateJsonElement(jsonObj.get("blocks"));
+      // validate the optional field `block_count_info`
+      if (jsonObj.get("block_count_info") != null && !jsonObj.get("block_count_info").isJsonNull()) {
+        Remaining.validateJsonElement(jsonObj.get("block_count_info"));
       }
       if (!jsonObj.get("FID").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `FID` to be a primitive type in the JSON string but got `%s`", jsonObj.get("FID").toString()));
