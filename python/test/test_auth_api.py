@@ -48,13 +48,6 @@ class TestAuthApi(unittest.TestCase):
         """
         pass
 
-    def test_register_external_user_identity(self) -> None:
-        """Test case for register_external_user_identity
-
-        External User Registration
-        """
-        pass
-
     def test_reset_password(self) -> None:
         """Test case for reset_password
 

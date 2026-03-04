@@ -14,7 +14,6 @@
 package ai.xfloor.memory.api;
 
 import ai.xfloor.memory.client.ApiException;
-import ai.xfloor.memory.model.ChangeEmail200Response;
 import ai.xfloor.memory.model.ChangePassword200Response;
 import ai.xfloor.memory.model.GetRecentEvents400Response;
 import ai.xfloor.memory.model.ResetPassword200Response;
@@ -52,7 +51,7 @@ public class AuthApiTest {
     public void changeEmailTest() throws ApiException {
         String newEmailId = null;
         String activationCode = null;
-        ChangeEmail200Response response = api.changeEmail(newEmailId, activationCode);
+        SignInResponse response = api.changeEmail(newEmailId, activationCode);
         // TODO: test validations
     }
 
@@ -67,7 +66,7 @@ public class AuthApiTest {
     public void changeMobileNumberTest() throws ApiException {
         String newMobileNumber = null;
         String activationCode = null;
-        ChangeEmail200Response response = api.changeMobileNumber(newMobileNumber, activationCode);
+        SignInResponse response = api.changeMobileNumber(newMobileNumber, activationCode);
         // TODO: test validations
     }
 
@@ -84,23 +83,6 @@ public class AuthApiTest {
         String activationCode = null;
         String userId = null;
         ChangePassword200Response response = api.changePassword(newPassword, activationCode, userId);
-        // TODO: test validations
-    }
-
-    /**
-     * External User Registration
-     *
-     * This API allows a calling application to **pass externally authenticated user identity information to xfloor** after completing authentication within its own system.  xfloor **does not perform authentication, credential verification, or session management** as part of this API. The calling application is fully responsible for validating the user and ensuring the correctness of the identity data provided.  Upon invocation, xfloor will:  * **Create a new user profile** if no matching user exists, or * **Update the existing user profile** if the user is already present.  xfloor returns a unique &#x60;xfloor_user_id&#x60;, which serves as the **canonical user identifier** and must be used in all subsequent xfloor APIs, including floors, blocks, conversations, memory interactions, and analytics.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void registerExternalUserIdentityTest() throws ApiException {
-        String mobileNumber = null;
-        String emailId = null;
-        String name = null;
-        String appId = null;
-        ChangeEmail200Response response = api.registerExternalUserIdentity(mobileNumber, emailId, name, appId);
         // TODO: test validations
     }
 

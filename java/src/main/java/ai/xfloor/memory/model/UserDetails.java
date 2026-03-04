@@ -16,8 +16,8 @@
 package ai.xfloor.memory.model;
 
 import java.util.Objects;
-import ai.xfloor.memory.model.ChangeEmail200ResponsePodInfo;
-import ai.xfloor.memory.model.ChangeEmail200ResponseProfile;
+import ai.xfloor.memory.model.UserDetailsPodInfo;
+import ai.xfloor.memory.model.UserDetailsProfile;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -57,12 +57,12 @@ public class UserDetails {
   public static final String SERIALIZED_NAME_PROFILE = "profile";
   @SerializedName(SERIALIZED_NAME_PROFILE)
   @javax.annotation.Nonnull
-  private ChangeEmail200ResponseProfile profile;
+  private UserDetailsProfile profile;
 
   public static final String SERIALIZED_NAME_POD_INFO = "pod_info";
   @SerializedName(SERIALIZED_NAME_POD_INFO)
   @javax.annotation.Nonnull
-  private ChangeEmail200ResponsePodInfo podInfo;
+  private UserDetailsPodInfo podInfo;
 
   public static final String SERIALIZED_NAME_APP_ID = "app_id";
   @SerializedName(SERIALIZED_NAME_APP_ID)
@@ -72,7 +72,7 @@ public class UserDetails {
   public UserDetails() {
   }
 
-  public UserDetails profile(@javax.annotation.Nonnull ChangeEmail200ResponseProfile profile) {
+  public UserDetails profile(@javax.annotation.Nonnull UserDetailsProfile profile) {
     this.profile = profile;
     return this;
   }
@@ -82,16 +82,16 @@ public class UserDetails {
    * @return profile
    */
   @javax.annotation.Nonnull
-  public ChangeEmail200ResponseProfile getProfile() {
+  public UserDetailsProfile getProfile() {
     return profile;
   }
 
-  public void setProfile(@javax.annotation.Nonnull ChangeEmail200ResponseProfile profile) {
+  public void setProfile(@javax.annotation.Nonnull UserDetailsProfile profile) {
     this.profile = profile;
   }
 
 
-  public UserDetails podInfo(@javax.annotation.Nonnull ChangeEmail200ResponsePodInfo podInfo) {
+  public UserDetails podInfo(@javax.annotation.Nonnull UserDetailsPodInfo podInfo) {
     this.podInfo = podInfo;
     return this;
   }
@@ -101,11 +101,11 @@ public class UserDetails {
    * @return podInfo
    */
   @javax.annotation.Nonnull
-  public ChangeEmail200ResponsePodInfo getPodInfo() {
+  public UserDetailsPodInfo getPodInfo() {
     return podInfo;
   }
 
-  public void setPodInfo(@javax.annotation.Nonnull ChangeEmail200ResponsePodInfo podInfo) {
+  public void setPodInfo(@javax.annotation.Nonnull UserDetailsPodInfo podInfo) {
     this.podInfo = podInfo;
   }
 
@@ -212,9 +212,9 @@ public class UserDetails {
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the required field `profile`
-      ChangeEmail200ResponseProfile.validateJsonElement(jsonObj.get("profile"));
+      UserDetailsProfile.validateJsonElement(jsonObj.get("profile"));
       // validate the required field `pod_info`
-      ChangeEmail200ResponsePodInfo.validateJsonElement(jsonObj.get("pod_info"));
+      UserDetailsPodInfo.validateJsonElement(jsonObj.get("pod_info"));
       if ((jsonObj.get("app_id") != null && !jsonObj.get("app_id").isJsonNull()) && !jsonObj.get("app_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `app_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("app_id").toString()));
       }

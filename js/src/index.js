@@ -16,10 +16,6 @@
 
 import ApiClient from './ApiClient';
 import BlockDetails from './model/BlockDetails';
-import ChangeEmail200Response from './model/ChangeEmail200Response';
-import ChangeEmail200ResponsePodInfo from './model/ChangeEmail200ResponsePodInfo';
-import ChangeEmail200ResponseProfile from './model/ChangeEmail200ResponseProfile';
-import ChangeEmail200ResponseProfileAvatar from './model/ChangeEmail200ResponseProfileAvatar';
 import ChangePassword200Response from './model/ChangePassword200Response';
 import EditFloor200Response from './model/EditFloor200Response';
 import EditFloor400Response from './model/EditFloor400Response';
@@ -49,6 +45,9 @@ import SignInResponse from './model/SignInResponse';
 import SignUp200Response from './model/SignUp200Response';
 import SignUpResponse from './model/SignUpResponse';
 import UserDetails from './model/UserDetails';
+import UserDetailsPodInfo from './model/UserDetailsPodInfo';
+import UserDetailsProfile from './model/UserDetailsProfile';
+import UserDetailsProfileAvatar from './model/UserDetailsProfileAvatar';
 import ValidateCode400Response from './model/ValidateCode400Response';
 import ValidateCode400ResponseError from './model/ValidateCode400ResponseError';
 import ValidateCode412Response from './model/ValidateCode412Response';
@@ -87,7 +86,7 @@ import QueryApi from './api/QueryApi';
 * </pre>
 * </p>
 * @module index
-* @version 1.0.21
+* @version 1.0.22
 */
 export {
     /**
@@ -101,30 +100,6 @@ export {
      * @property {module:model/BlockDetails}
      */
     BlockDetails,
-
-    /**
-     * The ChangeEmail200Response model constructor.
-     * @property {module:model/ChangeEmail200Response}
-     */
-    ChangeEmail200Response,
-
-    /**
-     * The ChangeEmail200ResponsePodInfo model constructor.
-     * @property {module:model/ChangeEmail200ResponsePodInfo}
-     */
-    ChangeEmail200ResponsePodInfo,
-
-    /**
-     * The ChangeEmail200ResponseProfile model constructor.
-     * @property {module:model/ChangeEmail200ResponseProfile}
-     */
-    ChangeEmail200ResponseProfile,
-
-    /**
-     * The ChangeEmail200ResponseProfileAvatar model constructor.
-     * @property {module:model/ChangeEmail200ResponseProfileAvatar}
-     */
-    ChangeEmail200ResponseProfileAvatar,
 
     /**
      * The ChangePassword200Response model constructor.
@@ -299,6 +274,24 @@ export {
      * @property {module:model/UserDetails}
      */
     UserDetails,
+
+    /**
+     * The UserDetailsPodInfo model constructor.
+     * @property {module:model/UserDetailsPodInfo}
+     */
+    UserDetailsPodInfo,
+
+    /**
+     * The UserDetailsProfile model constructor.
+     * @property {module:model/UserDetailsProfile}
+     */
+    UserDetailsProfile,
+
+    /**
+     * The UserDetailsProfileAvatar model constructor.
+     * @property {module:model/UserDetailsProfileAvatar}
+     */
+    UserDetailsProfileAvatar,
 
     /**
      * The ValidateCode400Response model constructor.

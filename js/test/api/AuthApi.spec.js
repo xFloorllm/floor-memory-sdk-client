@@ -78,16 +78,6 @@
         done();
       });
     });
-    describe('registerExternalUserIdentity', function() {
-      it('should call registerExternalUserIdentity successfully', function(done) {
-        //uncomment below and update the code to test registerExternalUserIdentity
-        //instance.registerExternalUserIdentity(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
     describe('resetPassword', function() {
       it('should call resetPassword successfully', function(done) {
         //uncomment below and update the code to test resetPassword

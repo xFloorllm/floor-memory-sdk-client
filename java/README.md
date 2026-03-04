@@ -47,7 +47,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>ai.xfloor.sdk</groupId>
   <artifactId>floor-memory-sdk-client</artifactId>
-  <version>1.0.21</version>
+  <version>1.0.22</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -63,7 +63,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "ai.xfloor.sdk:floor-memory-sdk-client:1.0.21"
+     implementation "ai.xfloor.sdk:floor-memory-sdk-client:1.0.22"
   }
 ```
 
@@ -77,7 +77,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/floor-memory-sdk-client-1.0.21.jar`
+* `target/floor-memory-sdk-client-1.0.22.jar`
 * `target/lib/*.jar`
 
 ### Getting Started
@@ -107,7 +107,7 @@ public class Example {
     String newEmailId = "newEmailId_example"; // String | New Email ID
     String activationCode = "activationCode_example"; // String | Validation code
     try {
-      ChangeEmail200Response result = apiInstance.changeEmail(newEmailId, activationCode);
+      SignInResponse result = apiInstance.changeEmail(newEmailId, activationCode);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling AuthApi#changeEmail");
@@ -150,11 +150,6 @@ Change Mobile number
 | [**changePassword**](docs/AuthApi.md#changePassword) | **POST** /auth-service/password/change |
 
 Change Password
-*AuthApi*
-
-| [**registerExternalUserIdentity**](docs/AuthApi.md#registerExternalUserIdentity) | **POST** /memory/identity/external-user |
-
-External User Registration
 *AuthApi*
 
 | [**resetPassword**](docs/AuthApi.md#resetPassword) | **POST** /auth-service/password/reset |
@@ -230,10 +225,6 @@ Query (Primary API)
 ### Documentation for Models
 
  - [BlockDetails](docs/BlockDetails.md)
- - [ChangeEmail200Response](docs/ChangeEmail200Response.md)
- - [ChangeEmail200ResponsePodInfo](docs/ChangeEmail200ResponsePodInfo.md)
- - [ChangeEmail200ResponseProfile](docs/ChangeEmail200ResponseProfile.md)
- - [ChangeEmail200ResponseProfileAvatar](docs/ChangeEmail200ResponseProfileAvatar.md)
  - [ChangePassword200Response](docs/ChangePassword200Response.md)
  - [EditFloor200Response](docs/EditFloor200Response.md)
  - [EditFloor400Response](docs/EditFloor400Response.md)
@@ -263,6 +254,9 @@ Query (Primary API)
  - [SignUp200Response](docs/SignUp200Response.md)
  - [SignUpResponse](docs/SignUpResponse.md)
  - [UserDetails](docs/UserDetails.md)
+ - [UserDetailsPodInfo](docs/UserDetailsPodInfo.md)
+ - [UserDetailsProfile](docs/UserDetailsProfile.md)
+ - [UserDetailsProfileAvatar](docs/UserDetailsProfileAvatar.md)
  - [ValidateCode400Response](docs/ValidateCode400Response.md)
  - [ValidateCode400ResponseError](docs/ValidateCode400ResponseError.md)
  - [ValidateCode412Response](docs/ValidateCode412Response.md)

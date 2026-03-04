@@ -5,10 +5,6 @@
 README.md
 docs/AuthApi.md
 docs/BlockDetails.md
-docs/ChangeEmail200Response.md
-docs/ChangeEmail200ResponsePodInfo.md
-docs/ChangeEmail200ResponseProfile.md
-docs/ChangeEmail200ResponseProfileAvatar.md
 docs/ChangePassword200Response.md
 docs/EditFloor200Response.md
 docs/EditFloor400Response.md
@@ -41,6 +37,9 @@ docs/SignInResponse.md
 docs/SignUp200Response.md
 docs/SignUpResponse.md
 docs/UserDetails.md
+docs/UserDetailsPodInfo.md
+docs/UserDetailsProfile.md
+docs/UserDetailsProfileAvatar.md
 docs/ValidateCode400Response.md
 docs/ValidateCode400ResponseError.md
 docs/ValidateCode412Response.md
@@ -54,10 +53,6 @@ src/api/FloorApi.js
 src/api/QueryApi.js
 src/index.js
 src/model/BlockDetails.js
-src/model/ChangeEmail200Response.js
-src/model/ChangeEmail200ResponsePodInfo.js
-src/model/ChangeEmail200ResponseProfile.js
-src/model/ChangeEmail200ResponseProfileAvatar.js
 src/model/ChangePassword200Response.js
 src/model/EditFloor200Response.js
 src/model/EditFloor400Response.js
@@ -87,6 +82,9 @@ src/model/SignInResponse.js
 src/model/SignUp200Response.js
 src/model/SignUpResponse.js
 src/model/UserDetails.js
+src/model/UserDetailsPodInfo.js
+src/model/UserDetailsProfile.js
+src/model/UserDetailsProfileAvatar.js
 src/model/ValidateCode400Response.js
 src/model/ValidateCode400ResponseError.js
 src/model/ValidateCode412Response.js
@@ -95,10 +93,6 @@ test/api/EventApi.spec.js
 test/api/FloorApi.spec.js
 test/api/QueryApi.spec.js
 test/model/BlockDetails.spec.js
-test/model/ChangeEmail200Response.spec.js
-test/model/ChangeEmail200ResponsePodInfo.spec.js
-test/model/ChangeEmail200ResponseProfile.spec.js
-test/model/ChangeEmail200ResponseProfileAvatar.spec.js
 test/model/ChangePassword200Response.spec.js
 test/model/EditFloor200Response.spec.js
 test/model/EditFloor400Response.spec.js
@@ -128,6 +122,9 @@ test/model/SignInResponse.spec.js
 test/model/SignUp200Response.spec.js
 test/model/SignUpResponse.spec.js
 test/model/UserDetails.spec.js
+test/model/UserDetailsPodInfo.spec.js
+test/model/UserDetailsProfile.spec.js
+test/model/UserDetailsProfileAvatar.spec.js
 test/model/ValidateCode400Response.spec.js
 test/model/ValidateCode400ResponseError.spec.js
 test/model/ValidateCode412Response.spec.js

@@ -1,10 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './BlockDetails';
-export * from './ChangeEmail200Response';
-export * from './ChangeEmail200ResponsePodInfo';
-export * from './ChangeEmail200ResponseProfile';
-export * from './ChangeEmail200ResponseProfileAvatar';
 export * from './ChangePassword200Response';
 export * from './EditFloor200Response';
 export * from './EditFloor400Response';
@@ -34,6 +30,9 @@ export * from './SignInResponse';
 export * from './SignUp200Response';
 export * from './SignUpResponse';
 export * from './UserDetails';
+export * from './UserDetailsPodInfo';
+export * from './UserDetailsProfile';
+export * from './UserDetailsProfileAvatar';
 export * from './ValidateCode400Response';
 export * from './ValidateCode400ResponseError';
 export * from './ValidateCode412Response';

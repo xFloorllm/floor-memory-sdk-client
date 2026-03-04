@@ -13,8 +13,8 @@
 
 package ai.xfloor.memory.model;
 
-import ai.xfloor.memory.model.ChangeEmail200ResponsePodInfo;
-import ai.xfloor.memory.model.ChangeEmail200ResponseProfile;
+import ai.xfloor.memory.model.UserDetailsPodInfo;
+import ai.xfloor.memory.model.UserDetailsProfile;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;

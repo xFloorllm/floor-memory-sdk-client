@@ -7,7 +7,6 @@ Method | HTTP request | Description
 [**change_email**](AuthApi.md#change_email) | **POST** /auth-service/change/email | Change email ID
 [**change_mobile_number**](AuthApi.md#change_mobile_number) | **POST** /auth-service/change/mobile | Change Mobile number
 [**change_password**](AuthApi.md#change_password) | **POST** /auth-service/password/change | Change Password
-[**register_external_user_identity**](AuthApi.md#register_external_user_identity) | **POST** /memory/identity/external-user | External User Registration
 [**reset_password**](AuthApi.md#reset_password) | **POST** /auth-service/password/reset | Reset Password
 [**send_validation_code**](AuthApi.md#send_validation_code) | **POST** /auth-service/send/validation/code | Send Validation code
 [**sign_in_with_email**](AuthApi.md#sign_in_with_email) | **POST** /auth-service/sign/in/with/email | Sign In with email ID
@@ -17,7 +16,7 @@ Method | HTTP request | Description
 
 
 # **change_email**
-> ChangeEmail200Response change_email(new_email_id, activation_code)
+> SignInResponse change_email(new_email_id, activation_code)
 
 Change email ID
 
@@ -119,7 +118,7 @@ Notes (Recommended)**
 
 ```python
 import xfloor_memory_sdk
-from xfloor_memory_sdk.models.change_email200_response import ChangeEmail200Response
+from xfloor_memory_sdk.models.sign_in_response import SignInResponse
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
@@ -179,7 +178,7 @@ Notes
 
 ### Return type
 
-[**ChangeEmail200Response**](ChangeEmail200Response.md)
+[**SignInResponse**](SignInResponse.md)
 
 ### Authorization
 
@@ -204,7 +203,7 @@ Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **change_mobile_number**
-> ChangeEmail200Response change_mobile_number(new_mobile_number, activation_code)
+> SignInResponse change_mobile_number(new_mobile_number, activation_code)
 
 Change Mobile number
 
@@ -303,7 +302,7 @@ Notes (Recommended)**
 
 ```python
 import xfloor_memory_sdk
-from xfloor_memory_sdk.models.change_email200_response import ChangeEmail200Response
+from xfloor_memory_sdk.models.sign_in_response import SignInResponse
 from xfloor_memory_sdk.rest import ApiException
 from pprint import pprint
 
@@ -363,7 +362,7 @@ Notes
 
 ### Return type
 
-[**ChangeEmail200Response**](ChangeEmail200Response.md)
+[**SignInResponse**](SignInResponse.md)
 
 ### Authorization
 
@@ -521,129 +520,6 @@ Notes
 |
 - |
 **400** |
-|
-- |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **register_external_user_identity**
-> ChangeEmail200Response register_external_user_identity(mobile_number=mobile_number, email_id=email_id, name=name, app_id=app_id)
-
-External User Registration
-
-This API allows a calling application to **pass externally authenticated user identity information to xfloor** after completing authentication within its own system.
-
-xfloor **does not perform authentication, credential verification, or session management** as part of this API. The calling application is fully responsible for validating the user and ensuring the correctness of the identity data provided.
-
-Upon invocation, xfloor will:
-
-* **Create a new user profile** if no matching user exists, or
-* **Update the existing user profile** if the user is already present.
-
-xfloor returns a unique `xfloor_user_id`, which serves as the **canonical user identifier** and must be used in all subsequent xfloor APIs, including floors, blocks, conversations, memory interactions, and analytics.
-
-### Example
-
-* Bearer Authentication (bearer):
-
-```python
-import xfloor_memory_sdk
-from xfloor_memory_sdk.models.change_email200_response import ChangeEmail200Response
-from xfloor_memory_sdk.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://appfloor.in
-# See configuration.py for a list of all supported configuration parameters.
-configuration = xfloor_memory_sdk.Configuration(
-    host = "https://appfloor.in"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: bearer
-configuration = xfloor_memory_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with xfloor_memory_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = xfloor_memory_sdk.AuthApi(api_client)
-    mobile_number = 'mobile_number_example' # str |  (optional)
-    email_id = 'email_id_example' # str |  (optional)
-    name = 'name_example' # str |  (optional)
-    app_id = 'app_id_example' # str |  (optional)
-
-    try:
-        # External User Registration
-        api_response = api_instance.register_external_user_identity(mobile_number=mobile_number, email_id=email_id, name=name, app_id=app_id)
-        print("The response of AuthApi->register_external_user_identity:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AuthApi->register_external_user_identity: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name
-
-| Type | Description |
-
-Notes
--------------
-
-| ------------- | ------------- |
-
--------------
- **mobile_number**
-
-| **str**|
-|
-
-[optional]
- **email_id**
-
-| **str**|
-|
-
-[optional]
- **name**
-
-| **str**|
-|
-
-[optional]
- **app_id**
-
-| **str**|
-|
-
-[optional]
-
-### Return type
-
-[**ChangeEmail200Response**](ChangeEmail200Response.md)
-
-### Authorization
-
-[bearer](../README.md#bearer)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** |
 |
 - |
 

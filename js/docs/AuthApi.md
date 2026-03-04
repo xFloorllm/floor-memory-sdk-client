@@ -7,7 +7,6 @@ Method | HTTP request | Description
 [**changeEmail**](AuthApi.md#changeEmail) | **POST** /auth-service/change/email | Change email ID
 [**changeMobileNumber**](AuthApi.md#changeMobileNumber) | **POST** /auth-service/change/mobile | Change Mobile number
 [**changePassword**](AuthApi.md#changePassword) | **POST** /auth-service/password/change | Change Password
-[**registerExternalUserIdentity**](AuthApi.md#registerExternalUserIdentity) | **POST** /memory/identity/external-user | External User Registration
 [**resetPassword**](AuthApi.md#resetPassword) | **POST** /auth-service/password/reset | Reset Password
 [**sendValidationCode**](AuthApi.md#sendValidationCode) | **POST** /auth-service/send/validation/code | Send Validation code
 [**signInWithEmail**](AuthApi.md#signInWithEmail) | **POST** /auth-service/sign/in/with/email | Sign In with email ID
@@ -19,7 +18,7 @@ Method | HTTP request | Description
 
 ### changeEmail
 
-> ChangeEmail200Response changeEmail(newEmailId, activationCode)
+> SignInResponse changeEmail(newEmailId, activationCode)
 
 Change email ID
 
@@ -133,7 +132,7 @@ Notes
 
 ### Return type
 
-[**ChangeEmail200Response**](ChangeEmail200Response.md)
+[**SignInResponse**](SignInResponse.md)
 
 ### Authorization
 
@@ -147,7 +146,7 @@ Notes
 
 ### changeMobileNumber
 
-> ChangeEmail200Response changeMobileNumber(newMobileNumber, activationCode)
+> SignInResponse changeMobileNumber(newMobileNumber, activationCode)
 
 Change Mobile number
 
@@ -261,7 +260,7 @@ Notes
 
 ### Return type
 
-[**ChangeEmail200Response**](ChangeEmail200Response.md)
+[**SignInResponse**](SignInResponse.md)
 
 ### Authorization
 
@@ -359,93 +358,6 @@ Notes
 ### Return type
 
 [**ChangePassword200Response**](ChangePassword200Response.md)
-
-### Authorization
-
-[bearer](../README.md#bearer)
-
-### HTTP request headers
-
-- **Content-Type**: multipart/form-data
-- **Accept**: application/json
-
-
-### registerExternalUserIdentity
-
-> ChangeEmail200Response registerExternalUserIdentity(opts)
-
-External User Registration
-
-This API allows a calling application to **pass externally authenticated user identity information to xfloor** after completing authentication within its own system. xfloor **does not perform authentication, credential verification, or session management** as part of this API. The calling application is fully responsible for validating the user and ensuring the correctness of the identity data provided. Upon invocation, xfloor will:
-* **Create a new user profile** if no matching user exists, or
-* **Update the existing user profile** if the user is already present. xfloor returns a unique `xfloor_user_id`, which serves as the **canonical user identifier** and must be used in all subsequent xfloor APIs, including floors, blocks, conversations, memory interactions, and analytics.
-
-### Example
-
-```javascript
-import XfloorFloorMemorySdkJs from '@xfloor/floor-memory-sdk-js';
-let defaultClient = XfloorFloorMemorySdkJs.ApiClient.instance;
-// Configure Bearer access token for authorization: bearer
-let bearer = defaultClient.authentications['bearer'];
-bearer.accessToken = "YOUR ACCESS TOKEN"
-
-let apiInstance = new XfloorFloorMemorySdkJs.AuthApi();
-let opts = {
-  'mobileNumber': "mobileNumber_example", // String | 
-  'emailId': "emailId_example", // String | 
-  'name': "name_example", // String | 
-  'appId': "appId_example" // String | 
-};
-apiInstance.registerExternalUserIdentity(opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
-```
-
-### Parameters
-
-
-Name
-
-| Type | Description |
-
-Notes
--------------
-
-| ------------- | ------------- |
-
--------------
- **mobileNumber**
-
-| **String**|
-|
-
-[optional]
- **emailId**
-
-| **String**|
-|
-
-[optional]
- **name**
-
-| **String**|
-|
-
-[optional]
- **appId**
-
-| **String**|
-|
-
-[optional]
-
-### Return type
-
-[**ChangeEmail200Response**](ChangeEmail200Response.md)
 
 ### Authorization
 

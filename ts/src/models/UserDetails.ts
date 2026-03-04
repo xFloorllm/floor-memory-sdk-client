@@ -15,20 +15,20 @@
  */
 
 import { mapValues } from '../runtime';
-import type { ChangeEmail200ResponseProfile } from './ChangeEmail200ResponseProfile';
+import type { UserDetailsPodInfo } from './UserDetailsPodInfo';
 import {
-    ChangeEmail200ResponseProfileFromJSON,
-    ChangeEmail200ResponseProfileFromJSONTyped,
-    ChangeEmail200ResponseProfileToJSON,
-    ChangeEmail200ResponseProfileToJSONTyped,
-} from './ChangeEmail200ResponseProfile';
-import type { ChangeEmail200ResponsePodInfo } from './ChangeEmail200ResponsePodInfo';
+    UserDetailsPodInfoFromJSON,
+    UserDetailsPodInfoFromJSONTyped,
+    UserDetailsPodInfoToJSON,
+    UserDetailsPodInfoToJSONTyped,
+} from './UserDetailsPodInfo';
+import type { UserDetailsProfile } from './UserDetailsProfile';
 import {
-    ChangeEmail200ResponsePodInfoFromJSON,
-    ChangeEmail200ResponsePodInfoFromJSONTyped,
-    ChangeEmail200ResponsePodInfoToJSON,
-    ChangeEmail200ResponsePodInfoToJSONTyped,
-} from './ChangeEmail200ResponsePodInfo';
+    UserDetailsProfileFromJSON,
+    UserDetailsProfileFromJSONTyped,
+    UserDetailsProfileToJSON,
+    UserDetailsProfileToJSONTyped,
+} from './UserDetailsProfile';
 
 /**
  * 
@@ -38,16 +38,16 @@ import {
 export interface UserDetails {
     /**
      * 
-     * @type {ChangeEmail200ResponseProfile}
+     * @type {UserDetailsProfile}
      * @memberof UserDetails
      */
-    profile: ChangeEmail200ResponseProfile;
+    profile: UserDetailsProfile;
     /**
      * 
-     * @type {ChangeEmail200ResponsePodInfo}
+     * @type {UserDetailsPodInfo}
      * @memberof UserDetails
      */
-    podInfo: ChangeEmail200ResponsePodInfo;
+    podInfo: UserDetailsPodInfo;
     /**
      * App ID
      * @type {string}
@@ -75,8 +75,8 @@ export function UserDetailsFromJSONTyped(json: any, ignoreDiscriminator: boolean
     }
     return {
         
-        'profile': ChangeEmail200ResponseProfileFromJSON(json['profile']),
-        'podInfo': ChangeEmail200ResponsePodInfoFromJSON(json['pod_info']),
+        'profile': UserDetailsProfileFromJSON(json['profile']),
+        'podInfo': UserDetailsPodInfoFromJSON(json['pod_info']),
         'appId': json['app_id'] == null ? undefined : json['app_id'],
     };
 }
@@ -92,8 +92,8 @@ export function UserDetailsToJSONTyped(value?: UserDetails | null, ignoreDiscrim
 
     return {
         
-        'profile': ChangeEmail200ResponseProfileToJSON(value['profile']),
-        'pod_info': ChangeEmail200ResponsePodInfoToJSON(value['podInfo']),
+        'profile': UserDetailsProfileToJSON(value['profile']),
+        'pod_info': UserDetailsPodInfoToJSON(value['podInfo']),
         'app_id': value['appId'],
     };
 }

@@ -8,10 +8,6 @@ build.gradle
 build.sbt
 docs/AuthApi.md
 docs/BlockDetails.md
-docs/ChangeEmail200Response.md
-docs/ChangeEmail200ResponsePodInfo.md
-docs/ChangeEmail200ResponseProfile.md
-docs/ChangeEmail200ResponseProfileAvatar.md
 docs/ChangePassword200Response.md
 docs/EditFloor200Response.md
 docs/EditFloor400Response.md
@@ -44,6 +40,9 @@ docs/SignInResponse.md
 docs/SignUp200Response.md
 docs/SignUpResponse.md
 docs/UserDetails.md
+docs/UserDetailsPodInfo.md
+docs/UserDetailsProfile.md
+docs/UserDetailsProfileAvatar.md
 docs/ValidateCode400Response.md
 docs/ValidateCode400ResponseError.md
 docs/ValidateCode412Response.md
@@ -79,10 +78,6 @@ src/main/java/ai/xfloor/memory/client/auth/HttpBasicAuth.java
 src/main/java/ai/xfloor/memory/client/auth/HttpBearerAuth.java
 src/main/java/ai/xfloor/memory/model/AbstractOpenApiSchema.java
 src/main/java/ai/xfloor/memory/model/BlockDetails.java
-src/main/java/ai/xfloor/memory/model/ChangeEmail200Response.java
-src/main/java/ai/xfloor/memory/model/ChangeEmail200ResponsePodInfo.java
-src/main/java/ai/xfloor/memory/model/ChangeEmail200ResponseProfile.java
-src/main/java/ai/xfloor/memory/model/ChangeEmail200ResponseProfileAvatar.java
 src/main/java/ai/xfloor/memory/model/ChangePassword200Response.java
 src/main/java/ai/xfloor/memory/model/EditFloor200Response.java
 src/main/java/ai/xfloor/memory/model/EditFloor400Response.java
@@ -112,6 +107,9 @@ src/main/java/ai/xfloor/memory/model/SignInResponse.java
 src/main/java/ai/xfloor/memory/model/SignUp200Response.java
 src/main/java/ai/xfloor/memory/model/SignUpResponse.java
 src/main/java/ai/xfloor/memory/model/UserDetails.java
+src/main/java/ai/xfloor/memory/model/UserDetailsPodInfo.java
+src/main/java/ai/xfloor/memory/model/UserDetailsProfile.java
+src/main/java/ai/xfloor/memory/model/UserDetailsProfileAvatar.java
 src/main/java/ai/xfloor/memory/model/ValidateCode400Response.java
 src/main/java/ai/xfloor/memory/model/ValidateCode400ResponseError.java
 src/main/java/ai/xfloor/memory/model/ValidateCode412Response.java
@@ -120,10 +118,6 @@ src/test/java/ai/xfloor/memory/api/EventApiTest.java
 src/test/java/ai/xfloor/memory/api/FloorApiTest.java
 src/test/java/ai/xfloor/memory/api/QueryApiTest.java
 src/test/java/ai/xfloor/memory/model/BlockDetailsTest.java
-src/test/java/ai/xfloor/memory/model/ChangeEmail200ResponsePodInfoTest.java
-src/test/java/ai/xfloor/memory/model/ChangeEmail200ResponseProfileAvatarTest.java
-src/test/java/ai/xfloor/memory/model/ChangeEmail200ResponseProfileTest.java
-src/test/java/ai/xfloor/memory/model/ChangeEmail200ResponseTest.java
 src/test/java/ai/xfloor/memory/model/ChangePassword200ResponseTest.java
 src/test/java/ai/xfloor/memory/model/EditFloor200ResponseTest.java
 src/test/java/ai/xfloor/memory/model/EditFloor400ResponseErrorTest.java
@@ -152,6 +146,9 @@ src/test/java/ai/xfloor/memory/model/SendValidationCode200ResponseTest.java
 src/test/java/ai/xfloor/memory/model/SignInResponseTest.java
 src/test/java/ai/xfloor/memory/model/SignUp200ResponseTest.java
 src/test/java/ai/xfloor/memory/model/SignUpResponseTest.java
+src/test/java/ai/xfloor/memory/model/UserDetailsPodInfoTest.java
+src/test/java/ai/xfloor/memory/model/UserDetailsProfileAvatarTest.java
+src/test/java/ai/xfloor/memory/model/UserDetailsProfileTest.java
 src/test/java/ai/xfloor/memory/model/UserDetailsTest.java
 src/test/java/ai/xfloor/memory/model/ValidateCode400ResponseErrorTest.java
 src/test/java/ai/xfloor/memory/model/ValidateCode400ResponseTest.java

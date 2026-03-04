@@ -7,9 +7,9 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**profile** | [**ChangeEmail200ResponseProfile**](ChangeEmail200ResponseProfile.md) |
+|**profile** | [**UserDetailsProfile**](UserDetailsProfile.md) |
 | |
-|**podInfo** | [**ChangeEmail200ResponsePodInfo**](ChangeEmail200ResponsePodInfo.md) |
+|**podInfo** | [**UserDetailsPodInfo**](UserDetailsPodInfo.md) |
 | |
 |**appId** | **String** | App ID | [optional] |
 

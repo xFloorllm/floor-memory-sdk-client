@@ -20,7 +20,7 @@ import Media from './Media';
 /**
  * The EditFloor200Response model module.
  * @module model/EditFloor200Response
- * @version 1.0.21
+ * @version 1.0.22
  */
 class EditFloor200Response {
     /**

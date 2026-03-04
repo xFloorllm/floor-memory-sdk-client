@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The Remaining model module.
  * @module model/Remaining
- * @version 1.0.21
+ * @version 1.0.22
  */
 class Remaining {
     /**

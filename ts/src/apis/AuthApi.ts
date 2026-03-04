@@ -17,7 +17,6 @@
 
 import * as runtime from '../runtime';
 import type {
-  ChangeEmail200Response,
   ChangePassword200Response,
   GetRecentEvents400Response,
   ResetPassword200Response,
@@ -30,8 +29,6 @@ import type {
   ValidateCode412Response,
 } from '../models/index';
 import {
-    ChangeEmail200ResponseFromJSON,
-    ChangeEmail200ResponseToJSON,
     ChangePassword200ResponseFromJSON,
     ChangePassword200ResponseToJSON,
     GetRecentEvents400ResponseFromJSON,
@@ -68,13 +65,6 @@ export interface ChangePasswordRequest {
     newPassword: string;
     activationCode: string;
     userId?: string;
-}
-
-export interface RegisterExternalUserIdentityRequest {
-    mobileNumber?: string;
-    emailId?: string;
-    name?: string;
-    appId?: string;
 }
 
 export interface ResetPasswordRequest {
@@ -131,7 +121,7 @@ export class AuthApi extends runtime.BaseAPI {
      * Updates the email ID associated with an existing user account after validating a one-time activation code sent to the **new email address**.  This operation can only be performed by a **logged-in user**. When a user initiates an email change, an activation code is sent to the newly provided email ID. The email update takes effect only after the activation code is successfully validated.  If the activation code validation fails, the email ID remains unchanged.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  ``` Authorization: Bearer <access_token> ```  ---  ### **Request Body**  ```json {   \"user_id\": \"string\",   \"new_email_id\": \"string\",   \"activation_code\": \"string\",   \"app_id\":\"string\" } ```  **Field Description**  * `user_id` – Unique identifier of the logged-in user * `new_email_id` – New email address to be associated with the account * `activation_code` – One-time activation code sent to the new email ID for verification  ---  ### **Flow Summary**  1. User is authenticated and logged in 2. User requests to change email ID 3. System sends an activation code to the **new email address** 4. User submits the activation code via this API 5. On successful validation, the email ID is updated  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user’s email ID is updated immediately * A `success` string is returned confirming the email change  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the user or email * The new email ID is already in use * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing email ID remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to `/auth-service/send/validation/code` with the proper mode.  ---  ### **Security Notes (Recommended)**  * Activation codes are single-use and time-bound * Email changes require prior authentication * Rate limiting may be applied to prevent abuse  ---  ### **One-Line Summary**  > Changes a user’s email ID after validating an activation code sent to the new email address. 
      * Change email ID
      */
-    async changeEmailRaw(requestParameters: ChangeEmailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ChangeEmail200Response>> {
+    async changeEmailRaw(requestParameters: ChangeEmailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SignInResponse>> {
         if (requestParameters['newEmailId'] == null) {
             throw new runtime.RequiredError(
                 'newEmailId',
@@ -191,14 +181,14 @@ export class AuthApi extends runtime.BaseAPI {
             body: formParams,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ChangeEmail200ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => SignInResponseFromJSON(jsonValue));
     }
 
     /**
      * Updates the email ID associated with an existing user account after validating a one-time activation code sent to the **new email address**.  This operation can only be performed by a **logged-in user**. When a user initiates an email change, an activation code is sent to the newly provided email ID. The email update takes effect only after the activation code is successfully validated.  If the activation code validation fails, the email ID remains unchanged.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  ``` Authorization: Bearer <access_token> ```  ---  ### **Request Body**  ```json {   \"user_id\": \"string\",   \"new_email_id\": \"string\",   \"activation_code\": \"string\",   \"app_id\":\"string\" } ```  **Field Description**  * `user_id` – Unique identifier of the logged-in user * `new_email_id` – New email address to be associated with the account * `activation_code` – One-time activation code sent to the new email ID for verification  ---  ### **Flow Summary**  1. User is authenticated and logged in 2. User requests to change email ID 3. System sends an activation code to the **new email address** 4. User submits the activation code via this API 5. On successful validation, the email ID is updated  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user’s email ID is updated immediately * A `success` string is returned confirming the email change  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the user or email * The new email ID is already in use * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing email ID remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to `/auth-service/send/validation/code` with the proper mode.  ---  ### **Security Notes (Recommended)**  * Activation codes are single-use and time-bound * Email changes require prior authentication * Rate limiting may be applied to prevent abuse  ---  ### **One-Line Summary**  > Changes a user’s email ID after validating an activation code sent to the new email address. 
      * Change email ID
      */
-    async changeEmail(requestParameters: ChangeEmailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ChangeEmail200Response> {
+    async changeEmail(requestParameters: ChangeEmailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SignInResponse> {
         const response = await this.changeEmailRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -207,7 +197,7 @@ export class AuthApi extends runtime.BaseAPI {
      * Updates the mobile number associated with an existing user account after validating a one-time activation code sent to the **new mobile number**.  This operation can only be performed by a **logged-in user**. When a user initiates a mobile number change, an activation code is sent to the newly provided mobile number. The mobile number update takes effect only after the activation code is successfully validated.  If the activation code validation fails, the mobile number remains unchanged.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  ``` Authorization: Bearer <access_token> ```  ---  ### **Request Body**  ```json {   \"user_id\": \"string\",   \"new_mobile_number\": \"string\",   \"activation_code\": \"string\" } ```  **Field Description**  * `user_id` – Unique identifier of the logged-in user * `new_mobile_number` – New mobile number to be associated with the account * `activation_code` – One-time activation code sent to the new mobile number for verification  ---  ### **Flow Summary**  1. User is authenticated and logged in 2. User requests to change mobile number 3. System sends an activation code to the **new mobile number** 4. User submits the activation code via this API 5. On successful validation, the mobile number is updated  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user’s mobile number is updated immediately * A `success` string is returned confirming the mobile number change  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the user or mobile number * The new mobile number is already in use * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing mobile number remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to `/auth-service/send/validation/code` with the proper mode. ---  ### **Security Notes (Recommended)**  * Activation codes are single-use and time-bound * Mobile number changes require prior authentication * Rate limiting may be applied to prevent abuse  ---  ### **One-Line Summary**  > Changes a user’s mobile number after validating an activation code sent to the new mobile number.
      * Change Mobile number
      */
-    async changeMobileNumberRaw(requestParameters: ChangeMobileNumberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ChangeEmail200Response>> {
+    async changeMobileNumberRaw(requestParameters: ChangeMobileNumberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SignInResponse>> {
         if (requestParameters['newMobileNumber'] == null) {
             throw new runtime.RequiredError(
                 'newMobileNumber',
@@ -267,14 +257,14 @@ export class AuthApi extends runtime.BaseAPI {
             body: formParams,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ChangeEmail200ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => SignInResponseFromJSON(jsonValue));
     }
 
     /**
      * Updates the mobile number associated with an existing user account after validating a one-time activation code sent to the **new mobile number**.  This operation can only be performed by a **logged-in user**. When a user initiates a mobile number change, an activation code is sent to the newly provided mobile number. The mobile number update takes effect only after the activation code is successfully validated.  If the activation code validation fails, the mobile number remains unchanged.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  ``` Authorization: Bearer <access_token> ```  ---  ### **Request Body**  ```json {   \"user_id\": \"string\",   \"new_mobile_number\": \"string\",   \"activation_code\": \"string\" } ```  **Field Description**  * `user_id` – Unique identifier of the logged-in user * `new_mobile_number` – New mobile number to be associated with the account * `activation_code` – One-time activation code sent to the new mobile number for verification  ---  ### **Flow Summary**  1. User is authenticated and logged in 2. User requests to change mobile number 3. System sends an activation code to the **new mobile number** 4. User submits the activation code via this API 5. On successful validation, the mobile number is updated  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user’s mobile number is updated immediately * A `success` string is returned confirming the mobile number change  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the user or mobile number * The new mobile number is already in use * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing mobile number remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to `/auth-service/send/validation/code` with the proper mode. ---  ### **Security Notes (Recommended)**  * Activation codes are single-use and time-bound * Mobile number changes require prior authentication * Rate limiting may be applied to prevent abuse  ---  ### **One-Line Summary**  > Changes a user’s mobile number after validating an activation code sent to the new mobile number.
      * Change Mobile number
      */
-    async changeMobileNumber(requestParameters: ChangeMobileNumberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ChangeEmail200Response> {
+    async changeMobileNumber(requestParameters: ChangeMobileNumberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SignInResponse> {
         const response = await this.changeMobileNumberRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -356,76 +346,6 @@ export class AuthApi extends runtime.BaseAPI {
      */
     async changePassword(requestParameters: ChangePasswordRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ChangePassword200Response> {
         const response = await this.changePasswordRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * This API allows a calling application to **pass externally authenticated user identity information to xfloor** after completing authentication within its own system.  xfloor **does not perform authentication, credential verification, or session management** as part of this API. The calling application is fully responsible for validating the user and ensuring the correctness of the identity data provided.  Upon invocation, xfloor will:  * **Create a new user profile** if no matching user exists, or * **Update the existing user profile** if the user is already present.  xfloor returns a unique `xfloor_user_id`, which serves as the **canonical user identifier** and must be used in all subsequent xfloor APIs, including floors, blocks, conversations, memory interactions, and analytics.
-     * External User Registration
-     */
-    async registerExternalUserIdentityRaw(requestParameters: RegisterExternalUserIdentityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ChangeEmail200Response>> {
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("bearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-        const consumes: runtime.Consume[] = [
-            { contentType: 'multipart/form-data' },
-        ];
-        // @ts-ignore: canConsumeForm may be unused
-        const canConsumeForm = runtime.canConsumeForm(consumes);
-
-        let formParams: { append(param: string, value: any): any };
-        let useForm = false;
-        if (useForm) {
-            formParams = new FormData();
-        } else {
-            formParams = new URLSearchParams();
-        }
-
-        if (requestParameters['mobileNumber'] != null) {
-            formParams.append('mobile_number', requestParameters['mobileNumber'] as any);
-        }
-
-        if (requestParameters['emailId'] != null) {
-            formParams.append('email_id', requestParameters['emailId'] as any);
-        }
-
-        if (requestParameters['name'] != null) {
-            formParams.append('name', requestParameters['name'] as any);
-        }
-
-        if (requestParameters['appId'] != null) {
-            formParams.append('app_id', requestParameters['appId'] as any);
-        }
-
-
-        let urlPath = `/memory/identity/external-user`;
-
-        const response = await this.request({
-            path: urlPath,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: formParams,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => ChangeEmail200ResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * This API allows a calling application to **pass externally authenticated user identity information to xfloor** after completing authentication within its own system.  xfloor **does not perform authentication, credential verification, or session management** as part of this API. The calling application is fully responsible for validating the user and ensuring the correctness of the identity data provided.  Upon invocation, xfloor will:  * **Create a new user profile** if no matching user exists, or * **Update the existing user profile** if the user is already present.  xfloor returns a unique `xfloor_user_id`, which serves as the **canonical user identifier** and must be used in all subsequent xfloor APIs, including floors, blocks, conversations, memory interactions, and analytics.
-     * External User Registration
-     */
-    async registerExternalUserIdentity(requestParameters: RegisterExternalUserIdentityRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ChangeEmail200Response> {
-        const response = await this.registerExternalUserIdentityRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

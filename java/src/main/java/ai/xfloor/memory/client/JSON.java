@@ -99,10 +99,6 @@ public class JSON {
         gsonBuilder.registerTypeAdapter(LocalDate.class, localDateTypeAdapter);
         gsonBuilder.registerTypeAdapter(byte[].class, byteArrayAdapter);
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.BlockDetails.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.ChangeEmail200Response.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.ChangeEmail200ResponsePodInfo.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.ChangeEmail200ResponseProfile.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.ChangeEmail200ResponseProfileAvatar.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.ChangePassword200Response.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.EditFloor200Response.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.EditFloor400Response.CustomTypeAdapterFactory());
@@ -132,6 +128,9 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.SignUp200Response.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.SignUpResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.UserDetails.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.UserDetailsPodInfo.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.UserDetailsProfile.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.UserDetailsProfileAvatar.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.ValidateCode400Response.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.ValidateCode400ResponseError.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new ai.xfloor.memory.model.ValidateCode412Response.CustomTypeAdapterFactory());

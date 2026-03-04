@@ -29,7 +29,6 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import ai.xfloor.memory.model.ChangeEmail200Response;
 import ai.xfloor.memory.model.ChangePassword200Response;
 import ai.xfloor.memory.model.GetRecentEvents400Response;
 import ai.xfloor.memory.model.ResetPassword200Response;
@@ -173,7 +172,7 @@ public class AuthApi {
      * Updates the email ID associated with an existing user account after validating a one-time activation code sent to the **new email address**.  This operation can only be performed by a **logged-in user**. When a user initiates an email change, an activation code is sent to the newly provided email ID. The email update takes effect only after the activation code is successfully validated.  If the activation code validation fails, the email ID remains unchanged.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ### **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;new_email_id\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot;,   \&quot;app_id\&quot;:\&quot;string\&quot; } &#x60;&#x60;&#x60;  **Field Description**  * &#x60;user_id&#x60; – Unique identifier of the logged-in user * &#x60;new_email_id&#x60; – New email address to be associated with the account * &#x60;activation_code&#x60; – One-time activation code sent to the new email ID for verification  ---  ### **Flow Summary**  1. User is authenticated and logged in 2. User requests to change email ID 3. System sends an activation code to the **new email address** 4. User submits the activation code via this API 5. On successful validation, the email ID is updated  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user’s email ID is updated immediately * A &#x60;success&#x60; string is returned confirming the email change  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the user or email * The new email ID is already in use * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing email ID remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to &#x60;/auth-service/send/validation/code&#x60; with the proper mode.  ---  ### **Security Notes (Recommended)**  * Activation codes are single-use and time-bound * Email changes require prior authentication * Rate limiting may be applied to prevent abuse  ---  ### **One-Line Summary**  &gt; Changes a user’s email ID after validating an activation code sent to the new email address. 
      * @param newEmailId New Email ID (required)
      * @param activationCode Validation code (required)
-     * @return ChangeEmail200Response
+     * @return SignInResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -183,8 +182,8 @@ public class AuthApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ChangeEmail200Response changeEmail(@javax.annotation.Nonnull String newEmailId, @javax.annotation.Nonnull String activationCode) throws ApiException {
-        ApiResponse<ChangeEmail200Response> localVarResp = changeEmailWithHttpInfo(newEmailId, activationCode);
+    public SignInResponse changeEmail(@javax.annotation.Nonnull String newEmailId, @javax.annotation.Nonnull String activationCode) throws ApiException {
+        ApiResponse<SignInResponse> localVarResp = changeEmailWithHttpInfo(newEmailId, activationCode);
         return localVarResp.getData();
     }
 
@@ -193,7 +192,7 @@ public class AuthApi {
      * Updates the email ID associated with an existing user account after validating a one-time activation code sent to the **new email address**.  This operation can only be performed by a **logged-in user**. When a user initiates an email change, an activation code is sent to the newly provided email ID. The email update takes effect only after the activation code is successfully validated.  If the activation code validation fails, the email ID remains unchanged.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ### **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;new_email_id\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot;,   \&quot;app_id\&quot;:\&quot;string\&quot; } &#x60;&#x60;&#x60;  **Field Description**  * &#x60;user_id&#x60; – Unique identifier of the logged-in user * &#x60;new_email_id&#x60; – New email address to be associated with the account * &#x60;activation_code&#x60; – One-time activation code sent to the new email ID for verification  ---  ### **Flow Summary**  1. User is authenticated and logged in 2. User requests to change email ID 3. System sends an activation code to the **new email address** 4. User submits the activation code via this API 5. On successful validation, the email ID is updated  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user’s email ID is updated immediately * A &#x60;success&#x60; string is returned confirming the email change  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the user or email * The new email ID is already in use * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing email ID remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to &#x60;/auth-service/send/validation/code&#x60; with the proper mode.  ---  ### **Security Notes (Recommended)**  * Activation codes are single-use and time-bound * Email changes require prior authentication * Rate limiting may be applied to prevent abuse  ---  ### **One-Line Summary**  &gt; Changes a user’s email ID after validating an activation code sent to the new email address. 
      * @param newEmailId New Email ID (required)
      * @param activationCode Validation code (required)
-     * @return ApiResponse&lt;ChangeEmail200Response&gt;
+     * @return ApiResponse&lt;SignInResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -203,9 +202,9 @@ public class AuthApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ChangeEmail200Response> changeEmailWithHttpInfo(@javax.annotation.Nonnull String newEmailId, @javax.annotation.Nonnull String activationCode) throws ApiException {
+    public ApiResponse<SignInResponse> changeEmailWithHttpInfo(@javax.annotation.Nonnull String newEmailId, @javax.annotation.Nonnull String activationCode) throws ApiException {
         okhttp3.Call localVarCall = changeEmailValidateBeforeCall(newEmailId, activationCode, null);
-        Type localVarReturnType = new TypeToken<ChangeEmail200Response>(){}.getType();
+        Type localVarReturnType = new TypeToken<SignInResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -225,10 +224,10 @@ public class AuthApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call changeEmailAsync(@javax.annotation.Nonnull String newEmailId, @javax.annotation.Nonnull String activationCode, final ApiCallback<ChangeEmail200Response> _callback) throws ApiException {
+    public okhttp3.Call changeEmailAsync(@javax.annotation.Nonnull String newEmailId, @javax.annotation.Nonnull String activationCode, final ApiCallback<SignInResponse> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = changeEmailValidateBeforeCall(newEmailId, activationCode, _callback);
-        Type localVarReturnType = new TypeToken<ChangeEmail200Response>(){}.getType();
+        Type localVarReturnType = new TypeToken<SignInResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -321,7 +320,7 @@ public class AuthApi {
      * Updates the mobile number associated with an existing user account after validating a one-time activation code sent to the **new mobile number**.  This operation can only be performed by a **logged-in user**. When a user initiates a mobile number change, an activation code is sent to the newly provided mobile number. The mobile number update takes effect only after the activation code is successfully validated.  If the activation code validation fails, the mobile number remains unchanged.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ### **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;new_mobile_number\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot; } &#x60;&#x60;&#x60;  **Field Description**  * &#x60;user_id&#x60; – Unique identifier of the logged-in user * &#x60;new_mobile_number&#x60; – New mobile number to be associated with the account * &#x60;activation_code&#x60; – One-time activation code sent to the new mobile number for verification  ---  ### **Flow Summary**  1. User is authenticated and logged in 2. User requests to change mobile number 3. System sends an activation code to the **new mobile number** 4. User submits the activation code via this API 5. On successful validation, the mobile number is updated  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user’s mobile number is updated immediately * A &#x60;success&#x60; string is returned confirming the mobile number change  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the user or mobile number * The new mobile number is already in use * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing mobile number remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to &#x60;/auth-service/send/validation/code&#x60; with the proper mode. ---  ### **Security Notes (Recommended)**  * Activation codes are single-use and time-bound * Mobile number changes require prior authentication * Rate limiting may be applied to prevent abuse  ---  ### **One-Line Summary**  &gt; Changes a user’s mobile number after validating an activation code sent to the new mobile number.
      * @param newMobileNumber New mobile number (required)
      * @param activationCode Activation code (required)
-     * @return ChangeEmail200Response
+     * @return SignInResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -331,8 +330,8 @@ public class AuthApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ChangeEmail200Response changeMobileNumber(@javax.annotation.Nonnull String newMobileNumber, @javax.annotation.Nonnull String activationCode) throws ApiException {
-        ApiResponse<ChangeEmail200Response> localVarResp = changeMobileNumberWithHttpInfo(newMobileNumber, activationCode);
+    public SignInResponse changeMobileNumber(@javax.annotation.Nonnull String newMobileNumber, @javax.annotation.Nonnull String activationCode) throws ApiException {
+        ApiResponse<SignInResponse> localVarResp = changeMobileNumberWithHttpInfo(newMobileNumber, activationCode);
         return localVarResp.getData();
     }
 
@@ -341,7 +340,7 @@ public class AuthApi {
      * Updates the mobile number associated with an existing user account after validating a one-time activation code sent to the **new mobile number**.  This operation can only be performed by a **logged-in user**. When a user initiates a mobile number change, an activation code is sent to the newly provided mobile number. The mobile number update takes effect only after the activation code is successfully validated.  If the activation code validation fails, the mobile number remains unchanged.  ---  ### **Authentication**  This endpoint requires **Bearer Token authentication**.  &#x60;&#x60;&#x60; Authorization: Bearer &lt;access_token&gt; &#x60;&#x60;&#x60;  ---  ### **Request Body**  &#x60;&#x60;&#x60;json {   \&quot;user_id\&quot;: \&quot;string\&quot;,   \&quot;new_mobile_number\&quot;: \&quot;string\&quot;,   \&quot;activation_code\&quot;: \&quot;string\&quot; } &#x60;&#x60;&#x60;  **Field Description**  * &#x60;user_id&#x60; – Unique identifier of the logged-in user * &#x60;new_mobile_number&#x60; – New mobile number to be associated with the account * &#x60;activation_code&#x60; – One-time activation code sent to the new mobile number for verification  ---  ### **Flow Summary**  1. User is authenticated and logged in 2. User requests to change mobile number 3. System sends an activation code to the **new mobile number** 4. User submits the activation code via this API 5. On successful validation, the mobile number is updated  ---  ### **Successful Response**  On successful validation:  * The activation code is verified * The user’s mobile number is updated immediately * A &#x60;success&#x60; string is returned confirming the mobile number change  ---  ### **Error Response**  The API returns an error response if:  * The activation code is invalid or expired * The activation code does not match the user or mobile number * The new mobile number is already in use * Authorization fails or the bearer token is missing or invalid  In all error cases, the existing mobile number remains unchanged.  --- ### **Behavior Notes**  * Requires a prior call to &#x60;/auth-service/send/validation/code&#x60; with the proper mode. ---  ### **Security Notes (Recommended)**  * Activation codes are single-use and time-bound * Mobile number changes require prior authentication * Rate limiting may be applied to prevent abuse  ---  ### **One-Line Summary**  &gt; Changes a user’s mobile number after validating an activation code sent to the new mobile number.
      * @param newMobileNumber New mobile number (required)
      * @param activationCode Activation code (required)
-     * @return ApiResponse&lt;ChangeEmail200Response&gt;
+     * @return ApiResponse&lt;SignInResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -351,9 +350,9 @@ public class AuthApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ChangeEmail200Response> changeMobileNumberWithHttpInfo(@javax.annotation.Nonnull String newMobileNumber, @javax.annotation.Nonnull String activationCode) throws ApiException {
+    public ApiResponse<SignInResponse> changeMobileNumberWithHttpInfo(@javax.annotation.Nonnull String newMobileNumber, @javax.annotation.Nonnull String activationCode) throws ApiException {
         okhttp3.Call localVarCall = changeMobileNumberValidateBeforeCall(newMobileNumber, activationCode, null);
-        Type localVarReturnType = new TypeToken<ChangeEmail200Response>(){}.getType();
+        Type localVarReturnType = new TypeToken<SignInResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -373,10 +372,10 @@ public class AuthApi {
         <tr><td> 400 </td><td>  </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call changeMobileNumberAsync(@javax.annotation.Nonnull String newMobileNumber, @javax.annotation.Nonnull String activationCode, final ApiCallback<ChangeEmail200Response> _callback) throws ApiException {
+    public okhttp3.Call changeMobileNumberAsync(@javax.annotation.Nonnull String newMobileNumber, @javax.annotation.Nonnull String activationCode, final ApiCallback<SignInResponse> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = changeMobileNumberValidateBeforeCall(newMobileNumber, activationCode, _callback);
-        Type localVarReturnType = new TypeToken<ChangeEmail200Response>(){}.getType();
+        Type localVarReturnType = new TypeToken<SignInResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -533,156 +532,6 @@ public class AuthApi {
 
         okhttp3.Call localVarCall = changePasswordValidateBeforeCall(newPassword, activationCode, userId, _callback);
         Type localVarReturnType = new TypeToken<ChangePassword200Response>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for registerExternalUserIdentity
-     * @param mobileNumber  (optional)
-     * @param emailId  (optional)
-     * @param name  (optional)
-     * @param appId  (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td>  </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call registerExternalUserIdentityCall(@javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String name, @javax.annotation.Nullable String appId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/memory/identity/external-user";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (mobileNumber != null) {
-            localVarFormParams.put("mobile_number", mobileNumber);
-        }
-
-        if (emailId != null) {
-            localVarFormParams.put("email_id", emailId);
-        }
-
-        if (name != null) {
-            localVarFormParams.put("name", name);
-        }
-
-        if (appId != null) {
-            localVarFormParams.put("app_id", appId);
-        }
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "multipart/form-data"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "bearer" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call registerExternalUserIdentityValidateBeforeCall(@javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String name, @javax.annotation.Nullable String appId, final ApiCallback _callback) throws ApiException {
-        return registerExternalUserIdentityCall(mobileNumber, emailId, name, appId, _callback);
-
-    }
-
-    /**
-     * External User Registration
-     * This API allows a calling application to **pass externally authenticated user identity information to xfloor** after completing authentication within its own system.  xfloor **does not perform authentication, credential verification, or session management** as part of this API. The calling application is fully responsible for validating the user and ensuring the correctness of the identity data provided.  Upon invocation, xfloor will:  * **Create a new user profile** if no matching user exists, or * **Update the existing user profile** if the user is already present.  xfloor returns a unique &#x60;xfloor_user_id&#x60;, which serves as the **canonical user identifier** and must be used in all subsequent xfloor APIs, including floors, blocks, conversations, memory interactions, and analytics.
-     * @param mobileNumber  (optional)
-     * @param emailId  (optional)
-     * @param name  (optional)
-     * @param appId  (optional)
-     * @return ChangeEmail200Response
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td>  </td><td>  -  </td></tr>
-     </table>
-     */
-    public ChangeEmail200Response registerExternalUserIdentity(@javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String name, @javax.annotation.Nullable String appId) throws ApiException {
-        ApiResponse<ChangeEmail200Response> localVarResp = registerExternalUserIdentityWithHttpInfo(mobileNumber, emailId, name, appId);
-        return localVarResp.getData();
-    }
-
-    /**
-     * External User Registration
-     * This API allows a calling application to **pass externally authenticated user identity information to xfloor** after completing authentication within its own system.  xfloor **does not perform authentication, credential verification, or session management** as part of this API. The calling application is fully responsible for validating the user and ensuring the correctness of the identity data provided.  Upon invocation, xfloor will:  * **Create a new user profile** if no matching user exists, or * **Update the existing user profile** if the user is already present.  xfloor returns a unique &#x60;xfloor_user_id&#x60;, which serves as the **canonical user identifier** and must be used in all subsequent xfloor APIs, including floors, blocks, conversations, memory interactions, and analytics.
-     * @param mobileNumber  (optional)
-     * @param emailId  (optional)
-     * @param name  (optional)
-     * @param appId  (optional)
-     * @return ApiResponse&lt;ChangeEmail200Response&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td>  </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ChangeEmail200Response> registerExternalUserIdentityWithHttpInfo(@javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String name, @javax.annotation.Nullable String appId) throws ApiException {
-        okhttp3.Call localVarCall = registerExternalUserIdentityValidateBeforeCall(mobileNumber, emailId, name, appId, null);
-        Type localVarReturnType = new TypeToken<ChangeEmail200Response>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * External User Registration (asynchronously)
-     * This API allows a calling application to **pass externally authenticated user identity information to xfloor** after completing authentication within its own system.  xfloor **does not perform authentication, credential verification, or session management** as part of this API. The calling application is fully responsible for validating the user and ensuring the correctness of the identity data provided.  Upon invocation, xfloor will:  * **Create a new user profile** if no matching user exists, or * **Update the existing user profile** if the user is already present.  xfloor returns a unique &#x60;xfloor_user_id&#x60;, which serves as the **canonical user identifier** and must be used in all subsequent xfloor APIs, including floors, blocks, conversations, memory interactions, and analytics.
-     * @param mobileNumber  (optional)
-     * @param emailId  (optional)
-     * @param name  (optional)
-     * @param appId  (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td>  </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call registerExternalUserIdentityAsync(@javax.annotation.Nullable String mobileNumber, @javax.annotation.Nullable String emailId, @javax.annotation.Nullable String name, @javax.annotation.Nullable String appId, final ApiCallback<ChangeEmail200Response> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = registerExternalUserIdentityValidateBeforeCall(mobileNumber, emailId, name, appId, _callback);
-        Type localVarReturnType = new TypeToken<ChangeEmail200Response>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

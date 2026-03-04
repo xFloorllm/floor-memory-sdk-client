@@ -17,7 +17,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.21"
+__version__ = "1.0.22"
 
 # Define package exports
 __all__ = [
@@ -35,10 +35,6 @@ __all__ = [
     "ApiAttributeError",
     "ApiException",
     "BlockDetails",
-    "ChangeEmail200Response",
-    "ChangeEmail200ResponsePodInfo",
-    "ChangeEmail200ResponseProfile",
-    "ChangeEmail200ResponseProfileAvatar",
     "ChangePassword200Response",
     "EditFloor200Response",
     "EditFloor400Response",
@@ -68,6 +64,9 @@ __all__ = [
     "SignUp200Response",
     "SignUpResponse",
     "UserDetails",
+    "UserDetailsPodInfo",
+    "UserDetailsProfile",
+    "UserDetailsProfileAvatar",
     "ValidateCode400Response",
     "ValidateCode400ResponseError",
     "ValidateCode412Response",
@@ -92,10 +91,6 @@ from xfloor_memory_sdk.exceptions import ApiException as ApiException
 
 # import models into sdk package
 from xfloor_memory_sdk.models.block_details import BlockDetails as BlockDetails
-from xfloor_memory_sdk.models.change_email200_response import ChangeEmail200Response as ChangeEmail200Response
-from xfloor_memory_sdk.models.change_email200_response_pod_info import ChangeEmail200ResponsePodInfo as ChangeEmail200ResponsePodInfo
-from xfloor_memory_sdk.models.change_email200_response_profile import ChangeEmail200ResponseProfile as ChangeEmail200ResponseProfile
-from xfloor_memory_sdk.models.change_email200_response_profile_avatar import ChangeEmail200ResponseProfileAvatar as ChangeEmail200ResponseProfileAvatar
 from xfloor_memory_sdk.models.change_password200_response import ChangePassword200Response as ChangePassword200Response
 from xfloor_memory_sdk.models.edit_floor200_response import EditFloor200Response as EditFloor200Response
 from xfloor_memory_sdk.models.edit_floor400_response import EditFloor400Response as EditFloor400Response
@@ -125,6 +120,9 @@ from xfloor_memory_sdk.models.sign_in_response import SignInResponse as SignInRe
 from xfloor_memory_sdk.models.sign_up200_response import SignUp200Response as SignUp200Response
 from xfloor_memory_sdk.models.sign_up_response import SignUpResponse as SignUpResponse
 from xfloor_memory_sdk.models.user_details import UserDetails as UserDetails
+from xfloor_memory_sdk.models.user_details_pod_info import UserDetailsPodInfo as UserDetailsPodInfo
+from xfloor_memory_sdk.models.user_details_profile import UserDetailsProfile as UserDetailsProfile
+from xfloor_memory_sdk.models.user_details_profile_avatar import UserDetailsProfileAvatar as UserDetailsProfileAvatar
 from xfloor_memory_sdk.models.validate_code400_response import ValidateCode400Response as ValidateCode400Response
 from xfloor_memory_sdk.models.validate_code400_response_error import ValidateCode400ResponseError as ValidateCode400ResponseError
 from xfloor_memory_sdk.models.validate_code412_response import ValidateCode412Response as ValidateCode412Response

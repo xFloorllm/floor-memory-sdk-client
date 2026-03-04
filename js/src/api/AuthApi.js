@@ -15,7 +15,6 @@
 
 
 import ApiClient from "../ApiClient";
-import ChangeEmail200Response from '../model/ChangeEmail200Response';
 import ChangePassword200Response from '../model/ChangePassword200Response';
 import GetRecentEvents400Response from '../model/GetRecentEvents400Response';
 import ResetPassword200Response from '../model/ResetPassword200Response';
@@ -30,7 +29,7 @@ import ValidateCode412Response from '../model/ValidateCode412Response';
 /**
 * Auth service.
 * @module api/AuthApi
-* @version 1.0.21
+* @version 1.0.22
 */
 export default class AuthApi {
 
@@ -50,7 +49,7 @@ export default class AuthApi {
      * Callback function to receive the result of the changeEmail operation.
      * @callback module:api/AuthApi~changeEmailCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/ChangeEmail200Response} data The data returned by the service call.
+     * @param {module:model/SignInResponse} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -60,7 +59,7 @@ export default class AuthApi {
      * @param {String} newEmailId New Email ID
      * @param {String} activationCode Validation code
      * @param {module:api/AuthApi~changeEmailCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/ChangeEmail200Response}
+     * data is of type: {@link module:model/SignInResponse}
      */
     changeEmail(newEmailId, activationCode, callback) {
       let postBody = null;
@@ -87,7 +86,7 @@ export default class AuthApi {
       let authNames = ['bearer'];
       let contentTypes = ['multipart/form-data'];
       let accepts = ['application/json'];
-      let returnType = ChangeEmail200Response;
+      let returnType = SignInResponse;
       return this.apiClient.callApi(
         '/auth-service/change/email', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
@@ -99,7 +98,7 @@ export default class AuthApi {
      * Callback function to receive the result of the changeMobileNumber operation.
      * @callback module:api/AuthApi~changeMobileNumberCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/ChangeEmail200Response} data The data returned by the service call.
+     * @param {module:model/SignInResponse} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -109,7 +108,7 @@ export default class AuthApi {
      * @param {String} newMobileNumber New mobile number
      * @param {String} activationCode Activation code
      * @param {module:api/AuthApi~changeMobileNumberCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/ChangeEmail200Response}
+     * data is of type: {@link module:model/SignInResponse}
      */
     changeMobileNumber(newMobileNumber, activationCode, callback) {
       let postBody = null;
@@ -136,7 +135,7 @@ export default class AuthApi {
       let authNames = ['bearer'];
       let contentTypes = ['multipart/form-data'];
       let accepts = ['application/json'];
-      let returnType = ChangeEmail200Response;
+      let returnType = SignInResponse;
       return this.apiClient.callApi(
         '/auth-service/change/mobile', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
@@ -192,53 +191,6 @@ export default class AuthApi {
       let returnType = ChangePassword200Response;
       return this.apiClient.callApi(
         '/auth-service/password/change', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
-      );
-    }
-
-    /**
-     * Callback function to receive the result of the registerExternalUserIdentity operation.
-     * @callback module:api/AuthApi~registerExternalUserIdentityCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/ChangeEmail200Response} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * External User Registration
-     * This API allows a calling application to **pass externally authenticated user identity information to xfloor** after completing authentication within its own system.  xfloor **does not perform authentication, credential verification, or session management** as part of this API. The calling application is fully responsible for validating the user and ensuring the correctness of the identity data provided.  Upon invocation, xfloor will:  * **Create a new user profile** if no matching user exists, or * **Update the existing user profile** if the user is already present.  xfloor returns a unique `xfloor_user_id`, which serves as the **canonical user identifier** and must be used in all subsequent xfloor APIs, including floors, blocks, conversations, memory interactions, and analytics.
-     * @param {Object} opts Optional parameters
-     * @param {String} [mobileNumber] 
-     * @param {String} [emailId] 
-     * @param {String} [name] 
-     * @param {String} [appId] 
-     * @param {module:api/AuthApi~registerExternalUserIdentityCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/ChangeEmail200Response}
-     */
-    registerExternalUserIdentity(opts, callback) {
-      opts = opts || {};
-      let postBody = null;
-
-      let pathParams = {
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-        'mobile_number': opts['mobileNumber'],
-        'email_id': opts['emailId'],
-        'name': opts['name'],
-        'app_id': opts['appId']
-      };
-
-      let authNames = ['bearer'];
-      let contentTypes = ['multipart/form-data'];
-      let accepts = ['application/json'];
-      let returnType = ChangeEmail200Response;
-      return this.apiClient.callApi(
-        '/memory/identity/external-user', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

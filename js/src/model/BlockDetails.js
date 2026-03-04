@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The BlockDetails model module.
  * @module model/BlockDetails
- * @version 1.0.21
+ * @version 1.0.22
  */
 class BlockDetails {
     /**

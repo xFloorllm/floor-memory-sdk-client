@@ -4,10 +4,6 @@
 README.md
 docs/AuthApi.md
 docs/BlockDetails.md
-docs/ChangeEmail200Response.md
-docs/ChangeEmail200ResponsePodInfo.md
-docs/ChangeEmail200ResponseProfile.md
-docs/ChangeEmail200ResponseProfileAvatar.md
 docs/ChangePassword200Response.md
 docs/EditFloor200Response.md
 docs/EditFloor400Response.md
@@ -40,6 +36,9 @@ docs/SignInResponse.md
 docs/SignUp200Response.md
 docs/SignUpResponse.md
 docs/UserDetails.md
+docs/UserDetailsPodInfo.md
+docs/UserDetailsProfile.md
+docs/UserDetailsProfileAvatar.md
 docs/ValidateCode400Response.md
 docs/ValidateCode400ResponseError.md
 docs/ValidateCode412Response.md
@@ -51,10 +50,6 @@ src/apis/QueryApi.ts
 src/apis/index.ts
 src/index.ts
 src/models/BlockDetails.ts
-src/models/ChangeEmail200Response.ts
-src/models/ChangeEmail200ResponsePodInfo.ts
-src/models/ChangeEmail200ResponseProfile.ts
-src/models/ChangeEmail200ResponseProfileAvatar.ts
 src/models/ChangePassword200Response.ts
 src/models/EditFloor200Response.ts
 src/models/EditFloor400Response.ts
@@ -84,6 +79,9 @@ src/models/SignInResponse.ts
 src/models/SignUp200Response.ts
 src/models/SignUpResponse.ts
 src/models/UserDetails.ts
+src/models/UserDetailsPodInfo.ts
+src/models/UserDetailsProfile.ts
+src/models/UserDetailsProfileAvatar.ts
 src/models/ValidateCode400Response.ts
 src/models/ValidateCode400ResponseError.ts
 src/models/ValidateCode412Response.ts

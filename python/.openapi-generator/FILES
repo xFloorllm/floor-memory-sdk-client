@@ -6,10 +6,6 @@
 README.md
 docs/AuthApi.md
 docs/BlockDetails.md
-docs/ChangeEmail200Response.md
-docs/ChangeEmail200ResponsePodInfo.md
-docs/ChangeEmail200ResponseProfile.md
-docs/ChangeEmail200ResponseProfileAvatar.md
 docs/ChangePassword200Response.md
 docs/EditFloor200Response.md
 docs/EditFloor400Response.md
@@ -42,6 +38,9 @@ docs/SignInResponse.md
 docs/SignUp200Response.md
 docs/SignUpResponse.md
 docs/UserDetails.md
+docs/UserDetailsPodInfo.md
+docs/UserDetailsProfile.md
+docs/UserDetailsProfileAvatar.md
 docs/ValidateCode400Response.md
 docs/ValidateCode400ResponseError.md
 docs/ValidateCode412Response.md
@@ -54,10 +53,6 @@ test-requirements.txt
 test/__init__.py
 test/test_auth_api.py
 test/test_block_details.py
-test/test_change_email200_response.py
-test/test_change_email200_response_pod_info.py
-test/test_change_email200_response_profile.py
-test/test_change_email200_response_profile_avatar.py
 test/test_change_password200_response.py
 test/test_edit_floor200_response.py
 test/test_edit_floor400_response.py
@@ -90,6 +85,9 @@ test/test_sign_in_response.py
 test/test_sign_up200_response.py
 test/test_sign_up_response.py
 test/test_user_details.py
+test/test_user_details_pod_info.py
+test/test_user_details_profile.py
+test/test_user_details_profile_avatar.py
 test/test_validate_code400_response.py
 test/test_validate_code400_response_error.py
 test/test_validate_code412_response.py
@@ -106,10 +104,6 @@ xfloor_memory_sdk/configuration.py
 xfloor_memory_sdk/exceptions.py
 xfloor_memory_sdk/models/__init__.py
 xfloor_memory_sdk/models/block_details.py
-xfloor_memory_sdk/models/change_email200_response.py
-xfloor_memory_sdk/models/change_email200_response_pod_info.py
-xfloor_memory_sdk/models/change_email200_response_profile.py
-xfloor_memory_sdk/models/change_email200_response_profile_avatar.py
 xfloor_memory_sdk/models/change_password200_response.py
 xfloor_memory_sdk/models/edit_floor200_response.py
 xfloor_memory_sdk/models/edit_floor400_response.py
@@ -139,6 +133,9 @@ xfloor_memory_sdk/models/sign_in_response.py
 xfloor_memory_sdk/models/sign_up200_response.py
 xfloor_memory_sdk/models/sign_up_response.py
 xfloor_memory_sdk/models/user_details.py
+xfloor_memory_sdk/models/user_details_pod_info.py
+xfloor_memory_sdk/models/user_details_profile.py
+xfloor_memory_sdk/models/user_details_profile_avatar.py
 xfloor_memory_sdk/models/validate_code400_response.py
 xfloor_memory_sdk/models/validate_code400_response_error.py
 xfloor_memory_sdk/models/validate_code412_response.py

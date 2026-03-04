@@ -7,7 +7,6 @@ All URIs are relative to *https://appfloor.in*
 | [**changeEmail**](AuthApi.md#changeemail) | **POST** /auth-service/change/email | Change email ID |
 | [**changeMobileNumber**](AuthApi.md#changemobilenumber) | **POST** /auth-service/change/mobile | Change Mobile number |
 | [**changePassword**](AuthApi.md#changepassword) | **POST** /auth-service/password/change | Change Password |
-| [**registerExternalUserIdentity**](AuthApi.md#registerexternaluseridentity) | **POST** /memory/identity/external-user | External User Registration |
 | [**resetPassword**](AuthApi.md#resetpassword) | **POST** /auth-service/password/reset | Reset Password |
 | [**sendValidationCode**](AuthApi.md#sendvalidationcode) | **POST** /auth-service/send/validation/code | Send Validation code |
 | [**signInWithEmail**](AuthApi.md#signinwithemail) | **POST** /auth-service/sign/in/with/email | Sign In with email ID |
@@ -19,7 +18,7 @@ All URIs are relative to *https://appfloor.in*
 
 ### changeEmail
 
-> ChangeEmail200Response changeEmail(newEmailId, activationCode)
+> SignInResponse changeEmail(newEmailId, activationCode)
 
 Change email ID
 
@@ -136,7 +135,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**ChangeEmail200Response**](ChangeEmail200Response.md)
+[**SignInResponse**](SignInResponse.md)
 
 ### Authorization
 
@@ -163,7 +162,7 @@ example().catch(console.error);
 
 ### changeMobileNumber
 
-> ChangeEmail200Response changeMobileNumber(newMobileNumber, activationCode)
+> SignInResponse changeMobileNumber(newMobileNumber, activationCode)
 
 Change Mobile number
 
@@ -280,7 +279,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**ChangeEmail200Response**](ChangeEmail200Response.md)
+[**SignInResponse**](SignInResponse.md)
 
 ### Authorization
 
@@ -407,94 +406,6 @@ example().catch(console.error);
 |
 - |
 | **400** |
-|
-- |
-
-[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
-
-
-### registerExternalUserIdentity
-
-> ChangeEmail200Response registerExternalUserIdentity(mobileNumber, emailId, name, appId)
-
-External User Registration
-
-This API allows a calling application to **pass externally authenticated user identity information to xfloor** after completing authentication within its own system. xfloor **does not perform authentication, credential verification, or session management** as part of this API. The calling application is fully responsible for validating the user and ensuring the correctness of the identity data provided. Upon invocation, xfloor will:
-* **Create a new user profile** if no matching user exists, or
-* **Update the existing user profile** if the user is already present. xfloor returns a unique `xfloor_user_id`, which serves as the **canonical user identifier** and must be used in all subsequent xfloor APIs, including floors, blocks, conversations, memory interactions, and analytics.
-
-### Example
-
-```ts
-import {
-  Configuration,
-  AuthApi,
-} from '@xfloor/floor-memory-sdk-ts';
-import type { RegisterExternalUserIdentityRequest } from '@xfloor/floor-memory-sdk-ts';
-
-async function example() {
-  console.log("🚀 Testing @xfloor/floor-memory-sdk-ts SDK...");
-  const config = new Configuration({ 
-    // Configure HTTP bearer authorization: bearer
-    accessToken: "YOUR BEARER TOKEN",
-  });
-  const api = new AuthApi(config);
-
-  const body = {
-    // string (optional)
-    mobileNumber: mobileNumber_example,
-    // string (optional)
-    emailId: emailId_example,
-    // string (optional)
-    name: name_example,
-    // string (optional)
-    appId: appId_example,
-  } satisfies RegisterExternalUserIdentityRequest;
-
-  try {
-    const data = await api.registerExternalUserIdentity(body);
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// Run the test
-example().catch(console.error);
-```
-
-### Parameters
-
-
-| Name | Type | Description | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **mobileNumber** | `string` |
-| [Optional] [Defaults to `undefined`] |
-| **emailId** | `string` |
-| [Optional] [Defaults to `undefined`] |
-| **name** | `string` |
-| [Optional] [Defaults to `undefined`] |
-| **appId** | `string` |
-| [Optional] [Defaults to `undefined`] |
-
-### Return type
-
-[**ChangeEmail200Response**](ChangeEmail200Response.md)
-
-### Authorization
-
-[bearer](../README.md#bearer)
-
-### HTTP request headers
-
-- **Content-Type**: `multipart/form-data`
-- **Accept**: `application/json`
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** |
 |
 - |
 

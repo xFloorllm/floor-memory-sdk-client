@@ -7,7 +7,6 @@ All URIs are relative to *https://appfloor.in*
 | [**changeEmail**](AuthApi.md#changeEmail) | **POST** /auth-service/change/email | Change email ID |
 | [**changeMobileNumber**](AuthApi.md#changeMobileNumber) | **POST** /auth-service/change/mobile | Change Mobile number |
 | [**changePassword**](AuthApi.md#changePassword) | **POST** /auth-service/password/change | Change Password |
-| [**registerExternalUserIdentity**](AuthApi.md#registerExternalUserIdentity) | **POST** /memory/identity/external-user | External User Registration |
 | [**resetPassword**](AuthApi.md#resetPassword) | **POST** /auth-service/password/reset | Reset Password |
 | [**sendValidationCode**](AuthApi.md#sendValidationCode) | **POST** /auth-service/send/validation/code | Send Validation code |
 | [**signInWithEmail**](AuthApi.md#signInWithEmail) | **POST** /auth-service/sign/in/with/email | Sign In with email ID |
@@ -18,7 +17,7 @@ All URIs are relative to *https://appfloor.in*
 
 <a id="changeEmail"></a>
 # **changeEmail**
-> ChangeEmail200Response changeEmail(newEmailId, activationCode)
+> SignInResponse changeEmail(newEmailId, activationCode)
 
 Change email ID
 
@@ -112,7 +111,7 @@ public class Example {
     String newEmailId = "newEmailId_example"; // String | New Email ID
     String activationCode = "activationCode_example"; // String | Validation code
     try {
-      ChangeEmail200Response result = apiInstance.changeEmail(newEmailId, activationCode);
+      SignInResponse result = apiInstance.changeEmail(newEmailId, activationCode);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling AuthApi#changeEmail");
@@ -136,7 +135,7 @@ public class Example {
 
 ### Return type
 
-[**ChangeEmail200Response**](ChangeEmail200Response.md)
+[**SignInResponse**](SignInResponse.md)
 
 ### Authorization
 
@@ -159,7 +158,7 @@ public class Example {
 
 <a id="changeMobileNumber"></a>
 # **changeMobileNumber**
-> ChangeEmail200Response changeMobileNumber(newMobileNumber, activationCode)
+> SignInResponse changeMobileNumber(newMobileNumber, activationCode)
 
 Change Mobile number
 
@@ -253,7 +252,7 @@ public class Example {
     String newMobileNumber = "newMobileNumber_example"; // String | New mobile number
     String activationCode = "activationCode_example"; // String | Activation code
     try {
-      ChangeEmail200Response result = apiInstance.changeMobileNumber(newMobileNumber, activationCode);
+      SignInResponse result = apiInstance.changeMobileNumber(newMobileNumber, activationCode);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling AuthApi#changeMobileNumber");
@@ -277,7 +276,7 @@ public class Example {
 
 ### Return type
 
-[**ChangeEmail200Response**](ChangeEmail200Response.md)
+[**SignInResponse**](SignInResponse.md)
 
 ### Authorization
 
@@ -399,87 +398,6 @@ public class Example {
 |
 - |
 | **400** |
-|
-- |
-
-<a id="registerExternalUserIdentity"></a>
-# **registerExternalUserIdentity**
-> ChangeEmail200Response registerExternalUserIdentity(mobileNumber, emailId, name, appId)
-
-External User Registration
-
-This API allows a calling application to **pass externally authenticated user identity information to xfloor** after completing authentication within its own system. xfloor **does not perform authentication, credential verification, or session management** as part of this API. The calling application is fully responsible for validating the user and ensuring the correctness of the identity data provided. Upon invocation, xfloor will:
-* **Create a new user profile** if no matching user exists, or
-* **Update the existing user profile** if the user is already present. xfloor returns a unique `xfloor_user_id`, which serves as the **canonical user identifier** and must be used in all subsequent xfloor APIs, including floors, blocks, conversations, memory interactions, and analytics.
-
-### Example
-```java
-// Import classes:
-import ai.xfloor.memory.client.ApiClient;
-import ai.xfloor.memory.client.ApiException;
-import ai.xfloor.memory.client.Configuration;
-import ai.xfloor.memory.client.auth.*;
-import ai.xfloor.memory.client.models.*;
-import ai.xfloor.memory.api.AuthApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://appfloor.in");
-    
-    // Configure HTTP bearer authorization: bearer
-    HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
-    bearer.setBearerToken("BEARER TOKEN");
-
-    AuthApi apiInstance = new AuthApi(defaultClient);
-    String mobileNumber = "mobileNumber_example"; // String | 
-    String emailId = "emailId_example"; // String | 
-    String name = "name_example"; // String | 
-    String appId = "appId_example"; // String | 
-    try {
-      ChangeEmail200Response result = apiInstance.registerExternalUserIdentity(mobileNumber, emailId, name, appId);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AuthApi#registerExternalUserIdentity");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **mobileNumber** | **String**|
-| [optional] |
-| **emailId** | **String**|
-| [optional] |
-| **name** | **String**|
-| [optional] |
-| **appId** | **String**|
-| [optional] |
-
-### Return type
-
-[**ChangeEmail200Response**](ChangeEmail200Response.md)
-
-### Authorization
-
-[bearer](../README.md#bearer)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** |
 |
 - |
 

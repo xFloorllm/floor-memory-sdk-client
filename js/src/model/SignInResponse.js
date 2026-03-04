@@ -14,20 +14,20 @@
  */
 
 import ApiClient from '../ApiClient';
-import ChangeEmail200ResponsePodInfo from './ChangeEmail200ResponsePodInfo';
-import ChangeEmail200ResponseProfile from './ChangeEmail200ResponseProfile';
+import UserDetailsPodInfo from './UserDetailsPodInfo';
+import UserDetailsProfile from './UserDetailsProfile';
 
 /**
  * The SignInResponse model module.
  * @module model/SignInResponse
- * @version 1.0.21
+ * @version 1.0.22
  */
 class SignInResponse {
     /**
      * Constructs a new <code>SignInResponse</code>.
      * @alias module:model/SignInResponse
-     * @param profile {module:model/ChangeEmail200ResponseProfile} 
-     * @param podInfo {module:model/ChangeEmail200ResponsePodInfo} 
+     * @param profile {module:model/UserDetailsProfile} 
+     * @param podInfo {module:model/UserDetailsPodInfo} 
      */
     constructor(profile, podInfo) { 
         
@@ -56,10 +56,10 @@ class SignInResponse {
             obj = obj || new SignInResponse();
 
             if (data.hasOwnProperty('profile')) {
-                obj['profile'] = ChangeEmail200ResponseProfile.constructFromObject(data['profile']);
+                obj['profile'] = UserDetailsProfile.constructFromObject(data['profile']);
             }
             if (data.hasOwnProperty('pod_info')) {
-                obj['pod_info'] = ChangeEmail200ResponsePodInfo.constructFromObject(data['pod_info']);
+                obj['pod_info'] = UserDetailsPodInfo.constructFromObject(data['pod_info']);
             }
             if (data.hasOwnProperty('app_id')) {
                 obj['app_id'] = ApiClient.convertToType(data['app_id'], 'String');
@@ -82,11 +82,11 @@ class SignInResponse {
         }
         // validate the optional field `profile`
         if (data['profile']) { // data not null
-          ChangeEmail200ResponseProfile.validateJSON(data['profile']);
+          UserDetailsProfile.validateJSON(data['profile']);
         }
         // validate the optional field `pod_info`
         if (data['pod_info']) { // data not null
-          ChangeEmail200ResponsePodInfo.validateJSON(data['pod_info']);
+          UserDetailsPodInfo.validateJSON(data['pod_info']);
         }
         // ensure the json data is a string
         if (data['app_id'] && !(typeof data['app_id'] === 'string' || data['app_id'] instanceof String)) {
@@ -102,12 +102,12 @@ class SignInResponse {
 SignInResponse.RequiredProperties = ["profile", "pod_info"];
 
 /**
- * @member {module:model/ChangeEmail200ResponseProfile} profile
+ * @member {module:model/UserDetailsProfile} profile
  */
 SignInResponse.prototype['profile'] = undefined;
 
 /**
- * @member {module:model/ChangeEmail200ResponsePodInfo} pod_info
+ * @member {module:model/UserDetailsPodInfo} pod_info
  */
 SignInResponse.prototype['pod_info'] = undefined;
 
