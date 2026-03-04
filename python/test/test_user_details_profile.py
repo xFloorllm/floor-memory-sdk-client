@@ -50,7 +50,7 @@ class TestUserDetailsProfile(unittest.TestCase):
                 user_id = '',
                 avatar = xfloor_memory_sdk.models.user_details_profile_avatar.UserDetails_profile_avatar(
                     url = '', 
-                    id = '', )
+                    type = '', )
             )
         else:
             return UserDetailsProfile(

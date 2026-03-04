@@ -20,7 +20,7 @@ import Media from './Media';
 /**
  * The UserDetailsPodInfo model module.
  * @module model/UserDetailsPodInfo
- * @version 1.0.22
+ * @version 1.0.23
  */
 class UserDetailsPodInfo {
     /**

@@ -57,10 +57,10 @@ public class UserDetailsProfileAvatar {
   @javax.annotation.Nonnull
   private String url;
 
-  public static final String SERIALIZED_NAME_ID = "id";
-  @SerializedName(SERIALIZED_NAME_ID)
+  public static final String SERIALIZED_NAME_TYPE = "type";
+  @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nonnull
-  private String id;
+  private String type;
 
   public UserDetailsProfileAvatar() {
   }
@@ -84,22 +84,22 @@ public class UserDetailsProfileAvatar {
   }
 
 
-  public UserDetailsProfileAvatar id(@javax.annotation.Nonnull String id) {
-    this.id = id;
+  public UserDetailsProfileAvatar type(@javax.annotation.Nonnull String type) {
+    this.type = type;
     return this;
   }
 
   /**
    * Image ID
-   * @return id
+   * @return type
    */
   @javax.annotation.Nonnull
-  public String getId() {
-    return id;
+  public String getType() {
+    return type;
   }
 
-  public void setId(@javax.annotation.Nonnull String id) {
-    this.id = id;
+  public void setType(@javax.annotation.Nonnull String type) {
+    this.type = type;
   }
 
 
@@ -114,12 +114,12 @@ public class UserDetailsProfileAvatar {
     }
     UserDetailsProfileAvatar userDetailsProfileAvatar = (UserDetailsProfileAvatar) o;
     return Objects.equals(this.url, userDetailsProfileAvatar.url) &&
-        Objects.equals(this.id, userDetailsProfileAvatar.id);
+        Objects.equals(this.type, userDetailsProfileAvatar.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(url, id);
+    return Objects.hash(url, type);
   }
 
   @Override
@@ -127,7 +127,7 @@ public class UserDetailsProfileAvatar {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserDetailsProfileAvatar {\n");
     sb.append("    url: ").append(toIndentedString(url)).append("\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -149,10 +149,10 @@ public class UserDetailsProfileAvatar {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("url", "id"));
+    openapiFields = new HashSet<String>(Arrays.asList("url", "type"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("url", "id"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("url", "type"));
   }
 
   /**
@@ -186,8 +186,8 @@ public class UserDetailsProfileAvatar {
       if (!jsonObj.get("url").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("url").toString()));
       }
-      if (!jsonObj.get("id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
+      if (!jsonObj.get("type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
       }
   }
 

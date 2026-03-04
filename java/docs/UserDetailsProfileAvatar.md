@@ -10,7 +10,7 @@ Profile Pick details
 |------------ | ------------- | ------------- | -------------|
 |**url** | **String** | Image URL |
 |
-|**id** | **String** | Image ID |
+|**type** | **String** | Image ID |
 |
 
 

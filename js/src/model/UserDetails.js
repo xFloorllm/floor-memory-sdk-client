@@ -20,7 +20,7 @@ import UserDetailsProfile from './UserDetailsProfile';
 /**
  * The UserDetails model module.
  * @module model/UserDetails
- * @version 1.0.22
+ * @version 1.0.23
  */
 class UserDetails {
     /**

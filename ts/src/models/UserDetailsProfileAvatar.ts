@@ -32,7 +32,7 @@ export interface UserDetailsProfileAvatar {
      * @type {string}
      * @memberof UserDetailsProfileAvatar
      */
-    id: string;
+    type: string;
 }
 
 /**
@@ -40,7 +40,7 @@ export interface UserDetailsProfileAvatar {
  */
 export function instanceOfUserDetailsProfileAvatar(value: object): value is UserDetailsProfileAvatar {
     if (!('url' in value) || value['url'] === undefined) return false;
-    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('type' in value) || value['type'] === undefined) return false;
     return true;
 }
 
@@ -55,7 +55,7 @@ export function UserDetailsProfileAvatarFromJSONTyped(json: any, ignoreDiscrimin
     return {
         
         'url': json['url'],
-        'id': json['id'],
+        'type': json['type'],
     };
 }
 
@@ -71,7 +71,7 @@ export function UserDetailsProfileAvatarToJSONTyped(value?: UserDetailsProfileAv
     return {
         
         'url': value['url'],
-        'id': value['id'],
+        'type': value['type'],
     };
 }
 

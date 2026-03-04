@@ -37,12 +37,12 @@ class TestUserDetailsProfileAvatar(unittest.TestCase):
         if include_optional:
             return UserDetailsProfileAvatar(
                 url = '',
-                id = ''
+                type = ''
             )
         else:
             return UserDetailsProfileAvatar(
                 url = '',
-                id = '',
+                type = '',
         )
         """
 

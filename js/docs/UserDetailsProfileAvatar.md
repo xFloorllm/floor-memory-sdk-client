@@ -15,7 +15,7 @@ Notes
 **url**
 
 | **String** | Image URL |
-**id**
+**type**
 
 | **String** | Image ID |
 

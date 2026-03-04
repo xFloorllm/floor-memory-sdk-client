@@ -46,11 +46,11 @@ public class UserDetailsProfileAvatarTest {
     }
 
     /**
-     * Test the property 'id'
+     * Test the property 'type'
      */
     @Test
-    public void idTest() {
-        // TODO: test id
+    public void typeTest() {
+        // TODO: test type
     }
 
 }

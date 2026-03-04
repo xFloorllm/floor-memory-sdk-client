@@ -20,7 +20,7 @@ import UserDetailsProfile from './UserDetailsProfile';
 /**
  * The SignInResponse model module.
  * @module model/SignInResponse
- * @version 1.0.22
+ * @version 1.0.23
  */
 class SignInResponse {
     /**

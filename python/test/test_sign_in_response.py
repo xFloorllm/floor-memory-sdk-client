@@ -51,7 +51,7 @@ class TestSignInResponse(unittest.TestCase):
                     user_id = '', 
                     avatar = xfloor_memory_sdk.models.user_details_profile_avatar.UserDetails_profile_avatar(
                         url = '', 
-                        id = '', ), ),
+                        type = '', ), ),
                 pod_info = xfloor_memory_sdk.models.user_details_pod_info.UserDetails_pod_info(
                     floor_id = '', 
                     is_owner = '', 
@@ -87,7 +87,7 @@ class TestSignInResponse(unittest.TestCase):
                     user_id = '', 
                     avatar = xfloor_memory_sdk.models.user_details_profile_avatar.UserDetails_profile_avatar(
                         url = '', 
-                        id = '', ), ),
+                        type = '', ), ),
                 pod_info = xfloor_memory_sdk.models.user_details_pod_info.UserDetails_pod_info(
                     floor_id = '', 
                     is_owner = '', 

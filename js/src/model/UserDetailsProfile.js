@@ -20,7 +20,7 @@ import UserDetailsProfileAvatar from './UserDetailsProfileAvatar';
 /**
  * The UserDetailsProfile model module.
  * @module model/UserDetailsProfile
- * @version 1.0.22
+ * @version 1.0.23
  */
 class UserDetailsProfile {
     /**

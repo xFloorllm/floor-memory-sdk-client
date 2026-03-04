@@ -30,8 +30,8 @@ class UserDetailsProfileAvatar(BaseModel):
     Profile Pick details
     """ # noqa: E501
     url: StrictStr = Field(description="Image URL")
-    id: StrictStr = Field(description="Image ID")
-    __properties: ClassVar[List[str]] = ["url", "id"]
+    type: StrictStr = Field(description="Image ID")
+    __properties: ClassVar[List[str]] = ["url", "type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +85,7 @@ class UserDetailsProfileAvatar(BaseModel):
 
         _obj = cls.model_validate({
             "url": obj.get("url"),
-            "id": obj.get("id")
+            "type": obj.get("type")
         })
         return _obj
 

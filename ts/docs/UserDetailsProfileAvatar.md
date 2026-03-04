@@ -8,7 +8,7 @@ Profile Pick details
 Name | Type
 ------------ | -------------
 `url` | string
-`id` | string
+`type` | string
 
 ### Example
 
@@ -18,7 +18,7 @@ import type { UserDetailsProfileAvatar } from '@xfloor/floor-memory-sdk-ts'
 // TODO: Update the object below with actual values
 const example = {
   "url": null,
-  "id": null,
+  "type": null,
 } satisfies UserDetailsProfileAvatar
 
 console.log(example)

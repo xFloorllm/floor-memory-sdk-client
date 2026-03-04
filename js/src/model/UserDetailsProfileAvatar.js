@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The UserDetailsProfileAvatar model module.
  * @module model/UserDetailsProfileAvatar
- * @version 1.0.22
+ * @version 1.0.23
  */
 class UserDetailsProfileAvatar {
     /**
@@ -26,11 +26,11 @@ class UserDetailsProfileAvatar {
      * Profile Pick details
      * @alias module:model/UserDetailsProfileAvatar
      * @param url {String} Image URL
-     * @param id {String} Image ID
+     * @param type {String} Image ID
      */
-    constructor(url, id) { 
+    constructor(url, type) { 
         
-        UserDetailsProfileAvatar.initialize(this, url, id);
+        UserDetailsProfileAvatar.initialize(this, url, type);
     }
 
     /**
@@ -38,9 +38,9 @@ class UserDetailsProfileAvatar {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, url, id) { 
+    static initialize(obj, url, type) { 
         obj['url'] = url;
-        obj['id'] = id;
+        obj['type'] = type;
     }
 
     /**
@@ -57,8 +57,8 @@ class UserDetailsProfileAvatar {
             if (data.hasOwnProperty('url')) {
                 obj['url'] = ApiClient.convertToType(data['url'], 'String');
             }
-            if (data.hasOwnProperty('id')) {
-                obj['id'] = ApiClient.convertToType(data['id'], 'String');
+            if (data.hasOwnProperty('type')) {
+                obj['type'] = ApiClient.convertToType(data['type'], 'String');
             }
         }
         return obj;
@@ -81,8 +81,8 @@ class UserDetailsProfileAvatar {
             throw new Error("Expected the field `url` to be a primitive type in the JSON string but got " + data['url']);
         }
         // ensure the json data is a string
-        if (data['id'] && !(typeof data['id'] === 'string' || data['id'] instanceof String)) {
-            throw new Error("Expected the field `id` to be a primitive type in the JSON string but got " + data['id']);
+        if (data['type'] && !(typeof data['type'] === 'string' || data['type'] instanceof String)) {
+            throw new Error("Expected the field `type` to be a primitive type in the JSON string but got " + data['type']);
         }
 
         return true;
@@ -91,7 +91,7 @@ class UserDetailsProfileAvatar {
 
 }
 
-UserDetailsProfileAvatar.RequiredProperties = ["url", "id"];
+UserDetailsProfileAvatar.RequiredProperties = ["url", "type"];
 
 /**
  * Image URL
@@ -101,9 +101,9 @@ UserDetailsProfileAvatar.prototype['url'] = undefined;
 
 /**
  * Image ID
- * @member {String} id
+ * @member {String} type
  */
-UserDetailsProfileAvatar.prototype['id'] = undefined;
+UserDetailsProfileAvatar.prototype['type'] = undefined;
 
 
 
