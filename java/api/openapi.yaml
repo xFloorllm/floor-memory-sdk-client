@@ -22,10 +22,9 @@ servers:
   url: https://appfloor.in
 tags:
 - name: query
-- name: event
-- name: getRecentEvents
-- name: getFloorInformation
-- name: editFloor
+- name: Event
+- name: Floor
+- name: Auth
 paths:
   /agent/memory/query:
     post:
@@ -720,7 +719,7 @@ paths:
       - bearer: []
       summary: Create Event (Post Content)
       tags:
-      - event
+      - Event
       x-content-type: multipart/form-data
       x-accepts:
       - application/json
@@ -940,7 +939,7 @@ paths:
       - bearer: []
       summary: Recent Events
       tags:
-      - getRecentEvents
+      - Event
       x-accepts:
       - application/json
   /api/memory/floor/info/{floor_id}:
@@ -1175,7 +1174,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getFloorInformation_200_response"
+                $ref: "#/components/schemas/FloorInfo"
           description: ""
         "400":
           content:
@@ -1193,7 +1192,7 @@ paths:
       - bearer: []
       summary: Basic information of a floor
       tags:
-      - getFloorInformation
+      - Floor
       x-accepts:
       - application/json
   /api/memory/edit/floor/{floor_id}:
@@ -1348,7 +1347,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getFloorInformation_200_response"
+                $ref: "#/components/schemas/editFloor_200_response"
           description: ""
         "400":
           content:
@@ -1366,7 +1365,7 @@ paths:
       - bearer: []
       summary: Edit floor
       tags:
-      - editFloor
+      - Floor
       x-content-type: multipart/form-data
       x-accepts:
       - application/json
@@ -1539,7 +1538,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getFloorInformation_200_response"
+                $ref: "#/components/schemas/editFloor_200_response"
           description: ""
         "400":
           content:
@@ -1556,7 +1555,8 @@ paths:
       security:
       - bearer: []
       summary: Make floor Private
-      tags: []
+      tags:
+      - Floor
       x-accepts:
       - application/json
   /api/memory/make/floor/public/{floor_id}:
@@ -1735,7 +1735,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getFloorInformation_200_response"
+                $ref: "#/components/schemas/editFloor_200_response"
           description: ""
         "400":
           content:
@@ -1752,7 +1752,8 @@ paths:
       security:
       - bearer: []
       summary: Make floor public
-      tags: []
+      tags:
+      - Floor
       x-accepts:
       - application/json
   /api/memory/change/floor/id:
@@ -1940,7 +1941,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getFloorInformation_200_response"
+                $ref: "#/components/schemas/editFloor_200_response"
           description: ""
         "400":
           content:
@@ -1951,7 +1952,8 @@ paths:
       security:
       - bearer: []
       summary: Rename floor
-      tags: []
+      tags:
+      - Floor
       x-accepts:
       - application/json
   /auth-service/sign/up:
@@ -2009,7 +2011,8 @@ paths:
       security:
       - bearer: []
       summary: Sign Up
-      tags: []
+      tags:
+      - Auth
       x-content-type: multipart/form-data
       x-accepts:
       - application/json
@@ -2059,16 +2062,8 @@ paths:
         "200":
           content:
             application/json:
-              example: |-
-                "error": {
-                    "code": "XF_VALIDATION_ERROR",
-                    "message": "Invalid E-Mail",
-                    "path": "/auth-service/sign/in/with/email",
-                    "timestamp": "2026-01-12T08:11:59.993079561Z"
-                }
-                }
               schema:
-                $ref: "#/components/schemas/signInWithEmail_200_response"
+                $ref: "#/components/schemas/SignInResponse"
           description: ""
         "400":
           content:
@@ -2086,7 +2081,8 @@ paths:
       security:
       - bearer: []
       summary: Sign In with email ID
-      tags: []
+      tags:
+      - Auth
       x-content-type: multipart/form-data
       x-accepts:
       - application/json
@@ -2137,14 +2133,8 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                error:
-                  code: XF_VALIDATION_ERROR
-                  message: Invalid mobile number
-                  path: /auth-service/sign/in/with/mobile/number
-                  timestamp: 2026-01-12T08:11:59.993079561Z
               schema:
-                $ref: "#/components/schemas/signInWithEmail_200_response"
+                $ref: "#/components/schemas/SignInResponse"
           description: ""
         "400":
           content:
@@ -2162,7 +2152,8 @@ paths:
       security:
       - bearer: []
       summary: Sign In with Mobile number
-      tags: []
+      tags:
+      - Auth
       x-content-type: multipart/form-data
       x-accepts:
       - application/json
@@ -2308,7 +2299,8 @@ paths:
       security:
       - bearer: []
       summary: Validation
-      tags: []
+      tags:
+      - Auth
       x-content-type: multipart/form-data
       x-accepts:
       - application/json
@@ -2384,7 +2376,8 @@ paths:
       security:
       - bearer: []
       summary: Change Password
-      tags: []
+      tags:
+      - Auth
       x-content-type: multipart/form-data
       x-accepts:
       - application/json
@@ -2459,7 +2452,8 @@ paths:
           description: ""
       security: []
       summary: Reset Password
-      tags: []
+      tags:
+      - Auth
       x-content-type: multipart/form-data
       x-accepts:
       - application/json
@@ -2567,7 +2561,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/signInWithEmail_200_response"
+                $ref: "#/components/schemas/changeEmail_200_response"
           description: ""
         "400":
           content:
@@ -2585,7 +2579,8 @@ paths:
       security:
       - bearer: []
       summary: Change email ID
-      tags: []
+      tags:
+      - Auth
       x-content-type: multipart/form-data
       x-accepts:
       - application/json
@@ -2698,7 +2693,7 @@ paths:
                     "timestamp": "2026-01-12T08:11:59.993079561Z"
                 }
               schema:
-                $ref: "#/components/schemas/signInWithEmail_200_response"
+                $ref: "#/components/schemas/changeEmail_200_response"
           description: ""
         "400":
           content:
@@ -2715,7 +2710,8 @@ paths:
       security:
       - bearer: []
       summary: Change Mobile number
-      tags: []
+      tags:
+      - Auth
       x-content-type: multipart/form-data
       x-accepts:
       - application/json
@@ -2842,7 +2838,62 @@ paths:
       security:
       - bearer: []
       summary: Send Validation code
-      tags: []
+      tags:
+      - Auth
+      x-content-type: multipart/form-data
+      x-accepts:
+      - application/json
+  /memory/identity/external-user:
+    post:
+      deprecated: false
+      description: |-
+        This API allows a calling application to **pass externally authenticated user identity information to xfloor** after completing authentication within its own system.
+
+        xfloor **does not perform authentication, credential verification, or session management** as part of this API. The calling application is fully responsible for validating the user and ensuring the correctness of the identity data provided.
+
+        Upon invocation, xfloor will:
+
+        * **Create a new user profile** if no matching user exists, or
+        * **Update the existing user profile** if the user is already present.
+
+        xfloor returns a unique `xfloor_user_id`, which serves as the **canonical user identifier** and must be used in all subsequent xfloor APIs, including floors, blocks, conversations, memory interactions, and analytics.
+      operationId: registerExternalUserIdentity
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            examples: {}
+            schema:
+              $ref: "#/components/schemas/registerExternalUserIdentity_request"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                pod_info:
+                  fid: string
+                  floor_id: string
+                  title: string
+                  details: string
+                profile:
+                  floor_id: string
+                  fid: string
+                  name: string
+                  email: string
+                  mobile_number: string
+                  user_id: string
+                  avatar:
+                    url: string
+                    id: string
+              schema:
+                $ref: "#/components/schemas/changeEmail_200_response"
+          description: ""
+      security:
+      - bearer: []
+      summary: External User Registration
+      tags:
+      - Auth
       x-content-type: multipart/form-data
       x-accepts:
       - application/json
@@ -2937,9 +2988,9 @@ components:
         app_id: app_id
       properties:
         profile:
-          $ref: "#/components/schemas/signInWithEmail_200_response_profile"
+          $ref: "#/components/schemas/changeEmail_200_response_profile"
         pod_info:
-          $ref: "#/components/schemas/signInWithEmail_200_response_pod_info"
+          $ref: "#/components/schemas/changeEmail_200_response_pod_info"
         app_id:
           description: App ID
           type: string
@@ -2982,6 +3033,24 @@ components:
       type: object
     FloorInfo:
       description: User's Pod floor Infomation
+      example:
+        blocks:
+        - type: type
+          title: title
+          block_id: block_id
+        - type: type
+          title: title
+          block_id: block_id
+        is_owner: is_owner
+        floor_uid: floor_uid
+        floor_id: floor_id
+        details: details
+        avatar:
+          type: type
+          url: url
+        title: title
+        floor_type: floor_type
+        app_id: app_id
       properties:
         floor_id:
           description: Pod floor ID
@@ -3056,6 +3125,54 @@ components:
           type: string
         remaining:
           type: string
+      type: object
+    SignInResponse:
+      example:
+        pod_info:
+          is_owner: is_owner
+          blocks:
+          - type: type
+            title: title
+            block_id: block_id
+          - type: type
+            title: title
+            block_id: block_id
+          floor_uid: floor_uid
+          floor_id: floor_id
+          details: details
+          avatar:
+            type: type
+            url: url
+          title: title
+          app_id: app_id
+        profile:
+          FID: FID
+          block_count_info:
+            permitted: permitted
+            remaining: remaining
+          user_id: user_id
+          name: name
+          floor_id: floor_id
+          floor_count_info:
+            permitted: permitted
+            remaining: remaining
+          avatar:
+            id: id
+            url: url
+          mobile_number: mobile_number
+          email: email
+        app_id: app_id
+      properties:
+        profile:
+          $ref: "#/components/schemas/changeEmail_200_response_profile"
+        pod_info:
+          $ref: "#/components/schemas/changeEmail_200_response_pod_info"
+        app_id:
+          description: App ID
+          type: string
+      required:
+      - pod_info
+      - profile
       type: object
     query_request_filters:
       description: JSON format filters
@@ -3359,7 +3476,34 @@ components:
       - error
       title: ""
       type: object
-    getFloorInformation_200_response:
+    editFloor_request:
+      properties:
+        user_id:
+          description: User ID
+          example: ""
+          type: string
+        app_id:
+          description: App ID
+          example: ""
+          type: string
+        logo_file:
+          description: Floor avatar
+          example: !!binary ""
+          format: binary
+          type: string
+        title:
+          description: Floor title
+          example: ""
+          type: string
+        details:
+          description: Floor decription
+          example: ""
+          type: string
+      required:
+      - app_id
+      - user_id
+      type: object
+    editFloor_200_response:
       example:
         blocks:
         - type: type
@@ -3413,33 +3557,6 @@ components:
       - floor_uid
       - is_owner
       - title
-      type: object
-    editFloor_request:
-      properties:
-        user_id:
-          description: User ID
-          example: ""
-          type: string
-        app_id:
-          description: App ID
-          example: ""
-          type: string
-        logo_file:
-          description: Floor avatar
-          example: !!binary ""
-          format: binary
-          type: string
-        title:
-          description: Floor title
-          example: ""
-          type: string
-        details:
-          description: Floor decription
-          example: ""
-          type: string
-      required:
-      - app_id
-      - user_id
       type: object
     editFloor_400_response_error:
       example:
@@ -3546,161 +3663,6 @@ components:
       - email_id
       - login_type
       - pass_code
-      type: object
-    signInWithEmail_200_response_profile_avatar:
-      description: Profile Pick details
-      example:
-        id: id
-        url: url
-      properties:
-        url:
-          description: Image URL
-          type: string
-        id:
-          description: Image ID
-          type: string
-      required:
-      - id
-      - url
-      type: object
-    signInWithEmail_200_response_profile:
-      description: User profile details
-      example:
-        FID: FID
-        block_count_info:
-          permitted: permitted
-          remaining: remaining
-        user_id: user_id
-        name: name
-        floor_id: floor_id
-        floor_count_info:
-          permitted: permitted
-          remaining: remaining
-        avatar:
-          id: id
-          url: url
-        mobile_number: mobile_number
-        email: email
-      properties:
-        floor_id:
-          description: Associated floor ID
-          type: string
-        floor_count_info:
-          $ref: "#/components/schemas/Remaining"
-        block_count_info:
-          $ref: "#/components/schemas/Remaining"
-        FID:
-          description: Unique ID of floor
-          type: string
-        name:
-          description: User Name
-          type: string
-        email:
-          description: Email ID
-          type: string
-        mobile_number:
-          description: Mobile number
-          type: string
-        user_id:
-          description: Unique User ID
-          type: string
-        avatar:
-          $ref: "#/components/schemas/signInWithEmail_200_response_profile_avatar"
-      required:
-      - FID
-      - floor_id
-      - user_id
-      type: object
-    signInWithEmail_200_response_pod_info:
-      example:
-        is_owner: is_owner
-        blocks:
-        - type: type
-          title: title
-          block_id: block_id
-        - type: type
-          title: title
-          block_id: block_id
-        floor_uid: floor_uid
-        floor_id: floor_id
-        details: details
-        avatar:
-          type: type
-          url: url
-        title: title
-        app_id: app_id
-      properties:
-        floor_id:
-          type: string
-        is_owner:
-          type: string
-        app_id:
-          type: string
-        title:
-          type: string
-        details:
-          type: string
-        floor_uid:
-          type: string
-        blocks:
-          items:
-            $ref: "#/components/schemas/BlockDetails"
-          type: array
-        avatar:
-          $ref: "#/components/schemas/Media"
-      required:
-      - blocks
-      - floor_id
-      - floor_uid
-      - title
-      type: object
-    signInWithEmail_200_response:
-      example:
-        pod_info:
-          is_owner: is_owner
-          blocks:
-          - type: type
-            title: title
-            block_id: block_id
-          - type: type
-            title: title
-            block_id: block_id
-          floor_uid: floor_uid
-          floor_id: floor_id
-          details: details
-          avatar:
-            type: type
-            url: url
-          title: title
-          app_id: app_id
-        profile:
-          FID: FID
-          block_count_info:
-            permitted: permitted
-            remaining: remaining
-          user_id: user_id
-          name: name
-          floor_id: floor_id
-          floor_count_info:
-            permitted: permitted
-            remaining: remaining
-          avatar:
-            id: id
-            url: url
-          mobile_number: mobile_number
-          email: email
-        app_id: app_id
-      properties:
-        profile:
-          $ref: "#/components/schemas/signInWithEmail_200_response_profile"
-        pod_info:
-          $ref: "#/components/schemas/signInWithEmail_200_response_pod_info"
-        app_id:
-          description: App ID
-          type: string
-      required:
-      - pod_info
-      - profile
       type: object
     signInWithMobileNumber_request:
       properties:
@@ -3892,6 +3854,161 @@ components:
       - activation_code
       - new_email_id
       type: object
+    changeEmail_200_response_profile_avatar:
+      description: Profile Pick details
+      example:
+        id: id
+        url: url
+      properties:
+        url:
+          description: Image URL
+          type: string
+        id:
+          description: Image ID
+          type: string
+      required:
+      - id
+      - url
+      type: object
+    changeEmail_200_response_profile:
+      description: User profile details
+      example:
+        FID: FID
+        block_count_info:
+          permitted: permitted
+          remaining: remaining
+        user_id: user_id
+        name: name
+        floor_id: floor_id
+        floor_count_info:
+          permitted: permitted
+          remaining: remaining
+        avatar:
+          id: id
+          url: url
+        mobile_number: mobile_number
+        email: email
+      properties:
+        floor_id:
+          description: Associated floor ID
+          type: string
+        floor_count_info:
+          $ref: "#/components/schemas/Remaining"
+        block_count_info:
+          $ref: "#/components/schemas/Remaining"
+        FID:
+          description: Unique ID of floor
+          type: string
+        name:
+          description: User Name
+          type: string
+        email:
+          description: Email ID
+          type: string
+        mobile_number:
+          description: Mobile number
+          type: string
+        user_id:
+          description: Unique User ID
+          type: string
+        avatar:
+          $ref: "#/components/schemas/changeEmail_200_response_profile_avatar"
+      required:
+      - FID
+      - floor_id
+      - user_id
+      type: object
+    changeEmail_200_response_pod_info:
+      example:
+        is_owner: is_owner
+        blocks:
+        - type: type
+          title: title
+          block_id: block_id
+        - type: type
+          title: title
+          block_id: block_id
+        floor_uid: floor_uid
+        floor_id: floor_id
+        details: details
+        avatar:
+          type: type
+          url: url
+        title: title
+        app_id: app_id
+      properties:
+        floor_id:
+          type: string
+        is_owner:
+          type: string
+        app_id:
+          type: string
+        title:
+          type: string
+        details:
+          type: string
+        floor_uid:
+          type: string
+        blocks:
+          items:
+            $ref: "#/components/schemas/BlockDetails"
+          type: array
+        avatar:
+          $ref: "#/components/schemas/Media"
+      required:
+      - blocks
+      - floor_id
+      - floor_uid
+      - title
+      type: object
+    changeEmail_200_response:
+      example:
+        pod_info:
+          is_owner: is_owner
+          blocks:
+          - type: type
+            title: title
+            block_id: block_id
+          - type: type
+            title: title
+            block_id: block_id
+          floor_uid: floor_uid
+          floor_id: floor_id
+          details: details
+          avatar:
+            type: type
+            url: url
+          title: title
+          app_id: app_id
+        profile:
+          FID: FID
+          block_count_info:
+            permitted: permitted
+            remaining: remaining
+          user_id: user_id
+          name: name
+          floor_id: floor_id
+          floor_count_info:
+            permitted: permitted
+            remaining: remaining
+          avatar:
+            id: id
+            url: url
+          mobile_number: mobile_number
+          email: email
+        app_id: app_id
+      properties:
+        profile:
+          $ref: "#/components/schemas/changeEmail_200_response_profile"
+        pod_info:
+          $ref: "#/components/schemas/changeEmail_200_response_pod_info"
+        app_id:
+          description: App ID
+          type: string
+      required:
+      - pod_info
+      - profile
+      type: object
     changeMobileNumber_request:
       properties:
         new_mobile_number:
@@ -3935,6 +4052,21 @@ components:
           type: string
       required:
       - success
+      type: object
+    registerExternalUserIdentity_request:
+      properties:
+        mobile_number:
+          example: ""
+          type: string
+        email_id:
+          example: ""
+          type: string
+        name:
+          example: ""
+          type: string
+        app_id:
+          example: ""
+          type: string
       type: object
     QueryResponse_items_inner:
       description: Each item description

@@ -1,14 +1,18 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './BlockDetails';
+export * from './ChangeEmail200Response';
+export * from './ChangeEmail200ResponsePodInfo';
+export * from './ChangeEmail200ResponseProfile';
+export * from './ChangeEmail200ResponseProfileAvatar';
 export * from './ChangePassword200Response';
+export * from './EditFloor200Response';
 export * from './EditFloor400Response';
 export * from './EditFloor400ResponseError';
 export * from './Event400Response';
 export * from './Event400ResponseError';
 export * from './EventResponse';
 export * from './FloorInfo';
-export * from './GetFloorInformation200Response';
 export * from './GetRecentEvents200Response';
 export * from './GetRecentEvents200ResponseItemsInner';
 export * from './GetRecentEvents200ResponseItemsInnerAuthor';
@@ -26,10 +30,7 @@ export * from './Remaining';
 export * from './ResetPassword200Response';
 export * from './ResetPassword400Response';
 export * from './SendValidationCode200Response';
-export * from './SignInWithEmail200Response';
-export * from './SignInWithEmail200ResponsePodInfo';
-export * from './SignInWithEmail200ResponseProfile';
-export * from './SignInWithEmail200ResponseProfileAvatar';
+export * from './SignInResponse';
 export * from './SignUp200Response';
 export * from './SignUpResponse';
 export * from './UserDetails';

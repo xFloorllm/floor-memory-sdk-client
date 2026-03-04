@@ -17,15 +17,13 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.20"
+__version__ = "1.0.21"
 
 # Define package exports
 __all__ = [
-    "DefaultApi",
-    "EditFloorApi",
+    "AuthApi",
     "EventApi",
-    "GetFloorInformationApi",
-    "GetRecentEventsApi",
+    "FloorApi",
     "QueryApi",
     "ApiResponse",
     "ApiClient",
@@ -37,14 +35,18 @@ __all__ = [
     "ApiAttributeError",
     "ApiException",
     "BlockDetails",
+    "ChangeEmail200Response",
+    "ChangeEmail200ResponsePodInfo",
+    "ChangeEmail200ResponseProfile",
+    "ChangeEmail200ResponseProfileAvatar",
     "ChangePassword200Response",
+    "EditFloor200Response",
     "EditFloor400Response",
     "EditFloor400ResponseError",
     "Event400Response",
     "Event400ResponseError",
     "EventResponse",
     "FloorInfo",
-    "GetFloorInformation200Response",
     "GetRecentEvents200Response",
     "GetRecentEvents200ResponseItemsInner",
     "GetRecentEvents200ResponseItemsInnerAuthor",
@@ -62,10 +64,7 @@ __all__ = [
     "ResetPassword200Response",
     "ResetPassword400Response",
     "SendValidationCode200Response",
-    "SignInWithEmail200Response",
-    "SignInWithEmail200ResponsePodInfo",
-    "SignInWithEmail200ResponseProfile",
-    "SignInWithEmail200ResponseProfileAvatar",
+    "SignInResponse",
     "SignUp200Response",
     "SignUpResponse",
     "UserDetails",
@@ -75,11 +74,9 @@ __all__ = [
 ]
 
 # import apis into sdk package
-from xfloor_memory_sdk.api.default_api import DefaultApi as DefaultApi
-from xfloor_memory_sdk.api.edit_floor_api import EditFloorApi as EditFloorApi
+from xfloor_memory_sdk.api.auth_api import AuthApi as AuthApi
 from xfloor_memory_sdk.api.event_api import EventApi as EventApi
-from xfloor_memory_sdk.api.get_floor_information_api import GetFloorInformationApi as GetFloorInformationApi
-from xfloor_memory_sdk.api.get_recent_events_api import GetRecentEventsApi as GetRecentEventsApi
+from xfloor_memory_sdk.api.floor_api import FloorApi as FloorApi
 from xfloor_memory_sdk.api.query_api import QueryApi as QueryApi
 
 # import ApiClient
@@ -95,14 +92,18 @@ from xfloor_memory_sdk.exceptions import ApiException as ApiException
 
 # import models into sdk package
 from xfloor_memory_sdk.models.block_details import BlockDetails as BlockDetails
+from xfloor_memory_sdk.models.change_email200_response import ChangeEmail200Response as ChangeEmail200Response
+from xfloor_memory_sdk.models.change_email200_response_pod_info import ChangeEmail200ResponsePodInfo as ChangeEmail200ResponsePodInfo
+from xfloor_memory_sdk.models.change_email200_response_profile import ChangeEmail200ResponseProfile as ChangeEmail200ResponseProfile
+from xfloor_memory_sdk.models.change_email200_response_profile_avatar import ChangeEmail200ResponseProfileAvatar as ChangeEmail200ResponseProfileAvatar
 from xfloor_memory_sdk.models.change_password200_response import ChangePassword200Response as ChangePassword200Response
+from xfloor_memory_sdk.models.edit_floor200_response import EditFloor200Response as EditFloor200Response
 from xfloor_memory_sdk.models.edit_floor400_response import EditFloor400Response as EditFloor400Response
 from xfloor_memory_sdk.models.edit_floor400_response_error import EditFloor400ResponseError as EditFloor400ResponseError
 from xfloor_memory_sdk.models.event400_response import Event400Response as Event400Response
 from xfloor_memory_sdk.models.event400_response_error import Event400ResponseError as Event400ResponseError
 from xfloor_memory_sdk.models.event_response import EventResponse as EventResponse
 from xfloor_memory_sdk.models.floor_info import FloorInfo as FloorInfo
-from xfloor_memory_sdk.models.get_floor_information200_response import GetFloorInformation200Response as GetFloorInformation200Response
 from xfloor_memory_sdk.models.get_recent_events200_response import GetRecentEvents200Response as GetRecentEvents200Response
 from xfloor_memory_sdk.models.get_recent_events200_response_items_inner import GetRecentEvents200ResponseItemsInner as GetRecentEvents200ResponseItemsInner
 from xfloor_memory_sdk.models.get_recent_events200_response_items_inner_author import GetRecentEvents200ResponseItemsInnerAuthor as GetRecentEvents200ResponseItemsInnerAuthor
@@ -120,10 +121,7 @@ from xfloor_memory_sdk.models.remaining import Remaining as Remaining
 from xfloor_memory_sdk.models.reset_password200_response import ResetPassword200Response as ResetPassword200Response
 from xfloor_memory_sdk.models.reset_password400_response import ResetPassword400Response as ResetPassword400Response
 from xfloor_memory_sdk.models.send_validation_code200_response import SendValidationCode200Response as SendValidationCode200Response
-from xfloor_memory_sdk.models.sign_in_with_email200_response import SignInWithEmail200Response as SignInWithEmail200Response
-from xfloor_memory_sdk.models.sign_in_with_email200_response_pod_info import SignInWithEmail200ResponsePodInfo as SignInWithEmail200ResponsePodInfo
-from xfloor_memory_sdk.models.sign_in_with_email200_response_profile import SignInWithEmail200ResponseProfile as SignInWithEmail200ResponseProfile
-from xfloor_memory_sdk.models.sign_in_with_email200_response_profile_avatar import SignInWithEmail200ResponseProfileAvatar as SignInWithEmail200ResponseProfileAvatar
+from xfloor_memory_sdk.models.sign_in_response import SignInResponse as SignInResponse
 from xfloor_memory_sdk.models.sign_up200_response import SignUp200Response as SignUp200Response
 from xfloor_memory_sdk.models.sign_up_response import SignUpResponse as SignUpResponse
 from xfloor_memory_sdk.models.user_details import UserDetails as UserDetails

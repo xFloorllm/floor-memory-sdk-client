@@ -58,6 +58,16 @@
         done();
       });
     });
+    describe('getRecentEvents', function() {
+      it('should call getRecentEvents successfully', function(done) {
+        //uncomment below and update the code to test getRecentEvents
+        //instance.getRecentEvents(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
   });
 
 }));

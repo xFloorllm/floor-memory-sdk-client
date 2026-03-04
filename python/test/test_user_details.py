@@ -36,7 +36,7 @@ class TestUserDetails(unittest.TestCase):
         model = UserDetails()
         if include_optional:
             return UserDetails(
-                profile = xfloor_memory_sdk.models.sign_in_with_email_200_response_profile.signInWithEmail_200_response_profile(
+                profile = xfloor_memory_sdk.models.change_email_200_response_profile.changeEmail_200_response_profile(
                     floor_id = '', 
                     floor_count_info = xfloor_memory_sdk.models.remaining.Remaining(
                         permitted = '', 
@@ -49,10 +49,10 @@ class TestUserDetails(unittest.TestCase):
                     email = '', 
                     mobile_number = '', 
                     user_id = '', 
-                    avatar = xfloor_memory_sdk.models.sign_in_with_email_200_response_profile_avatar.signInWithEmail_200_response_profile_avatar(
+                    avatar = xfloor_memory_sdk.models.change_email_200_response_profile_avatar.changeEmail_200_response_profile_avatar(
                         url = '', 
                         id = '', ), ),
-                pod_info = xfloor_memory_sdk.models.sign_in_with_email_200_response_pod_info.signInWithEmail_200_response_pod_info(
+                pod_info = xfloor_memory_sdk.models.change_email_200_response_pod_info.changeEmail_200_response_pod_info(
                     floor_id = '', 
                     is_owner = '', 
                     app_id = '', 
@@ -72,7 +72,7 @@ class TestUserDetails(unittest.TestCase):
             )
         else:
             return UserDetails(
-                profile = xfloor_memory_sdk.models.sign_in_with_email_200_response_profile.signInWithEmail_200_response_profile(
+                profile = xfloor_memory_sdk.models.change_email_200_response_profile.changeEmail_200_response_profile(
                     floor_id = '', 
                     floor_count_info = xfloor_memory_sdk.models.remaining.Remaining(
                         permitted = '', 
@@ -85,10 +85,10 @@ class TestUserDetails(unittest.TestCase):
                     email = '', 
                     mobile_number = '', 
                     user_id = '', 
-                    avatar = xfloor_memory_sdk.models.sign_in_with_email_200_response_profile_avatar.signInWithEmail_200_response_profile_avatar(
+                    avatar = xfloor_memory_sdk.models.change_email_200_response_profile_avatar.changeEmail_200_response_profile_avatar(
                         url = '', 
                         id = '', ), ),
-                pod_info = xfloor_memory_sdk.models.sign_in_with_email_200_response_pod_info.signInWithEmail_200_response_pod_info(
+                pod_info = xfloor_memory_sdk.models.change_email_200_response_pod_info.changeEmail_200_response_pod_info(
                     floor_id = '', 
                     is_owner = '', 
                     app_id = '', 

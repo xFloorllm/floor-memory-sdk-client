@@ -16,14 +16,18 @@
 
 import ApiClient from './ApiClient';
 import BlockDetails from './model/BlockDetails';
+import ChangeEmail200Response from './model/ChangeEmail200Response';
+import ChangeEmail200ResponsePodInfo from './model/ChangeEmail200ResponsePodInfo';
+import ChangeEmail200ResponseProfile from './model/ChangeEmail200ResponseProfile';
+import ChangeEmail200ResponseProfileAvatar from './model/ChangeEmail200ResponseProfileAvatar';
 import ChangePassword200Response from './model/ChangePassword200Response';
+import EditFloor200Response from './model/EditFloor200Response';
 import EditFloor400Response from './model/EditFloor400Response';
 import EditFloor400ResponseError from './model/EditFloor400ResponseError';
 import Event400Response from './model/Event400Response';
 import Event400ResponseError from './model/Event400ResponseError';
 import EventResponse from './model/EventResponse';
 import FloorInfo from './model/FloorInfo';
-import GetFloorInformation200Response from './model/GetFloorInformation200Response';
 import GetRecentEvents200Response from './model/GetRecentEvents200Response';
 import GetRecentEvents200ResponseItemsInner from './model/GetRecentEvents200ResponseItemsInner';
 import GetRecentEvents200ResponseItemsInnerAuthor from './model/GetRecentEvents200ResponseItemsInnerAuthor';
@@ -41,21 +45,16 @@ import Remaining from './model/Remaining';
 import ResetPassword200Response from './model/ResetPassword200Response';
 import ResetPassword400Response from './model/ResetPassword400Response';
 import SendValidationCode200Response from './model/SendValidationCode200Response';
-import SignInWithEmail200Response from './model/SignInWithEmail200Response';
-import SignInWithEmail200ResponsePodInfo from './model/SignInWithEmail200ResponsePodInfo';
-import SignInWithEmail200ResponseProfile from './model/SignInWithEmail200ResponseProfile';
-import SignInWithEmail200ResponseProfileAvatar from './model/SignInWithEmail200ResponseProfileAvatar';
+import SignInResponse from './model/SignInResponse';
 import SignUp200Response from './model/SignUp200Response';
 import SignUpResponse from './model/SignUpResponse';
 import UserDetails from './model/UserDetails';
 import ValidateCode400Response from './model/ValidateCode400Response';
 import ValidateCode400ResponseError from './model/ValidateCode400ResponseError';
 import ValidateCode412Response from './model/ValidateCode412Response';
-import DefaultApi from './api/DefaultApi';
-import EditFloorApi from './api/EditFloorApi';
+import AuthApi from './api/AuthApi';
 import EventApi from './api/EventApi';
-import GetFloorInformationApi from './api/GetFloorInformationApi';
-import GetRecentEventsApi from './api/GetRecentEventsApi';
+import FloorApi from './api/FloorApi';
 import QueryApi from './api/QueryApi';
 
 
@@ -88,7 +87,7 @@ import QueryApi from './api/QueryApi';
 * </pre>
 * </p>
 * @module index
-* @version 1.0.20
+* @version 1.0.21
 */
 export {
     /**
@@ -104,10 +103,40 @@ export {
     BlockDetails,
 
     /**
+     * The ChangeEmail200Response model constructor.
+     * @property {module:model/ChangeEmail200Response}
+     */
+    ChangeEmail200Response,
+
+    /**
+     * The ChangeEmail200ResponsePodInfo model constructor.
+     * @property {module:model/ChangeEmail200ResponsePodInfo}
+     */
+    ChangeEmail200ResponsePodInfo,
+
+    /**
+     * The ChangeEmail200ResponseProfile model constructor.
+     * @property {module:model/ChangeEmail200ResponseProfile}
+     */
+    ChangeEmail200ResponseProfile,
+
+    /**
+     * The ChangeEmail200ResponseProfileAvatar model constructor.
+     * @property {module:model/ChangeEmail200ResponseProfileAvatar}
+     */
+    ChangeEmail200ResponseProfileAvatar,
+
+    /**
      * The ChangePassword200Response model constructor.
      * @property {module:model/ChangePassword200Response}
      */
     ChangePassword200Response,
+
+    /**
+     * The EditFloor200Response model constructor.
+     * @property {module:model/EditFloor200Response}
+     */
+    EditFloor200Response,
 
     /**
      * The EditFloor400Response model constructor.
@@ -144,12 +173,6 @@ export {
      * @property {module:model/FloorInfo}
      */
     FloorInfo,
-
-    /**
-     * The GetFloorInformation200Response model constructor.
-     * @property {module:model/GetFloorInformation200Response}
-     */
-    GetFloorInformation200Response,
 
     /**
      * The GetRecentEvents200Response model constructor.
@@ -254,28 +277,10 @@ export {
     SendValidationCode200Response,
 
     /**
-     * The SignInWithEmail200Response model constructor.
-     * @property {module:model/SignInWithEmail200Response}
+     * The SignInResponse model constructor.
+     * @property {module:model/SignInResponse}
      */
-    SignInWithEmail200Response,
-
-    /**
-     * The SignInWithEmail200ResponsePodInfo model constructor.
-     * @property {module:model/SignInWithEmail200ResponsePodInfo}
-     */
-    SignInWithEmail200ResponsePodInfo,
-
-    /**
-     * The SignInWithEmail200ResponseProfile model constructor.
-     * @property {module:model/SignInWithEmail200ResponseProfile}
-     */
-    SignInWithEmail200ResponseProfile,
-
-    /**
-     * The SignInWithEmail200ResponseProfileAvatar model constructor.
-     * @property {module:model/SignInWithEmail200ResponseProfileAvatar}
-     */
-    SignInWithEmail200ResponseProfileAvatar,
+    SignInResponse,
 
     /**
      * The SignUp200Response model constructor.
@@ -314,16 +319,10 @@ export {
     ValidateCode412Response,
 
     /**
-    * The DefaultApi service constructor.
-    * @property {module:api/DefaultApi}
+    * The AuthApi service constructor.
+    * @property {module:api/AuthApi}
     */
-    DefaultApi,
-
-    /**
-    * The EditFloorApi service constructor.
-    * @property {module:api/EditFloorApi}
-    */
-    EditFloorApi,
+    AuthApi,
 
     /**
     * The EventApi service constructor.
@@ -332,16 +331,10 @@ export {
     EventApi,
 
     /**
-    * The GetFloorInformationApi service constructor.
-    * @property {module:api/GetFloorInformationApi}
+    * The FloorApi service constructor.
+    * @property {module:api/FloorApi}
     */
-    GetFloorInformationApi,
-
-    /**
-    * The GetRecentEventsApi service constructor.
-    * @property {module:api/GetRecentEventsApi}
-    */
-    GetRecentEventsApi,
+    FloorApi,
 
     /**
     * The QueryApi service constructor.

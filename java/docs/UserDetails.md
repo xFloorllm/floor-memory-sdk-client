@@ -7,9 +7,9 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**profile** | [**SignInWithEmail200ResponseProfile**](SignInWithEmail200ResponseProfile.md) |
+|**profile** | [**ChangeEmail200ResponseProfile**](ChangeEmail200ResponseProfile.md) |
 | |
-|**podInfo** | [**SignInWithEmail200ResponsePodInfo**](SignInWithEmail200ResponsePodInfo.md) |
+|**podInfo** | [**ChangeEmail200ResponsePodInfo**](ChangeEmail200ResponsePodInfo.md) |
 | |
 |**appId** | **String** | App ID | [optional] |
 

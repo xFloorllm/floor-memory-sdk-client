@@ -22,8 +22,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from xfloor_memory_sdk.models.sign_in_with_email200_response_pod_info import SignInWithEmail200ResponsePodInfo
-from xfloor_memory_sdk.models.sign_in_with_email200_response_profile import SignInWithEmail200ResponseProfile
+from xfloor_memory_sdk.models.change_email200_response_pod_info import ChangeEmail200ResponsePodInfo
+from xfloor_memory_sdk.models.change_email200_response_profile import ChangeEmail200ResponseProfile
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,8 +31,8 @@ class UserDetails(BaseModel):
     """
     UserDetails
     """ # noqa: E501
-    profile: SignInWithEmail200ResponseProfile
-    pod_info: SignInWithEmail200ResponsePodInfo
+    profile: ChangeEmail200ResponseProfile
+    pod_info: ChangeEmail200ResponsePodInfo
     app_id: Optional[StrictStr] = Field(default=None, description="App ID")
     __properties: ClassVar[List[str]] = ["profile", "pod_info", "app_id"]
 
@@ -93,8 +93,8 @@ class UserDetails(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "profile": SignInWithEmail200ResponseProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None,
-            "pod_info": SignInWithEmail200ResponsePodInfo.from_dict(obj["pod_info"]) if obj.get("pod_info") is not None else None,
+            "profile": ChangeEmail200ResponseProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None,
+            "pod_info": ChangeEmail200ResponsePodInfo.from_dict(obj["pod_info"]) if obj.get("pod_info") is not None else None,
             "app_id": obj.get("app_id")
         })
         return _obj

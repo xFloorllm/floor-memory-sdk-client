@@ -34,6 +34,13 @@ class TestEventApi(unittest.TestCase):
         """
         pass
 
+    def test_get_recent_events(self) -> None:
+        """Test case for get_recent_events
+
+        Recent Events
+        """
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -15,11 +15,11 @@ Notes
 -------------
 **profile**
 
-| [**SignInWithEmail200ResponseProfile**](SignInWithEmail200ResponseProfile.md) |
+| [**ChangeEmail200ResponseProfile**](ChangeEmail200ResponseProfile.md) |
 |
 **pod_info**
 
-| [**SignInWithEmail200ResponsePodInfo**](SignInWithEmail200ResponsePodInfo.md) |
+| [**ChangeEmail200ResponsePodInfo**](ChangeEmail200ResponsePodInfo.md) |
 |
 **app_id**
 

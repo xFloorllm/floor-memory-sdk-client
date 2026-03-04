@@ -15,20 +15,20 @@
  */
 
 import { mapValues } from '../runtime';
-import type { SignInWithEmail200ResponsePodInfo } from './SignInWithEmail200ResponsePodInfo';
+import type { ChangeEmail200ResponseProfile } from './ChangeEmail200ResponseProfile';
 import {
-    SignInWithEmail200ResponsePodInfoFromJSON,
-    SignInWithEmail200ResponsePodInfoFromJSONTyped,
-    SignInWithEmail200ResponsePodInfoToJSON,
-    SignInWithEmail200ResponsePodInfoToJSONTyped,
-} from './SignInWithEmail200ResponsePodInfo';
-import type { SignInWithEmail200ResponseProfile } from './SignInWithEmail200ResponseProfile';
+    ChangeEmail200ResponseProfileFromJSON,
+    ChangeEmail200ResponseProfileFromJSONTyped,
+    ChangeEmail200ResponseProfileToJSON,
+    ChangeEmail200ResponseProfileToJSONTyped,
+} from './ChangeEmail200ResponseProfile';
+import type { ChangeEmail200ResponsePodInfo } from './ChangeEmail200ResponsePodInfo';
 import {
-    SignInWithEmail200ResponseProfileFromJSON,
-    SignInWithEmail200ResponseProfileFromJSONTyped,
-    SignInWithEmail200ResponseProfileToJSON,
-    SignInWithEmail200ResponseProfileToJSONTyped,
-} from './SignInWithEmail200ResponseProfile';
+    ChangeEmail200ResponsePodInfoFromJSON,
+    ChangeEmail200ResponsePodInfoFromJSONTyped,
+    ChangeEmail200ResponsePodInfoToJSON,
+    ChangeEmail200ResponsePodInfoToJSONTyped,
+} from './ChangeEmail200ResponsePodInfo';
 
 /**
  * 
@@ -38,16 +38,16 @@ import {
 export interface UserDetails {
     /**
      * 
-     * @type {SignInWithEmail200ResponseProfile}
+     * @type {ChangeEmail200ResponseProfile}
      * @memberof UserDetails
      */
-    profile: SignInWithEmail200ResponseProfile;
+    profile: ChangeEmail200ResponseProfile;
     /**
      * 
-     * @type {SignInWithEmail200ResponsePodInfo}
+     * @type {ChangeEmail200ResponsePodInfo}
      * @memberof UserDetails
      */
-    podInfo: SignInWithEmail200ResponsePodInfo;
+    podInfo: ChangeEmail200ResponsePodInfo;
     /**
      * App ID
      * @type {string}
@@ -75,8 +75,8 @@ export function UserDetailsFromJSONTyped(json: any, ignoreDiscriminator: boolean
     }
     return {
         
-        'profile': SignInWithEmail200ResponseProfileFromJSON(json['profile']),
-        'podInfo': SignInWithEmail200ResponsePodInfoFromJSON(json['pod_info']),
+        'profile': ChangeEmail200ResponseProfileFromJSON(json['profile']),
+        'podInfo': ChangeEmail200ResponsePodInfoFromJSON(json['pod_info']),
         'appId': json['app_id'] == null ? undefined : json['app_id'],
     };
 }
@@ -92,8 +92,8 @@ export function UserDetailsToJSONTyped(value?: UserDetails | null, ignoreDiscrim
 
     return {
         
-        'profile': SignInWithEmail200ResponseProfileToJSON(value['profile']),
-        'pod_info': SignInWithEmail200ResponsePodInfoToJSON(value['podInfo']),
+        'profile': ChangeEmail200ResponseProfileToJSON(value['profile']),
+        'pod_info': ChangeEmail200ResponsePodInfoToJSON(value['podInfo']),
         'app_id': value['appId'],
     };
 }
