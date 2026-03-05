@@ -32,6 +32,12 @@ Notes
 **fid**
 
 | **str** | Unique ID of floor |
+**title**
+
+| **str** |
+|
+
+[optional]
 **name**
 
 | **str** | User Name |

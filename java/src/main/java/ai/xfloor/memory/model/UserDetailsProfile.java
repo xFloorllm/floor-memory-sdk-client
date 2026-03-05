@@ -74,6 +74,11 @@ public class UserDetailsProfile {
   @javax.annotation.Nonnull
   private String FID;
 
+  public static final String SERIALIZED_NAME_TITLE = "title";
+  @SerializedName(SERIALIZED_NAME_TITLE)
+  @javax.annotation.Nullable
+  private String title;
+
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
   @javax.annotation.Nullable
@@ -175,6 +180,25 @@ public class UserDetailsProfile {
 
   public void setFID(@javax.annotation.Nonnull String FID) {
     this.FID = FID;
+  }
+
+
+  public UserDetailsProfile title(@javax.annotation.Nullable String title) {
+    this.title = title;
+    return this;
+  }
+
+  /**
+   * Get title
+   * @return title
+   */
+  @javax.annotation.Nullable
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(@javax.annotation.Nullable String title) {
+    this.title = title;
   }
 
 
@@ -287,6 +311,7 @@ public class UserDetailsProfile {
         Objects.equals(this.floorCountInfo, userDetailsProfile.floorCountInfo) &&
         Objects.equals(this.blockCountInfo, userDetailsProfile.blockCountInfo) &&
         Objects.equals(this.FID, userDetailsProfile.FID) &&
+        Objects.equals(this.title, userDetailsProfile.title) &&
         Objects.equals(this.name, userDetailsProfile.name) &&
         Objects.equals(this.email, userDetailsProfile.email) &&
         Objects.equals(this.mobileNumber, userDetailsProfile.mobileNumber) &&
@@ -296,7 +321,7 @@ public class UserDetailsProfile {
 
   @Override
   public int hashCode() {
-    return Objects.hash(floorId, floorCountInfo, blockCountInfo, FID, name, email, mobileNumber, userId, avatar);
+    return Objects.hash(floorId, floorCountInfo, blockCountInfo, FID, title, name, email, mobileNumber, userId, avatar);
   }
 
   @Override
@@ -307,6 +332,7 @@ public class UserDetailsProfile {
     sb.append("    floorCountInfo: ").append(toIndentedString(floorCountInfo)).append("\n");
     sb.append("    blockCountInfo: ").append(toIndentedString(blockCountInfo)).append("\n");
     sb.append("    FID: ").append(toIndentedString(FID)).append("\n");
+    sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    mobileNumber: ").append(toIndentedString(mobileNumber)).append("\n");
@@ -333,7 +359,7 @@ public class UserDetailsProfile {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("floor_id", "floor_count_info", "block_count_info", "FID", "name", "email", "mobile_number", "user_id", "avatar"));
+    openapiFields = new HashSet<String>(Arrays.asList("floor_id", "floor_count_info", "block_count_info", "FID", "title", "name", "email", "mobile_number", "user_id", "avatar"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(Arrays.asList("floor_id", "FID", "user_id"));
@@ -380,6 +406,9 @@ public class UserDetailsProfile {
       }
       if (!jsonObj.get("FID").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `FID` to be a primitive type in the JSON string but got `%s`", jsonObj.get("FID").toString()));
+      }
+      if ((jsonObj.get("title") != null && !jsonObj.get("title").isJsonNull()) && !jsonObj.get("title").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `title` to be a primitive type in the JSON string but got `%s`", jsonObj.get("title").toString()));
       }
       if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));

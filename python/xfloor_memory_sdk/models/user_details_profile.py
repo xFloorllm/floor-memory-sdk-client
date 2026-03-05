@@ -35,12 +35,13 @@ class UserDetailsProfile(BaseModel):
     floor_count_info: Optional[Remaining] = None
     block_count_info: Optional[Remaining] = None
     fid: StrictStr = Field(description="Unique ID of floor", alias="FID")
+    title: Optional[StrictStr] = None
     name: Optional[StrictStr] = Field(default=None, description="User Name")
     email: Optional[StrictStr] = Field(default=None, description="Email ID")
     mobile_number: Optional[StrictStr] = Field(default=None, description="Mobile number")
     user_id: StrictStr = Field(description="Unique User ID")
     avatar: Optional[UserDetailsProfileAvatar] = None
-    __properties: ClassVar[List[str]] = ["floor_id", "floor_count_info", "block_count_info", "FID", "name", "email", "mobile_number", "user_id", "avatar"]
+    __properties: ClassVar[List[str]] = ["floor_id", "floor_count_info", "block_count_info", "FID", "title", "name", "email", "mobile_number", "user_id", "avatar"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -106,6 +107,7 @@ class UserDetailsProfile(BaseModel):
             "floor_count_info": Remaining.from_dict(obj["floor_count_info"]) if obj.get("floor_count_info") is not None else None,
             "block_count_info": Remaining.from_dict(obj["block_count_info"]) if obj.get("block_count_info") is not None else None,
             "FID": obj.get("FID"),
+            "title": obj.get("title"),
             "name": obj.get("name"),
             "email": obj.get("email"),
             "mobile_number": obj.get("mobile_number"),

@@ -29,7 +29,7 @@ import ValidateCode412Response from '../model/ValidateCode412Response';
 /**
 * Auth service.
 * @module api/AuthApi
-* @version 1.0.23
+* @version 1.0.24
 */
 export default class AuthApi {
 

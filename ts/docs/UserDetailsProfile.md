@@ -11,6 +11,7 @@ Name | Type
 `floorCountInfo` | [Remaining](Remaining.md)
 `blockCountInfo` | [Remaining](Remaining.md)
 `fID` | string
+`title` | string
 `name` | string
 `email` | string
 `mobileNumber` | string
@@ -28,6 +29,7 @@ const example = {
   "floorCountInfo": null,
   "blockCountInfo": null,
   "fID": null,
+  "title": null,
   "name": null,
   "email": null,
   "mobileNumber": null,

@@ -18,7 +18,7 @@ import ApiClient from '../ApiClient';
 /**
  * The UserDetailsProfileAvatar model module.
  * @module model/UserDetailsProfileAvatar
- * @version 1.0.23
+ * @version 1.0.24
  */
 class UserDetailsProfileAvatar {
     /**

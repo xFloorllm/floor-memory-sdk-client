@@ -16,6 +16,8 @@ User profile details
 | [optional] |
 |**FID** | **String** | Unique ID of floor |
 |
+|**title** | **String** |
+| [optional] |
 |**name** | **String** | User Name | [optional] |
 |**email** | **String** | Email ID | [optional] |
 |**mobileNumber** | **String** | Mobile number | [optional] |

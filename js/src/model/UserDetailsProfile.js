@@ -20,7 +20,7 @@ import UserDetailsProfileAvatar from './UserDetailsProfileAvatar';
 /**
  * The UserDetailsProfile model module.
  * @module model/UserDetailsProfile
- * @version 1.0.23
+ * @version 1.0.24
  */
 class UserDetailsProfile {
     /**
@@ -70,6 +70,9 @@ class UserDetailsProfile {
             if (data.hasOwnProperty('FID')) {
                 obj['FID'] = ApiClient.convertToType(data['FID'], 'String');
             }
+            if (data.hasOwnProperty('title')) {
+                obj['title'] = ApiClient.convertToType(data['title'], 'String');
+            }
             if (data.hasOwnProperty('name')) {
                 obj['name'] = ApiClient.convertToType(data['name'], 'String');
             }
@@ -116,6 +119,10 @@ class UserDetailsProfile {
         // ensure the json data is a string
         if (data['FID'] && !(typeof data['FID'] === 'string' || data['FID'] instanceof String)) {
             throw new Error("Expected the field `FID` to be a primitive type in the JSON string but got " + data['FID']);
+        }
+        // ensure the json data is a string
+        if (data['title'] && !(typeof data['title'] === 'string' || data['title'] instanceof String)) {
+            throw new Error("Expected the field `title` to be a primitive type in the JSON string but got " + data['title']);
         }
         // ensure the json data is a string
         if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
@@ -167,6 +174,11 @@ UserDetailsProfile.prototype['block_count_info'] = undefined;
  * @member {String} FID
  */
 UserDetailsProfile.prototype['FID'] = undefined;
+
+/**
+ * @member {String} title
+ */
+UserDetailsProfile.prototype['title'] = undefined;
 
 /**
  * User Name

@@ -44,6 +44,7 @@ class TestUserDetailsProfile(unittest.TestCase):
                     permitted = '', 
                     remaining = '', ),
                 fid = '',
+                title = '',
                 name = '',
                 email = '',
                 mobile_number = '',

@@ -72,6 +72,14 @@ public class UserDetailsProfileTest {
     }
 
     /**
+     * Test the property 'title'
+     */
+    @Test
+    public void titleTest() {
+        // TODO: test title
+    }
+
+    /**
      * Test the property 'name'
      */
     @Test

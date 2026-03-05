@@ -30,6 +30,12 @@ Notes
 **FID**
 
 | **String** | Unique ID of floor |
+**title**
+
+| **String** |
+|
+
+[optional]
 **name**
 
 | **String** | User Name |

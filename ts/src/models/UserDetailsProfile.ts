@@ -61,6 +61,12 @@ export interface UserDetailsProfile {
      */
     fID: string;
     /**
+     * 
+     * @type {string}
+     * @memberof UserDetailsProfile
+     */
+    title?: string;
+    /**
      * User Name
      * @type {string}
      * @memberof UserDetailsProfile
@@ -116,6 +122,7 @@ export function UserDetailsProfileFromJSONTyped(json: any, ignoreDiscriminator: 
         'floorCountInfo': json['floor_count_info'] == null ? undefined : RemainingFromJSON(json['floor_count_info']),
         'blockCountInfo': json['block_count_info'] == null ? undefined : RemainingFromJSON(json['block_count_info']),
         'fID': json['FID'],
+        'title': json['title'] == null ? undefined : json['title'],
         'name': json['name'] == null ? undefined : json['name'],
         'email': json['email'] == null ? undefined : json['email'],
         'mobileNumber': json['mobile_number'] == null ? undefined : json['mobile_number'],
@@ -139,6 +146,7 @@ export function UserDetailsProfileToJSONTyped(value?: UserDetailsProfile | null,
         'floor_count_info': RemainingToJSON(value['floorCountInfo']),
         'block_count_info': RemainingToJSON(value['blockCountInfo']),
         'FID': value['fID'],
+        'title': value['title'],
         'name': value['name'],
         'email': value['email'],
         'mobile_number': value['mobileNumber'],
